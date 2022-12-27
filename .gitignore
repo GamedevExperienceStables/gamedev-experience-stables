@@ -136,3 +136,4 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/unity,macos,windows
 
 .idea/
+/[Aa]ssets/[Ss]andbox/
