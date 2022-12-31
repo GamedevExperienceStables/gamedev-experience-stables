@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: flex-end;">
+            <ui:Button text="Menu" display-tooltip-when-elided="true" focusable="false" name="button-menu" style="-unity-font-style: normal;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+        <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0);">
+            <ui:Label tabindex="-1" text="&lt;b&gt;Mission:&lt;/b&gt; Destroy enemies. &lt;b&gt;God Mode:&lt;/b&gt; Enabled" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+            <ui:Label tabindex="-1" text="&lt;b&gt;Keyboard:&lt;/b&gt; WASD/Arrows - Move, RMB - Aim, RMB+LMB - Fire" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+            <ui:Label tabindex="-1" text="&lt;b&gt;GamePad:&lt;/b&gt; Left Stick - Move, LT - Aim, LT+Right Stick - Look, LT+RT - Fire, Start - Menu" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
