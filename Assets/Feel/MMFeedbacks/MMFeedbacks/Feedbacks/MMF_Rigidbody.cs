@@ -22,6 +22,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiresSetupText { get { return "This feedback requires that a TargetRigidbody be set to be able to work properly. You can set one below."; } }
 		#endif
 		public enum Modes { AddForce, AddRelativeForce, AddTorque, AddRelativeTorque }
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetRigidbody = FindAutomatedTarget<Rigidbody>();
 
 		[MMFInspectorGroup("Rigidbody", true, 61, true)]
 		/// the rigidbody to target on play

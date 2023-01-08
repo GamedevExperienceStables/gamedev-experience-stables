@@ -162,7 +162,10 @@ namespace MoreMountains.Feedbacks
 			base.ShakeComplete();
 			_attenuation = 0f;
 			_newRotation = ComputeNewRotation();
-			ApplyNewRotation(_newRotation);
+			if (TargetTransform != null)
+			{
+				ApplyNewRotation(_newRotation);	
+			}
 		}
 
 		protected virtual void ApplyNewRotation(Vector3 newRotation)

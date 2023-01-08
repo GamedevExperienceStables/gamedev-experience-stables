@@ -27,6 +27,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiresSetupText { get { return "This feedback requires that a AnimatePositionTarget and a Destination be set to be able to work properly. You can set one below."; } }
 		public override bool HasCustomInspectors { get { return true; } }
 		#endif
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => AnimateRotationTarget = FindAutomatedTarget<Transform>();
 
 		[MMFInspectorGroup("Rotation Target", true, 61, true)]
 		/// the object whose rotation you want to animate

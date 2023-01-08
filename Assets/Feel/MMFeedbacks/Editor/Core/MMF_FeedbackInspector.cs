@@ -38,6 +38,7 @@ namespace MoreMountains.Feedbacks
 		private const string _channelFieldName = "Channel";
 		private const string _channelModeFieldName = "ChannelMode";
 		private const string _channelDefinitionFieldName = "MMChannelDefinition";
+		private const string _automatedTargetAcquisitionName = "AutomatedTargetAcquisition";
         
 		public virtual void OnEnable()
 		{
@@ -306,13 +307,13 @@ namespace MoreMountains.Feedbacks
 
 				for (int i = 0; i < groupData.PropertiesList.Count; i++)
 				{
-					DrawVerticalLayout(() => DrawChild(i), MMF_FeedbackInspectorStyle.BoxChildStyle);
+					DrawVerticalLayout(() => DrawChild(i, feedback), MMF_FeedbackInspectorStyle.BoxChildStyle);
 				}
 			}
 
 			EditorGUILayout.EndVertical();
 
-			void DrawChild(int i)
+			void DrawChild(int i, MMF_Feedback feedbackDrawn)
 			{
 				if (i > groupData.PropertiesList.Count - 1)
 				{
@@ -337,7 +338,12 @@ namespace MoreMountains.Feedbacks
                 
 				if (!DrawCustomInspectors(groupData.PropertiesList[i], feedback))
 				{
-					EditorGUILayout.PropertyField(groupData.PropertiesList[i], _groupTitle, true); 
+					bool shouldDraw = !((groupData.PropertiesList[i].name == _automatedTargetAcquisitionName) &&
+					                    (!feedbackDrawn.HasAutomatedTargetAcquisition));
+					if (shouldDraw)
+					{
+						EditorGUILayout.PropertyField(groupData.PropertiesList[i], _groupTitle, true);	
+					}
 				}
 			}
 		}

@@ -22,6 +22,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiresSetupText => "This feedback requires that a TargetBlink be set to be able to work properly. You can set one below.";
 		#endif
 		public override float FeedbackDuration { get { return ApplyTimeMultiplier(Duration); } set { Duration = value; } }
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetBlink = FindAutomatedTarget<MMBlink>();
         
 		/// a static bool used to disable all feedbacks of this type at once
 		public static bool FeedbackTypeAuthorized = true;

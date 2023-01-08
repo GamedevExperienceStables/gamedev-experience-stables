@@ -32,6 +32,8 @@ namespace MoreMountains.Feedbacks
 		/// the duration of this feedback is the declared duration 
 		public override float FeedbackDuration { get { return ApplyTimeMultiplier(DeclaredDuration); } set { DeclaredDuration = value;  } }
 		public override bool HasRandomness => true;
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => BoundAnimator = FindAutomatedTarget<Animator>();
 
 		[MMFInspectorGroup("Animation", true, 12, true)]
 		/// the animator whose parameters you want to update

@@ -25,6 +25,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiresSetupText { get { return "This feedback requires that a TargetTransform and a Destination be set to be able to work properly. You can set one below."; } }
 		public override bool HasCustomInspectors { get { return true; } }
 		#endif
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetTransform = FindAutomatedTarget<Transform>();
 
 		[MMFInspectorGroup("Target to animate", true, 61, true)]
 		/// the target transform we want to animate properties on

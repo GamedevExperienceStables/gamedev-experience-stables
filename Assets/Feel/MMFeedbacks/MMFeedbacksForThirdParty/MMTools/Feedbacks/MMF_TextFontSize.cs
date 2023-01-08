@@ -19,6 +19,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiredTargetText { get { return TargetText != null ? TargetText.name : "";  } }
 		public override string RequiresSetupText { get { return "This feedback requires that a TargetText be set to be able to work properly. You can set one below."; } }
 		#endif
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetText = FindAutomatedTarget<Text>();
 
 		[MMFInspectorGroup("Target", true, 58, true)]
 		/// the TMP_Text component to control

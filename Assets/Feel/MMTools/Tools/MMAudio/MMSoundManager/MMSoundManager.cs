@@ -230,6 +230,10 @@ namespace MoreMountains.Tools
 			if (attachToTransform != null)
 			{
 				MMFollowTarget followTarget = audioSource.gameObject.MMGetComponentNoAlloc<MMFollowTarget>();
+				if (followTarget == null)
+				{
+					followTarget = audioSource.gameObject.AddComponent<MMFollowTarget>();
+				}
 				followTarget.Target = attachToTransform;
 				followTarget.InterpolatePosition = false;
 				followTarget.InterpolateRotation = false;

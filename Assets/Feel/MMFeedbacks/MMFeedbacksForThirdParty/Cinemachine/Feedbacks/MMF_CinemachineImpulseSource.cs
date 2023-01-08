@@ -17,13 +17,14 @@ namespace MoreMountains.FeedbacksForThirdParty
 		public static bool FeedbackTypeAuthorized = true;
 		/// sets the inspector color for this feedback
 		#if UNITY_EDITOR
-		public override Color FeedbackColor { get { return MMFeedbacksInspectorColors.CameraColor; } }
-		#if MM_CINEMACHINE
-		public override bool EvaluateRequiresSetup() { return (ImpulseSource == null); }
-		public override string RequiredTargetText { get { return ImpulseSource != null ? ImpulseSource.name : "";  } }
+			public override Color FeedbackColor { get { return MMFeedbacksInspectorColors.CameraColor; } }
+			#if MM_CINEMACHINE
+				public override bool EvaluateRequiresSetup() { return (ImpulseSource == null); }
+				public override string RequiredTargetText { get { return ImpulseSource != null ? ImpulseSource.name : "";  } }
+			#endif
+			public override string RequiresSetupText { get { return "This feedback requires that an ImpulseSource be set to be able to work properly. You can set one below."; } }
 		#endif
-		public override string RequiresSetupText { get { return "This feedback requires that an ImpulseSource be set to be able to work properly. You can set one below."; } }
-		#endif
+		
 
 		[MMFInspectorGroup("Cinemachine Impulse Source", true, 28)]
 
@@ -31,9 +32,12 @@ namespace MoreMountains.FeedbacksForThirdParty
 		[Tooltip("the velocity to apply to the impulse shake")]
 		public Vector3 Velocity = new Vector3(1f,1f,1f);
 		#if MM_CINEMACHINE
-		/// the impulse definition to broadcast
-		[Tooltip("the impulse definition to broadcast")]
-		public CinemachineImpulseSource ImpulseSource;
+			/// the impulse definition to broadcast
+			[Tooltip("the impulse definition to broadcast")]
+			public CinemachineImpulseSource ImpulseSource;
+			
+			public override bool HasAutomatedTargetAcquisition => true;
+			protected override void AutomateTargetAcquisition() => ImpulseSource = FindAutomatedTarget<CinemachineImpulseSource>();
 		#endif
 		/// whether or not to clear impulses (stopping camera shakes) when the Stop method is called on that feedback
 		[Tooltip("whether or not to clear impulses (stopping camera shakes) when the Stop method is called on that feedback")]

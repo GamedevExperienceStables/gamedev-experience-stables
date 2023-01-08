@@ -109,42 +109,61 @@ namespace MoreMountains.Feedbacks
 			{
 				return;
 			}
-			if (Mode == Modes.Cached)
-			{
-				InstantiateParticleSystem();
-			}
-			else if (Mode == Modes.Pool)
-			{
-				if (!_poolCreatedOrFound)
-				{
-					if (_objectPooler != null)
-					{
-						_objectPooler.DestroyObjectPool();
-						owner.ProxyDestroy(_objectPooler.gameObject);
-					}
+			
+			CacheParticleSystem();
 
-					GameObject objectPoolGo = new GameObject();
-					objectPoolGo.name = Owner.name+"_ObjectPooler";
-					_objectPooler = objectPoolGo.AddComponent<MMMiniObjectPooler>();
-					_objectPooler.GameObjectToPool = ParticlesPrefab.gameObject;
-					_objectPooler.PoolSize = ObjectPoolSize;
-					if (ParentTransform != null)
-					{
-						_objectPooler.transform.SetParent(ParentTransform);
-					}
-					else
-					{
-						_objectPooler.transform.SetParent(Owner.transform);
-					}
-					_objectPooler.MutualizeWaitingPools = MutualizePools;
-					_objectPooler.FillObjectPool();
-					if ((Owner != null) && (objectPoolGo.transform.parent == null))
-					{
-						SceneManager.MoveGameObjectToScene(objectPoolGo, Owner.gameObject.scene);    
-					}
-					_poolCreatedOrFound = true;
-				}
+			CreatePools(owner);
+		}
+		
+		protected virtual bool ShouldCache => (Mode == Modes.OnDemand && CachedRecycle) || (Mode == Modes.Cached);
+
+		protected virtual void CreatePools(MMF_Player owner)
+		{
+			if (Mode != Modes.Pool)
+			{
+				return;
 			}
+
+			if (!_poolCreatedOrFound)
+			{
+				if (_objectPooler != null)
+				{
+					_objectPooler.DestroyObjectPool();
+					owner.ProxyDestroy(_objectPooler.gameObject);
+				}
+
+				GameObject objectPoolGo = new GameObject();
+				objectPoolGo.name = Owner.name+"_ObjectPooler";
+				_objectPooler = objectPoolGo.AddComponent<MMMiniObjectPooler>();
+				_objectPooler.GameObjectToPool = ParticlesPrefab.gameObject;
+				_objectPooler.PoolSize = ObjectPoolSize;
+				if (ParentTransform != null)
+				{
+					_objectPooler.transform.SetParent(ParentTransform);
+				}
+				else
+				{
+					_objectPooler.transform.SetParent(Owner.transform);
+				}
+				_objectPooler.MutualizeWaitingPools = MutualizePools;
+				_objectPooler.FillObjectPool();
+				if ((Owner != null) && (objectPoolGo.transform.parent == null))
+				{
+					SceneManager.MoveGameObjectToScene(objectPoolGo, Owner.gameObject.scene);    
+				}
+				_poolCreatedOrFound = true;
+			}
+			
+		}
+		
+		protected virtual void CacheParticleSystem()
+		{
+			if (!ShouldCache)
+			{
+				return;
+			}
+
+			InstantiateParticleSystem();
 		}
 
 		/// <summary>
@@ -152,17 +171,6 @@ namespace MoreMountains.Feedbacks
 		/// </summary>
 		protected virtual void InstantiateParticleSystem()
 		{
-			if (Mode == Modes.OnDemand 
-			    && CachedRecycle
-			    && (RandomParticlePrefabs.Count == 0))
-			{
-				if (_instantiatedParticleSystem != null)
-				{
-					PositionParticleSystem(_instantiatedParticleSystem);
-					return;
-				}
-			}
-
 			Transform newParent = null;
             
 			if (NestParticles)
@@ -176,10 +184,10 @@ namespace MoreMountains.Feedbacks
 					newParent = InstantiateParticlesPosition;
 				}
 			}
-
+			
 			if (RandomParticlePrefabs.Count > 0)
 			{
-				if (Mode == Modes.Cached)
+				if (ShouldCache)
 				{
 					_instantiatedRandomParticleSystems = new List<ParticleSystem>();
 					foreach(ParticleSystem system in RandomParticlePrefabs)
@@ -189,6 +197,7 @@ namespace MoreMountains.Feedbacks
 						{
 							SceneManager.MoveGameObjectToScene(newSystem.gameObject, Owner.gameObject.scene);    
 						}
+						newSystem.Stop();
 						_instantiatedRandomParticleSystems.Add(newSystem);
 					}
 				}
@@ -209,12 +218,13 @@ namespace MoreMountains.Feedbacks
 					return;
 				}
 				_instantiatedParticleSystem = GameObject.Instantiate(ParticlesPrefab, newParent) as ParticleSystem;
+				_instantiatedParticleSystem.Stop();
 				if (newParent == null)
 				{
 					SceneManager.MoveGameObjectToScene(_instantiatedParticleSystem.gameObject, Owner.gameObject.scene);    
 				}
 			}
-
+			
 			if (_instantiatedParticleSystem != null)
 			{
 				PositionParticleSystem(_instantiatedParticleSystem);
@@ -336,11 +346,7 @@ namespace MoreMountains.Feedbacks
 				return;
 			}
 
-			if (Mode == Modes.OnDemand)
-			{
-				InstantiateParticleSystem();
-			}
-			else if (Mode == Modes.Pool)
+			if (Mode == Modes.Pool)
 			{
 				if (_objectPooler != null)
 				{
@@ -353,7 +359,18 @@ namespace MoreMountains.Feedbacks
 					}
 				}
 			}
-
+			else
+			{
+				if (!ShouldCache)
+				{
+					InstantiateParticleSystem();
+				}
+				else
+				{
+					GrabCachedParticleSystem();
+				}
+			}
+			
 			if (_instantiatedParticleSystem != null)
 			{
 				if (ForceSetActiveOnPlay)
@@ -379,6 +396,15 @@ namespace MoreMountains.Feedbacks
 				}
 				int random = Random.Range(0, _instantiatedRandomParticleSystems.Count);
 				_instantiatedRandomParticleSystems[random].Play();
+			}
+		}
+
+		protected virtual void GrabCachedParticleSystem()
+		{
+			if (RandomParticlePrefabs.Count > 0)
+			{
+				int random = Random.Range(0, RandomParticlePrefabs.Count);
+				_instantiatedParticleSystem = _instantiatedRandomParticleSystems[random];
 			}
 		}
 

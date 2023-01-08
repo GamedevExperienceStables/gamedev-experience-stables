@@ -18,6 +18,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiredTargetText { get { return TargetCanvasGroup != null ? TargetCanvasGroup.name : "";  } }
 		public override string RequiresSetupText { get { return "This feedback requires that a TargetCanvasGroup be set to be able to work properly. You can set one below."; } }
 		#endif
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetCanvasGroup = FindAutomatedTarget<CanvasGroup>();
 
 		[MMFInspectorGroup("Canvas Group", true, 12, true)]
 		/// the receiver to write the level to

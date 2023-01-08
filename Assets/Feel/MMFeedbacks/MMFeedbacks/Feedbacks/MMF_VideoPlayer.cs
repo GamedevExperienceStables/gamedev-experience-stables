@@ -25,6 +25,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiredTargetText { get { return TargetVideoPlayer != null ? TargetVideoPlayer.name + " " + VideoAction.ToString() : "";  } }
 		public override string RequiresSetupText { get { return "This feedback requires that a TargetVideoPlayer be set to be able to work properly. You can set one below."; } }
 		#endif
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetVideoPlayer = FindAutomatedTarget<VideoPlayer>();
 
 		[MMFInspectorGroup("Video Player", true, 58, true)]
 		/// the Video Player to control with this feedback

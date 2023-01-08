@@ -26,6 +26,8 @@ namespace MoreMountains.Feedbacks
 		/// the duration of this feedback is the duration of the Image, or 0 if instant
 		public override float FeedbackDuration { get { return ApplyTimeMultiplier(Duration); } set { Duration = value; } }
 		public override bool HasChannel => true;
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetGraphic = FindAutomatedTarget<Graphic>();
 
 		/// the possible modes for this feedback
 		public enum Modes { Alpha, Color }

@@ -24,6 +24,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiresSetupText { get { return "This feedback requires that a BoundAnimator be set to be able to work properly. You can set one below."; } }
 		#endif
 		public override bool HasRandomness => true;
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => BoundAnimator = FindAutomatedTarget<Animator>();
 
 		public enum SpeedModes { Once, InstantThenReset, OverTime }
 		

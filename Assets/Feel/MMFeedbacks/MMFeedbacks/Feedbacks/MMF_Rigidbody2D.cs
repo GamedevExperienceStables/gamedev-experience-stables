@@ -21,6 +21,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiredTargetText { get { return TargetRigidbody2D != null ? TargetRigidbody2D.name : "";  } }
 		public override string RequiresSetupText { get { return "This feedback requires that a TargetRigidbody2D be set to be able to work properly. You can set one below."; } }
 		#endif
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetRigidbody2D = FindAutomatedTarget<Rigidbody2D>();
 
 		public enum Modes { AddForce, AddRelativeForce, AddTorque}
 

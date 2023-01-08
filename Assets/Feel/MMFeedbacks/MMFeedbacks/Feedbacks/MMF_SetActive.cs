@@ -21,6 +21,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiredTargetText { get { return TargetGameObject != null ? TargetGameObject.name : "";  } }
 		public override string RequiresSetupText { get { return "This feedback requires that a TargetGameObject be set to be able to work properly. You can set one below."; } }
 		#endif
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetGameObject = FindAutomatedTargetGameObject();
 
 		/// the possible effects the feedback can have on the target object's status 
 		public enum PossibleStates { Active, Inactive, Toggle }

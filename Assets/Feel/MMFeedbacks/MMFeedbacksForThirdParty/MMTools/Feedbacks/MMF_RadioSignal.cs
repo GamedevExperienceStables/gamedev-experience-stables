@@ -26,6 +26,8 @@ namespace MoreMountains.Feedbacks
 		/// the duration of this feedback is the duration of the light, or 0 if instant
 		public override float FeedbackDuration { get { return 0f; } }
 		public override bool HasRandomness => true;
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetSignal = FindAutomatedTarget<MMRadioSignal>();
 
 		[MMFInspectorGroup("Radio Signal", true, 72)]
 		/// The target MMRadioSignal to trigger

@@ -110,6 +110,25 @@ namespace MoreMountains.Feedbacks
 				if (item.Delay.y > 0) { yield return WaitFor(item.Delay.y); }
 			}
 		}
+
+		/// <summary>
+		/// On skip to the end, we skip for all players in our chain
+		/// </summary>
+		/// <param name="position"></param>
+		/// <param name="feedbacksIntensity"></param>
+		protected override void CustomSkipToTheEnd(Vector3 position, float feedbacksIntensity = 1.0f)
+		{
+			foreach (PlayerChainItem item in Players)
+			{
+				if ((item == null) || (item.TargetPlayer == null) || item.Inactive)
+				{
+					continue;
+				}
+
+				item.TargetPlayer.PlayFeedbacks();
+				item.TargetPlayer.SkipToTheEnd();
+			}
+		}
 		
 		/// <summary>
 		/// On restore, we put our object back at its initial position
