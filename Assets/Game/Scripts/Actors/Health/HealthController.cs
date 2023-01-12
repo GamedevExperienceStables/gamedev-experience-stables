@@ -30,6 +30,11 @@ namespace Game.Actors.Health
         {
             _currentValue = initialValue;
         }
+        
+        public void Init(int value)
+        {
+            _currentValue = value;
+        }
 
 
         public void Damage(int damageValue)

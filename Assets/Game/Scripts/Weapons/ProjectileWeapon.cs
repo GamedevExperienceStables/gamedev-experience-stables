@@ -1,4 +1,5 @@
-﻿using MoreMountains.Feedbacks;
+﻿using System;
+using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine;
 
@@ -35,6 +36,11 @@ namespace Game.Weapons
             {
                 recoilFeedbacks.PlayFeedbacks();
             }
+        }
+
+        public void OnDestroy()
+        {
+            pool.DestroyObjectPool();
         }
     }
 }

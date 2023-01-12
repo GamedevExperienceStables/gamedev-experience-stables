@@ -75,7 +75,16 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Menu"",
                     ""type"": ""Button"",
-                    ""id"": ""b839dfb8-de8a-43b5-a070-1cf9be5d712f"",
+                    ""id"": ""39a7064c-30ee-444a-86bc-fcf2f3172436"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interaction"",
+                    ""type"": ""Button"",
+                    ""id"": ""ab6a280b-79bc-4ef2-beef-82b9cea999f6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -96,7 +105,7 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ca2030cf-264e-4982-94ea-2c6b01e68d43"",
+                    ""id"": ""d8061f57-ce44-4817-ada9-c6c4e085b6df"",
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -118,7 +127,7 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0d07f19d-cb82-4eed-9262-35f85820a4ba"",
+                    ""id"": ""bdcf88f7-e43a-4408-b097-1c59f47f9a0c"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -272,7 +281,7 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2c3cb54c-294b-4d9d-9d2a-6bf84b408548"",
+                    ""id"": ""8ba5b5cd-4d1a-4981-b167-cd6fe71dbe1f"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -283,7 +292,7 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2399c3be-9754-48fa-a148-8476c0593ede"",
+                    ""id"": ""11fbbb7a-84d6-4a42-bbd3-ab3f5e8f36a8"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -291,17 +300,39 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
                     ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8a1d366-20f2-48be-bfe1-7f165b80b09c"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dfa143e5-2903-4b6c-bb7c-d0f0ddd0ddd7"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
         {
-            ""name"": ""Menus"",
+            ""name"": ""Menu"",
             ""id"": ""99f5d594-0ebe-4653-8312-d85de6a881d6"",
             ""actions"": [
                 {
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
-                    ""id"": ""b87b87a5-1c30-490b-9fdc-5391b154299a"",
+                    ""id"": ""5b97d27d-da35-4448-ba0a-223cbdb65e7a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -310,7 +341,7 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Exit"",
                     ""type"": ""Button"",
-                    ""id"": ""e94cac92-aa18-420a-a569-cb2545c61b75"",
+                    ""id"": ""abee376d-29b2-42b8-abc8-a6fb2651d2a4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -320,7 +351,7 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""3043c2dd-5db9-41ea-96e0-5176cc379ebc"",
+                    ""id"": ""b6873496-66e4-4949-97fe-40a2eec318a5"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -331,23 +362,23 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""54b13e93-bcc1-47d0-8b4d-235d1c2eb313"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f210f6f7-2306-4abe-8f9e-46c30788e43b"",
+                    ""id"": ""ff5a73da-9f26-4dd0-aa85-fa6f11e32e0e"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bcbe8d93-a274-4cbf-80d5-7c3cbb12f1a7"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -392,10 +423,11 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
         m_Gameplay_SecondaryMovement = m_Gameplay.FindAction("SecondaryMovement", throwIfNotFound: true);
         m_Gameplay_MousePosition = m_Gameplay.FindAction("MousePosition", throwIfNotFound: true);
         m_Gameplay_Menu = m_Gameplay.FindAction("Menu", throwIfNotFound: true);
-        // Menus
-        m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
-        m_Menus_Cancel = m_Menus.FindAction("Cancel", throwIfNotFound: true);
-        m_Menus_Exit = m_Menus.FindAction("Exit", throwIfNotFound: true);
+        m_Gameplay_Interaction = m_Gameplay.FindAction("Interaction", throwIfNotFound: true);
+        // Menu
+        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        m_Menu_Cancel = m_Menu.FindAction("Cancel", throwIfNotFound: true);
+        m_Menu_Exit = m_Menu.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -461,6 +493,7 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_SecondaryMovement;
     private readonly InputAction m_Gameplay_MousePosition;
     private readonly InputAction m_Gameplay_Menu;
+    private readonly InputAction m_Gameplay_Interaction;
     public struct GameplayActions
     {
         private @GameInputControls m_Wrapper;
@@ -471,6 +504,7 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
         public InputAction @SecondaryMovement => m_Wrapper.m_Gameplay_SecondaryMovement;
         public InputAction @MousePosition => m_Wrapper.m_Gameplay_MousePosition;
         public InputAction @Menu => m_Wrapper.m_Gameplay_Menu;
+        public InputAction @Interaction => m_Wrapper.m_Gameplay_Interaction;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -498,6 +532,9 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
                 @Menu.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
+                @Interaction.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteraction;
+                @Interaction.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteraction;
+                @Interaction.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteraction;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -520,39 +557,42 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
+                @Interaction.started += instance.OnInteraction;
+                @Interaction.performed += instance.OnInteraction;
+                @Interaction.canceled += instance.OnInteraction;
             }
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
 
-    // Menus
-    private readonly InputActionMap m_Menus;
-    private IMenusActions m_MenusActionsCallbackInterface;
-    private readonly InputAction m_Menus_Cancel;
-    private readonly InputAction m_Menus_Exit;
-    public struct MenusActions
+    // Menu
+    private readonly InputActionMap m_Menu;
+    private IMenuActions m_MenuActionsCallbackInterface;
+    private readonly InputAction m_Menu_Cancel;
+    private readonly InputAction m_Menu_Exit;
+    public struct MenuActions
     {
         private @GameInputControls m_Wrapper;
-        public MenusActions(@GameInputControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Cancel => m_Wrapper.m_Menus_Cancel;
-        public InputAction @Exit => m_Wrapper.m_Menus_Exit;
-        public InputActionMap Get() { return m_Wrapper.m_Menus; }
+        public MenuActions(@GameInputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Cancel => m_Wrapper.m_Menu_Cancel;
+        public InputAction @Exit => m_Wrapper.m_Menu_Exit;
+        public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MenusActions set) { return set.Get(); }
-        public void SetCallbacks(IMenusActions instance)
+        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuActions instance)
         {
-            if (m_Wrapper.m_MenusActionsCallbackInterface != null)
+            if (m_Wrapper.m_MenuActionsCallbackInterface != null)
             {
-                @Cancel.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnCancel;
-                @Cancel.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnCancel;
-                @Cancel.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnCancel;
-                @Exit.started -= m_Wrapper.m_MenusActionsCallbackInterface.OnExit;
-                @Exit.performed -= m_Wrapper.m_MenusActionsCallbackInterface.OnExit;
-                @Exit.canceled -= m_Wrapper.m_MenusActionsCallbackInterface.OnExit;
+                @Cancel.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
+                @Exit.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnExit;
             }
-            m_Wrapper.m_MenusActionsCallbackInterface = instance;
+            m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Cancel.started += instance.OnCancel;
@@ -564,7 +604,7 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
             }
         }
     }
-    public MenusActions @Menus => new MenusActions(this);
+    public MenuActions @Menu => new MenuActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -591,8 +631,9 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
         void OnSecondaryMovement(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnInteraction(InputAction.CallbackContext context);
     }
-    public interface IMenusActions
+    public interface IMenuActions
     {
         void OnCancel(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
