@@ -1,7 +1,5 @@
 ﻿using Game.Actors;
 using Game.Actors.Health;
-using Game.Hero;
-using Game.Input;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

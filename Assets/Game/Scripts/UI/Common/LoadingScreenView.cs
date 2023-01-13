@@ -1,5 +1,4 @@
-﻿using Game.SceneManagement;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Game.UI

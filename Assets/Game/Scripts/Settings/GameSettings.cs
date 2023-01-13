@@ -1,5 +1,4 @@
-﻿using Game.GameFlow;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Settings
 {

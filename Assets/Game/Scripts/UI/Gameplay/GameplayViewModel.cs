@@ -11,7 +11,7 @@ namespace Game.UI
         [Inject]
         public void Construct(
             RootStateMachine rootStateMachine,
-            PlanetStateMachine planetStateMachine
+            PlanetStateMachine planetStateMachine 
         )
         {
             _planetStateMachine = planetStateMachine;
