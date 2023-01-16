@@ -53,7 +53,7 @@ namespace KinematicCharacterController.Walkthrough.MultipleMovementStates
         public Transform MeshRoot;
 
         public CharacterState CurrentCharacterState { get; private set; }
-        
+
         private Collider[] _probedColliders = new Collider[8];
         private Vector3 _moveInputVector;
         private Vector3 _lookInputVector;
@@ -248,7 +248,7 @@ namespace KinematicCharacterController.Walkthrough.MultipleMovementStates
 
                                 Vector3 velocityDiff = Vector3.ProjectOnPlane(targetMovementVelocity - currentVelocity, Gravity);
                                 currentVelocity += velocityDiff * AirAccelerationSpeed * deltaTime;
-                            } 
+                            }
 
                             // Gravity
                             currentVelocity += Gravity * deltaTime;

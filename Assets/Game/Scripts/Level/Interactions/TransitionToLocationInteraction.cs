@@ -8,7 +8,7 @@ namespace Game.Level
     {
         private readonly PlanetStateMachine _planetStateMachine;
         private readonly GameStateModel _gameStateModel;
-        
+
         private LocationPointDefinition _targetLocation;
 
         [Inject]
@@ -21,7 +21,7 @@ namespace Game.Level
         public void Init(GameObject source, LocationPointDefinition targetLocation)
         {
             Source = source;
-            
+
             _targetLocation = targetLocation;
         }
 
@@ -29,7 +29,7 @@ namespace Game.Level
         {
             _gameStateModel.LastLocation = _gameStateModel.CurrentLocation;
             _gameStateModel.CurrentLocation = _targetLocation;
-            
+
             _planetStateMachine.EnterState<PlanetLocationLoadingState>();
         }
     }

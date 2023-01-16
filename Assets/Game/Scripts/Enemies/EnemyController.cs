@@ -105,7 +105,7 @@ namespace Game.Enemies
         {
             Vector3 targetPosition = GetValidTargetPosition();
             NavMesh.CalculatePath(transform.position, targetPosition, NavMesh.AllAreas, _path);
-            
+
             ResetNextPathTarget();
         }
 

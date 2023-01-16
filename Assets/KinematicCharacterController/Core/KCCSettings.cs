@@ -19,7 +19,7 @@ namespace KinematicCharacterController
         [Tooltip("Should interpolation of characters and PhysicsMovers be handled")]
         public bool Interpolate = true;
         /// <summary>
-		
+
         /// Initial capacity of the system's list of Motors (will resize automatically if needed, but setting a high initial capacity can help preventing GC allocs)
         /// </summary>
         [Tooltip("Initial capacity of the system's list of Motors (will resize automatically if needed, but setting a high initial capacity can help preventing GC allocs)")]

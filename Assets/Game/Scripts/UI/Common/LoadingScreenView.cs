@@ -7,11 +7,11 @@ namespace Game.UI
     public class LoadingScreenView : MonoBehaviour, ILoadingScreen
     {
         private VisualElement _container;
-        
+
         private void Awake()
         {
             VisualElement root = GetComponent<UIDocument>().rootVisualElement;
-            
+
             _container = root.Q<VisualElement>("loading-screen");
         }
 

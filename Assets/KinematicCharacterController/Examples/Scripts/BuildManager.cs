@@ -16,7 +16,7 @@ public class BuildManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }

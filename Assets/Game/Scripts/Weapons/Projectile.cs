@@ -17,7 +17,7 @@ namespace Game.Weapons
 
         [SerializeField]
         private float lifeTime = 3f;
-        
+
         [SerializeField]
         private float raycastMaxDistance = 0.4f;
 

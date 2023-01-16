@@ -6,7 +6,7 @@ namespace Game.Utils
     public class BoxMarker : MonoBehaviour
     {
         private const float FILL_OPACITY_MULTIPLIER = 0.8f;
-        
+
         [SerializeField]
         private Color gizmoColor = Color.green;
 

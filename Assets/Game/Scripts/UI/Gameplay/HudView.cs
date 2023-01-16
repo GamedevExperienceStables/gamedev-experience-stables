@@ -12,7 +12,7 @@ namespace Game.UI
         private GameplayViewModel _viewModel;
 
         [Inject]
-        public void Construct(GameplayViewModel viewModel) 
+        public void Construct(GameplayViewModel viewModel)
             => _viewModel = viewModel;
 
         private void Awake()
@@ -28,13 +28,13 @@ namespace Game.UI
             _buttonMenu.clicked -= PauseGame;
         }
 
-        private void PauseGame() 
+        private void PauseGame()
             => _viewModel.PauseGame();
 
-        public void Show() 
+        public void Show()
             => _root.style.display = DisplayStyle.Flex;
 
-        public void Hide() 
+        public void Hide()
             => _root.style.display = DisplayStyle.None;
     }
 }

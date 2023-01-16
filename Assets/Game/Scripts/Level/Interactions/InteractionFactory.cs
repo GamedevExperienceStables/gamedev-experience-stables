@@ -16,11 +16,11 @@ namespace Game.Level
             switch (interactable)
             {
                 case LocationDoor locationDoor:
-                {
-                    var teleport = _resolver.Resolve<TransitionToLocationInteraction>();
-                    teleport.Init(interactable.gameObject, locationDoor.TargetLocation);
-                    return teleport;
-                }
+                    {
+                        var teleport = _resolver.Resolve<TransitionToLocationInteraction>();
+                        teleport.Init(interactable.gameObject, locationDoor.TargetLocation);
+                        return teleport;
+                    }
                 default:
                     return null;
             }

@@ -40,7 +40,7 @@ namespace Game.GameFlow
             _locationController.Clear();
 
             await UnloadLastLocationIfExists();
-            
+
             LocationPointDefinition spawnLocation = _gameStateModel.CurrentLocation;
             Scene location = await LoadLocationAsync(spawnLocation.Location);
             InitLocation(location, spawnLocation.PointKey);
@@ -70,7 +70,7 @@ namespace Game.GameFlow
             await _sceneLoader.UnloadSceneIfLoadedAsync(lastLocation.Location.SceneName);
         }
 
-        private async UniTask<Scene> LoadLocationAsync(LocationDefinition spawnLocation) 
+        private async UniTask<Scene> LoadLocationAsync(LocationDefinition spawnLocation)
             => await _sceneLoader.LoadSingleSceneAdditiveAsync(spawnLocation.SceneName);
 
         private LocationContext GetContext(Scene location)

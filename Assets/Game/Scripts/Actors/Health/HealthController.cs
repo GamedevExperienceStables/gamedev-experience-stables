@@ -30,7 +30,7 @@ namespace Game.Actors.Health
         {
             _currentValue = initialValue;
         }
-        
+
         public void Init(int value)
         {
             _currentValue = value;
@@ -43,7 +43,7 @@ namespace Game.Actors.Health
             {
                 return;
             }
-            
+
             if (_currentValue <= 0 && initialValue > 0)
             {
                 return;
@@ -76,7 +76,7 @@ namespace Game.Actors.Health
                 Instantiate(damageFeedback, transform.position, transform.rotation);
             }
         }
-        
+
         private void PlayDeathFeedback()
         {
             if (deathFeedback)

@@ -11,7 +11,7 @@ namespace Game.Enemies
         private readonly IObjectResolver _resolver;
 
         [Inject]
-        public EnemyFactory(IObjectResolver resolver) 
+        public EnemyFactory(IObjectResolver resolver)
             => _resolver = resolver;
 
         public EnemyController Create(EnemyDefinition definition, Transform spawnPoint, Transform target, Transform spawnContainer)
@@ -19,7 +19,7 @@ namespace Game.Enemies
             EnemyController instance = _resolver.Instantiate(definition.Prefab, spawnContainer);
             instance.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             instance.SetTarget(target);
-            
+
             var health = instance.GetComponent<HealthController>();
             health.Init(definition.Health);
 

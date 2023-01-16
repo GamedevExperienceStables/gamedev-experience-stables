@@ -252,7 +252,7 @@ namespace KinematicCharacterController
             if (deltaTime > 0f)
             {
                 Velocity = (TransientPosition - InitialSimulationPosition) / deltaTime;
-                                
+
                 Quaternion rotationFromCurrentToGoal = TransientRotation * (Quaternion.Inverse(InitialSimulationRotation));
                 AngularVelocity = (Mathf.Deg2Rad * rotationFromCurrentToGoal.eulerAngles) / deltaTime;
             }

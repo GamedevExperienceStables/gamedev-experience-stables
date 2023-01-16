@@ -48,7 +48,7 @@ namespace KinematicCharacterController.Walkthrough.DoubleJumping
         private float _timeSinceJumpRequested = Mathf.Infinity;
         private float _timeSinceLastAbleToJump = 0f;
         private bool _doubleJumpConsumed = false;
-        
+
         private void Start()
         {
             // Assign to motor

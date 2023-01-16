@@ -8,7 +8,7 @@ namespace Game.Actors.Damage
     {
         [SerializeField]
         private int initialValue = 1;
-        
+
         [SerializeField]
         private MMF_Player hitFeedback;
 

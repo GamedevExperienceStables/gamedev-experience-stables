@@ -14,7 +14,7 @@ namespace Game.Input
         public InputButton AimButton { get; } = new();
         public InputButton MenuButton { get; } = new();
         public InputButton InteractionButton { get; } = new();
-        
+
         [Inject]
         public InputControlGameplay(GameInputControlsAdapter inputControls)
         {

@@ -34,7 +34,7 @@ namespace KinematicCharacterController.Walkthrough.BasicMovement
 
         private Vector3 _moveInputVector;
         private Vector3 _lookInputVector;
-        
+
         private void Start()
         {
             // Assign to motor

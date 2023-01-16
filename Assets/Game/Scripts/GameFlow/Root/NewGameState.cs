@@ -22,7 +22,7 @@ namespace Game.GameFlow
         protected override void OnEnter()
         {
             NewGame();
-            
+
             Parent.EnterState<IntroState>();
         }
 

@@ -11,16 +11,16 @@ namespace Game.GameFlow
         public virtual void Enter()
         {
             Debug.Log($"[STATE] <color=cyan>>>></color> {this}");
-            
+
             OnEnter();
         }
 
         public virtual void Exit()
         {
             Child?.CurrentState.Exit();
-            
+
             Debug.Log($"[STATE] <color=grey><<<</color> {this}");
-            
+
             OnExit();
         }
 

@@ -7,7 +7,7 @@ namespace Game.Actors
     {
         [SerializeField]
         private ProjectileWeapon currentWeapon;
-        
+
         public void Fire()
         {
             currentWeapon.SpawnProjectile();

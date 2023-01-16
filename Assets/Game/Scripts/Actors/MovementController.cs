@@ -35,7 +35,7 @@ namespace Game.Actors
         {
             motor.SetPositionAndRotation(position, quaternion);
         }
-        
+
         public void SetMovementSpeed(float maxSpeed)
         {
             groundMovement.SetMaxSpeed(maxSpeed);

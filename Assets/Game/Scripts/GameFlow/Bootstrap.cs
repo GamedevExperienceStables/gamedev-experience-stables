@@ -12,7 +12,7 @@ namespace Game.GameFlow
         {
             _rootStateMachine = rootStateMachine;
         }
-        
+
         private void Start()
         {
             _rootStateMachine.EnterState<InitState>();

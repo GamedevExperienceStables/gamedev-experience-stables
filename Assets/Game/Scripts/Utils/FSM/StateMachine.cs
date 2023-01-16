@@ -47,7 +47,7 @@ namespace Game.Utils
             return state;
         }
 
-        private T GetState<T>() where T : class, IState 
+        private T GetState<T>() where T : class, IState
             => _states[typeof(T)] as T;
     }
 }

@@ -16,17 +16,17 @@ namespace Game.GameFlow
         {
             // show confirmation popup
             // ...
-            
+
             // On confirm Quit
             Quit();
         }
 
-        private void Quit() 
+        private void Quit()
             => _quitService.Quit();
 
         protected override void OnExit()
         {
-            
+
         }
     }
 }

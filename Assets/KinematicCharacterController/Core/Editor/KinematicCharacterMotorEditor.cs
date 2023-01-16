@@ -9,7 +9,7 @@ namespace KinematicCharacterController
     public class KinematicCharacterMotorEditor : Editor
     {
         protected virtual void OnSceneGUI()
-        {            
+        {
             KinematicCharacterMotor motor = (target as KinematicCharacterMotor);
             if (motor)
             {
@@ -17,10 +17,10 @@ namespace KinematicCharacterController
 
                 Handles.color = Color.yellow;
                 Handles.CircleHandleCap(
-                    0, 
-                    characterBottom + (motor.transform.up * motor.MaxStepHeight), 
-                    Quaternion.LookRotation(motor.transform.up, motor.transform.forward), 
-                    motor.Capsule.radius + 0.1f, 
+                    0,
+                    characterBottom + (motor.transform.up * motor.MaxStepHeight),
+                    Quaternion.LookRotation(motor.transform.up, motor.transform.forward),
+                    motor.Capsule.radius + 0.1f,
                     EventType.Repaint);
             }
         }

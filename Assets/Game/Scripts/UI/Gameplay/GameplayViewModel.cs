@@ -3,7 +3,7 @@ using VContainer;
 
 namespace Game.UI
 {
-    public class GameplayViewModel 
+    public class GameplayViewModel
     {
         private RootStateMachine _rootStateMachine;
         private PlanetStateMachine _planetStateMachine;
@@ -11,7 +11,7 @@ namespace Game.UI
         [Inject]
         public void Construct(
             RootStateMachine rootStateMachine,
-            PlanetStateMachine planetStateMachine 
+            PlanetStateMachine planetStateMachine
         )
         {
             _planetStateMachine = planetStateMachine;

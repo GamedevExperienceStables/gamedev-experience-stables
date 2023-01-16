@@ -2,7 +2,7 @@
 
 namespace Game.GameFlow
 {
-    public class QuitGameService 
+    public class QuitGameService
     {
         [Inject]
         public QuitGameService()

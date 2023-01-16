@@ -34,12 +34,12 @@ namespace KinematicCharacterController.Walkthrough.ClimbingLadders
 
         public Vector3 ClosestPointOnLadderSegment(Vector3 fromPoint, out float onSegmentState)
         {
-            Vector3 segment = TopAnchorPoint - BottomAnchorPoint;            
+            Vector3 segment = TopAnchorPoint - BottomAnchorPoint;
             Vector3 segmentPoint1ToPoint = fromPoint - BottomAnchorPoint;
             float pointProjectionLength = Vector3.Dot(segmentPoint1ToPoint, segment.normalized);
 
             // When higher than bottom point
-            if(pointProjectionLength > 0)
+            if (pointProjectionLength > 0)
             {
                 // If we are not higher than top point
                 if (pointProjectionLength <= segment.magnitude)

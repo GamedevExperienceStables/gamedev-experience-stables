@@ -26,7 +26,7 @@ namespace Game.GameFlow
         protected override void OnEnter()
         {
             _timeService.Pause();
-            
+
             _inputService.EnableMenus();
             _view.ShowPause();
         }

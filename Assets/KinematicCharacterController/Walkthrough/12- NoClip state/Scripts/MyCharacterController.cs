@@ -172,7 +172,7 @@ namespace KinematicCharacterController.Walkthrough.NoClipState
                 cameraPlanarDirection = Vector3.ProjectOnPlane(inputs.CameraRotation * Vector3.up, Motor.CharacterUp).normalized;
             }
             Quaternion cameraPlanarRotation = Quaternion.LookRotation(cameraPlanarDirection, Motor.CharacterUp);
-            
+
             switch (CurrentCharacterState)
             {
                 case CharacterState.Default:

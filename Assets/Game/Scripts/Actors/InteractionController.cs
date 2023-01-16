@@ -15,7 +15,7 @@ namespace Game.Actors
         private InteractionService _interactionService;
         private Interactable _activeInteraction;
 
-        public void Init(InteractionService interactionService) 
+        public void Init(InteractionService interactionService)
             => _interactionService = interactionService;
 
         private void OnEnable()
@@ -66,7 +66,7 @@ namespace Game.Actors
         {
             Interaction existsInteraction = FindInteraction(source);
             _potentialInteractions.Remove(existsInteraction);
-            
+
             if (_potentialInteractions.Count > 0)
             {
                 Interaction nextInteraction = _potentialInteractions.First();

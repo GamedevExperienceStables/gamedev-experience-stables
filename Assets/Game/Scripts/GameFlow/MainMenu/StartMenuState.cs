@@ -11,12 +11,12 @@ namespace Game.GameFlow
 
         protected override void OnEnter()
         {
-            
+
         }
 
         protected override void OnExit()
         {
-            
+
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Game.Hero
         private IInputControlGameplay _input;
         private Vector3 _movementDirection;
         private Vector3 _lookDirection;
-     
+
         private MovementController _movement;
         private WeaponController _weapon;
         private InteractionController _interaction;
@@ -52,7 +52,7 @@ namespace Game.Hero
         {
             if (_input is null)
                 return;
-            
+
             _input.AimButton.Performed -= OnAim;
             _input.AimButton.Canceled -= OnAimCanceled;
 
@@ -69,7 +69,7 @@ namespace Game.Hero
 
         private void OnFire()
         {
-            if (_input.AimButton.IsDown) 
+            if (_input.AimButton.IsDown)
                 _weapon.Fire();
         }
 
@@ -86,8 +86,8 @@ namespace Game.Hero
 
             _movement.ResetMovementSpeed();
         }
-        
-        private void OnInteract() 
+
+        private void OnInteract()
             => _interaction.Interact();
 
         private void HandleInputs()
@@ -96,7 +96,7 @@ namespace Game.Hero
             _lookDirection = GetLookDirection(_movementDirection);
         }
 
-        private void Move() 
+        private void Move()
             => _movement.UpdateInputs(_movementDirection, _lookDirection.normalized);
 
         private Vector3 GetMovementDirection()

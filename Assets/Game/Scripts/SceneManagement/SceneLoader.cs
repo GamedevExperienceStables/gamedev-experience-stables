@@ -26,7 +26,7 @@ namespace Game.SceneManagement
 
             while (!operation.isDone)
             {
-                if (operation.progress >= 0.9f) 
+                if (operation.progress >= 0.9f)
                     operation.allowSceneActivation = true;
 
                 await UniTask.Yield();
@@ -43,7 +43,7 @@ namespace Game.SceneManagement
             await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
             Scene scene = SceneManager.GetSceneByName(sceneName);
             SceneManager.SetActiveScene(scene);
-            
+
             return scene;
         }
 
@@ -52,7 +52,7 @@ namespace Game.SceneManagement
             Scene scene = SceneManager.GetSceneByName(sceneName);
             if (!scene.isLoaded)
                 return;
-            
+
             await SceneManager.UnloadSceneAsync(sceneName);
         }
     }
