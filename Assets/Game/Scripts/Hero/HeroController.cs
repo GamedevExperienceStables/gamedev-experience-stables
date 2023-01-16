@@ -5,12 +5,10 @@ using UnityEngine;
 
 namespace Game.Hero
 {
-    [RequireComponent(typeof(MovementController), typeof(WeaponController))]
+    [RequireComponent(typeof(MovementController))]
+    [RequireComponent(typeof(WeaponController))]
     public class HeroController : MonoBehaviour
     {
-        private MovementController movement;
-        private WeaponController weapon;
-
         [SerializeField]
         private Transform cameraTarget;
 
@@ -20,36 +18,46 @@ namespace Game.Hero
         private SceneCamera _sceneCamera;
         private FollowSceneCamera _followCamera;
 
-        private IInputReader _inputReader;
+        private IInputControlGameplay _input;
         private Vector3 _movementDirection;
         private Vector3 _lookDirection;
+     
+        private MovementController _movement;
+        private WeaponController _weapon;
+        private InteractionController _interaction;
 
         public Transform CameraTarget => cameraTarget;
 
         private void Awake()
         {
-            movement = GetComponent<MovementController>();
-            weapon = GetComponent<WeaponController>();
+            _movement = GetComponent<MovementController>();
+            _weapon = GetComponent<WeaponController>();
+            _interaction = GetComponent<InteractionController>();
         }
 
-        public void Construct(IInputReader inputReader, SceneCamera sceneCamera, FollowSceneCamera followCamera)
+        public void Init(IInputControlGameplay input, SceneCamera sceneCamera, FollowSceneCamera followCamera)
         {
             _followCamera = followCamera;
             _sceneCamera = sceneCamera;
-            _inputReader = inputReader;
+            _input = input;
 
-            _inputReader.AimButton.Performed += OnAim;
-            _inputReader.AimButton.Canceled += OnAimCanceled;
+            _input.AimButton.Performed += OnAim;
+            _input.AimButton.Canceled += OnAimCanceled;
 
-            _inputReader.FireButton.Performed += OnFire;
+            _input.FireButton.Performed += OnFire;
+            _input.InteractionButton.Performed += OnInteract;
         }
 
         private void OnDestroy()
         {
-            _inputReader.AimButton.Performed -= OnAim;
-            _inputReader.AimButton.Canceled -= OnAimCanceled;
+            if (_input is null)
+                return;
+            
+            _input.AimButton.Performed -= OnAim;
+            _input.AimButton.Canceled -= OnAimCanceled;
 
-            _inputReader.FireButton.Performed -= OnFire;
+            _input.FireButton.Performed -= OnFire;
+            _input.InteractionButton.Performed -= OnInteract;
         }
 
         private void Update()
@@ -61,25 +69,26 @@ namespace Game.Hero
 
         private void OnFire()
         {
-            if (_inputReader.AimButton.IsDown)
-            {
-                weapon.Fire();
-            }
+            if (_input.AimButton.IsDown) 
+                _weapon.Fire();
         }
 
         private void OnAim()
         {
             _followCamera.ZoomOut();
 
-            movement.SetMovementSpeed(aimMaxSpeed);
+            _movement.SetMovementSpeed(aimMaxSpeed);
         }
 
         private void OnAimCanceled()
         {
             _followCamera.ZoomReset();
 
-            movement.ResetMovementSpeed();
+            _movement.ResetMovementSpeed();
         }
+        
+        private void OnInteract() 
+            => _interaction.Interact();
 
         private void HandleInputs()
         {
@@ -87,14 +96,12 @@ namespace Game.Hero
             _lookDirection = GetLookDirection(_movementDirection);
         }
 
-        private void Move()
-        {
-            movement.UpdateInputs(_movementDirection, _lookDirection.normalized);
-        }
+        private void Move() 
+            => _movement.UpdateInputs(_movementDirection, _lookDirection.normalized);
 
         private Vector3 GetMovementDirection()
         {
-            Vector3 movementDirection = _sceneCamera.TransformDirection(_inputReader.PrimaryMovement);
+            Vector3 movementDirection = _sceneCamera.TransformDirection(_input.PrimaryMovement);
             movementDirection.y = 0;
 
             return movementDirection;
@@ -102,28 +109,20 @@ namespace Game.Hero
 
         private Vector3 GetLookDirection(Vector3 movementDirection)
         {
-            if (!_inputReader.AimButton.IsDown)
-            {
+            if (!_input.AimButton.IsDown)
                 return movementDirection;
-            }
 
             if (IsSecondaryMovementPerformed())
-            {
                 return GetLookDirectionFromSecondaryMovement();
-            }
 
-            return GetLookDirectionFromMousePosition(movementDirection, _inputReader.MousePosition);
+            return GetLookDirectionFromMousePosition(movementDirection, _input.MousePosition);
         }
 
         private Vector3 GetLookDirectionFromSecondaryMovement()
-        {
-            return _sceneCamera.TransformDirection(_inputReader.SecondaryMovement);
-        }
+            => _sceneCamera.TransformDirection(_input.SecondaryMovement);
 
         private bool IsSecondaryMovementPerformed()
-        {
-            return _inputReader.SecondaryMovement.sqrMagnitude > 0;
-        }
+            => _input.SecondaryMovement.sqrMagnitude > 0;
 
         private Vector3 GetLookDirectionFromMousePosition(Vector3 movementDirection, Vector2 mousePosition)
         {
@@ -139,8 +138,6 @@ namespace Game.Hero
         }
 
         public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
-        {
-            movement.SetPositionAndRotation(position, rotation);
-        }
+            => _movement.SetPositionAndRotation(position, rotation);
     }
 }

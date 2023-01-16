@@ -26,6 +26,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiredTargetText { get { return ((AnimateRotationTarget != null) || (AnimateRotationCenter != null)) ? AnimateRotationTarget.name : "";  } }
 		public override string RequiresSetupText { get { return "This feedback requires that a AnimatePositionTarget and a AnimateRotationCenter be set to be able to work properly. You can set one below."; } }
 		#endif
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => AnimateRotationTarget = FindAutomatedTarget<Transform>();
 
 		[MMFInspectorGroup("Animation Targets", true, 61, true)]
 		/// the object whose rotation you want to animate

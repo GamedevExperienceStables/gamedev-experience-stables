@@ -452,12 +452,35 @@ namespace MoreMountains.Tools
 			return null;
 		}
 
+		protected string _tempSearchedName;
+		
+		/// <summary>
+		/// Gets an object of the type at the specified index in the Pool.
+		/// Note that the whole point of this multiple object pooler is to abstract the various pools and handle
+		/// the picking based on the selected mode. If you plan on just picking from different pools yourself,
+		/// consider simply having multiple single object poolers.
+		/// </summary>
+		/// <param name="index"></param>
+		public virtual GameObject GetPooledGamObjectAtIndex(int index)
+		{
+			if ((index < 0) || (index >= Pool.Count))
+			{
+				return null;
+			}
+
+			_tempSearchedName = Pool[index].GameObjectToPool.name;
+			return GetPooledGameObjectOfType(_tempSearchedName);
+		}
+
 		/// <summary>
 		/// Gets an object of the specified name from the pool
+		/// Note that the whole point of this multiple object pooler is to abstract the various pools and handle
+		/// the picking based on the selected mode. If you plan on just picking from different pools yourself,
+		/// consider simply having multiple single object poolers.
 		/// </summary>
 		/// <returns>The pooled game object of type.</returns>
 		/// <param name="type">Type.</param>
-		protected virtual GameObject GetPooledGameObjectOfType(string searchedName)
+		public virtual GameObject GetPooledGameObjectOfType(string searchedName)
 		{
 			GameObject newObject = FindInactiveObject(searchedName,_objectPool.PooledGameObjects);
 

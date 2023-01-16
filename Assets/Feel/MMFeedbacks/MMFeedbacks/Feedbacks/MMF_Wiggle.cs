@@ -21,6 +21,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiredTargetText { get { return TargetWiggle != null ? TargetWiggle.name : "";  } }
 		public override string RequiresSetupText { get { return "This feedback requires that a TargetWiggle be set to be able to work properly. You can set one below."; } }
 		#endif
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetWiggle = FindAutomatedTarget<MMWiggle>();
 
 		[MMFInspectorGroup("Target", true, 54, true)]
 		/// the Wiggle component to target

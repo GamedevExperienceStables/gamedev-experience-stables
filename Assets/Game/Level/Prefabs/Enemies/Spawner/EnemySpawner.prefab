@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4084789936463911640}
   - component: {fileID: 5578446121642143856}
   m_Layer: 0
-  m_Name: Feedback
+  m_Name: SpawnFeedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

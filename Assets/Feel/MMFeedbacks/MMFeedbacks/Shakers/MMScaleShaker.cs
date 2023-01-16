@@ -162,7 +162,10 @@ namespace MoreMountains.Feedbacks
 			base.ShakeComplete();
 			_attenuation = 0f;
 			_newScale = ComputeNewScale();
-			ApplyNewScale(_newScale);
+			if (TargetTransform != null)
+			{
+				ApplyNewScale(_newScale);	
+			}
 		}
 
 		protected virtual void ApplyNewScale(Vector3 newScale)

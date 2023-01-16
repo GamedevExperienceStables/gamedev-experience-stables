@@ -25,6 +25,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiresSetupText { get { return "This feedback requires that a TargetFloatController be set to be able to work properly. You can set one below."; } }
 		#endif
 		public override bool HasRandomness => true;
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetFloatController = FindAutomatedTarget<FloatController>();
 
 		[MMFInspectorGroup("Float Controller", true, 36, true)]
 		/// the mode this controller is in

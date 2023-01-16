@@ -29,6 +29,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiresSetupText { get { return "This feedback requires that an AnimateScaleTarget be set to be able to work properly. You can set one below."; } }
 		public override bool HasCustomInspectors { get { return true; } }
 		#endif
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => AnimateScaleTarget = FindAutomatedTarget<Transform>();
 
 		[MMFInspectorGroup("Scale Mode", true, 12, true)]
 		/// the mode this feedback should operate on

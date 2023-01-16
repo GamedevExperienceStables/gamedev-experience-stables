@@ -1,34 +1,33 @@
-﻿namespace Game.Input
+﻿using VContainer;
+
+namespace Game.Input
 {
-    public partial class InputService : IInputReader
+    public class InputService : IInputService
     {
-        private readonly GameInputControls _gameInput;
+        private readonly GameInputControlsAdapter _gameInput;
 
-        public InputService()
+        [Inject]
+        public InputService(GameInputControlsAdapter gameInput)
         {
-            _gameInput = new GameInputControls();
-
-            _gameInput.Gameplay.SetCallbacks(this);
-            _gameInput.Menus.SetCallbacks(this);
+            _gameInput = gameInput;
         }
 
         public void EnableGameplay()
         {
-            _gameInput.Gameplay.Enable();
-            _gameInput.Menus.Disable();
+            _gameInput.GameplayEnable();
+            _gameInput.MenuDisable();
         }
 
         public void EnableMenus()
         {
-            _gameInput.Gameplay.Disable();
-            _gameInput.Menus.Enable();
+            _gameInput.GameplayDisable();
+            _gameInput.MenuEnable();
         }
-
 
         public void DisableAll()
         {
-            _gameInput.Gameplay.Disable();
-            _gameInput.Menus.Disable();
+            _gameInput.GameplayDisable();
+            _gameInput.MenuDisable();
         }
     }
 }

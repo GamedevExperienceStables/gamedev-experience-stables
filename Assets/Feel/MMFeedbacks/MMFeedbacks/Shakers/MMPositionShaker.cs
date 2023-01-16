@@ -167,7 +167,10 @@ namespace MoreMountains.Feedbacks
 			base.ShakeComplete();
 			_attenuation = 0f;
 			_newPosition = ComputeNewPosition();
-			ApplyNewPosition(_newPosition);
+			if (TargetTransform != null)
+			{
+				ApplyNewPosition(_newPosition);	
+			}
 		}
 
 		protected virtual void ApplyNewPosition(Vector3 newPosition)

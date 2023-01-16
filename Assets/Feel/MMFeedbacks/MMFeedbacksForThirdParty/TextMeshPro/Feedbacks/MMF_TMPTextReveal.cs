@@ -30,6 +30,9 @@ namespace MoreMountains.Feedbacks
 		protected string _originalText;
 		
 		#if MM_TEXTMESHPRO
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetTMPText = FindAutomatedTarget<TMP_Text>();
+
 		/// the duration of this feedback 
 		public override float FeedbackDuration
 		{

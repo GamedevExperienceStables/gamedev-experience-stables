@@ -36,6 +36,8 @@ namespace MoreMountains.FeedbacksForThirdParty
 		#if MM_CINEMACHINE
 		/// the duration of this feedback is the duration of the shake
 		public override float FeedbackDuration { get { return ApplyTimeMultiplier(BlendDefintion.m_Time); } set { BlendDefintion.m_Time = value; } }
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetVirtualCamera = FindAutomatedTarget<CinemachineVirtualCamera>();
 		#endif
 		public override bool HasChannel => true;
 

@@ -20,9 +20,6 @@ namespace Game.Actors
         [SerializeField]
         private Gravity gravity;
 
-        [SerializeField]
-        private bool rotateOnlyXZ = true;
-
         private Vector3 _movementDirection;
         private Vector3 _lookDirection;
         public float CapsuleRadius => motor.Capsule.radius;
@@ -53,7 +50,7 @@ namespace Game.Actors
         {
             _movementDirection = movementDirection;
 
-            if (rotateOnlyXZ)
+            if (rotation.rotateOnlyXZ)
             {
                 lookDirection.y = 0;
             }

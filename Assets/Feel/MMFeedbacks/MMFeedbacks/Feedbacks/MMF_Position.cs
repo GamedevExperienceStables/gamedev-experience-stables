@@ -18,12 +18,16 @@ namespace MoreMountains.Feedbacks
 		public static bool FeedbackTypeAuthorized = true;
 		/// sets the inspector color for this feedback
 		#if UNITY_EDITOR
-		public override Color FeedbackColor { get { return MMFeedbacksInspectorColors.TransformColor; } }
-		public override bool EvaluateRequiresSetup() { return (AnimatePositionTarget == null); }
-		public override string RequiredTargetText { get { return AnimatePositionTarget != null ? AnimatePositionTarget.name : "";  } }
-		public override string RequiresSetupText { get { return "This feedback requires that a AnimatePositionTarget and a Destination be set to be able to work properly. You can set one below."; } }
-		public override bool HasCustomInspectors { get { return true; } }
+		public override Color FeedbackColor => MMFeedbacksInspectorColors.TransformColor; 
+		public override bool EvaluateRequiresSetup() => (AnimatePositionTarget == null);
+		public override string RequiredTargetText => AnimatePositionTarget != null ? AnimatePositionTarget.name : "";  
+		public override string RequiresSetupText => "This feedback requires that a AnimatePositionTarget and a Destination be set to be able to work properly. You can set one below."; 
+		public override bool HasCustomInspectors => true; 
 		#endif
+		public override bool HasRandomness => true;
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => AnimatePositionTarget = FindAutomatedTargetGameObject();
+		
 		public enum Spaces { World, Local, RectTransform, Self }
 		public enum Modes { AtoB, AlongCurve, ToDestination }
 		public enum TimeScales { Scaled, Unscaled }
@@ -125,7 +129,6 @@ namespace MoreMountains.Feedbacks
 		public Transform DestinationPositionTransform;
 		/// the duration of this feedback is the duration of its animation
 		public override float FeedbackDuration { get { return ApplyTimeMultiplier(AnimatePositionDuration); } set { AnimatePositionDuration = value; } }
-		public override bool HasRandomness => true;
 		
 		/// [DEPRECATED] the acceleration of the movement
 		[HideInInspector] public AnimationCurve AnimatePositionCurveX = null;

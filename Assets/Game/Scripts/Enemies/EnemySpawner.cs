@@ -1,14 +1,14 @@
-﻿using Game.Enemies;
-using MoreMountains.Feedbacks;
+﻿using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Serialization;
+using VContainer;
 
-namespace Game.Managers
+namespace Game.Enemies
 {
     public class EnemySpawner : MonoBehaviour
     {
         [SerializeField]
-        private EnemyController enemyPrefab;
+        private EnemyDefinition enemy;
 
         [FormerlySerializedAs("interval")]
         [SerializeField]
@@ -22,11 +22,14 @@ namespace Game.Managers
         private bool _hasTarget;
 
         private Transform _spawnContainer;
+        private EnemyFactory _factory;
 
-        public void Init(Transform spawnContainer)
-        {
-            _spawnContainer = spawnContainer;
-        }
+        [Inject]
+        public void Construct(EnemyFactory factory) 
+            => _factory = factory;
+
+        public void Init(Transform spawnContainer) 
+            => _spawnContainer = spawnContainer;
 
         public void SetTarget(Transform target)
         {
@@ -58,10 +61,7 @@ namespace Game.Managers
 
         private void Spawn()
         {
-            Transform t = transform;
-            EnemyController enemy = Instantiate(enemyPrefab, _spawnContainer);
-            enemy.SetPositionAndRotation(t.position, t.rotation);
-            enemy.SetTarget(_target);
+            _factory.Create(enemy, transform, _target, _spawnContainer);
 
             PlaySpawnFeedback();
         }

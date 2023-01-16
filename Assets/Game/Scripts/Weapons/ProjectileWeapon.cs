@@ -36,5 +36,10 @@ namespace Game.Weapons
                 recoilFeedbacks.PlayFeedbacks();
             }
         }
+
+        public void OnDestroy()
+        {
+            pool.DestroyObjectPool();
+        }
     }
 }

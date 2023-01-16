@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="loading-screen" picking-mode="Ignore" style="flex-grow: 1; background-color: rgb(24, 24, 24); opacity: 1; display: none;">
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: center; align-items: center;">
+            <ui:Label tabindex="-1" text="Loading..." display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 33px; -unity-font-style: bold-and-italic;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

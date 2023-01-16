@@ -17,6 +17,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiredTargetText => TargetRenderer != null ? TargetRenderer.name : "";
 		public override string RequiresSetupText => "This feedback requires that a TargetRenderer be set to be able to work properly. You can set one below.";
 		#endif
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetRenderer = FindAutomatedTarget<Renderer>();
         
 		/// a static bool used to disable all feedbacks of this type at once
 		public static bool FeedbackTypeAuthorized = true;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Tools;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -62,6 +63,7 @@ namespace MoreMountains.Feedbacks
 			InitializeFeedbackList();
 			ExtraInitializationChecks();
 			CheckForLoops();
+			ComputeCachedTotalDuration();
 		}
 
 		/// <summary>
@@ -157,7 +159,7 @@ namespace MoreMountains.Feedbacks
 			{
 				if (FeedbacksList[i] != null)
 				{
-					FeedbacksList[i].Initialization(this);
+					FeedbacksList[i].Initialization(this, i);
 				}                
 			}
 		}
@@ -1017,6 +1019,99 @@ namespace MoreMountains.Feedbacks
 		#endregion
 
 		#region ACCESS
+		
+		public enum AccessMethods { First, Previous, Closest, Next, Last }
+		
+		/// <summary>
+		/// Returns the first feedback found in this player's list based on the chosen method and type
+		/// First : first feedback of the matching type in the list, from top to bottom
+		/// Previous : first feedback of the matching type located before (so above) the feedback at the reference index
+		/// Closest : first feedback of the matching type located before or after the feedback at the reference index
+		/// Next : first feedback of the matching type located after (so below) the feedback at the reference index
+		/// First : last feedback of the matching type in the list, from top to bottom
+		/// </summary>
+		/// <param name="method"></param>
+		/// <param name="referenceIndex"></param>
+		/// <typeparam name="T"></typeparam>
+		/// <returns></returns>
+		public virtual T GetFeedbackOfType<T>(AccessMethods method, int referenceIndex) where T:MMF_Feedback
+		{
+			_t = typeof(T);
+
+			referenceIndex = Mathf.Clamp(referenceIndex, 0, FeedbacksList.Count);
+			
+			switch (method)
+			{
+				case AccessMethods.First:
+					for (int i = 0; i < FeedbacksList.Count; i++)
+					{
+						if (Check(i)) { return (T)FeedbacksList[i]; }
+					}
+					break;
+				case AccessMethods.Previous:
+					for (int i = referenceIndex; i >= 0; i--)
+					{
+						if (Check(i)) { return (T)FeedbacksList[i]; }
+					}
+					break;
+				case AccessMethods.Closest:
+					int closestIndexBack = referenceIndex;
+					int closestIndexForward = referenceIndex;
+					for (int i = referenceIndex; i >= 0; i--)
+					{
+						if (Check(i))
+						{
+							closestIndexBack = i;
+							break;
+						}
+					}
+
+					for (int i = referenceIndex; i < FeedbacksList.Count; i++)
+					{
+						if (Check(i))
+						{
+							closestIndexForward = i;
+							break;
+						}
+					}
+
+					int foundIndex;
+					if ((closestIndexBack != referenceIndex) || (closestIndexForward != referenceIndex))
+					{
+						if (closestIndexBack == referenceIndex) { foundIndex = closestIndexForward; }
+						else if (closestIndexForward == referenceIndex) { foundIndex = closestIndexBack; }
+						else
+						{
+							int distanceBack = Mathf.Abs(referenceIndex - closestIndexBack);
+							int distanceForward = Mathf.Abs(referenceIndex - closestIndexForward);
+							foundIndex = (distanceBack > distanceForward) ? closestIndexForward : closestIndexBack;
+						}
+						return (T)FeedbacksList[foundIndex];
+					}
+					else
+					{
+						return null;
+					}
+				case AccessMethods.Next:
+					for (int i = referenceIndex; i < FeedbacksList.Count; i++)
+					{
+						if (Check(i)) { return (T)FeedbacksList[i]; }
+					}
+					break;
+				case AccessMethods.Last:
+					for (int i = FeedbacksList.Count - 1; i >= 0; i--)
+					{
+						if (Check(i)) { return (T)FeedbacksList[i]; }
+					}
+					break;
+			}
+			return null;
+
+			bool Check(int i)
+			{
+				return (FeedbacksList[i].GetType() == _t);
+			}
+		}
 
 		/// <summary>
 		/// Returns the first feedback of the searched type on this MMF_Player
@@ -1188,6 +1283,10 @@ namespace MoreMountains.Feedbacks
 			{
 				foreach (MMF_Feedback feedback in FeedbacksList)
 				{
+					if (feedback.TotalDuration == 0f)
+					{
+						feedback.ComputeTotalDuration();
+					}
 					if ((feedback != null) && (feedback.Active) && feedback.ShouldPlayInThisSequenceDirection)
 					{
 						if (total < feedback.TotalDuration)
@@ -1214,6 +1313,10 @@ namespace MoreMountains.Feedbacks
 					
 					if ((FeedbacksList[i] != null) && FeedbacksList[i].Active && FeedbacksList[i].ShouldPlayInThisSequenceDirection)
 					{
+						if (FeedbacksList[i].TotalDuration == 0f)
+						{
+							FeedbacksList[i].ComputeTotalDuration();
+						}
 						if (FeedbacksList[i].Pause != null)
 						{
 							// pause
@@ -1239,7 +1342,6 @@ namespace MoreMountains.Feedbacks
 								lastPauseFoundAt = i;
 							}
 
-							// TODO : looper pause maths still doesn't work 
 							if (FeedbacksList[i].LooperPause && ((FeedbacksList[i] as MMF_Looper).NumberOfLoops > 0))
 							{
 								if (i == lastLoopFoundAt)

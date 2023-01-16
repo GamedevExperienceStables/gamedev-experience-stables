@@ -35,6 +35,9 @@ namespace MoreMountains.Feedbacks
 		public override float FeedbackDuration { get { return (Mode == MMFeedbackBase.Modes.Instant) ? 0f : ApplyTimeMultiplier(Duration); } set { Duration = value; } }
 
 		#if MM_TEXTMESHPRO
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetTMPText = FindAutomatedTarget<TMP_Text>();
+
 		[MMFInspectorGroup("Target", true, 12, true)]
 		/// the TMP_Text component to control
 		[Tooltip("the TMP_Text component to control")]

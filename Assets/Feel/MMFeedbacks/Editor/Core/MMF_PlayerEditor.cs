@@ -932,7 +932,7 @@ namespace MoreMountains.Feedbacks
 		protected virtual void InitializeFeedback(int id)
 		{
 			MMF_Feedback feedback = TargetMmfPlayer.FeedbacksList[id];
-			feedback.Initialization(TargetMmfPlayer);
+			feedback.Initialization(TargetMmfPlayer, id);
 		}
 
 		/// <summary>

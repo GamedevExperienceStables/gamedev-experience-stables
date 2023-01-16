@@ -25,6 +25,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiresSetupText { get { return "This feedback requires that a TargetShaderController be set to be able to work properly. You can set one below."; } }
 		#endif
 		public override bool HasRandomness => true;
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetShaderController = FindAutomatedTarget<ShaderController>();
 
 		[MMFInspectorGroup("Shader Controller", true, 37, true)]
 		/// the mode this controller is in

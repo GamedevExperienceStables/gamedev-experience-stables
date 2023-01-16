@@ -22,6 +22,8 @@ namespace MoreMountains.Feedbacks
 		public override string RequiredTargetText { get { return TargetCollider2D != null ? TargetCollider2D.name : "";  } }
 		public override string RequiresSetupText { get { return "This feedback requires that a TargetCollider2D be set to be able to work properly. You can set one below."; } }
 		#endif
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetCollider2D = FindAutomatedTarget<Collider2D>();
 
 		/// the possible effects the feedback can have on the target collider's status 
 		public enum Modes { Enable, Disable, ToggleActive, Trigger, NonTrigger, ToggleTrigger }

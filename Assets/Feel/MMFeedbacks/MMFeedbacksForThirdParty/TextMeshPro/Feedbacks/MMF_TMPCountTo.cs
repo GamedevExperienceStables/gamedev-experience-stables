@@ -33,6 +33,9 @@ namespace MoreMountains.Feedbacks
 		public override float FeedbackDuration { get { return ApplyTimeMultiplier(Duration); } set { Duration = value; } }
         
 		#if MM_TEXTMESHPRO
+		public override bool HasAutomatedTargetAcquisition => true;
+		protected override void AutomateTargetAcquisition() => TargetTMPText = FindAutomatedTarget<TMP_Text>();
+
 		[MMFInspectorGroup("TextMeshPro Target Text", true, 12, true)]
 		/// the target TMP_Text component we want to change the text on
 		[Tooltip("the target TMP_Text component we want to change the text on")]
