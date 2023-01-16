@@ -1,4 +1,5 @@
-﻿using Game.Input;
+﻿using Cysharp.Threading.Tasks;
+using Game.Input;
 using Game.TimeManagment;
 using Game.UI;
 using VContainer;
@@ -23,16 +24,28 @@ namespace Game.GameFlow
             _view = view;
         }
 
-        protected override void OnEnter()
+        protected override void OnEnter() 
+            => EnterAsync().Forget();
+
+        protected override void OnExit() 
+            => ExitAsync().Forget();
+
+        private async UniTask EnterAsync()
         {
             _timeService.Pause();
+            _inputService.DisableAll();
             
+            await _view.ShowPauseAsync();
+
             _inputService.EnableMenus();
-            _view.ShowPause();
         }
 
-        protected override void OnExit()
+        private async UniTask ExitAsync()
         {
+            _inputService.DisableAll();
+
+            await _view.HidePauseAsync();
+            
             _timeService.Play();
         }
     }

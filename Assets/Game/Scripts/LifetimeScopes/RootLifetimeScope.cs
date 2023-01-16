@@ -18,12 +18,6 @@ namespace Game.LifetimeScopes
         [SerializeField]
         private HeroDefinition heroData;
 
-        [SerializeField]
-        private FaderScreenView faderScreenPrefab;
-
-        [SerializeField]
-        private LoadingScreenView loadingScreenPrefab;
-
         protected override void Configure(IContainerBuilder builder)
         {
             base.Configure(builder);
@@ -50,11 +44,11 @@ namespace Game.LifetimeScopes
         {
             builder.Register<SceneLoader>(Lifetime.Singleton);
 
-            builder.RegisterComponentInNewPrefab(faderScreenPrefab, Lifetime.Singleton)
+            builder.RegisterComponentInNewPrefab(gameSettings.UiSettings.FadeScreen, Lifetime.Singleton)
                 .DontDestroyOnLoad()
                 .As<IFaderScreen>();
             
-            builder.RegisterComponentInNewPrefab(loadingScreenPrefab, Lifetime.Singleton)
+            builder.RegisterComponentInNewPrefab(gameSettings.UiSettings.LoadingScreen, Lifetime.Singleton)
                 .DontDestroyOnLoad()
                 .As<ILoadingScreen>();
         }

@@ -1,12 +1,6 @@
-﻿using System;
-
-namespace Game.UI
+﻿namespace Game.UI
 {
-    public interface IFaderScreen
+    public interface IFaderScreen : ILoadingScreen
     {
-        void FadeIn(TimeSpan duration);
-        void FadeIn(float opacity, TimeSpan duration);
-        void FadeOut();
-        void FadeOut(TimeSpan duration);
     }
 }

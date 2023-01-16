@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Utils;
+using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
 
@@ -28,13 +29,16 @@ namespace Game.UI
             _buttonMenu.clicked -= PauseGame;
         }
 
-        private void PauseGame() 
-            => _viewModel.PauseGame();
+        public void HideImmediate() 
+            => _root.SetDisplay(false);
 
-        public void Show() 
-            => _root.style.display = DisplayStyle.Flex;
+        public void Show()
+            => _root.SetDisplay(true);
 
         public void Hide() 
-            => _root.style.display = DisplayStyle.None;
+            => _root.SetDisplay(false);
+
+        private void PauseGame() 
+            => _viewModel.PauseGame();
     }
 }

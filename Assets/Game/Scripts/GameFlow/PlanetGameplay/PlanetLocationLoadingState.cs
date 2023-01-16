@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using Cysharp.Threading.Tasks;
+using Game.Input;
 using Game.Level;
 using Game.SceneManagement;
 using Game.UI;
@@ -12,30 +13,35 @@ namespace Game.GameFlow
 {
     public class PlanetLocationLoadingState : GameState
     {
-        private readonly ILoadingScreen _loadingScreen;
+        private readonly IFaderScreen _loadingScreen;
         private readonly GameStateModel _gameStateModel;
         private readonly SceneLoader _sceneLoader;
         private readonly LocationController _locationController;
+        private readonly IInputService _inputService;
 
         private readonly List<GameObject> _loadingSceneRootGameObjectsBuffer = new(5);
 
         [Inject]
         public PlanetLocationLoadingState(
-            ILoadingScreen loadingScreen,
+            IFaderScreen loadingScreen,
             GameStateModel gameStateModel,
             SceneLoader sceneLoader,
-            LocationController locationController
+            LocationController locationController,
+            IInputService inputService
         )
         {
             _loadingScreen = loadingScreen;
             _gameStateModel = gameStateModel;
             _sceneLoader = sceneLoader;
             _locationController = locationController;
+            _inputService = inputService;
         }
 
         protected override async void OnEnter()
         {
-            _loadingScreen.Show();
+            _inputService.DisableAll();
+            
+            await _loadingScreen.ShowAsync();
 
             _locationController.Clear();
 
