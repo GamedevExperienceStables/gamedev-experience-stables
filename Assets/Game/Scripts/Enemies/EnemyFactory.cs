@@ -17,6 +17,8 @@ namespace Game.Enemies
         public EnemyController Create(EnemyDefinition definition, Transform spawnPoint, Transform target, Transform spawnContainer)
         {
             EnemyController instance = _resolver.Instantiate(definition.Prefab, spawnContainer);
+            _resolver.InjectGameObject(instance.gameObject);
+            
             instance.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             instance.SetTarget(target);
             
