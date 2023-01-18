@@ -1,4 +1,5 @@
-﻿using MoreMountains.Feedbacks;
+﻿using System;
+using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine;
 
@@ -9,20 +10,16 @@ namespace Game.Actors.Health
         [SerializeField]
         private int initialValue;
 
-        [SerializeField]
-        private bool destroyOnDeath = true;
-
         [Header("Feedbacks")]
         [SerializeField]
         private MMF_Player damageFeedback;
-
-        [SerializeField]
-        private MMF_Player deathFeedback;
 
         [MMReadOnly]
         private int _currentValue;
 
         public int Value => _currentValue;
+
+        public event Action<int> HealthChanged;
 
         private bool _isDamageable = true;
 
@@ -30,7 +27,7 @@ namespace Game.Actors.Health
         {
             _currentValue = initialValue;
         }
-        
+
         public void Init(int value)
         {
             _currentValue = value;
@@ -43,7 +40,7 @@ namespace Game.Actors.Health
             {
                 return;
             }
-            
+
             if (_currentValue <= 0 && initialValue > 0)
             {
                 return;
@@ -51,22 +48,6 @@ namespace Game.Actors.Health
 
             UpdateValue(damageValue);
             PlayDamageFeedback();
-
-            if (_currentValue <= 0)
-            {
-                Kill();
-            }
-        }
-
-        private void Kill()
-        {
-            PreventDamageWhileDead();
-            PlayDeathFeedback();
-
-            if (destroyOnDeath)
-            {
-                Destroy(gameObject);
-            }
         }
 
         private void PlayDamageFeedback()
@@ -76,24 +57,16 @@ namespace Game.Actors.Health
                 Instantiate(damageFeedback, transform.position, transform.rotation);
             }
         }
-        
-        private void PlayDeathFeedback()
-        {
-            if (deathFeedback)
-            {
-                Instantiate(deathFeedback, transform.position, transform.rotation);
-            }
-        }
 
         private void UpdateValue(int damageValue)
         {
             _currentValue -= damageValue;
             _currentValue = Mathf.Max(0, _currentValue);
+
+            HealthChanged?.Invoke(_currentValue);
         }
 
-        private void PreventDamageWhileDead()
-        {
-            _isDamageable = true;
-        }
+        public void MakeInvulnerable()
+            => _isDamageable = false;
     }
 }
