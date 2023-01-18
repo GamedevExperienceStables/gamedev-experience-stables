@@ -7,7 +7,7 @@ namespace Game.Hero
 {
     [RequireComponent(typeof(MovementController))]
     [RequireComponent(typeof(WeaponController))]
-    public class HeroController : MonoBehaviour
+    public class HeroController : ActorController
     {
         [SerializeField]
         private Transform cameraTarget;

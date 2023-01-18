@@ -5,7 +5,7 @@ using UnityEngine.AI;
 namespace Game.Enemies
 {
     [RequireComponent(typeof(MovementController))]
-    public class EnemyController : MonoBehaviour
+    public class EnemyController : ActorController
     {
 
         [SerializeField]
