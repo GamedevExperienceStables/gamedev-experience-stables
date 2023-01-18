@@ -17,7 +17,7 @@ namespace Game.Weapons
 
         [SerializeField]
         private float lifeTime = 3f;
-        
+
         [SerializeField]
         private float raycastMaxDistance = 0.4f;
 
@@ -56,7 +56,7 @@ namespace Game.Weapons
         private bool CheckCollision(out RaycastHit hit)
         {
             Transform t = transform;
-            int count = Physics.RaycastNonAlloc(t.position, t.forward, _hits, raycastMaxDistance);
+            int count = Physics.RaycastNonAlloc(t.position, t.forward, _hits, raycastMaxDistance, ~0, QueryTriggerInteraction.Ignore);
             if (count <= 0)
             {
                 hit = default;
