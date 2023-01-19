@@ -28,7 +28,7 @@ namespace Game.Hero
             hero.Init(_input, sceneCamera, followCamera);
 
             var movement = hero.GetComponent<MovementController>();
-            movement.SetMovementSpeed(_heroData.GroundMovementSpeed);
+            movement.SetMovementSpeed(_heroData.MovementSpeed);
 
             var interaction = hero.GetComponent<InteractionController>();
             interaction.Init(_interactionService);
