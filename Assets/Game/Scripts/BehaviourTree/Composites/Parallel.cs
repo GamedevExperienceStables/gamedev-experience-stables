@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using BehaviourTree.Runtime;
+using BehaviourTree;
 
 namespace Game.BehaviourTree.Composites
 {

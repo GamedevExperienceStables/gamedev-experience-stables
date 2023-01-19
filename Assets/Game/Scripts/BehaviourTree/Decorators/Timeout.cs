@@ -1,4 +1,4 @@
-using BehaviourTree.Runtime;
+using BehaviourTree;
 using UnityEngine;
 
 namespace Game.BehaviourTree.Decorators

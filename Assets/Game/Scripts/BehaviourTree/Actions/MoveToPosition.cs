@@ -1,4 +1,4 @@
-using BehaviourTree.Runtime;
+using BehaviourTree;
 using Game.Actors;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,7 +24,7 @@ namespace Game.BehaviourTree.Actions
 
         private NavMeshHit _hit;
 
-        private bool IsPathIndexValid => _pathIndex >= context.navMeshPath.corners.Length;
+        private bool IsPathIndexValid => _pathIndex < context.navMeshPath.corners.Length;
 
         protected override void OnStart()
         {
@@ -49,20 +49,17 @@ namespace Game.BehaviourTree.Actions
 
         protected override State OnUpdate()
         {
-            if (Vector3.Distance(context.transform.position, GetValidTargetPosition()) > tolerance)
+            if (IsPathIndexValid)
             {
-                return State.Running;
+                if (Vector3.Distance(context.transform.position, context.navMeshPath.corners[_pathIndex]) < tolerance)
+                {
+                    return State.Success;
+                }
             }
-
-            if (Vector3.Distance(context.transform.position, GetValidTargetPosition()) < tolerance)
+            else
             {
-                return State.Success;
+                return State.Failure;
             }
-
-            /*if (context.agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathInvalid)
-        {
-            return State.Failure;
-        }*/
 
             return State.Running;
         }
@@ -72,7 +69,7 @@ namespace Game.BehaviourTree.Actions
             _movementDirection = Vector3.zero;
             _lookDirection = Vector3.zero;
 
-            if (IsPathIndexValid)
+            if (!IsPathIndexValid)
             {
                 return;
             }
