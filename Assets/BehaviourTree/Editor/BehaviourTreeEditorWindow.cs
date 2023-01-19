@@ -1,13 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using BehaviourTree.Runtime;
+using Game.BehaviourTree;
 using UnityEditor;
+using UnityEditor.Callbacks;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEditor.UIElements;
-using UnityEditor.Callbacks;
 
-namespace TheKiwiCoder
+namespace BehaviourTree.Editor
 {
 
     public class BehaviourTreeEditorWindow : EditorWindow
@@ -42,7 +41,7 @@ namespace TheKiwiCoder
             wnd.minSize = new Vector2(800, 600);
         }
 
-        public static void OpenWindow(BehaviourTree tree)
+        public static void OpenWindow(Runtime.BehaviourTree tree)
         {
             BehaviourTreeEditorWindow wnd = GetWindow<BehaviourTreeEditorWindow>();
             wnd.titleContent = new GUIContent("BehaviourTreeEditor");
@@ -53,9 +52,9 @@ namespace TheKiwiCoder
         [OnOpenAsset]
         public static bool OnOpenAsset(int instanceId, int line)
         {
-            if (Selection.activeObject is BehaviourTree)
+            if (Selection.activeObject is Runtime.BehaviourTree)
             {
-                OpenWindow(Selection.activeObject as BehaviourTree);
+                OpenWindow(Selection.activeObject as Runtime.BehaviourTree);
                 return true;
             }
             return false;
@@ -92,13 +91,13 @@ namespace TheKiwiCoder
 
                 // Refresh the menu options just before it's opened (on mouse enter)
                 toolbarMenu.menu.MenuItems().Clear();
-                var behaviourTrees = EditorUtility.GetAssetPaths<BehaviourTree>();
+                var behaviourTrees = EditorUtility.GetAssetPaths<Runtime.BehaviourTree>();
                 behaviourTrees.ForEach(path =>
                 {
                     var fileName = System.IO.Path.GetFileName(path);
                     toolbarMenu.menu.AppendAction($"{fileName}", (a) =>
                     {
-                        var tree = AssetDatabase.LoadAssetAtPath<BehaviourTree>(path);
+                        var tree = AssetDatabase.LoadAssetAtPath<Runtime.BehaviourTree>(path);
                         SelectTree(tree);
                     });
                 });
@@ -169,7 +168,7 @@ namespace TheKiwiCoder
             }
         }
 
-        void SelectTree(BehaviourTree newTree)
+        void SelectTree(Runtime.BehaviourTree newTree)
         {
             if (!newTree)
             {
@@ -225,7 +224,7 @@ namespace TheKiwiCoder
 
         void OnToolbarNewAsset()
         {
-            BehaviourTree tree = EditorUtility.CreateNewTree("New Behaviour Tree", "Assets/");
+            Runtime.BehaviourTree tree = EditorUtility.CreateNewTree("New Behaviour Tree", "Assets/");
             if (tree)
             {
                 SelectTree(tree);

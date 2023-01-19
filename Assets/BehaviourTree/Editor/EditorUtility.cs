@@ -1,15 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEditor;
-using UnityEditor.UIElements;
+using UnityEngine;
 
-namespace TheKiwiCoder
+namespace BehaviourTree.Editor
 {
     public static class EditorUtility
     {
-        public static BehaviourTree CreateNewTree(string assetName, string folder)
+        public static Runtime.BehaviourTree CreateNewTree(string assetName, string folder)
         {
 
             string path = System.IO.Path.Join(folder, $"{assetName}.asset");
@@ -18,7 +15,7 @@ namespace TheKiwiCoder
                 Debug.LogError($"Failed to create behaviour tree asset: Path already exists:{assetName}");
                 return null;
             }
-            BehaviourTree tree = ScriptableObject.CreateInstance<BehaviourTree>();
+            Runtime.BehaviourTree tree = ScriptableObject.CreateInstance<Runtime.BehaviourTree>();
             tree.name = assetName;
             AssetDatabase.CreateAsset(tree, path);
             AssetDatabase.SaveAssets();

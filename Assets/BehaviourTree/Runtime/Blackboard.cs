@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace TheKiwiCoder
+namespace BehaviourTree.Runtime
 {
 
     // This is the blackboard container shared between all nodes.

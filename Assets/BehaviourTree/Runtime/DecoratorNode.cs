@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace TheKiwiCoder
+namespace BehaviourTree.Runtime
 {
     public abstract class DecoratorNode : Node
     {

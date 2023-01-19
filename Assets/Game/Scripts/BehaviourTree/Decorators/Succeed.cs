@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using BehaviourTree.Runtime;
 
-namespace TheKiwiCoder
+namespace Game.BehaviourTree.Decorators
 {
     [System.Serializable]
     public class Succeed : DecoratorNode

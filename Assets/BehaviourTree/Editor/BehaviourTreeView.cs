@@ -1,13 +1,15 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using BehaviourTree.Runtime;
+using Game.BehaviourTree;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEditor.Experimental.GraphView;
-using System;
-using System.Linq;
+using Node = BehaviourTree.Runtime.Node;
 
-namespace TheKiwiCoder
+namespace BehaviourTree.Editor
 {
     public class BehaviourTreeView : GraphView
     {
@@ -83,7 +85,7 @@ namespace TheKiwiCoder
             // Create edges
             serializer.tree.nodes.ForEach(n =>
             {
-                var children = BehaviourTree.GetChildren(n);
+                var children = Runtime.BehaviourTree.GetChildren(n);
                 children.ForEach(c =>
                 {
                     NodeView parentView = FindNodeView(n);

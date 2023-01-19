@@ -1,10 +1,8 @@
 using Game.Actors;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace TheKiwiCoder
+namespace BehaviourTree.Runtime
 {
 
     // The context is a shared object every node has access to.

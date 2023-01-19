@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using BehaviourTree.Runtime;
 using UnityEngine;
-using System.Linq;
 
-namespace TheKiwiCoder
+namespace Game.BehaviourTree.Composites
 {
     [System.Serializable]
     public class RandomSelector : CompositeNode

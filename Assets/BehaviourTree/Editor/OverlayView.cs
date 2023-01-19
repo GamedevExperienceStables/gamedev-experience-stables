@@ -1,16 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEditor;
+using UnityEngine.UIElements;
 
-namespace TheKiwiCoder
+namespace BehaviourTree.Editor
 {
     public class OverlayView : VisualElement
     {
         public new class UxmlFactory : UxmlFactory<OverlayView, UxmlTraits> { }
 
-        public System.Action<BehaviourTree> OnTreeSelected;
+        public System.Action<Runtime.BehaviourTree> OnTreeSelected;
 
         Button openButton;
         Button createButton;
@@ -31,7 +29,7 @@ namespace TheKiwiCoder
             locationPathField = this.Q<TextField>("LocationPath");
 
             // Configure asset selection dropdown menu
-            var behaviourTrees = EditorUtility.GetAssetPaths<BehaviourTree>();
+            var behaviourTrees = EditorUtility.GetAssetPaths<Runtime.BehaviourTree>();
             assetSelector.choices = new List<string>();
             behaviourTrees.ForEach(treePath =>
             {
@@ -67,7 +65,7 @@ namespace TheKiwiCoder
         void OnOpenAsset()
         {
             string path = ToAssetFormat(assetSelector.text);
-            BehaviourTree tree = AssetDatabase.LoadAssetAtPath<BehaviourTree>(path);
+            Runtime.BehaviourTree tree = AssetDatabase.LoadAssetAtPath<Runtime.BehaviourTree>(path);
             if (tree)
             {
                 TreeSelected(tree);
@@ -77,7 +75,7 @@ namespace TheKiwiCoder
 
         void OnCreateAsset()
         {
-            BehaviourTree tree = EditorUtility.CreateNewTree(treeNameField.text, locationPathField.text);
+            Runtime.BehaviourTree tree = EditorUtility.CreateNewTree(treeNameField.text, locationPathField.text);
             if (tree)
             {
                 TreeSelected(tree);
@@ -85,7 +83,7 @@ namespace TheKiwiCoder
             }
         }
 
-        void TreeSelected(BehaviourTree tree)
+        void TreeSelected(Runtime.BehaviourTree tree)
         {
             OnTreeSelected.Invoke(tree);
         }

@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using BehaviourTree.Runtime;
 using UnityEngine;
 
-namespace TheKiwiCoder
+namespace Game.BehaviourTree.Actions
 {
 
     [System.Serializable]

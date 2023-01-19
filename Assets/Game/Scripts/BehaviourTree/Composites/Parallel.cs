@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using BehaviourTree.Runtime;
 
-namespace TheKiwiCoder
+namespace Game.BehaviourTree.Composites
 {
     [System.Serializable]
     public class Parallel : CompositeNode

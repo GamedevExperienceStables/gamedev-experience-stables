@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace TheKiwiCoder
+namespace Game.BehaviourTree.Composites
 {
     [System.Serializable]
     public class InterruptSelector : Selector

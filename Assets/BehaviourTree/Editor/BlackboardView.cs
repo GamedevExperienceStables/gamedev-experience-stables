@@ -1,12 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UIElements;
-using UnityEditor;
 using UnityEditor.UIElements;
-using UnityEngine;
+using UnityEngine.UIElements;
 
-namespace TheKiwiCoder
+namespace BehaviourTree.Editor
 {
     public class BlackboardView : VisualElement
     {

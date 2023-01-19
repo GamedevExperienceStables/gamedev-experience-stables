@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using BehaviourTree.Runtime;
+using Game.BehaviourTree;
 using UnityEditor;
+using UnityEngine;
 
-namespace TheKiwiCoder
+namespace BehaviourTree.Editor
 {
 
     // This is a helper class which wraps a serialized object for finding properties on the behaviour.
@@ -15,7 +15,7 @@ namespace TheKiwiCoder
 
         // Wrapper serialized object for writing changes to the behaviour tree
         readonly public SerializedObject serializedObject;
-        readonly public BehaviourTree tree;
+        readonly public Runtime.BehaviourTree tree;
 
         // Property names. These correspond to the variable names on the behaviour tree
         const string sPropRootNode = "rootNode";
@@ -53,7 +53,7 @@ namespace TheKiwiCoder
         }
 
         // Start is called before the first frame update
-        public SerializedBehaviourTree(BehaviourTree tree)
+        public SerializedBehaviourTree(Runtime.BehaviourTree tree)
         {
             serializedObject = new SerializedObject(tree);
             this.tree = tree;

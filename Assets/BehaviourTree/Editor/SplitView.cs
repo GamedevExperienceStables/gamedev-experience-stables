@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UIElements;
 
-namespace TheKiwiCoder
+namespace BehaviourTree.Editor
 {
     public class SplitView : TwoPaneSplitView
     {

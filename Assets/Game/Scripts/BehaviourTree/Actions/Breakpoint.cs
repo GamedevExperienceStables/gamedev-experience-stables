@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+using BehaviourTree.Runtime;
 using UnityEngine;
-using TheKiwiCoder;
 
-[System.Serializable]
-public class Breakpoint : ActionNode
+namespace Game.BehaviourTree.Actions
 {
-    protected override void OnStart()
+    [System.Serializable]
+    public class Breakpoint : ActionNode
     {
-        Debug.Log("Trigging Breakpoint");
-        Debug.Break();
-    }
+        protected override void OnStart()
+        {
+            Debug.Log("Trigging Breakpoint");
+            Debug.Break();
+        }
 
-    protected override void OnStop()
-    {
-    }
+        protected override void OnStop()
+        {
+        }
 
-    protected override State OnUpdate()
-    {
-        return State.Success;
+        protected override State OnUpdate()
+        {
+            return State.Success;
+        }
     }
 }

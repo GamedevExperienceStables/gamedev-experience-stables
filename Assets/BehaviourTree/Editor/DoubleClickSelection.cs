@@ -1,12 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
-using UnityEditor.Experimental.GraphView;
 
-namespace TheKiwiCoder
+namespace BehaviourTree.Editor
 {
     public class DoubleClickSelection : MouseManipulator
     {
@@ -64,7 +59,7 @@ namespace TheKiwiCoder
             }
 
             // Add children to selection so the root element can be moved
-            BehaviourTree.Traverse(clickedElement.node, node =>
+            Runtime.BehaviourTree.Traverse(clickedElement.node, node =>
             {
                 var view = graphView.FindNodeView(node);
                 graphView.AddToSelection(view);
