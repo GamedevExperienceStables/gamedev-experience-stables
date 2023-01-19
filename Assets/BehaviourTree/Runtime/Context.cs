@@ -2,7 +2,7 @@ using Game.Actors;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace BehaviourTree.Runtime
+namespace BehaviourTree
 {
 
     // The context is a shared object every node has access to.

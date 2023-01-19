@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BehaviourTree.Runtime
+namespace BehaviourTree
 {
 
     // This is the blackboard container shared between all nodes.

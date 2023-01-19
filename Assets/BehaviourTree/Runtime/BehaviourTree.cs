@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BehaviourTree.Runtime
+namespace BehaviourTree
 {
     [CreateAssetMenu()]
     public class BehaviourTree : ScriptableObject

@@ -1,4 +1,3 @@
-using BehaviourTree.Runtime;
 using Game.BehaviourTree;
 using UnityEditor;
 using UnityEngine;
@@ -15,7 +14,7 @@ namespace BehaviourTree.Editor
 
         // Wrapper serialized object for writing changes to the behaviour tree
         readonly public SerializedObject serializedObject;
-        readonly public Runtime.BehaviourTree tree;
+        readonly public BehaviourTree tree;
 
         // Property names. These correspond to the variable names on the behaviour tree
         const string sPropRootNode = "rootNode";
@@ -53,7 +52,7 @@ namespace BehaviourTree.Editor
         }
 
         // Start is called before the first frame update
-        public SerializedBehaviourTree(Runtime.BehaviourTree tree)
+        public SerializedBehaviourTree(BehaviourTree tree)
         {
             serializedObject = new SerializedObject(tree);
             this.tree = tree;

@@ -1,5 +1,3 @@
-using BehaviourTree.Runtime;
-using Game.BehaviourTree;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.UIElements;
@@ -33,7 +31,7 @@ namespace BehaviourTree.Editor
         ToolbarMenu toolbarMenu;
         Label titleLabel;
 
-        [MenuItem("BehaviourTree/BehaviourTreeEditor ...")]
+        [MenuItem("BehaviourTree/Open Editor...")]
         public static void OpenWindow()
         {
             BehaviourTreeEditorWindow wnd = GetWindow<BehaviourTreeEditorWindow>();
@@ -41,7 +39,7 @@ namespace BehaviourTree.Editor
             wnd.minSize = new Vector2(800, 600);
         }
 
-        public static void OpenWindow(Runtime.BehaviourTree tree)
+        public static void OpenWindow(BehaviourTree tree)
         {
             BehaviourTreeEditorWindow wnd = GetWindow<BehaviourTreeEditorWindow>();
             wnd.titleContent = new GUIContent("BehaviourTreeEditor");
@@ -52,9 +50,9 @@ namespace BehaviourTree.Editor
         [OnOpenAsset]
         public static bool OnOpenAsset(int instanceId, int line)
         {
-            if (Selection.activeObject is Runtime.BehaviourTree)
+            if (Selection.activeObject is BehaviourTree)
             {
-                OpenWindow(Selection.activeObject as Runtime.BehaviourTree);
+                OpenWindow(Selection.activeObject as BehaviourTree);
                 return true;
             }
             return false;
@@ -91,13 +89,13 @@ namespace BehaviourTree.Editor
 
                 // Refresh the menu options just before it's opened (on mouse enter)
                 toolbarMenu.menu.MenuItems().Clear();
-                var behaviourTrees = EditorUtility.GetAssetPaths<Runtime.BehaviourTree>();
+                var behaviourTrees = EditorUtility.GetAssetPaths<BehaviourTree>();
                 behaviourTrees.ForEach(path =>
                 {
                     var fileName = System.IO.Path.GetFileName(path);
                     toolbarMenu.menu.AppendAction($"{fileName}", (a) =>
                     {
-                        var tree = AssetDatabase.LoadAssetAtPath<Runtime.BehaviourTree>(path);
+                        var tree = AssetDatabase.LoadAssetAtPath<BehaviourTree>(path);
                         SelectTree(tree);
                     });
                 });
@@ -168,7 +166,7 @@ namespace BehaviourTree.Editor
             }
         }
 
-        void SelectTree(Runtime.BehaviourTree newTree)
+        void SelectTree(BehaviourTree newTree)
         {
             if (!newTree)
             {
@@ -224,7 +222,7 @@ namespace BehaviourTree.Editor
 
         void OnToolbarNewAsset()
         {
-            Runtime.BehaviourTree tree = EditorUtility.CreateNewTree("New Behaviour Tree", "Assets/");
+            BehaviourTree tree = EditorUtility.CreateNewTree("New Behaviour Tree", "Assets/");
             if (tree)
             {
                 SelectTree(tree);

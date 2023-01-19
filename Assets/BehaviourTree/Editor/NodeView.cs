@@ -1,12 +1,11 @@
 using System;
-using BehaviourTree.Runtime;
 using Game.BehaviourTree;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Node = BehaviourTree.Runtime.Node;
+using Node = BehaviourTree.Node;
 
 namespace BehaviourTree.Editor
 {

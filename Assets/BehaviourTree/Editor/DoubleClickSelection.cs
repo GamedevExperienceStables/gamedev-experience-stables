@@ -59,7 +59,7 @@ namespace BehaviourTree.Editor
             }
 
             // Add children to selection so the root element can be moved
-            Runtime.BehaviourTree.Traverse(clickedElement.node, node =>
+            BehaviourTree.Traverse(clickedElement.node, node =>
             {
                 var view = graphView.FindNodeView(node);
                 graphView.AddToSelection(view);

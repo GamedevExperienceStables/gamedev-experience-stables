@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BehaviourTree.Runtime;
 using Game.BehaviourTree;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Node = BehaviourTree.Runtime.Node;
+using Node = BehaviourTree.Node;
 
 namespace BehaviourTree.Editor
 {
@@ -85,7 +84,7 @@ namespace BehaviourTree.Editor
             // Create edges
             serializer.tree.nodes.ForEach(n =>
             {
-                var children = Runtime.BehaviourTree.GetChildren(n);
+                var children = BehaviourTree.GetChildren(n);
                 children.ForEach(c =>
                 {
                     NodeView parentView = FindNodeView(n);

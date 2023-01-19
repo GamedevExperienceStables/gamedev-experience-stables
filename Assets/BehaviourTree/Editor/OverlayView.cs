@@ -8,7 +8,7 @@ namespace BehaviourTree.Editor
     {
         public new class UxmlFactory : UxmlFactory<OverlayView, UxmlTraits> { }
 
-        public System.Action<Runtime.BehaviourTree> OnTreeSelected;
+        public System.Action<BehaviourTree> OnTreeSelected;
 
         Button openButton;
         Button createButton;
@@ -29,7 +29,7 @@ namespace BehaviourTree.Editor
             locationPathField = this.Q<TextField>("LocationPath");
 
             // Configure asset selection dropdown menu
-            var behaviourTrees = EditorUtility.GetAssetPaths<Runtime.BehaviourTree>();
+            var behaviourTrees = EditorUtility.GetAssetPaths<BehaviourTree>();
             assetSelector.choices = new List<string>();
             behaviourTrees.ForEach(treePath =>
             {
@@ -65,7 +65,7 @@ namespace BehaviourTree.Editor
         void OnOpenAsset()
         {
             string path = ToAssetFormat(assetSelector.text);
-            Runtime.BehaviourTree tree = AssetDatabase.LoadAssetAtPath<Runtime.BehaviourTree>(path);
+            BehaviourTree tree = AssetDatabase.LoadAssetAtPath<BehaviourTree>(path);
             if (tree)
             {
                 TreeSelected(tree);
@@ -75,7 +75,7 @@ namespace BehaviourTree.Editor
 
         void OnCreateAsset()
         {
-            Runtime.BehaviourTree tree = EditorUtility.CreateNewTree(treeNameField.text, locationPathField.text);
+            BehaviourTree tree = EditorUtility.CreateNewTree(treeNameField.text, locationPathField.text);
             if (tree)
             {
                 TreeSelected(tree);
@@ -83,7 +83,7 @@ namespace BehaviourTree.Editor
             }
         }
 
-        void TreeSelected(Runtime.BehaviourTree tree)
+        void TreeSelected(BehaviourTree tree)
         {
             OnTreeSelected.Invoke(tree);
         }

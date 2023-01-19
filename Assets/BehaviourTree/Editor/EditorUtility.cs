@@ -6,7 +6,7 @@ namespace BehaviourTree.Editor
 {
     public static class EditorUtility
     {
-        public static Runtime.BehaviourTree CreateNewTree(string assetName, string folder)
+        public static BehaviourTree CreateNewTree(string assetName, string folder)
         {
 
             string path = System.IO.Path.Join(folder, $"{assetName}.asset");
@@ -15,7 +15,7 @@ namespace BehaviourTree.Editor
                 Debug.LogError($"Failed to create behaviour tree asset: Path already exists:{assetName}");
                 return null;
             }
-            Runtime.BehaviourTree tree = ScriptableObject.CreateInstance<Runtime.BehaviourTree>();
+            BehaviourTree tree = ScriptableObject.CreateInstance<BehaviourTree>();
             tree.name = assetName;
             AssetDatabase.CreateAsset(tree, path);
             AssetDatabase.SaveAssets();
