@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Game.UI
@@ -12,8 +13,8 @@ namespace Game.UI
 
         public void Start()
         {
-            hudView.Hide();
-            pauseMenuView.Hide();
+            hudView.HideImmediate();
+            pauseMenuView.HideImmediate();
         }
 
         public void ShowHud()
@@ -21,11 +22,14 @@ namespace Game.UI
             hudView.Show();
             pauseMenuView.Hide();
         }
-
-        public void ShowPause()
+        
+        public UniTask ShowPauseAsync()
         {
             hudView.Hide();
-            pauseMenuView.Show();
+            return pauseMenuView.ShowAsync();
         }
+
+        public UniTask HidePauseAsync() 
+            => pauseMenuView.HideAsync();
     }
 }

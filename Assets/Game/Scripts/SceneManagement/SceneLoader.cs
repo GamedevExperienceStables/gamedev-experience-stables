@@ -19,7 +19,7 @@ namespace Game.SceneManagement
 
         public async UniTask<Scene> LoadSceneAsync(string sceneName, Action onLoaded = null)
         {
-            _loadingScreen.Show();
+            await _loadingScreen.ShowAsync();
 
             AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
             operation.allowSceneActivation = false;

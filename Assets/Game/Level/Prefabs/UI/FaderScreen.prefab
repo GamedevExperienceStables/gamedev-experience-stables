@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8799658310818377208}
   - component: {fileID: 6867013069393386146}
-  - component: {fileID: 7234500149307779427}
+  - component: {fileID: 8192676096854133393}
   m_Layer: 0
   m_Name: FaderScreen
   m_TagString: Untagged
@@ -50,7 +50,7 @@ MonoBehaviour:
   sourceAsset: {fileID: 9197481963319205126, guid: 6357db5f3fbe8a943930995cb98d7cf4,
     type: 3}
   m_SortingOrder: 10
---- !u!114 &7234500149307779427
+--- !u!114 &8192676096854133393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,3 +62,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3150bb3d2ce4e38ba34ee1da9ac7995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showDuration: 0.15
+  hideDuration: 0.1

@@ -11,7 +11,11 @@ namespace Game.Settings
         [SerializeField]
         private CameraSettings cameraSettings;
 
+        [SerializeField]
+        private UiSettings uiSettings;
+
         public InitialSettings InitialSettings => initialSettings;
         public CameraSettings CameraSettings => cameraSettings;
+        public UiSettings UiSettings => uiSettings;
     }
 }

@@ -14,15 +14,9 @@ namespace Game.LifetimeScopes
     {
         [SerializeField]
         private GameSettings gameSettings;
-
+        
         [SerializeField]
         private HeroDefinition heroData;
-
-        [SerializeField]
-        private FaderScreenView faderScreenPrefab;
-
-        [SerializeField]
-        private LoadingScreenView loadingScreenPrefab;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -32,7 +26,7 @@ namespace Game.LifetimeScopes
             RegisterInput(builder);
             RegisterStateMachine(builder);
             RegisterSettings(builder);
-
+            
             builder.Register<GameStateModel>(Lifetime.Singleton);
             builder.Register<QuitGameService>(Lifetime.Singleton);
         }
@@ -40,7 +34,7 @@ namespace Game.LifetimeScopes
         private static void RegisterInput(IContainerBuilder builder)
         {
             builder.Register<GameInputControlsAdapter>(Lifetime.Singleton);
-
+            
             builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
             builder.Register<InputControlGameplay>(Lifetime.Singleton).As<IInputControlGameplay>();
             builder.Register<InputControlMenu>(Lifetime.Singleton).As<IInputControlMenu>();
@@ -50,11 +44,11 @@ namespace Game.LifetimeScopes
         {
             builder.Register<SceneLoader>(Lifetime.Singleton);
 
-            builder.RegisterComponentInNewPrefab(faderScreenPrefab, Lifetime.Singleton)
+            builder.RegisterComponentInNewPrefab(gameSettings.UiSettings.FadeScreen, Lifetime.Singleton)
                 .DontDestroyOnLoad()
                 .As<IFaderScreen>();
-
-            builder.RegisterComponentInNewPrefab(loadingScreenPrefab, Lifetime.Singleton)
+            
+            builder.RegisterComponentInNewPrefab(gameSettings.UiSettings.LoadingScreen, Lifetime.Singleton)
                 .DontDestroyOnLoad()
                 .As<ILoadingScreen>();
         }
@@ -62,7 +56,7 @@ namespace Game.LifetimeScopes
         private static void RegisterStateMachine(IContainerBuilder builder)
         {
             builder.Register<RootStateMachine>(Lifetime.Singleton);
-
+            
             builder.Register<InitState>(Lifetime.Singleton);
             builder.Register<IntroState>(Lifetime.Singleton);
             builder.Register<MainMenuState>(Lifetime.Singleton);

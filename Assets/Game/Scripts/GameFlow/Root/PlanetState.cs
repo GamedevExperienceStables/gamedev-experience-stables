@@ -1,4 +1,5 @@
-﻿using Game.SceneManagement;
+﻿using Cysharp.Threading.Tasks;
+using Game.SceneManagement;
 using VContainer;
 
 namespace Game.GameFlow
@@ -13,9 +14,9 @@ namespace Game.GameFlow
             _sceneLoader = sceneLoader;
         }
 
-        protected override async void OnEnter()
+        protected override void OnEnter()
         {
-            await _sceneLoader.LoadSceneAsync(SceneNames.GAMEPLAY_PLANET);
+            _sceneLoader.LoadSceneAsync(SceneNames.GAMEPLAY_PLANET).Forget();
         }
 
         protected override void OnExit()

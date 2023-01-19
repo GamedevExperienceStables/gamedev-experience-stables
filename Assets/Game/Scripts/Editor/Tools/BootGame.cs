@@ -6,7 +6,7 @@ namespace Game.Editor.Tools
 {
     public static class BootGame
     {
-        private const string MENU_PATH = "Game/Play";
+        private const string MENU_PATH = "Game/Play %#&p";
         private const string LAST_SCENE_KEY = "Editor/LastScene";
         private static string BootScenePath => EditorBuildSettings.scenes[0].path;
 

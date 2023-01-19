@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+    <ui:VisualElement name="pause-menu" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.64); align-items: center; justify-content: center;">
             <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center;">
                 <ui:Label tabindex="-1" text="Paused" display-tooltip-when-elided="true" enable-rich-text="true" style="color: rgb(255, 255, 255); font-size: 46px; -unity-font-style: bold;" />
