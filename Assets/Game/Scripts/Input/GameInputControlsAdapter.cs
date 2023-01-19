@@ -7,7 +7,7 @@ namespace Game.Input
         private readonly GameInputControls _controls;
 
         [Inject]
-        public GameInputControlsAdapter() 
+        public GameInputControlsAdapter()
             => _controls = new GameInputControls();
 
         public void SetGameplayCallbacks(GameInputControls.IGameplayActions callback)

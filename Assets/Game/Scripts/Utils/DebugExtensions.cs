@@ -1357,10 +1357,10 @@ namespace Game.Utils
         {
             var oldColor = Gizmos.color;
             Gizmos.color = color;
-            
+
             Gizmos.DrawRay(position, direction);
             DrawArrowEnd(position + direction, -direction, color, 15);
-            
+
             Gizmos.color = oldColor;
         }
 

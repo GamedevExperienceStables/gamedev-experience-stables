@@ -10,7 +10,7 @@ namespace Game.GameFlow
         private readonly SceneLoader _loader;
 
         [Inject]
-        public IntroState(SceneLoader loader) 
+        public IntroState(SceneLoader loader)
             => _loader = loader;
 
         protected override async void OnEnter()

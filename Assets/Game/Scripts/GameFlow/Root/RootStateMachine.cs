@@ -17,10 +17,10 @@ namespace Game.GameFlow
             stateMachine.AddState(initState);
             stateMachine.AddState(mainMenuState);
             stateMachine.AddState(introState);
-            
+
             stateMachine.AddState(newGameState);
             stateMachine.AddState(quitGameState);
-            
+
             stateMachine.AddState(planetGameplayState);
         }
     }

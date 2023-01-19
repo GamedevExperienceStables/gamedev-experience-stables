@@ -27,7 +27,7 @@ namespace Game.LifetimeScopes
         private static void RegisterStateMachine(IContainerBuilder builder)
         {
             builder.Register<MainMenuStateMachine>(Lifetime.Scoped);
-            
+
             builder.Register<StartMenuState>(Lifetime.Scoped);
         }
     }

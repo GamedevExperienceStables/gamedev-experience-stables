@@ -6,7 +6,7 @@ namespace Game.Cameras
     {
         [SerializeField]
         private Camera mainCamera;
-        
+
         public Vector3 TransformDirection(Vector3 direction)
         {
             return mainCamera.transform.TransformDirection(direction);
@@ -14,7 +14,7 @@ namespace Game.Cameras
 
         public Ray ScreenPointToRay(Vector2 position)
         {
-           return mainCamera.ScreenPointToRay(position);
+            return mainCamera.ScreenPointToRay(position);
         }
     }
 }

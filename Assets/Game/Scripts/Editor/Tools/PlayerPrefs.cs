@@ -10,7 +10,7 @@ namespace Game.Editor.Tools
         {
             UnityEngine.PlayerPrefs.DeleteAll();
             UnityEngine.PlayerPrefs.Save();
-            
+
             Debug.Log("Player Prefs cleared");
         }
     }
