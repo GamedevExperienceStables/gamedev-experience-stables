@@ -1,4 +1,4 @@
-﻿namespace Game.Scripts.Stats
+﻿namespace Game.Stats
 {
     public enum StatsModifierType
     {

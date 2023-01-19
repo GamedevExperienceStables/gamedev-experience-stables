@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Game.Scripts.Stats
+namespace Game.Stats
 {
     public class CharacterStat
     {
@@ -32,13 +32,6 @@ namespace Game.Scripts.Stats
         {
             _isDirty = true;
             _statModifiers.Add(statModifier);    
-            _statModifiers.Sort(CompareModifierOrder);
-        }
-
-        private int CompareModifierOrder(StatModifier modifierA, StatModifier modifierB)
-        {
-            if (modifierA.order < modifierB.order) return -1;
-            return modifierA.order > modifierB.order ? 1 : 0;
         }
         
         public void RemoveModifier(StatModifier statModifier)

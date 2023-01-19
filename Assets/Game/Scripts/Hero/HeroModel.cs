@@ -1,9 +1,8 @@
 using System;
-using Game.Hero;
-using Game.Scripts.Stats;
+using Game.Stats;
 using UnityEngine;
 
-namespace Game.Scripts.Hero
+namespace Game.Hero
 {
     public class HeroModel
     {
