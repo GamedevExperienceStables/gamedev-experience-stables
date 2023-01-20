@@ -3,7 +3,7 @@ using Game.Enemies;
 using Game.GameFlow;
 using Game.Hero;
 using Game.Level;
-using Game.TimeManagment;
+using Game.TimeManagement;
 using Game.UI;
 using UnityEngine;
 using VContainer;

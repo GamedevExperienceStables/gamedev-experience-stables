@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Input;
-using Game.TimeManagment;
+using Game.TimeManagement;
 using Game.UI;
 using VContainer;
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using VContainer;
 
-namespace Game.TimeManagment
+namespace Game.TimeManagement
 {
     public class TimeService
     {
