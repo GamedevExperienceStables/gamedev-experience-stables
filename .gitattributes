@@ -39,4 +39,4 @@
 /Assets/**/*.wav filter=lfs diff=lfs merge=lfs -text    
 
 # FMOD
-/Assets/**/*.fspackage filter=lfs diff=lfs merge=lfs -text
+*.fspackage filter=lfs diff=lfs merge=lfs -text
