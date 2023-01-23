@@ -136,6 +136,14 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/unity,macos,windows
 
+# FMOD .gitignore
+**/FMODStudioCache.asset
+/[Aa]ssets/StreamingAssets/*.bank
+fmod.log
+fmod_editor.log
+
+########################################
+
 .idea/
 /[Aa]ssets/[Ss]andbox.meta
 /[Aa]ssets/[Ss]andbox/
