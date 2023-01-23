@@ -1,4 +1,4 @@
-﻿* text=auto
+* text=auto
 # Unity insists using LF for its text assets so prevent changing them to CRLF
 *.unity text eol=lf
 *.prefab text eol=lf
@@ -37,3 +37,6 @@
 /Assets/**/*.unity filter=lfs diff=lfs merge=lfs -text
 /Assets/**/*.entities filter=lfs diff=lfs merge=lfs -text
 /Assets/**/*.wav filter=lfs diff=lfs merge=lfs -text    
+
+# FMOD
+*.fspackage filter=lfs diff=lfs merge=lfs -text
