@@ -1,8 +1,12 @@
 ﻿using Game.GameFlow;
 using Game.Hero;
 using Game.Input;
+using Game.Level;
+using Game.Persistence;
+using Game.RandomManagement;
 using Game.SceneManagement;
 using Game.Settings;
+using Game.TimeManagement;
 using Game.UI;
 using UnityEngine;
 using VContainer;
@@ -14,7 +18,7 @@ namespace Game.LifetimeScopes
     {
         [SerializeField]
         private GameSettings gameSettings;
-        
+
         [SerializeField]
         private HeroDefinition heroData;
 
@@ -26,15 +30,39 @@ namespace Game.LifetimeScopes
             RegisterInput(builder);
             RegisterStateMachine(builder);
             RegisterSettings(builder);
+            RegisterData(builder);
+            RegisterControllers(builder);
+            RegisterServices(builder);
+            RegisterSaveSystem(builder);
+        }
+
+        private static void RegisterControllers(IContainerBuilder builder)
+        {
+            builder.Register<LocationDataHandler>(Lifetime.Singleton);
+        }
+
+        private static void RegisterData(IContainerBuilder builder)
+        {
+            builder.Register<GameData>(Lifetime.Singleton);
+            builder.Register<PlayerData>(Lifetime.Singleton);
+            builder.Register<LocationData>(Lifetime.Singleton);
             
-            builder.Register<GameStateModel>(Lifetime.Singleton);
+            builder.Register<GameDataHandler>(Lifetime.Singleton);
+            builder.Register<LevelDataHandler>(Lifetime.Singleton);
+            builder.Register<PlayerDataHandler>(Lifetime.Singleton);
+        }
+
+        private static void RegisterServices(IContainerBuilder builder)
+        {
+            builder.Register<TimeService>(Lifetime.Singleton);
+            builder.Register<RandomService>(Lifetime.Singleton);
             builder.Register<QuitGameService>(Lifetime.Singleton);
         }
 
         private static void RegisterInput(IContainerBuilder builder)
         {
             builder.Register<GameInputControlsAdapter>(Lifetime.Singleton);
-            
+
             builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
             builder.Register<InputControlGameplay>(Lifetime.Singleton).As<IInputControlGameplay>();
             builder.Register<InputControlMenu>(Lifetime.Singleton).As<IInputControlMenu>();
@@ -47,7 +75,7 @@ namespace Game.LifetimeScopes
             builder.RegisterComponentInNewPrefab(gameSettings.UiSettings.FadeScreen, Lifetime.Singleton)
                 .DontDestroyOnLoad()
                 .As<IFaderScreen>();
-            
+
             builder.RegisterComponentInNewPrefab(gameSettings.UiSettings.LoadingScreen, Lifetime.Singleton)
                 .DontDestroyOnLoad()
                 .As<ILoadingScreen>();
@@ -56,7 +84,7 @@ namespace Game.LifetimeScopes
         private static void RegisterStateMachine(IContainerBuilder builder)
         {
             builder.Register<RootStateMachine>(Lifetime.Singleton);
-            
+
             builder.Register<InitState>(Lifetime.Singleton);
             builder.Register<IntroState>(Lifetime.Singleton);
             builder.Register<MainMenuState>(Lifetime.Singleton);
@@ -68,8 +96,22 @@ namespace Game.LifetimeScopes
         private void RegisterSettings(IContainerBuilder builder)
         {
             builder.RegisterInstance(heroData);
+            builder.RegisterInstance(heroData.InitialStats);
+            builder.RegisterInstance(heroData.Aim);
+
             builder.RegisterInstance(gameSettings.CameraSettings);
-            builder.RegisterInstance(gameSettings.InitialSettings);
+            builder.RegisterInstance(gameSettings.LootSettings);
+            builder.RegisterInstance(gameSettings.LevelsSettings);
+            builder.RegisterInstance(gameSettings.SaveSettings);
+        }
+
+        private void RegisterSaveSystem(IContainerBuilder builder)
+        {
+            builder.Register<PersistenceService>(Lifetime.Singleton);
+
+            builder.Register<LocalPersistence>(Lifetime.Singleton).As<IPersistence>();
+            builder.Register<NewtonJsonDataSerializer>(Lifetime.Singleton).As<IDataSerializer>()
+                .WithParameter(gameSettings.SaveSettings.Formatting);
         }
     }
 }

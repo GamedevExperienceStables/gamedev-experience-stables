@@ -17,7 +17,7 @@ namespace Game.GameFlow
 
         public virtual void Exit()
         {
-            Child?.CurrentState.Exit();
+            Child?.Exit();
             
             Debug.Log($"[STATE] <color=grey><<<</color> {this}");
             

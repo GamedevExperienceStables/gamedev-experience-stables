@@ -1,37 +1,28 @@
-﻿using Game.Actors;
-using Game.Cameras;
-using Game.Input;
-using Game.Level;
-using UnityEngine;
-using VContainer;
+﻿using VContainer;
+using VContainer.Unity;
 
 namespace Game.Hero
 {
     public class HeroFactory
     {
-        private readonly IInputControlGameplay _input;
-        private readonly InteractionService _interactionService;
-        private readonly HeroDefinition _heroData;
+        private readonly HeroDefinition _heroDefinition;
+        private readonly PlayerData _playerState;
+        private readonly IObjectResolver _resolver;
 
         [Inject]
-        public HeroFactory(IInputControlGameplay input, InteractionService interactionService, HeroDefinition heroData)
+        public HeroFactory(HeroDefinition heroDefinition, PlayerData playerState, IObjectResolver resolver)
         {
-            _input = input;
-            _interactionService = interactionService;
-            _heroData = heroData;
+            _heroDefinition = heroDefinition;
+            _playerState = playerState;
+            _resolver = resolver;
         }
 
-        public HeroController Create(Transform spawnPoint, SceneCamera sceneCamera, FollowSceneCamera followCamera)
+        public HeroController Create()
         {
-            HeroController hero = Object.Instantiate(_heroData.Prefab);
-            hero.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
-            hero.Init(_input, sceneCamera, followCamera);
-
-            var movement = hero.GetComponent<MovementController>();
-            movement.SetMovementSpeed(_heroData.MovementSpeed);
-
-            var interaction = hero.GetComponent<InteractionController>();
-            interaction.Init(_interactionService);
+            HeroController hero = _resolver.Instantiate(_heroDefinition.Prefab);
+            _resolver.InjectGameObject(hero.gameObject);
+            
+            hero.Init(_playerState);
 
             return hero;
         }

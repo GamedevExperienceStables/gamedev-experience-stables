@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Actors;
+using UnityEngine;
 
 namespace Game.Hero
 {
@@ -9,33 +10,13 @@ namespace Game.Hero
         private HeroController prefab;
 
         [SerializeField]
-        private float movementSpeed = 10f;
+        private HeroStats.Settings initialStats;
 
         [SerializeField]
-        private float healthPoints = 10f;
-        
-        [SerializeField]
-        private float staminaPoints = 10f;
-        
-        [SerializeField]
-        private float manaPoints = 10f;
-        
-        [SerializeField]
-        private float healthRegeneration = 1f;
-        
-        [SerializeField]
-        private float manaRegeneration = 1f;
-        
-        [SerializeField]
-        private float staminaRegeneration = 1f;
-        
+        private AimAbility.Settings aim;
+
         public HeroController Prefab => prefab;
-        public float MovementSpeed => movementSpeed;
-        public float HealthPoints => healthPoints;
-        public float StaminaPoints => staminaPoints;
-        public float ManaPoints => manaPoints;
-        public float HealthRegeneration => healthRegeneration;
-        public float ManaRegeneration => manaRegeneration;
-        public float StaminaRegeneration => staminaRegeneration;
+        public HeroStats.Settings InitialStats => initialStats;
+        public AimAbility.Settings Aim => aim;
     }
 }

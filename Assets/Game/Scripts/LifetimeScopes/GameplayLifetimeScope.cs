@@ -36,19 +36,20 @@ namespace Game.LifetimeScopes
 
             RegisterUi(builder);
             RegisterCameras(builder);
-            RegisterStateMachine(builder);
+            RegisterPlanetStateMachine(builder);
+            RegisterLocationStateMachine(builder);
+            RegisterLootSystem(builder);
 
             builder.UseEntryPoints(entryPoints =>
             {
                 entryPoints.Add<GameplayEntryPoint>();
-                entryPoints.Add<InGameInputListener>();
+                entryPoints.Add<GameplayInputTracker>();
             });
         }
 
         private static void RegisterServices(IContainerBuilder builder)
         {
             builder.Register<LocationController>(Lifetime.Scoped);
-            builder.Register<TimeService>(Lifetime.Scoped);
 
             RegisterInteractions(builder);
         }
@@ -59,6 +60,7 @@ namespace Game.LifetimeScopes
             builder.Register<InteractionFactory>(Lifetime.Scoped);
 
             builder.Register<TransitionToLocationInteraction>(Lifetime.Transient);
+            builder.Register<ItemPickupInteraction>(Lifetime.Transient);
         }
 
         private static void RegisterFactories(IContainerBuilder builder)
@@ -82,13 +84,27 @@ namespace Game.LifetimeScopes
             builder.RegisterComponent(followCamera);
         }
 
-        private static void RegisterStateMachine(IContainerBuilder builder)
+        private static void RegisterPlanetStateMachine(IContainerBuilder builder)
         {
             builder.Register<PlanetStateMachine>(Lifetime.Scoped);
 
             builder.Register<PlanetLocationLoadingState>(Lifetime.Scoped);
             builder.Register<PlanetPlayState>(Lifetime.Scoped);
             builder.Register<PlanetPauseState>(Lifetime.Scoped);
+        }
+
+        private static void RegisterLocationStateMachine(IContainerBuilder builder)
+        {
+            builder.Register<LocationStateMachine>(Lifetime.Scoped);
+
+            builder.Register<LocationSafeState>(Lifetime.Scoped);
+            builder.Register<LocationBattleState>(Lifetime.Scoped);
+        }
+
+        private static void RegisterLootSystem(IContainerBuilder builder)
+        {
+            builder.Register<LootSpawner>(Lifetime.Scoped);
+            builder.Register<LootFactory>(Lifetime.Scoped);
         }
     }
 }

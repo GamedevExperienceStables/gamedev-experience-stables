@@ -8,5 +8,11 @@ namespace Game.GameFlow
         
         public void EnterState<T>() where T : class, IState 
             => stateMachine.EnterState<T>();
+        
+        public void PushState<T>() where T : class, IState 
+            => stateMachine.PushState<T>();
+
+        public void PopState() 
+            => stateMachine.PopState();
     }
 }

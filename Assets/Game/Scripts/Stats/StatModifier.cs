@@ -1,14 +1,25 @@
+using System;
+using UnityEngine;
+
 namespace Game.Stats
 {
-    public abstract class StatModifier
+    [Serializable]
+    public class StatModifier
     {
-        public readonly float value;
-        public readonly StatsModifierType type;
+        [SerializeField]
+        private float value;
 
-        protected StatModifier(float value, StatsModifierType type)
+        [SerializeField]
+        private StatsModifierType type;
+
+        public StatModifier(float value, StatsModifierType type)
         {
             this.value = value;
             this.type = type;
         }
+
+        public float Value => value;
+
+        public StatsModifierType Type => type;
     }
 }

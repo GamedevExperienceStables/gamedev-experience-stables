@@ -11,25 +11,8 @@ namespace Game.Actors
 
         [SerializeField]
         private float sharpness = 15f;
-
-        private float _initialMaxSpeed;
-
+        
         public float MaxSpeed => maxSpeed;
         public float Sharpness => sharpness;
-
-        public void Init()
-        {
-            _initialMaxSpeed = MaxSpeed;
-        }
-
-        public void SetMaxSpeed(float newMaxSpeed)
-        {
-            maxSpeed = newMaxSpeed;
-        }
-
-        public void ResetMaxSpeed()
-        {
-            maxSpeed = _initialMaxSpeed;
-        }
     }
 }

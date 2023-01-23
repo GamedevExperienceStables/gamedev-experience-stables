@@ -11,16 +11,24 @@ namespace Game.Level
         public InteractionFactory(IObjectResolver resolver)
             => _resolver = resolver;
 
-        public Interaction Create(Interactable interactable, InteractionController instigator)
+        public Interaction Create(Interactable interactable, IActorController instigator)
         {
             switch (interactable)
             {
                 case LocationDoor locationDoor:
                 {
                     var teleport = _resolver.Resolve<TransitionToLocationInteraction>();
-                    teleport.Init(interactable.gameObject, locationDoor.TargetLocation);
+                    teleport.Init(locationDoor.TargetLocation, interactable.gameObject);
                     return teleport;
                 }
+                
+                case LootItem item:
+                {
+                    var pickup = _resolver.Resolve<ItemPickupInteraction>();
+                    pickup.Init(item.Definition, instigator, interactable.gameObject);
+                    return pickup;
+                }
+                
                 default:
                     return null;
             }

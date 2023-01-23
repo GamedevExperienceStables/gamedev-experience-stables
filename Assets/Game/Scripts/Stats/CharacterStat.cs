@@ -1,63 +1,93 @@
 using System;
 using System.Collections.Generic;
+using Game.Utils;
 
 namespace Game.Stats
 {
-    public class CharacterStat
+    public class CharacterStat : IReadOnlyCharacterStat
     {
-        public float baseValue;
-        private bool _isDirty = true;
+        private readonly List<StatModifier> _statModifiers = new();
 
-        public float Value
+        private float _baseValue;
+        
+        private event Action<float> ValueChanged;
+
+        public float BaseValue
         {
-            get
+            get => _baseValue;
+            set
             {
-                if (!_isDirty) return _value;
-                _value = CalculateFinalStatValue();
-                _isDirty = false;
-                return _value;
+                if (MathExtensions.AlmostEquals(_baseValue, value))
+                    return;
+                
+                _baseValue = value;
+                
+                CalculateFinalStatValue();
             }
         }
 
-        private float _value;
-        private readonly List<StatModifier> _statModifiers;
+        public float Value { get; private set; }
 
-        public CharacterStat(float baseValue)
+        public void Subscribe(Action<float> action)
         {
-            this.baseValue = baseValue;
-            _statModifiers = new List<StatModifier>();
+            ValueChanged += action;
+
+            action.Invoke(Value);
         }
-    
+
+        public void UnSubscribe(Action<float> action) 
+            => ValueChanged -= action;
+
+        public void Init(float baseValue)
+        {
+            _baseValue = baseValue;
+
+            Reset();
+        }
+
+        private void Reset()
+        {
+            _statModifiers.Clear();
+            
+            CalculateFinalStatValue();
+        }
+
         public void AddModifier(StatModifier statModifier)
         {
-            _isDirty = true;
-            _statModifiers.Add(statModifier);    
-        }
-        
-        public void RemoveModifier(StatModifier statModifier)
-        {
-            _isDirty = true;
-            _statModifiers.Remove(statModifier);    
+            _statModifiers.Add(statModifier);
+            
+            CalculateFinalStatValue();
         }
 
-        
-        private float CalculateFinalStatValue()
+        public void RemoveModifier(StatModifier statModifier)
         {
-            var finalValue = baseValue;
-            foreach (var statModifier in _statModifiers)
+            _statModifiers.Remove(statModifier);
+            
+            CalculateFinalStatValue();
+        }
+
+
+        private void CalculateFinalStatValue()
+        {
+            float finalValue = BaseValue;
+            foreach (StatModifier statModifier in _statModifiers)
             {
-                var modifier = statModifier;
-                if (modifier.type == StatsModifierType.Flat)
+                switch (statModifier.Type)
                 {
-                    finalValue += statModifier.value;
-                }
-                else if (modifier.type == StatsModifierType.Percent)
-                {
-                    finalValue *= 1 + modifier.value;
+                    case StatsModifierType.Flat:
+                        finalValue += statModifier.Value;
+                        break;
+                    case StatsModifierType.Percent:
+                        finalValue *= 1 + statModifier.Value;
+                        break;
                 }
             }
+
             finalValue = (float)Math.Round(finalValue, 2);
-            return finalValue;
+
+            Value = finalValue;
+            
+            ValueChanged?.Invoke(Value);
         }
     }
 }

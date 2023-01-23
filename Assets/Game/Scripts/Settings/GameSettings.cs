@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Persistence;
+using UnityEngine;
 
 namespace Game.Settings
 {
@@ -6,7 +7,7 @@ namespace Game.Settings
     public class GameSettings : ScriptableObject
     {
         [SerializeField]
-        private InitialSettings initialSettings;
+        private LevelsSettings levelsSettings;
 
         [SerializeField]
         private CameraSettings cameraSettings;
@@ -14,8 +15,18 @@ namespace Game.Settings
         [SerializeField]
         private UiSettings uiSettings;
 
-        public InitialSettings InitialSettings => initialSettings;
+        [SerializeField]
+        private LootSettings lootSettings;
+
+        [SerializeField]
+        private PersistenceService.Settings saveSettings;
+
         public CameraSettings CameraSettings => cameraSettings;
         public UiSettings UiSettings => uiSettings;
+        public LootSettings LootSettings => lootSettings;
+
+        public LevelsSettings LevelsSettings => levelsSettings;
+
+        public PersistenceService.Settings SaveSettings => saveSettings;
     }
 }

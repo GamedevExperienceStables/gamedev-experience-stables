@@ -6,6 +6,7 @@ namespace Game.Level
     {
         public GameObject Source { get; protected set; }
 
+        public abstract bool CanExecute();
         public abstract void Execute();
     }
 }

@@ -47,6 +47,7 @@ namespace Game.GameFlow
             await _view.HidePauseAsync();
             
             _timeService.Play();
+            _inputService.EnableGameplay();
         }
     }
 }

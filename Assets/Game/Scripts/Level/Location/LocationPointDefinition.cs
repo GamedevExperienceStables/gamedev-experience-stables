@@ -2,16 +2,11 @@
 
 namespace Game.Level
 {
-    [CreateAssetMenu(menuName = "Data/Location Point")]
-    public class LocationPointDefinition : ScriptableObject
+    public abstract class LocationPointDefinition : ScriptableObject
     {
         [SerializeField]
-        private LocationDefinition location;
+        protected LocationPointKey locationPointKey;
 
-        [SerializeField]
-        private LocationPointKey locationPointKey;
-
-        public LocationDefinition Location => location;
         public LocationPointKey PointKey => locationPointKey;
     }
 }

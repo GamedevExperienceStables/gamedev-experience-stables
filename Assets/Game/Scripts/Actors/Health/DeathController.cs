@@ -1,10 +1,11 @@
 ﻿using System;
+using Game.Stats;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 
 namespace Game.Actors.Health
 {
-    [RequireComponent(typeof(HealthController))]
+    [RequireComponent(typeof(DamageableController))]
     public class DeathController : MonoBehaviour
     {
         [SerializeField]
@@ -15,19 +16,25 @@ namespace Game.Actors.Health
 
         public event Action Died;
 
-        private HealthController _health;
+        private DamageableController _damageableController;
         private bool _isDead;
 
-        private void Awake()
-            => _health = GetComponent<HealthController>();
+        private IDamageableStats _damageableStats;
 
         private void Start()
-            => _health.HealthChanged += OnHealthChanged;
+        {
+            _damageableController = GetComponent<DamageableController>();
 
-        private void OnDestroy()
-            => _health.HealthChanged -= OnHealthChanged;
+            var owner = GetComponent<ActorController>();
+            _damageableStats = owner.GetStats<IDamageableStats>();
+            
+            _damageableStats.Health.Current.Subscribe(OnHealthChanged);
+        }
 
-        private void OnHealthChanged(int newValue)
+        private void OnDestroy() 
+            => _damageableStats.Health.Current.UnSubscribe(OnHealthChanged);
+
+        private void OnHealthChanged(float newValue)
         {
             if (newValue > 0)
                 return;
@@ -41,17 +48,17 @@ namespace Game.Actors.Health
         private void Kill()
         {
             MakeDead();
-            _health.MakeInvulnerable();
-            
+            _damageableController.MakeInvulnerable();
+
             Died?.Invoke();
-            
+
             PlayDeathFeedback();
 
             if (destroyOnDeath)
                 Destroy(gameObject);
         }
 
-        private void MakeDead() 
+        private void MakeDead()
             => _isDead = true;
 
         private void PlayDeathFeedback()

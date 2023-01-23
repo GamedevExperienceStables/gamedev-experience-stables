@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Game.Level;
 using Game.Utils;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
 using VContainer;
@@ -18,10 +19,12 @@ namespace Game.UI
         [SerializeField]
         private float hideDuration = 0.2f;
 
+        [Header("Blur")]
+        [SerializeField]
+        private Volume globalVolume;
+
         private Button _buttonResume;
         private Button _buttonMainMenu;
-
-        private LocationController _level;
 
         private GameplayViewModel _viewModel;
         private VisualElement _container;
@@ -29,12 +32,16 @@ namespace Game.UI
         private TimeSpan _showDuration;
         private TimeSpan _hideDuration;
 
+        private BlurHandler _blurHandler;
+
         [Inject]
         public void Construct(GameplayViewModel viewModel)
             => _viewModel = viewModel;
 
         private void Awake()
         {
+            _blurHandler = new BlurHandler(globalVolume);
+
             VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
             _container = root.Q<VisualElement>(LayoutNames.PauseMenu.CONTAINER);
@@ -54,27 +61,26 @@ namespace Game.UI
             _buttonMainMenu.clicked -= GoToMainMenu;
         }
 
-        public void Show()
-            => FadeIn(_showDuration);
-
-        public void Hide()
-            => FadeOut(_hideDuration);
-
         public void ShowImmediate()
             => _container.SetDisplay(true);
 
         public void HideImmediate()
-            => _container.SetDisplay(false);
+        {
+            _container.SetDisplay(false);
+            _container.SetOpacity(0f);
+            
+            _blurHandler.HideImmediate();
+        }
 
         public UniTask ShowAsync()
         {
-            Show();
+            FadeIn(_showDuration);
             return UniTask.Delay(_showDuration, true);
         }
 
         public UniTask HideAsync()
         {
-            Hide();
+            FadeOut(_hideDuration);
             return UniTask.Delay(_hideDuration, true);
         }
 
@@ -86,6 +92,8 @@ namespace Game.UI
 
         private void FadeIn(TimeSpan duration)
         {
+            _blurHandler.FadeIn(duration);
+
             _container.SetDisplay(true);
             _container.experimental.animation
                 .Start(new StyleValues { opacity = 1f }, (int)duration.TotalMilliseconds)
@@ -95,10 +103,12 @@ namespace Game.UI
 
         private void FadeOut(TimeSpan duration)
         {
+            _blurHandler.FadeOut(duration);
+
             _container.experimental.animation
                 .Start(new StyleValues { opacity = 0f }, (int)duration.TotalMilliseconds)
                 .Ease(Easing.InCubic)
-                .OnCompleted(() => { _container.SetDisplay(false); });
+                .OnCompleted(() => _container.SetDisplay(false));
         }
     }
 }

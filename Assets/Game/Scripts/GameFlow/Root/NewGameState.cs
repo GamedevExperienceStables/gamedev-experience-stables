@@ -1,34 +1,21 @@
-﻿using Game.Settings;
+﻿using Game.Persistence;
 using VContainer;
 
 namespace Game.GameFlow
 {
     public class NewGameState : GameState
     {
-        private readonly GameStateModel _gameStateModel;
-        private readonly InitialSettings _initialSettings;
+        private readonly PersistenceService _persistenceService;
 
         [Inject]
-        public NewGameState(
-            GameStateModel gameStateModel,
-            InitialSettings initialSettings
-        )
-        {
-            _gameStateModel = gameStateModel;
-            _initialSettings = initialSettings;
-        }
-
+        public NewGameState(PersistenceService persistenceService) 
+            => _persistenceService = persistenceService;
 
         protected override void OnEnter()
         {
-            NewGame();
-            
-            Parent.EnterState<IntroState>();
-        }
+            _persistenceService.InitData();
 
-        private void NewGame()
-        {
-            _gameStateModel.CurrentLocation = _initialSettings.StartPoint;
+            Parent.EnterState<IntroState>();
         }
 
         protected override void OnExit()

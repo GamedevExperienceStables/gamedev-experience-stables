@@ -6,10 +6,10 @@ namespace Game.Utils
 {
     public class StateMachine
     {
+        private readonly Stack<IState> _stack = new();
         private readonly Dictionary<Type, IState> _states = new();
 
         private IState _currentState;
-        public IState CurrentState => _currentState;
 
         public void AddState<T>(T state) where T : class, IState
         {
@@ -36,6 +36,25 @@ namespace Game.Utils
             _currentState = ChangeState<T>();
             _currentState.Enter();
         }
+        
+        public void PushState<T>() where T : class, IState
+        {
+            var state = GetState<T>();
+            _stack.Push(state);
+            
+            state.Enter();
+        }
+        
+        public void PopState()
+        {
+            if (_stack.Count == 0)
+            {
+                Debug.LogWarning("Trying to pop state when stack is empty.");
+                return;
+            }
+
+            _stack.Pop().Exit();
+        }
 
         private T ChangeState<T>() where T : class, IState
         {
@@ -49,5 +68,14 @@ namespace Game.Utils
 
         private T GetState<T>() where T : class, IState 
             => _states[typeof(T)] as T;
+        
+        
+        public void Exit()
+        {
+            while(_stack.Count > 0)
+                PopState();
+            
+            _currentState.Exit();
+        }
     }
 }

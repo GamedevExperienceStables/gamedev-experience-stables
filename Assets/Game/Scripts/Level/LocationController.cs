@@ -9,8 +9,8 @@ namespace Game.Level
     {
         private readonly HeroFactory _heroFactory;
 
-        private readonly SceneCamera _sceneCamera;
         private readonly FollowSceneCamera _followCamera;
+        private readonly LocationStateMachine _locationStateMachine;
 
         private HeroController _hero;
         private LocationContext _context;
@@ -18,50 +18,47 @@ namespace Game.Level
         [Inject]
         public LocationController(
             HeroFactory heroFactory,
-            SceneCamera sceneCamera,
-            FollowSceneCamera followCamera
+            FollowSceneCamera followCamera,
+            LocationStateMachine locationStateMachine
         )
         {
             _heroFactory = heroFactory;
-            _sceneCamera = sceneCamera;
             _followCamera = followCamera;
+            _locationStateMachine = locationStateMachine;
         }
 
         public void Init(LocationContext locationContext, Transform spawnPoint)
         {
             _context = locationContext;
 
-            _hero = SpawnHero(spawnPoint);
-            _followCamera.SetTarget(_hero.CameraTarget);
+            SpawnHero(spawnPoint);
+
             _context.InitEnemySpawners(_hero.transform);
+
+            _locationStateMachine.EnterState<LocationSafeState>();
         }
 
         public void Clear()
         {
-            if (_context)
+            if (_hero)
             {
-                DestroyEnemies();
-                _context = null;
+                _hero.Reset();
+                _hero.SetActive(false);
             }
 
-            if (_hero)
-                DestroyHero();
+            if (_context)
+                _context = null;
         }
 
-        private HeroController SpawnHero(Transform spawnPoint)
-            => _heroFactory.Create(spawnPoint, _sceneCamera, _followCamera);
-
-        private void DestroyHero()
+        private void SpawnHero(Transform spawnPoint)
         {
+            if (!_hero) 
+                _hero = _heroFactory.Create();
+
             _followCamera.ClearTarget();
-            Object.Destroy(_hero.gameObject);
-
-            _hero = null;
-        }
-
-        private void DestroyEnemies()
-        {
-            _context.DestroyEnemies();
+            _hero.SetActive(true);
+            _hero.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+            _followCamera.SetTarget(_hero.CameraTarget);
         }
     }
 }

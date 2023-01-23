@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "52cdadc03519a86af7d80fa2f60dbe684acf247e"
     },
+    "com.dbrizov.naughtyattributes": {
+      "version": "https://github.com/dbrizov/NaughtyAttributes.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "8a8fa5a9659a6d63f196391c71e06c4286c8acd7"
+    },
     "com.nuclearband.unityprojectfoldericons": {
       "version": "https://github.com/NuclearBand/UnityProjectFolderIcons.git",
       "depth": 0,
@@ -114,6 +121,13 @@
     "com.unity.nuget.mono-cecil": {
       "version": "1.11.4",
       "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.0.2",
+      "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"

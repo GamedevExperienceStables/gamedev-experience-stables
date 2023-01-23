@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-direction: row; -unity-text-align: upper-center; justify-content: center;">
+        <ui:Label tabindex="-1" text="HP" display-tooltip-when-elided="true" name="text-label" style="color: rgb(255, 255, 255); -unity-font-style: bold;" />
+        <ui:Label tabindex="-1" text="9999" display-tooltip-when-elided="true" name="text-current" style="color: rgb(255, 255, 255);" />
+        <ui:Label tabindex="-1" text="/" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+        <ui:Label tabindex="-1" text="9999" display-tooltip-when-elided="true" name="text-max" style="color: rgb(255, 255, 255);" />
+    </ui:VisualElement>
+</ui:UXML>

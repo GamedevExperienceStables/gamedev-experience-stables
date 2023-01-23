@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Game.Actors;
 using Game.Actors.Damage;
 using Game.Utils;
 using MoreMountains.Feedbacks;
@@ -20,6 +21,12 @@ namespace Game.Weapons
 
         [SerializeField]
         private float raycastMaxDistance = 0.4f;
+        
+        [SerializeField]
+        private float raycastRadius = 0.1f;
+
+        [SerializeField]
+        private LayerMask collisionLayerMask;
 
         [FormerlySerializedAs("deathFeedback")]
         [SerializeField]
@@ -34,7 +41,8 @@ namespace Game.Weapons
 
         private float _timer;
 
-        private readonly RaycastHit[] _hits = new RaycastHit[1];
+        private readonly RaycastHit[] _hits = new RaycastHit[5];
+        private IActorController _owner;
 
         private void Update()
         {
@@ -44,7 +52,7 @@ namespace Game.Weapons
 
         private void FixedUpdate()
         {
-            if (CheckCollision(out RaycastHit hit))
+            if (DetectCollisions(out RaycastHit hit))
             {
                 DestroyProjectile(hit);
                 return;
@@ -53,10 +61,10 @@ namespace Game.Weapons
             Move();
         }
 
-        private bool CheckCollision(out RaycastHit hit)
+        private bool DetectCollisions(out RaycastHit hit)
         {
             Transform t = transform;
-            int count = Physics.RaycastNonAlloc(t.position, t.forward, _hits, raycastMaxDistance, ~0, QueryTriggerInteraction.Ignore);
+            int count = Physics.RaycastNonAlloc(t.position, t.forward, _hits, raycastMaxDistance, collisionLayerMask, QueryTriggerInteraction.Ignore);
             if (count <= 0)
             {
                 hit = default;
@@ -85,8 +93,9 @@ namespace Game.Weapons
             Complete();
         }
 
-        public void Init(Transform startPoint)
+        public void Init(Transform startPoint, IActorController owner)
         {
+            _owner = owner;
             transform.SetPositionAndRotation(startPoint.position, startPoint.rotation);
 
             _timer = lifeTime;

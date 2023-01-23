@@ -1,26 +1,19 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="PropertyWidget" src="project://database/Assets/Game/UI/Uxml/Partial/PropertyWidget.uxml?fileID=9197481963319205126&amp;guid=e31eca968f2f9b04ea8f46d646c091d4&amp;type=3#PropertyWidget" />
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
         <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: flex-end;">
             <ui:Button text="Menu" display-tooltip-when-elided="true" focusable="false" name="button-menu" style="-unity-font-style: normal;" />
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
-        <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0);">
-            <ui:Label tabindex="-1" text="&lt;b&gt;God Mode:&lt;/b&gt; Enabled" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
-            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
-                <ui:Label tabindex="-1" text="&lt;b&gt;Keyboard&lt;/b&gt;" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 87px;" />
-                <ui:Label tabindex="-1" text="Move: WASD/Arrows" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 150px;" />
-                <ui:Label tabindex="-1" text="Aim: RMB" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 80px;" />
-                <ui:Label tabindex="-1" text="Fire: RMB+LMB" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 120px;" />
-                <ui:Label tabindex="-1" text="Interaction: E" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 120px;" />
-            </ui:VisualElement>
-            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
-                <ui:Label tabindex="-1" text="&lt;b&gt;Gamepad&lt;/b&gt;" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 87px;" />
-                <ui:Label tabindex="-1" text="Move: Left Stick" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 150px;" />
-                <ui:Label tabindex="-1" text="Aim: LT" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 80px;" />
-                <ui:Label tabindex="-1" text="Fire: LT+RT" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 120px;" />
-                <ui:Label tabindex="-1" text="Interaction: A" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 120px;" />
-                <ui:Label tabindex="-1" text="Look: LT+Right Stick" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 161px;" />
-                <ui:Label tabindex="-1" text="Menu: Start" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 161px;" />
+        <ui:VisualElement style="background-color: rgba(0, 0, 0, 0);">
+            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-direction: row;">
+                <ui:Instance template="PropertyWidget" name="widget-hp" style="width: 150px;" />
+                <ui:Instance template="PropertyWidget" name="widget-mp" style="width: 150px;">
+                    <AttributeOverrides element-name="label" text="MP" />
+                </ui:Instance>
+                <ui:Instance template="PropertyWidget" name="widget-sp" style="width: 150px;">
+                    <AttributeOverrides element-name="label" text="SP" />
+                </ui:Instance>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
