@@ -7,29 +7,34 @@ namespace Game.Level
     public class TransitionToLocationInteraction : Interaction
     {
         private readonly PlanetStateMachine _planetStateMachine;
-        private readonly GameStateModel _gameStateModel;
-        
+        private readonly LocationDataHandler _locationController;
+
         private LocationPointDefinition _targetLocation;
 
         [Inject]
-        public TransitionToLocationInteraction(PlanetStateMachine planetStateMachine, GameStateModel gameStateModel)
+        public TransitionToLocationInteraction(
+            PlanetStateMachine planetStateMachine,
+            LocationDataHandler locationController
+        )
         {
             _planetStateMachine = planetStateMachine;
-            _gameStateModel = gameStateModel;
+            _locationController = locationController;
         }
 
-        public void Init(GameObject source, LocationPointDefinition targetLocation)
+        public void Init(LocationPointDefinition targetLocation, GameObject source)
         {
             Source = source;
-            
+
             _targetLocation = targetLocation;
         }
 
+        public override bool CanExecute()
+            => _locationController.CanTransferTo(_targetLocation);
+
         public override void Execute()
         {
-            _gameStateModel.LastLocation = _gameStateModel.CurrentLocation;
-            _gameStateModel.CurrentLocation = _targetLocation;
-            
+            _locationController.SetLocation(_targetLocation);
+
             _planetStateMachine.EnterState<PlanetLocationLoadingState>();
         }
     }

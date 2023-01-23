@@ -190,12 +190,17 @@ GameObject:
   m_Component:
   - component: {fileID: 3247602722215226893}
   - component: {fileID: 3247602722215226892}
+  - component: {fileID: 4121165560153185053}
   - component: {fileID: 3247602722215226895}
   - component: {fileID: 3247602722215226880}
+  - component: {fileID: 3597760082879023102}
+  - component: {fileID: 7608877898895584494}
   - component: {fileID: 3247602722215226883}
+  - component: {fileID: 8192749885233769762}
   - component: {fileID: 3247602722215226882}
   - component: {fileID: 2763629437848491860}
-  - component: {fileID: 4121165560153185053}
+  - component: {fileID: 2300186903787914912}
+  - component: {fileID: 4701970604866781007}
   m_Layer: 3
   m_Name: Hero
   m_TagString: Untagged
@@ -245,6 +250,22 @@ CapsuleCollider:
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!208 &4121165560153185053
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247602722215226894}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.6, y: 0.8, z: 0.6}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.8, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!114 &3247602722215226895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,8 +320,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14bd21f39b8d40c395f4ab092967cecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3597760082879023102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247602722215226894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e022faa155451c944d00c693b96aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   cameraTarget: {fileID: 3247602723414457946}
-  aimMaxSpeed: 3
+--- !u!114 &7608877898895584494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247602722215226894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045e542f085e4eb58bab3f98b2d01f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3247602722215226883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +370,18 @@ MonoBehaviour:
     rotateOnlyXZ: 1
   gravity:
     direction: {x: 0, y: -30, z: 0}
+--- !u!114 &8192749885233769762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247602722215226894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c712bfcabf60487e8f24f13adc9a72b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3247602722215226882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,22 +408,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trigger: {fileID: 1584950886205839244}
---- !u!208 &4121165560153185053
-NavMeshObstacle:
+--- !u!114 &2300186903787914912
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3247602722215226894}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.6, y: 0.8, z: 0.6}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b950b9bbe5f41259fbd446539fbd7e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageFeedback: {fileID: 0}
+--- !u!114 &4701970604866781007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247602722215226894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb57b94c7089482398b501bc6f6db0fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathFeedback: {fileID: 0}
+  destroyOnDeath: 0
 --- !u!1 &3247602722463438873
 GameObject:
   m_ObjectHideFlags: 0

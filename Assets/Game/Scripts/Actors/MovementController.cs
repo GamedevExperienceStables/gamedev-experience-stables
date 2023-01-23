@@ -1,13 +1,13 @@
-﻿using KinematicCharacterController;
+﻿using System;
+using Game.Stats;
+using KinematicCharacterController;
 using UnityEngine;
 
 namespace Game.Actors
 {
+    [RequireComponent(typeof(KinematicCharacterMotor))]
     public class MovementController : MonoBehaviour, ICharacterController
     {
-        [SerializeField]
-        private KinematicCharacterMotor motor;
-
         [SerializeField]
         private GroundMovement groundMovement;
 
@@ -22,29 +22,26 @@ namespace Game.Actors
 
         private Vector3 _movementDirection;
         private Vector3 _lookDirection;
-        public float CapsuleRadius => motor.Capsule.radius;
+
+        private KinematicCharacterMotor _motor;
+        private IMovableStats _stats;
+
+        public float CapsuleRadius => _motor.Capsule.radius;
 
         private void Awake()
         {
-            motor.CharacterController = this;
+            _motor = GetComponent<KinematicCharacterMotor>();
+            _motor.CharacterController = this;
+        }
 
-            groundMovement.Init();
+        protected void Start()
+        {
+            var owner = GetComponent<ActorController>();
+            _stats = owner.GetStats<IMovableStats>();
         }
 
         public void SetPositionAndRotation(Vector3 position, Quaternion quaternion)
-        {
-            motor.SetPositionAndRotation(position, quaternion);
-        }
-        
-        public void SetMovementSpeed(float maxSpeed)
-        {
-            groundMovement.SetMaxSpeed(maxSpeed);
-        }
-
-        public void ResetMovementSpeed()
-        {
-            groundMovement.ResetMaxSpeed();
-        }
+            => _motor.SetPositionAndRotation(position, quaternion);
 
         public void UpdateInputs(Vector3 movementDirection, Vector3 lookDirection)
         {
@@ -63,18 +60,18 @@ namespace Game.Actors
             if (_lookDirection.sqrMagnitude > 0f && rotation.sharpness > 0f)
             {
                 Vector3 smoothedLookInputDirection = Vector3.Slerp(
-                    motor.CharacterForward,
+                    _motor.CharacterForward,
                     _lookDirection,
                     1 - Mathf.Exp(-rotation.sharpness * deltaTime)
                 );
 
-                currentRotation = Quaternion.LookRotation(smoothedLookInputDirection, motor.CharacterUp);
+                currentRotation = Quaternion.LookRotation(smoothedLookInputDirection, _motor.CharacterUp);
             }
         }
 
         public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
         {
-            if (motor.GroundingStatus.IsStableOnGround)
+            if (_motor.GroundingStatus.IsStableOnGround)
             {
                 UpdateGroundedState(ref currentVelocity, deltaTime);
             }
@@ -87,17 +84,17 @@ namespace Game.Actors
         private void UpdateGroundedState(ref Vector3 currentVelocity, float deltaTime)
         {
             float currentVelocityMagnitude = currentVelocity.magnitude;
-            Vector3 effectiveGroundNormal = motor.GroundingStatus.GroundNormal;
+            Vector3 effectiveGroundNormal = _motor.GroundingStatus.GroundNormal;
 
             // Reorient velocity on slope
-            currentVelocity = motor.GetDirectionTangentToSurface(currentVelocity, effectiveGroundNormal) *
+            currentVelocity = _motor.GetDirectionTangentToSurface(currentVelocity, effectiveGroundNormal) *
                               currentVelocityMagnitude;
 
             // Calculate target velocity
-            Vector3 inputRight = Vector3.Cross(_movementDirection, motor.CharacterUp);
+            Vector3 inputRight = Vector3.Cross(_movementDirection, _motor.CharacterUp);
             Vector3 reorientedInput = Vector3.Cross(effectiveGroundNormal, inputRight).normalized *
                                       _movementDirection.magnitude;
-            Vector3 targetMovementVelocity = reorientedInput * groundMovement.MaxSpeed;
+            Vector3 targetMovementVelocity = reorientedInput * _stats.Movement.Value;
 
             // Smooth movement Velocity
             currentVelocity = Vector3.Lerp(currentVelocity, targetMovementVelocity,
@@ -109,13 +106,13 @@ namespace Game.Actors
             // Add move input
             if (_movementDirection.sqrMagnitude > 0f)
             {
-                Vector3 targetMovementVelocity = _movementDirection * airMovement.maxSpeed;
+                Vector3 targetMovementVelocity = _movementDirection * _stats.Movement.Value;
 
                 // Prevent climbing on un-stable slopes with air movement
-                if (motor.GroundingStatus.FoundAnyGround)
+                if (_motor.GroundingStatus.FoundAnyGround)
                 {
                     Vector3 perpendicularObstructionNormal = Vector3.Cross(
-                        Vector3.Cross(motor.CharacterUp, motor.GroundingStatus.GroundNormal), motor.CharacterUp
+                        Vector3.Cross(_motor.CharacterUp, _motor.GroundingStatus.GroundNormal), _motor.CharacterUp
                     ).normalized;
 
                     targetMovementVelocity =

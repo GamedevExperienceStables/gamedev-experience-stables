@@ -8,14 +8,14 @@ namespace Game.GameFlow
         public PlanetStateMachine(
             PlanetState parentState,
             PlanetLocationLoadingState planetLoadingState,
-            PlanetPlayState planetState,
+            PlanetPlayState playState,
             PlanetPauseState pauseState
         )
         {
             parentState.Child = stateMachine;
 
             stateMachine.AddState(planetLoadingState);
-            stateMachine.AddState(planetState);
+            stateMachine.AddState(playState);
             stateMachine.AddState(pauseState);
         }
     }

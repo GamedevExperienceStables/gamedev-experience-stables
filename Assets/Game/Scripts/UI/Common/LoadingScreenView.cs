@@ -27,6 +27,7 @@ namespace Game.UI
             VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
             _container = root.Q<VisualElement>(LayoutNames.LoadingScreen.CONTAINER);
+            _container.SetOpacity(0f);
             
             _showDuration = TimeSpan.FromSeconds(showDuration);
             _hideDuration = TimeSpan.FromSeconds(hideDuration);

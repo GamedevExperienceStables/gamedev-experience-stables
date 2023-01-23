@@ -8,24 +8,27 @@ namespace Game.Actors.Damage
     {
         [SerializeField]
         private int initialValue = 1;
-        
+
         [SerializeField]
         private MMF_Player hitFeedback;
 
+        public void Init(int value) 
+            => initialValue = value;
+
         public bool TryDealDamage(Transform target)
         {
-            if (!target.TryGetComponent(out HealthController health))
+            if (!target.TryGetComponent(out DamageableController damageable))
             {
                 return false;
             }
 
-            if (health.Value <= 0)
+            if (damageable.IsInvulnerable)
             {
                 return false;
             }
 
             PlayHitFeedback();
-            ApplyDamage(health);
+            ApplyDamage(damageable);
 
             return true;
         }
@@ -38,9 +41,9 @@ namespace Game.Actors.Damage
             }
         }
 
-        private void ApplyDamage(HealthController health)
+        private void ApplyDamage(DamageableController damageable)
         {
-            health.Damage(initialValue);
+            damageable.Damage(initialValue);
         }
     }
 }

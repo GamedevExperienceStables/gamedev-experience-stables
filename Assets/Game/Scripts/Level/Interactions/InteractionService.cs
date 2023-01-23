@@ -13,7 +13,7 @@ namespace Game.Level
         public InteractionService(InteractionFactory factory)
             => _factory = factory;
 
-        public Interaction CreateInteraction(Interactable interactable, InteractionController instigator) 
+        public Interaction CreateInteraction(Interactable interactable, IActorController instigator) 
             => _factory.Create(interactable, instigator);
 
         public void SetInteraction(Interaction interaction)

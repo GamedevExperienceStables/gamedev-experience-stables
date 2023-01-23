@@ -6,5 +6,8 @@ namespace Game.Utils
     {
         public static void SetDisplay(this VisualElement element, bool isDisplay)
             => element.style.display = isDisplay ? DisplayStyle.Flex : DisplayStyle.None;
+        
+        public static void SetOpacity(this VisualElement element, float value)
+            => element.style.opacity = value;
     }
 }

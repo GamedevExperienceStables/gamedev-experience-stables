@@ -2,7 +2,7 @@
 
 namespace Game.Level
 {
-    [CreateAssetMenu(menuName = "Data/Location Point")]
+    [CreateAssetMenu(menuName = "Data/Location/Point")]
     public class LocationPointKey : ScriptableObject
     {
     }

@@ -20,6 +20,14 @@
         public static class Hud
         {
             public const string BUTTON_MENU = "button-menu";
+            
+            public const string WIDGET_HP = "widget-hp";
+            public const string WIDGET_MP = "widget-mp";
+            public const string WIDGET_SP = "widget-sp";
+
+            public const string TEXT_LABEL = "text-label";
+            public const string TEXT_CURRENT = "text-current";
+            public const string TEXT_MAX = "text-max";
         }
 
         public static class LoadingScreen

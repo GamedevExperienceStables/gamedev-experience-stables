@@ -1,37 +1,33 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using Game.Input;
 using Game.Level;
 using Game.SceneManagement;
 using Game.UI;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer;
+using VContainer.Unity;
 
 namespace Game.GameFlow
 {
     public class PlanetLocationLoadingState : GameState
     {
         private readonly IFaderScreen _loadingScreen;
-        private readonly GameStateModel _gameStateModel;
+        private readonly LocationData _locationData;
         private readonly SceneLoader _sceneLoader;
         private readonly LocationController _locationController;
         private readonly IInputService _inputService;
 
-        private readonly List<GameObject> _loadingSceneRootGameObjectsBuffer = new(5);
-
         [Inject]
         public PlanetLocationLoadingState(
             IFaderScreen loadingScreen,
-            GameStateModel gameStateModel,
+            LocationData locationData,
             SceneLoader sceneLoader,
             LocationController locationController,
             IInputService inputService
         )
         {
             _loadingScreen = loadingScreen;
-            _gameStateModel = gameStateModel;
+            _locationData = locationData;
             _sceneLoader = sceneLoader;
             _locationController = locationController;
             _inputService = inputService;
@@ -40,16 +36,16 @@ namespace Game.GameFlow
         protected override async void OnEnter()
         {
             _inputService.DisableAll();
-            
+
             await _loadingScreen.ShowAsync();
 
             _locationController.Clear();
 
             await UnloadLastLocationIfExists();
-            
-            LocationPointDefinition spawnLocation = _gameStateModel.CurrentLocation;
-            Scene location = await LoadLocationAsync(spawnLocation.Location);
-            InitLocation(location, spawnLocation.PointKey);
+
+            LocationPointData spawnLocation = _locationData.CurrentLocation;
+            Scene location = await LoadLocationAsync(spawnLocation.location);
+            InitLocation(location, spawnLocation.pointKey);
 
             Parent.EnterState<PlanetPlayState>();
         }
@@ -69,39 +65,20 @@ namespace Game.GameFlow
 
         private async UniTask UnloadLastLocationIfExists()
         {
-            LocationPointDefinition lastLocation = _gameStateModel.LastLocation;
-            if (!lastLocation)
+            LocationPointData lastLocation = _locationData.LastLocation;
+            if (!lastLocation.IsValid())
                 return;
 
-            await _sceneLoader.UnloadSceneIfLoadedAsync(lastLocation.Location.SceneName);
+            await _sceneLoader.UnloadSceneIfLoadedAsync(lastLocation.location.SceneName);
         }
 
-        private async UniTask<Scene> LoadLocationAsync(LocationDefinition spawnLocation) 
+        private async UniTask<Scene> LoadLocationAsync(LocationDefinition spawnLocation)
             => await _sceneLoader.LoadSingleSceneAdditiveAsync(spawnLocation.SceneName);
 
-        private LocationContext GetContext(Scene location)
+        private static LocationContext GetContext(Scene location)
         {
-            LocationContext context = FindContext(location);
-            if (context)
-                return context;
-
-            throw new NoNullAllowedException($"'{nameof(LocationContext)}' not found in location scene");
-        }
-
-        private LocationContext FindContext(Scene scene)
-        {
-            LocationContext context = null;
-
-            scene.GetRootGameObjects(_loadingSceneRootGameObjectsBuffer);
-            foreach (GameObject go in _loadingSceneRootGameObjectsBuffer)
-            {
-                if (go.TryGetComponent(out context))
-                    break;
-            }
-
-            _loadingSceneRootGameObjectsBuffer.Clear();
-
-            return context;
+            LifetimeScope scope = LifetimeScope.Find<LifetimeScope>(location);
+            return scope.GetComponent<LocationContext>();
         }
     }
 }

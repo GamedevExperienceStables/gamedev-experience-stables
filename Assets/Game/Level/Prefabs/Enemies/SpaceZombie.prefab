@@ -43,11 +43,15 @@ GameObject:
   m_Component:
   - component: {fileID: 1646171557498439825}
   - component: {fileID: 1646171557498439824}
+  - component: {fileID: -9147976717129128296}
   - component: {fileID: 1646171557498439827}
   - component: {fileID: 1646171557498439839}
   - component: {fileID: 1646171557498439836}
-  - component: {fileID: -9147976717129128296}
+  - component: {fileID: -3488804478806959247}
+  - component: {fileID: 5747837998317586703}
   - component: {fileID: 1815510984333573865}
+  - component: {fileID: 5183282983791351953}
+  - component: {fileID: 1141320969658811781}
   m_Layer: 0
   m_Name: SpaceZombie
   m_TagString: Untagged
@@ -94,6 +98,22 @@ CapsuleCollider:
   m_Height: 1.4
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!208 &-9147976717129128296
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646171557498439826}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.3, y: 0.7, z: 0.3}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.7, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!114 &1646171557498439827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5229fc2388ea4cf58ff47063e8c2b905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  motor: {fileID: 1646171557498439827}
   groundMovement:
     maxSpeed: 4
     sharpness: 15
@@ -158,9 +177,9 @@ MonoBehaviour:
     drag: 0.1
   rotation:
     sharpness: 10
+    rotateOnlyXZ: 1
   gravity:
     direction: {x: 0, y: -30, z: 0}
-  rotateOnlyXZ: 1
 --- !u!114 &1646171557498439836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,24 +192,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cfe952fc39643c8a92594da4c9d2fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updatePathInterval: 0.2
-  stopDistance: 1
---- !u!208 &-9147976717129128296
-NavMeshObstacle:
+--- !u!114 &-3488804478806959247
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646171557498439826}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.3, y: 0.7, z: 0.3}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.7, z: 0}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2903939fd728459f89087d2914af78c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5747837998317586703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646171557498439826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4b08e6a9dde4c5b995da8bf14caae26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updatePathInterval: 0.2
+  stopDistance: 1
 --- !u!114 &1815510984333573865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,12 +230,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b950b9bbe5f41259fbd446539fbd7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialValue: 1
-  destroyOnDeath: 1
   damageFeedback: {fileID: 7383564464360880306, guid: 12f231b81992930419afdbeeb56868b5,
     type: 3}
+--- !u!114 &5183282983791351953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646171557498439826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb57b94c7089482398b501bc6f6db0fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   deathFeedback: {fileID: 7383564464360880306, guid: 12f231b81992930419afdbeeb56868b5,
     type: 3}
+  destroyOnDeath: 1
+--- !u!114 &1141320969658811781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646171557498439826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a887bf80ae4a96825b91ce65a55f6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1646171557786517125
 GameObject:
   m_ObjectHideFlags: 0

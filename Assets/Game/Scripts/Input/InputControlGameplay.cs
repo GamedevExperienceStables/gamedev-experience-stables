@@ -14,7 +14,12 @@ namespace Game.Input
         public InputButton AimButton { get; } = new();
         public InputButton MenuButton { get; } = new();
         public InputButton InteractionButton { get; } = new();
-        
+        public InputButton DashButton { get; } = new();
+        public InputButton Slot1Button { get; } = new();
+        public InputButton Slot2Button { get; } = new();
+        public InputButton Slot3Button { get; } = new();
+        public InputButton Slot4Button { get; } = new();
+
         [Inject]
         public InputControlGameplay(GameInputControlsAdapter inputControls)
         {
@@ -66,6 +71,50 @@ namespace Game.Input
             else if (context.canceled)
             {
                 InteractionButton.TriggerButtonUp();
+            }
+        }
+
+        public void OnDash(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                DashButton.TriggerButtonDown();
+            }
+            else if (context.canceled)
+            {
+                DashButton.TriggerButtonUp();
+            }
+        }
+
+        public void OnSlot1(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                Slot1Button.TriggerButtonDown();
+            }
+        }
+
+        public void OnSlot2(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                Slot2Button.TriggerButtonDown();
+            }
+        }
+
+        public void OnSlot3(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                Slot3Button.TriggerButtonDown();
+            }
+        }
+
+        public void OnSlot4(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                Slot4Button.TriggerButtonDown();
             }
         }
 

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Game.Level;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Enemies
 {
@@ -14,10 +16,16 @@ namespace Game.Enemies
         [SerializeField]
         private float movementSpeed = 5;
 
+        [FormerlySerializedAs("loot")]
+        [SerializeField]
+        private LootBagDefinition lootBag;
+
         public EnemyController Prefab => prefab;
 
         public int Health => health;
 
         public float MovementSpeed => movementSpeed;
+
+        public LootBagDefinition LootBag => lootBag;
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Input;
-using Game.TimeManagment;
+using Game.TimeManagement;
 using Game.UI;
 using VContainer;
 
@@ -47,6 +47,7 @@ namespace Game.GameFlow
             await _view.HidePauseAsync();
             
             _timeService.Play();
+            _inputService.EnableGameplay();
         }
     }
 }

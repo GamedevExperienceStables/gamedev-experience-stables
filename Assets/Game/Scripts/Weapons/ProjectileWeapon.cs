@@ -1,4 +1,5 @@
-﻿using MoreMountains.Feedbacks;
+﻿using Game.Actors;
+using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine;
 
@@ -15,6 +16,11 @@ namespace Game.Weapons
         [SerializeField]
         private MMSimpleObjectPooler pool;
 
+        private IActorController _owner;
+
+        public void SetOwner(IActorController owner)
+            => _owner = owner;
+
         public void SpawnProjectile()
         {
             CreateProjectile();
@@ -25,7 +31,7 @@ namespace Game.Weapons
         {
             GameObject go = pool.GetPooledGameObject();
             var projectile = go.GetComponent<Projectile>();
-            projectile.Init(firePoint);
+            projectile.Init(firePoint, _owner);
             projectile.Show();
         }
 

@@ -20,16 +20,23 @@ namespace Game.UI
         public void ShowHud()
         {
             hudView.Show();
-            pauseMenuView.Hide();
-        }
-        
-        public UniTask ShowPauseAsync()
-        {
-            hudView.Hide();
-            return pauseMenuView.ShowAsync();
+            pauseMenuView.HideImmediate();
         }
 
-        public UniTask HidePauseAsync() 
-            => pauseMenuView.HideAsync();
+        public UniTask ShowPauseAsync()
+        {
+            return UniTask.WhenAll(
+                hudView.HideAsync(),
+                pauseMenuView.ShowAsync()
+            );
+        }
+
+        public UniTask HidePauseAsync()
+        {
+            return UniTask.WhenAll(
+                hudView.ShowAsync(),
+                pauseMenuView.HideAsync()
+            );
+        }
     }
 }
