@@ -7,6 +7,6 @@
 
         void Enter();
         void Exit();
-        
+
     }
 }

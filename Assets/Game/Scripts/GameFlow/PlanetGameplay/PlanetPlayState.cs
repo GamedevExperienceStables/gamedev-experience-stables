@@ -12,7 +12,7 @@ namespace Game.GameFlow
         [Inject]
         public PlanetPlayState(
             GameplayView view,
-            IInputService inputService 
+            IInputService inputService
         )
         {
             _view = view;

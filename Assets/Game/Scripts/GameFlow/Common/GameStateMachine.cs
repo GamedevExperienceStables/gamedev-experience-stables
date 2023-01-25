@@ -2,11 +2,11 @@
 
 namespace Game.GameFlow
 {
-    public abstract class GameStateMachine 
+    public abstract class GameStateMachine
     {
         protected readonly StateMachine stateMachine = new();
-        
-        public void EnterState<T>() where T : class, IState 
+
+        public void EnterState<T>() where T : class, IState
             => stateMachine.EnterState<T>();
         
         public void PushState<T>() where T : class, IState 

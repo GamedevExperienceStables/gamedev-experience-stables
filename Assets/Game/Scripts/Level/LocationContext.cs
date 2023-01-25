@@ -17,7 +17,7 @@ namespace Game.Level
                 return;
 
             _enemiesContainer = CreateContainer();
-            
+
             foreach (EnemySpawner spawner in enemySpawners)
             {
                 spawner.Init(_enemiesContainer);

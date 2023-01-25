@@ -10,11 +10,11 @@ namespace Game.Cameras
     {
         private CinemachineVirtualCamera _cinemachine;
         private CinemachineFramingTransposer _framingTransposer;
-        
+
         private CameraSettings _settings;
 
         [Inject]
-        public void Construct(CameraSettings settings) 
+        public void Construct(CameraSettings settings)
             => _settings = settings;
 
         private void Awake()
@@ -38,10 +38,10 @@ namespace Game.Cameras
         public void ZoomIn()
             => _framingTransposer.m_CameraDistance = _settings.CloseDistance;
 
-        public void ZoomOut() 
+        public void ZoomOut()
             => _framingTransposer.m_CameraDistance = _settings.FarDistance;
 
-        public void ZoomReset() 
+        public void ZoomReset()
             => _framingTransposer.m_CameraDistance = _settings.DefaultDistance;
     }
 }

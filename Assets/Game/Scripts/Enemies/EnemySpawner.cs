@@ -25,10 +25,10 @@ namespace Game.Enemies
         private EnemyFactory _factory;
 
         [Inject]
-        public void Construct(EnemyFactory factory) 
+        public void Construct(EnemyFactory factory)
             => _factory = factory;
 
-        public void Init(Transform spawnContainer) 
+        public void Init(Transform spawnContainer)
             => _spawnContainer = spawnContainer;
 
         public void SetTarget(Transform target)
