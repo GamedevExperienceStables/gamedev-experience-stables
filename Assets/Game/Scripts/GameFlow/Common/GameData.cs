@@ -9,7 +9,5 @@ namespace Game.GameFlow
     {
         public TimeSpan PlayTime { get; set; }
         public DateTime SessionStartTime { get; set; }
-        
-        public LevelSettings CurrentLevel { get; set; }
     }
 }

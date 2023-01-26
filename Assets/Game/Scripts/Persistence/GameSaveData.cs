@@ -17,11 +17,13 @@ namespace Game.Persistence
         public struct LevelSaveData
         {
             public string id;
+            public int materialCollected;
+            public List<string> pointsCleared;
         }
         
-        public struct PlayerSaveData
+        public readonly struct PlayerSaveData
         {
-            public List<string> runes;
+            public readonly List<string> runes;
         }
     }
 }

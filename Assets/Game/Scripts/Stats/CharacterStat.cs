@@ -9,7 +9,14 @@ namespace Game.Stats
         private readonly List<StatModifier> _statModifiers = new();
 
         private float _baseValue;
-        
+
+        public CharacterStat()
+        {
+        }
+
+        public CharacterStat(float baseValue) 
+            => _baseValue = baseValue;
+
         private event Action<float> ValueChanged;
 
         public float BaseValue

@@ -1,8 +1,6 @@
 ﻿using Game.Actors;
 using Game.Stats;
 using UnityEngine;
-using VContainer;
-using VContainer.Unity;
 
 namespace Game.Effects
 {
@@ -17,20 +15,14 @@ namespace Game.Effects
 
         public float Value => value;
         public CharacterStats Stat => stat;
-
-        public class EffectChangeStat : GameplayEffect
+    }
+    
+    public class EffectChangeStat : GameplayEffect<EffectChangeStatDefinition>
+    {
+        public override void Execute(IActorController target, IActorController instigator)
         {
-            private readonly EffectChangeStatDefinition _definition;
-
-            [Inject]
-            public EffectChangeStat(EffectChangeStatDefinition definition) 
-                => _definition = definition;
-
-            public override void Execute(IActorController target, IActorController instigator)
-            {
-                // if (target.Stats.HasStat(_definition.Stat))
-                //     target.Stats.AddValue(_definition.Stat, _definition.Value);
-            }
+            // if (target.HasStats(definition.Stat))
+            //     target.ChangeStat(definition.Stat, definition.Value);
         }
     }
 }

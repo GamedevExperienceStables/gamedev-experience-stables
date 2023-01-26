@@ -1,9 +1,11 @@
-﻿using Game.Cameras;
+﻿using Game.Actors;
+using Game.Cameras;
+using Game.Effects;
 using Game.Enemies;
 using Game.GameFlow;
 using Game.Hero;
+using Game.Inventory;
 using Game.Level;
-using Game.TimeManagement;
 using Game.UI;
 using UnityEngine;
 using VContainer;
@@ -39,17 +41,38 @@ namespace Game.LifetimeScopes
             RegisterPlanetStateMachine(builder);
             RegisterLocationStateMachine(builder);
             RegisterLootSystem(builder);
+            RegisterAbilities(builder);
+            RegisterEffects(builder);
 
             builder.UseEntryPoints(entryPoints =>
             {
                 entryPoints.Add<GameplayEntryPoint>();
+                
                 entryPoints.Add<GameplayInputTracker>();
             });
+        }
+        
+        private static void RegisterAbilities(IContainerBuilder builder)
+        {
+            builder.Register<AbilityFactory>(Lifetime.Singleton);
+
+            builder.Register<AimAbility>(Lifetime.Transient);
+            builder.Register<AutoPickupAbility>(Lifetime.Transient);
+            builder.Register<InteractionAbility>(Lifetime.Transient);
+            builder.Register<WeaponAbility>(Lifetime.Transient);
+        }
+        
+        private static void RegisterEffects(IContainerBuilder builder)
+        {
+            builder.Register<GameplayEffectFactory>(Lifetime.Singleton);
+            builder.Register<EffectChangeStat>(Lifetime.Singleton);
         }
 
         private static void RegisterServices(IContainerBuilder builder)
         {
             builder.Register<LocationController>(Lifetime.Scoped);
+            builder.Register<InventorySystem>(Lifetime.Scoped);
+            builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
 
             RegisterInteractions(builder);
         }
@@ -60,7 +83,6 @@ namespace Game.LifetimeScopes
             builder.Register<InteractionFactory>(Lifetime.Scoped);
 
             builder.Register<TransitionToLocationInteraction>(Lifetime.Transient);
-            builder.Register<ItemPickupInteraction>(Lifetime.Transient);
         }
 
         private static void RegisterFactories(IContainerBuilder builder)

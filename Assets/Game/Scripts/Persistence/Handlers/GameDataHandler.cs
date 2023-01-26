@@ -7,29 +7,29 @@ namespace Game.Persistence
 {
     public class GameDataHandler
     {
-        private readonly GameData _gameData;
-        private readonly LevelDataHandler _levelDataHandler;
-        private readonly PlayerDataHandler _playerDataHandler;
+        private readonly GameData _game;
+        private readonly LevelImportExport _level;
+        private readonly PlayerDataHandler _player;
 
         [Inject]
         public GameDataHandler(
-            GameData gameData,
-            LevelDataHandler levelDataHandler,
-            PlayerDataHandler playerDataHandler
+            GameData game,
+            LevelImportExport level,
+            PlayerDataHandler player
         )
         {
-            _gameData = gameData;
-            _levelDataHandler = levelDataHandler;
-            _playerDataHandler = playerDataHandler;
+            _game = game;
+            _level = level;
+            _player = player;
         }
 
         public void Reset()
         {
-            _gameData.PlayTime = TimeSpan.Zero;
-            _gameData.SessionStartTime = DateTime.Now;
+            _game.PlayTime = TimeSpan.Zero;
+            _game.SessionStartTime = DateTime.Now;
 
-            _levelDataHandler.Reset();
-            _playerDataHandler.Reset();
+            _level.Reset();
+            _player.Reset();
         }
 
         public GameSaveData Export()
@@ -39,10 +39,10 @@ namespace Game.Persistence
                 meta = new GameSaveData.MetaSaveData
                 {
                     timestampString = DateTime.Now.ToString(CultureInfo.InvariantCulture),
-                    playTime = _gameData.PlayTime.Milliseconds,
+                    playTime = _game.PlayTime.Milliseconds,
                 },
-                level = _levelDataHandler.Export(),
-                player = _playerDataHandler.Export()
+                level = _level.Export(),
+                player = _player.Export()
             };
 
             return data;
@@ -50,11 +50,11 @@ namespace Game.Persistence
 
         public void Import(GameSaveData data)
         {
-            _gameData.SessionStartTime = DateTime.Now;
-            _gameData.PlayTime = TimeSpan.FromMilliseconds(data.meta.playTime);
+            _game.SessionStartTime = DateTime.Now;
+            _game.PlayTime = TimeSpan.FromMilliseconds(data.meta.playTime);
 
-            _levelDataHandler.Import(data.level);
-            _playerDataHandler.Import(data.player);
+            _level.Import(data.level);
+            _player.Import(data.player);
         }
     }
 }

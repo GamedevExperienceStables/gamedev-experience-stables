@@ -1,5 +1,8 @@
-﻿using Game.Actors;
+﻿using System.Collections.Generic;
+using Game.Actors;
+using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Hero
 {
@@ -12,11 +15,17 @@ namespace Game.Hero
         [SerializeField]
         private HeroStats.Settings initialStats;
 
-        [SerializeField]
-        private AimAbility.Settings aim;
+        [FormerlySerializedAs("defaultAbilities")]
+        [SerializeField, Expandable]
+        private List<AbilityDefinition> initialAbilities;
+
+        [SerializeField, Expandable]
+        private List<AbilityDefinition> abilities;
+
+        public List<AbilityDefinition> InitialAbilities => initialAbilities;
+        public List<AbilityDefinition> Abilities => abilities;
 
         public HeroController Prefab => prefab;
         public HeroStats.Settings InitialStats => initialStats;
-        public AimAbility.Settings Aim => aim;
     }
 }

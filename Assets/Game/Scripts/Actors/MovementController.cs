@@ -1,5 +1,4 @@
-﻿using System;
-using Game.Stats;
+﻿using Game.Stats;
 using KinematicCharacterController;
 using UnityEngine;
 

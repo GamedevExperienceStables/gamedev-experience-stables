@@ -20,21 +20,8 @@ namespace Game.Hero
         public override IStatsSet Stats => _stats;
         public Transform CameraTarget => _view.CameraTarget;
 
-        public void Init(PlayerData data)
-        {
-            SetStats(data.Stats);
-            InitAbilities();
-        }
-
-        private void SetStats(IHeroStats stats)
+        public void SetStats(IHeroStats stats)
             => _stats = stats;
-
-        private void InitAbilities()
-        {
-            FindAbility<AimAbility>().EnableAbility();
-            FindAbility<WeaponAbility>().EnableAbility();
-            FindAbility<InteractionAbilityView>().EnableAbility();
-        }
 
         public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
             => _movement.SetPositionAndRotation(position, rotation);

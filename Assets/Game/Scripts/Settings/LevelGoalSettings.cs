@@ -12,5 +12,9 @@ namespace Game.Settings
 
         [SerializeField, Min(0)]
         private int count;
+
+        public MaterialDefinition Material => material;
+
+        public int Count => count;
     }
 }

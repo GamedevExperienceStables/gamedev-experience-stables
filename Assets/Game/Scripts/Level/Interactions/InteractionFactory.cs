@@ -22,13 +22,6 @@ namespace Game.Level
                     return teleport;
                 }
                 
-                case LootItem item:
-                {
-                    var pickup = _resolver.Resolve<ItemPickupInteraction>();
-                    pickup.Init(item.Definition, instigator, interactable.gameObject);
-                    return pickup;
-                }
-                
                 default:
                     return null;
             }

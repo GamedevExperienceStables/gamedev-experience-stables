@@ -1,5 +1,4 @@
-﻿using System;
-using VContainer;
+﻿using VContainer;
 
 namespace Game.Effects
 {
@@ -11,11 +10,11 @@ namespace Game.Effects
         public GameplayEffectFactory(IObjectResolver resolver)
             => _resolver = resolver;
 
-        public GameplayEffect Create(GameplayEffectDefinition definition) =>
-            definition switch
-            {
-                EffectChangeStatDefinition => _resolver.Resolve<EffectChangeStatDefinition.EffectChangeStat>(),
-                _ => throw new ArgumentOutOfRangeException()
-            };
+        public TEffect Create<TEffect, TDefinition>(TDefinition definition) where TEffect : GameplayEffect<TDefinition>
+        {
+            var effect = _resolver.Resolve<TEffect>();
+            effect.Init(definition);
+            return effect;
+        }
     }
 }

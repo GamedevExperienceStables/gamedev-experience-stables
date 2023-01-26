@@ -1,4 +1,5 @@
 ﻿using Game.GameFlow;
+using Game.Persistence;
 using UnityEngine;
 using VContainer;
 
@@ -7,18 +8,21 @@ namespace Game.Level
     public class TransitionToLocationInteraction : Interaction
     {
         private readonly PlanetStateMachine _planetStateMachine;
-        private readonly LocationDataHandler _locationController;
+        private readonly LevelDataHandler _level;
+        private readonly LocationDataHandler _location;
 
         private LocationPointDefinition _targetLocation;
 
         [Inject]
         public TransitionToLocationInteraction(
             PlanetStateMachine planetStateMachine,
-            LocationDataHandler locationController
+            LevelDataHandler level,
+            LocationDataHandler location
         )
         {
             _planetStateMachine = planetStateMachine;
-            _locationController = locationController;
+            _level = level;
+            _location = location;
         }
 
         public void Init(LocationPointDefinition targetLocation, GameObject source)
@@ -29,11 +33,11 @@ namespace Game.Level
         }
 
         public override bool CanExecute()
-            => _locationController.CanTransferTo(_targetLocation);
+            => _location.CanTransferTo(_targetLocation);
 
         public override void Execute()
         {
-            _locationController.SetLocation(_targetLocation);
+            _level.SetLocation(_targetLocation);
 
             _planetStateMachine.EnterState<PlanetLocationLoadingState>();
         }

@@ -1,4 +1,5 @@
-﻿using Game.Persistence;
+﻿using Game.Inventory;
+using Game.Persistence;
 using UnityEngine;
 
 namespace Game.Settings
@@ -19,14 +20,16 @@ namespace Game.Settings
         private LootSettings lootSettings;
 
         [SerializeField]
+        private MagnetSystem.Settings magnetSettings;
+
+        [SerializeField]
         private PersistenceService.Settings saveSettings;
 
         public CameraSettings CameraSettings => cameraSettings;
         public UiSettings UiSettings => uiSettings;
         public LootSettings LootSettings => lootSettings;
-
         public LevelsSettings LevelsSettings => levelsSettings;
-
         public PersistenceService.Settings SaveSettings => saveSettings;
+        public MagnetSystem.Settings MagnetSettings => magnetSettings;
     }
 }

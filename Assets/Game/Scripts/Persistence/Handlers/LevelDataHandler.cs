@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Game.GameFlow;
 using Game.Level;
 using Game.Settings;
 using UnityEngine;
@@ -10,44 +9,74 @@ namespace Game.Persistence
     public class LevelDataHandler
     {
         private readonly LevelsSettings _levelsSettings;
-        private readonly GameData _gameData;
-        private readonly LocationDataHandler _locationDataHandler;
+        private readonly LevelData _levelData;
 
         [Inject]
-        public LevelDataHandler(LevelsSettings levelsSettings, GameData gameData, LocationDataHandler locationDataHandler)
+        public LevelDataHandler(
+            LevelsSettings levelsSettings,
+            LevelData levelData
+        )
         {
             _levelsSettings = levelsSettings;
-            _gameData = gameData;
-            _locationDataHandler = locationDataHandler;
+            _levelData = levelData;
+        }
+
+        public void InitLevel(LevelDefinition level)
+        {
+            _levelData.CurrentLevel = level;
+
+            _levelData.LastLocation = default;
+            _levelData.CurrentLocation = _levelsSettings.LevelStartPoint;
+        }
+
+        public string GetCurrentLevelId()
+            => _levelData.CurrentLevel.Id;
+
+        public LocationPointData GetCurrentLocation()
+            => _levelData.CurrentLocation;
+
+        public bool TryGetLastLocation(out LocationPointData location)
+        {
+            LocationPointData lastLocation = _levelData.LastLocation;
+            if (!lastLocation.IsValid())
+            {
+                location = default;
+                return false;
+            }
+
+            location = lastLocation;
+            return true;
+        }
+
+        public void SetLocation(LocationPointDefinition targetPoint)
+        {
+            _levelData.LastLocation = _levelData.CurrentLocation;
+
+            LocationDefinition location = GetLocationDefinition(targetPoint);
+
+            var newLocation = new LocationPointData(location, targetPoint.PointKey);
+            _levelData.CurrentLocation = newLocation;
         }
 
         public void Reset()
         {
-            _gameData.CurrentLevel = _levelsSettings.Levels.First();
-
-            _locationDataHandler.Init(_levelsSettings.LevelStartPoint);
+            LevelDefinition firstLevel = _levelsSettings.Levels.First();
+            InitLevel(firstLevel);
         }
 
-        public void Import(GameSaveData.LevelSaveData data)
-        {
-            _gameData.CurrentLevel = GetLevel(data.id);
-            
-            _locationDataHandler.Init(_levelsSettings.LevelStartPoint);
-        }
-
-        public GameSaveData.LevelSaveData Export()
-        {
-            return new GameSaveData.LevelSaveData
+        private LocationDefinition GetLocationDefinition(LocationPointDefinition definition) =>
+            definition switch
             {
-                id = _gameData.CurrentLevel.Id,
+                LocationPointDynamicDefinition => _levelData.CurrentLevel.Location,
+                LocationPointStaticDefinition staticLocation => staticLocation.Location,
+                _ => null
             };
-        }
 
-        private LevelSettings GetLevel(string levelId)
+        public LevelDefinition FindLevelById(string levelId)
         {
             var levels = _levelsSettings.Levels;
 
-            LevelSettings found = levels.Find(level => level.Id == levelId);
+            LevelDefinition found = levels.Find(level => level.Id == levelId);
             if (found)
                 return found;
 

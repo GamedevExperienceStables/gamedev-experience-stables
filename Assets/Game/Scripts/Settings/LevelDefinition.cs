@@ -4,15 +4,17 @@ using UnityEngine;
 
 namespace Game.Settings
 {
-    [CreateAssetMenu(menuName = "Settings/Level")]
-    public class LevelSettings : SerializableScriptableObject
+    [CreateAssetMenu(menuName = "Data/Level")]
+    public class LevelDefinition : SerializableScriptableObject
     {
         [SerializeField]
         private LocationDefinition location;
 
         [SerializeField]
-        private LevelGoalsSettings goals;
+        private LevelGoalSettings goal;
 
         public LocationDefinition Location => location;
+
+        public LevelGoalSettings Goal => goal;
     }
 }

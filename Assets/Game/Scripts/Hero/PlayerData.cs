@@ -6,6 +6,5 @@ namespace Game.Hero
     public class PlayerData
     {
         public HeroStats Stats { get; } = new();
-        public HeroAbilities Abilities { get; } = new();
     }
 }

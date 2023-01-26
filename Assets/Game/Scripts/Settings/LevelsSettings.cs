@@ -12,9 +12,9 @@ namespace Game.Settings
         private LocationPointStaticDefinition levelStartPoint;
 
         [SerializeField]
-        private List<LevelSettings> levels;
+        private List<LevelDefinition> levels;
 
-        public List<LevelSettings> Levels => levels;
+        public List<LevelDefinition> Levels => levels;
 
         public LocationPointStaticDefinition LevelStartPoint => levelStartPoint;
     }

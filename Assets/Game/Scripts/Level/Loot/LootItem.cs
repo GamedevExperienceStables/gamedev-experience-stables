@@ -1,14 +1,9 @@
 ﻿using Game.Inventory;
-using MoreMountains.Feedbacks;
-using UnityEngine;
 
 namespace Game.Level
 {
-    public class LootItem : Interactable
+    public class LootItem : Pickable
     {
-        [SerializeField]
-        private MMF_Player pickupFeedback;
-
         public ItemDefinition Definition { get; private set; }
 
         public void Init(ItemDefinition definition) 

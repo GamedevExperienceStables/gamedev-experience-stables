@@ -1,37 +1,46 @@
-﻿using UnityEngine;
-
 namespace Game.Actors
 {
-    public abstract class ActorAbilityView : MonoBehaviour
+    public abstract class ActorAbility
     {
         public IActorController Owner { get; set; }
 
         public bool IsEnabled { get; private set; }
         public bool IsActive { get; private set; }
 
-        public void InitAbility()
+        private AbilityDefinition Definition { get; set; }
+
+        public virtual void CreateAbility(AbilityDefinition definition) 
+            => Definition = definition;
+
+        public bool InstanceOf(AbilityDefinition definition)
+            => ReferenceEquals(Definition, definition);
+
+        public void InitAbility() 
             => OnInitAbility();
 
-        public void EnableAbility()
+        public void GiveAbility()
         {
             IsEnabled = true;
-            OnEnableAbility();
+            OnGiveAbility();
         }
 
-        public void DisableAbility()
+        public void RemoveAbility()
         {
+            if (IsActive)
+                CancelAbility();
+            
             IsEnabled = false;
-            OnDisableAbility();
+            OnRemoveAbility();
         }
 
         public void DestroyAbility()
         {
             if (IsEnabled)
-                OnDisableAbility();
+                RemoveAbility();
 
             OnDestroyAbility();
         }
-        
+
         public void ResetAbility()
         {
             if (IsEnabled)
@@ -45,14 +54,17 @@ namespace Game.Actors
 
             if (CanActivateAbility())
                 ActivateAbility();
-            else
-                EndAbility();
         }
 
         public void ActivateAbility()
         {
             IsActive = true;
             OnActivateAbility();
+        }
+
+        public void CancelAbility()
+        {
+            OnCancelAbility();
         }
 
         public void EndAbility()
@@ -70,28 +82,41 @@ namespace Game.Actors
         {
         }
 
-        protected virtual void OnEnableAbility()
+        protected virtual void OnGiveAbility()
         {
         }
 
-        protected virtual void OnDisableAbility()
+        protected virtual void OnRemoveAbility()
         {
         }
 
-        protected virtual void OnActivateAbility()
-        {
-        }
+        protected abstract void OnActivateAbility();
+
+        protected virtual void OnCancelAbility()
+            => OnEndAbility();
 
         protected virtual void OnEndAbility()
         {
         }
-        
+
         protected virtual void OnResetAbility()
         {
         }
 
         protected virtual void OnDestroyAbility()
         {
+        }
+    }
+
+    public abstract class ActorAbility<T> : ActorAbility where T : AbilityDefinition
+    {
+        protected T Definition { get; private set; }
+
+        public override void CreateAbility(AbilityDefinition definition)
+        {
+            base.CreateAbility(definition);
+
+            Definition = (T)definition;
         }
     }
 }
