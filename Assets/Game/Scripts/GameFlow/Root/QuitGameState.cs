@@ -1,4 +1,5 @@
-﻿using VContainer;
+﻿using Cysharp.Threading.Tasks;
+using VContainer;
 
 namespace Game.GameFlow
 {
@@ -12,21 +13,18 @@ namespace Game.GameFlow
             _quitService = quitService;
         }
 
-        protected override void OnEnter()
+        protected override UniTask OnEnter()
         {
             // show confirmation popup
             // ...
 
             // On confirm Quit
             Quit();
+            
+            return UniTask.CompletedTask;
         }
 
         private void Quit()
             => _quitService.Quit();
-
-        protected override void OnExit()
-        {
-
-        }
     }
 }

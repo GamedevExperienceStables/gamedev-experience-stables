@@ -1,4 +1,5 @@
-﻿using Game.Utils;
+﻿using Cysharp.Threading.Tasks;
+using Game.Utils;
 
 namespace Game.GameFlow
 {
@@ -7,12 +8,12 @@ namespace Game.GameFlow
         protected readonly StateMachine stateMachine = new();
 
         public void EnterState<T>() where T : class, IState
-            => stateMachine.EnterState<T>();
+            => stateMachine.EnterState<T>().Forget();
         
         public void PushState<T>() where T : class, IState 
-            => stateMachine.PushState<T>();
+            => stateMachine.PushState<T>().Forget();
 
         public void PopState() 
-            => stateMachine.PopState();
+            => stateMachine.PopState().Forget();
     }
 }

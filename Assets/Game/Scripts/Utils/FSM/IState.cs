@@ -1,12 +1,13 @@
-﻿namespace Game.Utils
+﻿using Cysharp.Threading.Tasks;
+
+namespace Game.Utils
 {
     public interface IState
     {
         StateMachine Parent { get; set; }
         StateMachine Child { get; set; }
 
-        void Enter();
-        void Exit();
-
+        UniTask Enter();
+        UniTask Exit();
     }
 }

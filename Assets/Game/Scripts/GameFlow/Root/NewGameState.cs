@@ -1,4 +1,5 @@
-﻿using Game.Persistence;
+﻿using Cysharp.Threading.Tasks;
+using Game.Persistence;
 using VContainer;
 
 namespace Game.GameFlow
@@ -11,15 +12,11 @@ namespace Game.GameFlow
         public NewGameState(PersistenceService persistenceService) 
             => _persistenceService = persistenceService;
 
-        protected override void OnEnter()
+        protected override UniTask OnEnter()
         {
             _persistenceService.InitData();
 
-            Parent.EnterState<IntroState>();
-        }
-
-        protected override void OnExit()
-        {
+            return Parent.EnterState<IntroState>();
         }
     }
 }

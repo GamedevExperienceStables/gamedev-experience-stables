@@ -33,7 +33,7 @@ namespace Game.GameFlow
             _inputService = inputService;
         }
 
-        protected override async void OnEnter()
+        protected override async UniTask OnEnter()
         {
             _inputService.DisableAll();
 
@@ -47,12 +47,13 @@ namespace Game.GameFlow
             Scene location = await LoadLocationAsync(spawnLocation.location);
             InitLocation(location, spawnLocation.pointKey);
 
-            Parent.EnterState<PlanetPlayState>();
+            await Parent.EnterState<PlanetPlayState>();
         }
 
-        protected override void OnExit()
+        protected override UniTask OnExit()
         {
             _loadingScreen.Hide();
+            return UniTask.CompletedTask;
         }
 
         private void InitLocation(Scene location, LocationPointKey locationPoint)
