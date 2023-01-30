@@ -1,8 +1,10 @@
 ﻿using Game.GameFlow;
 using Game.Hero;
 using Game.Input;
+using Game.Inventory;
 using Game.Level;
 using Game.Persistence;
+using Game.Player;
 using Game.RandomManagement;
 using Game.SceneManagement;
 using Game.Settings;
@@ -31,25 +33,27 @@ namespace Game.LifetimeScopes
             RegisterStateMachine(builder);
             RegisterSettings(builder);
             RegisterData(builder);
-            RegisterControllers(builder);
             RegisterServices(builder);
             RegisterSaveSystem(builder);
-        }
-
-        private static void RegisterControllers(IContainerBuilder builder)
-        {
-            builder.Register<LocationDataHandler>(Lifetime.Singleton);
         }
 
         private static void RegisterData(IContainerBuilder builder)
         {
             builder.Register<GameData>(Lifetime.Singleton);
+            builder.Register<GameImportExport>(Lifetime.Singleton);
+
+            builder.Register<LevelData>(Lifetime.Singleton);
+            builder.Register<LevelController>(Lifetime.Singleton);
+            builder.Register<LevelImportExport>(Lifetime.Singleton);
+
             builder.Register<PlayerData>(Lifetime.Singleton);
+            builder.Register<PlayerController>(Lifetime.Singleton);
+            builder.Register<PlayerImportExport>(Lifetime.Singleton);
+            builder.Register<InventoryData>(Lifetime.Singleton);
+            builder.Register<InventoryController>(Lifetime.Singleton);
+
             builder.Register<LocationData>(Lifetime.Singleton);
-            
-            builder.Register<GameDataHandler>(Lifetime.Singleton);
-            builder.Register<LevelDataHandler>(Lifetime.Singleton);
-            builder.Register<PlayerDataHandler>(Lifetime.Singleton);
+            builder.Register<LocationDataHandler>(Lifetime.Singleton);
         }
 
         private static void RegisterServices(IContainerBuilder builder)
@@ -97,12 +101,13 @@ namespace Game.LifetimeScopes
         {
             builder.RegisterInstance(heroData);
             builder.RegisterInstance(heroData.InitialStats);
-            builder.RegisterInstance(heroData.Aim);
 
             builder.RegisterInstance(gameSettings.CameraSettings);
             builder.RegisterInstance(gameSettings.LootSettings);
             builder.RegisterInstance(gameSettings.LevelsSettings);
             builder.RegisterInstance(gameSettings.SaveSettings);
+            builder.RegisterInstance(gameSettings.MagnetSettings);
+            builder.RegisterInstance(gameSettings.InventorySettings);
         }
 
         private void RegisterSaveSystem(IContainerBuilder builder)

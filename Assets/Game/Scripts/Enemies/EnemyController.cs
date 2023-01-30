@@ -8,23 +8,27 @@ namespace Game.Enemies
     [RequireComponent(typeof(NavigationController))]
     public class EnemyController : ActorController
     {
-        public override IStatsSet Stats => _stats;
-
         private AiController _ai;
         private MovementController _movement;
-        
-        private readonly EnemyStats _stats = new();
         private LootController _loot;
+        
+        private EnemyStats _stats;
+        protected override IStats Stats => _stats;
 
-        protected override void OnAwake()
+        protected override void OnActorAwake()
         {
             _ai = GetComponent<AiController>();
             _movement = GetComponent<MovementController>();
             _loot = GetComponent<LootController>();
+
+            _stats = new();
         }
 
-        public void InitStats(EnemyDefinition definition) 
-            => _stats.InitStats(definition);
+        protected override void OnActorDestroy() 
+            => _stats.Dispose();
+
+        public void InitStats(EnemyStats.InitialStats initial) 
+            => _stats.InitStats(initial);
 
         public void SetTarget(Transform target) 
             => _ai.SetTarget(target);

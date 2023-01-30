@@ -19,24 +19,24 @@ namespace Game.Actors.Health
         private DamageableController _damageableController;
         private bool _isDead;
 
-        private IDamageableStats _damageableStats;
+        private IActorController _owner;
 
         private void Start()
         {
             _damageableController = GetComponent<DamageableController>();
 
-            var owner = GetComponent<ActorController>();
-            _damageableStats = owner.GetStats<IDamageableStats>();
-            
-            _damageableStats.Health.Current.Subscribe(OnHealthChanged);
+            _owner = GetComponent<IActorController>();
+            _owner.Subscribe(CharacterStats.Health, OnHealthChanged);
         }
 
-        private void OnDestroy() 
-            => _damageableStats.Health.Current.UnSubscribe(OnHealthChanged);
-
-        private void OnHealthChanged(float newValue)
+        private void OnDestroy()
         {
-            if (newValue > 0)
+            _owner.UnSubscribe(CharacterStats.Health, OnHealthChanged);
+        }
+
+        private void OnHealthChanged(StatValueChange change)
+        {
+            if (change.newValue > 0)
                 return;
 
             if (_isDead)

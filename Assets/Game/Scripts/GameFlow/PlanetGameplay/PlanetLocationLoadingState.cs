@@ -12,7 +12,7 @@ namespace Game.GameFlow
     public class PlanetLocationLoadingState : GameState
     {
         private readonly IFaderScreen _loadingScreen;
-        private readonly LocationData _locationData;
+        private readonly LevelController _level;
         private readonly SceneLoader _sceneLoader;
         private readonly LocationController _locationController;
         private readonly IInputService _inputService;
@@ -20,14 +20,14 @@ namespace Game.GameFlow
         [Inject]
         public PlanetLocationLoadingState(
             IFaderScreen loadingScreen,
-            LocationData locationData,
+            LevelController level,
             SceneLoader sceneLoader,
             LocationController locationController,
             IInputService inputService
         )
         {
             _loadingScreen = loadingScreen;
-            _locationData = locationData;
+            _level = level;
             _sceneLoader = sceneLoader;
             _locationController = locationController;
             _inputService = inputService;
@@ -43,7 +43,7 @@ namespace Game.GameFlow
 
             await UnloadLastLocationIfExists();
 
-            LocationPointData spawnLocation = _locationData.CurrentLocation;
+            LocationPointData spawnLocation = _level.GetCurrentLocation();
             Scene location = await LoadLocationAsync(spawnLocation.location);
             InitLocation(location, spawnLocation.pointKey);
 
@@ -65,8 +65,7 @@ namespace Game.GameFlow
 
         private async UniTask UnloadLastLocationIfExists()
         {
-            LocationPointData lastLocation = _locationData.LastLocation;
-            if (!lastLocation.IsValid())
+            if (!_level.TryGetLastLocation(out LocationPointData lastLocation))
                 return;
 
             await _sceneLoader.UnloadSceneIfLoadedAsync(lastLocation.location.SceneName);

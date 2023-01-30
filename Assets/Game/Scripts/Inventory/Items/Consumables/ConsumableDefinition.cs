@@ -1,17 +1,13 @@
-﻿using Game.Effects;
-using UnityEngine;
-using UnityEngine.Serialization;
-
-namespace Game.Inventory
+﻿namespace Game.Inventory
 {
-    [CreateAssetMenu(menuName = MENU_PATH + "Stone")]
-    public class ConsumableDefinition : ItemDefinition
+    
+    public abstract class ConsumableDefinition : ItemDefinition, IItemExecutableDefinition
     {
-        [FormerlySerializedAs("effect")]
-        [FormerlySerializedAs("action")]
-        [SerializeField]
-        private GameplayEffectDefinition effectDefinition;
+        public virtual bool CanExecute(ItemExecutionContext context) 
+            => true;
 
-        public GameplayEffectDefinition EffectDefinition => effectDefinition;
+        public virtual void Execute(ItemExecutionContext context)
+        {
+        }
     }
 }

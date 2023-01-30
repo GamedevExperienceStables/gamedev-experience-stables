@@ -17,11 +17,14 @@ namespace Game.Persistence
         public struct LevelSaveData
         {
             public string id;
+            public List<string> pointsCleared;
         }
-        
+
         public struct PlayerSaveData
         {
-            public List<string> runes;
+            public int containerMaterials;
+            public int bagMaterials;
+            public List<string> recipes;
         }
     }
 }

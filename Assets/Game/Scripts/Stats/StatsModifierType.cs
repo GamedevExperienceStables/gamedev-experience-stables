@@ -3,6 +3,7 @@
     public enum StatsModifierType
     {
         Flat,
-        Percent
+        Percent,
+        Override
     }
 }

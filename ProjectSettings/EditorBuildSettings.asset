@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Level/Scenes/Levels/Planet1_Dungeon1.unity
     guid: 354a9d38bdbdd634ca875da335fb3c53
+  - enabled: 1
+    path: Assets/Game/Test/TestLocation.unity
+    guid: 740c65653d10bf84fad0c7a2e027fcff
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 356ab69d75917644f8bb1676edee2467,
       type: 2}

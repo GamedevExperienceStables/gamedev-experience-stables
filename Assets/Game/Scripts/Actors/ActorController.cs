@@ -1,70 +1,80 @@
-﻿using System.Collections.Generic;
-using Game.Stats;
+﻿using Game.Stats;
 using UnityEngine;
 
 namespace Game.Actors
 {
     public abstract class ActorController : MonoBehaviour, IActorController
     {
-        public abstract IStatsSet Stats { get; }
+        private readonly ActorAbilities _abilities = new();
 
-        public IEnumerable<ActorAbilityView> Abilities => _abilities;
+        public Transform Transform => transform;
 
-        private ActorAbilityView[] _abilities;
+        protected abstract IStats Stats { get; }
 
         private void Awake()
-        {
-            OnAwake();
-            CollectAbilities();
-        }
-
-        protected virtual void OnAwake()
-        {
-        }
-
-        private void Start()
-            => InitAbilities();
+            => OnActorAwake();
 
         private void OnDestroy()
-            => DestroyAbilities();
-
-        public T GetStats<T>() where T : IStatsSet
-            => (T)Stats;
-
-        public T FindAbility<T>() where T : ActorAbilityView
         {
-            foreach (ActorAbilityView ability in Abilities)
-            {
-                if (ability is T foundAbility)
-                    return foundAbility;
-            }
+            DestroyAbilities();
 
-            return default;
+            OnActorDestroy();
         }
+
+        public bool HasStat(CharacterStats key)
+            => Stats.HasStat(key);
+
+        public float GetCurrentValue(CharacterStats key)
+            => Stats[key];
+
+        public void ApplyModifier(CharacterStats key, StatModifier modifier)
+        {
+            var data = new StatModifierApplyData(key, modifier.Type, modifier.Value, this);
+            Stats.ApplyModifier(key, data);
+        }
+
+        public void AddModifier(CharacterStats key, StatModifier modifier)
+            => Stats.AddModifier(key, modifier);
+
+        public void RemoveModifier(CharacterStats key, StatModifier modifier)
+            => Stats.RemoveModifier(key, modifier);
+
+        public void Subscribe(CharacterStats key, IStats.StatChangedEvent callback)
+            => Stats.Subscribe(key, callback);
+
+        public void UnSubscribe(CharacterStats key, IStats.StatChangedEvent callback)
+            => Stats.UnSubscribe(key, callback);
+
+        public void RegisterAbility(ActorAbility ability)
+            => _abilities.RegisterAbility(ability, this);
+
+        public void GiveAbility(AbilityDefinition definition)
+            => _abilities.GiveAbility(definition);
+
+        public void RemoveAbility(AbilityDefinition definition)
+            => _abilities.RemoveAbility(definition);
+
+        public bool TryGetAbility(AbilityDefinition definition, out ActorAbility foundAbility)
+            => _abilities.TryGetAbility(definition, out foundAbility);
+
+        public T GetAbility<T>() where T : ActorAbility
+            => _abilities.GetAbility<T>();
+
+        public void InitAbilities()
+            => _abilities.InitAbilities();
 
         protected void ResetAbilities()
-        {
-            foreach (ActorAbilityView ability in Abilities)
-                ability.ResetAbility();
-        }
-
-        private void CollectAbilities()
-        {
-            _abilities = GetComponents<ActorAbilityView>();
-            foreach (ActorAbilityView ability in Abilities)
-                ability.Owner = this;
-        }
-
-        private void InitAbilities()
-        {
-            foreach (ActorAbilityView ability in Abilities)
-                ability.InitAbility();
-        }
+            => _abilities.ResetAbilities();
 
         private void DestroyAbilities()
+            => _abilities.DestroyAbilities();
+
+        protected virtual void OnActorAwake()
         {
-            foreach (ActorAbilityView ability in Abilities)
-                ability.DestroyAbility();
+        }
+
+        protected virtual void OnActorDestroy()
+        {
         }
     }
 }

@@ -1,31 +1,31 @@
-﻿using Game.Level;
+﻿using System.Collections.Generic;
+using Game.Actors;
+using Game.Level;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Game.Enemies
 {
     [CreateAssetMenu(menuName = "Data/Enemy")]
-    public class EnemyDefinition : ScriptableObject
+    public class EnemyDefinition : ActorDefinition
     {
         [SerializeField]
         private EnemyController prefab;
-
-        [SerializeField]
-        private int health = 1;
-
-        [SerializeField]
-        private float movementSpeed = 5;
 
         [FormerlySerializedAs("loot")]
         [SerializeField]
         private LootBagDefinition lootBag;
 
+        [SerializeField]
+        private EnemyStats.InitialStats initialStats;
+
+        [SerializeField, Expandable]
+        private List<AbilityDefinition> abilities;
+
         public EnemyController Prefab => prefab;
-
-        public int Health => health;
-
-        public float MovementSpeed => movementSpeed;
-
         public LootBagDefinition LootBag => lootBag;
+        public EnemyStats.InitialStats InitialStats => initialStats;
+        public List<AbilityDefinition> Abilities => abilities;
     }
 }

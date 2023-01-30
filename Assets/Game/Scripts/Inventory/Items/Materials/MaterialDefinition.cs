@@ -3,7 +3,7 @@
 namespace Game.Inventory
 {
     [CreateAssetMenu(menuName = MENU_PATH + "Crystal")]
-    public class MaterialDefinition : ItemDefinition
+    public class MaterialDefinition : ItemInventoryDefinition
     {
     }
 }

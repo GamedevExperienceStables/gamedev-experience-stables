@@ -1,10 +1,24 @@
 ﻿using Game.Stats;
+using UnityEngine;
 
 namespace Game.Actors
 {
     public interface IActorController
     {
-        T GetStats<T>() where T : IStatsSet;
-        T FindAbility<T>() where T : ActorAbilityView;
+        Transform Transform { get; }
+        T GetComponent<T>();
+        
+        bool HasStat(CharacterStats key);
+        float GetCurrentValue(CharacterStats key);
+        void ApplyModifier(CharacterStats key, StatModifier modifier);
+        void AddModifier(CharacterStats key, StatModifier modifier);
+        void RemoveModifier(CharacterStats key, StatModifier modifier);
+        
+        void Subscribe(CharacterStats key, IStats.StatChangedEvent callback);
+        void UnSubscribe(CharacterStats key, IStats.StatChangedEvent callback);
+
+        void GiveAbility(AbilityDefinition definition);
+        T GetAbility<T>() where T : ActorAbility;
+        bool TryGetAbility(AbilityDefinition definition, out ActorAbility foundAbility);
     }
 }

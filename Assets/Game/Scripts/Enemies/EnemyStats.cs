@@ -1,16 +1,36 @@
-using Game.Stats;
+﻿using System;
+using Game.Actors;
+using UnityEngine;
 
 namespace Game.Enemies
 {
-    public class EnemyStats : IMovableStats, IDamageableStats
+    public class EnemyStats : ActorStats
     {
-        public CharacterStatWithMax Health { get; } = new();
-        public CharacterStat Movement { get; } = new();
-
-        public void InitStats(EnemyDefinition definition)
+        public EnemyStats()
         {
-            Health.Init(definition.Health);
-            Movement.Init(definition.MovementSpeed);
+            this.CreateStatsHealth();
+            this.CreateStatsMovement();
+        }
+
+        public void InitStats(InitialStats stats)
+        {
+            this.InitStatsHealth(stats.HealthPoints);
+            this.InitStatsMovement(stats.MovementSpeed);
+        }
+        
+        [Serializable]
+        public class InitialStats
+        {
+            [SerializeField]
+            private float healthPoints = 1f;
+            
+            [Header("Movement")]
+            [SerializeField]
+            private float movementSpeed = 3f;
+
+            public float HealthPoints => healthPoints;
+
+            public float MovementSpeed => movementSpeed;
         }
     }
 }

@@ -48,6 +48,8 @@ namespace Game.Weapons
         {
             CalculateSpeed();
             UpdateLifeTimer();
+            
+            Move();
         }
 
         private void FixedUpdate()
@@ -55,10 +57,7 @@ namespace Game.Weapons
             if (DetectCollisions(out RaycastHit hit))
             {
                 DestroyProjectile(hit);
-                return;
             }
-
-            Move();
         }
 
         private bool DetectCollisions(out RaycastHit hit)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Cysharp.Threading.Tasks;
+using Game.Stats;
 using Game.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -116,45 +117,45 @@ namespace Game.UI
 
         private void SubscribeStats()
         {
-            _viewModel.HeroHealth.Current.Subscribe(UpdateHealth);
-            _viewModel.HeroHealth.Max.Subscribe(UpdateHealthMax);
-
-            _viewModel.HeroMana.Current.Subscribe(UpdateMana);
-            _viewModel.HeroMana.Max.Subscribe(UpdateManaMax);
-
-            _viewModel.HeroStamina.Current.Subscribe(UpdateStamina);
-            _viewModel.HeroStamina.Max.Subscribe(UpdateStaminaMax);
+            _viewModel.HeroStatSubscribe(CharacterStats.Health, UpdateHealth);
+            _viewModel.HeroStatSubscribe(CharacterStats.HealthMax, UpdateHealthMax);
+            
+            _viewModel.HeroStatSubscribe(CharacterStats.Mana, UpdateMana);
+            _viewModel.HeroStatSubscribe(CharacterStats.ManaMax, UpdateManaMax);
+            
+            _viewModel.HeroStatSubscribe(CharacterStats.Stamina, UpdateStamina);
+            _viewModel.HeroStatSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax);
         }
 
         private void UnSubscribeStats()
         {
-            _viewModel.HeroHealth.Current.UnSubscribe(UpdateHealth);
-            _viewModel.HeroHealth.Max.UnSubscribe(UpdateHealthMax);
-
-            _viewModel.HeroMana.Current.UnSubscribe(UpdateMana);
-            _viewModel.HeroMana.Max.UnSubscribe(UpdateManaMax);
-
-            _viewModel.HeroStamina.Current.UnSubscribe(UpdateStamina);
-            _viewModel.HeroStamina.Max.UnSubscribe(UpdateStaminaMax);
+            _viewModel.HeroStatUnSubscribe(CharacterStats.Health, UpdateHealth);
+            _viewModel.HeroStatUnSubscribe(CharacterStats.HealthMax, UpdateHealthMax);
+            
+            _viewModel.HeroStatUnSubscribe(CharacterStats.Mana, UpdateMana);
+            _viewModel.HeroStatUnSubscribe(CharacterStats.ManaMax, UpdateManaMax);
+            
+            _viewModel.HeroStatUnSubscribe(CharacterStats.Stamina, UpdateStamina);
+            _viewModel.HeroStatUnSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax); 
         }
 
-        private void UpdateHealth(float value)
-            => _hp.text = value.ToString(CultureInfo.InvariantCulture);
+        private void UpdateHealth(StatValueChange change)
+            => _hp.text = change.newValue.ToString(CultureInfo.InvariantCulture);
 
-        private void UpdateHealthMax(float value)
-            => _hpMax.text = value.ToString(CultureInfo.InvariantCulture);
+        private void UpdateHealthMax(StatValueChange change)
+            => _hpMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
 
-        private void UpdateMana(float value)
-            => _mp.text = value.ToString(CultureInfo.InvariantCulture);
+        private void UpdateMana(StatValueChange change)
+            => _mp.text = change.newValue.ToString(CultureInfo.InvariantCulture);
 
-        private void UpdateManaMax(float value)
-            => _mpMax.text = value.ToString(CultureInfo.InvariantCulture);
+        private void UpdateManaMax(StatValueChange change)
+            => _mpMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
 
-        private void UpdateStamina(float value)
-            => _sp.text = value.ToString(CultureInfo.InvariantCulture);
+        private void UpdateStamina(StatValueChange change)
+            => _sp.text = change.newValue.ToString(CultureInfo.InvariantCulture);
 
-        private void UpdateStaminaMax(float value)
-            => _spMax.text = value.ToString(CultureInfo.InvariantCulture);
+        private void UpdateStaminaMax(StatValueChange change)
+            => _spMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
 
         #endregion
     }

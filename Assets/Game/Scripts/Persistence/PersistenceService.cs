@@ -10,10 +10,10 @@ namespace Game.Persistence
         private readonly IPersistence _persistence;
         
         private readonly Settings _settings;
-        private readonly GameDataHandler _handler;
+        private readonly GameImportExport _handler;
         
         [Inject]
-        public PersistenceService(Settings settings, GameDataHandler handler, IPersistence persistence)
+        public PersistenceService(Settings settings, GameImportExport handler, IPersistence persistence)
         {
             _settings = settings;
             _handler = handler;

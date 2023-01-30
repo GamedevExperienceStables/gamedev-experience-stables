@@ -7,7 +7,6 @@ using VContainer;
 namespace Game.Hero
 {
     [RequireComponent(typeof(MovementController))]
-    [RequireComponent(typeof(WeaponAbility))]
     public class HeroInputController : MonoBehaviour
     {
         private SceneCamera _sceneCamera;
@@ -19,8 +18,9 @@ namespace Game.Hero
 
         private MovementController _movement;
         private WeaponAbility _weapon;
-        private InteractionAbilityView _interaction;
+        private InteractionAbility _interaction;
         private AimAbility _aim;
+        private IActorController _owner;
 
         [Inject]
         public void Construct(IInputControlGameplay input, SceneCamera sceneCamera)
@@ -32,13 +32,15 @@ namespace Game.Hero
         private void Awake()
         {
             _movement = GetComponent<MovementController>();
-            _weapon = GetComponent<WeaponAbility>();
-            _interaction = GetComponent<InteractionAbilityView>();
-            _aim = GetComponent<AimAbility>();
+            _owner = GetComponent<IActorController>();
         }
 
         private void Start()
         {
+            _weapon = _owner.GetAbility<WeaponAbility>();
+            _interaction = _owner.GetAbility<InteractionAbility>();
+            _aim = _owner.GetAbility<AimAbility>();
+
             _input.AimButton.Performed += OnAim;
             _input.AimButton.Canceled += OnAimCanceled;
 
