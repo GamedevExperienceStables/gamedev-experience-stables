@@ -10,10 +10,5 @@ namespace Game.Level
         
         public LocationPointData LastLocation { get; set; }
         public LocationPointData CurrentLocation { get; set; }
-
-        // список собранных материалов на планете
-        
-        // список уничтоженных врагов в локациях
-        
     }
 }

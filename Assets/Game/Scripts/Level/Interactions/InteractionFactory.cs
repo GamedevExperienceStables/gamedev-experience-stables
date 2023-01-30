@@ -1,4 +1,5 @@
-﻿using Game.Actors;
+﻿using System;
+using Game.Actors;
 using VContainer;
 
 namespace Game.Level
@@ -8,23 +9,17 @@ namespace Game.Level
         private readonly IObjectResolver _resolver;
 
         [Inject]
-        public InteractionFactory(IObjectResolver resolver)
+        public InteractionFactory(IObjectResolver resolver) 
             => _resolver = resolver;
 
         public Interaction Create(Interactable interactable, IActorController instigator)
         {
-            switch (interactable)
-            {
-                case LocationDoor locationDoor:
-                {
-                    var teleport = _resolver.Resolve<TransitionToLocationInteraction>();
-                    teleport.Init(locationDoor.TargetLocation, interactable.gameObject);
-                    return teleport;
-                }
-                
-                default:
-                    return null;
-            }
+            Type interactionType = InteractionBindingMap.GetInteractionType(interactable);
+            var interaction = (Interaction)_resolver.Resolve(interactionType);
+            interaction.Source = interactable.gameObject;
+            interaction.Instigator = instigator;
+            interaction.OnCreate();
+            return interaction;
         }
     }
 }

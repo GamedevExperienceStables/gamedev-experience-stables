@@ -9,18 +9,20 @@ namespace Game.Actors
     [CreateAssetMenu(menuName = MENU_PATH + "AutoPickupAbility")]
     public class AutoPickupAbilityDefinition : AbilityDefinition<AutoPickupAbility>
     {
-        [field: SerializeField, Range(0.01f, 5f)]
-        public float PickupDistance { get; set; } = 3f;
+        [SerializeField, Range(0.01f, 5f)]
+        private float pickupDistance = 3f;
+
+        public float PickupDistance => pickupDistance;
     }
 
     public class AutoPickupAbility : ActorAbility<AutoPickupAbilityDefinition>
     {
         private readonly IMagnetSystem _magnet;
-        private readonly InventorySystem _inventory;
+        private readonly InventoryController _inventory;
         private ZoneTrigger _trigger;
 
         [Inject]
-        public AutoPickupAbility(IMagnetSystem magnet, InventorySystem inventory)
+        public AutoPickupAbility(IMagnetSystem magnet, InventoryController inventory)
         {
             _magnet = magnet;
             _inventory = inventory;
@@ -46,35 +48,32 @@ namespace Game.Actors
             => !IsActive;
 
         protected override void OnActivateAbility()
-        {
-            _trigger.TriggerEntered += OnTriggerEntered;
-        }
+            => _trigger.TriggerEntered += OnTriggerEntered;
 
-        protected override void OnEndAbility()
-        {
-            _trigger.TriggerEntered -= OnTriggerEntered;
-        }
+        protected override void OnEndAbility(bool wasCancelled)
+            => _trigger.TriggerEntered -= OnTriggerEntered;
 
         private void OnTriggerEntered(GameObject other)
         {
-            if (!other.TryGetComponent(out LootItem item))
+            if (!other.TryGetComponent(out LootItem loot))
                 return;
 
-            if (!_inventory.CanAddItem(item.Definition))
+            if (!_inventory.CanAddToBag(loot.Definition.ItemDefinition, Owner))
                 return;
 
-            PickItem(item).Forget();
+            PickItemAsync(loot, Owner).Forget();
         }
 
-        private async UniTask PickItem(LootItem item)
+        private async UniTask PickItemAsync(LootItem loot, IActorController target)
         {
-            Debug.Log($"Start picking! {item.name}");
-            
-            await _magnet.StartPullAsync(item.transform, Owner.Transform);
+            await _magnet.StartPullAsync(loot.transform, target.Transform);
 
-            // on magnet ends -> try execute effect
-            if (_inventory.TryAddItem(item.Definition)) 
-                Object.Destroy(item.gameObject);
+            if (_inventory.TryAddToBag(loot.Definition.ItemDefinition, target))
+            {
+                // getting vfx from settings or loot definition 
+                //Object.Instantiate(loot.Definition.PickupFeedback);
+                Object.Destroy(loot.gameObject);
+            }
         }
     }
 }

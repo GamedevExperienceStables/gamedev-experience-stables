@@ -1,38 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using Game.Stats;
+using Game.Actors;
 using UnityEngine;
 
 namespace Game.Hero
 {
-    [Serializable]
-    public class HeroStats : IHeroStats
+    public class HeroStats : ActorStats
     {
-        public CharacterStatWithMax Health { get; } = new();
-        public CharacterStatWithMax Stamina { get; } = new();
-        public CharacterStatWithMax Mana { get; } = new();
-        
-        public CharacterStat Movement { get; } = new();
-
-        public CharacterStat HealthRegeneration { get; } = new();
-        public CharacterStat ManaRegeneration { get; } = new();
-        public CharacterStat StaminaRegeneration { get; } = new();
-
-        public void InitStats(Settings settings)
+        public HeroStats()
         {
-            Health.Init(settings.HealthPoints);
-            Stamina.Init(settings.StaminaPoints);
-            Mana.Init(settings.ManaPoints);
-            Movement.Init(settings.MovementSpeed);
+            this.CreateStatsHealth();
+            this.CreateStatsMana();
+            this.CreateStatsStamina();
+            this.CreateStatsMovement();
+        }
 
-            HealthRegeneration.Init(settings.HealthRegeneration);
-            ManaRegeneration.Init(settings.ManaRegeneration);
-            StaminaRegeneration.Init(settings.StaminaRegeneration);
+        public void Init(InitialStats initial)
+        {
+            this.InitStatsHealth(initial.HealthPoints);
+            this.InitStatsMana(initial.ManaPoints);
+            this.InitStatsStamina(initial.StaminaPoints);
+            this.InitStatsMovement(initial.MovementSpeed);
         }
 
 
         [Serializable]
-        public class Settings
+        public class InitialStats
         {
             [SerializeField]
             private float healthPoints = 100f;
@@ -42,7 +34,7 @@ namespace Game.Hero
 
             [SerializeField]
             private float manaPoints = 100f;
-            
+
             [Header("Movement")]
             [SerializeField]
             private float movementSpeed = 6f;

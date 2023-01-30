@@ -1,7 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Input;
 using Game.Level;
-using Game.Persistence;
 using Game.SceneManagement;
 using Game.UI;
 using UnityEngine.SceneManagement;
@@ -13,7 +12,7 @@ namespace Game.GameFlow
     public class PlanetLocationLoadingState : GameState
     {
         private readonly IFaderScreen _loadingScreen;
-        private readonly LevelDataHandler _level;
+        private readonly LevelController _level;
         private readonly SceneLoader _sceneLoader;
         private readonly LocationController _locationController;
         private readonly IInputService _inputService;
@@ -21,7 +20,7 @@ namespace Game.GameFlow
         [Inject]
         public PlanetLocationLoadingState(
             IFaderScreen loadingScreen,
-            LevelDataHandler level,
+            LevelController level,
             SceneLoader sceneLoader,
             LocationController locationController,
             IInputService inputService

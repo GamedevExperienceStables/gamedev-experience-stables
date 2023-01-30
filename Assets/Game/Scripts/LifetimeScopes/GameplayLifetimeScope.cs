@@ -1,10 +1,8 @@
 ﻿using Game.Actors;
 using Game.Cameras;
-using Game.Effects;
 using Game.Enemies;
 using Game.GameFlow;
 using Game.Hero;
-using Game.Inventory;
 using Game.Level;
 using Game.UI;
 using UnityEngine;
@@ -42,7 +40,6 @@ namespace Game.LifetimeScopes
             RegisterLocationStateMachine(builder);
             RegisterLootSystem(builder);
             RegisterAbilities(builder);
-            RegisterEffects(builder);
 
             builder.UseEntryPoints(entryPoints =>
             {
@@ -61,17 +58,10 @@ namespace Game.LifetimeScopes
             builder.Register<InteractionAbility>(Lifetime.Transient);
             builder.Register<WeaponAbility>(Lifetime.Transient);
         }
-        
-        private static void RegisterEffects(IContainerBuilder builder)
-        {
-            builder.Register<GameplayEffectFactory>(Lifetime.Singleton);
-            builder.Register<EffectChangeStat>(Lifetime.Singleton);
-        }
 
         private static void RegisterServices(IContainerBuilder builder)
         {
             builder.Register<LocationController>(Lifetime.Scoped);
-            builder.Register<InventorySystem>(Lifetime.Scoped);
             builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
 
             RegisterInteractions(builder);
@@ -83,6 +73,7 @@ namespace Game.LifetimeScopes
             builder.Register<InteractionFactory>(Lifetime.Scoped);
 
             builder.Register<TransitionToLocationInteraction>(Lifetime.Transient);
+            builder.Register<RocketContainerInteraction>(Lifetime.Transient);
         }
 
         private static void RegisterFactories(IContainerBuilder builder)

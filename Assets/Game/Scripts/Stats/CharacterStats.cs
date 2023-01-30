@@ -3,11 +3,14 @@
     public enum CharacterStats
     {
         Health,
-        MaxHealth,
+        HealthMax,
+        
         Mana,
-        MaxMana,
+        ManaMax,
+        
         Stamina,
-        MaxStamina,
+        StaminaMax,
+        
         MovementSpeed
     }
 }

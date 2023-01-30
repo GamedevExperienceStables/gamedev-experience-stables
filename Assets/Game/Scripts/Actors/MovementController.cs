@@ -23,7 +23,7 @@ namespace Game.Actors
         private Vector3 _lookDirection;
 
         private KinematicCharacterMotor _motor;
-        private IMovableStats _stats;
+        private IActorController _owner;
 
         public float CapsuleRadius => _motor.Capsule.radius;
 
@@ -31,12 +31,8 @@ namespace Game.Actors
         {
             _motor = GetComponent<KinematicCharacterMotor>();
             _motor.CharacterController = this;
-        }
 
-        protected void Start()
-        {
-            var owner = GetComponent<ActorController>();
-            _stats = owner.GetStats<IMovableStats>();
+            _owner = GetComponent<IActorController>();
         }
 
         public void SetPositionAndRotation(Vector3 position, Quaternion quaternion)
@@ -70,17 +66,19 @@ namespace Game.Actors
 
         public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
         {
+            float speed = _owner.GetCurrentValue(CharacterStats.MovementSpeed);
+            
             if (_motor.GroundingStatus.IsStableOnGround)
             {
-                UpdateGroundedState(ref currentVelocity, deltaTime);
+                UpdateGroundedState(ref currentVelocity, speed, deltaTime);
             }
             else
             {
-                UpdateAirborneState(ref currentVelocity, deltaTime);
+                UpdateAirborneState(ref currentVelocity, speed, deltaTime);
             }
         }
 
-        private void UpdateGroundedState(ref Vector3 currentVelocity, float deltaTime)
+        private void UpdateGroundedState(ref Vector3 currentVelocity, float speed, float deltaTime)
         {
             float currentVelocityMagnitude = currentVelocity.magnitude;
             Vector3 effectiveGroundNormal = _motor.GroundingStatus.GroundNormal;
@@ -93,19 +91,19 @@ namespace Game.Actors
             Vector3 inputRight = Vector3.Cross(_movementDirection, _motor.CharacterUp);
             Vector3 reorientedInput = Vector3.Cross(effectiveGroundNormal, inputRight).normalized *
                                       _movementDirection.magnitude;
-            Vector3 targetMovementVelocity = reorientedInput * _stats.Movement.Value;
+            Vector3 targetMovementVelocity = reorientedInput * speed;
 
             // Smooth movement Velocity
             currentVelocity = Vector3.Lerp(currentVelocity, targetMovementVelocity,
                 1f - Mathf.Exp(-groundMovement.Sharpness * deltaTime));
         }
 
-        private void UpdateAirborneState(ref Vector3 currentVelocity, float deltaTime)
+        private void UpdateAirborneState(ref Vector3 currentVelocity, float speed, float deltaTime)
         {
             // Add move input
             if (_movementDirection.sqrMagnitude > 0f)
             {
-                Vector3 targetMovementVelocity = _movementDirection * _stats.Movement.Value;
+                Vector3 targetMovementVelocity = _movementDirection * speed;
 
                 // Prevent climbing on un-stable slopes with air movement
                 if (_motor.GroundingStatus.FoundAnyGround)

@@ -1,4 +1,5 @@
 ﻿using Game.Actors.Health;
+using Game.Stats;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 
@@ -12,8 +13,12 @@ namespace Game.Actors.Damage
         [SerializeField]
         private MMF_Player hitFeedback;
 
-        public void Init(int value) 
-            => initialValue = value;
+        private StatModifier _damageModifier;
+
+        private void Start()
+        {
+            _damageModifier = new StatModifier(-initialValue, StatsModifierType.Flat);
+        }
 
         public bool TryDealDamage(Transform target)
         {
@@ -41,9 +46,7 @@ namespace Game.Actors.Damage
             }
         }
 
-        private void ApplyDamage(DamageableController damageable)
-        {
-            damageable.Damage(initialValue);
-        }
+        private void ApplyDamage(DamageableController damageable) 
+            => damageable.Damage(_damageModifier);
     }
 }

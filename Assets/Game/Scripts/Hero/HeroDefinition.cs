@@ -7,15 +7,14 @@ using UnityEngine.Serialization;
 namespace Game.Hero
 {
     [CreateAssetMenu(menuName = "Data/Hero")]
-    public class HeroDefinition : ScriptableObject
+    public class HeroDefinition : ActorDefinition
     {
         [SerializeField]
         private HeroController prefab;
 
         [SerializeField]
-        private HeroStats.Settings initialStats;
-
-        [FormerlySerializedAs("defaultAbilities")]
+        private HeroStats.InitialStats initialStats;
+        
         [SerializeField, Expandable]
         private List<AbilityDefinition> initialAbilities;
 
@@ -26,6 +25,6 @@ namespace Game.Hero
         public List<AbilityDefinition> Abilities => abilities;
 
         public HeroController Prefab => prefab;
-        public HeroStats.Settings InitialStats => initialStats;
+        public HeroStats.InitialStats InitialStats => initialStats;
     }
 }

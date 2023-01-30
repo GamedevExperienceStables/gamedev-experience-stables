@@ -1,100 +1,96 @@
 using System;
 using System.Collections.Generic;
-using Game.Utils;
+using UnityEngine;
 
 namespace Game.Stats
 {
-    public class CharacterStat : IReadOnlyCharacterStat
+    public class CharacterStat
     {
-        private readonly List<StatModifier> _statModifiers = new();
+        private readonly List<StatModifier> _modifiers = new();
 
         private float _baseValue;
+        private event Action<CharacterStat> ValueChanged;
 
-        public CharacterStat()
+        public CharacterStat(CharacterStats key, float baseValue = 0)
         {
+            Key = key;
+
+            _baseValue = baseValue;
+            Value = baseValue;
         }
 
-        public CharacterStat(float baseValue) 
-            => _baseValue = baseValue;
-
-        private event Action<float> ValueChanged;
+        public CharacterStats Key { get; }
 
         public float BaseValue
         {
             get => _baseValue;
             set
             {
-                if (MathExtensions.AlmostEquals(_baseValue, value))
-                    return;
-                
                 _baseValue = value;
-                
-                CalculateFinalStatValue();
+
+                SetDirty();
             }
         }
 
-        public float Value { get; private set; }
-
-        public void Subscribe(Action<float> action)
-        {
-            ValueChanged += action;
-
-            action.Invoke(Value);
-        }
-
-        public void UnSubscribe(Action<float> action) 
-            => ValueChanged -= action;
+        public float Value { get; set; }
 
         public void Init(float baseValue)
         {
             _baseValue = baseValue;
+            _modifiers.Clear();
 
-            Reset();
+            SetDirty();
         }
 
-        private void Reset()
-        {
-            _statModifiers.Clear();
-            
-            CalculateFinalStatValue();
-        }
+        public void Subscribe(Action<CharacterStat> action)
+            => ValueChanged += action;
+
+        public void UnSubscribe(Action<CharacterStat> action)
+            => ValueChanged -= action;
 
         public void AddModifier(StatModifier statModifier)
         {
-            _statModifiers.Add(statModifier);
-            
-            CalculateFinalStatValue();
+            _modifiers.Add(statModifier);
+
+            SetDirty();
         }
 
         public void RemoveModifier(StatModifier statModifier)
         {
-            _statModifiers.Remove(statModifier);
-            
-            CalculateFinalStatValue();
+            _modifiers.Remove(statModifier);
+
+            SetDirty();
         }
 
-
-        private void CalculateFinalStatValue()
+        public float CalculateFinalValue()
         {
-            float finalValue = BaseValue;
-            foreach (StatModifier statModifier in _statModifiers)
+            float flat = 0;
+            float percent = 1;
+
+            foreach (StatModifier modifier in _modifiers)
             {
-                switch (statModifier.Type)
+                switch (modifier.Type)
                 {
+                    case StatsModifierType.Override:
+                        return modifier.Value;
+
                     case StatsModifierType.Flat:
-                        finalValue += statModifier.Value;
+                        flat += modifier.Value;
                         break;
+
                     case StatsModifierType.Percent:
-                        finalValue *= 1 + statModifier.Value;
+                        percent += modifier.Value;
                         break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
 
-            finalValue = (float)Math.Round(finalValue, 2);
-
-            Value = finalValue;
-            
-            ValueChanged?.Invoke(Value);
+            return (BaseValue + flat) * percent;
         }
+
+        private void SetDirty()
+            => ValueChanged?.Invoke(this);
     }
 }

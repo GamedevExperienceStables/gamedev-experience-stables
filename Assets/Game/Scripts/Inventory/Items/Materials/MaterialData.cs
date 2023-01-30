@@ -2,16 +2,15 @@ namespace Game.Inventory
 {
     public class MaterialData
     {
-        private readonly MaterialDefinition _material;
-        private readonly int _total;
-
-        private int _current;
-
-        public MaterialData(MaterialDefinition material, int total, int current)
+        public MaterialData(MaterialDefinition definition, int total, int current)
         {
-            _material = material;
-            _current = current;
-            _total = total;
+            Definition = definition;
+            Total = total;
+            Current = current;
         }
+
+        public MaterialDefinition Definition { get; }
+        public int Total { get; }
+        public int Current { get; set; }
     }
 }

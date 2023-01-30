@@ -505,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146046f8624248dc989a8ada425cf74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Trigger>k__BackingField: {fileID: 2660862653515176319}
+  trigger: {fileID: 2660862653515176319}
 --- !u!114 &2300186903787914912
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ namespace Game.Enemies
             EnemyController enemy = Object.Instantiate(definition.Prefab, spawnContainer);
             _resolver.InjectGameObject(enemy.gameObject);
 
-            enemy.InitStats(definition);
+            enemy.InitStats(definition.InitialStats);
             enemy.SetTarget(target);
             enemy.SetLoot(definition.LootBag);
             enemy.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);

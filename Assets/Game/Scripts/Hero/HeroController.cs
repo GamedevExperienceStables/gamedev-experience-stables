@@ -8,20 +8,21 @@ namespace Game.Hero
     {
         private MovementController _movement;
         private HeroView _view;
+        
+        private HeroStats _stats;
 
-        private IHeroStats _stats;
+        protected override IStats Stats => _stats;
 
-        protected override void OnAwake()
+        protected override void OnActorAwake()
         {
             _view = GetComponent<HeroView>();
             _movement = GetComponent<MovementController>();
         }
 
-        public override IStatsSet Stats => _stats;
-        public Transform CameraTarget => _view.CameraTarget;
-
-        public void SetStats(IHeroStats stats)
+        public void Bind(HeroStats stats) 
             => _stats = stats;
+
+        public Transform CameraTarget => _view.CameraTarget;
 
         public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
             => _movement.SetPositionAndRotation(position, rotation);

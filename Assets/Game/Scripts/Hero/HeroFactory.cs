@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Game.Actors;
+using Game.Player;
 using VContainer;
 using VContainer.Unity;
 
@@ -8,16 +9,16 @@ namespace Game.Hero
     public class HeroFactory
     {
         private readonly HeroDefinition _heroDefinition;
-        private readonly PlayerData _playerState;
+        private readonly PlayerController _player;
         private readonly AbilityFactory _abilityFactory;
         private readonly IObjectResolver _resolver;
 
         [Inject]
-        public HeroFactory(HeroDefinition heroDefinition, PlayerData playerState, AbilityFactory abilityFactory,
+        public HeroFactory(HeroDefinition heroDefinition, PlayerController player, AbilityFactory abilityFactory,
             IObjectResolver resolver)
         {
             _heroDefinition = heroDefinition;
-            _playerState = playerState;
+            _player = player;
             _abilityFactory = abilityFactory;
             _resolver = resolver;
         }
@@ -27,7 +28,7 @@ namespace Game.Hero
             HeroController hero = _resolver.Instantiate(_heroDefinition.Prefab);
             _resolver.InjectGameObject(hero.gameObject);
             
-            hero.SetStats(_playerState.Stats);
+            hero.Bind(_player.GetStats());
             AddAbilities(hero);
 
             return hero;

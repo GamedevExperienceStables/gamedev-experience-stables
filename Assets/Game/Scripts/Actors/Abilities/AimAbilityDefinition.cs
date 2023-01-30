@@ -17,7 +17,6 @@ namespace Game.Actors
     public class AimAbility : ActorAbility<AimAbilityDefinition>
     {
         private readonly FollowSceneCamera _followCamera;
-        private IMovableStats _movableStats;
 
         [Inject]
         public AimAbility(FollowSceneCamera followCamera)
@@ -26,19 +25,16 @@ namespace Game.Actors
         public override bool CanActivateAbility()
             => true;
 
-        protected override void OnInitAbility()
-            => _movableStats = Owner.GetStats<IMovableStats>();
-
         protected override void OnActivateAbility()
         {
             _followCamera.ZoomOut();
-            _movableStats.Movement.AddModifier(Definition.SpeedModifier);
+            Owner.AddModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
         }
 
-        protected override void OnEndAbility()
+        protected override void OnEndAbility(bool wasCancelled)
         {
             _followCamera.ZoomReset();
-            _movableStats.Movement.RemoveModifier(Definition.SpeedModifier);
+            Owner.RemoveModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
         }
     }
 }

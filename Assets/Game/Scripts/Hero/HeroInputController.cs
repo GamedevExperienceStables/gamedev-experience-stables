@@ -37,20 +37,15 @@ namespace Game.Hero
 
         private void Start()
         {
-            GetAbilities();
-            
+            _weapon = _owner.GetAbility<WeaponAbility>();
+            _interaction = _owner.GetAbility<InteractionAbility>();
+            _aim = _owner.GetAbility<AimAbility>();
+
             _input.AimButton.Performed += OnAim;
             _input.AimButton.Canceled += OnAimCanceled;
 
             _input.FireButton.Performed += OnFire;
             _input.InteractionButton.Performed += OnInteract;
-        }
-
-        private void GetAbilities()
-        {
-            _weapon = _owner.FindAbility<WeaponAbility>();
-            _interaction = _owner.FindAbility<InteractionAbility>();
-            _aim = _owner.FindAbility<AimAbility>();
         }
 
         private void OnDestroy()

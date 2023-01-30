@@ -1,83 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
-using Game.Stats;
+﻿using Game.Stats;
 using UnityEngine;
 
 namespace Game.Actors
 {
     public abstract class ActorController : MonoBehaviour, IActorController
     {
-        public Transform Transform => transform;
-        
-        public abstract IStatsSet Stats { get; }
+        private readonly ActorAbilities _abilities = new();
 
-        private readonly Dictionary<Type, ActorAbility> _abilities = new();
+        public Transform Transform => transform;
+
+        protected abstract IStats Stats { get; }
 
         private void Awake()
-            => OnAwake();
-
-        protected virtual void OnAwake()
-        {
-        }
+            => OnActorAwake();
 
         private void OnDestroy()
-            => DestroyAbilities();
+        {
+            DestroyAbilities();
 
-        public bool HasStats<T>() where T : IStatsSet
-            => Stats is T;
+            OnActorDestroy();
+        }
 
-        public T GetStats<T>() where T : IStatsSet
-            => (T)Stats;
+        public bool HasStat(CharacterStats key)
+            => Stats.HasStat(key);
+
+        public float GetCurrentValue(CharacterStats key)
+            => Stats[key];
+
+        public void ApplyModifier(CharacterStats key, StatModifier modifier)
+        {
+            var data = new StatModifierApplyData(key, modifier.Type, modifier.Value, this);
+            Stats.ApplyModifier(key, data);
+        }
+
+        public void AddModifier(CharacterStats key, StatModifier modifier)
+            => Stats.AddModifier(key, modifier);
+
+        public void RemoveModifier(CharacterStats key, StatModifier modifier)
+            => Stats.RemoveModifier(key, modifier);
+
+        public void Subscribe(CharacterStats key, IStats.StatChangedEvent callback)
+            => Stats.Subscribe(key, callback);
+
+        public void UnSubscribe(CharacterStats key, IStats.StatChangedEvent callback)
+            => Stats.UnSubscribe(key, callback);
 
         public void RegisterAbility(ActorAbility ability)
-        {
-            ability.Owner = this;
-            
-            _abilities[ability.GetType()] = ability;
-        }
+            => _abilities.RegisterAbility(ability, this);
 
         public void GiveAbility(AbilityDefinition definition)
-        {
-            foreach (ActorAbility ability in _abilities.Values)
-            {
-                if (ability.InstanceOf(definition))
-                    ability.GiveAbility();
-            }
-        }
-        
+            => _abilities.GiveAbility(definition);
+
         public void RemoveAbility(AbilityDefinition definition)
-        {
-            foreach (ActorAbility ability in _abilities.Values)
-            {
-                if (ability.InstanceOf(definition))
-                    ability.RemoveAbility();
-            }
-        }
+            => _abilities.RemoveAbility(definition);
 
-        public T FindAbility<T>() where T : ActorAbility
-        {
-            if (_abilities.TryGetValue(typeof(T), out ActorAbility foundAbility))
-                return (T)foundAbility;
+        public bool TryGetAbility(AbilityDefinition definition, out ActorAbility foundAbility)
+            => _abilities.TryGetAbility(definition, out foundAbility);
 
-            return null;
-        }
-        
+        public T GetAbility<T>() where T : ActorAbility
+            => _abilities.GetAbility<T>();
+
         public void InitAbilities()
-        {
-            foreach (ActorAbility ability in _abilities.Values) 
-                ability.InitAbility();
-        }
+            => _abilities.InitAbilities();
 
         protected void ResetAbilities()
-        {
-            foreach (ActorAbility ability in _abilities.Values)
-                ability.ResetAbility();
-        }
+            => _abilities.ResetAbilities();
 
         private void DestroyAbilities()
+            => _abilities.DestroyAbilities();
+
+        protected virtual void OnActorAwake()
         {
-            foreach (ActorAbility ability in _abilities.Values)
-                ability.DestroyAbility();
+        }
+
+        protected virtual void OnActorDestroy()
+        {
         }
     }
 }

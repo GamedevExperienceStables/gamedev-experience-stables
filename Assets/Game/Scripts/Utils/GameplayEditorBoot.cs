@@ -11,12 +11,12 @@ namespace Game.Utils
         [SerializeField]
         private LocationPointDefinition currentLocation;
         
-        private GameDataHandler _game;
+        private GameImportExport _game;
         private RootStateMachine _rootStateMachine;
-        private LevelDataHandler _level;
+        private LevelController _level;
 
         [Inject]
-        public void Construct(GameDataHandler game, LevelDataHandler level, RootStateMachine rootStateMachine)
+        public void Construct(GameImportExport game, LevelController level, RootStateMachine rootStateMachine)
         {
             _game = game;
             _level = level;

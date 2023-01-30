@@ -100,8 +100,14 @@ namespace Game.Actors
 
         protected override void OnActivateAbility()
         {
-            Interaction interaction = _potentialInteractions.First();
-            _interactionService.StartInteraction(interaction);
+            foreach (Interaction potentialInteraction in _potentialInteractions)
+            {
+                if (!potentialInteraction.CanExecute()) 
+                    continue;
+                
+                _interactionService.StartInteraction(potentialInteraction);
+                return;
+            }
         }
 
         private bool InteractionExists(Object source)

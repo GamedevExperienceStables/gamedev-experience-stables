@@ -1,20 +1,13 @@
+using Game.Utils.Factory;
 using VContainer;
 
 namespace Game.Actors
 {
-    public class AbilityFactory
+    public class AbilityFactory : ScriptableObjectFactory<AbilityDefinition>
     {
-        private readonly IObjectResolver _resolver;
-
         [Inject]
-        public AbilityFactory(IObjectResolver resolver)
-            => _resolver = resolver;
-
-        public ActorAbility Create<T>(AbilityDefinition<T> definition) where T : ActorAbility
+        public AbilityFactory(IObjectResolver resolver) : base(resolver)
         {
-            var ability = _resolver.Resolve<T>();
-            ability.CreateAbility(definition);
-            return ability;
         }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Actors
 {
-    [CreateAssetMenu(menuName = MENU_PATH + "/Weapon")]
+    [CreateAssetMenu(menuName = MENU_PATH + "Weapon")]
     public class WeaponAbilityDefinition : AbilityDefinition<WeaponAbility>
     {
     }
@@ -15,7 +15,7 @@ namespace Game.Actors
 
         protected override void OnInitAbility()
         {
-            _aim = Owner.FindAbility<AimAbility>();
+            _aim = Owner.GetAbility<AimAbility>();
 
             var view = Owner.GetComponent<WeaponAbilityView>();
             _currentWeapon = view.CurrentWeapon;

@@ -5,7 +5,9 @@ namespace Game.Actors
 {
     public class AutoPickupAbilityView : MonoBehaviour
     {
-        [field: SerializeField]
-        public ZoneTrigger Trigger { get; private set; }
+        [SerializeField]
+        private ZoneTrigger trigger;
+
+        public ZoneTrigger Trigger => trigger;
     }
 }

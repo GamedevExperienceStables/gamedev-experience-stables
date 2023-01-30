@@ -1,6 +1,6 @@
-﻿using System;
-using Game.GameFlow;
-using Game.Hero;
+﻿using Game.GameFlow;
+using Game.Inventory;
+using Game.Player;
 using Game.Stats;
 using VContainer;
 
@@ -8,31 +8,40 @@ namespace Game.UI
 {
     public class GameplayViewModel
     {
-        private RootStateMachine _rootStateMachine;
-        private PlanetStateMachine _planetStateMachine;
-
-        public IReadOnlyCharacterStatWithMax HeroHealth { get; private set; }
-        public IReadOnlyCharacterStatWithMax HeroMana { get; private set; }
-        public IReadOnlyCharacterStatWithMax HeroStamina { get; private set; }
+        private readonly RootStateMachine _rootStateMachine;
+        private readonly PlanetStateMachine _planetStateMachine;
+        private readonly PlayerController _player;
+        private readonly InventoryController _inventory;
 
         [Inject]
-        public void Construct(
+        public GameplayViewModel(
             RootStateMachine rootStateMachine,
             PlanetStateMachine planetStateMachine,
-            PlayerData playerData
+            PlayerController player,
+            InventoryController inventory
         )
         {
             _planetStateMachine = planetStateMachine;
             _rootStateMachine = rootStateMachine;
-
-            HeroHealth = playerData.Stats.Health;
-            HeroMana = playerData.Stats.Mana;
-            HeroStamina = playerData.Stats.Stamina;
+            
+            _player = player;
+            _inventory = inventory;
         }
 
         public void PauseGame() => _planetStateMachine.PushState<PlanetPauseState>();
         public void ResumeGame() => _planetStateMachine.PopState();
 
         public void GoToMainMenu() => _rootStateMachine.EnterState<MainMenuState>();
+
+        public void HeroStatSubscribe(CharacterStats key, IStats.StatChangedEvent callback) 
+            => _player.HeroStatSubscribe(key, callback);
+
+        public void HeroStatUnSubscribe(CharacterStats key, IStats.StatChangedEvent callback) 
+            => _player.HeroStatUnSubscribe(key, callback);
+
+        public void BagMaterialsSubscribe(MaterialContainer.MaterialChangedEvent callback) 
+            => _inventory.Materials.Bag.Subscribe(callback);
+        public void BagMaterialsUnSubscribe(MaterialContainer.MaterialChangedEvent callback) 
+            => _inventory.Materials.Bag.UnSubscribe(callback);
     }
 }

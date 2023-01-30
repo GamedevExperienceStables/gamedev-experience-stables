@@ -1,21 +1,20 @@
+using Game.Utils.Factory;
+
 namespace Game.Actors
 {
-    public abstract class ActorAbility
+    public abstract class ActorAbility : IRuntimeInstance<AbilityDefinition>
     {
         public IActorController Owner { get; set; }
 
         public bool IsEnabled { get; private set; }
         public bool IsActive { get; private set; }
 
-        private AbilityDefinition Definition { get; set; }
+        public AbilityDefinition Definition { get; private set; }
 
-        public virtual void CreateAbility(AbilityDefinition definition) 
+        public virtual void OnCreate(AbilityDefinition definition)
             => Definition = definition;
 
-        public bool InstanceOf(AbilityDefinition definition)
-            => ReferenceEquals(Definition, definition);
-
-        public void InitAbility() 
+        public void InitAbility()
             => OnInitAbility();
 
         public void GiveAbility()
@@ -28,7 +27,7 @@ namespace Game.Actors
         {
             if (IsActive)
                 CancelAbility();
-            
+
             IsEnabled = false;
             OnRemoveAbility();
         }
@@ -70,7 +69,7 @@ namespace Game.Actors
         public void EndAbility()
         {
             if (IsActive)
-                OnEndAbility();
+                OnEndAbility(false);
 
             IsActive = false;
         }
@@ -93,9 +92,9 @@ namespace Game.Actors
         protected abstract void OnActivateAbility();
 
         protected virtual void OnCancelAbility()
-            => OnEndAbility();
+            => OnEndAbility(true);
 
-        protected virtual void OnEndAbility()
+        protected virtual void OnEndAbility(bool wasCancelled)
         {
         }
 
@@ -110,11 +109,11 @@ namespace Game.Actors
 
     public abstract class ActorAbility<T> : ActorAbility where T : AbilityDefinition
     {
-        protected T Definition { get; private set; }
+        protected new T Definition { get; private set; }
 
-        public override void CreateAbility(AbilityDefinition definition)
+        public override void OnCreate(AbilityDefinition definition)
         {
-            base.CreateAbility(definition);
+            base.OnCreate(definition);
 
             Definition = (T)definition;
         }

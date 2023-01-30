@@ -15,7 +15,7 @@ namespace Game.Level
         public LootItem Create(LootItemDefinition itemDefinition, Vector3 position)
         {
             LootItem item = _resolver.Instantiate(itemDefinition.Prefab, position, Quaternion.identity);
-            item.Init(itemDefinition.ItemDefinition);
+            item.Init(itemDefinition);
             
             return item;
         }

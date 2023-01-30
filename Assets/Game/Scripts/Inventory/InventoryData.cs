@@ -1,9 +1,12 @@
+using JetBrains.Annotations;
+
 namespace Game.Inventory
 {
+    [UsedImplicitly]
     public class InventoryData
     {
-        private Materials _materials;
-        private Recipes _recipes;
-        private Runes _runes;
+        public Materials Materials { get; } = new();
+        public Recipes Recipes { get; } = new();
+        public Runes Runes { get; } = new();
     }
 }

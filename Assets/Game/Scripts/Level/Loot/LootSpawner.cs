@@ -5,7 +5,7 @@ using VContainer;
 
 namespace Game.Level
 {
-    public class LootSpawner
+    public class LootSpawner 
     {
         private readonly LootFactory _factory;
         private readonly RandomService _random;
@@ -31,9 +31,10 @@ namespace Game.Level
             }
         }
 
-        private void SpawnItem(Vector3 position, LootDefinitionItem itemDefinition)
+        private void SpawnItem(Vector3 position, LootDefinitionItem item)
         {
-            _factory.Create(itemDefinition.Definition, position);
+            LootItemDefinition lootDefinition = item.Definition;
+            _factory.Create(lootDefinition, position);
             // toss up item? 
         }
     }

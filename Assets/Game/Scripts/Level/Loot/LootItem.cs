@@ -1,12 +1,15 @@
-﻿using Game.Inventory;
+﻿using UnityEngine;
 
 namespace Game.Level
 {
-    public class LootItem : Pickable
+    public class LootItem : MonoBehaviour
     {
-        public ItemDefinition Definition { get; private set; }
+        [SerializeField]
+        private LootItemDefinition definition;
 
-        public void Init(ItemDefinition definition) 
-            => Definition = definition;
+        public LootItemDefinition Definition => definition;
+
+        public void Init(LootItemDefinition lootDefinition) 
+            => definition = lootDefinition;
     }
 }
