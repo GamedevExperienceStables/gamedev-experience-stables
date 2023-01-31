@@ -16,15 +16,15 @@ namespace Game.Persistence
         public bool Exists(string filename)
             => File.Exists(GetFilePath(filename));
 
-        public UniTask SerializeAsync<T>(T data, string filename)
+        public async UniTask SerializeAsync<T>(T data, string filename)
         {
             string filepath = GetFilePath(filename);
 
-            using var sw = new StreamWriter(filepath, false);
-            return _serializer.SerializeAsync(data, sw);
+            await using var sw = new StreamWriter(filepath, false);
+            await _serializer.SerializeAsync(data, sw);
         }
 
-        public UniTask<T> DeserializeAsync<T>(string filename)
+        public async UniTask<T> DeserializeAsync<T>(string filename)
         {
             string filepath = GetFilePath(filename);
 
@@ -32,7 +32,8 @@ namespace Game.Persistence
                 throw new FileNotFoundException($"There is no file at the path \"{filepath}\".");
 
             using StreamReader sr = File.OpenText(filepath);
-            return _serializer.DeserializeAsync<T>(sr);
+            var loadedData = await _serializer.DeserializeAsync<T>(sr);
+            return loadedData;
         }
 
         public bool Delete(string filename)

@@ -1,30 +1,28 @@
-﻿using System.Collections.Generic;
-
-namespace Game.Persistence
+﻿namespace Game.Persistence
 {
     public struct GameSaveData
     {
-        public MetaSaveData meta;
-        public LevelSaveData level;
-        public PlayerSaveData player;
+        public Meta meta;
+        public Level level;
+        public Player player;
 
-        public struct MetaSaveData
+        public struct Meta
         {
             public string timestampString;
-            public double playTime;
+            public uint playTime;
         }
 
-        public struct LevelSaveData
+        public struct Level
         {
             public string id;
-            public List<string> pointsCleared;
+            public string[] pointsCleared;
         }
 
-        public struct PlayerSaveData
+        public struct Player
         {
             public int containerMaterials;
             public int bagMaterials;
-            public List<string> recipes;
+            public string[] recipes;
         }
     }
 }

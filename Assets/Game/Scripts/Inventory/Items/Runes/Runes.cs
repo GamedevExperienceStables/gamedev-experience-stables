@@ -7,6 +7,8 @@ namespace Game.Inventory
     {
         private readonly List<RuneDefinition> _items = new();
 
+        public IReadOnlyList<RuneDefinition> Items => _items.AsReadOnly();
+
         private event Action<RuneDefinition> RuneAdded;
 
         public void Subscribe(Action<RuneDefinition> callback)
@@ -17,6 +19,13 @@ namespace Game.Inventory
 
         public void Init()
             => _items.Clear();
+
+        public void Init(IEnumerable<RuneDefinition> runes)
+        {
+            _items.Clear();
+            foreach (RuneDefinition rune in runes) 
+                _items.Add(rune);
+        }
 
         public bool Contains(RuneDefinition rune)
             => _items.Contains(rune);

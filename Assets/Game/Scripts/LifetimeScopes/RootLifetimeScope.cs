@@ -24,6 +24,9 @@ namespace Game.LifetimeScopes
         [SerializeField]
         private HeroDefinition heroData;
 
+        [SerializeField]
+        private GameDataTables dataTables;
+
         protected override void Configure(IContainerBuilder builder)
         {
             base.Configure(builder);
@@ -33,6 +36,7 @@ namespace Game.LifetimeScopes
             RegisterStateMachine(builder);
             RegisterSettings(builder);
             RegisterData(builder);
+            RegisterDataTables(builder);
             RegisterServices(builder);
             RegisterSaveSystem(builder);
         }
@@ -93,6 +97,7 @@ namespace Game.LifetimeScopes
             builder.Register<IntroState>(Lifetime.Singleton);
             builder.Register<MainMenuState>(Lifetime.Singleton);
             builder.Register<NewGameState>(Lifetime.Singleton);
+            builder.Register<LoadGameState>(Lifetime.Singleton);
             builder.Register<QuitGameState>(Lifetime.Singleton);
             builder.Register<PlanetState>(Lifetime.Singleton);
         }
@@ -108,6 +113,13 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.SaveSettings);
             builder.RegisterInstance(gameSettings.MagnetSettings);
             builder.RegisterInstance(gameSettings.InventorySettings);
+        }
+
+        private void RegisterDataTables(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(dataTables.Runes);
+            builder.RegisterInstance(dataTables.Materials);
+            builder.RegisterInstance(dataTables.Recipes);
         }
 
         private void RegisterSaveSystem(IContainerBuilder builder)

@@ -34,12 +34,13 @@ namespace Game.Persistence
 
         public GameSaveData Export()
         {
+            TimeSpan totalPlayTime = CalculateTotalPlayTime();
             var data = new GameSaveData
             {
-                meta = new GameSaveData.MetaSaveData
+                meta = new GameSaveData.Meta
                 {
                     timestampString = DateTime.Now.ToString(CultureInfo.InvariantCulture),
-                    playTime = _game.PlayTime.Milliseconds,
+                    playTime = (uint)totalPlayTime.TotalSeconds
                 },
                 level = _level.Export(),
                 player = _player.Export()
@@ -48,10 +49,18 @@ namespace Game.Persistence
             return data;
         }
 
+        private TimeSpan CalculateTotalPlayTime()
+        {
+            TimeSpan lastPlayTime = _game.PlayTime;
+            TimeSpan currentSessionPlayTime = DateTime.Now.Subtract(_game.SessionStartTime);
+            TimeSpan totalPlayTime = currentSessionPlayTime + lastPlayTime;
+            return totalPlayTime;
+        }
+
         public void Import(GameSaveData data)
         {
             _game.SessionStartTime = DateTime.Now;
-            _game.PlayTime = TimeSpan.FromMilliseconds(data.meta.playTime);
+            _game.PlayTime = TimeSpan.FromSeconds(data.meta.playTime);
 
             _level.Import(data.level);
             _player.Import(data.player);

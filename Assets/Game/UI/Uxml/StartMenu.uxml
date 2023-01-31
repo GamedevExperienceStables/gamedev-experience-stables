@@ -6,6 +6,7 @@
             </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 50px;" />
             <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 244px;">
+                <ui:Button text="Continue" display-tooltip-when-elided="true" name="button-continue" />
                 <ui:Button text="New Game" display-tooltip-when-elided="true" name="button-start" />
                 <ui:Button text="Quit" display-tooltip-when-elided="true" name="button-quit" />
             </ui:VisualElement>

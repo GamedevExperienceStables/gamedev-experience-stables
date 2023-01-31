@@ -1,4 +1,5 @@
-﻿using Game.Settings;
+﻿using System.Collections.Generic;
+using Game.Settings;
 using UnityEngine;
 
 namespace Game.Inventory
@@ -26,6 +27,15 @@ namespace Game.Inventory
         {
             _container.Reset();
             _bag.Reset();
+        }
+
+        public void Init(IEnumerable<MaterialInitialData> container, IEnumerable<MaterialInitialData> bag)
+        {
+            foreach (MaterialInitialData data in container)
+                _container.SetValue(data.material, data.quantity);
+            
+            foreach (MaterialInitialData data in bag)
+                _bag.SetValue(data.material, data.quantity);
         }
 
         public bool CanAddToBag(MaterialDefinition definition)

@@ -10,6 +10,7 @@ namespace Game.GameFlow
             IntroState introState,
             MainMenuState mainMenuState,
             NewGameState newGameState,
+            LoadGameState loadGameState,
             QuitGameState quitGameState,
             PlanetState planetGameplayState
         )
@@ -19,6 +20,7 @@ namespace Game.GameFlow
             stateMachine.AddState(introState);
 
             stateMachine.AddState(newGameState);
+            stateMachine.AddState(loadGameState);
             stateMachine.AddState(quitGameState);
 
             stateMachine.AddState(planetGameplayState);
