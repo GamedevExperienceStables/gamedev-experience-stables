@@ -12,16 +12,16 @@ namespace Game.Level
 
         public void InitEnemySpawners(Transform target)
         {
-            var enemySpawners = GetComponentsInChildren<EnemySpawner>();
-            if (enemySpawners.Length == 0)
+            var enemySpawnZones = GetComponentsInChildren<EnemySpawnZone>();
+            if (enemySpawnZones.Length == 0)
                 return;
 
             _enemiesContainer = CreateContainer();
 
-            foreach (EnemySpawner spawner in enemySpawners)
+            foreach (EnemySpawnZone spawnZone in enemySpawnZones)
             {
-                spawner.Init(_enemiesContainer);
-                spawner.SetTarget(target);
+                spawnZone.Init(_enemiesContainer);
+                spawnZone.SetTarget(target);
             }
         }
 

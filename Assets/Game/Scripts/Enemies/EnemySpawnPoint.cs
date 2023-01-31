@@ -5,14 +5,16 @@ using VContainer;
 
 namespace Game.Enemies
 {
-    public class EnemySpawner : MonoBehaviour
+    public class EnemySpawnPoint : MonoBehaviour
     {
         [SerializeField]
         private EnemyDefinition enemy;
 
-        [FormerlySerializedAs("interval")]
         [SerializeField]
-        private float spawnInterval = 4f;
+        private float spawnCount = 3f;
+        
+        [SerializeField]
+        private float spawnInterval = 5f;
 
         [SerializeField]
         private MMF_Player spawnFeedback;
@@ -49,12 +51,12 @@ namespace Game.Enemies
 
         private void UpdateTimer()
         {
+            if (spawnCount <= 0) return;
+            
             _timeSinceLastSpawn += Time.deltaTime;
-            if (_timeSinceLastSpawn < spawnInterval)
-            {
-                return;
-            }
+            if (_timeSinceLastSpawn < spawnInterval) return;
 
+            spawnCount -= 1f;
             _timeSinceLastSpawn = 0f;
             Spawn();
         }
