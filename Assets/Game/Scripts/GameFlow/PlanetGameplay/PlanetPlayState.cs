@@ -1,4 +1,5 @@
-﻿using Game.Input;
+﻿using Cysharp.Threading.Tasks;
+using Game.Input;
 using Game.UI;
 using VContainer;
 
@@ -19,14 +20,17 @@ namespace Game.GameFlow
             _inputService = inputService;
         }
 
-        protected override void OnEnter()
+        protected override UniTask OnEnter()
         {
             _inputService.EnableGameplay();
             _view.ShowHud();
+            
+            return UniTask.CompletedTask;
         }
 
-        protected override void OnExit()
+        protected override UniTask OnExit()
         {
+            return UniTask.CompletedTask;
         }
     }
 }

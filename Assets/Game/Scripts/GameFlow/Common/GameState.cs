@@ -1,4 +1,5 @@
-﻿using Game.Utils;
+﻿using Cysharp.Threading.Tasks;
+using Game.Utils;
 using UnityEngine;
 
 namespace Game.GameFlow
@@ -8,24 +9,25 @@ namespace Game.GameFlow
         public StateMachine Parent { get; set; }
         public StateMachine Child { get; set; }
 
-        public virtual void Enter()
+        public UniTask Enter()
         {
             Debug.Log($"[STATE] <color=cyan>>>></color> {this}");
             
-            OnEnter();
+            return OnEnter();
         }
 
-        public virtual void Exit()
+        public UniTask Exit()
         {
             Child?.Exit();
             
             Debug.Log($"[STATE] <color=grey><<<</color> {this}");
             
-            OnExit();
+            return OnExit();
         }
 
-        protected abstract void OnEnter();
+        protected abstract UniTask OnEnter();
 
-        protected abstract void OnExit();
+        protected virtual UniTask OnExit() 
+            => UniTask.CompletedTask;
     }
 }

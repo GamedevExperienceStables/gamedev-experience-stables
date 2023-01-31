@@ -13,19 +13,15 @@ namespace Game.GameFlow
         public IntroState(SceneLoader loader)
             => _loader = loader;
 
-        protected override async void OnEnter()
+        protected override async UniTask OnEnter()
         {
             await _loader.LoadSceneAsync(SceneNames.INTRO);
             await Delay_ShouldBeRemovedBeforeProduction();
 
-            Parent.EnterState<PlanetState>();
+            await Parent.EnterState<PlanetState>();
         }
 
         private static async UniTask Delay_ShouldBeRemovedBeforeProduction()
             => await UniTask.Delay(TimeSpan.FromSeconds(1f));
-
-        protected override void OnExit()
-        {
-        }
     }
 }

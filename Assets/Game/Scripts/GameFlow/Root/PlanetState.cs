@@ -14,14 +14,16 @@ namespace Game.GameFlow
             _sceneLoader = sceneLoader;
         }
 
-        protected override void OnEnter()
+        protected override UniTask OnEnter()
         {
-            _sceneLoader.LoadSceneAsync(SceneNames.GAMEPLAY_PLANET).Forget();
+            return _sceneLoader.LoadSceneAsync(SceneNames.GAMEPLAY_PLANET);
         }
 
-        protected override void OnExit()
+        protected override UniTask OnExit()
         {
             Child = null;
+            
+            return base.OnExit();
         }
     }
 }

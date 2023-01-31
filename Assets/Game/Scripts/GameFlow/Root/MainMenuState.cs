@@ -14,13 +14,7 @@ namespace Game.GameFlow
             _sceneLoader = sceneLoader;
         }
 
-        protected override void OnEnter()
-        {
-            _sceneLoader.LoadSceneAsync(SceneNames.MAIN_MENU).Forget();
-        }
-
-        protected override void OnExit()
-        {
-        }
+        protected override UniTask OnEnter() 
+            => _sceneLoader.LoadSceneAsync(SceneNames.MAIN_MENU);
     }
 }
