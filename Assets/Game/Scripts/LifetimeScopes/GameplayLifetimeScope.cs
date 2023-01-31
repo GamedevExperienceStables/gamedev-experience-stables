@@ -54,6 +54,8 @@ namespace Game.LifetimeScopes
             builder.Register<AbilityFactory>(Lifetime.Singleton);
 
             builder.Register<AimAbility>(Lifetime.Transient);
+            builder.Register<DashAbility>(Lifetime.Transient);
+            builder.Register<MeleeAbility>(Lifetime.Transient);
             builder.Register<AutoPickupAbility>(Lifetime.Transient);
             builder.Register<InteractionAbility>(Lifetime.Transient);
             builder.Register<WeaponAbility>(Lifetime.Transient);

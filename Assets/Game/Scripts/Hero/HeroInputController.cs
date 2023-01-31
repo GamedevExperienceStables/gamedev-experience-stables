@@ -2,6 +2,7 @@
 using Game.Cameras;
 using Game.Input;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using VContainer;
 
 namespace Game.Hero
@@ -20,6 +21,8 @@ namespace Game.Hero
         private WeaponAbility _weapon;
         private InteractionAbility _interaction;
         private AimAbility _aim;
+        private DashAbility _dash;
+        private MeleeAbility _melee;
         private IActorController _owner;
 
         [Inject]
@@ -40,12 +43,16 @@ namespace Game.Hero
             _weapon = _owner.GetAbility<WeaponAbility>();
             _interaction = _owner.GetAbility<InteractionAbility>();
             _aim = _owner.GetAbility<AimAbility>();
+            _dash = _owner.GetAbility<DashAbility>();
+            _melee = _owner.GetAbility<MeleeAbility>();
 
             _input.AimButton.Performed += OnAim;
             _input.AimButton.Canceled += OnAimCanceled;
 
             _input.FireButton.Performed += OnFire;
+            _input.FireButton.Performed += OnMelee;
             _input.InteractionButton.Performed += OnInteract;
+            _input.DashButton.Performed += OnDash;
         }
 
         private void OnDestroy()
@@ -54,7 +61,10 @@ namespace Game.Hero
             _input.AimButton.Canceled -= OnAimCanceled;
 
             _input.FireButton.Performed -= OnFire;
+            _input.FireButton.Performed -= OnMelee;
             _input.InteractionButton.Performed -= OnInteract;
+            _input.DashButton.Performed -= OnDash;
+
         }
 
         private void Update()
@@ -66,6 +76,12 @@ namespace Game.Hero
 
         private void OnFire() 
             => _weapon.TryActivateAbility();
+        
+        private void OnMelee() 
+            => _melee.TryActivateAbility();
+        
+        private void OnDash() 
+            => _dash.TryActivateAbility();
 
         private void OnAim() 
             => _aim.TryActivateAbility();
@@ -85,6 +101,11 @@ namespace Game.Hero
         private void Move()
             => _movement.UpdateInputs(_movementDirection, _lookDirection.normalized);
 
+        public void Dash()
+        {
+            _movement.UpdateInputs( transform.forward, transform.forward);
+        }
+        
         private Vector3 GetMovementDirection()
         {
             Vector3 movementDirection = _sceneCamera.TransformDirection(_input.PrimaryMovement);
