@@ -1,4 +1,5 @@
-﻿using MoreMountains.Feedbacks;
+﻿using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
@@ -25,6 +26,7 @@ namespace Game.Enemies
 
         private Transform _spawnContainer;
         private EnemyFactory _factory;
+        private List<EnemyController> _enemies;
 
         [Inject]
         public void Construct(EnemyFactory factory)
@@ -63,7 +65,8 @@ namespace Game.Enemies
 
         private void Spawn()
         {
-            _factory.Create(enemy, transform, _target, _spawnContainer);
+            EnemyController enemyInstance = _factory.Create(enemy, transform, _target, _spawnContainer);
+            _enemies.Add(enemyInstance);
 
             PlaySpawnFeedback();
         }

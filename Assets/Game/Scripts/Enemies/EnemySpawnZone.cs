@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Level;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,11 +13,11 @@ namespace Game.Enemies
         [SerializeField]
         private List<EnemySpawnPoint> enemySpawnPoint;
 
-        [SerializeField]
-        private float respawnCounts = 1f;
-        
-        [SerializeField]
-        private float respawnTimer = 0f;
+        [SerializeField, Min(1f)]
+        private float spawnCounts = 1f;
+
+        [SerializeField, Min(0f)]
+        private float respawnTimerS = 0f;
 
         private float _timeSinceLastSpawn;
         private Transform _target;
@@ -43,30 +44,25 @@ namespace Game.Enemies
             UpdateTimer();
         }
 
-        public void OnTriggerEnter(Collider other)
-        {
-            if (other.transform == _target)
-            {
-                if (respawnCounts <= 0) return;
-
-                respawnCounts -= 1f;
-                ActivateSpawnPoints();
-            }
-        }
-
         private void UpdateTimer()
         {
-            /*if (respawnCounts <= 0) return;
+            // Написать обработчик после зачистки зоны запустить таймер для повторного запуска зоны
+        }
 
-            respawnCounts -= 1f;
-            ActivateSpawnPoints();*/
+        public void Activate()
+        {
+            if (spawnCounts <= 0) return;
+            //if (!_isTimerEnds) return;
+
+            spawnCounts -= 1f;
+            ActivateSpawnPoints();
         }
 
         private void ActivateSpawnPoints()
         {
             enemySpawnPoint.ForEach(spawnPoint =>
             {
-                spawnPoint.Init(_target);
+                spawnPoint.Init(_spawnContainer);
                 spawnPoint.SetTarget(_target);
             });
         }
