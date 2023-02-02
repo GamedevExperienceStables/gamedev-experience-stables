@@ -25,7 +25,8 @@ namespace Game.Hero
         private MeleeAbility _melee;
         private RecoveryAbility _recovery;
         private IActorController _owner;
-
+        private bool _isBlocked;
+        
         [Inject]
         public void Construct(IInputControlGameplay input, SceneCamera sceneCamera)
         {
@@ -83,15 +84,21 @@ namespace Game.Hero
         
         private void OnFire() 
             => _weapon.TryActivateAbility();
-        
-        private void OnMelee() 
-            => _melee.TryActivateAbility();
+
+        private void OnMelee()
+        {
+            if (_isBlocked) return;
+            _melee.TryActivateAbility();
+        }
         
         private void OnDash() 
             => _dash.TryActivateAbility();
 
-        private void OnAim() 
-            => _aim.TryActivateAbility();
+        private void OnAim()
+        {
+            if (_isBlocked) return;
+            _aim.TryActivateAbility();
+        }
 
         private void OnAimCanceled() 
             => _aim.EndAbility();
@@ -101,6 +108,7 @@ namespace Game.Hero
 
         private void HandleInputs()
         {
+            if (_isBlocked) return;
             _movementDirection = GetMovementDirection();
             _lookDirection = GetLookDirection(_movementDirection);
         }
@@ -108,10 +116,9 @@ namespace Game.Hero
         private void Move()
             => _movement.UpdateInputs(_movementDirection, _lookDirection.normalized);
 
-        public void Dash()
-        {
-            _movement.UpdateInputs( transform.forward, transform.forward);
-        }
+        public void BlockInput(bool isBlocked)
+            =>_isBlocked = isBlocked;
+        
         
         private Vector3 GetMovementDirection()
         {

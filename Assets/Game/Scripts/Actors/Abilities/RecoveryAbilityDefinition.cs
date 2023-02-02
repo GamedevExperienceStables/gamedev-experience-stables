@@ -43,9 +43,9 @@ namespace Game.Actors
             while (true)
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(Definition.RecoveryTime), ignoreTimeScale: false);
-                Owner.AddModifier(CharacterStats.Stamina, Definition.StaminaRegeneration);
-                Owner.AddModifier(CharacterStats.Mana, Definition.ManaRegeneration);
-                Owner.AddModifier(CharacterStats.Health, Definition.HealthRegeneration);
+                Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaRegeneration);
+                Owner.ApplyModifier(CharacterStats.Mana, Definition.ManaRegeneration);
+                Owner.ApplyModifier(CharacterStats.Health, Definition.HealthRegeneration);
             }
         }
     }

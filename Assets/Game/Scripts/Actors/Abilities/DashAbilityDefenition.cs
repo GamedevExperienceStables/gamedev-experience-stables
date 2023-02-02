@@ -27,18 +27,29 @@ namespace Game.Actors
 
         public class DashAbility : ActorAbility<DashAbilityDefinition>
         {
-            private HeroInputController _movementController;           
+            private HeroInputController _movementController;
+            private bool _isDashActive;
+            private AimAbility _aim;
+
+
             public override bool CanActivateAbility()
-                => Owner.GetCurrentValue(CharacterStats.Stamina) > Definition.StaminaCost.Value;
+            {
+                if (_aim.IsActive) return false;
+                if (_isDashActive) return false;
+                return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
+            }
+                 
 
             protected override void OnInitAbility()
             {
+                _aim = Owner.GetAbility<AimAbility>();
                 _movementController = Owner.GetComponent<HeroInputController>();
             }
 
             protected override void OnActivateAbility()
             {
-                Owner.AddModifier(CharacterStats.Stamina, Definition.StaminaCost);
+                _movementController.BlockInput(_isDashActive = true);
+                Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
                 Owner.AddModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
                 float time = Definition.DashRange / Owner.GetCurrentValue(CharacterStats.MovementSpeed);
                 UniTask.Run(() => StartDash(time));
@@ -47,12 +58,12 @@ namespace Game.Actors
             private async UniTask StartDash(float time)
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(time), ignoreTimeScale: false);
-                Debug.Log("Dash ended");
                 OnEndAbility(false);
             }
             
             protected override void OnEndAbility(bool wasCancelled)
             {
+                _movementController.BlockInput(_isDashActive = false);
                 Owner.RemoveModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
             }
             

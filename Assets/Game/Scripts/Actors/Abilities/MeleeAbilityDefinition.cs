@@ -32,7 +32,9 @@ namespace Game.Actors
         private MeleeAbility _melee;
 
         public override bool CanActivateAbility()
-            => !_aim.IsActive && (Owner.GetCurrentValue(CharacterStats.Stamina) > Definition.StaminaCost.Value);
+            => !_aim.IsActive && (Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value));
+        
+             
 
         protected override void OnInitAbility()
         {
@@ -41,7 +43,7 @@ namespace Game.Actors
 
         protected override void OnActivateAbility()
         {
-            Owner.AddModifier(CharacterStats.Stamina, Definition.StaminaCost);
+            Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
             LayerMask mask = LayerMask.GetMask("Enemy");
             var hits = Physics.OverlapSphere(Owner.Transform.position,
                 Definition.MeleeRangeRadius,LayerMasks.Enemy );
@@ -57,7 +59,6 @@ namespace Game.Actors
         {
             // Draw a yellow sphere at the transform's position
             Gizmos.color = Color.cyan;
-            Debug.Log(Definition.MeleeRangeRadius);
             Gizmos.DrawSphere(Owner.Transform.position, Definition.MeleeRangeRadius);
         }
     }
