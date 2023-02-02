@@ -53,7 +53,7 @@ MonoBehaviour:
   raycastRadius: 0.05
   collisionLayerMask:
     serializedVersion: 2
-    m_Bits: 585
+    m_Bits: 2625
   deathFeedbackPrefab: {fileID: 7383564464360880306, guid: f9d5596b2249c4f4aacfbaf3c263e6f5,
     type: 3}
   damageDealer: {fileID: 2169979632489900430}

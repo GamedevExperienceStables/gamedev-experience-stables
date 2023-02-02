@@ -44,7 +44,7 @@ namespace Game.Actors
             {
                 Debug.Log(hit.transform.gameObject + "MELEE ATTACKED");
                 hit.transform.gameObject.TryGetComponent<IActorController>(out IActorController destinationOwner);
-                destinationOwner.GetComponent<DamageableController>().MakeDamage(Definition.MeleeDamage);
+                destinationOwner.GetComponent<DamageableController>().Damage(Definition.MeleeDamage);
             }
         }
         
@@ -52,6 +52,7 @@ namespace Game.Actors
         {
             // Draw a yellow sphere at the transform's position
             Gizmos.color = Color.cyan;
+            Debug.Log(Definition.MeleeRangeRadius);
             Gizmos.DrawSphere(Owner.Transform.position, Definition.MeleeRangeRadius);
         }
     }
