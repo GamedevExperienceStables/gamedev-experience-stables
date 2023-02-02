@@ -19,8 +19,12 @@ namespace Game.Actors
         [SerializeField]
         private StatModifier meleeDamage;
         
+        [SerializeField]
+        private StatModifier staminaCost;
+        
         public float MeleeRangeRadius => meleeRangeRadius;
         public StatModifier MeleeDamage => meleeDamage;
+        public StatModifier StaminaCost => staminaCost;
     }
     public class MeleeAbility : ActorAbility<MeleeAbilityDefinition>
     {
@@ -28,7 +32,7 @@ namespace Game.Actors
         private MeleeAbility _melee;
 
         public override bool CanActivateAbility()
-            => !_aim.IsActive;
+            => !_aim.IsActive && (Owner.GetCurrentValue(CharacterStats.Stamina) > Definition.StaminaCost.Value);
 
         protected override void OnInitAbility()
         {
@@ -37,6 +41,7 @@ namespace Game.Actors
 
         protected override void OnActivateAbility()
         {
+            Owner.AddModifier(CharacterStats.Stamina, Definition.StaminaCost);
             LayerMask mask = LayerMask.GetMask("Enemy");
             var hits = Physics.OverlapSphere(Owner.Transform.position,
                 Definition.MeleeRangeRadius,LayerMasks.Enemy );

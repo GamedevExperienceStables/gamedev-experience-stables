@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Game.Actors
 {
-    [CreateAssetMenu(menuName = MENU_PATH + "DashAbility")]
+        [CreateAssetMenu(menuName = MENU_PATH + "DashAbility")]
         public class DashAbilityDefinition : AbilityDefinition<DashAbility>
         {
             [SerializeField]
@@ -14,17 +14,22 @@ namespace Game.Actors
             
             [SerializeField]
             private float dashRange;
+            
+            [SerializeField]
+            private StatModifier staminaCost;
+            
+            
             public StatModifier SpeedModifier => speedModifier;
             public float DashRange => dashRange;
+            public StatModifier StaminaCost => staminaCost;
+
         }
 
         public class DashAbility : ActorAbility<DashAbilityDefinition>
         {
-
-
             private HeroInputController _movementController;           
             public override bool CanActivateAbility()
-                => true;
+                => Owner.GetCurrentValue(CharacterStats.Stamina) > Definition.StaminaCost.Value;
 
             protected override void OnInitAbility()
             {
@@ -33,6 +38,7 @@ namespace Game.Actors
 
             protected override void OnActivateAbility()
             {
+                Owner.AddModifier(CharacterStats.Stamina, Definition.StaminaCost);
                 Owner.AddModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
                 float time = Definition.DashRange / Owner.GetCurrentValue(CharacterStats.MovementSpeed);
                 UniTask.Run(() => StartDash(time));
