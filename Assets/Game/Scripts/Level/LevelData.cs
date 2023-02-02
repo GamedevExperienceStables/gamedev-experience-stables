@@ -8,7 +8,7 @@ namespace Game.Level
     {
         public LevelDefinition CurrentLevel { get; set; }
         
-        public LocationPointData LastLocation { get; set; }
-        public LocationPointData CurrentLocation { get; set; }
+        public ILocationPoint LastLocationPoint { get; set; }
+        public ILocationPoint CurrentLocationPoint { get; set; }
     }
 }

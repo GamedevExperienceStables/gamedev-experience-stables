@@ -8,32 +8,67 @@ namespace Game.Persistence
     public class PersistenceService
     {
         private readonly IPersistence _persistence;
-        
+
         private readonly Settings _settings;
-        private readonly GameImportExport _handler;
-        
+        private readonly GameImportExport _game;
+
         [Inject]
-        public PersistenceService(Settings settings, GameImportExport handler, IPersistence persistence)
+        public PersistenceService(Settings settings, GameImportExport game, IPersistence persistence)
         {
             _settings = settings;
-            _handler = handler;
+            _game = game;
 
             _persistence = persistence;
         }
 
-        public void InitData() 
-            => _handler.Reset();
+        public bool IsRunning { get; private set; }
+
+        public bool IsSaveGameExists()
+            => _persistence.Exists(_settings.Filename);
+
+        public void InitData()
+            => _game.Reset();
 
         public async UniTask LoadDataAsync()
         {
-            var data = await _persistence.DeserializeAsync<GameSaveData>(_settings.Filename);
-            _handler.Import(data);
+            if (IsRunning)
+            {
+                Debug.LogWarning("Loading in process.");
+                return;
+            }
+
+            IsRunning = true;
+            await LoadingProcess();
+            IsRunning = false;
         }
 
-        public UniTask SaveDataAsync()
+        public async UniTask SaveDataAsync()
         {
-            GameSaveData data = _handler.Export();
-            return _persistence.SerializeAsync(data, _settings.Filename);
+            if (IsRunning)
+            {
+                Debug.LogWarning("Saving in process.");
+                return;
+            }
+
+            IsRunning = true;
+            await SavingProcess();
+            IsRunning = false;
+        }
+
+        private async UniTask SavingProcess()
+        {
+            GameSaveData data = _game.Export();
+            await _persistence.SerializeAsync(data, _settings.Filename);
+
+            Debug.Log("[SAVE_GAME] Saved!");
+        }
+
+        private async UniTask LoadingProcess()
+        {
+            var data = await _persistence.DeserializeAsync<GameSaveData>(_settings.Filename);
+            _game.Import(data);
+            
+            Debug.Log("[SAVE_GAME] Loaded!");
         }
 
         [Serializable]

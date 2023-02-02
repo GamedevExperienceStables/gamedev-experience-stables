@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Game.Level;
 using Game.Settings;
@@ -10,7 +11,7 @@ namespace Game.Persistence
     {
         private readonly LevelController _level;
         private readonly LevelsSettings _settings;
-        private readonly LocationPointStaticDefinition _startPoint;
+        private readonly ILocationPoint _startPoint;
 
         [Inject]
         public LevelImportExport(LevelController level, LevelsSettings settings)
@@ -22,34 +23,29 @@ namespace Game.Persistence
 
         public void Reset()
         {
-            LevelDefinition firstLevel = _settings.Levels.First();
+            LevelDefinition firstLevel = _settings.GetFirstLevel();
             _level.InitLevel(firstLevel, _startPoint);
         }
 
-        public void Import(GameSaveData.LevelSaveData data)
+        public void Import(GameSaveData.Level data)
         {
-            LevelDefinition currentLevel = FindLevelById(data.id);
+            LevelDefinition currentLevel = _settings.FindLevelById(data.id);
+            if (!currentLevel)
+            {
+                Debug.LogError($"Level '{data.id}' not found. Used first level");
+                currentLevel = _settings.GetFirstLevel();
+            }
+
             _level.InitLevel(currentLevel, _startPoint);
         }
 
-        public GameSaveData.LevelSaveData Export()
+        public GameSaveData.Level Export()
         {
-            return new GameSaveData.LevelSaveData
+            return new GameSaveData.Level
             {
                 id = _level.GetCurrentLevelId(),
+                pointsCleared = Array.Empty<string>()
             };
-        }
-
-        private LevelDefinition FindLevelById(string levelId)
-        {
-            var levels = _settings.Levels;
-
-            LevelDefinition found = levels.Find(level => level.Id == levelId);
-            if (found)
-                return found;
-
-            Debug.LogError($"Level '{levelId}' not found. Used first level");
-            return levels.First();
         }
     }
 }

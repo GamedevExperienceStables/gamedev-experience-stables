@@ -33,6 +33,14 @@ namespace Game.Inventory
             _runes.Init();
         }
 
+        public void Init(InventoryInitialData data)
+        {
+            _runes.Init();
+            
+            _materials.Init(data.container, data.bag);
+            _recipes.Init(data.recipes);
+        }
+
         public bool CanTransferToContainer(MaterialDefinition definition)
             => _materials.CanTransferToContainer(definition);
 

@@ -2,11 +2,11 @@
 
 namespace Game.Level
 {
-    public abstract class LocationPointDefinition : ScriptableObject
+    public abstract class LocationPointDefinition : ScriptableObject, ILocationPointKeyOwner
     {
         [SerializeField]
         protected LocationPointKey locationPointKey;
 
-        public LocationPointKey PointKey => locationPointKey;
+        public ILocationPointKey PointKey => locationPointKey;
     }
 }

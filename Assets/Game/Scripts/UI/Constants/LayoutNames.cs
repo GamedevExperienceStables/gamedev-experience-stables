@@ -14,6 +14,7 @@
         public static class StartMenu
         {
             public const string BUTTON_START = "button-start";
+            public const string BUTTON_CONTINUE = "button-continue";
             public const string BUTTON_QUIT = "button-quit";
         }
 
