@@ -2,11 +2,11 @@
 
 namespace Game.Level
 {
-    public class LocationPoint : MonoBehaviour
+    public partial class LocationPoint : MonoBehaviour, ILocationPointKeyOwner
     {
         [SerializeField]
         private LocationPointKey point;
 
-        public LocationPointKey Key => point;
+        public ILocationPointKey PointKey => point;
     }
 }
