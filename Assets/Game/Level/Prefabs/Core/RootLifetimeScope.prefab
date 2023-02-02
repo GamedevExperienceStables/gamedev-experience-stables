@@ -50,7 +50,4 @@ MonoBehaviour:
   autoInjectGameObjects: []
   gameSettings: {fileID: 11400000, guid: 2a6d5e66c7b69114ba250107d23d73ed, type: 2}
   heroData: {fileID: 11400000, guid: 8c2b9dc66daa1f64d8fae317ee94ad6f, type: 2}
-  faderScreenPrefab: {fileID: -7187413838075000008, guid: e16213b6da9112645b5c86f8911272c3,
-    type: 3}
-  loadingScreenPrefab: {fileID: -7354811997525886321, guid: 59b6b92df6127c344b762f63bacb75c7,
-    type: 3}
+  dataTables: {fileID: 11400000, guid: daf0eea7d6b33164e900ceb65994c0dd, type: 2}

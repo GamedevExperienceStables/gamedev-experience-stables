@@ -77,6 +77,7 @@ namespace Game.LifetimeScopes
 
             builder.Register<TransitionToLocationInteraction>(Lifetime.Transient);
             builder.Register<RocketContainerInteraction>(Lifetime.Transient);
+            builder.Register<SaveGameInteraction>(Lifetime.Transient);
         }
 
         private static void RegisterFactories(IContainerBuilder builder)
