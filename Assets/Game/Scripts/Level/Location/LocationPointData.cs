@@ -1,23 +1,14 @@
 ﻿namespace Game.Level
 {
-    public struct LocationPointData
+    public class LocationPointData : ILocationPoint
     {
-        public readonly LocationDefinition location;
-        public readonly LocationPointKey pointKey;
-
-        public LocationPointData(LocationDefinition location, LocationPointKey pointKey)
+        public LocationPointData(ILocationDefinition location, ILocationPointKey pointKey)
         {
-            this.location = location;
-            this.pointKey = pointKey;
+            Location = location;
+            PointKey = pointKey;
         }
 
-        public static implicit operator LocationPointData(LocationPointStaticDefinition definition)
-            => new(definition.Location, definition.PointKey);
-    }
-
-    public static class LocationPointDataExtensions
-    {
-        public static bool IsValid(this LocationPointData data)
-            => data.location && data.pointKey;
+        public ILocationDefinition Location { get; }
+        public ILocationPointKey PointKey { get; }
     }
 }

@@ -34,7 +34,7 @@ namespace Game.Level
 
         public override void Execute()
         {
-            _level.SetLocation(_targetLocation);
+            _level.SetLocationPoint(_targetLocation);
 
             _planetStateMachine.EnterState<PlanetLocationLoadingState>();
         }

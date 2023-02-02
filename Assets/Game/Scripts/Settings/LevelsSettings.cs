@@ -17,8 +17,8 @@ namespace Game.Settings
 
         public List<LevelDefinition> Levels => levels;
 
-        public LocationPointStaticDefinition LevelStartPoint => levelStartPoint;
-
+        public ILocationPoint LevelStartPoint => levelStartPoint;
+        
         public LevelDefinition FindLevelById(string levelId)
         {
             LevelDefinition found = levels.Find(level => level.Id == levelId);

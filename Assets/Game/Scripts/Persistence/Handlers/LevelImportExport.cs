@@ -11,7 +11,7 @@ namespace Game.Persistence
     {
         private readonly LevelController _level;
         private readonly LevelsSettings _settings;
-        private readonly LocationPointStaticDefinition _startPoint;
+        private readonly ILocationPoint _startPoint;
 
         [Inject]
         public LevelImportExport(LevelController level, LevelsSettings settings)
