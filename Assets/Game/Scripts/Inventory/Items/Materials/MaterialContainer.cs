@@ -9,8 +9,8 @@ namespace Game.Inventory
 
         private readonly Dictionary<MaterialDefinition, MaterialData> _container = new();
         private event MaterialChangedEvent ValueChanged;
-        
-        public MaterialContainer(MaterialContainerId id) 
+
+        public MaterialContainer(MaterialContainerId id)
             => Id = id;
 
         public MaterialContainerId Id { get; }
@@ -26,7 +26,7 @@ namespace Game.Inventory
 
         public void Reset()
         {
-            foreach (MaterialData material in _container.Values) 
+            foreach (MaterialData material in _container.Values)
                 SetValue(material.Definition, 0);
         }
 
@@ -42,12 +42,15 @@ namespace Game.Inventory
         public void SetValue(MaterialDefinition definition, int newValue)
         {
             MaterialData material = _container[definition];
+
+            newValue = Mathf.Clamp(newValue, 0, material.Total);
+
             if (material.Current == newValue)
                 return;
 
             int oldValue = material.Current;
             material.Current = newValue;
-            
+
             Debug.Log($"[MATERIAL] {Id} | {material.Definition.name}: {oldValue} -> {material.Current}");
             ValueChanged?.Invoke(new MaterialChangedData(material.Definition, oldValue, material.Current));
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Game.Inventory
 {
@@ -8,5 +9,7 @@ namespace Game.Inventory
         void UnSubscribe(Action<RecipeDefinition> callback);
         
         bool Contains(RecipeDefinition recipe);
+
+        IReadOnlyList<RecipeDefinition> Items { get; }
     }
 }
