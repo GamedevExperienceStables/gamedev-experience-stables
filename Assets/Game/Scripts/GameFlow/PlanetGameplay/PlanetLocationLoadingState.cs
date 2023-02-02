@@ -33,7 +33,7 @@ namespace Game.GameFlow
             _inputService = inputService;
         }
 
-        protected override async void OnEnter()
+        protected override async UniTask OnEnter()
         {
             _inputService.DisableAll();
 
@@ -43,19 +43,20 @@ namespace Game.GameFlow
 
             await UnloadLastLocationIfExists();
 
-            LocationPointData spawnLocation = _level.GetCurrentLocation();
-            Scene location = await LoadLocationAsync(spawnLocation.location);
-            InitLocation(location, spawnLocation.pointKey);
+            ILocationPoint spawnLocationPoint = _level.GetCurrentLocationPoint();
+            Scene location = await LoadLocationAsync(spawnLocationPoint.Location);
+            InitLocation(location, spawnLocationPoint.PointKey);
 
-            Parent.EnterState<PlanetPlayState>();
+            await Parent.EnterState<PlanetPlayState>();
         }
 
-        protected override void OnExit()
+        protected override UniTask OnExit()
         {
             _loadingScreen.Hide();
+            return UniTask.CompletedTask;
         }
 
-        private void InitLocation(Scene location, LocationPointKey locationPoint)
+        private void InitLocation(Scene location, ILocationPointKey locationPoint)
         {
             LocationContext context = GetContext(location);
             LocationPoint spawnPoint = context.FindLocationPoint(locationPoint);
@@ -65,19 +66,20 @@ namespace Game.GameFlow
 
         private async UniTask UnloadLastLocationIfExists()
         {
-            if (!_level.TryGetLastLocation(out LocationPointData lastLocation))
+            if (!_level.TryGetLastLocationPoint(out ILocationPoint lastLocation))
                 return;
 
-            await _sceneLoader.UnloadSceneIfLoadedAsync(lastLocation.location.SceneName);
+            await _sceneLoader.UnloadSceneIfLoadedAsync(lastLocation.Location.SceneName);
         }
 
-        private async UniTask<Scene> LoadLocationAsync(LocationDefinition spawnLocation)
-            => await _sceneLoader.LoadSingleSceneAdditiveAsync(spawnLocation.SceneName);
+        private async UniTask<Scene> LoadLocationAsync(ILocationDefinition location)
+            => await _sceneLoader.LoadSingleSceneAdditiveAsync(location.SceneName);
 
         private static LocationContext GetContext(Scene location)
         {
-            LifetimeScope scope = LifetimeScope.Find<LifetimeScope>(location);
-            return scope.GetComponent<LocationContext>();
+            LifetimeScope scope = LifetimeScope.Find<LocationLifetimeScope>(location);
+            var locationContext = scope.GetComponent<LocationContext>();
+            return locationContext;
         }
     }
 }

@@ -24,13 +24,7 @@ namespace Game.GameFlow
             _view = view;
         }
 
-        protected override void OnEnter() 
-            => EnterAsync().Forget();
-
-        protected override void OnExit() 
-            => ExitAsync().Forget();
-
-        private async UniTask EnterAsync()
+        protected override async UniTask OnEnter()
         {
             _timeService.Pause();
             _inputService.DisableAll();
@@ -40,7 +34,7 @@ namespace Game.GameFlow
             _inputService.EnableMenus();
         }
 
-        private async UniTask ExitAsync()
+        protected override async UniTask OnExit()
         {
             _inputService.DisableAll();
 

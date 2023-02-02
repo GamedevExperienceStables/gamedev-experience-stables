@@ -13,7 +13,7 @@ namespace Game.Settings
         [SerializeField]
         private LevelGoalSettings goal;
 
-        public LocationDefinition Location => location;
+        public ILocationDefinition Location => location;
 
         public LevelGoalSettings Goal => goal;
     }

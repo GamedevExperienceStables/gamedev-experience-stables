@@ -14,6 +14,13 @@
       "dependencies": {},
       "hash": "8a8fa5a9659a6d63f196391c71e06c4286c8acd7"
     },
+    "com.moremountains.feel": {
+      "version": "https://github.com/GamedevExperienceStables/com.moremountains.feel.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1df9c831b679a64cbbf0300ac81fcd13458275e4"
+    },
     "com.nuclearband.projectfoldericons": {
       "version": "https://github.com/NuclearBand/NuclearProjectFolderIcons.git",
       "depth": 0,
@@ -163,7 +170,7 @@
     },
     "com.unity.searcher": {
       "version": "4.9.2",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -177,12 +184,22 @@
     },
     "com.unity.shadergraph": {
       "version": "14.0.4",
-      "depth": 1,
+      "depth": 0,
       "source": "builtin",
       "dependencies": {
         "com.unity.render-pipelines.core": "14.0.4",
         "com.unity.searcher": "4.9.2"
       }
+    },
+    "com.unity.terrain-tools": {
+      "version": "5.0.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.terrain": "1.0.0",
+        "com.unity.modules.terrainphysics": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
       "version": "1.1.33",

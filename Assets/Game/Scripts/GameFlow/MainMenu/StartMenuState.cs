@@ -1,4 +1,5 @@
-﻿using VContainer;
+﻿using Cysharp.Threading.Tasks;
+using VContainer;
 
 namespace Game.GameFlow
 {
@@ -9,14 +10,9 @@ namespace Game.GameFlow
         {
         }
 
-        protected override void OnEnter()
+        protected override UniTask OnEnter()
         {
-
-        }
-
-        protected override void OnExit()
-        {
-
+            return UniTask.CompletedTask;
         }
     }
 }

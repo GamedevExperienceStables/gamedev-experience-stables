@@ -31,7 +31,7 @@ namespace Game.Level
                 Destroy(_enemiesContainer.gameObject);
         }
 
-        public LocationPoint FindLocationPoint(LocationPointKey locationPointKey)
+        public LocationPoint FindLocationPoint(ILocationPointKey locationPointKey)
         {
             var points = GetComponentsInChildren<LocationPoint>();
             if (points.Length == 0)
@@ -39,11 +39,11 @@ namespace Game.Level
 
             foreach (LocationPoint point in points)
             {
-                if (point.Key == locationPointKey)
+                if (point.PointKey == locationPointKey)
                     return point;
             }
 
-            Debug.LogWarning($"Not found '{locationPointKey.name}' point, returned first point on location");
+            Debug.LogWarning($"Not found '{locationPointKey}' point, returned first point on location");
             return points.First();
         }
 

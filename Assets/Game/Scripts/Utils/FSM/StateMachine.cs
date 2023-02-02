@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Game.Utils
@@ -24,7 +25,7 @@ namespace Game.Utils
             state.Parent = this;
         }
 
-        public void EnterState<T>() where T : class, IState
+        public async UniTask EnterState<T>() where T : class, IState
         {
             Type type = typeof(T);
             if (_currentState?.GetType() == type)
@@ -33,19 +34,19 @@ namespace Game.Utils
                 return;
             }
 
-            _currentState = ChangeState<T>();
-            _currentState.Enter();
+            _currentState = await ChangeState<T>();
+            await _currentState.Enter();
         }
         
-        public void PushState<T>() where T : class, IState
+        public async UniTask PushState<T>() where T : class, IState
         {
             var state = GetState<T>();
             _stack.Push(state);
             
-            state.Enter();
+            await state.Enter();
         }
         
-        public void PopState()
+        public async UniTask PopState()
         {
             if (_stack.Count == 0)
             {
@@ -53,29 +54,28 @@ namespace Game.Utils
                 return;
             }
 
-            _stack.Pop().Exit();
+            IState state = _stack.Pop();
+            await state.Exit();
         }
 
-        private T ChangeState<T>() where T : class, IState
+        private async UniTask<T> ChangeState<T>() where T : class, IState
         {
-            _currentState?.Exit();
+            if (_currentState is not null)
+                await _currentState.Exit();
 
-            var state = GetState<T>();
-            _currentState = state;
-
-            return state;
+            return GetState<T>();
         }
 
         private T GetState<T>() where T : class, IState
             => _states[typeof(T)] as T;
         
         
-        public void Exit()
+        public async UniTask Exit()
         {
             while(_stack.Count > 0)
-                PopState();
+                await PopState();
             
-            _currentState.Exit();
+            await _currentState.Exit();
         }
     }
 }

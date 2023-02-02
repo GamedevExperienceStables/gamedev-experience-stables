@@ -1,4 +1,5 @@
-﻿using Game.GameFlow;
+﻿using Cysharp.Threading.Tasks;
+using Game.GameFlow;
 using VContainer;
 
 namespace Game.Level
@@ -11,14 +12,12 @@ namespace Game.Level
         public LocationSafeState(LocationData locationData) 
             => _locationData = locationData;
 
-        protected override void OnEnter()
+        protected override UniTask OnEnter()
         {
             _locationData.allowExit = true;
             _locationData.allowInventory = true;
-        }
-
-        protected override void OnExit()
-        {
+            
+            return UniTask.CompletedTask;
         }
     }
 }
