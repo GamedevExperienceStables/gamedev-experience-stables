@@ -24,11 +24,6 @@ namespace Game.Enemies
         private bool _hasTarget;
 
         private Transform _spawnContainer;
-        private EnemyFactory _factory;
-
-        [Inject]
-        public void Construct(EnemyFactory factory)
-            => _factory = factory;
 
         public void Init(Transform spawnContainer)
             => _spawnContainer = spawnContainer;

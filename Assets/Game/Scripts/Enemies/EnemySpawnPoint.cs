@@ -20,13 +20,13 @@ namespace Game.Enemies
         [SerializeField]
         private MMF_Player spawnFeedback;
 
-        private float _timeSinceLastSpawn;
+        private float _timeSinceLastSpawn = 0f;
         private Transform _target;
         private bool _hasTarget;
 
         private Transform _spawnContainer;
         private EnemyFactory _factory;
-        private List<EnemyController> _enemies;
+        private List<EnemyController> _enemies = new();
 
         [Inject]
         public void Construct(EnemyFactory factory)
@@ -55,18 +55,20 @@ namespace Game.Enemies
         {
             if (spawnCount <= 0) return;
             
+            if (_timeSinceLastSpawn >= spawnInterval) _timeSinceLastSpawn = 0f;
+            if (_timeSinceLastSpawn == 0f)
+            {
+                spawnCount -= 1f;
+                _timeSinceLastSpawn = 0f;
+                Spawn(); 
+            }
             _timeSinceLastSpawn += Time.deltaTime;
-            if (_timeSinceLastSpawn < spawnInterval) return;
-
-            spawnCount -= 1f;
-            _timeSinceLastSpawn = 0f;
-            Spawn();
         }
 
         private void Spawn()
         {
             EnemyController enemyInstance = _factory.Create(enemy, transform, _target, _spawnContainer);
-            _enemies.Add(enemyInstance);
+            //_enemies.Add(enemyInstance);
 
             PlaySpawnFeedback();
         }
