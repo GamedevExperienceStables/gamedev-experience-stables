@@ -43,7 +43,7 @@ namespace Game.Level
                     return point;
             }
 
-            Debug.LogWarning($"Not found '{locationPointKey}' point, returned first point on location");
+            Debug.LogWarning($"Not found '{locationPointKey}' spawn point, will be used first on location");
             return points.First();
         }
 

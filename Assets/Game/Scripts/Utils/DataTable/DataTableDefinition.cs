@@ -5,7 +5,7 @@ namespace Game.Utils.DataTable
 {
     public abstract class DataTableDefinition : ScriptableObject
     {
-        protected const string MENU_PATH = "★ DataTable/";
+        protected const string MENU_PATH = "DataTable/";
     }
 
     public abstract partial class DataTableDefinition<T> : DataTableDefinition where T : DataTableItemDefinition
