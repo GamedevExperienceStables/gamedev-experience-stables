@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Game.Inventory
 {
@@ -7,5 +8,7 @@ namespace Game.Inventory
         void Subscribe(Action<RuneDefinition> callback);
         void UnSubscribe(Action<RuneDefinition> callback);
         bool Contains(RuneDefinition rune);
+        
+        IReadOnlyList<RuneDefinition> Items { get; }
     }
 }

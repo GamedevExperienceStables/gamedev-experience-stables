@@ -133,7 +133,7 @@ namespace Game.Utils
                 if (!selectedSpawnPoint)
                     throw new NoNullAllowedException($"{gameObject.name} has not selected spawn point!");
 
-                locationPoint = selectedSpawnPoint;
+                locationPoint = CreateLocationPoint(selectedSpawnPoint.PointKey);
             }
             else
             {
