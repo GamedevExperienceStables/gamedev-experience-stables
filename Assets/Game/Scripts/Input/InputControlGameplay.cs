@@ -25,7 +25,7 @@ namespace Game.Input
         {
             inputControls.SetGameplayCallbacks(this);
         }
-
+        
         public void OnAim(InputAction.CallbackContext context)
         {
             if (context.performed)
@@ -132,5 +132,6 @@ namespace Game.Input
         {
             MousePosition = context.ReadValue<Vector2>();
         }
+        
     }
 }

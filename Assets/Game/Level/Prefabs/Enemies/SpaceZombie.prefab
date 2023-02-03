@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1646171557179622636}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 1815510984333573865}
   - component: {fileID: 5183282983791351953}
   - component: {fileID: 1141320969658811781}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SpaceZombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 1646171557786517122}
   - component: {fileID: 1646171557786517120}
   - component: {fileID: 1646171557786517123}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 1646171558355840896}
   - component: {fileID: 1646171558355840910}
   - component: {fileID: 1646171558355840897}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

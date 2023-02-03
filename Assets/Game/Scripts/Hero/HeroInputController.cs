@@ -2,6 +2,7 @@
 using Game.Cameras;
 using Game.Input;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using VContainer;
 
 namespace Game.Hero
@@ -20,8 +21,12 @@ namespace Game.Hero
         private WeaponAbility _weapon;
         private InteractionAbility _interaction;
         private AimAbility _aim;
+        private DashAbility _dash;
+        private MeleeAbility _melee;
+        private RecoveryAbility _recovery;
         private IActorController _owner;
-
+        private bool _isBlocked;
+        
         [Inject]
         public void Construct(IInputControlGameplay input, SceneCamera sceneCamera)
         {
@@ -40,12 +45,17 @@ namespace Game.Hero
             _weapon = _owner.GetAbility<WeaponAbility>();
             _interaction = _owner.GetAbility<InteractionAbility>();
             _aim = _owner.GetAbility<AimAbility>();
-
+            _dash = _owner.GetAbility<DashAbility>();
+            _melee = _owner.GetAbility<MeleeAbility>();
+            _recovery = _owner.GetAbility<RecoveryAbility>();
+            StartRecovering();
             _input.AimButton.Performed += OnAim;
             _input.AimButton.Canceled += OnAimCanceled;
 
             _input.FireButton.Performed += OnFire;
+            _input.FireButton.Performed += OnMelee;
             _input.InteractionButton.Performed += OnInteract;
+            _input.DashButton.Performed += OnDash;
         }
 
         private void OnDestroy()
@@ -54,7 +64,10 @@ namespace Game.Hero
             _input.AimButton.Canceled -= OnAimCanceled;
 
             _input.FireButton.Performed -= OnFire;
+            _input.FireButton.Performed -= OnMelee;
             _input.InteractionButton.Performed -= OnInteract;
+            _input.DashButton.Performed -= OnDash;
+
         }
 
         private void Update()
@@ -64,11 +77,28 @@ namespace Game.Hero
             Move();
         }
 
+        private void StartRecovering()
+        {
+            _recovery.TryActivateAbility();
+        }
+        
         private void OnFire() 
             => _weapon.TryActivateAbility();
 
-        private void OnAim() 
-            => _aim.TryActivateAbility();
+        private void OnMelee()
+        {
+            if (_isBlocked) return;
+            _melee.TryActivateAbility();
+        }
+        
+        private void OnDash() 
+            => _dash.TryActivateAbility();
+
+        private void OnAim()
+        {
+            if (_isBlocked) return;
+            _aim.TryActivateAbility();
+        }
 
         private void OnAimCanceled() 
             => _aim.EndAbility();
@@ -78,6 +108,7 @@ namespace Game.Hero
 
         private void HandleInputs()
         {
+            if (_isBlocked) return;
             _movementDirection = GetMovementDirection();
             _lookDirection = GetLookDirection(_movementDirection);
         }
@@ -85,6 +116,10 @@ namespace Game.Hero
         private void Move()
             => _movement.UpdateInputs(_movementDirection, _lookDirection.normalized);
 
+        public void BlockInput(bool isBlocked)
+            =>_isBlocked = isBlocked;
+        
+        
         private Vector3 GetMovementDirection()
         {
             Vector3 movementDirection = _sceneCamera.TransformDirection(_input.PrimaryMovement);
