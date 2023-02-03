@@ -57,6 +57,7 @@ namespace Game.Actors
 
             private async UniTask StartDash(float time)
             {
+                // to do: change to timer from assets and add ability deactivate after enviroment collision
                 await UniTask.Delay(TimeSpan.FromSeconds(time), ignoreTimeScale: false);
                 OnEndAbility(false);
             }

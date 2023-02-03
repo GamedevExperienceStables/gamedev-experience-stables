@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Game.Actors.Health;
+﻿using Game.Actors.Health;
 using Game.Stats;
 using Game.Utils;
 using UnityEngine;
@@ -43,21 +42,21 @@ namespace Game.Actors
 
         protected override void OnActivateAbility()
         {
+            // to do: change method to non-allocating in the future
             Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
-            LayerMask mask = LayerMask.GetMask("Enemy");
             var hits = Physics.OverlapSphere(Owner.Transform.position,
                 Definition.MeleeRangeRadius,LayerMasks.Enemy );
             foreach (Collider hit in hits)
             {
                 Debug.Log(hit.transform.gameObject + "MELEE ATTACKED");
-                hit.transform.gameObject.TryGetComponent<IActorController>(out IActorController destinationOwner);
-                destinationOwner.GetComponent<DamageableController>().Damage(Definition.MeleeDamage);
+                hit.transform.gameObject.TryGetComponent(out IActorController destinationOwner);
+                destinationOwner?.GetComponent<DamageableController>().Damage(Definition.MeleeDamage);
             }
         }
         
         void OnDrawGizmosSelected()
         {
-            // Draw a yellow sphere at the transform's position
+            // for debbuging, delete after adding new method
             Gizmos.color = Color.cyan;
             Gizmos.DrawSphere(Owner.Transform.position, Definition.MeleeRangeRadius);
         }
