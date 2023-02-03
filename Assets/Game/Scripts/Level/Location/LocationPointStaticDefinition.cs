@@ -2,7 +2,7 @@
 
 namespace Game.Level
 {
-    [CreateAssetMenu(menuName = "Data/Location/Point Static")]
+    [CreateAssetMenu(menuName = "★ Location/Point/Static")]
     public class LocationPointStaticDefinition : LocationPointDefinition, ILocationPoint
     {
         [SerializeField]
