@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Data;
+using Cysharp.Threading.Tasks;
 using Game.Input;
 using Game.Level;
 using Game.SceneManagement;
@@ -78,6 +79,9 @@ namespace Game.GameFlow
         private static LocationContext GetContext(Scene location)
         {
             LifetimeScope scope = LifetimeScope.Find<LocationLifetimeScope>(location);
+            if (!scope)
+                throw new NoNullAllowedException("Not found 'LocationContext'");
+
             var locationContext = scope.GetComponent<LocationContext>();
             return locationContext;
         }
