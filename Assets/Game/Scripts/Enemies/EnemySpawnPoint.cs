@@ -26,7 +26,6 @@ namespace Game.Enemies
 
         private Transform _spawnContainer;
         private EnemyFactory _factory;
-        private List<EnemyController> _enemies = new();
 
         [Inject]
         public void Construct(EnemyFactory factory)
@@ -53,9 +52,11 @@ namespace Game.Enemies
 
         private void UpdateTimer()
         {
-            if (spawnCount <= 0) return;
+            if (spawnCount <= 0) 
+                return;
+            if (_timeSinceLastSpawn >= spawnInterval) 
+                _timeSinceLastSpawn = 0f;
             
-            if (_timeSinceLastSpawn >= spawnInterval) _timeSinceLastSpawn = 0f;
             if (_timeSinceLastSpawn == 0f)
             {
                 spawnCount -= 1f;
@@ -67,8 +68,7 @@ namespace Game.Enemies
 
         private void Spawn()
         {
-            EnemyController enemyInstance = _factory.Create(enemy, transform, _target, _spawnContainer);
-            //_enemies.Add(enemyInstance);
+            _factory.Create(enemy, transform, _target, _spawnContainer);
 
             PlaySpawnFeedback();
         }

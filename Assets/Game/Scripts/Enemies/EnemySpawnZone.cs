@@ -15,9 +15,8 @@ namespace Game.Enemies
 
         [SerializeField, Min(1f)]
         private float spawnCounts = 1f;
-
         [SerializeField, Min(0f)]
-        private float respawnTimerS = 0f;
+        private float respawnTimer = 0f;
 
         private float _timeSinceLastSpawn;
         private Transform _target;
@@ -41,13 +40,13 @@ namespace Game.Enemies
 
         private void UpdateTimer()
         {
-            // Написать обработчик после зачистки зоны запустить таймер для повторного запуска зоны
+            //TODO: Написать обработчик после зачистки зоны запустить таймер для повторного запуска зоны
         }
 
         public void Activate()
         {
-            if (spawnCounts <= 0) return;
-            //if (!_isTimerEnds) return;
+            if (spawnCounts <= 0) 
+                return;
 
             spawnCounts -= 1f;
             ActivateSpawnPoints();
