@@ -155,6 +155,9 @@ MonoBehaviour:
           TrackID: 0
           Quantized: 0
           TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
         RandomizeOutput: 0
         RandomMultiplier: {x: 0.8, y: 1}
         RandomizeDuration: 0
@@ -226,6 +229,9 @@ MonoBehaviour:
           TrackID: 0
           Quantized: 0
           TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
         RandomizeOutput: 0
         RandomMultiplier: {x: 0.8, y: 1}
         RandomizeDuration: 0
@@ -297,6 +303,9 @@ MonoBehaviour:
           TrackID: 0
           Quantized: 0
           TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
         RandomizeOutput: 0
         RandomMultiplier: {x: 0.8, y: 1}
         RandomizeDuration: 0
@@ -350,9 +359,9 @@ GameObject:
   - component: {fileID: 2350107545435338789}
   - component: {fileID: 2350107545435338788}
   m_Layer: 0
-  m_Name: EnemySpawner
+  m_Name: EnemySpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -386,8 +395,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8318a78858b4a939974071aef0193ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 1646171557498439836, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
-    type: 3}
+  enemy: {fileID: 0}
+  spawnCount: 3
   spawnInterval: 4
   spawnFeedback: {fileID: 5578446121642143856}
 --- !u!1001 &2350107543583411551

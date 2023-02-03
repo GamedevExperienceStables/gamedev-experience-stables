@@ -1,10 +1,11 @@
 ﻿using Game.Actors;
+using Game.Level;
 using Game.Stats;
 using UnityEngine;
 
 namespace Game.Hero
 {
-    public class HeroController : ActorController
+    public class HeroController : ActorController, ISpawnZoneTrigger
     {
         private MovementController _movement;
         private HeroView _view;
