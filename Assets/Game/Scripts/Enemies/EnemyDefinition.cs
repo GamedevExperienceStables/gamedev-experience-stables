@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 namespace Game.Enemies
 {
-    [CreateAssetMenu(menuName = "Data/Enemy")]
+    [CreateAssetMenu(menuName = "★ Entities/Enemy")]
     public class EnemyDefinition : ActorDefinition
     {
         [SerializeField]

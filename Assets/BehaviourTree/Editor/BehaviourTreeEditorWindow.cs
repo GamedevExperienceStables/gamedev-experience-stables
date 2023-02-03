@@ -200,6 +200,11 @@ namespace BehaviourTree.Editor
 
         void ClearIfSelected(string path)
         {
+            if (serializer is null)
+            {
+                return;
+            }
+            
             if (AssetDatabase.GetAssetPath(serializer.tree) == path)
             {
                 // Need to delay because this is called from a will delete asset callback

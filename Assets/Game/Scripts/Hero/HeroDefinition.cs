@@ -2,11 +2,10 @@
 using Game.Actors;
 using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Hero
 {
-    [CreateAssetMenu(menuName = "Data/Hero")]
+    [CreateAssetMenu(menuName = "★ Entities/Hero")]
     public class HeroDefinition : ActorDefinition
     {
         [SerializeField]

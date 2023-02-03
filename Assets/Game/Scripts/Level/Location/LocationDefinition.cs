@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Level
 {
-    [CreateAssetMenu(menuName = "Data/Location/Location")]
+    [CreateAssetMenu(menuName = "★ Location/Location")]
     public class LocationDefinition : ScriptableObject, ILocationDefinition
     {
         [SerializeField, Scene]

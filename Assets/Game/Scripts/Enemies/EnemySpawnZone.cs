@@ -60,5 +60,14 @@ namespace Game.Enemies
                 spawnPoint.SetTarget(_target);
             });
         }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+
+            Vector3 position = transform.position;
+            foreach (EnemySpawnPoint spawnZone in enemySpawnPoint)
+                Gizmos.DrawLine(position, spawnZone.transform.position);
+        }
     }
 }

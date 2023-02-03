@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Level
 {
-    [CreateAssetMenu(menuName = "Data/Loot/Bag")]
+    [CreateAssetMenu(menuName = "★ Loot/Bag")]
     public class LootBagDefinition : ScriptableObject
     {
         [SerializeField]

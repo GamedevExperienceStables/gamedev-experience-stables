@@ -6,7 +6,7 @@ using VContainer;
 
 namespace Game.Actors
 {
-    [CreateAssetMenu(menuName = MENU_PATH + "AutoPickupAbility")]
+    [CreateAssetMenu(menuName = MENU_PATH + "Auto Pickup")]
     public class AutoPickupAbilityDefinition : AbilityDefinition<AutoPickupAbility>
     {
         [SerializeField, Range(0.01f, 5f)]
