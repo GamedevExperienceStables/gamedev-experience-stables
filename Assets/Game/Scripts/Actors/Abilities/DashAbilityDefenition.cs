@@ -34,8 +34,10 @@ namespace Game.Actors
 
             public override bool CanActivateAbility()
             {
-                if (_aim.IsActive) return false;
-                if (_isDashActive) return false;
+                if (_aim.IsActive) 
+                    return false;
+                if (_isDashActive) 
+                    return false;
                 return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
             }
                  
@@ -52,7 +54,7 @@ namespace Game.Actors
                 Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
                 Owner.AddModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
                 float time = Definition.DashRange / Owner.GetCurrentValue(CharacterStats.MovementSpeed);
-                UniTask.Run(() => StartDash(time));
+                UniTask.Run(() => StartDash(time)).Forget();
             }
 
             private async UniTask StartDash(float time)

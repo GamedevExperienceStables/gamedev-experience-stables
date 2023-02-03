@@ -35,7 +35,7 @@ namespace Game.Actors
 
         protected override void OnActivateAbility()
         {
-            UniTask.Run(Regeneration);
+            UniTask.Run(Regeneration).Forget();
         }
 
         private async UniTask Regeneration()
