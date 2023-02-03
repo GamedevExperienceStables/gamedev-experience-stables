@@ -19,5 +19,14 @@ namespace Game.Enemies
                 }
             }
         }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+
+            Vector3 position = transform.position;
+            foreach (EnemySpawnZone spawnZone in enemySpawnZones)
+                Gizmos.DrawLine(position, spawnZone.transform.position);
+        }
     }
 }
