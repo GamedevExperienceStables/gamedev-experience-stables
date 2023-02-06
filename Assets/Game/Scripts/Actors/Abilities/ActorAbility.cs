@@ -63,7 +63,10 @@ namespace Game.Actors
 
         public void CancelAbility()
         {
-            OnCancelAbility();
+            if (IsActive)
+                OnEndAbility(true);
+            
+            IsActive = false;
         }
 
         public void EndAbility()
@@ -90,9 +93,6 @@ namespace Game.Actors
         }
 
         protected abstract void OnActivateAbility();
-
-        protected virtual void OnCancelAbility()
-            => OnEndAbility(true);
 
         protected virtual void OnEndAbility(bool wasCancelled)
         {
