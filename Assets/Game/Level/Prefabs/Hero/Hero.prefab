@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 5547676887462078008}
   - component: {fileID: 2300186903787914912}
   - component: {fileID: 4701970604866781007}
+  - component: {fileID: -8342920493895960248}
   m_Layer: 3
   m_Name: Hero
   m_TagString: Untagged
@@ -561,6 +562,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathFeedback: {fileID: 0}
   destroyOnDeath: 0
+--- !u!114 &-8342920493895960248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247602722215226894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29dbc6fd77436be4d92c86d14f05818f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputSound:
+    Guid:
+      Data1: 1175942992
+      Data2: 1243012162
+      Data3: -940986451
+      Data4: -2133673114
+    Path: event:/Footstep
 --- !u!1 &3247602722463438873
 GameObject:
   m_ObjectHideFlags: 0

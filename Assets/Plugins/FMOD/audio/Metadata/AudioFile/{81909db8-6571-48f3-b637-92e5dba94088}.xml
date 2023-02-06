@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{81909db8-6571-48f3-b637-92e5dba94088}">
+		<property name="assetPath">
+			<value>char_mad_foot_00_asphalt_02.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.13052154195011337</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2ad7aef5-2b93-4e64-95df-fcd3a9768e2a}</destination>
+		</relationship>
+	</object>
+</objects>

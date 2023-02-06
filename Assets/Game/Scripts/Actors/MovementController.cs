@@ -1,4 +1,4 @@
-﻿using Game.Stats;
+using Game.Stats;
 using KinematicCharacterController;
 using UnityEngine;
 
@@ -26,7 +26,7 @@ namespace Game.Actors
         private IActorController _owner;
 
         public float CapsuleRadius => _motor.Capsule.radius;
-
+        public static bool flagRun = false;
         private void Awake()
         {
             _motor = GetComponent<KinematicCharacterMotor>();
@@ -71,10 +71,20 @@ namespace Game.Actors
             if (_motor.GroundingStatus.IsStableOnGround)
             {
                 UpdateGroundedState(ref currentVelocity, speed, deltaTime);
+                //это для звука шагов!!!!
+                if (currentVelocity.y != 0 || currentVelocity.x != 0)
+                {
+                    flagRun = true;
+                }
+                else
+                {
+                    flagRun = false;
+                }
             }
             else
             {
                 UpdateAirborneState(ref currentVelocity, speed, deltaTime);
+                flagRun = false;
             }
         }
 
