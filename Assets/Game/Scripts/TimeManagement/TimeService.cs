@@ -13,8 +13,6 @@ namespace Game.TimeManagement
         public void Play() => UnityEngine.Time.timeScale = 1;
 
         public float WorldTime => UnityEngine.Time.time;
-        public float UnscaledTime => UnityEngine.Time.unscaledTime;
         public float RealtimeSinceStartup => UnityEngine.Time.realtimeSinceStartup;
-        public float DeltaTime => UnityEngine.Time.deltaTime;
     }
 }
