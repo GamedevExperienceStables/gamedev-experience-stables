@@ -11,7 +11,12 @@ namespace Game.TimeManagement
         public TimerFactory(ITimeProvider timeProvider)
             => _timeProvider = timeProvider;
 
-        public TimerUpdatable CreateTimer(TimeSpan duration)
-            => new(duration, false, _timeProvider);
+        public TimerUpdatable CreateTimer(
+            TimeSpan duration,
+            Action onComplete = null,
+            bool isLooped = false,
+            bool ignoreTimeScale = false
+        )
+            => new(duration, onComplete, isLooped, ignoreTimeScale, _timeProvider);
     }
 }
