@@ -22,8 +22,9 @@ namespace Game.Enemies
             enemy.SetTarget(target);
             enemy.SetLoot(definition.LootBag);
             enemy.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
-
+            
             return enemy;
         }
+        
     }
 }
