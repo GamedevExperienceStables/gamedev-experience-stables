@@ -26,7 +26,7 @@ namespace Game.Level
         public override void OnCreate()
         {
             var door = Source.GetComponent<LocationDoor>();
-            _targetLocation = door.TargetLocation;
+            _targetLocation = door.TargetLocationPoint;
         }
 
         public override bool CanExecute()

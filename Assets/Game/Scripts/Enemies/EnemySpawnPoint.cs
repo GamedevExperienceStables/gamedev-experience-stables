@@ -1,23 +1,26 @@
-﻿using MoreMountains.Feedbacks;
+﻿using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
 
 namespace Game.Enemies
 {
-    public class EnemySpawner : MonoBehaviour
+    public class EnemySpawnPoint : MonoBehaviour
     {
         [SerializeField]
         private EnemyDefinition enemy;
 
-        [FormerlySerializedAs("interval")]
         [SerializeField]
-        private float spawnInterval = 4f;
+        private float spawnCount = 3f;
+        
+        [SerializeField]
+        private float spawnInterval = 5f;
 
         [SerializeField]
         private MMF_Player spawnFeedback;
 
-        private float _timeSinceLastSpawn;
+        private float _timeSinceLastSpawn = 0f;
         private Transform _target;
         private bool _hasTarget;
 
@@ -49,14 +52,18 @@ namespace Game.Enemies
 
         private void UpdateTimer()
         {
-            _timeSinceLastSpawn += Time.deltaTime;
-            if (_timeSinceLastSpawn < spawnInterval)
-            {
+            if (spawnCount <= 0) 
                 return;
+            if (_timeSinceLastSpawn >= spawnInterval) 
+                _timeSinceLastSpawn = 0f;
+            
+            if (_timeSinceLastSpawn == 0f)
+            {
+                spawnCount -= 1f;
+                _timeSinceLastSpawn = 0f;
+                Spawn(); 
             }
-
-            _timeSinceLastSpawn = 0f;
-            Spawn();
+            _timeSinceLastSpawn += Time.deltaTime;
         }
 
         private void Spawn()

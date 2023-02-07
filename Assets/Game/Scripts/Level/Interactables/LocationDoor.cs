@@ -1,13 +1,16 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Level
 {
     [DisallowMultipleComponent]
     public class LocationDoor : Interactable
     {
-        [SerializeField]
-        private LocationPointDefinition targetConnection;
+        [FormerlySerializedAs("targetConnection")]
+        [SerializeField, Required("Select LocationPoint where player will be spawned")]
+        private LocationPointDefinition targetLocationPoint;
 
-        public LocationPointDefinition TargetLocation => targetConnection;
+        public LocationPointDefinition TargetLocationPoint => targetLocationPoint;
     }
 }

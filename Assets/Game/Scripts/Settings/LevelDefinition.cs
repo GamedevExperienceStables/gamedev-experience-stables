@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Settings
 {
-    [CreateAssetMenu(menuName = "Data/Level")]
+    [CreateAssetMenu(menuName = "Settings/Level")]
     public class LevelDefinition : SerializableScriptableObject
     {
         [SerializeField]
