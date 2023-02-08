@@ -34,8 +34,6 @@ namespace Game.Actors
 
             public override bool CanActivateAbility()
             {
-                if (_aim.IsActive) 
-                    return false;
                 if (_isDashActive) 
                     return false;
                 return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
@@ -50,6 +48,7 @@ namespace Game.Actors
 
             protected override void OnActivateAbility()
             {
+                _aim.EndAbility();
                 _movementController.BlockInput(_isDashActive = true);
                 Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
                 Owner.AddModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);

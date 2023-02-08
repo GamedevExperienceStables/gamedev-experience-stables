@@ -46,6 +46,7 @@ namespace Game.Actors
 
         protected override void OnActivateAbility()
         {
+            DebugExtensions.DebugWireSphere(Owner.Transform.position, radius: Definition.MeleeRangeRadius);
             // to do: change method to non-allocating in the future
             Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
             var hits = Physics.OverlapSphere(Owner.Transform.position,
