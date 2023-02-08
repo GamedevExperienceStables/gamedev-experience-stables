@@ -62,7 +62,8 @@ namespace Game.LifetimeScopes
 
         private static void RegisterServices(IContainerBuilder builder)
         {
-            builder.Register<TimeService>(Lifetime.Singleton);
+            builder.Register<TimeService>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<TimerFactory>(Lifetime.Singleton);
             builder.Register<RandomService>(Lifetime.Singleton);
             builder.Register<QuitGameService>(Lifetime.Singleton);
         }

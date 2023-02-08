@@ -8,13 +8,13 @@ namespace Game.GameFlow
 {
     public class PlanetPauseState : GameState
     {
-        private readonly TimeService _timeService;
+        private readonly ITimeService _timeService;
         private readonly IInputService _inputService;
         private readonly GameplayView _view;
 
         [Inject]
         public PlanetPauseState(
-            TimeService timeService,
+            ITimeService timeService,
             IInputService inputService,
             GameplayView view
         )
