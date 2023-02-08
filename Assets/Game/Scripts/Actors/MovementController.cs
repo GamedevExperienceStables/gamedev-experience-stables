@@ -21,6 +21,7 @@ namespace Game.Actors
 
         private Vector3 _movementDirection;
         private Vector3 _lookDirection;
+        private Vector3 _internalVelocityAdd;
 
         private KinematicCharacterMotor _motor;
         private IActorController _owner;
@@ -49,7 +50,8 @@ namespace Game.Actors
 
             _lookDirection = lookDirection;
         }
-
+        
+        
         public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
         {
             if (_lookDirection.sqrMagnitude > 0f && rotation.sharpness > 0f)
@@ -63,7 +65,12 @@ namespace Game.Actors
                 currentRotation = Quaternion.LookRotation(smoothedLookInputDirection, _motor.CharacterUp);
             }
         }
-
+        
+        public void AddVelocity(Vector3 velocity)
+        {
+            _internalVelocityAdd += velocity;
+        }
+        
         public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
         {
             float speed = _owner.GetCurrentValue(CharacterStats.MovementSpeed);
