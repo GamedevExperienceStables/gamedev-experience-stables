@@ -27,10 +27,10 @@ namespace Game.Enemies
             _resolver.InjectGameObject(enemy.gameObject);
 
             enemy.InitStats(definition.InitialStats);
+            AddAbilities(enemy, definition);
             enemy.SetTarget(target);
             enemy.SetLoot(definition.LootBag);
             enemy.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
-            AddAbilities(enemy, definition);
 
             return enemy;
         }

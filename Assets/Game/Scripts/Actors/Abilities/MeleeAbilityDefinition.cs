@@ -25,10 +25,14 @@ namespace Game.Actors
         [SerializeField]
         private StatModifier staminaCost;
         
+        [SerializeField]
+        private LayerMask mask;
+        
         public float MeleeRangeRadius => meleeRangeRadius;
         public StatModifier MeleeDamage => meleeDamage;
         public StatModifier StaminaCost => staminaCost;
         public float PushForce => pushForce;
+        public LayerMask Mask => mask;
     }
     public class MeleeAbility : ActorAbility<MeleeAbilityDefinition>
     {
@@ -50,7 +54,7 @@ namespace Game.Actors
             // to do: change method to non-allocating in the future
             Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
             var hits = Physics.OverlapSphere(Owner.Transform.position,
-                Definition.MeleeRangeRadius,LayerMasks.Enemy );
+                Definition.MeleeRangeRadius,Definition.Mask );
             foreach (Collider hit in hits)
             {
                 Debug.Log(hit.transform.gameObject + "MELEE ATTACKED");
