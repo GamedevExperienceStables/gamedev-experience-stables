@@ -57,15 +57,15 @@ namespace Game.Actors
                     destinationOwner.GetComponent<DamageableController>().Damage(Definition.MeleeDamage);
                 Vector3 dir = hit.transform.position - Owner.Transform.position;
                 dir = dir.normalized * Definition.PushForce;
-                hit.transform.GetComponent<KinematicCharacterMotor>().MoveCharacter(hit.transform.position + dir);
+                hit.transform.GetComponent<MovementController>().AddVelocity(hit.transform.position + dir);
             }
         }
         
-        void OnDrawGizmosSelected()
+        /*void OnDrawGizmosSelected()
         {
             // for debbuging, delete after adding new method
             Gizmos.color = Color.cyan;
             Gizmos.DrawSphere(Owner.Transform.position, Definition.MeleeRangeRadius);
-        }
+        }*/
     }
 }

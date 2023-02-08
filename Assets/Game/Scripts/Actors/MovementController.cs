@@ -74,7 +74,11 @@ namespace Game.Actors
         public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
         {
             float speed = _owner.GetCurrentValue(CharacterStats.MovementSpeed);
-            
+            if (_internalVelocityAdd.sqrMagnitude > 0f)
+            {
+                currentVelocity += _internalVelocityAdd;
+                _internalVelocityAdd = Vector3.zero;
+            }
             if (_motor.GroundingStatus.IsStableOnGround)
             {
                 UpdateGroundedState(ref currentVelocity, speed, deltaTime);
