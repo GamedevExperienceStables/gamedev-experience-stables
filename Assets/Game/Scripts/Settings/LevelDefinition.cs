@@ -16,5 +16,11 @@ namespace Game.Settings
         public ILocationDefinition Location => location;
 
         public LevelGoalSettings Goal => goal;
+
+        public bool TryGetCompletionCutsceneName(out string sceneName)
+        {
+            sceneName = default;
+            return false;
+        }
     }
 }
