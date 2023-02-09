@@ -12,10 +12,6 @@ namespace Game.Level
         public SaveGameInteraction(PersistenceService persistence)
             => _persistence = persistence;
 
-        public override void OnCreate()
-        {
-        }
-
         public override bool CanExecute()
             => !_persistence.IsRunning;
 
