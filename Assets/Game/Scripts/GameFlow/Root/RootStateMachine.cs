@@ -12,7 +12,9 @@ namespace Game.GameFlow
             NewGameState newGameState,
             LoadGameState loadGameState,
             QuitGameState quitGameState,
-            PlanetState planetGameplayState
+            PlanetState planetGameplayState,
+            CompleteLevelState completeLevelState,
+            CompleteGameState completeGameState
         )
         {
             stateMachine.AddState(initState);
@@ -21,9 +23,11 @@ namespace Game.GameFlow
 
             stateMachine.AddState(newGameState);
             stateMachine.AddState(loadGameState);
+            stateMachine.AddState(completeGameState);
             stateMachine.AddState(quitGameState);
 
             stateMachine.AddState(planetGameplayState);
+            stateMachine.AddState(completeLevelState);
         }
     }
 }

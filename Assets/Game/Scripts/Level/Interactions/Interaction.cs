@@ -8,7 +8,10 @@ namespace Game.Level
         public GameObject Source { get; set; }
         public IActorController Instigator { get; set; }
 
-        public abstract void OnCreate();
+        public virtual void OnCreate()
+        {
+        }
+
         public abstract bool CanExecute();
         public abstract void Execute();
     }
