@@ -41,12 +41,7 @@ namespace Game.LifetimeScopes
             RegisterLootSystem(builder);
             RegisterAbilities(builder);
 
-            builder.UseEntryPoints(entryPoints =>
-            {
-                entryPoints.Add<GameplayEntryPoint>();
-                
-                entryPoints.Add<GameplayInputTracker>();
-            });
+            builder.RegisterEntryPoint<GameplayEntryPoint>();
         }
         
         private static void RegisterAbilities(IContainerBuilder builder)
@@ -64,6 +59,7 @@ namespace Game.LifetimeScopes
 
         private static void RegisterServices(IContainerBuilder builder)
         {
+            builder.Register<GameplayInputTracker>(Lifetime.Scoped);
             builder.Register<LocationController>(Lifetime.Scoped);
             builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
 
