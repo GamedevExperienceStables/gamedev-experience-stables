@@ -18,6 +18,9 @@ namespace Game.Actors
         private float pushForce;
         
         [SerializeField]
+        private int targetNum;
+        
+        [SerializeField]
         private float sphereColliderShift;
         
         [FormerlySerializedAs("MeleeDamage")]
@@ -36,6 +39,7 @@ namespace Game.Actors
         public float PushForce => pushForce;
         public LayerMask Mask => mask;
         public float SphereColliderShift => sphereColliderShift;
+        public int TargetNum => targetNum;
     }
     public class MeleeAbility : ActorAbility<MeleeAbilityDefinition>
     {
@@ -52,12 +56,12 @@ namespace Game.Actors
 
         protected override void OnActivateAbility()
         {
-            DebugExtensions.DebugWireSphere(Owner.Transform.position, radius: Definition.MeleeRangeRadius);
             // to do: change method to non-allocating in the future
             Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
             Vector3 sphereShift = Owner.Transform.position + Vector3.forward * Definition.SphereColliderShift;
-            var hits = Physics.OverlapSphere(sphereShift,
-                Definition.MeleeRangeRadius,Definition.Mask );
+            DebugExtensions.DebugWireSphere(sphereShift, radius: Definition.MeleeRangeRadius);
+                                                        /*var hits = Physics.OverlapSphOwner.Transform.positionere(sphereShift,
+                Definition.MeleeRangeRadius,Definition.Mask);
             foreach (Collider hit in hits)
             {
                 Debug.Log(hit.transform.gameObject + "MELEE ATTACKED");
@@ -67,6 +71,21 @@ namespace Game.Actors
                 dir = dir.normalized * Definition.PushForce;
                 hit.transform.GetComponent<MovementController>().AddVelocity(dir);
             }
+            */
+            
+            Collider[] hitColliders = new Collider[Definition.TargetNum];
+            int numColliders = Physics.OverlapSphereNonAlloc(sphereShift, 
+                Definition.MeleeRangeRadius, hitColliders, Definition.Mask);
+            for (int i = 0; i < numColliders; i++)
+            {
+                Debug.Log(hitColliders[i].transform.gameObject + "MELEE ATTACKED");
+                if (hitColliders[i].transform.gameObject.TryGetComponent(out IActorController destinationOwner))
+                    destinationOwner.GetComponent<DamageableController>().Damage(Definition.MeleeDamage);
+                Vector3 dir = hitColliders[i].transform.position - Owner.Transform.position;
+                dir = dir.normalized * Definition.PushForce;
+                hitColliders[i].transform.GetComponent<MovementController>().AddVelocity(dir);
+            }
+            
         }
         
         /*void OnDrawGizmosSelected()
