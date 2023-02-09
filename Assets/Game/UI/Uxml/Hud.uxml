@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:Template name="PropertyWidget" src="project://database/Assets/Game/UI/Uxml/Partial/PropertyWidget.uxml?fileID=9197481963319205126&amp;guid=e31eca968f2f9b04ea8f46d646c091d4&amp;type=3#PropertyWidget" />
+    <Style src="project://database/Assets/Game/UI/Uss/HudStyle.uss?fileID=7433441132597879392&amp;guid=43fb365d5654783488ae02a43eaf455d&amp;type=3#HudStyle" />
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
         <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: space-between; align-items: flex-start; margin-left: 20px; margin-top: 20px; margin-right: 30px;">
             <ui:VisualElement name="widget-crystal" style="align-items: center; height: 119px; width: 123px;">
@@ -29,13 +30,12 @@
                     <AttributeOverrides element-name="label" text="SP" />
                 </ui:Instance>
             </ui:VisualElement>
-            <ui:VisualElement name="health" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-                <ui:VisualElement style="flex-grow: 1; width: 87px; height: 82px; position: absolute; top: 14px; left: 10px; flex-direction: column; justify-content: flex-end; background-image: url(&apos;project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=-4528830608231651361&amp;guid=45cefae80f3effb4da42f0ff302bb887&amp;type=3#arrow-up@2x&apos;); -unity-background-image-tint-color: rgb(255, 0, 0);">
-                    <ui:VisualElement style="flex-grow: 0; height: 70%; flex-direction: column-reverse; transition-property: height; transition-duration: 0.1s; overflow: hidden; position: absolute;">
-                        <ui:VisualElement style="flex-grow: 0; background-color: rgb(253, 253, 253); height: 100%; flex-direction: column-reverse; transition-property: height; transition-duration: 0.1s; background-image: url(&apos;project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=-4528830608231651361&amp;guid=45cefae80f3effb4da42f0ff302bb887&amp;type=3#arrow-up@2x&apos;); -unity-background-scale-mode: stretch-to-fill; position: absolute; -unity-background-image-tint-color: rgb(255, 255, 255);" />
-                    </ui:VisualElement>
+            <ui:VisualElement name="health" class="hud-bar-size hud-bar hud-bar--red" style="justify-content: flex-end;">
+                <ui:VisualElement name="bg" style="background-image: url(&apos;project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=-4528830608231651361&amp;guid=45cefae80f3effb4da42f0ff302bb887&amp;type=3#arrow-up@2x&apos;); -unity-background-image-tint-color: rgb(0, 0, 0); flex-grow: 1; display: flex;" />
+                <ui:VisualElement name="mask" style="transition-property: height; transition-duration: 0.1s; overflow: hidden; position: absolute; left: 0; right: 0; height: 48%; bottom: 0; display: flex;">
+                    <ui:VisualElement name="fill" class="hud-bar-fill hud-bar-size" style="transition-property: height; transition-duration: 0.1s; background-image: url(&apos;project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=-4528830608231651361&amp;guid=45cefae80f3effb4da42f0ff302bb887&amp;type=3#arrow-up@2x&apos;); position: absolute; bottom: 0;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="corner" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Sandbox/NicePng_dota-png_7117672.png?fileID=2800000&amp;guid=36df9aa429c496f49b73277f51064652&amp;type=3#NicePng_dota-png_7117672&apos;); width: 100px; height: 100px;" />
+                <ui:VisualElement name="front-frame" style="background-image: url(&apos;project://database/Packages/com.unity.timeline/Editor/StyleSheets/Images/Shared/TimelineOutline.png?fileID=2800000&amp;guid=829511f8e35bf3a40be037a1050f801c&amp;type=3#TimelineOutline&apos;); position: absolute; left: 0; top: 0; right: 0; bottom: 0; display: flex;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

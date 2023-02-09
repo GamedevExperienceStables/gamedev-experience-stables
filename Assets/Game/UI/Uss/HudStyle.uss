@@ -1,0 +1,27 @@
+.hud-bar {
+}
+
+.hud-bar-size {
+    height: 100px;
+    width: 100px;
+}
+
+.hud-bar-fill {
+    
+}
+
+.hud-bar-frame {
+    
+}
+
+.hud-bar--red .hud-bar-fill  {
+    -unity-background-image-tint-color: rgb(255, 0, 0);
+}
+
+.hud-bar--blue .hud-bar-fill  {
+    -unity-background-image-tint-color: rgb(0, 29, 255);
+}
+
+.hud-bar--red .hud-bar-frame {
+    -unity-background-image-tint-color: rgb(255, 0, 0);
+}
