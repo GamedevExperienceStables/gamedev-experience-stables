@@ -24,7 +24,6 @@ namespace Game.Enemies
             _ai = GetComponent<AiController>();
             _movement = GetComponent<MovementController>();
             _loot = GetComponent<LootController>();
-            _melee = _owner.GetAbility<MeleeAbility>();
         }
 
         protected override void OnActorDestroy() 
@@ -44,7 +43,8 @@ namespace Game.Enemies
 
         public void SetLoot(LootBagDefinition definitionLootBag) 
             => _loot.SetLoot(definitionLootBag);
-
+        public void SetAbilities( ) 
+            => _melee = _owner.GetAbility<MeleeAbility>();
         private void Attack()
             => _melee.TryActivateAbility();
 

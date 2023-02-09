@@ -1,7 +1,6 @@
 ﻿using Game.Actors.Health;
 using Game.Stats;
 using Game.Utils;
-using KinematicCharacterController;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -18,6 +17,9 @@ namespace Game.Actors
         [SerializeField]
         private float pushForce;
         
+        [SerializeField]
+        private float sphereColliderShift;
+        
         [FormerlySerializedAs("MeleeDamage")]
         [SerializeField]
         private StatModifier meleeDamage;
@@ -33,16 +35,16 @@ namespace Game.Actors
         public StatModifier StaminaCost => staminaCost;
         public float PushForce => pushForce;
         public LayerMask Mask => mask;
+        public float SphereColliderShift => sphereColliderShift;
     }
     public class MeleeAbility : ActorAbility<MeleeAbilityDefinition>
     {
         private AimAbility _aim;
 
         public override bool CanActivateAbility()
-            => !_aim.IsActive && (Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value));
+            => !_aim.IsActive && Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
         
-             
-
+        
         protected override void OnInitAbility()
         {
             _aim = Owner.GetAbility<AimAbility>();
@@ -53,7 +55,8 @@ namespace Game.Actors
             DebugExtensions.DebugWireSphere(Owner.Transform.position, radius: Definition.MeleeRangeRadius);
             // to do: change method to non-allocating in the future
             Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
-            var hits = Physics.OverlapSphere(Owner.Transform.position,
+            Vector3 sphereShift = Owner.Transform.position + Vector3.forward * Definition.SphereColliderShift;
+            var hits = Physics.OverlapSphere(sphereShift,
                 Definition.MeleeRangeRadius,Definition.Mask );
             foreach (Collider hit in hits)
             {
@@ -62,7 +65,7 @@ namespace Game.Actors
                     destinationOwner.GetComponent<DamageableController>().Damage(Definition.MeleeDamage);
                 Vector3 dir = hit.transform.position - Owner.Transform.position;
                 dir = dir.normalized * Definition.PushForce;
-                hit.transform.GetComponent<MovementController>().AddVelocity(hit.transform.position + dir);
+                hit.transform.GetComponent<MovementController>().AddVelocity(dir);
             }
         }
         
