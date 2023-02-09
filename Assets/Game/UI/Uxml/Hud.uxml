@@ -30,7 +30,7 @@
                     <AttributeOverrides element-name="label" text="SP" />
                 </ui:Instance>
             </ui:VisualElement>
-            <ui:VisualElement name="health" class="hud-bar-size hud-bar hud-bar--red" style="justify-content: flex-end;">
+            <ui:VisualElement name="widget-bar-hp" class="hud-bar-size hud-bar hud-bar--red" style="justify-content: flex-end;">
                 <ui:VisualElement name="bg" style="background-image: url(&apos;project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=-4528830608231651361&amp;guid=45cefae80f3effb4da42f0ff302bb887&amp;type=3#arrow-up@2x&apos;); -unity-background-image-tint-color: rgb(0, 0, 0); flex-grow: 1; display: flex;" />
                 <ui:VisualElement name="mask" style="transition-property: height; transition-duration: 0.1s; overflow: hidden; position: absolute; left: 0; right: 0; height: 48%; bottom: 0; display: flex;">
                     <ui:VisualElement name="fill" class="hud-bar-fill hud-bar-size" style="transition-property: height; transition-duration: 0.1s; background-image: url(&apos;project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=-4528830608231651361&amp;guid=45cefae80f3effb4da42f0ff302bb887&amp;type=3#arrow-up@2x&apos;); position: absolute; bottom: 0;" />

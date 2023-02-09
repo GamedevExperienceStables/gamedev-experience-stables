@@ -37,6 +37,9 @@ namespace Game.UI
         private Label _crystal;
         private Label _crystalMax;
 
+        private float _currentMaxHp;
+        private VisualElement _hpBarWidgetMask;
+
         [Inject]
         public void Construct(GameplayViewModel viewModel)
             => _viewModel = viewModel;
@@ -56,6 +59,9 @@ namespace Game.UI
             _hp = hpWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
             _hpMax = hpWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
 
+            VisualElement hpBarWidget = _root.Q(LayoutNames.Hud.WIDGET_HP_BAR);
+            _hpBarWidgetMask = hpBarWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
+
             var mpWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_MP);
             mpWidget.Q<Label>(LayoutNames.Hud.TEXT_LABEL).text = "MP";
             _mp = mpWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
@@ -65,7 +71,7 @@ namespace Game.UI
             spWidget.Q<Label>(LayoutNames.Hud.TEXT_LABEL).text = "SP";
             _sp = spWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
             _spMax = spWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
-            
+
             var crystalWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_CRYSTAL);
             _crystal = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
             _crystalMax = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
@@ -120,19 +126,17 @@ namespace Game.UI
                 .OnCompleted(() => _root.SetDisplay(false));
         }
 
-        #region AwaitsRefactoring
-
         private void SubscribeStats()
         {
             _viewModel.HeroStatSubscribe(CharacterStats.Health, UpdateHealth);
             _viewModel.HeroStatSubscribe(CharacterStats.HealthMax, UpdateHealthMax);
-            
+
             _viewModel.HeroStatSubscribe(CharacterStats.Mana, UpdateMana);
             _viewModel.HeroStatSubscribe(CharacterStats.ManaMax, UpdateManaMax);
-            
+
             _viewModel.HeroStatSubscribe(CharacterStats.Stamina, UpdateStamina);
             _viewModel.HeroStatSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax);
-            
+
             _viewModel.BagMaterialsSubscribe(UpdateCrystal);
             _viewModel.BagMaterialsSubscribe(UpdateCrystalMax);
         }
@@ -141,26 +145,34 @@ namespace Game.UI
         {
             _viewModel.HeroStatUnSubscribe(CharacterStats.Health, UpdateHealth);
             _viewModel.HeroStatUnSubscribe(CharacterStats.HealthMax, UpdateHealthMax);
-            
+
             _viewModel.HeroStatUnSubscribe(CharacterStats.Mana, UpdateMana);
             _viewModel.HeroStatUnSubscribe(CharacterStats.ManaMax, UpdateManaMax);
-            
+
             _viewModel.HeroStatUnSubscribe(CharacterStats.Stamina, UpdateStamina);
-            _viewModel.HeroStatUnSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax); 
-            
+            _viewModel.HeroStatUnSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax);
+
             _viewModel.BagMaterialsUnSubscribe(UpdateCrystal);
             _viewModel.BagMaterialsUnSubscribe(UpdateCrystalMax);
         }
 
         private void UpdateHealth(StatValueChange change)
-            => _hp.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+        {
+            Length stylePercent = GetStylePercent(change.newValue, _currentMaxHp);
+            _hpBarWidgetMask.style.height = stylePercent;
+
+            _hp.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+        }
 
         private void UpdateHealthMax(StatValueChange change)
-            => _hpMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+        {
+            _currentMaxHp = change.newValue;
+            _hpMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+        }
 
         private void UpdateMana(StatValueChange change)
             => _mp.text = change.newValue.ToString(CultureInfo.InvariantCulture);
-        
+
         private void UpdateCrystal(MaterialChangedData change)
             => _crystal.text = change.newValue.ToString(CultureInfo.InvariantCulture);
 
@@ -172,10 +184,15 @@ namespace Game.UI
 
         private void UpdateStaminaMax(StatValueChange change)
             => _spMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
-        
+
         private void UpdateCrystalMax(MaterialChangedData change)
             => _crystalMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
 
-        #endregion
+        private static Length GetStylePercent(float current, float max)
+        {
+            float percent = current / max * 100;
+            var stylePercent = new Length(percent, LengthUnit.Percent);
+            return stylePercent;
+        }
     }
 }
