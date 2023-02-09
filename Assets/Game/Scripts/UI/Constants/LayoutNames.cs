@@ -25,6 +25,7 @@
             public const string WIDGET_HP = "widget-hp";
             public const string WIDGET_MP = "widget-mp";
             public const string WIDGET_SP = "widget-sp";
+            public const string WIDGET_CRYSTAL = "widget-crystal";
 
             public const string TEXT_LABEL = "text-label";
             public const string TEXT_CURRENT = "text-current";

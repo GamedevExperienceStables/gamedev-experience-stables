@@ -1,19 +1,41 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:Template name="PropertyWidget" src="project://database/Assets/Game/UI/Uxml/Partial/PropertyWidget.uxml?fileID=9197481963319205126&amp;guid=e31eca968f2f9b04ea8f46d646c091d4&amp;type=3#PropertyWidget" />
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-        <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: flex-end;">
+        <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: space-between; align-items: flex-start; margin-left: 20px; margin-top: 20px; margin-right: 30px;">
+            <ui:VisualElement name="widget-crystal" style="align-items: center; height: 119px; width: 123px;">
+                <ui:VisualElement name="crystal-icon" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/Settings/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-4528830608231651361&amp;guid=68defc61dddd5ac409f19cc4a99464da&amp;type=3#arrow-up@2x&apos;); width: 60px; height: 82px; align-self: center; align-items: auto; -unity-background-image-tint-color: rgb(255, 8, 8);" />
+                <ui:VisualElement style="flex-direction: row; -unity-text-align: upper-center; justify-content: center; align-items: auto; -unity-background-image-tint-color: rgb(0, 0, 0); font-size: 24px;">
+                    <ui:Label tabindex="-1" text="9999" display-tooltip-when-elided="true" name="text-current" style="color: rgb(255, 255, 255);" />
+                    <ui:Label tabindex="-1" text="/" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+                    <ui:Label tabindex="-1" text="9999" display-tooltip-when-elided="true" name="text-max" style="color: rgb(255, 255, 255);" />
+                </ui:VisualElement>
+            </ui:VisualElement>
             <ui:Button text="Menu" display-tooltip-when-elided="true" focusable="false" name="button-menu" style="-unity-font-style: normal;" />
+            <ui:VisualElement name="mini-map" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); background-image: none; align-items: flex-end; width: 351px; height: 274px;">
+                <ui:VisualElement name="background" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/Art/Textures/Brand/ges-logo-sprite.png?fileID=2800000&amp;guid=9cf8309659141ed4daae262274f405da&amp;type=3#ges-logo-sprite&apos;); align-items: center; justify-content: center; -unity-background-scale-mode: scale-to-fit; height: 190px; width: 336px; opacity: 0.5;" />
+                <ui:VisualElement name="corner" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Sandbox/NicePng_dota-png_7117672.png?fileID=2800000&amp;guid=36df9aa429c496f49b73277f51064652&amp;type=3#NicePng_dota-png_7117672&apos;); width: 376px; height: 310px; position: absolute; left: -25px; top: -28px;" />
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
         <ui:VisualElement style="background-color: rgba(0, 0, 0, 0);">
             <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-direction: row;">
-                <ui:Instance template="PropertyWidget" name="widget-hp" style="width: 150px;" />
+                <ui:Instance template="PropertyWidget" name="widget-hp" style="width: 150px;">
+                    <AttributeOverrides element-name="text-label" text="HP" />
+                </ui:Instance>
                 <ui:Instance template="PropertyWidget" name="widget-mp" style="width: 150px;">
                     <AttributeOverrides element-name="label" text="MP" />
                 </ui:Instance>
                 <ui:Instance template="PropertyWidget" name="widget-sp" style="width: 150px;">
                     <AttributeOverrides element-name="label" text="SP" />
                 </ui:Instance>
+            </ui:VisualElement>
+            <ui:VisualElement name="health" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                <ui:VisualElement style="flex-grow: 1; width: 87px; height: 82px; position: absolute; top: 14px; left: 10px; flex-direction: column; justify-content: flex-end; background-image: url(&apos;project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=-4528830608231651361&amp;guid=45cefae80f3effb4da42f0ff302bb887&amp;type=3#arrow-up@2x&apos;); -unity-background-image-tint-color: rgb(255, 0, 0);">
+                    <ui:VisualElement style="flex-grow: 0; height: 70%; flex-direction: column-reverse; transition-property: height; transition-duration: 0.1s; overflow: hidden; position: absolute;">
+                        <ui:VisualElement style="flex-grow: 0; background-color: rgb(253, 253, 253); height: 100%; flex-direction: column-reverse; transition-property: height; transition-duration: 0.1s; background-image: url(&apos;project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=-4528830608231651361&amp;guid=45cefae80f3effb4da42f0ff302bb887&amp;type=3#arrow-up@2x&apos;); -unity-background-scale-mode: stretch-to-fill; position: absolute; -unity-background-image-tint-color: rgb(255, 255, 255);" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="corner" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Sandbox/NicePng_dota-png_7117672.png?fileID=2800000&amp;guid=36df9aa429c496f49b73277f51064652&amp;type=3#NicePng_dota-png_7117672&apos;); width: 100px; height: 100px;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

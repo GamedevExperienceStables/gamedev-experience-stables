@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Cysharp.Threading.Tasks;
+using Game.Inventory;
 using Game.Stats;
 using Game.Utils;
 using UnityEngine;
@@ -33,6 +34,8 @@ namespace Game.UI
         private Label _mpMax;
         private Label _sp;
         private Label _spMax;
+        private Label _crystal;
+        private Label _crystalMax;
 
         [Inject]
         public void Construct(GameplayViewModel viewModel)
@@ -62,6 +65,10 @@ namespace Game.UI
             spWidget.Q<Label>(LayoutNames.Hud.TEXT_LABEL).text = "SP";
             _sp = spWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
             _spMax = spWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
+            
+            var crystalWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_CRYSTAL);
+            _crystal = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
+            _crystalMax = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
 
             SubscribeStats();
         }
@@ -125,6 +132,9 @@ namespace Game.UI
             
             _viewModel.HeroStatSubscribe(CharacterStats.Stamina, UpdateStamina);
             _viewModel.HeroStatSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax);
+            
+            _viewModel.BagMaterialsSubscribe(UpdateCrystal);
+            _viewModel.BagMaterialsSubscribe(UpdateCrystalMax);
         }
 
         private void UnSubscribeStats()
@@ -137,6 +147,9 @@ namespace Game.UI
             
             _viewModel.HeroStatUnSubscribe(CharacterStats.Stamina, UpdateStamina);
             _viewModel.HeroStatUnSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax); 
+            
+            _viewModel.BagMaterialsUnSubscribe(UpdateCrystal);
+            _viewModel.BagMaterialsUnSubscribe(UpdateCrystalMax);
         }
 
         private void UpdateHealth(StatValueChange change)
@@ -147,6 +160,9 @@ namespace Game.UI
 
         private void UpdateMana(StatValueChange change)
             => _mp.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+        
+        private void UpdateCrystal(MaterialChangedData change)
+            => _crystal.text = change.newValue.ToString(CultureInfo.InvariantCulture);
 
         private void UpdateManaMax(StatValueChange change)
             => _mpMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
@@ -156,6 +172,9 @@ namespace Game.UI
 
         private void UpdateStaminaMax(StatValueChange change)
             => _spMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+        
+        private void UpdateCrystalMax(MaterialChangedData change)
+            => _crystalMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
 
         #endregion
     }
