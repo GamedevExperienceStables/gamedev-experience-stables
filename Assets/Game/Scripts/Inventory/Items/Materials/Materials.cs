@@ -26,7 +26,7 @@ namespace Game.Inventory
         public void Init()
         {
             _container.Reset();
-            _bag.Reset();
+            ClearBag();
         }
 
         public void Init(IEnumerable<MaterialInitialData> container, IEnumerable<MaterialInitialData> bag)
@@ -37,6 +37,9 @@ namespace Game.Inventory
             foreach (MaterialInitialData data in bag)
                 _bag.SetValue(data.material, data.quantity);
         }
+
+        public void ClearBag() 
+            => _bag.Reset();
 
         public bool CanAddToBag(MaterialDefinition definition)
             => !_bag.IsFull(definition);

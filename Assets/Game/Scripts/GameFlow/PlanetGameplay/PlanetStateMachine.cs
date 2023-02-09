@@ -9,7 +9,8 @@ namespace Game.GameFlow
             PlanetState parentState,
             PlanetLocationLoadingState planetLoadingState,
             PlanetPlayState playState,
-            PlanetPauseState pauseState
+            PlanetPauseState pauseState,
+            PlanetCompleteState completeState
         )
         {
             parentState.Child = stateMachine;
@@ -17,6 +18,7 @@ namespace Game.GameFlow
             stateMachine.AddState(planetLoadingState);
             stateMachine.AddState(playState);
             stateMachine.AddState(pauseState);
+            stateMachine.AddState(completeState);
         }
     }
 }

@@ -18,14 +18,39 @@ namespace Game.Settings
         public List<LevelDefinition> Levels => levels;
 
         public ILocationPoint LevelStartPoint => levelStartPoint;
-        
+
         public LevelDefinition FindLevelById(string levelId)
+            => levels.Find(level => level.Id == levelId);
+
+        public LevelDefinition GetFirstLevel()
+            => Levels.First();
+
+        public LevelDefinition GetNextLevel(LevelDefinition currentLevel)
         {
-            LevelDefinition found = levels.Find(level => level.Id == levelId);
-            return found;
+            int nextLevelIndex = GetNextLevelIndex(currentLevel);
+            return levels[nextLevelIndex];
         }
 
-        public LevelDefinition GetFirstLevel() 
-            => Levels.First();
+        public bool IsLastLevel(LevelDefinition currentLevel)
+        {
+            int nextLevelIndex = GetNextLevelIndex(currentLevel);
+            return nextLevelIndex >= levels.Count;
+        }
+
+        private int GetLevelIndex(LevelDefinition currentLevel)
+        {
+            int levelIndex = levels.IndexOf(currentLevel);
+            if (levelIndex < 0)
+                throw new KeyNotFoundException($"Level '{currentLevel.name}' not found in settings list");
+
+            return levelIndex;
+        }
+
+        private int GetNextLevelIndex(LevelDefinition currentLevel)
+        {
+            int levelIndex = GetLevelIndex(currentLevel);
+            int nextLevelIndex = levelIndex + 1;
+            return nextLevelIndex;
+        }
     }
 }
