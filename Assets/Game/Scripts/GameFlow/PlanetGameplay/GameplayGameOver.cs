@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Actors;
 using Game.Hero;
 using Game.Player;
 using VContainer;
@@ -25,8 +26,17 @@ namespace Game.GameFlow
 
         private void OnHeroDied(HeroController hero)
         {
+            if (CanRevive(hero))
+                return;
+
             hero.RemoveAbilities();
             _planetStateMachine.PushState<PlanetGameOverState>();
+        }
+
+        private static bool CanRevive(IActorController hero)
+        {
+            var reviveAbility = hero.GetAbility<ReviveAbility>();
+            return reviveAbility.TryActivateAbility();
         }
     }
 }

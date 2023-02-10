@@ -45,6 +45,7 @@ namespace Game.LifetimeScopes
             builder.Register<AimAbility>(Lifetime.Transient);
             builder.Register<DashAbility>(Lifetime.Transient);
             builder.Register<RecoveryAbility>(Lifetime.Transient);
+            builder.Register<ReviveAbility>(Lifetime.Transient);
             builder.Register<MeleeAbility>(Lifetime.Transient);
             builder.Register<AutoPickupAbility>(Lifetime.Transient);
             builder.Register<InteractionAbility>(Lifetime.Transient);
