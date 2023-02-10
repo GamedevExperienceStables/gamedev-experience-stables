@@ -34,6 +34,12 @@ namespace Game.Actors.Health
             _owner.UnSubscribe(CharacterStats.Health, OnHealthChanged);
         }
 
+        public void Revive()
+        {
+            _isDead = false;
+            _damageableController.MakeVulnerable();
+        }
+
         private void OnHealthChanged(StatValueChange change)
         {
             if (change.newValue > 0)
@@ -47,7 +53,7 @@ namespace Game.Actors.Health
 
         private void Kill()
         {
-            MakeDead();
+            _isDead = true;
             _damageableController.MakeInvulnerable();
 
             Died?.Invoke();
@@ -57,9 +63,6 @@ namespace Game.Actors.Health
             if (destroyOnDeath)
                 Destroy(gameObject);
         }
-
-        private void MakeDead()
-            => _isDead = true;
 
         private void PlayDeathFeedback()
         {

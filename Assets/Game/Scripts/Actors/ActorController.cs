@@ -57,6 +57,9 @@ namespace Game.Actors
         public bool TryGetAbility(AbilityDefinition definition, out ActorAbility foundAbility)
             => _abilities.TryGetAbility(definition, out foundAbility);
 
+        public bool TryGetAbility<T>(out T foundAbility) where T : ActorAbility
+            => _abilities.TryGetAbility(out foundAbility);
+
         public T GetAbility<T>() where T : ActorAbility
             => _abilities.GetAbility<T>();
 
@@ -65,6 +68,9 @@ namespace Game.Actors
 
         protected void ResetAbilities()
             => _abilities.ResetAbilities();
+        
+        public void RemoveAbilities() 
+            => _abilities.RemoveAbilities();
 
         private void DestroyAbilities()
             => _abilities.DestroyAbilities();

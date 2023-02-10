@@ -11,17 +11,33 @@ namespace Game.UI
         [SerializeField]
         private PauseMenuView pauseMenuView;
 
+        [SerializeField]
+        private GameOverView gameOverView;
+
         public void Start()
         {
             hudView.HideImmediate();
             pauseMenuView.HideImmediate();
+            gameOverView.HideImmediate();
         }
 
         public void ShowHud()
         {
             hudView.Show();
             pauseMenuView.HideImmediate();
+            gameOverView.HideImmediate();
         }
+
+        public UniTask ShowGameOverAsync()
+        {
+            return UniTask.WhenAll(
+                hudView.HideAsync(),
+                gameOverView.ShowAsync()
+            );
+        }
+
+        public UniTask HideGameOverAsync() 
+            => gameOverView.HideAsync();
 
         public UniTask ShowPauseAsync()
         {
