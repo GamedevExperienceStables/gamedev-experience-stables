@@ -65,6 +65,7 @@ namespace Game.UI
             _crystal = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
             _crystalMax = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
 
+            InitCrystalView(_viewModel.GetCurrentMaterial());
             SubscribeStats();
         }
 
@@ -125,9 +126,8 @@ namespace Game.UI
 
             _viewModel.HeroStatSubscribe(CharacterStats.Stamina, UpdateStamina);
             _viewModel.HeroStatSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax);
-
-            _viewModel.BagMaterialsSubscribe(UpdateCrystal);
-            _viewModel.BagMaterialsSubscribe(UpdateCrystalMax);
+            
+            _viewModel.LevelBagMaterialSubscribe(UpdateCrystal);
         }
 
         private void UnSubscribeStats()
@@ -141,8 +141,7 @@ namespace Game.UI
             _viewModel.HeroStatUnSubscribe(CharacterStats.Stamina, UpdateStamina);
             _viewModel.HeroStatUnSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax);
 
-            _viewModel.BagMaterialsUnSubscribe(UpdateCrystal);
-            _viewModel.BagMaterialsUnSubscribe(UpdateCrystalMax);
+            _viewModel.LevelBagMaterialUnSubscribe(UpdateCrystal);
         }
 
         private void UpdateHealth(StatValueChange change)
@@ -172,11 +171,17 @@ namespace Game.UI
         private void UpdateStaminaMax(StatValueChange change)
             => _currentMaxSp = change.newValue;
 
+        private void InitCrystalView(IReadOnlyMaterialData materialData)
+        {
+            // todo: implement changing crystal color
+            // _crystalIcon.style.color = materialData.Definition.Color;
+
+            _crystal.text = materialData.Current.ToString(CultureInfo.InvariantCulture);
+            _crystalMax.text = materialData.Total.ToString(CultureInfo.InvariantCulture);
+        }
+
         private void UpdateCrystal(MaterialChangedData change)
             => _crystal.text = change.newValue.ToString(CultureInfo.InvariantCulture);
-
-        private void UpdateCrystalMax(MaterialChangedData change)
-            => _crystalMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
 
         private static Length GetStylePercent(float current, float max)
         {

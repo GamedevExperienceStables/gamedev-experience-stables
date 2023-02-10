@@ -1,5 +1,6 @@
 ﻿using Game.GameFlow;
 using Game.Inventory;
+using Game.Level;
 using Game.Player;
 using Game.Stats;
 using VContainer;
@@ -49,10 +50,10 @@ namespace Game.UI
         public void HeroStatUnSubscribe(CharacterStats key, IStats.StatChangedEvent callback)
             => _player.HeroStatUnSubscribe(key, callback);
 
-        public void BagMaterialsSubscribe(MaterialContainer.MaterialChangedEvent callback)
+        public void LevelBagMaterialSubscribe(MaterialContainer.MaterialChangedEvent callback)
             => _inventory.Materials.Bag.Subscribe(callback);
 
-        public void BagMaterialsUnSubscribe(MaterialContainer.MaterialChangedEvent callback)
+        public void LevelBagMaterialUnSubscribe(MaterialContainer.MaterialChangedEvent callback)
             => _inventory.Materials.Bag.UnSubscribe(callback);
 
         public IReadOnlyMaterialData GetCurrentMaterial()
