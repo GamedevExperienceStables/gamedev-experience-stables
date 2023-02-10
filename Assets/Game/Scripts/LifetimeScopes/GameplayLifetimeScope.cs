@@ -23,12 +23,6 @@ namespace Game.LifetimeScopes
         [SerializeField]
         private GameplayView gameplayView;
 
-        [SerializeField]
-        private HudView hudView;
-
-        [SerializeField]
-        private PauseMenuView pauseMenuView;
-
         protected override void Configure(IContainerBuilder builder)
         {
             RegisterServices(builder);
@@ -51,6 +45,7 @@ namespace Game.LifetimeScopes
             builder.Register<AimAbility>(Lifetime.Transient);
             builder.Register<DashAbility>(Lifetime.Transient);
             builder.Register<RecoveryAbility>(Lifetime.Transient);
+            builder.Register<ReviveAbility>(Lifetime.Transient);
             builder.Register<MeleeAbility>(Lifetime.Transient);
             builder.Register<AutoPickupAbility>(Lifetime.Transient);
             builder.Register<InteractionAbility>(Lifetime.Transient);
@@ -59,7 +54,9 @@ namespace Game.LifetimeScopes
 
         private static void RegisterServices(IContainerBuilder builder)
         {
-            builder.Register<GameplayInputTracker>(Lifetime.Scoped);
+            builder.Register<GameplayPause>(Lifetime.Scoped);
+            builder.Register<GameplayBackButton>(Lifetime.Scoped);
+            builder.Register<GameplayGameOver>(Lifetime.Scoped);
             builder.Register<LocationController>(Lifetime.Scoped);
             builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
 
@@ -86,10 +83,15 @@ namespace Game.LifetimeScopes
         private void RegisterUi(IContainerBuilder builder)
         {
             builder.Register<GameplayViewModel>(Lifetime.Scoped);
-
-            builder.RegisterComponent(gameplayView);
-            builder.RegisterComponent(hudView);
-            builder.RegisterComponent(pauseMenuView);
+            
+            builder.UseComponents(componentsBuilder =>
+            {
+                Transform uiRoot = gameplayView.transform;
+                componentsBuilder.AddInstance(gameplayView);
+                componentsBuilder.AddInHierarchy<HudView>().UnderTransform(uiRoot);
+                componentsBuilder.AddInHierarchy<PauseMenuView>().UnderTransform(uiRoot);
+                componentsBuilder.AddInHierarchy<GameOverView>().UnderTransform(uiRoot);
+            });
         }
 
         private void RegisterCameras(IContainerBuilder builder)
@@ -105,6 +107,7 @@ namespace Game.LifetimeScopes
             builder.Register<PlanetLocationLoadingState>(Lifetime.Scoped);
             builder.Register<PlanetPlayState>(Lifetime.Scoped);
             builder.Register<PlanetPauseState>(Lifetime.Scoped);
+            builder.Register<PlanetGameOverState>(Lifetime.Scoped);
             builder.Register<PlanetCompleteState>(Lifetime.Scoped);
         }
 

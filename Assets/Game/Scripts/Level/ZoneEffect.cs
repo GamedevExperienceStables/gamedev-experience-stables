@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Actors;
 using UnityEngine;
 
@@ -9,7 +10,10 @@ namespace Game.Level
         [SerializeField]
         private ZoneTrigger trigger;
 
-        private readonly List<IActorController> _insideZone = new();
+        public List<IActorController> InsideZone { get; } = new();
+
+        public event Action<IActorController> ActorAdded;
+        public event Action<IActorController> ActorRemoved;
 
         private void OnEnable()
         {
@@ -28,10 +32,11 @@ namespace Game.Level
             if (!other.TryGetComponent(out IActorController actor))
                 return;
 
-            if (_insideZone.Contains(actor))
+            if (InsideZone.Contains(actor))
                 return;
-            
-            _insideZone.Add(actor);
+
+            ActorAdded?.Invoke(actor);
+            InsideZone.Add(actor);
         }
 
         private void OnTriggerExited(GameObject other)
@@ -39,10 +44,11 @@ namespace Game.Level
             if (!other.TryGetComponent(out IActorController actor))
                 return;
             
-            if (!_insideZone.Contains(actor))
+            if (!InsideZone.Contains(actor))
                 return;
 
-            _insideZone.Remove(actor);
+            ActorRemoved?.Invoke(actor);
+            InsideZone.Remove(actor);
         }
     }
 }

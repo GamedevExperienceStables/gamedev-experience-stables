@@ -1,13 +1,15 @@
-﻿using UnityEngine;
+﻿using Game.Actors;
+using UnityEngine;
 
 namespace Game.Enemies
 {
-    public class AiController : MonoBehaviour
+    public class AiController : MonoBehaviour, IActorInputController
     {
         private NavigationController _navigation;
 
         private Transform _target;
         private bool _hasTarget;
+        private bool _inputBlocked;
 
         private void Awake()
             => _navigation = GetComponent<NavigationController>();
@@ -26,5 +28,8 @@ namespace Game.Enemies
             if (_navigation.IsValidPath())
                 _navigation.MoveToPosition(_target.position);
         }
+
+        public void BlockInput(bool isBlocked) 
+            => _inputBlocked = isBlocked;
     }
 }
