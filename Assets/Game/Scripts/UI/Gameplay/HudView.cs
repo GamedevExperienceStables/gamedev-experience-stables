@@ -27,18 +27,16 @@ namespace Game.UI
 
         private TimeSpan _showDuration;
         private TimeSpan _hideDuration;
-
-        private Label _hp;
-        private Label _hpMax;
-        private Label _mp;
-        private Label _mpMax;
-        private Label _sp;
-        private Label _spMax;
+        
         private Label _crystal;
         private Label _crystalMax;
 
         private float _currentMaxHp;
         private VisualElement _hpBarWidgetMask;
+        private float _currentMaxMp;
+        private VisualElement _mpBarWidgetMask;
+        private float _currentMaxSp;
+        private VisualElement _spBarWidgetMask;
 
         [Inject]
         public void Construct(GameplayViewModel viewModel)
@@ -55,22 +53,13 @@ namespace Game.UI
             _hideDuration = TimeSpan.FromSeconds(hideDuration);
 
             var hpWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_HP);
-            hpWidget.Q<Label>(LayoutNames.Hud.TEXT_LABEL).text = "HP";
-            _hp = hpWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
-            _hpMax = hpWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
-
-            VisualElement hpBarWidget = _root.Q(LayoutNames.Hud.WIDGET_HP_BAR);
-            _hpBarWidgetMask = hpBarWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
+            _hpBarWidgetMask = hpWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
 
             var mpWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_MP);
-            mpWidget.Q<Label>(LayoutNames.Hud.TEXT_LABEL).text = "MP";
-            _mp = mpWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
-            _mpMax = mpWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
-
+            _mpBarWidgetMask = mpWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
+            
             var spWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_SP);
-            spWidget.Q<Label>(LayoutNames.Hud.TEXT_LABEL).text = "SP";
-            _sp = spWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
-            _spMax = spWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
+            _spBarWidgetMask = spWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
 
             var crystalWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_CRYSTAL);
             _crystal = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
@@ -160,30 +149,31 @@ namespace Game.UI
         {
             Length stylePercent = GetStylePercent(change.newValue, _currentMaxHp);
             _hpBarWidgetMask.style.height = stylePercent;
-
-            _hp.text = change.newValue.ToString(CultureInfo.InvariantCulture);
         }
 
-        private void UpdateHealthMax(StatValueChange change)
-        {
-            _currentMaxHp = change.newValue;
-            _hpMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
-        }
+        private void UpdateHealthMax(StatValueChange change) 
+            => _currentMaxHp = change.newValue;
 
         private void UpdateMana(StatValueChange change)
-            => _mp.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+        {
+            Length stylePercent = GetStylePercent(change.newValue, _currentMaxMp);
+            _mpBarWidgetMask.style.height = stylePercent;
+        }
+
+        private void UpdateManaMax(StatValueChange change)
+            => _currentMaxMp = change.newValue;
+
+        private void UpdateStamina(StatValueChange change)
+        {
+            Length stylePercent = GetStylePercent(change.newValue, _currentMaxSp);
+            _spBarWidgetMask.style.width = stylePercent;
+        }
+
+        private void UpdateStaminaMax(StatValueChange change)
+            => _currentMaxSp = change.newValue;
 
         private void UpdateCrystal(MaterialChangedData change)
             => _crystal.text = change.newValue.ToString(CultureInfo.InvariantCulture);
-
-        private void UpdateManaMax(StatValueChange change)
-            => _mpMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
-
-        private void UpdateStamina(StatValueChange change)
-            => _sp.text = change.newValue.ToString(CultureInfo.InvariantCulture);
-
-        private void UpdateStaminaMax(StatValueChange change)
-            => _spMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
 
         private void UpdateCrystalMax(MaterialChangedData change)
             => _crystalMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
