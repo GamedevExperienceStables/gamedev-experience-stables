@@ -41,5 +41,8 @@ namespace Game.Actors.Health
 
         public void MakeInvulnerable()
             => IsInvulnerable = true;
+
+        public void MakeVulnerable() 
+            => IsInvulnerable = false;
     }
 }
