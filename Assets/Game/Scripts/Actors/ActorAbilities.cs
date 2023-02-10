@@ -36,9 +36,21 @@ namespace Game.Actors
 
             ability.RemoveAbility();
         }
-        
-        public T GetAbility<T>() where T : ActorAbility 
+
+        public T GetAbility<T>() where T : ActorAbility
             => _abilities[typeof(T)] as T;
+
+        public bool TryGetAbility<T>(out T foundAbility) where T : ActorAbility
+        {
+            if (_abilities.TryGetValue(typeof(T), out ActorAbility ability))
+            {
+                foundAbility = ability as T;
+                return true;
+            }
+
+            foundAbility = default;
+            return false;
+        }
 
         public bool TryGetAbility(AbilityDefinition definition, out ActorAbility foundAbility)
         {
@@ -65,6 +77,12 @@ namespace Game.Actors
         {
             foreach (ActorAbility ability in _abilities.Values)
                 ability.ResetAbility();
+        }
+
+        public void RemoveAbilities()
+        {
+            foreach (ActorAbility ability in _abilities.Values)
+                ability.RemoveAbility();
         }
 
         public void DestroyAbilities()

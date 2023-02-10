@@ -7,7 +7,6 @@
             public const string CONTAINER = "pause-menu";
             
             public const string BUTTON_MAIN_MENU = "button-exit";
-            public const string BUTTON_RESTART = "button-restart";
             public const string BUTTON_RESUME = "button-resume";
         }
 
@@ -37,6 +36,14 @@
         public static class LoadingScreen
         {
             public const string CONTAINER = "loading-screen";
+        }
+
+        public static class GameOver
+        {
+            public const string CONTAINER = "game-over-screen";
+            
+            public const string BUTTON_RESTART = "button-restart";
+            public const string BUTTON_MAIN_MENU = "button-exit";
         }
     }
 }
