@@ -49,6 +49,7 @@ namespace Game.LifetimeScopes
             builder.Register<LevelData>(Lifetime.Singleton);
             builder.Register<LevelController>(Lifetime.Singleton);
             builder.Register<LevelImportExport>(Lifetime.Singleton);
+            builder.Register<LevelGoalChecker>(Lifetime.Singleton);
 
             builder.Register<PlayerData>(Lifetime.Singleton);
             builder.Register<PlayerController>(Lifetime.Singleton);
@@ -62,7 +63,8 @@ namespace Game.LifetimeScopes
 
         private static void RegisterServices(IContainerBuilder builder)
         {
-            builder.Register<TimeService>(Lifetime.Singleton);
+            builder.Register<TimeService>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<TimerFactory>(Lifetime.Singleton);
             builder.Register<RandomService>(Lifetime.Singleton);
             builder.Register<QuitGameService>(Lifetime.Singleton);
         }
@@ -98,6 +100,8 @@ namespace Game.LifetimeScopes
             builder.Register<MainMenuState>(Lifetime.Singleton);
             builder.Register<NewGameState>(Lifetime.Singleton);
             builder.Register<LoadGameState>(Lifetime.Singleton);
+            builder.Register<CompleteLevelState>(Lifetime.Singleton);
+            builder.Register<CompleteGameState>(Lifetime.Singleton);
             builder.Register<QuitGameState>(Lifetime.Singleton);
             builder.Register<PlanetState>(Lifetime.Singleton);
         }

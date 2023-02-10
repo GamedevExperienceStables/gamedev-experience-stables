@@ -10,6 +10,7 @@ namespace Game.Level
             [typeof(LocationDoor)] = typeof(TransitionToLocationInteraction),
             [typeof(RocketContainer)] = typeof(RocketContainerInteraction),
             [typeof(SavePoint)] = typeof(SaveGameInteraction),
+            [typeof(LevelExitPoint)] = typeof(LevelExitInteraction),
         };
 
         public static Type GetInteractionType(Interactable interactable)

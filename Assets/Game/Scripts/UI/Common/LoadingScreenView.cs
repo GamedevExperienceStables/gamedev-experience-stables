@@ -39,6 +39,7 @@ namespace Game.UI
                 return;
 
             FadeIn(_showDuration);
+            _isActive = true;
         }
 
         public void Hide()
@@ -47,24 +48,30 @@ namespace Game.UI
                 return;
 
             FadeOut(_showDuration);
+            _isActive = false;
         }
 
-        public UniTask ShowAsync()
+        public async UniTask ShowAsync()
         {
             if (_isActive)
-                return UniTask.CompletedTask;
+                return;
             
             Show();
-            return UniTask.Delay(_showDuration);
+            
+            await UniTask.Delay(_showDuration);
+            
+            _isActive = true;
         }
 
-        public UniTask HideAsync()
+        public async UniTask HideAsync()
         {
             if (_isActive)
-                return UniTask.CompletedTask;
+                return;
             
             Hide();
-            return UniTask.Delay(_hideDuration);
+            await UniTask.Delay(_hideDuration);
+
+            _isActive = false;
         }
 
 
@@ -73,8 +80,7 @@ namespace Game.UI
             _container.SetDisplay(true);
             _container.experimental.animation
                 .Start(new StyleValues { opacity = 1f }, (int)duration.TotalMilliseconds)
-                .Ease(Easing.InCubic)
-                .OnCompleted(() => _isActive = true);
+                .Ease(Easing.InCubic);
         }
 
         private void FadeOut(TimeSpan duration)
@@ -82,11 +88,7 @@ namespace Game.UI
             _container.experimental.animation
                 .Start(new StyleValues { opacity = 0f }, (int)duration.TotalMilliseconds)
                 .Ease(Easing.InCubic)
-                .OnCompleted(() =>
-                {
-                    _container.SetDisplay(false);
-                    _isActive = false;
-                });
+                .OnCompleted(() => _container.SetDisplay(false));
         }
     }
 }

@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Game/Level/Scenes/Other/Intro.unity
     guid: 2fa9474f3ef4de74da8dd537b1d55537
   - enabled: 1
+    path: Assets/Game/Level/Scenes/Other/Ending.unity
+    guid: 5f5a6fa0c7442844f8eb78751396d4a0
+  - enabled: 1
     path: Assets/Game/Level/Scenes/Levels/Rocket.unity
     guid: 9c5c7b1c4a790bc4cae59dd29ee73451
   - enabled: 1
@@ -29,9 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Level/Scenes/Levels/Planet1_Dungeon1.unity
     guid: 354a9d38bdbdd634ca875da335fb3c53
-  - enabled: 1
-    path: Assets/Game/Level/Scenes/TestScene.unity
-    guid: 4036d83a1d892a74ea8cf1203387ea10
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 356ab69d75917644f8bb1676edee2467,
       type: 2}
