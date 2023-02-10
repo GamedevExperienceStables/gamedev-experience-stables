@@ -2,13 +2,12 @@
 using Game.Cameras;
 using Game.Input;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using VContainer;
 
 namespace Game.Hero
 {
     [RequireComponent(typeof(MovementController))]
-    public class HeroInputController : MonoBehaviour
+    public class HeroInputController : MonoBehaviour, IActorInputController
     {
         private SceneCamera _sceneCamera;
 
@@ -108,7 +107,12 @@ namespace Game.Hero
 
         private void HandleInputs()
         {
-            if (_isBlocked) return;
+            if (_isBlocked)
+            {
+                _movementDirection = Vector3.zero;
+                return;
+            }
+
             _movementDirection = GetMovementDirection();
             _lookDirection = GetLookDirection(_movementDirection);
         }

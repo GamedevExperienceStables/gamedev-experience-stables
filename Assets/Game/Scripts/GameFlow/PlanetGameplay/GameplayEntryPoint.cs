@@ -7,23 +7,23 @@ namespace Game.GameFlow
     public sealed class GameplayEntryPoint : IStartable, IDisposable
     {
         private readonly PlanetStateMachine _planetStateMachine;
-        private readonly GameplayInputTracker _inputTracker;
+        private readonly GameplayGameOver _gameOver;
 
         [Inject]
-        public GameplayEntryPoint(PlanetStateMachine planetStateMachine, GameplayInputTracker inputTracker)
+        public GameplayEntryPoint(PlanetStateMachine planetStateMachine, GameplayGameOver gameOver)
         {
             _planetStateMachine = planetStateMachine;
-            _inputTracker = inputTracker;
+            _gameOver = gameOver;
         }
 
         public void Start()
         {
-            _inputTracker.Start();
-            
+            _gameOver.Start();
+
             _planetStateMachine.EnterState<PlanetLocationLoadingState>();
         }
 
-        public void Dispose() 
-            => _inputTracker.Dispose();
+        public void Dispose()
+            => _gameOver.Dispose();
     }
 }

@@ -7,6 +7,7 @@ namespace Game.Actors
     {
         Transform Transform { get; }
         T GetComponent<T>();
+        bool TryGetComponent<T>(out T component);
         
         bool HasStat(CharacterStats key);
         float GetCurrentValue(CharacterStats key);

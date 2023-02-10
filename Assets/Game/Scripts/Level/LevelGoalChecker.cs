@@ -23,7 +23,7 @@ namespace Game.Level
             if (currentMaterialCount < definition.Goal.Count)
                 return false;
 
-            // check if waves is destroyed
+            // check if waves are destroyed
             
             return true;
         }

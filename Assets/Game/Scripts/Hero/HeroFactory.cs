@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Actors;
 using Game.Player;
 using VContainer;
@@ -6,7 +7,7 @@ using VContainer.Unity;
 
 namespace Game.Hero
 {
-    public class HeroFactory
+    public sealed class HeroFactory: IDisposable
     {
         private readonly HeroDefinition _heroDefinition;
         private readonly PlayerController _player;
@@ -14,8 +15,12 @@ namespace Game.Hero
         private readonly IObjectResolver _resolver;
 
         [Inject]
-        public HeroFactory(HeroDefinition heroDefinition, PlayerController player, AbilityFactory abilityFactory,
-            IObjectResolver resolver)
+        public HeroFactory(
+            HeroDefinition heroDefinition,
+            PlayerController player,
+            AbilityFactory abilityFactory,
+            IObjectResolver resolver
+        )
         {
             _heroDefinition = heroDefinition;
             _player = player;
@@ -27,8 +32,8 @@ namespace Game.Hero
         {
             HeroController hero = _resolver.Instantiate(_heroDefinition.Prefab);
             _resolver.InjectGameObject(hero.gameObject);
-            
-            hero.Bind(_player.GetStats());
+
+            _player.BindHero(hero);
             AddAbilities(hero);
 
             return hero;
@@ -58,5 +63,8 @@ namespace Game.Hero
             foreach (AbilityDefinition definition in abilities)
                 actor.GiveAbility(definition);
         }
+
+        public void Dispose() 
+            => _player.UnbindHero();
     }
 }
