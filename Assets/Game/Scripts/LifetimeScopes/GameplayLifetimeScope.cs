@@ -23,12 +23,6 @@ namespace Game.LifetimeScopes
         [SerializeField]
         private GameplayView gameplayView;
 
-        [SerializeField]
-        private HudView hudView;
-
-        [SerializeField]
-        private PauseMenuView pauseMenuView;
-
         protected override void Configure(IContainerBuilder builder)
         {
             RegisterServices(builder);
@@ -86,10 +80,15 @@ namespace Game.LifetimeScopes
         private void RegisterUi(IContainerBuilder builder)
         {
             builder.Register<GameplayViewModel>(Lifetime.Scoped);
-
-            builder.RegisterComponent(gameplayView);
-            builder.RegisterComponent(hudView);
-            builder.RegisterComponent(pauseMenuView);
+            
+            builder.UseComponents(componentsBuilder =>
+            {
+                Transform uiRoot = gameplayView.transform;
+                componentsBuilder.AddInstance(gameplayView);
+                componentsBuilder.AddInHierarchy<HudView>().UnderTransform(uiRoot);
+                componentsBuilder.AddInHierarchy<PauseMenuView>().UnderTransform(uiRoot);
+                componentsBuilder.AddInHierarchy<GameOverView>().UnderTransform(uiRoot);
+            });
         }
 
         private void RegisterCameras(IContainerBuilder builder)
