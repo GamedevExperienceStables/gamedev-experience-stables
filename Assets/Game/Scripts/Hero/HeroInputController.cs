@@ -2,13 +2,12 @@
 using Game.Cameras;
 using Game.Input;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using VContainer;
 
 namespace Game.Hero
 {
     [RequireComponent(typeof(MovementController))]
-    public class HeroInputController : MonoBehaviour
+    public class HeroInputController : MonoBehaviour, IActorInputController
     {
         private SceneCamera _sceneCamera;
 
