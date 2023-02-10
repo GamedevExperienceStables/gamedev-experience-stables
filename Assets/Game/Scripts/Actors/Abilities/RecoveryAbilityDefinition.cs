@@ -29,6 +29,8 @@ namespace Game.Actors
 
     public class RecoveryAbility : ActorAbility<RecoveryAbilityDefinition>
     {
+        private bool _isRecoveryActive;
+        
         public override bool CanActivateAbility()
             => true;
         
@@ -40,13 +42,18 @@ namespace Game.Actors
 
         private async UniTask Regeneration()
         {
-            while (true)
+            while (!_isRecoveryActive)
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(Definition.RecoveryTime), ignoreTimeScale: false);
                 Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaRegeneration);
                 Owner.ApplyModifier(CharacterStats.Mana, Definition.ManaRegeneration);
                 Owner.ApplyModifier(CharacterStats.Health, Definition.HealthRegeneration);
             }
+        }
+        
+        protected override void OnEndAbility(bool wasCancelled)
+        {
+            _isRecoveryActive = wasCancelled;
         }
     }
 }

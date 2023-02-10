@@ -56,23 +56,9 @@ namespace Game.Actors
 
         protected override void OnActivateAbility()
         {
-            // to do: change method to non-allocating in the future
             Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
             Vector3 sphereShift = Owner.Transform.position + Vector3.forward * Definition.SphereColliderShift;
             DebugExtensions.DebugWireSphere(sphereShift, radius: Definition.MeleeRangeRadius);
-                                                        /*var hits = Physics.OverlapSphOwner.Transform.positionere(sphereShift,
-                Definition.MeleeRangeRadius,Definition.Mask);
-            foreach (Collider hit in hits)
-            {
-                Debug.Log(hit.transform.gameObject + "MELEE ATTACKED");
-                if (hit.transform.gameObject.TryGetComponent(out IActorController destinationOwner))
-                    destinationOwner.GetComponent<DamageableController>().Damage(Definition.MeleeDamage);
-                Vector3 dir = hit.transform.position - Owner.Transform.position;
-                dir = dir.normalized * Definition.PushForce;
-                hit.transform.GetComponent<MovementController>().AddVelocity(dir);
-            }
-            */
-            
             Collider[] hitColliders = new Collider[Definition.TargetNum];
             int numColliders = Physics.OverlapSphereNonAlloc(sphereShift, 
                 Definition.MeleeRangeRadius, hitColliders, Definition.Mask);
@@ -85,14 +71,6 @@ namespace Game.Actors
                 dir = dir.normalized * Definition.PushForce;
                 hitColliders[i].transform.GetComponent<MovementController>().AddVelocity(dir);
             }
-            
         }
-        
-        /*void OnDrawGizmosSelected()
-        {
-            // for debbuging, delete after adding new method
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawSphere(Owner.Transform.position, Definition.MeleeRangeRadius);
-        }*/
     }
 }
