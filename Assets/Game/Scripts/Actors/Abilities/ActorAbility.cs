@@ -25,10 +25,11 @@ namespace Game.Actors
 
         public void RemoveAbility()
         {
+            IsEnabled = false;
+            
             if (IsActive)
                 CancelAbility();
 
-            IsEnabled = false;
             OnRemoveAbility();
         }
 
@@ -63,18 +64,20 @@ namespace Game.Actors
 
         public void CancelAbility()
         {
-            if (IsActive)
-                OnEndAbility(true);
-            
+            if (!IsActive)
+                return;
+
             IsActive = false;
+            OnEndAbility(true);
         }
 
         public void EndAbility()
         {
-            if (IsActive)
-                OnEndAbility(false);
-
+            if (!IsActive) 
+                return;
+            
             IsActive = false;
+            OnEndAbility(false);
         }
 
         public abstract bool CanActivateAbility();
