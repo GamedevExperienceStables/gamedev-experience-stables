@@ -6,6 +6,12 @@ namespace Game.Actors
     [CreateAssetMenu(menuName = MENU_PATH + "Weapon")]
     public class WeaponAbilityDefinition : AbilityDefinition<WeaponAbility>
     {
+        [SerializeField]
+        private bool isEnemy;
+        [SerializeField]
+        private LayerMask mask;
+        public bool IsEnemy => isEnemy;
+        public LayerMask Mask => mask;
     }
 
     public class WeaponAbility : ActorAbility<WeaponAbilityDefinition>
@@ -23,7 +29,7 @@ namespace Game.Actors
         }
 
         public override bool CanActivateAbility()
-            => _aim.IsActive;
+            => Definition.IsEnemy || _aim.IsActive;
 
         protected override void OnActivateAbility()
             => _currentWeapon.SpawnProjectile();

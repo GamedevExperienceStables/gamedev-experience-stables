@@ -13,6 +13,7 @@ namespace Game.Enemies
         private MovementController _movement;
         private LootController _loot;
         private MeleeAbility _melee;
+        private WeaponAbility _weapon;
         private float _time = 2.0f;
         private EnemyStats _stats;
         private IActorController _owner;
@@ -43,17 +44,27 @@ namespace Game.Enemies
 
         public void SetLoot(LootBagDefinition definitionLootBag) 
             => _loot.SetLoot(definitionLootBag);
-        public void SetAbilities( ) 
-            => _melee = _owner.GetAbility<MeleeAbility>();
-        private void Attack()
+
+        public void SetAbilities()
+        {
+            _melee = _owner.GetAbility<MeleeAbility>();
+            _weapon = _owner.GetAbility<WeaponAbility>();
+
+        }
+        
+        private void MeleeAttack()
             => _melee.TryActivateAbility();
+        
+        private void RangeAttack()
+            => _weapon.TryActivateAbility();
 
         private void Update()
         {
             _time -= Time.deltaTime;
             if (_time <= 0)
             {
-                Attack();
+                MeleeAttack();
+                RangeAttack();
                 _time = 2.0f;
             }
         }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2169979632489900425}
   - component: {fileID: 2169979632489900430}
   m_Layer: 3
-  m_Name: BasicBullet
+  m_Name: BasicBulletZombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2169979632489900431}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2169979633855609758}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2169979632489900425
 MonoBehaviour:
@@ -53,7 +53,7 @@ MonoBehaviour:
   raycastRadius: 0.05
   collisionLayerMask:
     serializedVersion: 2
-    m_Bits: 2625
+    m_Bits: 585
   deathFeedbackPrefab: {fileID: 7383564464360880306, guid: f9d5596b2249c4f4aacfbaf3c263e6f5,
     type: 3}
   damageDealer: {fileID: 2169979632489900430}
@@ -132,7 +132,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 61e76bcf93faba04983a41d64b74031c, type: 2}
+  - {fileID: 2100000, guid: 5a9603aa200ca0c45bf4ce1b20e1a39a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
