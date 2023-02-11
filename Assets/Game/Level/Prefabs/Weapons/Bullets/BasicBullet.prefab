@@ -87,10 +87,10 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -106625208
-      Data2: 1224792819
-      Data3: 266870657
-      Data4: -1478584083
+      Data1: 1636584227
+      Data2: 1205985370
+      Data3: 2140196278
+      Data4: -415129901
     Path: event:/Shot
   Event: 
   PlayEvent: 11

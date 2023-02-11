@@ -363,10 +363,10 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 423372581
-      Data2: 1310856883
-      Data3: 1422374560
-      Data4: 1565588561
+      Data1: -618265939
+      Data2: 1335380151
+      Data3: -387922516
+      Data4: 1622680277
     Path: event:/Explosion
   Event: 
   PlayEvent: 1

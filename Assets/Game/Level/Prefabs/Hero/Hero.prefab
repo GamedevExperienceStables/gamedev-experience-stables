@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 5547676887462078008}
   - component: {fileID: 2300186903787914912}
   - component: {fileID: 4701970604866781007}
-  - component: {fileID: -8342920493895960248}
+  - component: {fileID: 8083429085371305486}
   m_Layer: 3
   m_Name: Hero
   m_TagString: Untagged
@@ -562,7 +562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathFeedback: {fileID: 0}
   destroyOnDeath: 0
---- !u!114 &-8342920493895960248
+--- !u!114 &8083429085371305486
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -574,13 +574,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29dbc6fd77436be4d92c86d14f05818f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputSound:
+  FootstepsEventPath:
     Guid:
-      Data1: 1175942992
-      Data2: 1243012162
-      Data3: -940986451
-      Data4: -2133673114
+      Data1: 963976853
+      Data2: 1194819281
+      Data3: -1541134971
+      Data4: 1918609358
     Path: event:/Footstep
+  JumpingEventPath:
+    Guid:
+      Data1: -978565242
+      Data2: 1264157142
+      Data3: 67732638
+      Data4: -636328597
+    Path: event:/Jump & Land
+  MaterialParameterName: Material
+  SpeedParameterName: Speed Switch
+  JumpOrLandParameterName: Jump Or Land
+  StepDistance: 2
+  RayDistance: 1.2
+  StartRunningTime: 0.3
+  JumpInputName: Jump
+  MaterialTypes:
+  - Earth
+  - Stone
+  - Grass
+  - Puddle
+  - Wood
+  DefulatMaterialValue: 0
 --- !u!1 &3247602722463438873
 GameObject:
   m_ObjectHideFlags: 0

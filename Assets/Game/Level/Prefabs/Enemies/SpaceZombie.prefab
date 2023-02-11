@@ -275,10 +275,10 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -513655306
-      Data2: 1075140125
-      Data3: -1252529784
-      Data4: -1000165919
+      Data1: -1247349945
+      Data2: 1298704262
+      Data3: -1111835481
+      Data4: 766823912
     Path: event:/Zombi
   Event: 
   PlayEvent: 11
