@@ -1,5 +1,6 @@
 ﻿using Game.GameFlow;
 using Game.Inventory;
+using Game.Level;
 using Game.Player;
 using Game.Stats;
 using VContainer;
@@ -12,13 +13,15 @@ namespace Game.UI
         private readonly GameplayPause _pause;
         private readonly PlayerController _player;
         private readonly InventoryController _inventory;
+        private readonly LevelController _level;
 
         [Inject]
         public GameplayViewModel(
             RootStateMachine rootStateMachine,
             GameplayPause pause,
             PlayerController player,
-            InventoryController inventory
+            InventoryController inventory,
+            LevelController level
         )
         {
             _rootStateMachine = rootStateMachine;
@@ -26,6 +29,7 @@ namespace Game.UI
 
             _player = player;
             _inventory = inventory;
+            _level = level;
         }
 
         public void PauseGame()
@@ -46,10 +50,16 @@ namespace Game.UI
         public void HeroStatUnSubscribe(CharacterStats key, IStats.StatChangedEvent callback)
             => _player.HeroStatUnSubscribe(key, callback);
 
-        public void BagMaterialsSubscribe(MaterialContainer.MaterialChangedEvent callback)
+        public void LevelBagMaterialSubscribe(MaterialContainer.MaterialChangedEvent callback)
             => _inventory.Materials.Bag.Subscribe(callback);
 
-        public void BagMaterialsUnSubscribe(MaterialContainer.MaterialChangedEvent callback)
+        public void LevelBagMaterialUnSubscribe(MaterialContainer.MaterialChangedEvent callback)
             => _inventory.Materials.Bag.UnSubscribe(callback);
+
+        public IReadOnlyMaterialData GetCurrentMaterial()
+        {
+            MaterialDefinition material = _level.GetCurrentLevelGoalMaterial();
+            return _inventory.Materials.Bag.GetMaterialData(material);
+        }
     }
 }
