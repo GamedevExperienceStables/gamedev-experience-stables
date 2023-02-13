@@ -1,0 +1,41 @@
+.hud-bar {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.hud-bar-size {
+    height: 150px;
+    width: 145px;
+}
+
+.hud-bar-stamina-size {
+    height: 35px;
+    width: 575px;
+}
+
+.hud-bar-fill {
+}
+
+.hud-bar-frame {
+}
+
+.hud-bar--red .hud-bar-fill {
+    -unity-background-image-tint-color: rgb(255, 0, 0);
+}
+
+.hud-bar--blue .hud-bar-fill {
+    -unity-background-image-tint-color: rgb(0, 29, 255);
+}
+
+.hud-bar--green .hud-bar-fill {
+    -unity-background-image-tint-color: rgb(20, 183, 8);
+}
+
+.hud-spell-size {
+    height: 85px;
+    width: 85px;
+    margin-left: 10px;
+    margin-right: 10px;
+}

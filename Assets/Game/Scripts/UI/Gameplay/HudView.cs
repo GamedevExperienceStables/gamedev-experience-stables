@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Cysharp.Threading.Tasks;
+using Game.Inventory;
 using Game.Stats;
 using Game.Utils;
 using UnityEngine;
@@ -26,13 +27,17 @@ namespace Game.UI
 
         private TimeSpan _showDuration;
         private TimeSpan _hideDuration;
+        
+        private Label _crystal;
+        private Label _crystalMax;
+        private VisualElement _crystalIcon;
 
-        private Label _hp;
-        private Label _hpMax;
-        private Label _mp;
-        private Label _mpMax;
-        private Label _sp;
-        private Label _spMax;
+        private float _currentMaxHp;
+        private VisualElement _hpBarWidgetMask;
+        private float _currentMaxMp;
+        private VisualElement _mpBarWidgetMask;
+        private float _currentMaxSp;
+        private VisualElement _spBarWidgetMask;
 
         [Inject]
         public void Construct(GameplayViewModel viewModel)
@@ -49,20 +54,20 @@ namespace Game.UI
             _hideDuration = TimeSpan.FromSeconds(hideDuration);
 
             var hpWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_HP);
-            hpWidget.Q<Label>(LayoutNames.Hud.TEXT_LABEL).text = "HP";
-            _hp = hpWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
-            _hpMax = hpWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
+            _hpBarWidgetMask = hpWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
 
             var mpWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_MP);
-            mpWidget.Q<Label>(LayoutNames.Hud.TEXT_LABEL).text = "MP";
-            _mp = mpWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
-            _mpMax = mpWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
-
+            _mpBarWidgetMask = mpWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
+            
             var spWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_SP);
-            spWidget.Q<Label>(LayoutNames.Hud.TEXT_LABEL).text = "SP";
-            _sp = spWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
-            _spMax = spWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
+            _spBarWidgetMask = spWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
 
+            var crystalWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_CRYSTAL);
+            _crystalIcon = crystalWidget.Q<VisualElement>(LayoutNames.Hud.CRYSTAL_ICON);
+            _crystal = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
+            _crystalMax = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
+
+            InitCrystalView(_viewModel.GetCurrentMaterial());
             SubscribeStats();
         }
 
@@ -113,50 +118,77 @@ namespace Game.UI
                 .OnCompleted(() => _root.SetDisplay(false));
         }
 
-        #region AwaitsRefactoring
-
         private void SubscribeStats()
         {
             _viewModel.HeroStatSubscribe(CharacterStats.Health, UpdateHealth);
             _viewModel.HeroStatSubscribe(CharacterStats.HealthMax, UpdateHealthMax);
-            
+
             _viewModel.HeroStatSubscribe(CharacterStats.Mana, UpdateMana);
             _viewModel.HeroStatSubscribe(CharacterStats.ManaMax, UpdateManaMax);
-            
+
             _viewModel.HeroStatSubscribe(CharacterStats.Stamina, UpdateStamina);
             _viewModel.HeroStatSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax);
+            
+            _viewModel.LevelBagMaterialSubscribe(UpdateCrystal);
         }
 
         private void UnSubscribeStats()
         {
             _viewModel.HeroStatUnSubscribe(CharacterStats.Health, UpdateHealth);
             _viewModel.HeroStatUnSubscribe(CharacterStats.HealthMax, UpdateHealthMax);
-            
+
             _viewModel.HeroStatUnSubscribe(CharacterStats.Mana, UpdateMana);
             _viewModel.HeroStatUnSubscribe(CharacterStats.ManaMax, UpdateManaMax);
-            
+
             _viewModel.HeroStatUnSubscribe(CharacterStats.Stamina, UpdateStamina);
-            _viewModel.HeroStatUnSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax); 
+            _viewModel.HeroStatUnSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax);
+
+            _viewModel.LevelBagMaterialUnSubscribe(UpdateCrystal);
         }
 
         private void UpdateHealth(StatValueChange change)
-            => _hp.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+        {
+            Length stylePercent = GetStylePercent(change.newValue, _currentMaxHp);
+            _hpBarWidgetMask.style.height = stylePercent;
+        }
 
-        private void UpdateHealthMax(StatValueChange change)
-            => _hpMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+        private void UpdateHealthMax(StatValueChange change) 
+            => _currentMaxHp = change.newValue;
 
         private void UpdateMana(StatValueChange change)
-            => _mp.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+        {
+            Length stylePercent = GetStylePercent(change.newValue, _currentMaxMp);
+            _mpBarWidgetMask.style.height = stylePercent;
+        }
 
         private void UpdateManaMax(StatValueChange change)
-            => _mpMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+            => _currentMaxMp = change.newValue;
 
         private void UpdateStamina(StatValueChange change)
-            => _sp.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+        {
+            Length stylePercent = GetStylePercent(change.newValue, _currentMaxSp);
+            _spBarWidgetMask.style.width = stylePercent;
+        }
 
         private void UpdateStaminaMax(StatValueChange change)
-            => _spMax.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+            => _currentMaxSp = change.newValue;
 
-        #endregion
+        private void InitCrystalView(IReadOnlyMaterialData materialData)
+        {
+            _crystalIcon.style.unityBackgroundImageTintColor = materialData.Definition.Color;
+
+            _crystal.text = materialData.Current.ToString(CultureInfo.InvariantCulture);
+            _crystalMax.text = materialData.Total.ToString(CultureInfo.InvariantCulture);
+        }
+
+        private void UpdateCrystal(MaterialChangedData change)
+            => _crystal.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+
+        private static Length GetStylePercent(float current, float max)
+        {
+            float percent = current / max * 100;
+            var stylePercent = new Length(percent, LengthUnit.Percent);
+            return stylePercent;
+        }
     }
 }

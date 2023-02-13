@@ -21,6 +21,9 @@ namespace Game.Inventory
         public void UnSubscribe(MaterialChangedEvent callback)
             => ValueChanged -= callback;
 
+        public IReadOnlyMaterialData GetMaterialData(MaterialDefinition definition) 
+            => _container[definition];
+
         public void Create(MaterialDefinition material, int total, int current)
             => _container.Add(material, new MaterialData(material, total, current));
 
