@@ -47,7 +47,7 @@ namespace Game.Enemies
             _initialized = true;
         }
 
-        public void SetTarget(Transform target) 
+        public void SetTarget(Transform target)
             => _target = target;
 
         public void Update()
@@ -61,6 +61,10 @@ namespace Game.Enemies
             if (_spawnCount.Equals(spawnCount))
             {
                 Spawn();
+
+                if (spawnCount <= 1)
+                    return;
+
                 _spawnTimer.Start();
             }
 
