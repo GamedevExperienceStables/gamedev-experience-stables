@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Game.Actors.Health;
 using MoreMountains.Feedbacks;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VContainer;
 
 namespace Game.Enemies
@@ -21,18 +20,29 @@ namespace Game.Enemies
         private MMF_Player spawnFeedback;
 
         private float _timeSinceLastSpawn = 0f;
+        private float _spawnCount;
         private Transform _target;
         private bool _hasTarget;
 
         private Transform _spawnContainer;
         private EnemyFactory _factory;
+        
+        public float EnemiesLeft { get; private set; }
 
         [Inject]
         public void Construct(EnemyFactory factory)
             => _factory = factory;
 
         public void Init(Transform spawnContainer)
-            => _spawnContainer = spawnContainer;
+        {
+            _spawnContainer = spawnContainer;
+            _spawnCount = spawnCount;
+        }
+
+        public void Awake()
+        {
+            EnemiesLeft = spawnCount;
+        }
 
         public void SetTarget(Transform target)
         {
@@ -43,24 +53,21 @@ namespace Game.Enemies
         public void Update()
         {
             if (!_hasTarget)
-            {
                 return;
-            }
 
             UpdateTimer();
         }
 
         private void UpdateTimer()
         {
-            if (spawnCount <= 0) 
+            if (_spawnCount <= 0) 
                 return;
             if (_timeSinceLastSpawn >= spawnInterval) 
                 _timeSinceLastSpawn = 0f;
             
             if (_timeSinceLastSpawn == 0f)
             {
-                spawnCount -= 1f;
-                _timeSinceLastSpawn = 0f;
+                _spawnCount -= 1f;
                 Spawn(); 
             }
             _timeSinceLastSpawn += Time.deltaTime;
@@ -68,7 +75,9 @@ namespace Game.Enemies
 
         private void Spawn()
         {
-            _factory.Create(enemy, transform, _target, _spawnContainer);
+            EnemyController instance = _factory.Create(enemy, transform, _target, _spawnContainer);
+            var deathController = instance.GetComponent<DeathController>();
+            deathController.Died += OnDied;
 
             PlaySpawnFeedback();
         }
@@ -76,9 +85,10 @@ namespace Game.Enemies
         private void PlaySpawnFeedback()
         {
             if (spawnFeedback)
-            {
                 spawnFeedback.PlayFeedbacks();
-            }
         }
+
+        private void OnDied()
+            => EnemiesLeft--;
     }
 }
