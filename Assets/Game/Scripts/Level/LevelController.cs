@@ -1,4 +1,5 @@
-﻿using Game.Settings;
+﻿using Game.Inventory;
+using Game.Settings;
 using VContainer;
 
 namespace Game.Level
@@ -54,5 +55,8 @@ namespace Game.Level
             ILocationDefinition location = _levelData.CurrentLevel.Location;
             _levelData.CurrentLocationPoint = new LocationPointData(location, targetPoint.PointKey);
         }
+
+        public MaterialDefinition GetCurrentLevelGoalMaterial() 
+            => _levelData.CurrentLevel.Goal.Material;
     }
 }
