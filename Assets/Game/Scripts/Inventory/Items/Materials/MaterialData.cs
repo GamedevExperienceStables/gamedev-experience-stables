@@ -1,6 +1,6 @@
 namespace Game.Inventory
 {
-    public class MaterialData
+    public class MaterialData : IReadOnlyMaterialData
     {
         public MaterialData(MaterialDefinition definition, int total, int current)
         {
