@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using Game.TimeManagement;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 
 namespace Game.Enemies
 {
     public class EnemySpawnZone : MonoBehaviour
     {
+        [FormerlySerializedAs("enemySpawnPoint")]
         [SerializeField]
         private List<EnemySpawnPoint> enemySpawnPoints;
 
