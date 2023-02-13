@@ -22,7 +22,7 @@ namespace Game.Enemies
 
         private int _spawnCount;
         private Transform _target;
-        private bool _hasTarget;
+        private bool _initialized;
 
         private Transform _spawnContainer;
         private EnemyFactory _factory;
@@ -37,24 +37,22 @@ namespace Game.Enemies
             _spawnTimer = timerFactory.CreateTimer(TimeSpan.FromSeconds(spawnInterval), Spawn, isLooped: true);
         }
 
+        public void Awake()
+            => _enemiesLeft = spawnCount;
+
         public void Init(Transform spawnContainer)
         {
             _spawnContainer = spawnContainer;
             _spawnCount = spawnCount;
+            _initialized = true;
         }
 
-        public void Awake()
-            => EnemiesLeft = spawnCount;
-
-        public void SetTarget(Transform target)
-        {
-            _target = target;
-            _hasTarget = true;
-        }
+        public void SetTarget(Transform target) 
+            => _target = target;
 
         public void Update()
         {
-            if (!_hasTarget)
+            if (!_initialized)
                 return;
 
             if (_spawnCount <= 0)
