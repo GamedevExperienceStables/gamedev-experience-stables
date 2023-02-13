@@ -39,13 +39,11 @@ namespace Game.Enemies
             _spawnTimer = timerFactory.CreateTimer(TimeSpan.FromSeconds(spawnInterval), Spawn, isLooped: true);
         }
 
-        public void Awake()
-            => _enemiesLeft = spawnCount;
-
         public void Init(Transform spawnContainer)
         {
             _spawnContainer = spawnContainer;
             _spawnCount = spawnCount;
+            _enemiesLeft = spawnCount;
             _initialized = true;
         }
 
