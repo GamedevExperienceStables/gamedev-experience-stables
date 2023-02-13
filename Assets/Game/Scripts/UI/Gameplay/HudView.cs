@@ -30,6 +30,7 @@ namespace Game.UI
         
         private Label _crystal;
         private Label _crystalMax;
+        private VisualElement _crystalIcon;
 
         private float _currentMaxHp;
         private VisualElement _hpBarWidgetMask;
@@ -62,6 +63,7 @@ namespace Game.UI
             _spBarWidgetMask = spWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
 
             var crystalWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_CRYSTAL);
+            _crystalIcon = crystalWidget.Q<VisualElement>(LayoutNames.Hud.CRYSTAL_ICON);
             _crystal = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
             _crystalMax = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
 
@@ -173,8 +175,7 @@ namespace Game.UI
 
         private void InitCrystalView(IReadOnlyMaterialData materialData)
         {
-            // todo: implement changing crystal color
-            // _crystalIcon.style.color = materialData.Definition.Color;
+            _crystalIcon.style.unityBackgroundImageTintColor = materialData.Definition.Color;
 
             _crystal.text = materialData.Current.ToString(CultureInfo.InvariantCulture);
             _crystalMax.text = materialData.Total.ToString(CultureInfo.InvariantCulture);
