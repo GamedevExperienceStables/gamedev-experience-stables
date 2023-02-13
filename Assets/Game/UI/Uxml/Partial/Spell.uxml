@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=-1827714293&amp;guid=f26b7e5c4a0732e4791437640237c7ae&amp;type=3#HUD_atlas_3&apos;); -unity-background-scale-mode: stretch-to-fill;">
+        <ui:VisualElement name="front-frame" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=-1827714293&amp;guid=f26b7e5c4a0732e4791437640237c7ae&amp;type=3#HUD_atlas_3&apos;); position: absolute; left: 0; top: 0; right: 0; bottom: 0; display: flex; -unity-background-scale-mode: stretch-to-fill;" />
+    </ui:VisualElement>
+</ui:UXML>
