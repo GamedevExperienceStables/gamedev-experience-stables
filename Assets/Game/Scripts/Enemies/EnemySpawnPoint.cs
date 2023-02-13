@@ -12,16 +12,15 @@ namespace Game.Enemies
         [SerializeField]
         private EnemyDefinition enemy;
 
-        [SerializeField, Min(1f)]
-        private float spawnCount = 3f;
-        
+        [SerializeField, Min(1)]
+        private int spawnCount = 3;
         [SerializeField, Min(1f)]
         private float spawnInterval = 5f;
 
         [SerializeField]
         private MMF_Player spawnFeedback;
 
-        private float _spawnCount;
+        private int _spawnCount;
         private Transform _target;
         private bool _hasTarget;
 
@@ -29,7 +28,7 @@ namespace Game.Enemies
         private EnemyFactory _factory;
         private TimerUpdatable _spawnTimer;
         
-        public float EnemiesLeft { get; private set; }
+        public int EnemiesLeft { get; private set; }
 
         [Inject]
         public void Construct(EnemyFactory enemyFactory, TimerFactory timerFactory)

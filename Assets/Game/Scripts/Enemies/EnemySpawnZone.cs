@@ -11,8 +11,8 @@ namespace Game.Enemies
         [SerializeField]
         private List<EnemySpawnPoint> enemySpawnPoints;
 
-        [SerializeField, Min(1f)]
-        private float spawnCounts = 1f;
+        [SerializeField, Min(1)]
+        private int spawnCounts = 1;
         [SerializeField, Min(0f)]
         private float respawnTimer = 0f;
 
@@ -57,7 +57,7 @@ namespace Game.Enemies
             if (!_canSpawn)
                 return;
 
-            spawnCounts -= 1f;
+            spawnCounts--;
             ActivateSpawnPoints();
             _canSpawn = false;
         }
@@ -78,9 +78,7 @@ namespace Game.Enemies
 
 
         private void OnCompleteSpawnTimer()
-        {
-            _canSpawn = true;
-        }
+            => _canSpawn = true;
 
         private void ActivateSpawnPoints()
         {
@@ -109,7 +107,7 @@ namespace Game.Enemies
                 return;
             
             Vector3 position = transform.position;
-            Gizmos.DrawIcon(new Vector3(position.x, 2f, position.z), "warning.png", false);
+            Gizmos.DrawIcon(new Vector3(position.x, 2f, position.z), "fire.png", false);
         }
     }
 }
