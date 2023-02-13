@@ -24,7 +24,8 @@ namespace Game.Enemies
 
         private Transform _spawnContainer;
         private TimerUpdatable _spawnTimer;
-        
+        private bool _initialized;
+
         [Inject]
         public void Construct(TimerFactory factory){
             _spawnTimer = factory.CreateTimer(TimeSpan.FromSeconds(respawnTimer), OnCompleteSpawnTimer);
@@ -32,6 +33,7 @@ namespace Game.Enemies
 
         public void Init(Transform spawnContainer)
         {
+            _initialized = true;
             _spawnContainer = spawnContainer;
         }
 
@@ -40,6 +42,9 @@ namespace Game.Enemies
 
         public void Update()
         {
+            if (!_initialized)
+                return;
+            
             if (_canSpawn)
             {
                 _spawnTimer.Stop();
