@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Game.TimeManagement;
 using UnityEngine;
+using VContainer;
 
 namespace Game.Enemies
 {
@@ -15,27 +18,54 @@ namespace Game.Enemies
 
         private float _timeSinceLastSpawn;
         private Transform _target;
-        private bool _activated = true;
+        private bool _canSpawn = true;
 
         private Transform _spawnContainer;
+        private TimerUpdatable _spawnTimer;
+        
+        [Inject]
+        public void Construct(TimerFactory factory){
+            _spawnTimer = factory.CreateTimer(TimeSpan.FromSeconds(respawnTimer), OnCompleteSpawnTimer);
+        }
 
         public void Init(Transform spawnContainer)
-            => _spawnContainer = spawnContainer;
+        {
+            _spawnContainer = spawnContainer;
+        }
 
         public void SetTarget(Transform target)
             => _target = target;
 
         public void Update()
         {
-            if (_activated)
+            if (_canSpawn)
             {
-                _timeSinceLastSpawn = 0f;
+                _spawnTimer.Stop();
                 return;
             }
-            UpdateTimer();
+            
+            _spawnTimer.Tick();
+            if (!CheckAllEnemiesDead()) 
+                RestartTimer();
         }
 
-        private void UpdateTimer()
+        public void Activate()
+        {
+            if (spawnCounts <= 0) 
+                return;
+            
+            if (!_canSpawn)
+                return;
+
+            spawnCounts -= 1f;
+            ActivateSpawnPoints();
+            _canSpawn = false;
+        }
+
+        private void RestartTimer()
+            => _spawnTimer.Start();
+
+        private bool CheckAllEnemiesDead()
         {
             bool allEnemiesDead = true;
             foreach (EnemySpawnPoint spawnPoint in enemySpawnPoints)
@@ -43,32 +73,21 @@ namespace Game.Enemies
                 allEnemiesDead &= (spawnPoint.EnemiesLeft <= 0);
             }
 
-            if (!allEnemiesDead) return;
-            _timeSinceLastSpawn += Time.deltaTime;
-            
-            if (_timeSinceLastSpawn < respawnTimer) return;
-            _timeSinceLastSpawn = 0f;
-            _activated = true;
+            return allEnemiesDead;
         }
 
-        public void Activate()
-        {
-            if (spawnCounts <= 0) 
-                return;
-            if (!_activated)
-                return;
 
-            spawnCounts -= 1f;
-            ActivateSpawnPoints();
-            _activated = false;
+        private void OnCompleteSpawnTimer()
+        {
+            _canSpawn = true;
         }
 
         private void ActivateSpawnPoints()
         {
             enemySpawnPoints.ForEach(spawnPoint =>
             {
-                spawnPoint.Init(_spawnContainer);
                 spawnPoint.SetTarget(_target);
+                spawnPoint.Init(_spawnContainer);
             });
         }
 
@@ -79,11 +98,17 @@ namespace Game.Enemies
             Vector3 position = transform.position;
             foreach (EnemySpawnPoint spawnZone in enemySpawnPoints)
                 Gizmos.DrawLine(position, spawnZone.transform.position);
+        }
 
-            if (!_activated) 
+        private void OnDrawGizmos()
+        {
+            if (!_canSpawn) 
                 return;
+            
             if (spawnCounts <= 0) 
                 return;
+            
+            Vector3 position = transform.position;
             Gizmos.DrawIcon(new Vector3(position.x, 2f, position.z), "warning.png", false);
         }
     }

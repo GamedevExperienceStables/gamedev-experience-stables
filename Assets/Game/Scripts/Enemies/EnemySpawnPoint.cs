@@ -1,4 +1,6 @@
-﻿using Game.Actors.Health;
+﻿using System;
+using Game.Actors.Health;
+using Game.TimeManagement;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using VContainer;
@@ -10,28 +12,31 @@ namespace Game.Enemies
         [SerializeField]
         private EnemyDefinition enemy;
 
-        [SerializeField]
+        [SerializeField, Min(1f)]
         private float spawnCount = 3f;
         
-        [SerializeField]
+        [SerializeField, Min(1f)]
         private float spawnInterval = 5f;
 
         [SerializeField]
         private MMF_Player spawnFeedback;
 
-        private float _timeSinceLastSpawn = 0f;
         private float _spawnCount;
         private Transform _target;
         private bool _hasTarget;
 
         private Transform _spawnContainer;
         private EnemyFactory _factory;
+        private TimerUpdatable _spawnTimer;
         
         public float EnemiesLeft { get; private set; }
 
         [Inject]
-        public void Construct(EnemyFactory factory)
-            => _factory = factory;
+        public void Construct(EnemyFactory enemyFactory, TimerFactory timerFactory)
+        {
+            _factory = enemyFactory;
+            _spawnTimer = timerFactory.CreateTimer(TimeSpan.FromSeconds(spawnInterval), Spawn, isLooped: true);
+        }
 
         public void Init(Transform spawnContainer)
         {
@@ -40,9 +45,7 @@ namespace Game.Enemies
         }
 
         public void Awake()
-        {
-            EnemiesLeft = spawnCount;
-        }
+            => EnemiesLeft = spawnCount;
 
         public void SetTarget(Transform target)
         {
@@ -55,22 +58,16 @@ namespace Game.Enemies
             if (!_hasTarget)
                 return;
 
-            UpdateTimer();
-        }
-
-        private void UpdateTimer()
-        {
-            if (_spawnCount <= 0) 
+            if (_spawnCount <= 0)
                 return;
-            if (_timeSinceLastSpawn >= spawnInterval) 
-                _timeSinceLastSpawn = 0f;
-            
-            if (_timeSinceLastSpawn == 0f)
+
+            if (_spawnCount.Equals(spawnCount))
             {
-                _spawnCount -= 1f;
-                Spawn(); 
+                Spawn();
+                _spawnTimer.Start();
             }
-            _timeSinceLastSpawn += Time.deltaTime;
+
+            _spawnTimer.Tick();
         }
 
         private void Spawn()
@@ -78,6 +75,7 @@ namespace Game.Enemies
             EnemyController instance = _factory.Create(enemy, transform, _target, _spawnContainer);
             var deathController = instance.GetComponent<DeathController>();
             deathController.Died += OnDied;
+            _spawnCount--;
 
             PlaySpawnFeedback();
         }
