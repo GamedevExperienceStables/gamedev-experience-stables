@@ -28,7 +28,9 @@ namespace Game.Enemies
         private EnemyFactory _factory;
         private TimerUpdatable _spawnTimer;
         
-        public int EnemiesLeft { get; private set; }
+        private int _enemiesLeft;
+
+        public bool IsCleared => _enemiesLeft <= 0;
 
         [Inject]
         public void Construct(EnemyFactory enemyFactory, TimerFactory timerFactory)
@@ -84,6 +86,6 @@ namespace Game.Enemies
         }
 
         private void OnDied()
-            => EnemiesLeft--;
+            => _enemiesLeft--;
     }
 }

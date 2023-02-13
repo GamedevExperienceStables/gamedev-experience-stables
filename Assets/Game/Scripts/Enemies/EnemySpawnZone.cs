@@ -77,7 +77,7 @@ namespace Game.Enemies
             bool allEnemiesDead = true;
             foreach (EnemySpawnPoint spawnPoint in enemySpawnPoints)
             {
-                allEnemiesDead &= (spawnPoint.EnemiesLeft <= 0);
+                allEnemiesDead &= spawnPoint.IsCleared;
             }
 
             return allEnemiesDead;
