@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.TimeManagement;
-using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VContainer;
 
 namespace Game.Enemies
 {
     public class EnemySpawnGroup : MonoBehaviour
     {
-        [SerializeField, ReadOnly]
+        [SerializeField, HideInInspector]
         private List<EnemySpawnPoint> enemySpawnPoints;
 
         [SerializeField, Min(1)]

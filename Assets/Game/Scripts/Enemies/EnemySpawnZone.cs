@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.Level;
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace Game.Enemies
 {
     public class EnemySpawnZone : MonoBehaviour
     {
-        [SerializeField, ReadOnly]
+        [SerializeField, HideInInspector]
         private List<EnemySpawnGroup> enemySpawnZones;
 
         private void OnValidate()
