@@ -55,24 +55,12 @@ namespace Game.Actors
                 _aim.EndAbility();
                 _movementController.BlockInput(_isDashActive = true);
                 Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
-                //Owner.AddModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
-                //float time = Definition.DashRange / Owner.GetCurrentValue(CharacterStats.MovementSpeed);
                 _inputController.BlockInput(true);
                 Vector3 dashTransform = Owner.Transform.position + _kinematicCharacterMotor.CharacterForward * Definition.DashRange;
                 // to do: change to timer from assets and add ability deactivate after enviroment collision
                 Owner.GetComponent<MovementController>().AddVelocity(dashTransform);
                 OnEndAbility(false);
-                //StartDash(time, startPosition).Forget();
             }
-
-            /*private async UniTask StartDash(float time, Vector3 startPosition)
-            {    
-                Vector3 dashTransform = startPosition + Vector3.forward * Definition.DashRange;
-                // to do: change to timer from assets and add ability deactivate after enviroment collision
-                Owner.GetComponent<MovementController>().AddVelocity(dashTransform);
-                await UniTask.Delay(TimeSpan.FromSeconds(time), ignoreTimeScale: false);
-                OnEndAbility(false);
-            }*/
             
             protected override void OnEndAbility(bool wasCancelled)
             {
