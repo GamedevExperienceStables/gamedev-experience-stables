@@ -2,6 +2,7 @@
 using Game.Actors.Health;
 using Game.TimeManagement;
 using MoreMountains.Feedbacks;
+using NaughtyAttributes;
 using UnityEngine;
 using VContainer;
 
@@ -9,7 +10,7 @@ namespace Game.Enemies
 {
     public class EnemySpawnPoint : MonoBehaviour
     {
-        [SerializeField]
+        [SerializeField, Required]
         private EnemyDefinition enemy;
 
         [SerializeField, Min(1)]
