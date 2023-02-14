@@ -56,10 +56,11 @@ namespace Game.Actors
                 _movementController.BlockInput(_isDashActive = true);
                 Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
                 _inputController.BlockInput(true);
-                Vector3 dashTransform = Owner.Transform.position + _kinematicCharacterMotor.CharacterForward * Definition.DashRange;
+                
+                Vector3 dashVelocity = _kinematicCharacterMotor.CharacterForward * Definition.DashRange;
                 // to do: change to timer from assets and add ability deactivate after enviroment collision
-                Owner.GetComponent<MovementController>().AddVelocity(dashTransform);
-                OnEndAbility(false);
+                Owner.GetComponent<MovementController>().AddVelocity(dashVelocity);
+                EndAbility();
             }
             
             protected override void OnEndAbility(bool wasCancelled)
