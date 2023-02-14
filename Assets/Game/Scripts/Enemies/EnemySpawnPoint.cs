@@ -15,6 +15,7 @@ namespace Game.Enemies
 
         [SerializeField, Min(1)]
         private int spawnCount = 3;
+
         [SerializeField, Min(1f)]
         private float spawnInterval = 5f;
 
@@ -28,7 +29,7 @@ namespace Game.Enemies
         private Transform _spawnContainer;
         private EnemyFactory _factory;
         private TimerUpdatable _spawnTimer;
-        
+
         private int _enemiesLeft;
 
         public bool IsCleared => _enemiesLeft <= 0;

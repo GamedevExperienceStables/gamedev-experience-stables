@@ -13,6 +13,7 @@ namespace Game.Enemies
 
         [SerializeField, Min(1)]
         private int spawnCounts = 1;
+
         [SerializeField, Min(0f)]
         private float respawnTimer = 0f;
 
@@ -23,7 +24,7 @@ namespace Game.Enemies
         private Transform _spawnContainer;
         private TimerUpdatable _spawnTimer;
         private bool _initialized;
-        
+
         private void OnValidate()
         {
             enemySpawnPoints.Clear();
@@ -35,7 +36,8 @@ namespace Game.Enemies
         }
 
         [Inject]
-        public void Construct(TimerFactory factory){
+        public void Construct(TimerFactory factory)
+        {
             _spawnTimer = factory.CreateTimer(TimeSpan.FromSeconds(respawnTimer), OnCompleteSpawnTimer);
         }
 
@@ -52,23 +54,23 @@ namespace Game.Enemies
         {
             if (!_initialized)
                 return;
-            
+
             if (_canSpawn)
             {
                 _spawnTimer.Stop();
                 return;
             }
-            
+
             _spawnTimer.Tick();
-            if (!CheckAllEnemiesDead()) 
+            if (!CheckAllEnemiesDead())
                 RestartTimer();
         }
 
         public void Activate()
         {
-            if (spawnCounts <= 0) 
+            if (spawnCounts <= 0)
                 return;
-            
+
             if (!_canSpawn)
                 return;
 
@@ -115,12 +117,12 @@ namespace Game.Enemies
 
         private void OnDrawGizmos()
         {
-            if (!_canSpawn) 
+            if (!_canSpawn)
                 return;
-            
-            if (spawnCounts <= 0) 
+
+            if (spawnCounts <= 0)
                 return;
-            
+
             Vector3 position = transform.position;
             Gizmos.DrawIcon(new Vector3(position.x, 2f, position.z), "fire.png", false);
         }

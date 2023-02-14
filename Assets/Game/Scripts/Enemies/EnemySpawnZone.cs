@@ -23,7 +23,7 @@ namespace Game.Enemies
         {
             if (!other.TryGetComponent(out ISpawnZoneTrigger _))
                 return;
-            
+
             foreach (EnemySpawnGroup enemySpawnZone in enemySpawnZones)
             {
                 enemySpawnZone.Activate();
