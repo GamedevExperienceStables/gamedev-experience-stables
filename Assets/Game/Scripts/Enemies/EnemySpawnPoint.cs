@@ -13,12 +13,14 @@ namespace Game.Enemies
         [SerializeField, Required]
         private EnemyDefinition enemy;
 
+        [Space]
         [SerializeField, Min(1)]
         private int spawnCount = 3;
 
         [SerializeField, Min(1f)]
         private float spawnInterval = 5f;
 
+        [Header("FX")]
         [SerializeField]
         private MMF_Player spawnFeedback;
 
