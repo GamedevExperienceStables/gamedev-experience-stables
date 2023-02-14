@@ -1,74 +1,86 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using Game.Actors.Health;
+using Game.TimeManagement;
 using MoreMountains.Feedbacks;
+using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VContainer;
 
 namespace Game.Enemies
 {
     public class EnemySpawnPoint : MonoBehaviour
     {
-        [SerializeField]
+        [SerializeField, Required]
         private EnemyDefinition enemy;
 
-        [SerializeField]
-        private float spawnCount = 3f;
-        
-        [SerializeField]
+        [Space]
+        [SerializeField, Min(1)]
+        private int spawnCount = 3;
+
+        [SerializeField, Min(1f)]
         private float spawnInterval = 5f;
 
+        [Header("FX")]
         [SerializeField]
         private MMF_Player spawnFeedback;
 
-        private float _timeSinceLastSpawn = 0f;
+        private int _spawnCount;
         private Transform _target;
-        private bool _hasTarget;
+        private bool _initialized;
 
         private Transform _spawnContainer;
         private EnemyFactory _factory;
+        private TimerUpdatable _spawnTimer;
+
+        private int _enemiesLeft;
+
+        public bool IsCleared => _enemiesLeft <= 0;
 
         [Inject]
-        public void Construct(EnemyFactory factory)
-            => _factory = factory;
+        public void Construct(EnemyFactory enemyFactory, TimerFactory timerFactory)
+        {
+            _factory = enemyFactory;
+            _spawnTimer = timerFactory.CreateTimer(TimeSpan.FromSeconds(spawnInterval), Spawn, isLooped: true);
+        }
 
         public void Init(Transform spawnContainer)
-            => _spawnContainer = spawnContainer;
+        {
+            _spawnContainer = spawnContainer;
+            _spawnCount = spawnCount;
+            _enemiesLeft = spawnCount;
+            _initialized = true;
+        }
 
         public void SetTarget(Transform target)
-        {
-            _target = target;
-            _hasTarget = true;
-        }
+            => _target = target;
 
         public void Update()
         {
-            if (!_hasTarget)
-            {
+            if (!_initialized)
                 return;
+
+            if (_spawnCount <= 0)
+                return;
+
+            if (_spawnCount.Equals(spawnCount))
+            {
+                Spawn();
+
+                if (spawnCount <= 1)
+                    return;
+
+                _spawnTimer.Start();
             }
 
-            UpdateTimer();
-        }
-
-        private void UpdateTimer()
-        {
-            if (spawnCount <= 0) 
-                return;
-            if (_timeSinceLastSpawn >= spawnInterval) 
-                _timeSinceLastSpawn = 0f;
-            
-            if (_timeSinceLastSpawn == 0f)
-            {
-                spawnCount -= 1f;
-                _timeSinceLastSpawn = 0f;
-                Spawn(); 
-            }
-            _timeSinceLastSpawn += Time.deltaTime;
+            _spawnTimer.Tick();
         }
 
         private void Spawn()
         {
-            _factory.Create(enemy, transform, _target, _spawnContainer);
+            EnemyController instance = _factory.Create(enemy, transform, _target, _spawnContainer);
+            var deathController = instance.GetComponent<DeathController>();
+            deathController.Died += OnDied;
+            _spawnCount--;
 
             PlaySpawnFeedback();
         }
@@ -76,9 +88,10 @@ namespace Game.Enemies
         private void PlaySpawnFeedback()
         {
             if (spawnFeedback)
-            {
                 spawnFeedback.PlayFeedbacks();
-            }
         }
+
+        private void OnDied()
+            => _enemiesLeft--;
     }
 }
