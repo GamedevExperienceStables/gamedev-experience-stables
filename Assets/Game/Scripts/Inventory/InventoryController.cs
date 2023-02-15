@@ -1,7 +1,4 @@
-using System;
 using Game.Actors;
-using Game.Settings;
-using UnityEngine;
 using VContainer;
 
 namespace Game.Inventory
@@ -13,13 +10,11 @@ namespace Game.Inventory
         private readonly Runes _runes;
 
         [Inject]
-        public InventoryController(Settings settings, LevelsSettings levels, InventoryData data)
+        public InventoryController(InventoryData data)
         {
             _materials = data.Materials;
             _recipes = data.Recipes;
             _runes = data.Runes;
-
-            _materials.CreateDefaults(levels, settings.BagMaxStack);
         }
 
         public IReadOnlyMaterials Materials => _materials;
@@ -87,15 +82,6 @@ namespace Game.Inventory
                     _runes.Add(rune);
                     break;
             }
-        }
-
-        [Serializable]
-        public class Settings
-        {
-            [SerializeField, Min(0)]
-            private int bagMaxStack = 10;
-
-            public int BagMaxStack => bagMaxStack;
         }
     }
 }

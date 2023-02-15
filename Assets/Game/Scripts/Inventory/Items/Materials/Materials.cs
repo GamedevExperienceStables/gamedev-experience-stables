@@ -9,12 +9,9 @@ namespace Game.Inventory
         private readonly MaterialContainer _bag = new(MaterialContainerId.Bag);
         private readonly MaterialContainer _container = new(MaterialContainerId.RocketContainer);
 
-        public IReadOnlyMaterialContainer Container => _container;
-        public IReadOnlyMaterialContainer Bag => _bag;
-
-        public void CreateDefaults(LevelsSettings settings, int bagStack)
+        public Materials(List<LevelDefinition> levels, int bagStack)
         {
-            foreach (LevelDefinition level in settings.Levels)
+            foreach (LevelDefinition level in levels)
             {
                 LevelGoalSettings goal = level.Goal;
 
@@ -22,6 +19,9 @@ namespace Game.Inventory
                 _bag.Create(goal.Material, bagStack, 0);
             }
         }
+
+        public IReadOnlyMaterialContainer Container => _container;
+        public IReadOnlyMaterialContainer Bag => _bag;
 
         public void Init()
         {
