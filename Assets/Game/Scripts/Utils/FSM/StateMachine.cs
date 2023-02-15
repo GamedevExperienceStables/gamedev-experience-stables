@@ -34,18 +34,20 @@ namespace Game.Utils
                 return;
             }
 
+            await ToRoot();
+
             _currentState = await ChangeState<T>();
             await _currentState.Enter();
         }
-        
+
         public async UniTask PushState<T>() where T : class, IState
         {
             var state = GetState<T>();
             _stack.Push(state);
-            
+
             await state.Enter();
         }
-        
+
         public async UniTask PopState()
         {
             if (_stack.Count == 0)
@@ -58,6 +60,20 @@ namespace Game.Utils
             await state.Exit();
         }
 
+        public bool IsState<T>()
+        {
+            if (_stack.Count > 0)
+                return _stack.Peek() is T;
+
+            return _currentState is T;
+        }
+
+        public async UniTask Exit()
+        {
+            await ToRoot();
+            await _currentState.Exit();
+        }
+
         private async UniTask<T> ChangeState<T>() where T : class, IState
         {
             if (_currentState is not null)
@@ -68,14 +84,11 @@ namespace Game.Utils
 
         private T GetState<T>() where T : class, IState
             => _states[typeof(T)] as T;
-        
-        
-        public async UniTask Exit()
+
+        private async UniTask ToRoot()
         {
-            while(_stack.Count > 0)
+            while (_stack.Count > 0)
                 await PopState();
-            
-            await _currentState.Exit();
         }
     }
 }
