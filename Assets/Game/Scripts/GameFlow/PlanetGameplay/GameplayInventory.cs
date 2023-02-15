@@ -3,39 +3,44 @@ using VContainer;
 
 namespace Game.GameFlow
 {
-    public sealed class GameplayPause : IDisposable
+    public sealed class GameplayInventory : IDisposable
     {
         private readonly PlanetStateMachine _planetStateMachine;
         private readonly GameplayMenuInput _menuInput;
 
         [Inject]
-        public GameplayPause(PlanetStateMachine planetStateMachine, GameplayMenuInput menuInput)
+        public GameplayInventory(PlanetStateMachine planetStateMachine, GameplayMenuInput menuInput)
         {
             _planetStateMachine = planetStateMachine;
             _menuInput = menuInput;
 
-            _menuInput.SubscribeMenu(OnMenuRequested);
+            _menuInput.SubscribeInventory(OnInventoryRequested);
             _menuInput.SubscribeBack(OnBackRequested);
         }
 
         public void Dispose()
         {
-            _menuInput.UnSubscribeMenu(OnMenuRequested);
+            _menuInput.UnSubscribeInventory(OnInventoryRequested);
             _menuInput.UnSubscribeBack(OnBackRequested);
         }
 
         public void Enable()
-            => _planetStateMachine.PushState<PlanetPauseState>();
+            => _planetStateMachine.PushState<PlanetInventoryState>();
 
         public void Disable()
             => _planetStateMachine.PopState();
 
-        private void OnMenuRequested()
-            => Enable();
+        private void OnInventoryRequested()
+        {
+            if (_planetStateMachine.IsState<PlanetInventoryState>())
+                Disable();
+            else
+                Enable();
+        }
 
         private void OnBackRequested()
         {
-            if (_planetStateMachine.IsState<PlanetPauseState>())
+            if (_planetStateMachine.IsState<PlanetInventoryState>()) 
                 Disable();
         }
     }

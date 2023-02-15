@@ -5,8 +5,9 @@ namespace Game.Input
 {
     public class InputControlMenu : IInputControlMenu, GameInputControls.IMenuActions
     {
-        public InputButton CancelButton { get; } = new();
-        public InputButton ExitButton { get; } = new();
+        public InputButton BackButton { get; } = new();
+        public InputButton MenuButton { get; } = new();
+        public InputButton OptionButton { get; } = new();
 
         [Inject]
         public InputControlMenu(GameInputControlsAdapter inputControls)
@@ -14,27 +15,39 @@ namespace Game.Input
             inputControls.SetMenuCallbacks(this);
         }
 
-        public void OnCancel(InputAction.CallbackContext context)
+        public void OnBack(InputAction.CallbackContext context)
         {
             if (context.performed)
             {
-                CancelButton.TriggerButtonDown();
+                BackButton.TriggerButtonDown();
             }
             else if (context.canceled)
             {
-                CancelButton.TriggerButtonUp();
+                BackButton.TriggerButtonUp();
             }
         }
 
-        public void OnExit(InputAction.CallbackContext context)
+        public void OnMenu(InputAction.CallbackContext context)
         {
             if (context.performed)
             {
-                ExitButton.TriggerButtonDown();
+                MenuButton.TriggerButtonDown();
             }
             else if (context.canceled)
             {
-                ExitButton.TriggerButtonUp();
+                MenuButton.TriggerButtonUp();
+            }
+        }
+
+        public void OnOption(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                OptionButton.TriggerButtonDown();
+            }
+            else if (context.canceled)
+            {
+                OptionButton.TriggerButtonUp();
             }
         }
     }

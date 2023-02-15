@@ -5,36 +5,40 @@ using VContainer;
 
 namespace Game.GameFlow
 {
-    public class PlanetGameOverState : GameState
+    public class PlanetInventoryState : GameState
     {
+        private readonly GameplayView _view;
         private readonly IInputService _input;
         private readonly GameplayMenuInput _menuInput;
-        private readonly GameplayView _view;
 
         [Inject]
-        public PlanetGameOverState(IInputService input, GameplayMenuInput menuInput, GameplayView view)
+        public PlanetInventoryState(GameplayView view, IInputService input, GameplayMenuInput menuInput)
         {
+            _view = view;
             _input = input;
             _menuInput = menuInput;
-            
-            _view = view;
         }
 
         protected override async UniTask OnEnter()
         {
             _input.PushState(InputSchemeGame.None);
-            _menuInput.ReplaceState(InputSchemeMenu.None);
+            _menuInput.PushState(InputSchemeMenu.None);
             
-            await _view.ShowGameOverAsync();
+            await _view.ShowBookAsync();
             
             _input.ReplaceState(InputSchemeGame.Menu);
+            _menuInput.ReplaceState(InputSchemeMenu.Inventory);
         }
 
         protected override async UniTask OnExit()
         {
             _input.ReplaceState(InputSchemeGame.None);
+            _menuInput.ReplaceState(InputSchemeMenu.None);
             
-            await _view.HideGameOverAsync();
+            await _view.HideBookAsync();
+
+            _input.Back();
+            _menuInput.Back();
         }
     }
 }
