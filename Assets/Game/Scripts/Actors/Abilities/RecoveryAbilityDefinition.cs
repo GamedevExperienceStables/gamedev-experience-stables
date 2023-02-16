@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Game.Stats;
 using UnityEngine;
@@ -29,22 +30,28 @@ namespace Game.Actors
 
     public class RecoveryAbility : ActorAbility<RecoveryAbilityDefinition>
     {
-        private bool _isRecoveryActive;
-        
+        private CancellationTokenSource _cancellationTokenSource;
         public override bool CanActivateAbility()
             => true;
         
 
         protected override void OnActivateAbility()
         {
+            _cancellationTokenSource = new CancellationTokenSource();
             UniTask.Run(Regeneration).Forget();
         }
-
+        
+        protected override void OnGiveAbility()
+        {
+            base.OnGiveAbility();
+            ActivateAbility();
+        }
+        
         private async UniTask Regeneration()
         {
-            while (!_isRecoveryActive)
+            while (IsActive)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(Definition.RecoveryTime), ignoreTimeScale: false);
+                await UniTask.Delay(TimeSpan.FromSeconds(Definition.RecoveryTime), cancellationToken:_cancellationTokenSource.Token);
                 Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaRegeneration);
                 Owner.ApplyModifier(CharacterStats.Mana, Definition.ManaRegeneration);
                 Owner.ApplyModifier(CharacterStats.Health, Definition.HealthRegeneration);
@@ -53,7 +60,7 @@ namespace Game.Actors
         
         protected override void OnEndAbility(bool wasCancelled)
         {
-            _isRecoveryActive = wasCancelled;
+            _cancellationTokenSource.Cancel();
         }
     }
 }

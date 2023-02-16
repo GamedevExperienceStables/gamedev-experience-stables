@@ -17,11 +17,13 @@ namespace Game.Actors
         [SerializeField]
         private float pushForce;
         
+        [FormerlySerializedAs("maxTagTargets")]
+        [FormerlySerializedAs("targetNum")]
         [SerializeField]
-        private int targetNum;
+        private int maxTargets;
         
         [SerializeField]
-        private float sphereColliderShift;
+        private Vector3 sphereColliderShift;
         
         [FormerlySerializedAs("MeleeDamage")]
         [SerializeField]
@@ -38,13 +40,13 @@ namespace Game.Actors
         public StatModifier StaminaCost => staminaCost;
         public float PushForce => pushForce;
         public LayerMask Mask => mask;
-        public float SphereColliderShift => sphereColliderShift;
-        public int TargetNum => targetNum;
+        public Vector3 SphereColliderShift => sphereColliderShift;
+        public int MaxTargets => maxTargets;
     }
     public class MeleeAbility : ActorAbility<MeleeAbilityDefinition>
     {
         private AimAbility _aim;
-
+        private Collider[] _hitColliders;
         public override bool CanActivateAbility()
             => !_aim.IsActive && Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
         
@@ -52,24 +54,25 @@ namespace Game.Actors
         protected override void OnInitAbility()
         {
             _aim = Owner.GetAbility<AimAbility>();
+            _hitColliders = new Collider[Definition.MaxTargets];
         }
 
         protected override void OnActivateAbility()
         {
             Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
-            Vector3 sphereShift = Owner.Transform.position + Vector3.forward * Definition.SphereColliderShift;
+            Vector3 sphereShift = Owner.Transform.position +  Definition.SphereColliderShift;
             DebugExtensions.DebugWireSphere(sphereShift, radius: Definition.MeleeRangeRadius);
-            Collider[] hitColliders = new Collider[Definition.TargetNum];
             int numColliders = Physics.OverlapSphereNonAlloc(sphereShift, 
-                Definition.MeleeRangeRadius, hitColliders, Definition.Mask);
+                Definition.MeleeRangeRadius, _hitColliders, Definition.Mask);
             for (int i = 0; i < numColliders; i++)
             {
-                Debug.Log(hitColliders[i].transform.gameObject + "MELEE ATTACKED");
-                if (hitColliders[i].transform.gameObject.TryGetComponent(out IActorController destinationOwner))
+                Transform hit = _hitColliders[i].transform;
+                Debug.Log(hit.gameObject + "MELEE ATTACKED");
+                if (hit.gameObject.TryGetComponent(out IActorController destinationOwner))
                     destinationOwner.GetComponent<DamageableController>().Damage(Definition.MeleeDamage);
-                Vector3 dir = hitColliders[i].transform.position - Owner.Transform.position;
+                Vector3 dir = hit.position - Owner.Transform.position;
                 dir = dir.normalized * Definition.PushForce;
-                hitColliders[i].transform.GetComponent<MovementController>().AddVelocity(dir);
+                hit.GetComponent<MovementController>().AddVelocity(dir);
             }
         }
     }
