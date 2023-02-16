@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{b5c0d490-383e-4db8-a0b5-e9d50aecd619}">
+		<property name="assetPath">
+			<value>Footsteps/Run/Earth/Ellen_Footsteps_Earth_Run_16.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.26837499999999997</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{af23839c-b308-4376-a221-3722cdb763a3}</destination>
+		</relationship>
+	</object>
+</objects>
