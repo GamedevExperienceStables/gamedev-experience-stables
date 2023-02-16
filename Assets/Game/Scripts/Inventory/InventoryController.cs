@@ -21,7 +21,7 @@ namespace Game.Inventory
         public IReadOnlyRecipes Recipes => _recipes;
         public IReadOnlyRunes Runes => _runes;
 
-        public void Init()
+        public void Reset()
         {
             _materials.Reset();
             _recipes.Reset();
