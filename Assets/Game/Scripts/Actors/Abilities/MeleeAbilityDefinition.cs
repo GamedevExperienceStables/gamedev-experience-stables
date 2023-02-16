@@ -17,8 +17,6 @@ namespace Game.Actors
         [SerializeField]
         private float pushForce;
         
-        [FormerlySerializedAs("maxTagTargets")]
-        [FormerlySerializedAs("targetNum")]
         [SerializeField]
         private int maxTargets;
         
@@ -61,7 +59,9 @@ namespace Game.Actors
         {
             Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
             Vector3 sphereShift = Owner.Transform.position +  Definition.SphereColliderShift;
-            DebugExtensions.DebugWireSphere(sphereShift, radius: Definition.MeleeRangeRadius);
+            #if UNITY_EDITOR
+                DebugExtensions.DebugWireSphere(sphereShift, radius: Definition.MeleeRangeRadius);
+             #endif
             int numColliders = Physics.OverlapSphereNonAlloc(sphereShift, 
                 Definition.MeleeRangeRadius, _hitColliders, Definition.Mask);
             for (int i = 0; i < numColliders; i++)

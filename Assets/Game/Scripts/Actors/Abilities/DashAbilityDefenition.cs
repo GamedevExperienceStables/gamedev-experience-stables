@@ -27,9 +27,7 @@ namespace Game.Actors
 
         public class DashAbility : ActorAbility<DashAbilityDefinition>
         {
-            private HeroInputController _heroInput;
             private MovementController _movementController;
-            private AimAbility _aim;
             private IActorInputController _inputController;
             private KinematicCharacterMotor _kinematicCharacterMotor;
 
@@ -43,16 +41,14 @@ namespace Game.Actors
 
             protected override void OnInitAbility()
             {
-                _aim = Owner.GetAbility<AimAbility>();
                 _inputController = Owner.GetComponent<IActorInputController>();
-                _heroInput = Owner.GetComponent<HeroInputController>();
                 _kinematicCharacterMotor = Owner.GetComponent<KinematicCharacterMotor>();
                 _movementController = Owner.GetComponent<MovementController>();
             }
 
             protected override void OnActivateAbility()
             {
-                _heroInput.BlockInput(IsActive);
+                _inputController.BlockInput(IsActive);
                 Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
                 _inputController.BlockInput(true);
                 
@@ -64,7 +60,7 @@ namespace Game.Actors
             
             protected override void OnEndAbility(bool wasCancelled)
             {
-                _heroInput.BlockInput(false);
+                _inputController.BlockInput(false);
                 Owner.RemoveModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
             }
             

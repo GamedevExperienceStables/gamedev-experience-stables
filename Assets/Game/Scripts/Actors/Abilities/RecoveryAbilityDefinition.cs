@@ -61,6 +61,8 @@ namespace Game.Actors
         protected override void OnEndAbility(bool wasCancelled)
         {
             _cancellationTokenSource.Cancel();
+            _cancellationTokenSource.Dispose();
+            _cancellationTokenSource = null;
         }
     }
 }
