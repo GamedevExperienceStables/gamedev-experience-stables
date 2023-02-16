@@ -5,6 +5,7 @@ namespace Game.Inventory
 {
     public class InventoryController : IInventory
     {
+        private readonly RuneSlots _slots;
         private readonly Materials _materials;
         private readonly Recipes _recipes;
         private readonly Runes _runes;
@@ -15,17 +16,20 @@ namespace Game.Inventory
             _materials = data.Materials;
             _recipes = data.Recipes;
             _runes = data.Runes;
+            _slots = data.Slots;
         }
 
         public IReadOnlyMaterials Materials => _materials;
         public IReadOnlyRecipes Recipes => _recipes;
         public IReadOnlyRunes Runes => _runes;
+        public IReadOnlyRuneSlots Slots => _slots;
 
         public void Reset()
         {
             _materials.Reset();
             _recipes.Reset();
             _runes.Reset();
+            _slots.Reset();
         }
 
         public void Init(InventoryInitialData data)
@@ -34,6 +38,7 @@ namespace Game.Inventory
             
             _materials.Init(data.container, data.bag);
             _recipes.Init(data.recipes);
+            _slots.Init(data.slots);
         }
 
         public bool CanTransferToContainer(MaterialDefinition definition)

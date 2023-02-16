@@ -13,11 +13,13 @@ namespace Game.Inventory
             Materials = new Materials(levelsSettings.Levels, settings.BagMaxStack);
             Recipes = new Recipes();
             Runes = new Runes();
+            Slots = new RuneSlots(settings.InventorySlots);
         }
 
         public Materials Materials { get; }
         public Recipes Recipes { get; }
         public Runes Runes { get; }
+        public RuneSlots Slots { get; }
 
         [Serializable]
         public class Settings
@@ -26,6 +28,8 @@ namespace Game.Inventory
             private int bagMaxStack = 10;
 
             public int BagMaxStack => bagMaxStack;
+
+            public int InventorySlots => 4;
         }
     }
 }
