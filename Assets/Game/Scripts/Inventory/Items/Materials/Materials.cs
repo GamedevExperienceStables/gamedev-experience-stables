@@ -23,7 +23,7 @@ namespace Game.Inventory
         public IReadOnlyMaterialContainer Container => _container;
         public IReadOnlyMaterialContainer Bag => _bag;
 
-        public void Init()
+        public void Reset()
         {
             _container.Reset();
             ClearBag();

@@ -40,7 +40,7 @@ namespace Game.Persistence
         public void Reset()
         {
             _player.Init(_initialStats);
-            _inventory.Init();
+            _inventory.Reset();
         }
 
         public GameSaveData.Player Export()

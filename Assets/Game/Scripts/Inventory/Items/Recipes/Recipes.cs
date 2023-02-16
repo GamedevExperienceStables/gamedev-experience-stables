@@ -17,7 +17,7 @@ namespace Game.Inventory
         public void UnSubscribe(Action<RecipeDefinition> callback)
             => RecipeAdded -= callback;
 
-        public void Init()
+        public void Reset()
             => _items.Clear();
         
         public void Init(IEnumerable<RecipeDefinition> recipes)

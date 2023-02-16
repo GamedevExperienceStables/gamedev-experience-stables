@@ -23,14 +23,14 @@ namespace Game.Inventory
 
         public void Init()
         {
-            _materials.Init();
-            _recipes.Init();
-            _runes.Init();
+            _materials.Reset();
+            _recipes.Reset();
+            _runes.Reset();
         }
 
         public void Init(InventoryInitialData data)
         {
-            _runes.Init();
+            _runes.Reset();
             
             _materials.Init(data.container, data.bag);
             _recipes.Init(data.recipes);
