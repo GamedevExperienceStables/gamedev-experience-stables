@@ -5,9 +5,8 @@ namespace Game.Inventory
 {
     public class RuneSlots : IReadOnlyRuneSlots
     {
-        private const int NOT_SET_ACTIVE_SLOT_ID = -1;
-
         private readonly Dictionary<RuneSlotId, RuneSlot> _slots = new();
+        private readonly RuneActiveSlot _activeSlot = new();
 
         public RuneSlots(int count)
         {
@@ -18,26 +17,37 @@ namespace Game.Inventory
             }
         }
 
-        public RuneSlotId Active { get; private set; } = NOT_SET_ACTIVE_SLOT_ID;
+        public RuneSlotId Active => _activeSlot.Value;
 
         public IReadOnlyDictionary<RuneSlotId, RuneSlot> Items => _slots;
 
+        public bool IsActive(RuneSlotId id)
+            => _activeSlot.Value == id;
+
         public void SetActive(RuneSlotId id)
-            => Active = id;
+        {
+            if (!_slots[id].IsEmpty)
+                _activeSlot.Set(id);
+        }
 
         public void ClearActive()
-            => Active = NOT_SET_ACTIVE_SLOT_ID;
+            => _activeSlot.Clear();
 
         public void Set(RuneSlotId id, RuneDefinition rune)
             => _slots[id].Set(rune);
 
         public void Clear(RuneSlotId id)
-            => _slots[id].Clear();
+        {
+            if (_activeSlot.Value == id)
+                _activeSlot.Clear();
+
+            _slots[id].Clear();
+        }
 
         public void Init(IDictionary<RuneSlotId, RuneDefinition> slots)
         {
             ClearActive();
-            
+
             foreach ((RuneSlotId id, RuneDefinition value) in slots)
             {
                 if (_slots.ContainsKey(id))
