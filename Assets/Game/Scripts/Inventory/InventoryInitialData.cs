@@ -8,5 +8,6 @@ namespace Game.Inventory
         public IList<MaterialInitialData> bag;
 
         public IList<RecipeDefinition> recipes;
+        public IDictionary<RuneSlotId, RuneDefinition> slots;
     }
 }

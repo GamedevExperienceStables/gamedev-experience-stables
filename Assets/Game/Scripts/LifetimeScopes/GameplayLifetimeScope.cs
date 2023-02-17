@@ -55,8 +55,9 @@ namespace Game.LifetimeScopes
         private static void RegisterServices(IContainerBuilder builder)
         {
             builder.Register<GameplayPause>(Lifetime.Scoped);
-            builder.Register<GameplayBackButton>(Lifetime.Scoped);
+            builder.Register<GameplayMenuInput>(Lifetime.Scoped);
             builder.Register<GameplayGameOver>(Lifetime.Scoped);
+            builder.Register<GameplayInventory>(Lifetime.Scoped);
             builder.Register<LocationController>(Lifetime.Scoped);
             builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
 
@@ -91,6 +92,7 @@ namespace Game.LifetimeScopes
                 componentsBuilder.AddInHierarchy<HudView>().UnderTransform(uiRoot);
                 componentsBuilder.AddInHierarchy<PauseMenuView>().UnderTransform(uiRoot);
                 componentsBuilder.AddInHierarchy<GameOverView>().UnderTransform(uiRoot);
+                componentsBuilder.AddInHierarchy<InventoryView>().UnderTransform(uiRoot);
             });
         }
 
@@ -107,6 +109,7 @@ namespace Game.LifetimeScopes
             builder.Register<PlanetLocationLoadingState>(Lifetime.Scoped);
             builder.Register<PlanetPlayState>(Lifetime.Scoped);
             builder.Register<PlanetPauseState>(Lifetime.Scoped);
+            builder.Register<PlanetInventoryState>(Lifetime.Scoped);
             builder.Register<PlanetGameOverState>(Lifetime.Scoped);
             builder.Register<PlanetCompleteState>(Lifetime.Scoped);
         }

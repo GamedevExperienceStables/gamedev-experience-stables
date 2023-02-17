@@ -7,7 +7,12 @@ namespace Game.Inventory
     public class RuneDefinition : ItemInventoryDefinition, IItemExecutableDefinition
     {
         [SerializeField]
+        private Sprite icon;
+        
+        [SerializeField]
         private AbilityDefinition grantAbility;
+        
+        public Sprite Icon => icon;
 
         public bool CanExecute(ItemExecutionContext context)
             => IsAbilityExistsAndDisabled(grantAbility, context.target);

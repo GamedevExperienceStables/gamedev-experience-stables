@@ -30,7 +30,7 @@ namespace Game.GameFlow
                 return;
 
             hero.RemoveAbilities();
-            _planetStateMachine.PushState<PlanetGameOverState>();
+            _planetStateMachine.EnterState<PlanetGameOverState>();
         }
 
         private static bool CanRevive(IActorController hero)

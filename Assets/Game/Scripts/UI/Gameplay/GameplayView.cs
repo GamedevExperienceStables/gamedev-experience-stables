@@ -5,53 +5,64 @@ namespace Game.UI
 {
     public class GameplayView : MonoBehaviour
     {
-        [SerializeField]
-        private HudView hudView;
+        private HudView _hudView;
+        private PauseMenuView _pauseMenuView;
+        private GameOverView _gameOverView;
+        private InventoryView _inventoryView;
 
-        [SerializeField]
-        private PauseMenuView pauseMenuView;
-
-        [SerializeField]
-        private GameOverView gameOverView;
+        private void Awake()
+        {
+            _hudView = GetComponentInChildren<HudView>();
+            _pauseMenuView = GetComponentInChildren<PauseMenuView>();
+            _gameOverView = GetComponentInChildren<GameOverView>();
+            _inventoryView = GetComponentInChildren<InventoryView>();
+        }
 
         public void Start()
         {
-            hudView.HideImmediate();
-            pauseMenuView.HideImmediate();
-            gameOverView.HideImmediate();
+            _hudView.HideImmediate();
+            _pauseMenuView.HideImmediate();
+            _gameOverView.HideImmediate();
+            _inventoryView.HideImmediate();
         }
 
         public void ShowHud()
         {
-            hudView.Show();
-            pauseMenuView.HideImmediate();
-            gameOverView.HideImmediate();
+            _hudView.Show();
+            _pauseMenuView.HideImmediate();
+            _gameOverView.HideImmediate();
         }
 
         public UniTask ShowGameOverAsync()
         {
             return UniTask.WhenAll(
-                hudView.HideAsync(),
-                gameOverView.ShowAsync()
+                _hudView.HideAsync(),
+                _gameOverView.ShowAsync()
             );
         }
 
-        public UniTask HideGameOverAsync() 
-            => gameOverView.HideAsync();
+        public UniTask HideGameOverAsync()
+            => _gameOverView.HideAsync();
+
+        public UniTask ShowBookAsync()
+            => _inventoryView.ShowAsync();
+
+        public UniTask HideBookAsync()
+            => _inventoryView.HideAsync();
 
         public UniTask ShowPauseAsync()
         {
             return UniTask.WhenAll(
-                hudView.HideAsync(),
-                pauseMenuView.ShowAsync()
+                _hudView.HideAsync(),
+                _pauseMenuView.ShowAsync()
             );
         }
 
         public UniTask HidePauseAsync()
         {
             return UniTask.WhenAll(
-                hudView.ShowAsync(),
-                pauseMenuView.HideAsync()
+                _hudView.ShowAsync(),
+                _pauseMenuView.HideAsync()
             );
         }
     }

@@ -1,44 +1,44 @@
-using System;
 using Game.Actors;
-using Game.Settings;
-using UnityEngine;
 using VContainer;
 
 namespace Game.Inventory
 {
     public class InventoryController : IInventory
     {
+        private readonly RuneSlots _slots;
         private readonly Materials _materials;
         private readonly Recipes _recipes;
         private readonly Runes _runes;
 
         [Inject]
-        public InventoryController(Settings settings, LevelsSettings levels, InventoryData data)
+        public InventoryController(InventoryData data)
         {
             _materials = data.Materials;
             _recipes = data.Recipes;
             _runes = data.Runes;
-
-            _materials.CreateDefaults(levels, settings.BagMaxStack);
+            _slots = data.Slots;
         }
 
         public IReadOnlyMaterials Materials => _materials;
         public IReadOnlyRecipes Recipes => _recipes;
         public IReadOnlyRunes Runes => _runes;
+        public IReadOnlyRuneSlots Slots => _slots;
 
-        public void Init()
+        public void Reset()
         {
-            _materials.Init();
-            _recipes.Init();
-            _runes.Init();
+            _materials.Reset();
+            _recipes.Reset();
+            _runes.Reset();
+            _slots.Reset();
         }
 
         public void Init(InventoryInitialData data)
         {
-            _runes.Init();
+            _runes.Reset();
             
             _materials.Init(data.container, data.bag);
             _recipes.Init(data.recipes);
+            _slots.Init(data.slots);
         }
 
         public bool CanTransferToContainer(MaterialDefinition definition)
@@ -87,15 +87,6 @@ namespace Game.Inventory
                     _runes.Add(rune);
                     break;
             }
-        }
-
-        [Serializable]
-        public class Settings
-        {
-            [SerializeField, Min(0)]
-            private int bagMaxStack = 10;
-
-            public int BagMaxStack => bagMaxStack;
         }
     }
 }

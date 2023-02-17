@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using JetBrains.Annotations;
 using NaughtyAttributes;
 using UnityEditor;
 
@@ -6,8 +7,8 @@ namespace Game.Utils.DataTable
 {
     public abstract partial class DataTableDefinition<T>
     {
-        [Button]
-        public void CollectAll()
+        [Button, UsedImplicitly]
+        private void CollectAll()
         {
             items.Clear();
 
