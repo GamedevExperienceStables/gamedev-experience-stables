@@ -1,9 +1,6 @@
 ﻿namespace Game.Input
 {
-    public interface IInputService
+    public interface IInputService : IHistoryHandler<InputSchemeGame>
     {
-        void EnableGameplay();
-        void EnableMenus();
-        void DisableAll();
     }
 }

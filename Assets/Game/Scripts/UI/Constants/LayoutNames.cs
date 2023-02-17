@@ -46,5 +46,11 @@
             public const string BUTTON_RESTART = "button-restart";
             public const string BUTTON_MAIN_MENU = "button-exit";
         }
+
+        public static class Inventory
+        {
+            public const string CONTAINER = "book-screen";
+            public const string BUTTON_CLOSE = "button-close";
+        }
     }
 }

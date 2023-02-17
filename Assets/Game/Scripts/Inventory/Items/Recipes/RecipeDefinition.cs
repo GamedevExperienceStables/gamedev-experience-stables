@@ -8,6 +8,8 @@ namespace Game.Inventory
         [SerializeField]
         private RuneDefinition grantsRune;
 
+        public RuneDefinition GrantsRune => grantsRune;
+
         public bool CanExecute(ItemExecutionContext context)
             => context.inventory.CanAddToBag(grantsRune, context.target);
 

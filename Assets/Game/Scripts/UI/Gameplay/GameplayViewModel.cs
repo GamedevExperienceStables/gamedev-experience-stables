@@ -10,7 +10,8 @@ namespace Game.UI
     public class GameplayViewModel
     {
         private readonly RootStateMachine _rootStateMachine;
-        private readonly GameplayPause _pause;
+        private readonly GameplayPause _pauseSwitcher;
+        private readonly GameplayInventory _inventorySwitcher;
         private readonly PlayerController _player;
         private readonly InventoryController _inventory;
         private readonly LevelController _level;
@@ -18,14 +19,16 @@ namespace Game.UI
         [Inject]
         public GameplayViewModel(
             RootStateMachine rootStateMachine,
-            GameplayPause pause,
+            GameplayPause pauseSwitcher,
+            GameplayInventory inventorySwitcher,
             PlayerController player,
             InventoryController inventory,
             LevelController level
         )
         {
             _rootStateMachine = rootStateMachine;
-            _pause = pause;
+            _pauseSwitcher = pauseSwitcher;
+            _inventorySwitcher = inventorySwitcher;
 
             _player = player;
             _inventory = inventory;
@@ -33,10 +36,13 @@ namespace Game.UI
         }
 
         public void PauseGame()
-            => _pause.Enable();
+            => _pauseSwitcher.Enable();
 
         public void ResumeGame()
-            => _pause.Disable();
+            => _pauseSwitcher.Disable();
+
+        public void CloseInventory() 
+            => _inventorySwitcher.Disable();
 
         public void GoToMainMenu()
             => _rootStateMachine.EnterState<MainMenuState>();

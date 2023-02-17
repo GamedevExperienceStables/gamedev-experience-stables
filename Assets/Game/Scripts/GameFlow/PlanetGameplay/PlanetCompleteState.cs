@@ -18,7 +18,7 @@ namespace Game.GameFlow
 
         protected override UniTask OnEnter()
         {
-            _input.DisableAll();
+            _input.ReplaceState(InputSchemeGame.None);
             _rootStateMachine.EnterState<CompleteLevelState>();
 
             return UniTask.CompletedTask;

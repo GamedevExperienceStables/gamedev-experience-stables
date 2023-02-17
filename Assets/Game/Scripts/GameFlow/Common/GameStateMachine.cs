@@ -15,5 +15,8 @@ namespace Game.GameFlow
 
         public void PopState() 
             => stateMachine.PopState().Forget();
+
+        public bool IsState<T>() 
+            => stateMachine.IsState<T>();
     }
 }
