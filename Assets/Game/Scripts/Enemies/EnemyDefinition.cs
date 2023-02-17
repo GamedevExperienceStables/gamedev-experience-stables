@@ -19,7 +19,7 @@ namespace Game.Enemies
 
         [SerializeField]
         private EnemyStats.InitialStats initialStats;
-
+        
         [SerializeField, Expandable]
         private List<AbilityDefinition> abilities;
 

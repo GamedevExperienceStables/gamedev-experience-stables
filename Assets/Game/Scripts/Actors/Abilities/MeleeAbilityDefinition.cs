@@ -14,6 +14,15 @@ namespace Game.Actors
         [SerializeField]
         private float meleeRangeRadius;
 
+        [SerializeField]
+        private float pushForce;
+        
+        [SerializeField]
+        private int maxTargets;
+        
+        [SerializeField]
+        private Vector3 sphereColliderShift;
+        
         [FormerlySerializedAs("MeleeDamage")]
         [SerializeField]
         private StatModifier meleeDamage;
@@ -21,44 +30,50 @@ namespace Game.Actors
         [SerializeField]
         private StatModifier staminaCost;
         
+        [SerializeField]
+        private LayerMask mask;
+        
         public float MeleeRangeRadius => meleeRangeRadius;
         public StatModifier MeleeDamage => meleeDamage;
         public StatModifier StaminaCost => staminaCost;
+        public float PushForce => pushForce;
+        public LayerMask Mask => mask;
+        public Vector3 SphereColliderShift => sphereColliderShift;
+        public int MaxTargets => maxTargets;
     }
     public class MeleeAbility : ActorAbility<MeleeAbilityDefinition>
     {
         private AimAbility _aim;
-        private MeleeAbility _melee;
-
+        private Collider[] _hitColliders;
         public override bool CanActivateAbility()
-            => !_aim.IsActive && (Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value));
+            => !_aim.IsActive && Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
         
-             
-
+        
         protected override void OnInitAbility()
         {
             _aim = Owner.GetAbility<AimAbility>();
+            _hitColliders = new Collider[Definition.MaxTargets];
         }
 
         protected override void OnActivateAbility()
         {
-            // to do: change method to non-allocating in the future
             Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
-            var hits = Physics.OverlapSphere(Owner.Transform.position,
-                Definition.MeleeRangeRadius,LayerMasks.Enemy );
-            foreach (Collider hit in hits)
+            Vector3 sphereShift = Owner.Transform.position +  Definition.SphereColliderShift;
+            #if UNITY_EDITOR
+                DebugExtensions.DebugWireSphere(sphereShift, radius: Definition.MeleeRangeRadius);
+             #endif
+            int numColliders = Physics.OverlapSphereNonAlloc(sphereShift, 
+                Definition.MeleeRangeRadius, _hitColliders, Definition.Mask);
+            for (int i = 0; i < numColliders; i++)
             {
-                Debug.Log(hit.transform.gameObject + "MELEE ATTACKED");
-                hit.transform.gameObject.TryGetComponent(out IActorController destinationOwner);
-                destinationOwner?.GetComponent<DamageableController>().Damage(Definition.MeleeDamage);
+                Transform hit = _hitColliders[i].transform;
+                Debug.Log(hit.gameObject + "MELEE ATTACKED");
+                if (hit.gameObject.TryGetComponent(out IActorController destinationOwner))
+                    destinationOwner.GetComponent<DamageableController>().Damage(Definition.MeleeDamage);
+                Vector3 dir = hit.position - Owner.Transform.position;
+                dir = dir.normalized * Definition.PushForce;
+                hit.GetComponent<MovementController>().AddVelocity(dir);
             }
-        }
-        
-        void OnDrawGizmosSelected()
-        {
-            // for debbuging, delete after adding new method
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawSphere(Owner.Transform.position, Definition.MeleeRangeRadius);
         }
     }
 }

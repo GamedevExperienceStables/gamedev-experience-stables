@@ -22,7 +22,6 @@ namespace Game.Hero
         private AimAbility _aim;
         private DashAbility _dash;
         private MeleeAbility _melee;
-        private RecoveryAbility _recovery;
         private IActorController _owner;
         private bool _isBlocked;
         
@@ -46,8 +45,6 @@ namespace Game.Hero
             _aim = _owner.GetAbility<AimAbility>();
             _dash = _owner.GetAbility<DashAbility>();
             _melee = _owner.GetAbility<MeleeAbility>();
-            _recovery = _owner.GetAbility<RecoveryAbility>();
-            StartRecovering();
             _input.AimButton.Performed += OnAim;
             _input.AimButton.Canceled += OnAimCanceled;
 
@@ -75,11 +72,7 @@ namespace Game.Hero
 
             Move();
         }
-
-        private void StartRecovering()
-        {
-            _recovery.TryActivateAbility();
-        }
+        
         
         private void OnFire() 
             => _weapon.TryActivateAbility();
