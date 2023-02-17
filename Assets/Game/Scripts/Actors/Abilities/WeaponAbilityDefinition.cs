@@ -1,11 +1,18 @@
-﻿using Game.Weapons;
+﻿    using Game.Weapons;
 using UnityEngine;
+    using UnityEngine.Serialization;
 
-namespace Game.Actors
+    namespace Game.Actors
 {
     [CreateAssetMenu(menuName = MENU_PATH + "Weapon")]
     public class WeaponAbilityDefinition : AbilityDefinition<WeaponAbility>
     {
+        [SerializeField]
+        private bool isAimAbilityRequired;
+        [SerializeField]
+        private LayerMask mask;
+        public bool IsAimAbilityRequired => isAimAbilityRequired;
+        public LayerMask Mask => mask;
     }
 
     public class WeaponAbility : ActorAbility<WeaponAbilityDefinition>
@@ -23,7 +30,7 @@ namespace Game.Actors
         }
 
         public override bool CanActivateAbility()
-            => _aim.IsActive;
+            => !Definition.IsAimAbilityRequired || _aim.IsActive;
 
         protected override void OnActivateAbility()
             => _currentWeapon.SpawnProjectile();
