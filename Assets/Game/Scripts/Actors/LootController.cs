@@ -31,7 +31,10 @@ namespace Game.Actors
         private void OnDied() 
             => SpawnLoot();
 
-        private void SpawnLoot() 
-            => _lootSpawner.SpawnScattered(_lootBag, transform.position);
+        private void SpawnLoot()
+        {
+            if (_lootBag)
+                _lootSpawner.SpawnScattered(_lootBag, transform.position);
+        }
     }
 }
