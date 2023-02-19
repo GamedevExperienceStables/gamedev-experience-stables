@@ -21,8 +21,8 @@ public class AudioController : MonoBehaviour
     [SerializeField] private float StartRunningTime = 0.3f;                     
     //[SerializeField] private string JumpInputName;                              
    
-    public string[] MaterialTypes;                                              
-    [HideInInspector] public int DefulatMaterialValue;                          // This will be told by the 'FMODStudioFootstepsEditor' script which Material has been set as the defualt. It will then store the value of that Material for outhis script to use. This cannot be changed in the Editor, but a drop down menu created by the 'FMODStudioFootstepsEditor' script can.
+    public string[] materialTypes;                                              
+    [HideInInspector] public int defulatMaterialValue;                          // This will be told by the 'FMODStudioFootstepsEditor' script which Material has been set as the defualt. It will then store the value of that Material for outhis script to use. This cannot be changed in the Editor, but a drop down menu created by the 'FMODStudioFootstepsEditor' script can.
    
     private float StepRandom;                                                   
     private Vector3 PrevPos;                                                    
@@ -90,13 +90,13 @@ public class AudioController : MonoBehaviour
 			{
             if (hit.collider.gameObject.GetComponent<FMODStudioMaterialSetter>())                                   
 				{
-                F_MaterialValue = hit.collider.gameObject.GetComponent<FMODStudioMaterialSetter>().MaterialValue;   
+                F_MaterialValue = hit.collider.gameObject.GetComponent<FMODStudioMaterialSetter>().materialValue;   
 				}
             else                                                                                                    
-				F_MaterialValue = DefulatMaterialValue;                                                            
+				F_MaterialValue = defulatMaterialValue;                                                            
 			}
         else                                                                                                        
-			F_MaterialValue = DefulatMaterialValue;                                                                  
+			F_MaterialValue = defulatMaterialValue;                                                                  
 		}
 
 
