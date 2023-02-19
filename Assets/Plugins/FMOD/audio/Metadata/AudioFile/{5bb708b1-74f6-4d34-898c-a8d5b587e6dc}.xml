@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{5bb708b1-74f6-4d34-898c-a8d5b587e6dc}">
+		<property name="assetPath">
+			<value>scott-buckley-childhood.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>137.16897959183675</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{af23839c-b308-4376-a221-3722cdb763a3}</destination>
+		</relationship>
+	</object>
+</objects>

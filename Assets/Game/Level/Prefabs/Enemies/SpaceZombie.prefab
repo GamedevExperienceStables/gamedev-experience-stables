@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 5183282983791351953}
   - component: {fileID: 1141320969658811781}
   - component: {fileID: 8388162916129220664}
+  - component: {fileID: 7703377477458111888}
   m_Layer: 11
   m_Name: SpaceZombie
   m_TagString: Untagged
@@ -274,6 +275,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWeapon: {fileID: 8473229071020956688}
+--- !u!114 &7703377477458111888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646171557498439826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1247349945
+      Data2: 1298704262
+      Data3: -1111835481
+      Data4: 766823912
+    Path: event:/Zombi
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1646171557786517125
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7383564464360880306}
   - component: {fileID: 8178268091706024114}
   - component: {fileID: 6936136090839916663}
+  - component: {fileID: 5621885527475581562}
   m_Layer: 0
   m_Name: ExplosionFeedback
   m_TagString: Untagged
@@ -155,6 +156,9 @@ MonoBehaviour:
           TrackID: 0
           Quantized: 0
           TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
         RandomizeOutput: 0
         RandomMultiplier: {x: 0.8, y: 1}
         RandomizeDuration: 0
@@ -237,6 +241,9 @@ MonoBehaviour:
           TrackID: 0
           Quantized: 0
           TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
         RandomizeOutput: 0
         RandomMultiplier: {x: 0.8, y: 1}
         RandomizeDuration: 0
@@ -341,3 +348,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeDestructionMode: 0
   TimeBeforeDestruction: 3
+--- !u!114 &5621885527475581562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7231396971107383612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -618265939
+      Data2: 1335380151
+      Data3: -387922516
+      Data4: 1622680277
+    Path: event:/Explosion
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

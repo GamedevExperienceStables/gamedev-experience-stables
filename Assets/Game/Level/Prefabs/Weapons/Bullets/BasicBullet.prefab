@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2169979632489900424}
   - component: {fileID: 2169979632489900425}
   - component: {fileID: 2169979632489900430}
+  - component: {fileID: 727923720211131680}
   m_Layer: 3
   m_Name: BasicBullet
   m_TagString: Untagged
@@ -71,6 +72,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialValue: 1
   hitFeedback: {fileID: 0}
+--- !u!114 &727923720211131680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2169979632489900431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1636584227
+      Data2: 1205985370
+      Data3: 2140196278
+      Data4: -415129901
+    Path: event:/Shot
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &2169979633855609759
 GameObject:
   m_ObjectHideFlags: 0
