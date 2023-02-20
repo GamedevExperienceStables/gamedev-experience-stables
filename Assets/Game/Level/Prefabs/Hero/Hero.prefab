@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 5547676887462078008}
   - component: {fileID: 2300186903787914912}
   - component: {fileID: 4701970604866781007}
+  - component: {fileID: 1052478895}
   m_Layer: 3
   m_Name: Hero
   m_TagString: Untagged
@@ -412,6 +413,7 @@ MonoBehaviour:
     rotateOnlyXZ: 1
   gravity:
     direction: {x: 0, y: -30, z: 0}
+  heroAnimator: {fileID: 1052478895}
 --- !u!114 &3247602722215226882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,6 +480,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathFeedback: {fileID: 0}
   destroyOnDeath: 0
+--- !u!95 &1052478895
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247602722215226894}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 75a07b1290b0f31459e0c24a899fb4b2, type: 3}
+  m_Controller: {fileID: 9100000, guid: 38b9d706cded53944a6802c0c1a98c8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &3247602723414458277
 GameObject:
   m_ObjectHideFlags: 0
