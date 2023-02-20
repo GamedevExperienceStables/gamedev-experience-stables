@@ -54,6 +54,12 @@ namespace Game.Actors
             }
 
             _lookDirection = lookDirection;
+            Debug.Log(_movementDirection);
+            heroAnimator.SetFloat("XCoord", _movementDirection.x);
+            heroAnimator.SetFloat("YCoord", _movementDirection.z);
+            Debug.Log(heroAnimator.GetFloat("XCoord"));
+            Debug.Log(heroAnimator.GetFloat("YCoord"));
+           
         }
 
 
