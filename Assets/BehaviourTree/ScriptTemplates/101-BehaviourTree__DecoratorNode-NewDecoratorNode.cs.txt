@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTree;
 
-[System.Serializable]
-public class #SCRIPTNAME# : DecoratorNode
+namespace Game.BehaviourTree.Decorators
 {
-    protected override void OnStart() {
-    }
-
-    protected override void OnStop() {
-    }
-
-    protected override State OnUpdate() {
-        return State.Success;
+    [System.Serializable]
+    public class #SCRIPTNAME# : DecoratorNode
+    {
+        protected override void OnStart() {
+        }
+    
+        protected override void OnStop() {
+        }
+    
+        protected override State OnUpdate() {
+            return State.Success;
+        }
     }
 }

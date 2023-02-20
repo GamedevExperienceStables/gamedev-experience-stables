@@ -14,6 +14,7 @@ namespace Game.Enemies
         private LootController _loot;
         private MeleeAbility _melee;
         private WeaponAbility _weapon;
+        private AiSensor _sensor;
         private float _time = 2.0f;
         private EnemyStats _stats;
         private IActorController _owner;
@@ -25,6 +26,7 @@ namespace Game.Enemies
             _ai = GetComponent<AiController>();
             _movement = GetComponent<MovementController>();
             _loot = GetComponent<LootController>();
+            _sensor = GetComponent<AiSensor>();
         }
 
         protected override void OnActorDestroy() 
@@ -44,6 +46,9 @@ namespace Game.Enemies
 
         public void SetLoot(LootBagDefinition definitionLootBag) 
             => _loot.SetLoot(definitionLootBag);
+        
+        public void InitSensor(EnemyStats.InitialStats initial)
+            => _sensor.InitSensor(initial);
 
         public void SetAbilities()
         {
