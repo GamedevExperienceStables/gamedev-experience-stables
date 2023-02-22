@@ -10,7 +10,6 @@ namespace Game.Enemies
         private float _height;
         
         private readonly Color _color = Color.red;
-        private Collider[] _colliders = new Collider[50];
 
         public void InitSensor(EnemyStats.InitialStats stats)
         {
@@ -18,40 +17,32 @@ namespace Game.Enemies
             _height = stats.SensorHeight;
         }
 
-        public void Update()
+        public bool Scan(Transform target)
         {
-            Scan();
+            float sqrDistance = (transform.position - target.position).sqrMagnitude;
+            float sqrScanDistance = _distance * _distance;
+            
+            
+            if (sqrDistance <= sqrScanDistance && FindHero(target))
+                return true;
+            
+            return false;
         }
 
-        public bool Scan()
-        {
-           int count = Physics.OverlapSphereNonAlloc(transform.position, _distance, _colliders);
-
-           for (int i = 0; i < count; i++)
-           {
-               GameObject gameObject = _colliders[i].gameObject;
-
-               if (IsInSight(gameObject))
-               {
-                   Debug.Log("Enemy find player");
-                   return true;
-               }
-           }
-           return false;
-        }
-
-        private bool IsInSight(GameObject gameObject)
+        private bool FindHero(Transform target)
         {
             Vector3 origin = transform.position;
-            Vector3 dest = gameObject.transform.position;
+            Vector3 dest = target.position;
             Vector3 direction = dest - origin;
             
             if (direction.y < 0 || direction.y > _height) 
                 return false;
 
-            origin.y += _height / 2;
             dest.y = origin.y;
-            return !Physics.Linecast(origin, direction) && gameObject.GetComponent<HeroController>();
+            if (!Physics.Linecast(origin, direction, LayerMasks.Player, QueryTriggerInteraction.Ignore))
+                return true;
+            
+            return false;
         }
 
         private void OnDrawGizmos()

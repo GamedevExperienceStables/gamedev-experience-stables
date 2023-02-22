@@ -1,5 +1,4 @@
-﻿using System;
-using Game.Actors;
+﻿using Game.Actors;
 using Game.Level;
 using Game.Stats;
 using UnityEngine;
@@ -10,14 +9,16 @@ namespace Game.Enemies
     public class EnemyController : ActorController
     {
         private AiController _ai;
+        private AiSensor _sensor;
         private MovementController _movement;
         private LootController _loot;
         private MeleeAbility _melee;
         private WeaponAbility _weapon;
-        private AiSensor _sensor;
-        private float _time = 2.0f;
         private EnemyStats _stats;
         private IActorController _owner;
+        
+        public Transform SpawnPoint { get; private set; }
+        
         protected override IStats Stats => _stats;
 
         protected override void OnActorAwake()
@@ -38,6 +39,9 @@ namespace Game.Enemies
             _stats.InitStats(initial);
         }    
 
+        public void AddSpawn(Transform spawnPoint) 
+            => SpawnPoint = spawnPoint;
+        
         public void SetTarget(Transform target) 
             => _ai.SetTarget(target);
 
@@ -57,21 +61,10 @@ namespace Game.Enemies
 
         }
         
-        private void MeleeAttack()
+        public void MeleeAttack()
             => _melee.TryActivateAbility();
         
-        private void RangeAttack()
+        public void RangeAttack()
             => _weapon.TryActivateAbility();
-
-        private void Update()
-        {
-            _time -= Time.deltaTime;
-            if (_time <= 0)
-            {
-                MeleeAttack();
-                RangeAttack();
-                _time = 2.0f;
-            }
-        }
     }
 }
