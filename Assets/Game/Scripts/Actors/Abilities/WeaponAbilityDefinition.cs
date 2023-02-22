@@ -1,8 +1,7 @@
-﻿    using Game.Weapons;
+﻿using Game.Weapons;
 using UnityEngine;
-    using UnityEngine.Serialization;
 
-    namespace Game.Actors
+namespace Game.Actors
 {
     [CreateAssetMenu(menuName = MENU_PATH + "Weapon")]
     public class WeaponAbilityDefinition : AbilityDefinition<WeaponAbility>
@@ -33,6 +32,6 @@ using UnityEngine;
             => !Definition.IsAimAbilityRequired || _aim.IsActive;
 
         protected override void OnActivateAbility()
-            => _currentWeapon.SpawnProjectile();
+            => _currentWeapon.SpawnProjectile(_aim.GetRealPosition());
     }
 }

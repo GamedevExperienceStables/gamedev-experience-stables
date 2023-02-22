@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Game.Actors;
 using Game.Actors.Damage;
 using Game.Utils;
@@ -43,7 +44,7 @@ namespace Game.Weapons
 
         private readonly RaycastHit[] _hits = new RaycastHit[5];
         private IActorController _owner;
-
+        
         private void Update()
         {
             CalculateSpeed();
@@ -92,14 +93,22 @@ namespace Game.Weapons
             Complete();
         }
 
-        public void Init(Transform startPoint, IActorController owner)
+        public void Init(Transform startPoint, IActorController owner, Vector3 targetPosition)
         {
             _owner = owner;
-            transform.SetPositionAndRotation(startPoint.position, startPoint.rotation);
+            Vector3 dir = new Vector3(targetPosition.x, 0, targetPosition.z) - startPoint.position;
+            var coord1 = targetPosition.x - startPoint.position.x;
+            var coord2 = targetPosition.z - startPoint.position.z;
+            var angle = Mathf.Atan2(coord1, coord2) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.Euler(new Vector3(0, angle, 0));
+            Debug.Log(angle);
+            Debug.Log(rotation);
+            transform.SetPositionAndRotation(startPoint.position, rotation);
 
             _timer = lifeTime;
             _currentSpeed = acceleration > 0 ? 0 : maxSpeed;
         }
+        
 
         private void Complete()
         {

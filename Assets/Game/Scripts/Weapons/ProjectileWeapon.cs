@@ -21,17 +21,17 @@ namespace Game.Weapons
         public void SetOwner(IActorController owner)
             => _owner = owner;
 
-        public void SpawnProjectile()
+        public void SpawnProjectile(Vector3 targetPosition)
         {
-            CreateProjectile();
+            CreateProjectile(targetPosition);
             PlayEffects();
         }
 
-        private void CreateProjectile()
+        private void CreateProjectile(Vector3 targetPosition)
         {
             GameObject go = pool.GetPooledGameObject();
             var projectile = go.GetComponent<Projectile>();
-            projectile.Init(firePoint, _owner);
+            projectile.Init(firePoint, _owner, targetPosition);
             projectile.Show();
         }
 

@@ -1,6 +1,9 @@
-﻿using Game.Stats;
+﻿using System;
+using Game.Input;
+using Game.Stats;
 using KinematicCharacterController;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Game.Actors
 {
@@ -184,5 +187,6 @@ namespace Game.Actors
         public void OnDiscreteCollisionDetected(Collider hitCollider)
         {
         }
+        
     }
 }

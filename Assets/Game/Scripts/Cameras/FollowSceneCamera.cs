@@ -27,7 +27,6 @@ namespace Game.Cameras
         public void SetTarget(Transform target)
         {
             Debug.Assert(target, "target == null");
-
             _cinemachine.PreviousStateIsValid = false;
             _cinemachine.Follow = target;
         }

@@ -24,6 +24,8 @@ namespace Game.Hero
         private MeleeAbility _melee;
         private IActorController _owner;
         private bool _isBlocked;
+        private Camera _mainCamera;
+        private Vector3 _mousePosition;
         
         [Inject]
         public void Construct(IInputControlGameplay input, SceneCamera sceneCamera)
@@ -34,10 +36,11 @@ namespace Game.Hero
 
         private void Awake()
         {
+            _mainCamera = Camera.main;
             _movement = GetComponent<MovementController>();
             _owner = GetComponent<IActorController>();
         }
-
+    
         private void Start()
         {
             _weapon = _owner.GetAbility<WeaponAbility>();
@@ -69,11 +72,20 @@ namespace Game.Hero
         private void Update()
         {
             HandleInputs();
-
             Move();
+            if (_aim.IsActive)
+            {
+                Plane plane = new Plane(Vector3.up, 0);
+                float distance;
+                Ray ray = Camera.main.ScreenPointToRay(_input.MousePosition);
+                if (plane.Raycast(ray, out distance))
+                {
+                    _mousePosition = ray.GetPoint(distance);
+                }
+            }
         }
-        
-        
+
+        public Vector3 GetRealMousePosition() => _mousePosition;
         private void OnFire() 
             => _weapon.TryActivateAbility();
 
@@ -154,5 +166,6 @@ namespace Game.Hero
 
             return movementDirection;
         }
+        
     }
 }
