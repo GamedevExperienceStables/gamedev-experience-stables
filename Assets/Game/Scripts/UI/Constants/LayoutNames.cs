@@ -26,12 +26,11 @@
             public const string WIDGET_SP = "widget-sp";
             public const string WIDGET_CRYSTAL = "widget-crystal";
             
-            public const string CRYSTAL_ICON = "crystal-icon";
+            public const string SP_LEFT = "sp-left";
+            public const string SP_CENTER = "sp-center";
+            public const string SP_RIGHT = "sp-right";
             
             public const string WIDGET_BAR_MASK = "mask";
-
-            public const string TEXT_CURRENT = "text-current";
-            public const string TEXT_MAX = "text-max";
         }
 
         public static class LoadingScreen

@@ -28,16 +28,17 @@ namespace Game.UI
         private TimeSpan _showDuration;
         private TimeSpan _hideDuration;
         
-        private Label _crystal;
-        private Label _crystalMax;
-        private VisualElement _crystalIcon;
+        private float _crystalMax;
+        private VisualElement _crystalMask;
 
         private float _currentMaxHp;
         private VisualElement _hpBarWidgetMask;
         private float _currentMaxMp;
         private VisualElement _mpBarWidgetMask;
         private float _currentMaxSp;
-        private VisualElement _spBarWidgetMask;
+        private VisualElement _spBarWidgetMaskLeft;
+        private VisualElement _spBarWidgetMaskCenter;
+        private VisualElement _spBarWidgetMaskRight;
 
         [Inject]
         public void Construct(GameplayViewModel viewModel)
@@ -60,12 +61,15 @@ namespace Game.UI
             _mpBarWidgetMask = mpWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
             
             var spWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_SP);
-            _spBarWidgetMask = spWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
+            var leftSp = spWidget.Q<VisualElement>(LayoutNames.Hud.SP_LEFT);
+            var centerSp = spWidget.Q<VisualElement>(LayoutNames.Hud.SP_CENTER);
+            var rightSp = spWidget.Q<VisualElement>(LayoutNames.Hud.SP_RIGHT);
+            _spBarWidgetMaskLeft = leftSp.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
+            _spBarWidgetMaskCenter = centerSp.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
+            _spBarWidgetMaskRight = rightSp.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
 
             var crystalWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_CRYSTAL);
-            _crystalIcon = crystalWidget.Q<VisualElement>(LayoutNames.Hud.CRYSTAL_ICON);
-            _crystal = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
-            _crystalMax = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
+            _crystalMask = crystalWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
 
             InitCrystalView(_viewModel.GetCurrentMaterial());
             SubscribeStats();
@@ -166,29 +170,40 @@ namespace Game.UI
 
         private void UpdateStamina(StatValueChange change)
         {
-            Length stylePercent = GetStylePercent(change.newValue, _currentMaxSp);
-            _spBarWidgetMask.style.width = stylePercent;
+            float currentValue = change.newValue / _currentMaxSp;
+            float mapLeft = Map(currentValue, 0f, 1f, 0f, 0.2f);
+            float mapCenter = Map(currentValue, 0f, 1f, 0.3f, 0.7f);
+            float mapRight = Map(currentValue, 0f, 1f, 0.8f, 1f);
+            var stylePercentLeft = new Length(mapLeft, LengthUnit.Percent);
+            var stylePercentCenter = new Length(mapCenter, LengthUnit.Percent);
+            var stylePercentRight = new Length(mapRight, LengthUnit.Percent);
+            _spBarWidgetMaskLeft.style.width = stylePercentLeft;
+            _spBarWidgetMaskCenter.style.width = stylePercentCenter;
+            _spBarWidgetMaskRight.style.width = stylePercentRight;
         }
 
         private void UpdateStaminaMax(StatValueChange change)
             => _currentMaxSp = change.newValue;
 
         private void InitCrystalView(IReadOnlyMaterialData materialData)
-        {
-            _crystalIcon.style.unityBackgroundImageTintColor = materialData.Definition.Color;
-
-            _crystal.text = materialData.Current.ToString(CultureInfo.InvariantCulture);
-            _crystalMax.text = materialData.Total.ToString(CultureInfo.InvariantCulture);
-        }
+            => _crystalMax = materialData.Total;
 
         private void UpdateCrystal(MaterialChangedData change)
-            => _crystal.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+        {
+            Length stylePercent = GetStylePercent(change.newValue, _crystalMax);
+            _crystalMask.style.height = stylePercent;
+        }
 
         private static Length GetStylePercent(float current, float max)
         {
             float percent = current / max * 100;
             var stylePercent = new Length(percent, LengthUnit.Percent);
             return stylePercent;
+        }
+        
+        private float Map(float input, float inputMin, float inputMax, float min, float max)
+        {
+            return min + (input - inputMin) * (max - min) / (inputMax - inputMin);
         }
     }
 }

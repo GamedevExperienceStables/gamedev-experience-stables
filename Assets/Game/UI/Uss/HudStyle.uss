@@ -11,7 +11,7 @@
 }
 
 .hud-bar-stamina-size {
-    height: 35px;
+    height: 32%;
     width: 575px;
 }
 
@@ -38,4 +38,38 @@
     width: 85px;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.crystal-bar {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.crystal-bar-size {
+    height: 5%;
+    width: 4%;
+}
+
+.crystal-bar-fill {
+    flex-grow: 0;
+    -unity-background-scale-mode: stretch-to-fill;
+    width: auto;
+    height: auto;
+}
+
+.hud-bar-stamina-left-size {
+    height: 100%;
+    width: auto;
+}
+
+.hud-bar-stamina-center-size {
+    height: 100%;
+    width: auto;
+}
+
+.hud-bar-stamina-right-size {
+    height: 100%;
+    width: auto;
 }
