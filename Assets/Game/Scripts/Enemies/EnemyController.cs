@@ -1,5 +1,4 @@
-﻿using System;
-using Game.Actors;
+﻿using Game.Actors;
 using Game.Level;
 using Game.Stats;
 using UnityEngine;
@@ -10,15 +9,16 @@ namespace Game.Enemies
     public class EnemyController : ActorController
     {
         private AiController _ai;
+        private AiSensor _sensor;
         private MovementController _movement;
         private LootController _loot;
         private MeleeAbility _melee;
         private ProjectileAbility _weapon;
-        private float _time = 2.0f;
         private EnemyStats _stats;
         private IActorController _owner;
-        private bool _hasMelee;
-        private bool _hasRange;
+        
+        public Transform SpawnPoint { get; private set; }
+        
         protected override IStats Stats => _stats;
 
         protected override void OnActorAwake()
@@ -27,6 +27,7 @@ namespace Game.Enemies
             _ai = GetComponent<AiController>();
             _movement = GetComponent<MovementController>();
             _loot = GetComponent<LootController>();
+            _sensor = GetComponent<AiSensor>();
         }
 
         protected override void OnActorDestroy() 
@@ -38,6 +39,9 @@ namespace Game.Enemies
             _stats.InitStats(initial);
         }    
 
+        public void AddSpawn(Transform spawnPoint) 
+            => SpawnPoint = spawnPoint;
+        
         public void SetTarget(Transform target) 
             => _ai.SetTarget(target);
 
@@ -46,35 +50,20 @@ namespace Game.Enemies
 
         public void SetLoot(LootBagDefinition definitionLootBag) 
             => _loot.SetLoot(definitionLootBag);
+        
+        public void InitSensor(EnemyStats.InitialStats initial)
+            => _sensor.InitSensor(initial);
 
         public void SetAbilities()
         {
             _melee = _owner.GetAbility<MeleeAbility>();
-            _hasMelee = _melee != null;
-            
             _weapon = _owner.GetAbility<ProjectileAbility>();
-            _hasRange = _weapon != null;
         }
         
-        private void MeleeAttack()
+        public void MeleeAttack()
             => _melee.TryActivateAbility();
         
-        private void RangeAttack()
+        public void RangeAttack()
             => _weapon.TryActivateAbility();
-
-        private void Update()
-        {
-            _time -= Time.deltaTime;
-            if (_time <= 0)
-            {
-                if (_hasMelee)
-                    MeleeAttack();
-                
-                if (_hasRange)
-                    RangeAttack();
-                
-                _time = 2.0f;
-            }
-        }
     }
 }

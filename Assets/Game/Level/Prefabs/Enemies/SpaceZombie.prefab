@@ -49,11 +49,14 @@ GameObject:
   - component: {fileID: 1646171557498439836}
   - component: {fileID: -3488804478806959247}
   - component: {fileID: 5747837998317586703}
+  - component: {fileID: -1107406705620513052}
   - component: {fileID: 1815510984333573865}
   - component: {fileID: 5183282983791351953}
   - component: {fileID: 1141320969658811781}
   - component: {fileID: 8388162916129220664}
-  - component: {fileID: -4605915005562129575}
+  - component: {fileID: 6510870325399623236}
+  - component: {fileID: 274484782315062749}
+  - component: {fileID: 5456209689643324787}
   m_Layer: 11
   m_Name: SpaceZombie
   m_TagString: Untagged
@@ -221,6 +224,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updatePathInterval: 0.2
   stopDistance: 1
+--- !u!114 &-1107406705620513052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646171557498439826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a0cb77e24348ae9a13e3e09770fbab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1815510984333573865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,7 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWeapon: {fileID: 8473229071020956688}
---- !u!114 &-4605915005562129575
+--- !u!114 &6510870325399623236
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -288,6 +303,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 8473229070387919807}
+--- !u!114 &274484782315062749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646171557498439826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad115aca74ce3c4891b3f6de0b4aae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _serializedExposedParameters: []
+  _boundGraphSerialization: 
+  _boundGraphObjectReferences: []
+  _boundGraphSource:
+    _version: 0
+    _category: 
+    _comments: 
+    _translation: {x: 0, y: 0}
+    _zoomFactor: 1
+  _firstActivation: 0
+  _enableAction: 0
+  _disableAction: 0
+  _lockBoundGraphPrefabOverrides: 1
+  _preInitializeSubGraphs: 0
+  _updateMode: 0
+  _graph: {fileID: 11400000, guid: cbaa47751c91e1947a270e2f8d41b8fb, type: 2}
+  _blackboard: {fileID: 5456209689643324787}
+--- !u!114 &5456209689643324787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646171557498439826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b98a6db0b653f764eac834f85857a9dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentBlackboard: {fileID: 0}
+  _serializedBlackboard: '{"_variables":{}}'
+  _objectReferences: []
+  _serializedVariables: []
 --- !u!1 &1646171557786517125
 GameObject:
   m_ObjectHideFlags: 0

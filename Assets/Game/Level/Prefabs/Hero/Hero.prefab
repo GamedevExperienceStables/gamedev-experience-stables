@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 4144300650630618432}
   - component: {fileID: 2308426046304888134}
   - component: {fileID: 1584950886205839244}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: InteractionZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -455,7 +455,7 @@ GameObject:
   - component: {fileID: 4149050960076140605}
   - component: {fileID: 8098581064844537398}
   - component: {fileID: 2660862653515176319}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PickupZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
