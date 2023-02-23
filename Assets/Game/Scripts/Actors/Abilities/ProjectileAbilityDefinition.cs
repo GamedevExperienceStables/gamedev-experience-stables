@@ -1,4 +1,6 @@
-﻿using Game.Stats;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using Game.Stats;
 using Game.Weapons;
 using NaughtyAttributes;
 using UnityEngine;
@@ -30,6 +32,8 @@ namespace Game.Actors
 
         private Transform _spawnPoint;
         private bool _hasMana;
+        private Animator _animator;
+        private bool _isAnimationEnded;
 
         public ProjectileAbility(ProjectileFactory projectileFactory)
         {
@@ -56,9 +60,10 @@ namespace Game.Actors
         protected override void OnInitAbility()
         {
             _hasMana = Owner.HasStat(CharacterStats.Mana);
-            
             var view = Owner.GetComponent<ProjectileAbilityView>();
             _spawnPoint = view.SpawnPoint;
+            _animator = Owner.GetComponent<Animator>();
+            _isAnimationEnded = true;
         }
 
         public override bool CanActivateAbility()
@@ -72,15 +77,28 @@ namespace Game.Actors
             return Owner.GetCurrentValue(CharacterStats.Mana) >= Definition.ManaCost;
         }
 
-        protected override void OnActivateAbility()
+        protected override async void OnActivateAbility()
         {
             if (_hasMana)
                 Owner.ApplyModifier(CharacterStats.Mana, -Definition.ManaCost);
             
+            if (_animator != null)
+            {
+                _animator.SetBool("IsAttacked", true);
+                _isAnimationEnded = false;
+                await WaitAnimationEnd();
+                _animator.SetBool("IsAttacked", false);
+            }
+            
             _projectilePool.Get(out Projectile projectile);
             projectile.Fire(_spawnPoint);
-
             EndAbility();
+        }
+        
+        private async UniTask WaitAnimationEnd()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), ignoreTimeScale: false);
+            _isAnimationEnded = true;
         }
     }
 }

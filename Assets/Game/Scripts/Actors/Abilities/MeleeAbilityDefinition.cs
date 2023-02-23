@@ -1,4 +1,6 @@
-﻿using Game.Actors.Health;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using Game.Actors.Health;
 using Game.Stats;
 using Game.Utils;
 using UnityEngine;
@@ -45,18 +47,32 @@ namespace Game.Actors
     {
         private AimAbility _aim;
         private Collider[] _hitColliders;
+        private Animator _animator;
+        private bool _isAnimationEnded;
+
+        
         public override bool CanActivateAbility()
-            => !_aim.IsActive && Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
+            => _isAnimationEnded && !_aim.IsActive && Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
         
         
         protected override void OnInitAbility()
         {
             _aim = Owner.GetAbility<AimAbility>();
             _hitColliders = new Collider[Definition.MaxTargets];
+            _animator = Owner.GetComponent<Animator>();
+            _isAnimationEnded = true;
         }
 
-        protected override void OnActivateAbility()
+        protected override async void OnActivateAbility()
         {
+            if (_animator != null)
+            {
+                _animator.SetBool("IsMeleeAttacked", true);
+                _isAnimationEnded = false;
+                await WaitAnimationEnd();
+                _animator.SetBool("IsMeleeAttacked", false);
+            }
+            
             Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
             Vector3 sphereShift = Owner.Transform.position +  Definition.SphereColliderShift;
             #if UNITY_EDITOR
@@ -75,5 +91,12 @@ namespace Game.Actors
                 hit.GetComponent<MovementController>().AddVelocity(dir);
             }
         }
+        
+        private async UniTask WaitAnimationEnd()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(0.75f), ignoreTimeScale: false);
+            _isAnimationEnded = true;
+        }
+        
     }
 }
