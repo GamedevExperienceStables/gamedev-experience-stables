@@ -19,15 +19,17 @@ namespace Game.BehaviourTree.Actions
         protected override string info => "Rotate to " + target;
 
         protected override void OnUpdate() {
-            if ( Vector3.Angle(target.value.transform.position - agent.transform.position, agent.transform.forward) <= angleDifference.value ) {
+            Transform agentTransform = agent.transform;
+            
+            Vector3 lookDirection = target.value.transform.position - agentTransform.position;
+            if ( Vector3.Angle(lookDirection, agentTransform.forward) <= angleDifference.value ) {
                 EndAction();
                 return;
             }
-            // TODO: Fix rotate
-            Transform transform = agent.transform;
-            Vector3 dir = target.value.transform.position - transform.position;
-            agent.LookTo(Vector3.RotateTowards(transform.forward, dir, speed.value * Time.deltaTime, 0));
-            if ( !waitActionFinish ) {
+
+            agent.LookTo(lookDirection);
+            
+            if (!waitActionFinish) {
                 EndAction();
             }
         }
