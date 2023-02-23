@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Game.Actors;
-using Game.Actors.Damage;
 using Game.Utils;
-using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -30,10 +30,7 @@ namespace Game.Weapons
 
         [FormerlySerializedAs("deathFeedback")]
         [SerializeField]
-        private MMF_Player deathFeedbackPrefab;
-
-        [SerializeField]
-        private DamageDealer damageDealer;
+        private GameObject deathFeedbackPrefab;
 
         private float _currentSpeed;
 
@@ -43,12 +40,17 @@ namespace Game.Weapons
 
         private readonly RaycastHit[] _hits = new RaycastHit[5];
         private IActorController _owner;
+        
+        private ProjectileLifetime _lifeTime;
+        private IList<DamageDefinition> _damages;
+
+        public event Action<Projectile> Completed;
 
         private void Update()
         {
             CalculateSpeed();
             UpdateLifeTimer();
-            
+
             Move();
         }
 
@@ -56,14 +58,16 @@ namespace Game.Weapons
         {
             if (DetectCollisions(out RaycastHit hit))
             {
-                DestroyProjectile(hit);
+                DestroyProjectile(hit.transform, hit.point, hit.normal);
             }
         }
 
         private bool DetectCollisions(out RaycastHit hit)
         {
             Transform t = transform;
-            int count = Physics.RaycastNonAlloc(t.position, t.forward, _hits, raycastMaxDistance, collisionLayerMask, QueryTriggerInteraction.Ignore);
+            var ray = new Ray(t.position, t.forward);
+            int count = Physics.RaycastNonAlloc(ray, _hits, raycastMaxDistance, collisionLayerMask,
+                QueryTriggerInteraction.Ignore);
             if (count <= 0)
             {
                 hit = default;
@@ -74,16 +78,17 @@ namespace Game.Weapons
             return true;
         }
 
-        private void DestroyProjectile(RaycastHit hit)
+        private void DestroyProjectile(Transform target, Vector3 hitPoint, Vector3 hitNormal)
         {
-            if (damageDealer.TryDealDamage(hit.transform))
-            {
+            bool damaged = false;
+
+            foreach (DamageDefinition damage in _damages)
+                damaged |= damage.TryDealDamage(transform, target, hitPoint);
+
+            if (damaged)
                 Complete();
-            }
             else
-            {
-                DestroyOnCollision(hit.point, hit.normal);
-            }
+                DestroyOnCollision(hitPoint, hitNormal);
         }
 
         private void DestroyOnCollision(Vector3 position, Vector3 normal)
@@ -101,8 +106,28 @@ namespace Game.Weapons
             _currentSpeed = acceleration > 0 ? 0 : maxSpeed;
         }
 
+        public void Init(LayerMask collisionLayers, float speed, ProjectileLifetime lifeTime,
+            IList<DamageDefinition> damages)
+        {
+            collisionLayerMask = collisionLayers;
+            maxSpeed = speed;
+            _lifeTime = lifeTime;
+            _damages = damages;
+        }
+
+        public void Fire(Transform spawnPoint)
+        {
+            transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+
+            _timer = _lifeTime.Duration;
+            _currentSpeed = acceleration > 0 ? 0 : maxSpeed;
+
+            Show();
+        }
+
         private void Complete()
         {
+            Completed?.Invoke(this);
             Hide();
         }
 
@@ -133,19 +158,33 @@ namespace Game.Weapons
         private void UpdateLifeTimer()
         {
             _timer -= Time.deltaTime;
-            if (_timer <= 0f)
+            if (_timer <= 0f) 
+                OnLifetimeEnd();
+        }
+
+        private void OnLifetimeEnd()
+        {
+            switch (_lifeTime.OnEndBehaviour)
             {
-                Complete();
+                case ProjectileLifetime.EndBehaviour.Execute:
+                {
+                    Transform t = transform;
+                    DestroyProjectile(t, t.position, t.up);
+                    break;
+                }
+
+                default:
+                {
+                    Complete();
+                    break;
+                }
             }
         }
 
         private void PlayDeathFeedback(Vector3 position, Vector3 normal)
         {
-            if (deathFeedbackPrefab)
-            {
-                MMF_Player instance = Instantiate(deathFeedbackPrefab, position, Quaternion.LookRotation(normal));
-                instance.PlayFeedbacks();
-            }
+            if (deathFeedbackPrefab) 
+                Instantiate(deathFeedbackPrefab, position, Quaternion.LookRotation(normal));
         }
     }
 }

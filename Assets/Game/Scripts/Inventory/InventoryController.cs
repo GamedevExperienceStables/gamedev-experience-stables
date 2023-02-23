@@ -1,51 +1,55 @@
+using System;
+using System.Collections.Generic;
 using Game.Actors;
 using VContainer;
 
 namespace Game.Inventory
 {
-    public class InventoryController : IInventory
+    public class InventoryController : IInventoryItems, IInventorySlots, IInventoryRunes
     {
         private readonly RuneSlots _slots;
         private readonly Materials _materials;
-        private readonly Recipes _recipes;
         private readonly Runes _runes;
 
         [Inject]
         public InventoryController(InventoryData data)
         {
             _materials = data.Materials;
-            _recipes = data.Recipes;
             _runes = data.Runes;
             _slots = data.Slots;
         }
 
         public IReadOnlyMaterials Materials => _materials;
-        public IReadOnlyRecipes Recipes => _recipes;
         public IReadOnlyRunes Runes => _runes;
         public IReadOnlyRuneSlots Slots => _slots;
+
+        IReadOnlyDictionary<RuneSlotId, RuneSlot> IInventorySlots.Items => _slots.Items;
+
+        public event Action<RuneActiveSlotChangedEvent> ActiveSlotChanged;
+        public event Action<RuneSlotChangedEvent> SlotChanged;
+
+        public bool HasActive => _slots.HasActive;
+        public RuneSlot ActiveSlot => _slots.GetActive();
 
         public void Reset()
         {
             _materials.Reset();
-            _recipes.Reset();
             _runes.Reset();
             _slots.Reset();
         }
 
         public void Init(InventoryInitialData data)
         {
-            _runes.Reset();
-            
             _materials.Init(data.container, data.bag);
-            _recipes.Init(data.recipes);
+            _runes.Init(data.runes);
             _slots.Init(data.slots);
         }
 
-        public bool CanTransferToContainer(MaterialDefinition definition)
-            => _materials.CanTransferToContainer(definition);
+        public bool CanTransferToContainer(MaterialDefinition levelMaterial)
+            => _materials.CanTransferToContainer(levelMaterial);
 
-        public void TransferToContainer(MaterialDefinition definition)
-            => _materials.TransferToContainer(definition);
+        public void TransferToContainer(MaterialDefinition levelMaterial)
+            => _materials.TransferToContainer(levelMaterial);
 
         public bool CanAddToBag(ItemDefinition definition, IActorController owner)
             => definition switch
@@ -64,8 +68,8 @@ namespace Game.Inventory
             AddToBag(item, owner);
             return true;
         }
-        
-        public void ClearBag() 
+
+        public void ClearBag()
             => _materials.ClearBag();
 
         public void AddToBag(ItemDefinition item, IActorController owner)
@@ -79,14 +83,103 @@ namespace Game.Inventory
                     _materials.AddToBag(material);
                     break;
 
-                case RecipeDefinition recipe:
-                    _recipes.Add(recipe);
-                    break;
-
                 case RuneDefinition rune:
                     _runes.Add(rune);
                     break;
             }
         }
+
+        public void SetActiveSlot(RuneSlotId slotId)
+        {
+            if (_slots.IsEmpty(slotId))
+                return;
+
+            RuneActiveSlotChangedEvent changedEvent;
+            if (_slots.IsActive(slotId))
+            {
+                _slots.ClearActive();
+
+                changedEvent = new RuneActiveSlotChangedEvent
+                {
+                    oldId = slotId,
+                };
+            }
+            else
+            {
+                RuneSlotId oldId = default;
+                if (_slots.HasActive)
+                    oldId = _slots.GetActive().Id;
+
+                _slots.SetActive(slotId);
+
+                changedEvent = new RuneActiveSlotChangedEvent
+                {
+                    newId = slotId,
+                    oldId = oldId,
+                };
+            }
+
+            ActiveSlotChanged?.Invoke(changedEvent);
+        }
+
+        public void SetSlot(RuneSlotId slotId, RuneDefinition targetRune)
+        {
+            if (_slots.Find(targetRune, out RuneSlotId foundSlotId))
+            {
+                _slots.Clear(foundSlotId);
+                SlotChanged?.Invoke(new RuneSlotChangedEvent
+                {
+                    id = foundSlotId
+                });
+            }
+
+            if (!_slots.IsEmpty(slotId))
+                _slots.Clear(slotId);
+
+            _slots.Set(slotId, targetRune);
+            SlotChanged?.Invoke(new RuneSlotChangedEvent
+            {
+                id = slotId,
+                definition = targetRune,
+            });
+
+            if (_slots.IsActive(slotId))
+            {
+                ActiveSlotChanged?.Invoke(new RuneActiveSlotChangedEvent
+                {
+                    oldId = slotId,
+                    newId = slotId,
+                });
+            }
+        }
+
+        public void ClearSlot(RuneSlotId slotId)
+        {
+            if (_slots.IsEmpty(slotId))
+                return;
+
+            if (_slots.IsActive(slotId))
+            {
+                _slots.ClearActive();
+                ActiveSlotChanged?.Invoke(new RuneActiveSlotChangedEvent
+                {
+                    oldId = slotId
+                });
+            }
+
+            _slots.Clear(slotId);
+            SlotChanged?.Invoke(new RuneSlotChangedEvent
+            {
+                id = slotId
+            });
+        }
+
+        public IReadOnlyList<RuneDefinition> Items => _runes.Items;
+
+        public void Subscribe(Action<RuneDefinition> callback)
+            => _runes.Subscribe(callback);
+
+        public void UnSubscribe(Action<RuneDefinition> callback)
+            => _runes.UnSubscribe(callback);
     }
 }

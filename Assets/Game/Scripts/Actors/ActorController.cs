@@ -32,6 +32,12 @@ namespace Game.Actors
             var data = new StatModifierApplyData(key, modifier.Type, modifier.Value, this);
             Stats.ApplyModifier(key, data);
         }
+        
+        public void ApplyModifier(CharacterStats key, float value)
+        {
+            var data = new StatModifierApplyData(key, StatsModifierType.Flat, value, this);
+            Stats.ApplyModifier(key, data);
+        }
 
         public void AddModifier(CharacterStats key, StatModifier modifier)
             => Stats.AddModifier(key, modifier);

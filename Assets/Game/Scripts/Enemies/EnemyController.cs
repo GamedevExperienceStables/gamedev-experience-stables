@@ -13,10 +13,12 @@ namespace Game.Enemies
         private MovementController _movement;
         private LootController _loot;
         private MeleeAbility _melee;
-        private WeaponAbility _weapon;
+        private ProjectileAbility _weapon;
         private float _time = 2.0f;
         private EnemyStats _stats;
         private IActorController _owner;
+        private bool _hasMelee;
+        private bool _hasRange;
         protected override IStats Stats => _stats;
 
         protected override void OnActorAwake()
@@ -48,8 +50,10 @@ namespace Game.Enemies
         public void SetAbilities()
         {
             _melee = _owner.GetAbility<MeleeAbility>();
-            _weapon = _owner.GetAbility<WeaponAbility>();
-
+            _hasMelee = _melee != null;
+            
+            _weapon = _owner.GetAbility<ProjectileAbility>();
+            _hasRange = _weapon != null;
         }
         
         private void MeleeAttack()
@@ -63,8 +67,12 @@ namespace Game.Enemies
             _time -= Time.deltaTime;
             if (_time <= 0)
             {
-                MeleeAttack();
-                RangeAttack();
+                if (_hasMelee)
+                    MeleeAttack();
+                
+                if (_hasRange)
+                    RangeAttack();
+                
                 _time = 2.0f;
             }
         }

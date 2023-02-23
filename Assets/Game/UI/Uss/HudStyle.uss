@@ -57,3 +57,12 @@
     height: 69px;
     width: 958px;
 }
+
+.hud-rune-slot #icon {
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, 0);
+}
+
+.hud-rune-slot--active #icon {
+    border-color: gold;
+}

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Globalization;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Inventory;
 using Game.Stats;
@@ -23,6 +23,7 @@ namespace Game.UI
         private VisualElement _root;
         private Button _buttonMenu;
         private GameplayViewModel _viewModel;
+        
         private bool _isVisible;
 
         private TimeSpan _showDuration;
@@ -39,10 +40,17 @@ namespace Game.UI
         private VisualElement _spBarWidgetMaskLeft;
         private VisualElement _spBarWidgetMaskCenter;
         private VisualElement _spBarWidgetMaskRight;
+        
+        private HudRuneSlotsView _runeSlotsView;
+
+        public IReadOnlyList<RuneSlotHudView> RuneSlots => _runeSlotsView.Slots;
 
         [Inject]
-        public void Construct(GameplayViewModel viewModel)
-            => _viewModel = viewModel;
+        public void Construct(GameplayViewModel viewModel, HudRuneSlotsView runeSlotsView)
+        {
+            _viewModel = viewModel;
+            _runeSlotsView = runeSlotsView;
+        }
 
         private void Awake()
         {
@@ -59,7 +67,7 @@ namespace Game.UI
 
             var mpWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_MP);
             _mpBarWidgetMask = mpWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
-            
+
             var spWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_SP);
             var leftSp = spWidget.Q<VisualElement>(LayoutNames.Hud.SP_LEFT);
             var centerSp = spWidget.Q<VisualElement>(LayoutNames.Hud.SP_CENTER);
@@ -70,8 +78,11 @@ namespace Game.UI
 
             var crystalWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_CRYSTAL);
             _crystalMask = crystalWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
+            
+            _runeSlotsView.Create(_root);
 
             InitCrystalView(_viewModel.GetCurrentMaterial());
+            
             SubscribeStats();
         }
 
@@ -79,6 +90,7 @@ namespace Game.UI
         {
             _buttonMenu.clicked -= PauseGame;
 
+            _runeSlotsView.Destroy();
             UnSubscribeStats();
         }
 
@@ -132,7 +144,7 @@ namespace Game.UI
 
             _viewModel.HeroStatSubscribe(CharacterStats.Stamina, UpdateStamina);
             _viewModel.HeroStatSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax);
-            
+
             _viewModel.LevelBagMaterialSubscribe(UpdateCrystal);
         }
 
@@ -156,7 +168,7 @@ namespace Game.UI
             _hpBarWidgetMask.style.height = stylePercent;
         }
 
-        private void UpdateHealthMax(StatValueChange change) 
+        private void UpdateHealthMax(StatValueChange change)
             => _currentMaxHp = change.newValue;
 
         private void UpdateMana(StatValueChange change)
@@ -179,7 +191,7 @@ namespace Game.UI
             _spBarWidgetMaskRight.style.width = new Length(barRight * 100, LengthUnit.Percent);
         }
         
-        float CalculateBarLength(float value, float barMinimum, float barMaximum) {
+        private float CalculateBarLength(float value, float barMinimum, float barMaximum) {
             return Mathf.Max(0, Mathf.Min(1, (value - barMinimum) / (barMaximum - barMinimum)));
         }
 
@@ -204,11 +216,6 @@ namespace Game.UI
             float percent = current / max * 100;
             var stylePercent = new Length(percent, LengthUnit.Percent);
             return stylePercent;
-        }
-        
-        private float Map(float input, float inputMin, float inputMax, float min, float max)
-        {
-            return min + (input - inputMin) * (max - min) / (inputMax - inputMin);
         }
     }
 }

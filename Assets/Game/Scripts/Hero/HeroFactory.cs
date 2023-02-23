@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.Actors;
+using Game.Inventory;
 using Game.Player;
 using VContainer;
 using VContainer.Unity;
 
 namespace Game.Hero
 {
-    public sealed class HeroFactory: IDisposable
+    public sealed class HeroFactory : IDisposable
     {
         private readonly HeroDefinition _heroDefinition;
         private readonly PlayerController _player;
+        private readonly IInventoryRunes _runes;
         private readonly AbilityFactory _abilityFactory;
         private readonly IObjectResolver _resolver;
 
@@ -18,12 +20,14 @@ namespace Game.Hero
         public HeroFactory(
             HeroDefinition heroDefinition,
             PlayerController player,
+            IInventoryRunes runes,
             AbilityFactory abilityFactory,
             IObjectResolver resolver
         )
         {
             _heroDefinition = heroDefinition;
             _player = player;
+            _runes = runes;
             _abilityFactory = abilityFactory;
             _resolver = resolver;
         }
@@ -35,6 +39,7 @@ namespace Game.Hero
 
             _player.BindHero(hero);
             AddAbilities(hero);
+            GiveObtainedRunes(hero, _runes.Items);
 
             return hero;
         }
@@ -49,7 +54,7 @@ namespace Game.Hero
             GiveAbilities(actor, _heroDefinition.InitialAbilities);
         }
 
-        private void RegisterAbilities(ActorController actor, List<AbilityDefinition> abilities)
+        private void RegisterAbilities(ActorController actor, IEnumerable<AbilityDefinition> abilities)
         {
             foreach (AbilityDefinition definition in abilities)
             {
@@ -58,13 +63,19 @@ namespace Game.Hero
             }
         }
 
-        private static void GiveAbilities(ActorController actor, List<AbilityDefinition> abilities)
+        private static void GiveAbilities(ActorController actor, IEnumerable<AbilityDefinition> abilities)
         {
             foreach (AbilityDefinition definition in abilities)
                 actor.GiveAbility(definition);
         }
 
-        public void Dispose() 
+        private void GiveObtainedRunes(ActorController actor, IEnumerable<RuneDefinition> runesItems)
+        {
+            foreach (RuneDefinition runeDefinition in runesItems)
+                actor.GiveAbility(runeDefinition.GrantAbility);
+        }
+
+        public void Dispose()
             => _player.UnbindHero();
     }
 }
