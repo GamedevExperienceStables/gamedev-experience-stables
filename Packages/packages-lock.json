@@ -15,7 +15,7 @@
       "hash": "8a8fa5a9659a6d63f196391c71e06c4286c8acd7"
     },
     "com.moremountains.feel": {
-      "version": "git@github.com:GamedevExperienceStables/com.moremountains.feel.git",
+      "version": "https://github.com/GamedevExperienceStables/com.moremountains.feel.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
