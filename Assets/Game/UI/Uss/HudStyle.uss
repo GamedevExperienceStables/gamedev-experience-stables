@@ -11,14 +11,11 @@
 }
 
 .hud-bar-stamina-size {
-    height: 35px;
-    width: 575px;
+    width: 1285px;
+    height: 69px;
 }
 
 .hud-bar-fill {
-}
-
-.hud-bar-frame {
 }
 
 .hud-bar--red .hud-bar-fill {
@@ -29,15 +26,36 @@
     -unity-background-image-tint-color: rgb(0, 29, 255);
 }
 
-.hud-bar--green .hud-bar-fill {
-    -unity-background-image-tint-color: rgb(20, 183, 8);
-}
-
 .hud-spell-size {
     height: 85px;
     width: 85px;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.crystal-bar {
+}
+
+.crystal-bar-size {
+    height: 120px;
+    width: 70px;
+}
+
+.crystal-bar-fill {
+    flex-grow: 0;
+    -unity-background-scale-mode: stretch-to-fill;
+    width: auto;
+    height: auto;
+}
+
+.hud-bar-stamina-side-size {
+    height: 69px;
+    width: 330px;
+}
+
+.hud-bar-stamina-center-size {
+    height: 69px;
+    width: 958px;
 }
 
 .hud-rune-slot #icon {
