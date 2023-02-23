@@ -11,14 +11,11 @@
 }
 
 .hud-bar-stamina-size {
-    height: 32%;
-    width: 575px;
+    width: 1285px;
+    height: 69px;
 }
 
 .hud-bar-fill {
-}
-
-.hud-bar-frame {
 }
 
 .hud-bar--red .hud-bar-fill {
@@ -27,10 +24,6 @@
 
 .hud-bar--blue .hud-bar-fill {
     -unity-background-image-tint-color: rgb(0, 29, 255);
-}
-
-.hud-bar--green .hud-bar-fill {
-    -unity-background-image-tint-color: rgb(20, 183, 8);
 }
 
 .hud-spell-size {
@@ -55,17 +48,12 @@
     height: auto;
 }
 
-.hud-bar-stamina-left-size {
-    height: 100%;
+.hud-bar-stamina-side-size {
+    height: 69px;
     width: 330px;
 }
 
 .hud-bar-stamina-center-size {
-    height: 100%;
+    height: 69px;
     width: 958px;
-}
-
-.hud-bar-stamina-right-size {
-    height: 100%;
-    width: 330px;
 }
