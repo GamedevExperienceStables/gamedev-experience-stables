@@ -171,22 +171,27 @@ namespace Game.UI
         private void UpdateStamina(StatValueChange change)
         {
             float currentValue = change.newValue / _currentMaxSp;
-            float mapLeft = Map(currentValue, 0f, 1f, 0f, 0.2f);
-            float mapCenter = Map(currentValue, 0f, 1f, 0.3f, 0.7f);
-            float mapRight = Map(currentValue, 0f, 1f, 0.8f, 1f);
-            var stylePercentLeft = new Length(mapLeft, LengthUnit.Percent);
-            var stylePercentCenter = new Length(mapCenter, LengthUnit.Percent);
-            var stylePercentRight = new Length(mapRight, LengthUnit.Percent);
-            _spBarWidgetMaskLeft.style.width = stylePercentLeft;
-            _spBarWidgetMaskCenter.style.width = stylePercentCenter;
-            _spBarWidgetMaskRight.style.width = stylePercentRight;
+            float barLeft = CalculateBarLength(currentValue, 0f, 0.25f);
+            float barCenter = CalculateBarLength(currentValue, 0.25f, 0.75f);
+            float barRight = CalculateBarLength(currentValue, 0.75f, 1f);
+            _spBarWidgetMaskLeft.style.width = new Length(barLeft * 100, LengthUnit.Percent);
+            _spBarWidgetMaskCenter.style.width = new Length(barCenter * 100, LengthUnit.Percent);
+            _spBarWidgetMaskRight.style.width = new Length(barRight * 100, LengthUnit.Percent);
+        }
+        
+        float CalculateBarLength(float value, float barMinimum, float barMaximum) {
+            return Mathf.Max(0, Mathf.Min(1, (value - barMinimum) / (barMaximum - barMinimum)));
         }
 
         private void UpdateStaminaMax(StatValueChange change)
             => _currentMaxSp = change.newValue;
 
         private void InitCrystalView(IReadOnlyMaterialData materialData)
-            => _crystalMax = materialData.Total;
+        {
+            _crystalMax = materialData.Total;
+            Length stylePercent = GetStylePercent(materialData.Current, _crystalMax);
+            _crystalMask.style.height = stylePercent;
+        }
 
         private void UpdateCrystal(MaterialChangedData change)
         {
