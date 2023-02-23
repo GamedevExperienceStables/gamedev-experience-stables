@@ -1,10 +1,10 @@
-﻿    using System;
-    using Cysharp.Threading.Tasks;
-    using Game.Weapons;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using Game.Weapons;
 using UnityEngine;
-    using UnityEngine.Serialization;
+using UnityEngine.Serialization;
 
-    namespace Game.Actors
+namespace Game.Actors
 {
     [CreateAssetMenu(menuName = MENU_PATH + "Weapon")]
     public class WeaponAbilityDefinition : AbilityDefinition<WeaponAbility>
