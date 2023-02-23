@@ -69,7 +69,6 @@ namespace Game.Hero
         private void Update()
         {
             HandleInputs();
-
             Move();
         }
         
