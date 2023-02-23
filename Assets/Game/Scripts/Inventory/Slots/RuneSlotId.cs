@@ -4,6 +4,8 @@ namespace Game.Inventory
 {
     public readonly struct RuneSlotId : IEquatable<RuneSlotId>
     {
+        public const int INVALID_ID = -1;
+
         private readonly int _id;
 
         private RuneSlotId(int id)
@@ -32,5 +34,8 @@ namespace Game.Inventory
 
         public static explicit operator int(RuneSlotId slotId)
             => slotId._id;
+
+        public bool IsValid()
+            => _id != INVALID_ID;
     }
 }

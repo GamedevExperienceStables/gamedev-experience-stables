@@ -19,12 +19,18 @@ namespace Game.Actors
 
         public void GiveAbility()
         {
+            if (IsEnabled)
+                return;
+            
             IsEnabled = true;
             OnGiveAbility();
         }
 
         public void RemoveAbility()
         {
+            if (!IsEnabled)
+                return;
+            
             IsEnabled = false;
             
             if (IsActive)

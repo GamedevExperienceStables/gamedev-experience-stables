@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Actors
 {
     public class ActorAbilities
     {
-        private readonly Dictionary<Type, ActorAbility> _abilities = new();
+        private readonly Dictionary<AbilityDefinition, ActorAbility> _abilities = new();
 
         public void RegisterAbility(ActorAbility ability, IActorController owner)
         {
             ability.Owner = owner;
 
-            _abilities.Add(ability.GetType(), ability);
+            _abilities.Add(ability.Definition, ability);
         }
 
         public void GiveAbility(AbilityDefinition definition)
@@ -38,14 +37,25 @@ namespace Game.Actors
         }
 
         public T GetAbility<T>() where T : ActorAbility
-            => _abilities[typeof(T)] as T;
+        {
+            foreach (ActorAbility ability in _abilities.Values)
+            {
+                if (ability.GetType() == typeof(T))
+                    return ability as T;
+            }
+
+            return default;
+        }
 
         public bool TryGetAbility<T>(out T foundAbility) where T : ActorAbility
         {
-            if (_abilities.TryGetValue(typeof(T), out ActorAbility ability))
+            foreach (ActorAbility ability in _abilities.Values)
             {
-                foundAbility = ability as T;
-                return true;
+                if (ability.GetType() == typeof(T))
+                {
+                    foundAbility = ability as T;
+                    return true;
+                }
             }
 
             foundAbility = default;
@@ -53,19 +63,7 @@ namespace Game.Actors
         }
 
         public bool TryGetAbility(AbilityDefinition definition, out ActorAbility foundAbility)
-        {
-            foreach (ActorAbility ability in _abilities.Values)
-            {
-                if (!ReferenceEquals(ability.Definition, definition))
-                    continue;
-
-                foundAbility = ability;
-                return true;
-            }
-
-            foundAbility = default;
-            return false;
-        }
+            => _abilities.TryGetValue(definition, out foundAbility);
 
         public void InitAbilities()
         {

@@ -18,11 +18,11 @@ namespace Game.Actors
     public class AutoPickupAbility : ActorAbility<AutoPickupAbilityDefinition>
     {
         private readonly IMagnetSystem _magnet;
-        private readonly InventoryController _inventory;
+        private readonly IInventoryItems _inventory;
         private ZoneTrigger _trigger;
 
         [Inject]
-        public AutoPickupAbility(IMagnetSystem magnet, InventoryController inventory)
+        public AutoPickupAbility(IMagnetSystem magnet, IInventoryItems inventory)
         {
             _magnet = magnet;
             _inventory = inventory;

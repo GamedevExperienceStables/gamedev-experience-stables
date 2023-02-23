@@ -4,20 +4,20 @@ namespace Game.Inventory
 {
     public class RuneActiveSlot
     {
-        private const int NOT_SET_ACTIVE_SLOT_ID = -1;
-        
-        public RuneSlotId Value { get; private set; } = NOT_SET_ACTIVE_SLOT_ID;
+        public RuneSlotId Value { get; private set; } = RuneSlotId.INVALID_ID;
+
+        public bool IsEmpty => !Value.IsValid();
 
         public void Set(RuneSlotId id)
         {
             Value = id;
-            Debug.Log($"new slot active {Value}");
+            Debug.Log($"Slot activated: {Value}");
         }
 
         public void Clear()
         {
-            Debug.Log($"active slot cleared {Value}");
-            Value = NOT_SET_ACTIVE_SLOT_ID;
+            Debug.Log($"Slot deactivated: {Value}");
+            Value = RuneSlotId.INVALID_ID;
         }
     }
 }
