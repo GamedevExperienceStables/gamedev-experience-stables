@@ -2,6 +2,7 @@
 using Game.Cameras;
 using Game.Input;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 
 namespace Game.Hero
@@ -24,8 +25,10 @@ namespace Game.Hero
         private MeleeAbility _melee;
         private IActorController _owner;
         private bool _isBlocked;
-        private Camera _mainCamera;
         private Vector3 _mousePosition;
+        private Plane _plane;
+        [SerializeField]
+        private GameObject aimSpriteTest;
         
         [Inject]
         public void Construct(IInputControlGameplay input, SceneCamera sceneCamera)
@@ -36,7 +39,7 @@ namespace Game.Hero
 
         private void Awake()
         {
-            _mainCamera = Camera.main;
+            _plane = new Plane(Vector3.up, 0);
             _movement = GetComponent<MovementController>();
             _owner = GetComponent<IActorController>();
         }
@@ -75,13 +78,19 @@ namespace Game.Hero
             Move();
             if (_aim.IsActive)
             {
-                Plane plane = new Plane(Vector3.up, 0);
-                float distance;
-                Ray ray = Camera.main.ScreenPointToRay(_input.MousePosition);
-                if (plane.Raycast(ray, out distance))
+                if (!aimSpriteTest.activeSelf)
+                    aimSpriteTest.SetActive(true);
+                Ray ray = _sceneCamera.ScreenPointToRay(_input.MousePosition);
+                if (_plane.Raycast(ray, out float distance))
                 {
                     _mousePosition = ray.GetPoint(distance);
+                    aimSpriteTest.transform.position = 
+                        new Vector3(_mousePosition.x, aimSpriteTest.transform.position.y, _mousePosition.z);
                 }
+            }
+            else
+            {
+                aimSpriteTest.SetActive(false);
             }
         }
 

@@ -40,7 +40,17 @@ namespace Game.Actors
             Owner.AddModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
         }
 
-        public Vector3 GetRealPosition() => _heroInputController.GetRealMousePosition();
+        public Vector3 GetRealPosition()
+        {
+            if (_heroInputController != null)
+            {
+                return _heroInputController.GetRealMousePosition();
+            }
+            else
+            {
+                return default;
+            }
+        }
         
         protected override void OnEndAbility(bool wasCancelled)
         {
