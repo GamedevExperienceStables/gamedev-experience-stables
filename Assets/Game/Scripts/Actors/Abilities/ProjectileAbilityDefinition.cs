@@ -1,7 +1,5 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using FMODUnity;
-using Game.Audio;
 using Game.Stats;
 using Game.Weapons;
 using NaughtyAttributes;
@@ -92,7 +90,7 @@ namespace Game.Actors
         {
             if (_hasMana)
                 Owner.ApplyModifier(CharacterStats.Mana, -Definition.ManaCost);
-
+            
             if (_animator != null)
             {
                 _animator.SetBool("IsAttacked", true);
@@ -100,23 +98,15 @@ namespace Game.Actors
                 await WaitAnimationEnd();
                 _animator.SetBool("IsAttacked", false);
             }
-
-            FireProjectile();
-            EndAbility();
-        }
-
-        private void FireProjectile()
-        {
+            
             _projectilePool.Get(out Projectile projectile);
             projectile.Fire(_spawnPoint);
-
-            if (!Definition.FireSfx.IsNull)
-                _audio.PlayOneShot(Definition.FireSfx, Owner.Transform);
+            EndAbility();
         }
-
+        
         private async UniTask WaitAnimationEnd()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(Definition.CastTime), ignoreTimeScale: false);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), ignoreTimeScale: false);
             _isAnimationEnded = true;
         }
     }
