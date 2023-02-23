@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 2300186903787914912}
   - component: {fileID: 4701970604866781007}
   - component: {fileID: 1128467230733977397}
+  - component: {fileID: -2042890121926572637}
   m_Layer: 3
   m_Name: Hero
   m_TagString: Untagged
@@ -500,16 +501,24 @@ MonoBehaviour:
     Path: event:/Footstep
   MaterialParameterName: Material
   SpeedParameterName: Speed Switch
-  StepDistance: 2
+  StepDistance: 1
   RayDistance: 3
   StartRunningTime: 0.3
-  MaterialTypes:
-  - Earth
-  - Stone
-  - Grass
-  - Puddle
-  - Wood
-  DefulatMaterialValue: 0
+  materialTypes: []
+  defulatMaterialValue: 0
+--- !u!114 &-2042890121926572637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247602722215226894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 3247602722215226894}
 --- !u!1 &3247602723414458277
 GameObject:
   m_ObjectHideFlags: 0
