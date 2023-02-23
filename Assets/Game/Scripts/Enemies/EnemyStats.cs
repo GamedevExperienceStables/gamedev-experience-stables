@@ -32,11 +32,21 @@ namespace Game.Enemies
             [Header("Movement")]
             [SerializeField]
             private float movementSpeed = 3f;
+            
+            [Header("Sensor")]
+            [SerializeField]
+            private float sensorDistance = 10f;
+            [SerializeField]
+            private float sensorHeight = 1.4f;
 
             public float HealthPoints => healthPoints;
 
             public float MovementSpeed => movementSpeed;
             public float StaminaPoints => staminaPoints;
+            
+            public float SensorDistance => sensorDistance;
+
+            public float SensorHeight => sensorHeight;
         }
     }
 }

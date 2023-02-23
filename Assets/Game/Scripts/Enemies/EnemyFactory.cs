@@ -29,9 +29,11 @@ namespace Game.Enemies
             enemy.InitStats(definition.InitialStats);
             AddAbilities(enemy, definition);
             enemy.SetAbilities();
+            enemy.AddSpawn(spawnPoint);
             enemy.SetTarget(target);
             enemy.SetLoot(definition.LootBag);
             enemy.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+            enemy.InitSensor(definition.InitialStats);
 
             return enemy;
         }
