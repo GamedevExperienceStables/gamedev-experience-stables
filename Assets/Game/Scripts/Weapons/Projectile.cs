@@ -99,16 +99,7 @@ namespace Game.Weapons
 
         public void Init(Transform startPoint, IActorController owner, Vector3 targetPosition)
         {
-            _owner = owner;
-            Vector3 dir = new Vector3(targetPosition.x, 0, targetPosition.z) - startPoint.position;
-            var coord1 = targetPosition.x - startPoint.position.x;
-            var coord2 = targetPosition.z - startPoint.position.z;
-            var angle = Mathf.Atan2(coord1, coord2) * Mathf.Rad2Deg;
-            Quaternion rotation = Quaternion.Euler(new Vector3(0, angle, 0));
-            Debug.Log(angle);
-            Debug.Log(rotation);
-            transform.SetPositionAndRotation(startPoint.position, rotation);
-
+            transform.SetPositionAndRotation(startPoint.position, startPoint.rotation);
             _timer = lifeTime;
             _currentSpeed = acceleration > 0 ? 0 : maxSpeed;
         }
@@ -123,9 +114,15 @@ namespace Game.Weapons
             _damages = damages;
         }
 
-        public void Fire(Transform spawnPoint)
+        public void Fire(Transform spawnPoint, Vector3 targetPosition)
         {
-            transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+            Vector3 startPosition = spawnPoint.position;
+            float coord1 = targetPosition.x - startPosition.x;
+            float coord2 = targetPosition.z - startPosition.z;
+            float angle = Mathf.Atan2(coord1, coord2) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.Euler(new Vector3(0, angle, 0));
+            
+            transform.SetPositionAndRotation(startPosition, rotation);
 
             _timer = _lifeTime.Duration;
             _currentSpeed = acceleration > 0 ? 0 : maxSpeed;

@@ -46,7 +46,7 @@ namespace Game.Actors
                 await WaitAnimationEnd();
                 _animator.SetBool("IsAttacked", false);
             }
-            _currentWeapon.SpawnProjectile();
+            _currentWeapon.SpawnProjectile(_aim.GetRealPosition());
         }
 
         private async UniTask WaitAnimationEnd()

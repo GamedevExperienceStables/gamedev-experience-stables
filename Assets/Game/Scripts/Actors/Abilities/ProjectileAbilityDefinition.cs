@@ -34,6 +34,8 @@ namespace Game.Actors
         private bool _hasMana;
         private Animator _animator;
         private bool _isAnimationEnded;
+        private AimAbility _aim;
+
 
         public ProjectileAbility(ProjectileFactory projectileFactory)
         {
@@ -63,6 +65,7 @@ namespace Game.Actors
             var view = Owner.GetComponent<ProjectileAbilityView>();
             _spawnPoint = view.SpawnPoint;
             _animator = Owner.GetComponent<Animator>();
+            _aim = Owner.GetAbility<AimAbility>();
             _isAnimationEnded = true;
         }
 
@@ -91,7 +94,7 @@ namespace Game.Actors
             }
             
             _projectilePool.Get(out Projectile projectile);
-            projectile.Fire(_spawnPoint);
+            projectile.Fire(_spawnPoint, _aim.GetRealPosition());
             EndAbility();
         }
         
