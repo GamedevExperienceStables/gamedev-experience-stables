@@ -6,13 +6,13 @@ namespace Game.Level
 {
     public class RocketContainerInteraction : Interaction
     {
-        private readonly InventoryController _inventory;
+        private readonly IInventoryItems _inventory;
         private readonly MaterialDefinition _levelMaterial;
 
         private RocketContainer _rocketContainer;
 
         [Inject]
-        public RocketContainerInteraction(LevelController level, InventoryController inventory)
+        public RocketContainerInteraction(LevelController level, IInventoryItems inventory)
         {
             LevelDefinition currentLevel = level.GetCurrentLevel();
             _levelMaterial = currentLevel.Goal.Material;

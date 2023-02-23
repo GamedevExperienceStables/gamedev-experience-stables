@@ -55,7 +55,7 @@ namespace Game.LifetimeScopes
             builder.Register<PlayerController>(Lifetime.Singleton);
             builder.Register<PlayerImportExport>(Lifetime.Singleton);
             builder.Register<InventoryData>(Lifetime.Singleton);
-            builder.Register<InventoryController>(Lifetime.Singleton);
+            builder.Register<InventoryController>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 
             builder.Register<LocationData>(Lifetime.Singleton);
             builder.Register<LocationDataHandler>(Lifetime.Singleton);

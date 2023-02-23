@@ -19,12 +19,12 @@
         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
         <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center;">
             <ui:VisualElement name="spells" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 500px; height: 100px; flex-direction: row; position: relative; top: 90px; justify-content: space-around; align-items: flex-end;">
-                <ui:Instance template="Spell" name="spell-1" class="hud-spell-size" style="flex-grow: 0;" />
-                <ui:Instance template="Spell" name="spell-2" class="hud-spell-size" style="flex-grow: 0;" />
-                <ui:Instance template="Spell" name="spell-3" class="hud-spell-size" style="flex-grow: 0;" />
-                <ui:Instance template="Spell" name="spell-4" class="hud-spell-size" style="flex-grow: 0;" />
+                <ui:Instance template="Spell" name="spell-1" class="hud-rune-slot hud-spell-size" style="flex-grow: 0;" />
+                <ui:Instance template="Spell" name="spell-2" class="hud-rune-slot hud-spell-size" style="flex-grow: 0;" />
+                <ui:Instance template="Spell" name="spell-3" class="hud-rune-slot hud-spell-size" style="flex-grow: 0;" />
+                <ui:Instance template="Spell" name="spell-4" class="hud-rune-slot hud-spell-size" style="flex-grow: 0;" />
             </ui:VisualElement>
-            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-direction: row; align-items: auto; margin-bottom: 10px;">
+            <ui:VisualElement picking-mode="Ignore" style="background-color: rgba(0, 0, 0, 0); flex-direction: row; align-items: auto; margin-bottom: 10px;">
                 <ui:VisualElement name="widget-hp" class="hud-bar-size hud-bar hud-bar--red" style="justify-content: flex-end; background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=1619591411&amp;guid=f26b7e5c4a0732e4791437640237c7ae&amp;type=3#HUD_atlas_2&apos;);">
                     <ui:VisualElement name="bg" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=-1202407392&amp;guid=f26b7e5c4a0732e4791437640237c7ae&amp;type=3#HUD_atlas_1&apos;); -unity-background-image-tint-color: rgba(0, 0, 0, 0); flex-grow: 1; display: flex; -unity-background-scale-mode: stretch-to-fill;" />
                     <ui:VisualElement name="mask" style="transition-property: height; transition-duration: 0.1s; overflow: hidden; position: absolute; left: 0; right: 0; bottom: 0; display: flex; height: 50%;">

@@ -27,7 +27,12 @@
             public const string WIDGET_CRYSTAL = "widget-crystal";
             
             public const string CRYSTAL_ICON = "crystal-icon";
-            
+
+            public const string RUNE_SLOT_CLASS_NAME = "hud-rune-slot";
+            public const string RUNE_SLOT_ACTIVE_CLASS_NAME = "hud-rune-slot--active";
+            public const string RUNE_SLOT_INTERACTABLE_CLASS_NAME = "hud-rune-slot--interactable";
+            public const string RUNE_SLOT_ICON = "icon";
+
             public const string WIDGET_BAR_MASK = "mask";
 
             public const string TEXT_CURRENT = "text-current";
@@ -51,6 +56,19 @@
         {
             public const string CONTAINER = "book-screen";
             public const string BUTTON_CLOSE = "button-close";
+            
+            public const string PAGE_DETAILS = "page-details";
+            
+            public const string RUNE_NAME = "text-rune-name";
+            public const string RUNE_DESCRIPTION = "text-rune-description";
+            public const string RUNE_ICON = "image-rune";
+
+            public const string RUNE_DRAGGER = "rune-dragger";
+            public const string RUNE_DRAGGER_DRAG_CLASS_NAME = "rune-dragger--drag";
+            
+            public const string RUNE_SLOT_CLASS_NAME = "magic-book-slot";
+            public const string SLOT_DISABLED_CLASS_NAME = "magic-book-slot--disabled";
+            public const string RUNE_SLOT_ICON = "icon";
         }
     }
 }

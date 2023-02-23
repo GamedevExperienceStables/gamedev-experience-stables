@@ -2,14 +2,16 @@
 
 namespace Game.Inventory
 {
-    public interface IInventory
+    public interface IInventoryItems
     {
         bool CanAddToBag(ItemDefinition definition, IActorController owner);
         bool TryAddToBag(ItemDefinition item, IActorController owner);
         void AddToBag(ItemDefinition item, IActorController owner);
+        void ClearBag();
         
+        bool CanTransferToContainer(MaterialDefinition levelMaterial);
+        void TransferToContainer(MaterialDefinition levelMaterial);
+
         IReadOnlyMaterials Materials { get; }
-        IReadOnlyRecipes Recipes { get; }
-        IReadOnlyRunes Runes { get; }
     }
 }

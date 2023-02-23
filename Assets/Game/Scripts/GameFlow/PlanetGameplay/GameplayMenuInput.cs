@@ -14,6 +14,8 @@ namespace Game.GameFlow
         private event Action BackRequested;
         private event Action InventoryRequested;
         private event Action MenuRequested;
+        
+        private event Action<int> ActiveSlotChanging;
 
         private readonly InputHistory<InputSchemeMenu> _history;
 
@@ -49,6 +51,12 @@ namespace Game.GameFlow
         public void UnSubscribeInventory(Action callback)
             => InventoryRequested -= callback;
 
+        public void SubscribeActiveSlot(Action<int> callback)
+            => ActiveSlotChanging += callback;
+        
+        public void UnSubscribeActiveSlot(Action<int> callback)
+            => ActiveSlotChanging -= callback;
+
         public void PushState(InputSchemeMenu state)
             => _history.Push(state);
 
@@ -66,6 +74,11 @@ namespace Game.GameFlow
             _inputMenu.BackButton.Performed += OnBack;
             _inputMenu.MenuButton.Performed += OnMenu;
             _inputMenu.OptionButton.Performed += OnInventory;
+            
+            _inputGameplay.Slot1Button.Performed += OnSlot1;
+            _inputGameplay.Slot2Button.Performed += OnSlot2;
+            _inputGameplay.Slot3Button.Performed += OnSlot3;
+            _inputGameplay.Slot4Button.Performed += OnSlot4;
         }
 
         private void UnSubscribeInputs()
@@ -76,6 +89,11 @@ namespace Game.GameFlow
             _inputMenu.BackButton.Performed -= OnBack;
             _inputMenu.MenuButton.Performed -= OnMenu;
             _inputMenu.OptionButton.Performed -= OnInventory;
+            
+            _inputGameplay.Slot1Button.Performed -= OnSlot1;
+            _inputGameplay.Slot2Button.Performed -= OnSlot2;
+            _inputGameplay.Slot3Button.Performed -= OnSlot3;
+            _inputGameplay.Slot4Button.Performed -= OnSlot4;
         }
 
         private void OnMenu()
@@ -108,5 +126,20 @@ namespace Game.GameFlow
             if (_history.Current is not InputSchemeMenu.Gameplay)
                 BackRequested?.Invoke();
         }
+        
+        private void OnSlot1() 
+            => OnActiveSlotChanging(1);
+
+        private void OnSlot2() 
+            => OnActiveSlotChanging(2);
+
+        private void OnSlot3() 
+            => OnActiveSlotChanging(3);
+
+        private void OnSlot4() 
+            => OnActiveSlotChanging(4);
+
+        private void OnActiveSlotChanging(int newSlotId) 
+            => ActiveSlotChanging?.Invoke(newSlotId);
     }
 }

@@ -195,4 +195,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeDestructionMode: 1
-  TimeBeforeDestruction: 3
+  TimeBeforeDestruction: 30

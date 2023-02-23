@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 5547676887462078008}
   - component: {fileID: 2300186903787914912}
   - component: {fileID: 4701970604866781007}
+  - component: {fileID: 5648670743995243564}
   m_Layer: 3
   m_Name: Hero
   m_TagString: Untagged
@@ -241,7 +242,7 @@ Transform:
   - {fileID: 1128881052067880643}
   - {fileID: 5994326260911655666}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!136 &3247602722215226892
 CapsuleCollider:
@@ -478,6 +479,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathFeedback: {fileID: 0}
   destroyOnDeath: 0
+--- !u!114 &5648670743995243564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247602722215226894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ca451c423c4039a6381cdf230e9835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoint: {fileID: 3247602722654005885}
 --- !u!1 &3247602723414458277
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,6 +740,12 @@ MonoBehaviour:
 --- !u!4 &3247602722012761564 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6290654306996248318, guid: fb4cec8100dd92b40b4c022c96c257c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8817249530012717858}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3247602722654005885 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6290654307494754655, guid: fb4cec8100dd92b40b4c022c96c257c2,
     type: 3}
   m_PrefabInstance: {fileID: 8817249530012717858}
   m_PrefabAsset: {fileID: 0}
