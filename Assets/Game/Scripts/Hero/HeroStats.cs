@@ -38,24 +38,11 @@ namespace Game.Hero
             [Header("Movement")]
             [SerializeField]
             private float movementSpeed = 6f;
-
-            [Header("Regeneration")]
-            [SerializeField]
-            private float healthRegeneration = 1f;
-
-            [SerializeField]
-            private float manaRegeneration = 1f;
-
-            [SerializeField]
-            private float staminaRegeneration = 1f;
-
+            
             public float MovementSpeed => movementSpeed;
             public float HealthPoints => healthPoints;
             public float StaminaPoints => staminaPoints;
             public float ManaPoints => manaPoints;
-            public float HealthRegeneration => healthRegeneration;
-            public float ManaRegeneration => manaRegeneration;
-            public float StaminaRegeneration => staminaRegeneration;
         }
     }
 }

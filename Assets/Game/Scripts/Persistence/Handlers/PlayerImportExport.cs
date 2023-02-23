@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Game.Hero;
 using Game.Inventory;
@@ -18,7 +19,6 @@ namespace Game.Persistence
         private readonly LevelController _level;
         private readonly LevelsSettings _levelsSettings;
 
-        private readonly RecipeDataTable _recipesDb;
         private readonly RuneDataTable _runesDb;
 
         [Inject]
@@ -26,7 +26,6 @@ namespace Game.Persistence
             HeroStats.InitialStats initialStats,
             PlayerController player,
             InventoryController inventory,
-            RecipeDataTable recipeDb,
             RuneDataTable runesDb,
             LevelController level,
             LevelsSettings levelsSettings
@@ -35,7 +34,6 @@ namespace Game.Persistence
             _initialStats = initialStats;
             _player = player;
             _inventory = inventory;
-            _recipesDb = recipeDb;
             _runesDb = runesDb;
             _level = level;
             _levelsSettings = levelsSettings;
@@ -49,8 +47,8 @@ namespace Game.Persistence
 
         public GameSaveData.Player Export()
         {
-            var recipes = _inventory.Recipes.Items;
-            string[] recipeIds = recipes.Select(definition => definition.Id).ToArray();
+            var runes = _inventory.Runes.Items;
+            string[] runesIds = runes.Select(definition => definition.Id).ToArray();
 
             var slots = _inventory.Slots.Items;
             string[] slotRuneIds = slots.Values
@@ -62,7 +60,7 @@ namespace Game.Persistence
 
             return new GameSaveData.Player
             {
-                recipes = recipeIds,
+                runes = runesIds,
                 slots = slotRuneIds,
                 containerMaterials = materials.Container.GetCurrentValue(levelMaterial),
                 bagMaterials = materials.Bag.GetCurrentValue(levelMaterial),
@@ -75,14 +73,17 @@ namespace Game.Persistence
 
             LevelDefinition currentLevel = _level.GetCurrentLevel();
 
-            var recipes = ImportRecipes(data.recipes);
-            var slots = ImportSlots(data.slots, recipes);
+            string[] dataRunes = data.runes ?? Array.Empty<string>();
+            var runes = ImportRunes(dataRunes);
+
+            string[] dataSlots = data.slots ?? Array.Empty<string>();
+            var slots = ImportSlots(dataSlots, runes);
 
             var inventoryData = new InventoryInitialData
             {
                 bag = ImportBag(data.bagMaterials, currentLevel),
                 container = ImportContainer(data.containerMaterials, currentLevel),
-                recipes = recipes,
+                runes = runes,
                 slots = slots,
             };
 
@@ -91,14 +92,10 @@ namespace Game.Persistence
 
         private IDictionary<RuneSlotId, RuneDefinition> ImportSlots(
             IList<string> runeIds,
-            IList<RecipeDefinition> recipes
+            ICollection<RuneDefinition> obtainedRunes
         )
         {
             Dictionary<RuneSlotId, RuneDefinition> slots = new();
-
-            if (runeIds is null)
-                return slots;
-
             for (int index = 0; index < runeIds.Count; index++)
             {
                 int slotId = index + 1;
@@ -116,10 +113,9 @@ namespace Game.Persistence
                     continue;
                 }
 
-                // validate the player has rune
-                if (recipes.Any(x => x.GrantsRune == rune))
+                if (!obtainedRunes.Contains(rune))
                 {
-                    Debug.LogError($"Trying add rune {rune.name} that player not obtained.");
+                    Debug.LogWarning($"Trying add rune {rune.name} that player not obtained.");
                     continue;
                 }
 
@@ -129,21 +125,21 @@ namespace Game.Persistence
             return slots;
         }
 
-        private IList<RecipeDefinition> ImportRecipes(IEnumerable<string> recipeIds)
+        private IList<RuneDefinition> ImportRunes(IEnumerable<string> runesIds)
         {
-            List<RecipeDefinition> obtainedRecipes = new();
-            foreach (string recipeId in recipeIds)
+            List<RuneDefinition> obtainedRunes = new();
+            foreach (string runeId in runesIds)
             {
-                if (!_recipesDb.TryGetValue(recipeId, out RecipeDefinition recipe))
+                if (!_runesDb.TryGetValue(runeId, out RuneDefinition rune))
                 {
-                    Debug.LogError($"Save data corrupted! Not found recipe with id: {recipeId}");
+                    Debug.LogError($"Save data corrupted! Not found rune with id: {runeId}");
                     continue;
                 }
-
-                obtainedRecipes.Add(recipe);
+                
+                obtainedRunes.Add(rune);
             }
 
-            return obtainedRecipes;
+            return obtainedRunes;
         }
 
         private static IList<MaterialInitialData> ImportBag(int quantity, LevelDefinition currentLevel)

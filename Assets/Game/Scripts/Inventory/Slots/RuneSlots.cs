@@ -17,18 +17,21 @@ namespace Game.Inventory
             }
         }
 
-        public RuneSlotId Active => _activeSlot.Value;
+        public bool HasActive => !_activeSlot.IsEmpty;
 
         public IReadOnlyDictionary<RuneSlotId, RuneSlot> Items => _slots;
+
+        public RuneSlot GetActive()
+            => _slots[_activeSlot.Value];
+
+        public bool IsEmpty(RuneSlotId id)
+            => _slots[id].IsEmpty;
 
         public bool IsActive(RuneSlotId id)
             => _activeSlot.Value == id;
 
-        public void SetActive(RuneSlotId id)
-        {
-            if (!_slots[id].IsEmpty)
-                _activeSlot.Set(id);
-        }
+        public void SetActive(RuneSlotId id) 
+            => _activeSlot.Set(id);
 
         public void ClearActive()
             => _activeSlot.Clear();
@@ -36,13 +39,8 @@ namespace Game.Inventory
         public void Set(RuneSlotId id, RuneDefinition rune)
             => _slots[id].Set(rune);
 
-        public void Clear(RuneSlotId id)
-        {
-            if (_activeSlot.Value == id)
-                _activeSlot.Clear();
-
-            _slots[id].Clear();
-        }
+        public void Clear(RuneSlotId id) 
+            => _slots[id].Clear();
 
         public void Init(IDictionary<RuneSlotId, RuneDefinition> slots)
         {
@@ -60,8 +58,24 @@ namespace Game.Inventory
         public void Reset()
         {
             ClearActive();
+            
             foreach (RuneSlotId id in _slots.Keys)
                 Clear(id);
+        }
+
+        public bool Find(RuneDefinition targetRune, out RuneSlotId runeSlotId)
+        {
+            foreach (RuneSlot runeSlot in _slots.Values)
+            {
+                if (runeSlot.Rune != targetRune)
+                    continue;
+
+                runeSlotId = runeSlot.Id;
+                return true;
+            }
+
+            runeSlotId = default;
+            return false;
         }
     }
 }
