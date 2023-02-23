@@ -18,7 +18,7 @@ namespace Game.Hero
         private Vector3 _lookDirection;
 
         private MovementController _movement;
-        private WeaponAbility _weapon;
+        private ActiveSkillAbility _activeSkill;
         private InteractionAbility _interaction;
         private AimAbility _aim;
         private DashAbility _dash;
@@ -46,7 +46,7 @@ namespace Game.Hero
     
         private void Start()
         {
-            _weapon = _owner.GetAbility<WeaponAbility>();
+            _activeSkill = _owner.GetAbility<ActiveSkillAbility>();
             _interaction = _owner.GetAbility<InteractionAbility>();
             _aim = _owner.GetAbility<AimAbility>();
             _dash = _owner.GetAbility<DashAbility>();
@@ -96,7 +96,7 @@ namespace Game.Hero
 
         public Vector3 GetRealMousePosition() => _mousePosition;
         private void OnFire() 
-            => _weapon.TryActivateAbility();
+            => _activeSkill.TryActivateAbility();
 
         private void OnMelee()
         {

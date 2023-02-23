@@ -28,7 +28,10 @@ namespace Game.Actors
 
         private KinematicCharacterMotor _motor;
         private IActorController _owner;
-
+        
+        [SerializeField]
+        private Animator heroAnimator;
+        
         public float CapsuleRadius => _motor.Capsule.radius;
 
         private void Awake()
@@ -52,6 +55,11 @@ namespace Game.Actors
             }
 
             _lookDirection = lookDirection;
+            if (heroAnimator != null)
+            {
+                heroAnimator.SetFloat("XCoord", _movementDirection.x);
+                heroAnimator.SetFloat("YCoord", _movementDirection.z);
+            }
         }
         
         

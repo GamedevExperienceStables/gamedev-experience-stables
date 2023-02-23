@@ -7,10 +7,10 @@ namespace Game.Level
     public class LevelGoalChecker
     {
         private readonly LevelController _level;
-        private readonly InventoryController _inventory;
+        private readonly IInventoryItems _inventory;
 
         [Inject]
-        public LevelGoalChecker(LevelController level, InventoryController inventory)
+        public LevelGoalChecker(LevelController level, IInventoryItems inventory)
         {
             _level = level;
             _inventory = inventory;

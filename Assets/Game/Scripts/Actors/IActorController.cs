@@ -11,6 +11,7 @@ namespace Game.Actors
         
         bool HasStat(CharacterStats key);
         float GetCurrentValue(CharacterStats key);
+        void ApplyModifier(CharacterStats key, float value);
         void ApplyModifier(CharacterStats key, StatModifier modifier);
         void AddModifier(CharacterStats key, StatModifier modifier);
         void RemoveModifier(CharacterStats key, StatModifier modifier);

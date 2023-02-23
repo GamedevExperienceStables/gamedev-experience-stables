@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 5183282983791351953}
   - component: {fileID: 1141320969658811781}
   - component: {fileID: 8388162916129220664}
+  - component: {fileID: -4605915005562129575}
   m_Layer: 11
   m_Name: SpaceZombie
   m_TagString: Untagged
@@ -75,7 +76,7 @@ Transform:
   - {fileID: 1646171557179622636}
   - {fileID: 8473229071020956702}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!136 &1646171557498439824
 CapsuleCollider:
@@ -274,6 +275,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWeapon: {fileID: 8473229071020956688}
+--- !u!114 &-4605915005562129575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646171557498439826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ca451c423c4039a6381cdf230e9835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoint: {fileID: 8473229070387919807}
 --- !u!1 &1646171557786517125
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,6 +558,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb4cec8100dd92b40b4c022c96c257c2, type: 3}
+--- !u!4 &8473229070387919807 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6290654307494754655, guid: fb4cec8100dd92b40b4c022c96c257c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2511337545455715040}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8473229071020956688 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6290654306996248304, guid: fb4cec8100dd92b40b4c022c96c257c2,

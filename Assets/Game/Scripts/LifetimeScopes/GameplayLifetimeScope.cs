@@ -5,6 +5,7 @@ using Game.GameFlow;
 using Game.Hero;
 using Game.Level;
 using Game.UI;
+using Game.Weapons;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -37,7 +38,7 @@ namespace Game.LifetimeScopes
 
             builder.RegisterEntryPoint<GameplayEntryPoint>();
         }
-        
+
         private static void RegisterAbilities(IContainerBuilder builder)
         {
             builder.Register<AbilityFactory>(Lifetime.Singleton);
@@ -50,6 +51,8 @@ namespace Game.LifetimeScopes
             builder.Register<AutoPickupAbility>(Lifetime.Transient);
             builder.Register<InteractionAbility>(Lifetime.Transient);
             builder.Register<WeaponAbility>(Lifetime.Transient);
+            builder.Register<ProjectileAbility>(Lifetime.Transient);
+            builder.Register<ActiveSkillAbility>(Lifetime.Transient);
         }
 
         private static void RegisterServices(IContainerBuilder builder)
@@ -79,20 +82,25 @@ namespace Game.LifetimeScopes
         {
             builder.Register<EnemyFactory>(Lifetime.Scoped);
             builder.Register<HeroFactory>(Lifetime.Scoped);
+            builder.Register<ProjectileFactory>(Lifetime.Scoped);
         }
 
         private void RegisterUi(IContainerBuilder builder)
         {
             builder.Register<GameplayViewModel>(Lifetime.Scoped);
+            builder.Register<InventoryViewModel>(Lifetime.Scoped);
             
-            builder.UseComponents(componentsBuilder =>
+            builder.Register<HudRuneSlotsView>(Lifetime.Scoped);
+            builder.Register<HudRuneSlotsViewModel>(Lifetime.Scoped);
+
+            builder.RegisterInstance(gameplayView);
+            Transform uiRoot = gameplayView.transform;
+            builder.UseComponents(uiRoot, componentsBuilder =>
             {
-                Transform uiRoot = gameplayView.transform;
-                componentsBuilder.AddInstance(gameplayView);
-                componentsBuilder.AddInHierarchy<HudView>().UnderTransform(uiRoot);
-                componentsBuilder.AddInHierarchy<PauseMenuView>().UnderTransform(uiRoot);
-                componentsBuilder.AddInHierarchy<GameOverView>().UnderTransform(uiRoot);
-                componentsBuilder.AddInHierarchy<InventoryView>().UnderTransform(uiRoot);
+                componentsBuilder.AddInHierarchy<HudView>();
+                componentsBuilder.AddInHierarchy<PauseMenuView>();
+                componentsBuilder.AddInHierarchy<GameOverView>();
+                componentsBuilder.AddInHierarchy<InventoryView>();
             });
         }
 
