@@ -13,7 +13,7 @@ namespace Game.Enemies
         private MovementController _movement;
         private LootController _loot;
         private MeleeAbility _melee;
-        private WeaponAbility _weapon;
+        private ProjectileAbility _weapon;
         private EnemyStats _stats;
         private IActorController _owner;
         
