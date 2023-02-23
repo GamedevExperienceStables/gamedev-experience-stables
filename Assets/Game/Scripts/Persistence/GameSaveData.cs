@@ -22,7 +22,7 @@
         {
             public int containerMaterials;
             public int bagMaterials;
-            public string[] recipes;
+            public string[] runes;
             public string[] slots;
         }
     }

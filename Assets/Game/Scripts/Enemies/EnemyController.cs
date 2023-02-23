@@ -19,6 +19,9 @@ namespace Game.Enemies
         
         public Transform SpawnPoint { get; private set; }
         
+        private bool _hasMelee;
+        private bool _hasRange;
+        
         protected override IStats Stats => _stats;
 
         protected override void OnActorAwake()
@@ -57,8 +60,10 @@ namespace Game.Enemies
         public void SetAbilities()
         {
             _melee = _owner.GetAbility<MeleeAbility>();
-            _weapon = _owner.GetAbility<WeaponAbility>();
-
+            _hasMelee = _melee != null;
+            
+            _weapon = _owner.GetAbility<ProjectileAbility>();
+            _hasRange = _weapon != null;
         }
         
         public void MeleeAttack()

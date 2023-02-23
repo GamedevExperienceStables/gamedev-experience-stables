@@ -2,13 +2,13 @@
 {
     public class RuneSlot
     {
-        private readonly RuneSlotId _id;
-
         public RuneSlot(RuneSlotId slotId)
-            => _id = slotId;
+            => Id = slotId;
 
-        public bool IsEmpty => ReferenceEquals(Rune, null);
+        public RuneSlotId Id { get; }
         public RuneDefinition Rune { get; private set; }
+        
+        public bool IsEmpty => ReferenceEquals(Rune, null);
 
         public void Set(RuneDefinition rune)
             => Rune = rune;

@@ -1,6 +1,8 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Game.Persistence;
 using Game.UI;
+using UnityEngine;
 using VContainer;
 
 namespace Game.GameFlow
@@ -20,9 +22,19 @@ namespace Game.GameFlow
         protected override async UniTask OnEnter()
         {
             await _loadingScreen.ShowAsync();
-            await _persistence.LoadDataAsync();
+
+            await LoadGame();
 
             await Parent.EnterState<PlanetState>();
+        }
+
+        private UniTask LoadGame()
+        {
+            if (_persistence.IsSaveGameExists())
+                return _persistence.LoadDataAsync();
+
+            _persistence.InitData();
+            return UniTask.CompletedTask;
         }
     }
 }
