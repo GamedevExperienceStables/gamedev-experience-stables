@@ -71,10 +71,7 @@ namespace Game.Inventory
         
         public void ClearBag() 
             => _materials.ClearBag();
-
-        public void ClearBag()
-            => _materials.ClearBag();
-
+        
         public void AddToBag(ItemDefinition item, IActorController owner)
         {
             if (item is IItemExecutableDefinition executableItem)

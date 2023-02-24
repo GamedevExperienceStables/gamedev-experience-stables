@@ -31,7 +31,7 @@
       "hash": "43ae50c5cf99ce879748dbe9da0c53ef64613354"
     },
     "com.paradoxnotion.nodecanvas": {
-      "version": "https://github.com/GamedevExperienceStables/com.paradoxnotion.nodecanvas.git",
+      "version": "git@github.com:GamedevExperienceStables/com.paradoxnotion.nodecanvas.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},

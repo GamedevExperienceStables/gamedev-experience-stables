@@ -25,7 +25,6 @@ namespace Game.GameFlow
             _input = input;
             _menuInput = menuInput;
             _view = view;
-            _backButton = backButton;
         }
 
         protected override async UniTask OnEnter()
