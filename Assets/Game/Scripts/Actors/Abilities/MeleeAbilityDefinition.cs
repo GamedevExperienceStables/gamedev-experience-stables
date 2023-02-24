@@ -70,6 +70,10 @@ namespace Game.Actors
                 _animator.SetBool("IsMeleeAttacked", true);
                 _isAnimationEnded = false;
                 await WaitAnimationEnd();
+                
+                if (!IsActive)
+                    EndAbility();
+                
                 _animator.SetBool("IsMeleeAttacked", false);
             }
             
