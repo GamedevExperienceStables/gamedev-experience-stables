@@ -2,7 +2,7 @@
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
         <ui:VisualElement style="flex-grow: 1; align-items: center; justify-content: center;">
             <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); -unity-font-style: bold; font-size: 35px;">
-                <ui:Label tabindex="-1" text="Untitled&#10;Space Magic&#10;Game" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 45px; -unity-font-style: bold; color: rgb(0, 0, 0);" />
+                <ui:Label tabindex="-1" text="Snoody&apos;s&#10;Epic Adventure" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 65px; -unity-font-style: bold; color: rgb(0, 0, 0);" />
             </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 50px;" />
             <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 244px;">
