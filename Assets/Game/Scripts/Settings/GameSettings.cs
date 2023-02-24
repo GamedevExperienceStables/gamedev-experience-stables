@@ -21,7 +21,7 @@ namespace Game.Settings
         private LootSettings lootSettings;
         
         [SerializeField]
-        private InventoryData.Settings inventorySettings;
+        private InventorySettings inventorySettings;
 
         [SerializeField]
         private MagnetSystem.Settings magnetSettings;
@@ -35,6 +35,6 @@ namespace Game.Settings
         public LevelsSettings LevelsSettings => levelsSettings;
         public PersistenceService.Settings SaveSettings => saveSettings;
         public MagnetSystem.Settings MagnetSettings => magnetSettings;
-        public InventoryData.Settings InventorySettings => inventorySettings;
+        public InventorySettings InventorySettings => inventorySettings;
     }
 }
