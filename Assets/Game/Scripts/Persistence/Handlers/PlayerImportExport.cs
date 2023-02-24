@@ -14,6 +14,7 @@ namespace Game.Persistence
     public class PlayerImportExport
     {
         private readonly HeroStats.InitialStats _initialStats;
+        private readonly InventorySettings _inventorySettings;
         private readonly PlayerController _player;
         private readonly InventoryController _inventory;
         private readonly LevelController _level;
@@ -24,6 +25,7 @@ namespace Game.Persistence
         [Inject]
         public PlayerImportExport(
             HeroStats.InitialStats initialStats,
+            InventorySettings inventorySettings,
             PlayerController player,
             InventoryController inventory,
             RuneDataTable runesDb,
@@ -32,6 +34,7 @@ namespace Game.Persistence
         )
         {
             _initialStats = initialStats;
+            _inventorySettings = inventorySettings;
             _player = player;
             _inventory = inventory;
             _runesDb = runesDb;
@@ -42,7 +45,15 @@ namespace Game.Persistence
         public void Reset()
         {
             _player.Init(_initialStats);
-            _inventory.Reset();
+
+            var initialData = new InventoryInitialData
+            {
+                bag = Array.Empty<MaterialInitialData>(),
+                container = Array.Empty<MaterialInitialData>(),
+                slots = new Dictionary<RuneSlotId, RuneDefinition>(),
+                runes = _inventorySettings.InitialRunes,
+            };
+            _inventory.Init(initialData);
         }
 
         public GameSaveData.Player Export()
@@ -137,6 +148,12 @@ namespace Game.Persistence
                 }
                 
                 obtainedRunes.Add(rune);
+            }
+            
+            foreach (RuneDefinition initialRune in _inventorySettings.InitialRunes)
+            {
+                if (!obtainedRunes.Contains(initialRune))
+                    obtainedRunes.Add(initialRune);
             }
 
             return obtainedRunes;
