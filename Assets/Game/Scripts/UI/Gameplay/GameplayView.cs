@@ -18,9 +18,6 @@ namespace Game.UI
             _inventoryView = GetComponentInChildren<InventoryView>();
         }
 
-        [SerializeField]
-        private GameOverView gameOverView;
-
         public void Start()
         {
             _hudView.HideImmediate();
