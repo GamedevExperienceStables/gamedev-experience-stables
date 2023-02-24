@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Game.Actors;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -7,10 +9,16 @@ namespace Game.Enemies
     public class EnemyFactory
     {
         private readonly IObjectResolver _resolver;
+        private readonly AbilityFactory _abilityFactory;
+
 
         [Inject]
-        public EnemyFactory(IObjectResolver resolver)
-            => _resolver = resolver;
+        public EnemyFactory(IObjectResolver resolver, AbilityFactory abilityFactory)
+        {
+            _resolver = resolver;
+            _abilityFactory = abilityFactory;
+        }
+             
 
         public EnemyController Create(EnemyDefinition definition, Transform spawnPoint, Transform target,
             Transform spawnContainer)
@@ -19,11 +27,37 @@ namespace Game.Enemies
             _resolver.InjectGameObject(enemy.gameObject);
 
             enemy.InitStats(definition.InitialStats);
+            AddAbilities(enemy, definition);
+            enemy.SetAbilities();
+            enemy.AddSpawn(spawnPoint);
             enemy.SetTarget(target);
             enemy.SetLoot(definition.LootBag);
             enemy.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+            enemy.InitSensor(definition.InitialStats);
 
             return enemy;
+        }
+    
+        private void AddAbilities(ActorController actor, EnemyDefinition definition)
+        {
+            RegisterAbilities(actor, definition.Abilities);
+            actor.InitAbilities();
+            GiveAbilities(actor, definition.Abilities);
+        }
+        
+        private void RegisterAbilities(ActorController actor, List<AbilityDefinition> abilities)
+        {
+            foreach (AbilityDefinition definition in abilities)
+            {
+                ActorAbility ability = definition.CreateRuntimeInstance(_abilityFactory);
+                actor.RegisterAbility(ability);
+            }
+        }
+        
+        private static void GiveAbilities(ActorController actor, List<AbilityDefinition> abilities)
+        {
+            foreach (AbilityDefinition definition in abilities)
+                actor.GiveAbility(definition);
         }
     }
 }

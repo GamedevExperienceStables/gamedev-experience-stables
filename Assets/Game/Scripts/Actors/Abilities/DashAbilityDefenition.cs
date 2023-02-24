@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using Game.Hero;
 using Game.Stats;
+using KinematicCharacterController;
 using UnityEngine;
 
 namespace Game.Actors
@@ -18,7 +19,6 @@ namespace Game.Actors
             [SerializeField]
             private StatModifier staminaCost;
             
-            
             public StatModifier SpeedModifier => speedModifier;
             public float DashRange => dashRange;
             public StatModifier StaminaCost => staminaCost;
@@ -27,16 +27,13 @@ namespace Game.Actors
 
         public class DashAbility : ActorAbility<DashAbilityDefinition>
         {
-            private HeroInputController _movementController;
-            private bool _isDashActive;
-            private AimAbility _aim;
-
+            private MovementController _movementController;
+            private IActorInputController _inputController;
+            private KinematicCharacterMotor _kinematicCharacterMotor;
 
             public override bool CanActivateAbility()
             {
-                if (_aim.IsActive) 
-                    return false;
-                if (_isDashActive) 
+                if (IsActive) 
                     return false;
                 return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
             }
@@ -44,29 +41,26 @@ namespace Game.Actors
 
             protected override void OnInitAbility()
             {
-                _aim = Owner.GetAbility<AimAbility>();
-                _movementController = Owner.GetComponent<HeroInputController>();
+                _inputController = Owner.GetComponent<IActorInputController>();
+                _kinematicCharacterMotor = Owner.GetComponent<KinematicCharacterMotor>();
+                _movementController = Owner.GetComponent<MovementController>();
             }
 
             protected override void OnActivateAbility()
             {
-                _movementController.BlockInput(_isDashActive = true);
+                _inputController.BlockInput(IsActive);
                 Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
-                Owner.AddModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
-                float time = Definition.DashRange / Owner.GetCurrentValue(CharacterStats.MovementSpeed);
-                UniTask.Run(() => StartDash(time)).Forget();
-            }
-
-            private async UniTask StartDash(float time)
-            {
+                _inputController.BlockInput(true);
+                
+                Vector3 dashVelocity = _kinematicCharacterMotor.CharacterForward * Definition.DashRange;
                 // to do: change to timer from assets and add ability deactivate after enviroment collision
-                await UniTask.Delay(TimeSpan.FromSeconds(time), ignoreTimeScale: false);
-                OnEndAbility(false);
+                _movementController.AddVelocity(dashVelocity);
+                EndAbility();
             }
             
             protected override void OnEndAbility(bool wasCancelled)
             {
-                _movementController.BlockInput(_isDashActive = false);
+                _inputController.BlockInput(false);
                 Owner.RemoveModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
             }
             

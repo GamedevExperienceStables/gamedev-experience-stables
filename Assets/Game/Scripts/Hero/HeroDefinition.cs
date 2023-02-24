@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Game.Actors;
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace Game.Hero
@@ -14,10 +13,10 @@ namespace Game.Hero
         [SerializeField]
         private HeroStats.InitialStats initialStats;
         
-        [SerializeField, Expandable]
+        [SerializeField]
         private List<AbilityDefinition> initialAbilities;
 
-        [SerializeField, Expandable]
+        [SerializeField]
         private List<AbilityDefinition> abilities;
 
         public List<AbilityDefinition> InitialAbilities => initialAbilities;

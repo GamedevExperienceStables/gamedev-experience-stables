@@ -13,7 +13,7 @@ namespace Game.Utils.DataTable
         [SerializeField]
         protected List<T> items = new();
 
-        public IEnumerable<T> Items => items.AsReadOnly();
+        public IReadOnlyList<T> Items => items.AsReadOnly();
 
         public bool TryGetValue(string id, out T found)
         {

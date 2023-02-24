@@ -9,28 +9,22 @@ namespace Game.GameFlow
     {
         private readonly GameplayView _view;
         private readonly IInputService _inputService;
-        private readonly GameplayBackButton _backButton;
+        private readonly GameplayMenuInput _menuInput;
 
         [Inject]
-        public PlanetPlayState(GameplayView view, IInputService inputService, GameplayBackButton backButton)
+        public PlanetPlayState(GameplayView view, IInputService inputService, GameplayMenuInput menuInput)
         {
             _view = view;
             _inputService = inputService;
-            _backButton = backButton;
+            _menuInput = menuInput;
         }
 
         protected override UniTask OnEnter()
         {
-            _backButton.SetActive(InputSchema.Gameplay, true);
-            _inputService.EnableGameplay();
+            _inputService.ReplaceState(InputSchemeGame.Gameplay);
+            _menuInput.ReplaceState(InputSchemeMenu.Gameplay);
             _view.ShowHud();
 
-            return UniTask.CompletedTask;
-        }
-
-        protected override UniTask OnExit()
-        {
-            _backButton.SetActive(InputSchema.Gameplay, false);
             return UniTask.CompletedTask;
         }
     }

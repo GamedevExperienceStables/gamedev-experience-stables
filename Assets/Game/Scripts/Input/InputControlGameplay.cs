@@ -13,6 +13,7 @@ namespace Game.Input
         public InputButton FireButton { get; } = new();
         public InputButton AimButton { get; } = new();
         public InputButton MenuButton { get; } = new();
+        public InputButton InventoryButton { get; } = new();
         public InputButton InteractionButton { get; } = new();
         public InputButton DashButton { get; } = new();
         public InputButton Slot1Button { get; } = new();
@@ -25,7 +26,7 @@ namespace Game.Input
         {
             inputControls.SetGameplayCallbacks(this);
         }
-        
+
         public void OnAim(InputAction.CallbackContext context)
         {
             if (context.performed)
@@ -59,6 +60,18 @@ namespace Game.Input
             else if (context.canceled)
             {
                 MenuButton.TriggerButtonUp();
+            }
+        }
+        
+        public void OnInventory(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                InventoryButton.TriggerButtonDown();
+            }
+            else if (context.canceled)
+            {
+                InventoryButton.TriggerButtonUp();
             }
         }
 

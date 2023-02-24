@@ -17,14 +17,14 @@ namespace Game.Inventory
         public void UnSubscribe(Action<RuneDefinition> callback)
             => RuneAdded -= callback;
 
-        public void Init()
+        public void Reset()
             => _items.Clear();
 
         public void Init(IEnumerable<RuneDefinition> runes)
         {
-            _items.Clear();
-            foreach (RuneDefinition rune in runes) 
-                _items.Add(rune);
+            Reset();
+            foreach (RuneDefinition rune in runes)
+                Add(rune);
         }
 
         public bool Contains(RuneDefinition rune)

@@ -3,12 +3,17 @@ using Cysharp.Threading.Tasks;
 using Game.Actors.Health;
 using Game.Stats;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game.Actors
 {
     [CreateAssetMenu(menuName = MENU_PATH + "Revive")]
     public class ReviveAbilityDefinition : AbilityDefinition<ReviveAbility>
     {
+        [SerializeField]
+        private GameObject reviveFeedback;
+
+        public GameObject ReviveFeedback => reviveFeedback;
     }
 
     public class ReviveAbility : ActorAbility<ReviveAbilityDefinition>
@@ -51,7 +56,12 @@ namespace Game.Actors
             => _deathController.Revive();
 
         private async UniTask PlayReviveAnimation()
-            => await UniTask.Delay(_animationDuration);
+        {
+            if (Definition.ReviveFeedback)
+                Object.Instantiate(Definition.ReviveFeedback, Owner.Transform.position, Quaternion.identity);
+            
+            await UniTask.Delay(_animationDuration);
+        }
 
         private void ResetStats()
         {

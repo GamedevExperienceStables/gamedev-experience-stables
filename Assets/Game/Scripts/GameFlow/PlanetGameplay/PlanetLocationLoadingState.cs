@@ -36,7 +36,7 @@ namespace Game.GameFlow
 
         protected override async UniTask OnEnter()
         {
-            _inputService.DisableAll();
+            _inputService.ReplaceState(InputSchemeGame.None);
 
             await _loadingScreen.ShowAsync();
 

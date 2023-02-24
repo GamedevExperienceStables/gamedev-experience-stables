@@ -9,20 +9,21 @@ namespace Game.GameFlow
     public class PlanetPauseState : GameState
     {
         private readonly ITimeService _timeService;
-        private readonly IInputService _inputService;
+        private readonly IInputService _input;
         private readonly GameplayView _view;
-        private readonly GameplayBackButton _backButton;
+        private readonly GameplayMenuInput _menuInput;
 
         [Inject]
         public PlanetPauseState(
             ITimeService timeService,
-            IInputService inputService,
+            IInputService input,
             GameplayView view,
-            GameplayBackButton backButton
+            GameplayMenuInput menuInput
         )
         {
             _timeService = timeService;
-            _inputService = inputService;
+            _input = input;
+            _menuInput = menuInput;
             _view = view;
             _backButton = backButton;
         }
@@ -30,23 +31,26 @@ namespace Game.GameFlow
         protected override async UniTask OnEnter()
         {
             _timeService.Pause();
-            _inputService.DisableAll();
+            _input.PushState(InputSchemeGame.None);
+            _menuInput.PushState(InputSchemeMenu.None);
 
             await _view.ShowPauseAsync();
-
-            _inputService.EnableMenus();
-            _backButton.SetActive(InputSchema.Menus, true);
+            
+            _input.ReplaceState(InputSchemeGame.Menu);
+            _menuInput.ReplaceState(InputSchemeMenu.Pause);
         }
 
         protected override async UniTask OnExit()
         {
-            _backButton.SetActive(InputSchema.Menus, false);
-            _inputService.DisableAll();
+            _input.ReplaceState(InputSchemeGame.None);
+            _menuInput.ReplaceState(InputSchemeMenu.None);
 
             await _view.HidePauseAsync();
 
+            _input.Back();
+            _menuInput.Back();
+            
             _timeService.Play();
-            _inputService.EnableGameplay();
         }
     }
 }

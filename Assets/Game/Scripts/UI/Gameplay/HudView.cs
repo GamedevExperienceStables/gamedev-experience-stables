@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Globalization;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Inventory;
 using Game.Stats;
@@ -23,25 +23,34 @@ namespace Game.UI
         private VisualElement _root;
         private Button _buttonMenu;
         private GameplayViewModel _viewModel;
+        
         private bool _isVisible;
 
         private TimeSpan _showDuration;
         private TimeSpan _hideDuration;
         
-        private Label _crystal;
-        private Label _crystalMax;
-        private VisualElement _crystalIcon;
+        private float _crystalMax;
+        private VisualElement _crystalMask;
 
         private float _currentMaxHp;
         private VisualElement _hpBarWidgetMask;
         private float _currentMaxMp;
         private VisualElement _mpBarWidgetMask;
         private float _currentMaxSp;
-        private VisualElement _spBarWidgetMask;
+        private VisualElement _spBarWidgetMaskLeft;
+        private VisualElement _spBarWidgetMaskCenter;
+        private VisualElement _spBarWidgetMaskRight;
+        
+        private HudRuneSlotsView _runeSlotsView;
+
+        public IReadOnlyList<RuneSlotHudView> RuneSlots => _runeSlotsView.Slots;
 
         [Inject]
-        public void Construct(GameplayViewModel viewModel)
-            => _viewModel = viewModel;
+        public void Construct(GameplayViewModel viewModel, HudRuneSlotsView runeSlotsView)
+        {
+            _viewModel = viewModel;
+            _runeSlotsView = runeSlotsView;
+        }
 
         private void Awake()
         {
@@ -58,16 +67,22 @@ namespace Game.UI
 
             var mpWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_MP);
             _mpBarWidgetMask = mpWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
-            
+
             var spWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_SP);
-            _spBarWidgetMask = spWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
+            var leftSp = spWidget.Q<VisualElement>(LayoutNames.Hud.SP_LEFT);
+            var centerSp = spWidget.Q<VisualElement>(LayoutNames.Hud.SP_CENTER);
+            var rightSp = spWidget.Q<VisualElement>(LayoutNames.Hud.SP_RIGHT);
+            _spBarWidgetMaskLeft = leftSp.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
+            _spBarWidgetMaskCenter = centerSp.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
+            _spBarWidgetMaskRight = rightSp.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
 
             var crystalWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_CRYSTAL);
-            _crystalIcon = crystalWidget.Q<VisualElement>(LayoutNames.Hud.CRYSTAL_ICON);
-            _crystal = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_CURRENT);
-            _crystalMax = crystalWidget.Q<Label>(LayoutNames.Hud.TEXT_MAX);
+            _crystalMask = crystalWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
+            
+            _runeSlotsView.Create(_root);
 
             InitCrystalView(_viewModel.GetCurrentMaterial());
+            
             SubscribeStats();
         }
 
@@ -75,6 +90,7 @@ namespace Game.UI
         {
             _buttonMenu.clicked -= PauseGame;
 
+            _runeSlotsView.Destroy();
             UnSubscribeStats();
         }
 
@@ -128,7 +144,7 @@ namespace Game.UI
 
             _viewModel.HeroStatSubscribe(CharacterStats.Stamina, UpdateStamina);
             _viewModel.HeroStatSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax);
-            
+
             _viewModel.LevelBagMaterialSubscribe(UpdateCrystal);
         }
 
@@ -152,7 +168,7 @@ namespace Game.UI
             _hpBarWidgetMask.style.height = stylePercent;
         }
 
-        private void UpdateHealthMax(StatValueChange change) 
+        private void UpdateHealthMax(StatValueChange change)
             => _currentMaxHp = change.newValue;
 
         private void UpdateMana(StatValueChange change)
@@ -166,8 +182,17 @@ namespace Game.UI
 
         private void UpdateStamina(StatValueChange change)
         {
-            Length stylePercent = GetStylePercent(change.newValue, _currentMaxSp);
-            _spBarWidgetMask.style.width = stylePercent;
+            float currentValue = change.newValue / _currentMaxSp;
+            float barLeft = CalculateBarLength(currentValue, 0f, 0.25f);
+            float barCenter = CalculateBarLength(currentValue, 0.25f, 0.75f);
+            float barRight = CalculateBarLength(currentValue, 0.75f, 1f);
+            _spBarWidgetMaskLeft.style.width = new Length(barLeft * 100, LengthUnit.Percent);
+            _spBarWidgetMaskCenter.style.width = new Length(barCenter * 100, LengthUnit.Percent);
+            _spBarWidgetMaskRight.style.width = new Length(barRight * 100, LengthUnit.Percent);
+        }
+        
+        private float CalculateBarLength(float value, float barMinimum, float barMaximum) {
+            return Mathf.Max(0, Mathf.Min(1, (value - barMinimum) / (barMaximum - barMinimum)));
         }
 
         private void UpdateStaminaMax(StatValueChange change)
@@ -175,14 +200,16 @@ namespace Game.UI
 
         private void InitCrystalView(IReadOnlyMaterialData materialData)
         {
-            _crystalIcon.style.unityBackgroundImageTintColor = materialData.Definition.Color;
-
-            _crystal.text = materialData.Current.ToString(CultureInfo.InvariantCulture);
-            _crystalMax.text = materialData.Total.ToString(CultureInfo.InvariantCulture);
+            _crystalMax = materialData.Total;
+            Length stylePercent = GetStylePercent(materialData.Current, _crystalMax);
+            _crystalMask.style.height = stylePercent;
         }
 
         private void UpdateCrystal(MaterialChangedData change)
-            => _crystal.text = change.newValue.ToString(CultureInfo.InvariantCulture);
+        {
+            Length stylePercent = GetStylePercent(change.newValue, _crystalMax);
+            _crystalMask.style.height = stylePercent;
+        }
 
         private static Length GetStylePercent(float current, float max)
         {

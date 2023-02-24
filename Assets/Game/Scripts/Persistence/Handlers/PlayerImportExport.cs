@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Game.Hero;
 using Game.Inventory;
@@ -15,16 +16,17 @@ namespace Game.Persistence
         private readonly HeroStats.InitialStats _initialStats;
         private readonly PlayerController _player;
         private readonly InventoryController _inventory;
-        private readonly RecipeDataTable _recipesDataTable;
         private readonly LevelController _level;
         private readonly LevelsSettings _levelsSettings;
+
+        private readonly RuneDataTable _runesDb;
 
         [Inject]
         public PlayerImportExport(
             HeroStats.InitialStats initialStats,
             PlayerController player,
             InventoryController inventory,
-            RecipeDataTable recipeDataTable,
+            RuneDataTable runesDb,
             LevelController level,
             LevelsSettings levelsSettings
         )
@@ -32,7 +34,7 @@ namespace Game.Persistence
             _initialStats = initialStats;
             _player = player;
             _inventory = inventory;
-            _recipesDataTable = recipeDataTable;
+            _runesDb = runesDb;
             _level = level;
             _levelsSettings = levelsSettings;
         }
@@ -40,22 +42,28 @@ namespace Game.Persistence
         public void Reset()
         {
             _player.Init(_initialStats);
-            _inventory.Init();
+            _inventory.Reset();
         }
 
         public GameSaveData.Player Export()
         {
-            var recipes = _inventory.Recipes.Items;
-            string[] recipeIds = recipes.Select(definition => definition.Id).ToArray();
+            var runes = _inventory.Runes.Items;
+            string[] runesIds = runes.Select(definition => definition.Id).ToArray();
 
-            MaterialDefinition planetMaterial = _level.GetCurrentLevel().Goal.Material;
+            var slots = _inventory.Slots.Items;
+            string[] slotRuneIds = slots.Values
+                .Select(slot => slot.IsEmpty ? string.Empty : slot.Rune.Id)
+                .ToArray();
+
+            MaterialDefinition levelMaterial = _level.GetCurrentLevel().Goal.Material;
             IReadOnlyMaterials materials = _inventory.Materials;
 
             return new GameSaveData.Player
             {
-                recipes = recipeIds,
-                containerMaterials = materials.Container.GetCurrentValue(planetMaterial),
-                bagMaterials = materials.Bag.GetCurrentValue(planetMaterial)
+                runes = runesIds,
+                slots = slotRuneIds,
+                containerMaterials = materials.Container.GetCurrentValue(levelMaterial),
+                bagMaterials = materials.Bag.GetCurrentValue(levelMaterial),
             };
         }
 
@@ -65,31 +73,73 @@ namespace Game.Persistence
 
             LevelDefinition currentLevel = _level.GetCurrentLevel();
 
+            string[] dataRunes = data.runes ?? Array.Empty<string>();
+            var runes = ImportRunes(dataRunes);
+
+            string[] dataSlots = data.slots ?? Array.Empty<string>();
+            var slots = ImportSlots(dataSlots, runes);
+
             var inventoryData = new InventoryInitialData
             {
                 bag = ImportBag(data.bagMaterials, currentLevel),
                 container = ImportContainer(data.containerMaterials, currentLevel),
-                recipes = ImportRecipes(data.recipes),
+                runes = runes,
+                slots = slots,
             };
 
             _inventory.Init(inventoryData);
         }
 
-        private IList<RecipeDefinition> ImportRecipes(IEnumerable<string> recipeIds)
+        private IDictionary<RuneSlotId, RuneDefinition> ImportSlots(
+            IList<string> runeIds,
+            ICollection<RuneDefinition> obtainedRunes
+        )
         {
-            List<RecipeDefinition> obtainedRecipes = new();
-            foreach (string recipeId in recipeIds)
+            Dictionary<RuneSlotId, RuneDefinition> slots = new();
+            for (int index = 0; index < runeIds.Count; index++)
             {
-                if (!_recipesDataTable.TryGetValue(recipeId, out RecipeDefinition recipe))
+                int slotId = index + 1;
+
+                string runeId = runeIds[index];
+                if (string.IsNullOrEmpty(runeId))
                 {
-                    Debug.LogError($"Save data corrupted! Not found recipe with id: {recipeId}");
+                    slots[slotId] = default;
                     continue;
                 }
 
-                obtainedRecipes.Add(recipe);
+                if (!_runesDb.TryGetValue(runeId, out RuneDefinition rune))
+                {
+                    Debug.LogError($"Save data corrupted! Not found rune with id: {runeId}");
+                    continue;
+                }
+
+                if (!obtainedRunes.Contains(rune))
+                {
+                    Debug.LogWarning($"Trying add rune {rune.name} that player not obtained.");
+                    continue;
+                }
+
+                slots[slotId] = rune;
             }
 
-            return obtainedRecipes;
+            return slots;
+        }
+
+        private IList<RuneDefinition> ImportRunes(IEnumerable<string> runesIds)
+        {
+            List<RuneDefinition> obtainedRunes = new();
+            foreach (string runeId in runesIds)
+            {
+                if (!_runesDb.TryGetValue(runeId, out RuneDefinition rune))
+                {
+                    Debug.LogError($"Save data corrupted! Not found rune with id: {runeId}");
+                    continue;
+                }
+                
+                obtainedRunes.Add(rune);
+            }
+
+            return obtainedRunes;
         }
 
         private static IList<MaterialInitialData> ImportBag(int quantity, LevelDefinition currentLevel)

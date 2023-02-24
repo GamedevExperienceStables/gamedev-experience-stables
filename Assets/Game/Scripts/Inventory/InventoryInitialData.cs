@@ -7,6 +7,7 @@ namespace Game.Inventory
         public IList<MaterialInitialData> container;
         public IList<MaterialInitialData> bag;
 
-        public IList<RecipeDefinition> recipes;
+        public IList<RuneDefinition> runes;
+        public IDictionary<RuneSlotId, RuneDefinition> slots;
     }
 }

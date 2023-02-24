@@ -3,15 +3,15 @@
 namespace Game.Inventory
 {
     [CreateAssetMenu(menuName = MENU_PATH + "Recipe")]
-    public class RecipeDefinition : ItemInventoryDefinition, IItemExecutableDefinition
+    public class RecipeDefinition : ConsumableDefinition
     {
         [SerializeField]
         private RuneDefinition grantsRune;
 
-        public bool CanExecute(ItemExecutionContext context)
+        public override bool CanExecute(ItemExecutionContext context)
             => context.inventory.CanAddToBag(grantsRune, context.target);
 
-        public void Execute(ItemExecutionContext context)
+        public override void Execute(ItemExecutionContext context)
         {
             if (!context.inventory.CanAddToBag(grantsRune, context.target))
             {

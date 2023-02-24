@@ -11,12 +11,12 @@ namespace Game.GameFlow
     public class CompleteLevelState : GameState
     {
         private readonly LevelsSettings _settings;
-        private readonly InventoryController _inventory;
+        private readonly IInventoryItems _inventory;
         private readonly LevelController _level;
         private readonly SceneLoader _loader;
 
         [Inject]
-        public CompleteLevelState(LevelsSettings settings, InventoryController inventory, LevelController level, SceneLoader loader)
+        public CompleteLevelState(LevelsSettings settings, IInventoryItems inventory, LevelController level, SceneLoader loader)
         {
             _settings = settings;
             _inventory = inventory;

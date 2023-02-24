@@ -17,12 +17,11 @@ namespace Game.Hero
         private Vector3 _lookDirection;
 
         private MovementController _movement;
-        private WeaponAbility _weapon;
+        private ActiveSkillAbility _activeSkill;
         private InteractionAbility _interaction;
         private AimAbility _aim;
         private DashAbility _dash;
         private MeleeAbility _melee;
-        private RecoveryAbility _recovery;
         private IActorController _owner;
         private bool _isBlocked;
         
@@ -41,13 +40,11 @@ namespace Game.Hero
 
         private void Start()
         {
-            _weapon = _owner.GetAbility<WeaponAbility>();
+            _activeSkill = _owner.GetAbility<ActiveSkillAbility>();
             _interaction = _owner.GetAbility<InteractionAbility>();
             _aim = _owner.GetAbility<AimAbility>();
             _dash = _owner.GetAbility<DashAbility>();
             _melee = _owner.GetAbility<MeleeAbility>();
-            _recovery = _owner.GetAbility<RecoveryAbility>();
-            StartRecovering();
             _input.AimButton.Performed += OnAim;
             _input.AimButton.Canceled += OnAimCanceled;
 
@@ -72,17 +69,12 @@ namespace Game.Hero
         private void Update()
         {
             HandleInputs();
-
             Move();
         }
-
-        private void StartRecovering()
-        {
-            _recovery.TryActivateAbility();
-        }
+        
         
         private void OnFire() 
-            => _weapon.TryActivateAbility();
+            => _activeSkill.TryActivateAbility();
 
         private void OnMelee()
         {

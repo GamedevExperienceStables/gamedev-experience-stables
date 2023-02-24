@@ -10,12 +10,14 @@ namespace Game.Enemies
         {
             this.CreateStatsHealth();
             this.CreateStatsMovement();
+            this.CreateStatsStamina();
         }
 
         public void InitStats(InitialStats stats)
         {
             this.InitStatsHealth(stats.HealthPoints);
             this.InitStatsMovement(stats.MovementSpeed);
+            this.InitStatsStamina(stats.StaminaPoints);
         }
         
         [Serializable]
@@ -24,13 +26,27 @@ namespace Game.Enemies
             [SerializeField]
             private float healthPoints = 1f;
             
+            [SerializeField]
+            private float staminaPoints = 1f;
+            
             [Header("Movement")]
             [SerializeField]
             private float movementSpeed = 3f;
+            
+            [Header("Sensor")]
+            [SerializeField]
+            private float sensorDistance = 10f;
+            [SerializeField]
+            private float sensorHeight = 1.4f;
 
             public float HealthPoints => healthPoints;
 
             public float MovementSpeed => movementSpeed;
+            public float StaminaPoints => staminaPoints;
+            
+            public float SensorDistance => sensorDistance;
+
+            public float SensorHeight => sensorHeight;
         }
     }
 }

@@ -13,6 +13,8 @@ namespace Game.Enemies
         [SerializeField]
         private float stopDistance = 1f;
 
+        public float StopDistance => stopDistance;
+
         private MovementController _movement;
 
         private Vector3 _movementDirection;
@@ -43,11 +45,29 @@ namespace Game.Enemies
             }
 
             UpdateDirection();
-            Move();
+            UpdateMovement();
 
 #if UNITY_EDITOR
             DrawDebugNavigationPath();
 #endif
+        }
+
+        public void Stop()
+        {
+            _path.ClearCorners();
+            _pathIndex = 0;
+            
+            _movementDirection = Vector3.zero;
+            _lookDirection = Vector3.zero;
+
+            UpdateMovement();
+        }
+
+        public void LookTo(Vector3 direction)
+        {
+            _lookDirection = direction;
+
+            UpdateMovement();
         }
 
         private void UpdateDirection()
@@ -77,7 +97,7 @@ namespace Game.Enemies
         }
 
 
-        private void Move()
+        private void UpdateMovement()
         {
             _movement.UpdateInputs(_movementDirection, _lookDirection);
         }
@@ -90,7 +110,7 @@ namespace Game.Enemies
             ResetNextPathTarget();
         }
 
-        private Vector3 GetValidTargetPosition(Vector3 position)
+        public Vector3 GetValidTargetPosition(Vector3 position)
         {
             if (NavMesh.SamplePosition(position, out _hit, 5f, NavMesh.AllAreas))
             {

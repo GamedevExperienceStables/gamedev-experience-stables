@@ -132,9 +132,10 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 0.0.3
+  bundleVersion: 0.0.4
   preloadedAssets:
   - {fileID: 11400000, guid: ec68bc50e33c0d84e846734d878e7b6d, type: 2}
+  - {fileID: 11400000, guid: cd3af9f5fb7b8b04199e75df413a09f7, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -811,7 +812,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: gamedev-experience-stables
-  metroPackageVersion: 
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -819,7 +820,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: gamedev-experience-stables
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: gamedev-experience-stables
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

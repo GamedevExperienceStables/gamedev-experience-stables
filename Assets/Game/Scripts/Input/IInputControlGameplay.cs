@@ -10,6 +10,7 @@ namespace Game.Input
         InputButton FireButton { get; }
         InputButton AimButton { get; }
         InputButton MenuButton { get; }
+        InputButton InventoryButton { get; }
         InputButton InteractionButton { get; }
         InputButton DashButton { get; }
         InputButton Slot1Button { get; }

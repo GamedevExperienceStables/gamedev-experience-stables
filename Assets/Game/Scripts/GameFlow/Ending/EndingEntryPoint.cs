@@ -21,17 +21,13 @@ namespace Game.GameFlow.Ending
 
         public void Start()
         {
-            _input.EnableMenus();
+            _input.ReplaceState(InputSchemeGame.Menu);
             
-            _menuControl.CancelButton.Performed += OnExitButton;
-            _menuControl.ExitButton.Performed += OnExitButton;
+            _menuControl.MenuButton.Performed += OnExitButton;
         }
 
-        public void Dispose()
-        {
-            _menuControl.CancelButton.Performed -= OnExitButton;
-            _menuControl.ExitButton.Performed -= OnExitButton;
-        }
+        public void Dispose() 
+            => _menuControl.MenuButton.Performed -= OnExitButton;
 
         private void OnExitButton()
             => _rootStateMachine.EnterState<MainMenuState>();

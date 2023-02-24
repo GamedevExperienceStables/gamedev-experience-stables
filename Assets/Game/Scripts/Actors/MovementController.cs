@@ -21,10 +21,14 @@ namespace Game.Actors
 
         private Vector3 _movementDirection;
         private Vector3 _lookDirection;
+        private Vector3 _internalVelocityAdd;
 
         private KinematicCharacterMotor _motor;
         private IActorController _owner;
-
+        
+        [SerializeField]
+        private Animator heroAnimator;
+        
         public float CapsuleRadius => _motor.Capsule.radius;
 
         private void Awake()
@@ -48,8 +52,14 @@ namespace Game.Actors
             }
 
             _lookDirection = lookDirection;
+            if (heroAnimator != null)
+            {
+                heroAnimator.SetFloat("XCoord", _movementDirection.x);
+                heroAnimator.SetFloat("YCoord", _movementDirection.z);
+            }
         }
-
+        
+        
         public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
         {
             if (_lookDirection.sqrMagnitude > 0f && rotation.sharpness > 0f)
@@ -63,11 +73,15 @@ namespace Game.Actors
                 currentRotation = Quaternion.LookRotation(smoothedLookInputDirection, _motor.CharacterUp);
             }
         }
-
+        
+        public void AddVelocity(Vector3 velocity)
+        {
+            _internalVelocityAdd += velocity;
+        }
+        
         public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
         {
             float speed = _owner.GetCurrentValue(CharacterStats.MovementSpeed);
-            
             if (_motor.GroundingStatus.IsStableOnGround)
             {
                 UpdateGroundedState(ref currentVelocity, speed, deltaTime);
@@ -75,6 +89,13 @@ namespace Game.Actors
             else
             {
                 UpdateAirborneState(ref currentVelocity, speed, deltaTime);
+            }
+
+            // ReSharper disable once InvertIf
+            if (_internalVelocityAdd.sqrMagnitude > 0f)
+            {
+                currentVelocity += _internalVelocityAdd;
+                _internalVelocityAdd = Vector3.zero;
             }
         }
 
