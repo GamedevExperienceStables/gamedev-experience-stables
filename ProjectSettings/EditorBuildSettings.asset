@@ -32,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Level/Scenes/Levels/GameLevel/L1D2/Level_1_Dung_2.unity
     guid: 55c4f3fbd99291a489d4ce1ac0071df8
+  - enabled: 1
+    path: Assets/Game/Level/Scenes/Levels/GameLevel/L1/Level_1_Small.unity
+    guid: 849d20eca27092742ab0027715a84087
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 356ab69d75917644f8bb1676edee2467,
       type: 2}
