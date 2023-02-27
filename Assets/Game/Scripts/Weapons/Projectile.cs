@@ -21,7 +21,7 @@ namespace Game.Weapons
 
         [SerializeField]
         private float raycastMaxDistance = 0.4f;
-        
+
         [SerializeField]
         private float raycastRadius = 0.1f;
 
@@ -40,9 +40,16 @@ namespace Game.Weapons
 
         private readonly RaycastHit[] _hits = new RaycastHit[5];
         private IActorController _owner;
-        
+
         private ProjectileLifetime _lifeTime;
         private IList<DamageDefinition> _damages;
+
+        private struct CollisionData
+        {
+            public Transform target;
+            public Vector3 hitPoint;
+            public Vector3 hitNormal;
+        }
 
         public event Action<Projectile> Completed;
 
@@ -56,39 +63,46 @@ namespace Game.Weapons
 
         private void FixedUpdate()
         {
-            if (DetectCollisions(out RaycastHit hit))
-            {
-                DestroyProjectile(hit.transform, hit.point, hit.normal);
-            }
+            if (DetectCollisions(out CollisionData collision))
+                DestroyProjectile(collision);
         }
 
-        private bool DetectCollisions(out RaycastHit hit)
+        private bool DetectCollisions(out CollisionData collision)
         {
-            Transform t = transform;
-            var ray = new Ray(t.position, t.forward);
-            int count = Physics.RaycastNonAlloc(ray, _hits, raycastMaxDistance, collisionLayerMask,
-                QueryTriggerInteraction.Ignore);
+            Transform projectileTransform = transform;
+            Vector3 projectilePosition = projectileTransform.position;
+            var ray = new Ray(projectilePosition, projectileTransform.forward);
+            int count = Physics.SphereCastNonAlloc(ray, raycastRadius, _hits,
+                raycastMaxDistance, collisionLayerMask, QueryTriggerInteraction.Ignore);
             if (count <= 0)
             {
-                hit = default;
+                collision = default;
                 return false;
             }
 
-            hit = _hits.First();
+            RaycastHit raycastHit = _hits[0];
+            Transform collisionTransform = raycastHit.transform;
+            Vector3 normal = (projectilePosition - collisionTransform.position).normalized;
+            collision = new CollisionData
+            {
+                target = collisionTransform,
+                hitPoint = projectilePosition,
+                hitNormal = normal
+            };
             return true;
         }
 
-        private void DestroyProjectile(Transform target, Vector3 hitPoint, Vector3 hitNormal)
+        private void DestroyProjectile(CollisionData collision)
         {
             bool damaged = false;
 
             foreach (DamageDefinition damage in _damages)
-                damaged |= damage.TryDealDamage(transform, target, hitPoint);
+                damaged |= damage.TryDealDamage(transform, collision.target, collision.hitPoint);
 
             if (damaged)
                 Complete();
             else
-                DestroyOnCollision(hitPoint, hitNormal);
+                DestroyOnCollision(collision.hitPoint, collision.hitNormal);
         }
 
         private void DestroyOnCollision(Vector3 position, Vector3 normal)
@@ -158,7 +172,7 @@ namespace Game.Weapons
         private void UpdateLifeTimer()
         {
             _timer -= Time.deltaTime;
-            if (_timer <= 0f) 
+            if (_timer <= 0f)
                 OnLifetimeEnd();
         }
 
@@ -169,7 +183,13 @@ namespace Game.Weapons
                 case ProjectileLifetime.EndBehaviour.Execute:
                 {
                     Transform t = transform;
-                    DestroyProjectile(t, t.position, t.up);
+                    var collision = new CollisionData
+                    {
+                        target = t,
+                        hitPoint = t.position,
+                        hitNormal = t.up
+                    };
+                    DestroyProjectile(collision);
                     break;
                 }
 
@@ -183,8 +203,11 @@ namespace Game.Weapons
 
         private void PlayDeathFeedback(Vector3 position, Vector3 normal)
         {
-            if (deathFeedbackPrefab) 
+            if (deathFeedbackPrefab)
                 Instantiate(deathFeedbackPrefab, position, Quaternion.LookRotation(normal));
         }
+
+        private void OnDrawGizmosSelected()
+            => Gizmos.DrawSphere(transform.position, raycastRadius);
     }
 }
