@@ -17,6 +17,9 @@ namespace Game.Enemies
         private EnemyStats _stats;
         private IActorController _owner;
         
+        private bool _hasMelee;
+        private bool _hasRange;
+        
         public Transform SpawnPoint { get; private set; }
         
         protected override IStats Stats => _stats;
@@ -54,16 +57,30 @@ namespace Game.Enemies
         public void InitSensor(EnemyStats.InitialStats initial)
             => _sensor.InitSensor(initial);
 
-        public void SetAbilities()
+        public void SetAbilities(EnemyStats.InitialStats initial)
         {
+            _ai.SetAttackParameters(initial.AttackRange, initial.AttackInterval);
+            
             _melee = _owner.GetAbility<MeleeAbility>();
+            _hasMelee = _melee != null;
+            
             _weapon = _owner.GetAbility<ProjectileAbility>();
+            _hasRange = _weapon != null;
+        }
+
+        public void Attack()
+        {
+            if (_hasMelee)
+                MeleeAttack();
+                
+            if (_hasRange)
+                RangeAttack();
         }
         
-        public void MeleeAttack()
+        private void MeleeAttack()
             => _melee.TryActivateAbility();
         
-        public void RangeAttack()
+        private void RangeAttack()
             => _weapon.TryActivateAbility();
     }
 }

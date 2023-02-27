@@ -28,7 +28,7 @@ namespace Game.Enemies
 
             enemy.InitStats(definition.InitialStats);
             AddAbilities(enemy, definition);
-            enemy.SetAbilities();
+            enemy.SetAbilities(definition.InitialStats);
             enemy.AddSpawn(spawnPoint);
             enemy.SetTarget(target);
             enemy.SetLoot(definition.LootBag);
