@@ -39,7 +39,7 @@ namespace Game.Hero
 
         private void Awake()
         {
-            _plane = new Plane(Vector3.up, 0);
+            _plane = new Plane(Vector3.up, new Vector3(0, 0, 0));
             _movement = GetComponent<MovementController>();
             _owner = GetComponent<IActorController>();
         }
@@ -76,6 +76,11 @@ namespace Game.Hero
         {
             HandleInputs();
             Move();
+            Aiming();
+        }
+
+        private void Aiming()
+        {
             if (_aim.IsActive)
             {
                 if (!aimSpriteTest.activeSelf)
@@ -93,7 +98,7 @@ namespace Game.Hero
                 aimSpriteTest.SetActive(false);
             }
         }
-
+        
         public Vector3 GetRealMousePosition() => _mousePosition;
         private void OnFire() 
             => _activeSkill.TryActivateAbility();
