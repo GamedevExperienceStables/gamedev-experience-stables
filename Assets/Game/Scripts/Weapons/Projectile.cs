@@ -55,14 +55,14 @@ namespace Game.Weapons
 
         private void Update()
         {
-            CalculateSpeed();
             UpdateLifeTimer();
-
-            Move();
         }
 
         private void FixedUpdate()
         {
+            CalculateSpeed();
+            Move();
+            
             if (DetectCollisions(out CollisionData collision))
                 DestroyProjectile(collision);
         }
@@ -162,10 +162,10 @@ namespace Game.Weapons
 
         private void CalculateSpeed()
         {
-            _velocity = transform.forward * (_currentSpeed * Time.deltaTime);
+            _velocity = transform.forward * (_currentSpeed * Time.fixedDeltaTime);
             if (!MathExtensions.AlmostEquals(_currentSpeed, maxSpeed))
             {
-                _currentSpeed += acceleration * Time.deltaTime;
+                _currentSpeed += acceleration * Time.fixedDeltaTime;
             }
         }
 
