@@ -18,11 +18,13 @@ namespace Game.Actors
         private int manaCost;
 
         [SerializeField, Min(0)]
-        private float castTime;
+        private float castTime = 0.5f;
 
         public ProjectileDefinition Projectile => projectile;
 
         public int ManaCost => manaCost;
+
+        public float CastTime => castTime;
     }
 
     public class ProjectileAbility : ActorAbility<ProjectileAbilityDefinition>
@@ -97,7 +99,7 @@ namespace Game.Actors
         
         private async UniTask WaitAnimationEnd()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), ignoreTimeScale: false);
+            await UniTask.Delay(TimeSpan.FromSeconds(Definition.CastTime), ignoreTimeScale: false);
             _isAnimationEnded = true;
         }
     }
