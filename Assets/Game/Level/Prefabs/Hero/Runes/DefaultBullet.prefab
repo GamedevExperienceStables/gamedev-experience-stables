@@ -49,7 +49,7 @@ MonoBehaviour:
   acceleration: 0
   lifeTime: 3
   raycastMaxDistance: 0.5
-  raycastRadius: 0.05
+  raycastRadius: 0.3
   collisionLayerMask:
     serializedVersion: 2
     m_Bits: 2625
