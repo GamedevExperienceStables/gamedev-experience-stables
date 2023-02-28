@@ -13,18 +13,21 @@ namespace Game.Actors
         [SerializeField]
         private GameObject reviveFeedback;
 
+        [SerializeField, Min(0)]
+        private float animationDuration = 1f;
+
         public GameObject ReviveFeedback => reviveFeedback;
+        
+        public float AnimationDuration => animationDuration;
     }
 
     public class ReviveAbility : ActorAbility<ReviveAbilityDefinition>
     {
         private DeathController _deathController;
-        private TimeSpan _animationDuration;
         private IActorInputController _inputController;
 
         protected override void OnInitAbility()
         {
-            _animationDuration = TimeSpan.FromSeconds(1f);
             _deathController = Owner.GetComponent<DeathController>();
             _inputController = Owner.GetComponent<IActorInputController>();
         }
@@ -60,7 +63,7 @@ namespace Game.Actors
             if (Definition.ReviveFeedback)
                 Object.Instantiate(Definition.ReviveFeedback, Owner.Transform.position, Quaternion.identity);
             
-            await UniTask.Delay(_animationDuration);
+            await UniTask.Delay(TimeSpan.FromSeconds(Definition.AnimationDuration));
         }
 
         private void ResetStats()
