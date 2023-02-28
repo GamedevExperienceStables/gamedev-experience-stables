@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Game.Animations.Hero;
 using Game.Stats;
 using Game.Weapons;
 using NaughtyAttributes;
@@ -40,7 +41,7 @@ namespace Game.Actors
 
         private Transform _spawnPoint;
         private bool _hasMana;
-        private Animator _animator;
+        private ActorAnimator _animator;
         private bool _isAnimationEnded;
 
         public ProjectileAbility(ProjectileFactory projectileFactory, FmodService audio)
@@ -71,7 +72,7 @@ namespace Game.Actors
             _hasMana = Owner.HasStat(CharacterStats.Mana);
             var view = Owner.GetComponent<ProjectileAbilityView>();
             _spawnPoint = view.SpawnPoint;
-            _animator = Owner.GetComponent<Animator>();
+            _animator = Owner.GetComponent<ActorAnimator>();
             _isAnimationEnded = true;
         }
 
@@ -93,10 +94,10 @@ namespace Game.Actors
             
             if (_animator != null)
             {
-                _animator.SetBool("IsAttacked", true);
+                _animator.SetAnimation(AnimationNames.RangeAttack, true);
                 _isAnimationEnded = false;
                 await WaitAnimationEnd();
-                _animator.SetBool("IsAttacked", false);
+                _animator.SetAnimation(AnimationNames.RangeAttack, false);
             }
             
             _projectilePool.Get(out Projectile projectile);

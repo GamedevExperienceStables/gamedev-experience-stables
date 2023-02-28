@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Game.Actors.Health;
+using Game.Animations.Hero;
 using Game.Stats;
 using Game.Utils;
 using UnityEngine;
@@ -47,7 +48,7 @@ namespace Game.Actors
     {
         private AimAbility _aim;
         private Collider[] _hitColliders;
-        private Animator _animator;
+        private ActorAnimator _animator;
         private bool _isAnimationEnded;
 
         
@@ -59,7 +60,7 @@ namespace Game.Actors
         {
             _aim = Owner.GetAbility<AimAbility>();
             _hitColliders = new Collider[Definition.MaxTargets];
-            _animator = Owner.GetComponent<Animator>();
+            _animator = Owner.GetComponent<ActorAnimator>();
             _isAnimationEnded = true;
         }
 
@@ -67,10 +68,14 @@ namespace Game.Actors
         {
             if (_animator != null)
             {
-                _animator.SetBool("IsMeleeAttacked", true);
+                _animator.SetAnimation(AnimationNames.MeleeAttack, true);
                 _isAnimationEnded = false;
                 await WaitAnimationEnd();
-                _animator.SetBool("IsMeleeAttacked", false);
+                
+                if (!IsActive)
+                    EndAbility();
+                
+                _animator.SetAnimation(AnimationNames.MeleeAttack, false);
             }
             
             Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
