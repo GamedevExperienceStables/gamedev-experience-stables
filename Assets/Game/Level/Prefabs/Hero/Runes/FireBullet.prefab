@@ -49,13 +49,12 @@ MonoBehaviour:
   acceleration: 0
   lifeTime: 3
   raycastMaxDistance: 0.5
-  raycastRadius: 0.1
+  raycastRadius: 0.4
   collisionLayerMask:
     serializedVersion: 2
     m_Bits: 2625
   deathFeedbackPrefab: {fileID: 2504214343621411470, guid: 3ed0d324122d7b24eaec75c55c74aafc,
     type: 3}
-  damageDealer: {fileID: 0}
 --- !u!1001 &1772779692839765302
 PrefabInstance:
   m_ObjectHideFlags: 0
