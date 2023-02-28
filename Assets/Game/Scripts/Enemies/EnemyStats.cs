@@ -39,11 +39,9 @@ namespace Game.Enemies
             [SerializeField]
             private float sensorHeight = 1.4f;
             
-            [Header("Attack")]
+            [Space]
             [SerializeField]
-            private float attackRange = 8f;
-            [SerializeField]
-            private float attackInterval = 0.8f;
+            private AttackSettings attackSettings;
 
             public float HealthPoints => healthPoints;
 
@@ -54,9 +52,7 @@ namespace Game.Enemies
 
             public float SensorHeight => sensorHeight;
 
-            public float AttackRange => attackRange;
-            
-            public float AttackInterval => attackInterval;
+            public AttackSettings AttackSettings => attackSettings;
         }
     }
 }

@@ -57,9 +57,9 @@ namespace Game.Enemies
         public void InitSensor(EnemyStats.InitialStats initial)
             => _sensor.InitSensor(initial);
 
-        public void SetAbilities(EnemyStats.InitialStats initial)
+        public void SetAbilities(AttackSettings attackSettings)
         {
-            _ai.SetAttackParameters(initial.AttackRange, initial.AttackInterval);
+            _ai.SetAttackParameters(attackSettings.Range, attackSettings.Interval);
             
             _melee = _owner.GetAbility<MeleeAbility>();
             _hasMelee = _melee != null;
