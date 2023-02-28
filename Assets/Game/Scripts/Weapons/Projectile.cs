@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Game.Actors;
 using Game.Utils;
 using UnityEngine;
@@ -10,6 +9,13 @@ namespace Game.Weapons
 {
     public class Projectile : MonoBehaviour
     {
+        private struct CollisionData
+        {
+            public Transform target;
+            public Vector3 hitPoint;
+            public Vector3 hitNormal;
+        }
+        
         [SerializeField]
         private float maxSpeed = 200f;
 
@@ -43,14 +49,7 @@ namespace Game.Weapons
 
         private ProjectileLifetime _lifeTime;
         private IList<DamageDefinition> _damages;
-
-        private struct CollisionData
-        {
-            public Transform target;
-            public Vector3 hitPoint;
-            public Vector3 hitNormal;
-        }
-
+        
         public event Action<Projectile> Completed;
 
         private void Update()
