@@ -9,13 +9,15 @@ namespace Game.Enemies
     public class EnemyController : ActorController
     {
         private AiController _ai;
-        private AiSensor _sensor;
         private MovementController _movement;
         private LootController _loot;
         private MeleeAbility _melee;
         private ProjectileAbility _weapon;
         private EnemyStats _stats;
         private IActorController _owner;
+        
+        private bool _hasMelee;
+        private bool _hasRange;
         
         public Transform SpawnPoint { get; private set; }
         
@@ -27,7 +29,6 @@ namespace Game.Enemies
             _ai = GetComponent<AiController>();
             _movement = GetComponent<MovementController>();
             _loot = GetComponent<LootController>();
-            _sensor = GetComponent<AiSensor>();
         }
 
         protected override void OnActorDestroy() 
@@ -52,18 +53,32 @@ namespace Game.Enemies
             => _loot.SetLoot(definitionLootBag);
         
         public void InitSensor(EnemyStats.InitialStats initial)
-            => _sensor.InitSensor(initial);
+            => _ai.InitSensor(initial);
 
-        public void SetAbilities()
+        public void SetAbilities(AttackSettings attackSettings)
         {
+            _ai.SetAttackParameters(attackSettings.Range, attackSettings.Interval);
+            
             _melee = _owner.GetAbility<MeleeAbility>();
+            _hasMelee = _melee != null;
+            
             _weapon = _owner.GetAbility<ProjectileAbility>();
+            _hasRange = _weapon != null;
+        }
+
+        public void Attack()
+        {
+            if (_hasMelee)
+                MeleeAttack();
+                
+            if (_hasRange)
+                RangeAttack();
         }
         
-        public void MeleeAttack()
+        private void MeleeAttack()
             => _melee.TryActivateAbility();
         
-        public void RangeAttack()
+        private void RangeAttack()
             => _weapon.TryActivateAbility();
     }
 }
