@@ -85,12 +85,19 @@ namespace Game.Hero
             {
                 if (!aimSpriteTest.activeSelf)
                     aimSpriteTest.SetActive(true);
+                
                 Ray ray = _sceneCamera.ScreenPointToRay(_input.MousePosition);
                 if (_plane.Raycast(ray, out float distance))
                 {
+                    Vector3 position = transform.position;
+                    float x = _mousePosition.x - position.x;
+                    float z = _mousePosition.z - position.z;
+                    Vector3 newPosition = position + new Vector3(x, 0, z).normalized * 3; 
                     _mousePosition = ray.GetPoint(distance);
                     aimSpriteTest.transform.position = 
-                        new Vector3(_mousePosition.x, aimSpriteTest.transform.position.y, _mousePosition.z);
+                        new Vector3(newPosition.x, aimSpriteTest.transform.position.y, newPosition.z);
+                     /*aimSpriteTest.transform.position = 
+                        new Vector3(_mousePosition.x, aimSpriteTest.transform.position.y, _mousePosition.z);*/
                 }
             }
             else
