@@ -68,10 +68,10 @@ namespace Game.Inventory
             AddToBag(item, owner);
             return true;
         }
-
-        public void ClearBag()
+        
+        public void ClearBag() 
             => _materials.ClearBag();
-
+        
         public void AddToBag(ItemDefinition item, IActorController owner)
         {
             if (item is IItemExecutableDefinition executableItem)
