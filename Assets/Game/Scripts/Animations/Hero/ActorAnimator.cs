@@ -1,25 +1,31 @@
-using DG.Tweening.Core;
-using Game.Actors;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Animations.Hero
 {
     public class ActorAnimator : MonoBehaviour
     {
-        [SerializeField]
         private Animator animator;
-        
+
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+        }
+
         public void SetAnimation(string animationName, bool isActive)
-            => animator.SetBool(animationName, isActive);
-        
-        
+        {
+            if (animator != null)
+                animator.SetBool(animationName, isActive);
+        }
+
+
         public void SetAnimation(string animationName, float animationParameter)
             => animator.SetFloat(animationName, animationParameter);
         
         
         public void SetAnimation(string animationName, int animationParameter)
             => animator.SetInteger(animationName, animationParameter);
-        
+
+        public void PlayAnimation(string animationName)
+            => animator.Play(animationName);
     }
 }

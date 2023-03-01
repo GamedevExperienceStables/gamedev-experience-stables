@@ -81,9 +81,12 @@ namespace Game.Actors
             if (IsActive)
                 return false;
 
+            if (!_isAnimationEnded)
+                return false;
+            
             if (!_hasMana)
                 return true;
-
+            
             return Owner.GetCurrentValue(CharacterStats.Mana) >= Definition.ManaCost;
         }
 
