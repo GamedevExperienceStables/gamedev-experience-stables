@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Game.Level
@@ -12,6 +13,7 @@ namespace Game.Level
         private readonly float _power;
 
         private readonly UniTaskCompletionSource _completionSource;
+        private readonly CancellationToken _token;
 
         public MagnetTask(Transform source, Transform target, float power, float minDistance,
             UniTaskCompletionSource completionSource)
@@ -22,6 +24,7 @@ namespace Game.Level
             _minDistance = minDistance;
             _power = power;
 
+            _token = _source.GetCancellationTokenOnDestroy();
             _completionSource = completionSource;
             
             Completed = false;
@@ -31,6 +34,13 @@ namespace Game.Level
 
         public void Execute(float deltaTime)
         {
+            if (_token.IsCancellationRequested)
+            {
+                _completionSource.TrySetCanceled(_token);
+                Completed = true;
+                return;
+            }
+
             Vector3 sourcePosition = _source.position;
             Vector3 targetPosition = _target.position;
 
