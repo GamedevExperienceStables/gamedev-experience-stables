@@ -9,6 +9,7 @@ namespace Game.Animations.Hero
         public static readonly string XCoordinate = "XCoord";
         public static readonly string YCoordinate = "YCoord";
         public static readonly string Aiming = "IsAiming";
-        public static readonly string Death = "Died";
+        public static readonly string Death = "IsDied";
+        public static readonly string Damage = "IsDamaged";
     }
 }

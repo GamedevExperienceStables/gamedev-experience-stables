@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using Game.Actors;
 using Game.Actors.Health;
 using UnityEngine;
@@ -11,12 +12,16 @@ namespace Game.Animations.Hero
         private MovementController movementController;
         private ActorAnimator _animator;
         private DeathController _deathController;
+        private DamageableController _damageableController;
 
         private void Awake()
         {
             _animator = GetComponent<ActorAnimator>();
             _deathController = GetComponent<DeathController>();
+            _damageableController = GetComponent<DamageableController>();
+            
             _deathController.Died += OnDiedAnimation;
+            _damageableController.DamageFeedback += OnDamageAnimation;
         }
 
         private void Update()
@@ -26,14 +31,20 @@ namespace Game.Animations.Hero
 
         private void MovementAnimation()
         {
-            var direction = movementController.GetMovementDirection();
+            Vector3 direction = movementController.GetMovementDirection();
             _animator.SetAnimation(AnimationNames.XCoordinate, direction.x);
             _animator.SetAnimation(AnimationNames.YCoordinate, direction.z);
         }
 
         private void OnDiedAnimation()
         {
-            _animator.PlayAnimation(AnimationNames.Death);
+            _animator.SetAnimation(AnimationNames.Death);
         }
+        
+        private void OnDamageAnimation()
+        {
+            _animator.SetAnimation(AnimationNames.Damage);
+        }
+        
     }
 }
