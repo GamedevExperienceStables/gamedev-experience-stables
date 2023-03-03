@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/UI/Uss/MapStyle.uss?fileID=7433441132597879392&amp;guid=54f0129aef30dd04ea9c0dd68e83fda9&amp;type=3#MapStyle" />
+    <ui:VisualElement name="mini-map" style="align-items: auto; flex-grow: 1;">
+        <ui:VisualElement name="map-container" class="root-container-mini" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 183px;">
+            <ui:VisualElement name="map" class="map-container" style="height: 182px; width: 186px; top: 0; right: 0;">
+                <ui:VisualElement name="image" class="map-img" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 879px; height: 854px; top: -231px; left: 2px;">
+                    <ui:VisualElement name="player" class="player-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); top: 315px; left: 83px; height: 20px; width: 20px;">
+                        <ui:VisualElement name="arrow" class="player-arrow" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); top: 0;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="front-frame" class="map-container" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=840681649&amp;guid=f26b7e5c4a0732e4791437640237c7ae&amp;type=3#HUD_atlas_3&apos;); position: absolute; display: flex; -unity-background-image-tint-color: rgb(255, 255, 255); width: 200px; height: 200px; align-items: auto; overflow: visible; flex-grow: 0; right: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

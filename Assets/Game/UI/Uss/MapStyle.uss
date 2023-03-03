@@ -1,0 +1,83 @@
+.map-img {
+    height: 100%;
+    width: 115%;
+    -unity-background-scale-mode: scale-and-crop;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background-image: url('project://database/Assets/Game/UI/Textures/Level1_small_map.png?fileID=2800000&guid=59b3d7ec029accf478859a80b27270e3&type=3#Level1_small_map');
+}
+
+.map-container {
+    width: 50%;
+    height: 90%;
+    overflow: hidden;
+    border-top-left-radius: 11px;
+    border-bottom-left-radius: 11px;
+    border-top-right-radius: 11px;
+    border-bottom-right-radius: 11px;
+}
+
+.root-container-full {
+    flex-grow: 1;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    justify-content: center;
+}
+
+.root-container-mini {
+    flex-grow: 1;
+    align-items: flex-end;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    justify-content: flex-start;
+}
+
+.root-container-mini #map {
+    width: 150px;
+    height: 150px;
+}
+
+.root-container-mini #image {
+    position: absolute;
+    -unity-background-scale-mode: scale-and-crop;
+    width: 512px;
+    height: 512px;
+}
+
+.player-container {
+    width: 10px;
+    height: 10px;
+    -unity-background-scale-mode: scale-to-fit;
+    position: absolute;
+    top: -54px;
+    left: -35px;
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.29);
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.player-cone {
+    width: 80px;
+    height: 60px;
+    -unity-background-scale-mode: scale-to-fit;
+    position: absolute;
+    top: -54px;
+    left: -35px;
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.29);
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.player-arrow {
+    width: 20px;
+    height: 30px;
+    -unity-background-image-tint-color: rgb(255, 50, 73);
+    top: 4px;
+    background-image: url('project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=1169890249420208065&guid=45cefae80f3effb4da42f0ff302bb887&type=3#arrow-up');
+}

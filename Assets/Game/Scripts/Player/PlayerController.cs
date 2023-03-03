@@ -3,6 +3,7 @@ using System.Data;
 using Game.Actors.Health;
 using Game.Hero;
 using Game.Stats;
+using UnityEngine;
 using VContainer;
 
 namespace Game.Player
@@ -34,6 +35,12 @@ namespace Game.Player
 
         public void HeroDiedUnSubscribe(Action<HeroController> callback)
             => HeroDeathEvent -= callback;
+
+        public Vector3 GetHeroPosition() 
+            => _hero ? _hero.transform.position : Vector3.zero;
+        
+        public Quaternion GetHeroRotation() 
+            => _hero ? _hero.transform.rotation : Quaternion.identity;
 
         public void BindHero(HeroController hero)
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Inventory;
 using Game.Stats;
+using Game.UI.MiniMap;
 using Game.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -42,14 +43,16 @@ namespace Game.UI
         private VisualElement _spBarWidgetMaskRight;
         
         private HudRuneSlotsView _runeSlotsView;
+        private MiniMapView _miniMapView;
 
         public IReadOnlyList<RuneSlotHudView> RuneSlots => _runeSlotsView.Slots;
 
         [Inject]
-        public void Construct(GameplayViewModel viewModel, HudRuneSlotsView runeSlotsView)
+        public void Construct(GameplayViewModel viewModel, HudRuneSlotsView runeSlotsView, MiniMapView miniMapView)
         {
             _viewModel = viewModel;
             _runeSlotsView = runeSlotsView;
+            _miniMapView = miniMapView;
         }
 
         private void Awake()
@@ -80,6 +83,7 @@ namespace Game.UI
             _crystalMask = crystalWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
             
             _runeSlotsView.Create(_root);
+            _miniMapView.Create(_root);
 
             InitCrystalView(_viewModel.GetCurrentMaterial());
             

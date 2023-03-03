@@ -5,7 +5,9 @@ using Game.GameFlow;
 using Game.Hero;
 using Game.Level;
 using Game.UI;
+using Game.UI.MiniMap;
 using Game.Weapons;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -92,6 +94,9 @@ namespace Game.LifetimeScopes
             
             builder.Register<HudRuneSlotsView>(Lifetime.Scoped);
             builder.Register<HudRuneSlotsViewModel>(Lifetime.Scoped);
+            
+            builder.Register<MiniMapView>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
+            builder.Register<MiniMapViewModel>(Lifetime.Scoped);
 
             builder.RegisterInstance(gameplayView);
             Transform uiRoot = gameplayView.transform;

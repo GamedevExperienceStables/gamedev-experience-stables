@@ -60,5 +60,10 @@ namespace Game.Level
             _hero.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             _followCamera.SetTarget(_hero.CameraTarget);
         }
+
+        public ILevelBoundary GetLevelBoundary()
+        {
+            return _context.FindBoundaries();
+        }
     }
 }
