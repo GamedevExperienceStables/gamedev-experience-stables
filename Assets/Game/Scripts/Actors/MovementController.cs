@@ -30,6 +30,8 @@ namespace Game.Actors
         private Animator heroAnimator;
         
         public float CapsuleRadius => _motor.Capsule.radius;
+        
+        public Vector3 Velocity => _motor.Velocity;
 
         private void Awake()
         {
@@ -52,14 +54,9 @@ namespace Game.Actors
             }
 
             _lookDirection = lookDirection;
-            if (heroAnimator != null)
-            {
-                heroAnimator.SetFloat("XCoord", _movementDirection.x);
-                heroAnimator.SetFloat("YCoord", _movementDirection.z);
-            }
         }
-        
-        
+
+
         public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
         {
             if (_lookDirection.sqrMagnitude > 0f && rotation.sharpness > 0f)
@@ -166,6 +163,11 @@ namespace Game.Actors
 
         public void AfterCharacterUpdate(float deltaTime)
         {
+            if (heroAnimator)
+            {
+                heroAnimator.SetFloat("XCoord", _motor.BaseVelocity.x);
+                heroAnimator.SetFloat("YCoord", _motor.BaseVelocity.z);
+            }
         }
 
         public bool IsColliderValidForCollisions(Collider coll)

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{0bb89e3c-9788-48a5-89aa-16df91d878a0}">
+		<property name="assetPath">
+			<value>Background Music/mixkit-relax-beat-292.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>108.06857142857143</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ec2d5f4e-b0a8-4322-ba77-d3c0e5842eac}</destination>
+		</relationship>
+	</object>
+</objects>

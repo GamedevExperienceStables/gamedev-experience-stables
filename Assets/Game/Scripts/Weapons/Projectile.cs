@@ -93,20 +93,10 @@ namespace Game.Weapons
 
         private void DestroyProjectile(CollisionData collision)
         {
-            bool damaged = false;
-
             foreach (DamageDefinition damage in _damages)
-                damaged |= damage.TryDealDamage(transform, collision.target, collision.hitPoint);
+                damage.TryDealDamage(transform, collision.target, collision.hitPoint);
 
-            if (damaged)
-                Complete();
-            else
-                DestroyOnCollision(collision.hitPoint, collision.hitNormal);
-        }
-
-        private void DestroyOnCollision(Vector3 position, Vector3 normal)
-        {
-            PlayDeathFeedback(position, normal);
+            PlayDeathFeedback(collision.hitPoint, collision.hitNormal);
             Complete();
         }
 

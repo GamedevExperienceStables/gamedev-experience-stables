@@ -1,4 +1,5 @@
 ﻿using Game.Actors;
+using Game.Audio;
 using Game.Cameras;
 using Game.Enemies;
 using Game.GameFlow;
@@ -21,6 +22,9 @@ namespace Game.LifetimeScopes
 
         [SerializeField]
         private FollowSceneCamera followCamera;
+        
+        [SerializeField]
+        private LocationAudioListener cameraAudioListener;
 
         [Header("UI")]
         [SerializeField]
@@ -33,6 +37,7 @@ namespace Game.LifetimeScopes
 
             RegisterUi(builder);
             RegisterCameras(builder);
+            RegisterAudio(builder);
             RegisterPlanetStateMachine(builder);
             RegisterLocationStateMachine(builder);
             RegisterLootSystem(builder);
@@ -140,5 +145,8 @@ namespace Game.LifetimeScopes
             builder.Register<LootSpawner>(Lifetime.Scoped);
             builder.Register<LootFactory>(Lifetime.Scoped);
         }
+
+        private void RegisterAudio(IContainerBuilder builder) 
+            => builder.RegisterComponent(cameraAudioListener);
     }
 }

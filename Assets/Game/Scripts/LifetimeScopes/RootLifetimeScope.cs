@@ -1,4 +1,5 @@
-﻿using Game.GameFlow;
+﻿using Game.Audio;
+using Game.GameFlow;
 using Game.Hero;
 using Game.Input;
 using Game.Inventory;
@@ -39,6 +40,7 @@ namespace Game.LifetimeScopes
             RegisterDataTables(builder);
             RegisterServices(builder);
             RegisterSaveSystem(builder);
+            RegisterAudio(builder);
         }
 
         private static void RegisterData(IContainerBuilder builder)
@@ -117,6 +119,7 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.SaveSettings);
             builder.RegisterInstance(gameSettings.MagnetSettings);
             builder.RegisterInstance(gameSettings.InventorySettings);
+            builder.RegisterInstance(gameSettings.AudioSettings);
         }
 
         private void RegisterDataTables(IContainerBuilder builder)
@@ -133,6 +136,13 @@ namespace Game.LifetimeScopes
             builder.Register<LocalPersistence>(Lifetime.Singleton).As<IPersistence>();
             builder.Register<NewtonJsonDataSerializer>(Lifetime.Singleton).As<IDataSerializer>()
                 .WithParameter(gameSettings.SaveSettings.Formatting);
+        }
+        
+        private static void RegisterAudio(IContainerBuilder builder)
+        {
+            builder.Register<FmodService>(Lifetime.Singleton).As<IAudioService>().AsSelf();
+            builder.Register<FmodFootsteps>(Lifetime.Singleton).As<IFootstepsAudio>();
+            builder.Register<FootstepsEmitter>(Lifetime.Transient);
         }
     }
 }
