@@ -53,7 +53,7 @@ MonoBehaviour:
   collisionLayerMask:
     serializedVersion: 2
     m_Bits: 2625
-  deathFeedbackPrefab: {fileID: 8771972552311404799, guid: bbf9e36a48d6c5648a13889afab076fd,
+  deathFeedbackPrefab: {fileID: 7434773884508858481, guid: c5b7cfd640416dc419956b2988396ea7,
     type: 3}
 --- !u!1001 &505294409601221887
 PrefabInstance:
