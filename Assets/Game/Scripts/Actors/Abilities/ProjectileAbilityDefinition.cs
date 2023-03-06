@@ -1,5 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using FMODUnity;
+using Game.Audio;
 using Game.Stats;
 using Game.Weapons;
 using NaughtyAttributes;
@@ -11,6 +13,9 @@ namespace Game.Actors
     [CreateAssetMenu(menuName = MENU_PATH + "Projectile")]
     public class ProjectileAbilityDefinition : AbilityDefinition<ProjectileAbility>
     {
+        [SerializeField]
+        private EventReference fireSfx;
+
         [SerializeField, Expandable]
         private ProjectileDefinition projectile;
 
@@ -25,10 +30,13 @@ namespace Game.Actors
         public int ManaCost => manaCost;
 
         public float CastTime => castTime;
+
+        public EventReference FireSfx => fireSfx;
     }
 
     public class ProjectileAbility : ActorAbility<ProjectileAbilityDefinition>
     {
+        private readonly FmodService _audio;
         private const int POOL_MAX_SIZE = 20;
         private readonly ObjectPool<Projectile> _projectilePool;
 
@@ -37,8 +45,9 @@ namespace Game.Actors
         private Animator _animator;
         private bool _isAnimationEnded;
 
-        public ProjectileAbility(ProjectileFactory projectileFactory)
+        public ProjectileAbility(ProjectileFactory projectileFactory, FmodService audio)
         {
+            _audio = audio;
             _projectilePool = new ObjectPool<Projectile>(
                 createFunc: () =>
                 {
@@ -83,7 +92,7 @@ namespace Game.Actors
         {
             if (_hasMana)
                 Owner.ApplyModifier(CharacterStats.Mana, -Definition.ManaCost);
-            
+
             if (_animator != null)
             {
                 _animator.SetBool("IsAttacked", true);
@@ -91,12 +100,20 @@ namespace Game.Actors
                 await WaitAnimationEnd();
                 _animator.SetBool("IsAttacked", false);
             }
-            
-            _projectilePool.Get(out Projectile projectile);
-            projectile.Fire(_spawnPoint);
+
+            FireProjectile();
             EndAbility();
         }
-        
+
+        private void FireProjectile()
+        {
+            _projectilePool.Get(out Projectile projectile);
+            projectile.Fire(_spawnPoint);
+
+            if (!Definition.FireSfx.IsNull)
+                _audio.PlayOneShot(Definition.FireSfx, Owner.Transform);
+        }
+
         private async UniTask WaitAnimationEnd()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(Definition.CastTime), ignoreTimeScale: false);

@@ -52,7 +52,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
@@ -804,12 +804,12 @@ TextureImporter:
       HUD_atlas_21: 634328786
       HUD_atlas_10: 1058294056
       HUD_atlas_20: -420370288
-      HUD_atlas_7: -1621022323
       HUD_atlas_5: -1542294138
-      HUD_atlas_25: -124136053
+      HUD_atlas_30: -1381307903
       HUD_atlas_4: 46647803
       HUD_atlas_24: 1173122105
       HUD_atlas_12: -403211107
+      HUD_atlas_28: -1157367548
       HUD_atlas_15: -554671214
       HUD_atlas_2: 1717201878
       HUD_atlas_29: -1592015478
@@ -825,16 +825,16 @@ TextureImporter:
       HUD_atlas_6: -216879603
       HUD_atlas_8: -70775643
       HUD_atlas_14: 1978125208
-      HUD_atlas_3: 840681649
       HUD_atlas_17: -78959028
+      HUD_atlas_25: -124136053
       HUD_atlas_22: 999504760
+      HUD_atlas_3: 840681649
       HUD_atlas_31: 1240862137
-      HUD_atlas_0: 1232523547
       HUD_atlas_18: 2095280001
-      HUD_atlas_28: -1157367548
-      HUD_atlas_30: -1381307903
+      HUD_atlas_7: -1621022323
+      HUD_atlas_0: 1232523547
   mipmapLimitGroupName: 
-  pSDRemoveMatte: 0
+  pSDRemoveMatte: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 

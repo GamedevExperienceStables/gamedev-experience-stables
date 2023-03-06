@@ -20,11 +20,19 @@ namespace Game.UI
         [SerializeField]
         private HudView hud;
 
+        [Header("Show")]
         [SerializeField, Min(0f)]
         private float showDuration = 0.4f;
+        
+        [SerializeField]
+        private GameObject showFeedbacks;
 
+        [Header("Hide")]
         [SerializeField, Min(0f)]
         private float hideDuration = 0.2f;
+
+        [SerializeField]
+        private GameObject hideFeedbacks;
 
         private InventoryViewModel _viewModel;
 
@@ -167,6 +175,7 @@ namespace Game.UI
             _container.style.bottom = OFFSET_BOTTOM;
 
             OnHide();
+            HideFeedbacks();
         }
 
         private void OnShow()
@@ -188,15 +197,20 @@ namespace Game.UI
             OnShow();
         }
 
-        public UniTask HideAsync()
+        public async UniTask HideAsync()
         {
             OnHide();
             FadeOut(_hideDuration);
-            return UniTask.Delay(_hideDuration);
+            await UniTask.Delay(_hideDuration);
+            
+            HideFeedbacks();
         }
 
         private void FadeIn(TimeSpan duration)
         {
+            if (showFeedbacks)
+                showFeedbacks.SetActive(true);
+            
             _container.SetDisplay(true);
             _container.experimental.animation
                 .Start(new StyleValues { opacity = 1f, bottom = 0 }, (int)duration.TotalMilliseconds)
@@ -205,10 +219,22 @@ namespace Game.UI
 
         private void FadeOut(TimeSpan duration)
         {
+            if (hideFeedbacks)
+                hideFeedbacks.SetActive(true);
+            
             _container.experimental.animation
                 .Start(new StyleValues { opacity = 0f, bottom = OFFSET_BOTTOM }, (int)duration.TotalMilliseconds)
                 .Ease(Easing.InOutSine)
                 .OnCompleted(() => _container.SetDisplay(false));
+        }
+
+        private void HideFeedbacks()
+        {
+            if (showFeedbacks)
+                showFeedbacks.SetActive(false);
+
+            if (hideFeedbacks)
+                hideFeedbacks.SetActive(false);
         }
     }
 }

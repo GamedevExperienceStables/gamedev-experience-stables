@@ -160,10 +160,6 @@ $RECYCLE.BIN/
 fmod.log
 fmod_editor.log
 
-# FMOD 1.10.x (Legacy)
-/[Aa]ssets/FMODAssets/*
-/[Aa]ssets/FMODStudioCache.meta
-
 ########################################
 
 .idea/

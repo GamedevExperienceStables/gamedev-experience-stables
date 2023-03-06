@@ -7,9 +7,10 @@ namespace Game.Cameras
         [SerializeField]
         private Camera mainCamera;
 
-        public Vector3 TransformDirection(Vector3 direction)
+        public Vector3 TransformDirection(Vector2 direction)
         {
-            return mainCamera.transform.TransformDirection(direction);
+            var planeDirection = new Vector3(direction.x, 0, direction.y);
+            return Quaternion.Euler(0, mainCamera.transform.eulerAngles.y, 0) * planeDirection;
         }
 
         public Ray ScreenPointToRay(Vector2 position)
