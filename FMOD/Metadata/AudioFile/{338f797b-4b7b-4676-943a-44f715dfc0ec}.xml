@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{338f797b-4b7b-4676-943a-44f715dfc0ec}">
+		<property name="assetPath">
+			<value>Sounds/Footsteps/Water/Barefoot Water footsteps 4.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.966530612244898</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ec2d5f4e-b0a8-4322-ba77-d3c0e5842eac}</destination>
+		</relationship>
+	</object>
+</objects>
