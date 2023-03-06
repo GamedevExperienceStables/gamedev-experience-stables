@@ -2,6 +2,7 @@
 using Game.Level;
 using Game.Persistence;
 using UnityEngine;
+using AudioSettings = Game.Audio.AudioSettings;
 
 namespace Game.Settings
 {
@@ -24,6 +25,9 @@ namespace Game.Settings
         private InventorySettings inventorySettings;
 
         [SerializeField]
+        private AudioSettings audioSettings;
+
+        [SerializeField]
         private MagnetSystem.Settings magnetSettings;
 
         [SerializeField]
@@ -36,5 +40,7 @@ namespace Game.Settings
         public PersistenceService.Settings SaveSettings => saveSettings;
         public MagnetSystem.Settings MagnetSettings => magnetSettings;
         public InventorySettings InventorySettings => inventorySettings;
+
+        public AudioSettings AudioSettings => audioSettings;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using Game.Audio;
 using Game.Input;
 using Game.TimeManagement;
 using Game.UI;
@@ -12,23 +13,28 @@ namespace Game.GameFlow
         private readonly IInputService _input;
         private readonly GameplayView _view;
         private readonly GameplayMenuInput _menuInput;
+        private readonly IAudioService _audio;
 
         [Inject]
         public PlanetPauseState(
             ITimeService timeService,
             IInputService input,
             GameplayView view,
-            GameplayMenuInput menuInput
+            GameplayMenuInput menuInput,
+            IAudioService audio
         )
         {
             _timeService = timeService;
             _input = input;
             _menuInput = menuInput;
+            _audio = audio;
             _view = view;
         }
 
         protected override async UniTask OnEnter()
         {
+            _audio.Pause();
+            
             _timeService.Pause();
             _input.PushState(InputSchemeGame.None);
             _menuInput.PushState(InputSchemeMenu.None);
@@ -41,6 +47,8 @@ namespace Game.GameFlow
 
         protected override async UniTask OnExit()
         {
+            _audio.Resume();
+            
             _input.ReplaceState(InputSchemeGame.None);
             _menuInput.ReplaceState(InputSchemeMenu.None);
 

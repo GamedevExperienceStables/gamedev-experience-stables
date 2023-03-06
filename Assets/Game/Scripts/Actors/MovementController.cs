@@ -30,6 +30,8 @@ namespace Game.Actors
         private Animator heroAnimator;
         
         public float CapsuleRadius => _motor.Capsule.radius;
+        
+        public Vector3 Velocity => _motor.Velocity;
 
         private void Awake()
         {
