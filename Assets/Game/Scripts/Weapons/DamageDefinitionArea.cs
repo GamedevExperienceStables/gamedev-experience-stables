@@ -16,9 +16,6 @@ namespace Game.Weapons
         [SerializeField, Min(0f)]
         private float radius = 1f;
 
-        [SerializeField, Range(0, 360f)]
-        private float area = 360f;
-
         [SerializeField]
         private GameObject hitFeedback;
 
