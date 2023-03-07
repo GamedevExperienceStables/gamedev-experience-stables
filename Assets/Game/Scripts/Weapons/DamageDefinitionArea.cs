@@ -21,13 +21,19 @@ namespace Game.Weapons
 
         public override bool TryDealDamage(Transform source, Transform target, Vector3 hitPoint)
         {
+#if UNITY_EDITOR
             DebugExtensions.DebugWireSphere(hitPoint, radius: radius, duration: DEBUG_DURATION);
+#endif
             var results = Physics.OverlapSphere(hitPoint, radius, ~0, QueryTriggerInteraction.Ignore);
             foreach (Collider collider in results)
             {
                 Vector3 closestPoint = collider.ClosestPointOnBounds(source.position);
                 if (base.TryDealDamage(source, collider.transform, closestPoint))
+                {
+#if UNITY_EDITOR
                     DebugExtensions.DebugPoint(closestPoint, Color.red, duration: DEBUG_DURATION);
+#endif
+                }
             }
 
             return false;
