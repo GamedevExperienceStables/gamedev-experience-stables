@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 
 namespace Game.Actors
 {
+    [Obsolete("Should be used " + nameof(ProjectileAbilityDefinition))]
     [CreateAssetMenu(menuName = MENU_PATH + "Weapon")]
     public class WeaponAbilityDefinition : AbilityDefinition<WeaponAbility>
     {
@@ -17,6 +18,7 @@ namespace Game.Actors
         public LayerMask Mask => mask;
     }
 
+    [Obsolete("Should be used " + nameof(ProjectileAbility))]
     public class WeaponAbility : ActorAbility<WeaponAbilityDefinition>
     {
         private AimAbility _aim;
