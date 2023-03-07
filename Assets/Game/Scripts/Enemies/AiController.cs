@@ -31,5 +31,7 @@ namespace Game.Enemies
 
         public void BlockInput(bool isBlocked) 
             => _inputBlocked = isBlocked;
+
+        public Vector3 DesiredDirection => transform.forward;
     }
 }
