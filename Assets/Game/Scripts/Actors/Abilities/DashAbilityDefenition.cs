@@ -27,6 +27,10 @@ namespace Game.Actors
             {
                 if (IsActive) 
                     return false;
+
+                if (!_movementController.IsGrounded)
+                    return false;
+                
                 return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
             }
                  
