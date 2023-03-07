@@ -5,7 +5,7 @@ namespace Game.Audio
 {
     public class FootstepsEmitter
     {
-        private const float RAYCAST_DISTANCE = 3f;
+        private const float RAYCAST_DISTANCE = 0.5f;
         private const float THRESHOLD = 0.1f;
         private readonly Vector3 _raycastOffset = new(0, 0.1f, 0f);
 
