@@ -1,10 +1,12 @@
-﻿using Game.Actors;
+﻿using System;
+using Game.Actors;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine;
 
 namespace Game.Weapons
 {
+    [Obsolete("Should be used " + nameof(ProjectileAbility))]
     public class ProjectileWeapon : MonoBehaviour
     {
         [SerializeField]
@@ -31,8 +33,6 @@ namespace Game.Weapons
         {
             GameObject go = pool.GetPooledGameObject();
             var projectile = go.GetComponent<Projectile>();
-            projectile.Init(firePoint, _owner);
-            projectile.Show();
         }
 
         private void PlayEffects()

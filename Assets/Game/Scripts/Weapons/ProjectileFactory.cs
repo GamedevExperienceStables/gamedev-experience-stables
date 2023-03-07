@@ -13,12 +13,7 @@ namespace Game.Weapons
         public Projectile Create(ProjectileDefinition definition)
         {
             Projectile instance = _resolver.Instantiate(definition.Prefab);
-            instance.Init(
-                definition.CollisionLayers, 
-                definition.Speed,
-                definition.LifeTime, 
-                definition.Damages
-            );
+            instance.Init(definition);
 
             return instance;
         }

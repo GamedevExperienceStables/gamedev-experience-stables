@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using Game.Actors;
-using Game.Utils;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -15,30 +13,13 @@ namespace Game.Weapons
             public Vector3 hitPoint;
             public Vector3 hitNormal;
         }
-        
-        [SerializeField]
-        private float maxSpeed = 200f;
-
-        [SerializeField]
-        private float acceleration;
-
-        [SerializeField]
-        private float lifeTime = 3f;
-
-        [SerializeField]
-        private float raycastMaxDistance = 0.4f;
 
         [SerializeField]
         private float raycastRadius = 0.1f;
 
-        [SerializeField]
-        private LayerMask collisionLayerMask;
-
         [FormerlySerializedAs("deathFeedback")]
         [SerializeField]
         private GameObject deathFeedbackPrefab;
-
-        private float _currentSpeed;
 
         private Vector3 _velocity;
 
@@ -46,117 +27,49 @@ namespace Game.Weapons
 
         private readonly RaycastHit[] _hits = new RaycastHit[5];
         private IActorController _owner;
-
-        private ProjectileLifetime _lifeTime;
-        private IList<DamageDefinition> _damages;
         
+        private IProjectileSettings _settings;
+
         public event Action<Projectile> Completed;
 
-        private void Update()
-        {
-            UpdateLifeTimer();
-        }
+        private void Update() 
+            => UpdateLifeTimer();
 
         private void FixedUpdate()
         {
-            CalculateSpeed();
-            Move();
+            float time = Time.fixedDeltaTime;
+            
+            UpdateVelocity();
+            UpdatePosition(time);
+            UpdateRotation();
             
             if (DetectCollisions(out CollisionData collision))
                 DestroyProjectile(collision);
         }
 
-        private bool DetectCollisions(out CollisionData collision)
-        {
-            Transform projectileTransform = transform;
-            Vector3 projectilePosition = projectileTransform.position;
-            var ray = new Ray(projectilePosition, projectileTransform.forward);
-            int count = Physics.SphereCastNonAlloc(ray, raycastRadius, _hits,
-                raycastMaxDistance, collisionLayerMask, QueryTriggerInteraction.Ignore);
-            if (count <= 0)
-            {
-                collision = default;
-                return false;
-            }
-
-            RaycastHit raycastHit = _hits[0];
-            Transform collisionTransform = raycastHit.transform;
-            Vector3 normal = (projectilePosition - collisionTransform.position).normalized;
-            collision = new CollisionData
-            {
-                target = collisionTransform,
-                hitPoint = projectilePosition,
-                hitNormal = normal
-            };
-            return true;
-        }
-
-        private void DestroyProjectile(CollisionData collision)
-        {
-            foreach (DamageDefinition damage in _damages)
-                damage.TryDealDamage(transform, collision.target, collision.hitPoint);
-
-            PlayDeathFeedback(collision.hitPoint, collision.hitNormal);
-            Complete();
-        }
-
-        public void Init(Transform startPoint, IActorController owner)
-        {
-            _owner = owner;
-            transform.SetPositionAndRotation(startPoint.position, startPoint.rotation);
-
-            _timer = lifeTime;
-            _currentSpeed = acceleration > 0 ? 0 : maxSpeed;
-        }
-
-        public void Init(LayerMask collisionLayers, float speed, ProjectileLifetime lifeTime,
-            IList<DamageDefinition> damages)
-        {
-            collisionLayerMask = collisionLayers;
-            maxSpeed = speed;
-            _lifeTime = lifeTime;
-            _damages = damages;
-        }
+        public void Init(IProjectileSettings settings) 
+            => _settings = settings;
 
         public void Fire(Transform spawnPoint)
         {
-            transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+            _timer = _settings.LifeTime.Duration;
 
-            _timer = _lifeTime.Duration;
-            _currentSpeed = acceleration > 0 ? 0 : maxSpeed;
+            Transform t = transform;
+            t.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+
+            _velocity = _settings.Trajectory.GetInitialDirection(t) * _settings.Speed;
 
             Show();
         }
 
-        private void Complete()
-        {
-            Completed?.Invoke(this);
-            Hide();
-        }
+        private void UpdateRotation()
+            => transform.forward = _velocity;
+        
+        private void UpdatePosition(float deltaTime) 
+            => transform.Translate(_velocity * deltaTime, Space.World);
 
-        public void Show()
-        {
-            gameObject.SetActive(true);
-        }
-
-        public void Hide()
-        {
-            gameObject.SetActive(false);
-        }
-
-        private void Move()
-        {
-            transform.Translate(_velocity, Space.World);
-        }
-
-        private void CalculateSpeed()
-        {
-            _velocity = transform.forward * (_currentSpeed * Time.fixedDeltaTime);
-            if (!MathExtensions.AlmostEquals(_currentSpeed, maxSpeed))
-            {
-                _currentSpeed += acceleration * Time.fixedDeltaTime;
-            }
-        }
+        private void UpdateVelocity() 
+            => _velocity = _settings.Trajectory.CalculateVelocity(_velocity);
 
         private void UpdateLifeTimer()
         {
@@ -167,7 +80,7 @@ namespace Game.Weapons
 
         private void OnLifetimeEnd()
         {
-            switch (_lifeTime.OnEndBehaviour)
+            switch (_settings.LifeTime.OnEndBehaviour)
             {
                 case ProjectileLifetime.EndBehaviour.Execute:
                 {
@@ -196,6 +109,53 @@ namespace Game.Weapons
                 Instantiate(deathFeedbackPrefab, position, Quaternion.LookRotation(normal));
         }
 
+
+        private bool DetectCollisions(out CollisionData collision)
+        {
+            Transform projectileTransform = transform;
+            Vector3 projectilePosition = projectileTransform.position;
+            var ray = new Ray(projectilePosition, projectileTransform.forward);
+            int count = Physics.SphereCastNonAlloc(ray, raycastRadius, _hits,
+                raycastRadius, _settings.CollisionLayers, QueryTriggerInteraction.Ignore);
+            if (count <= 0)
+            {
+                collision = default;
+                return false;
+            }
+
+            RaycastHit raycastHit = _hits[0];
+            Transform collisionTransform = raycastHit.transform;
+            Vector3 normal = (projectilePosition - collisionTransform.position).normalized;
+            collision = new CollisionData
+            {
+                target = collisionTransform,
+                hitPoint = projectilePosition,
+                hitNormal = normal
+            };
+            return true;
+        }
+
+        private void DestroyProjectile(CollisionData collision)
+        {
+            foreach (DamageDefinition damage in _settings.Damages)
+                damage.TryDealDamage(transform, collision.target, collision.hitPoint);
+
+            PlayDeathFeedback(collision.hitPoint, collision.hitNormal);
+            Complete();
+        }
+
+        private void Complete()
+        {
+            Completed?.Invoke(this);
+            Hide();
+        }
+
+        private void Show() 
+            => gameObject.SetActive(true);
+
+        private void Hide() 
+            => gameObject.SetActive(false);
+        
         private void OnDrawGizmosSelected()
             => Gizmos.DrawSphere(transform.position, raycastRadius);
     }
