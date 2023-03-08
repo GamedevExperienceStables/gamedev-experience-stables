@@ -33,7 +33,6 @@ namespace Game.Animations.Hero
         private void MovementAnimation()
         {
             Vector3 direction = movementController.GetMovementDirection();
-            Debug.Log(direction);
             _animator.SetAnimation(AnimationNames.XCoordinate, direction.x);
             _animator.SetAnimation(AnimationNames.YCoordinate, direction.z);
         }

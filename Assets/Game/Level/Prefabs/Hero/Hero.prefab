@@ -1114,7 +1114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followingPosition: {fileID: 2125638693}
-  speed: 2
+  speed: 1
 --- !u!4 &4173213442801527518 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bc97a27f171df4f4dbb7ebddedeed6f7,

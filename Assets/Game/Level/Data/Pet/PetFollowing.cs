@@ -19,7 +19,7 @@ namespace Game.Level.Data.Pet
             _petPosition = transform.position;
         }
 
-        void Update()
+        void LateUpdate()
         {
             Chasing(_isChasing);
             if (!_isChasing && Vector3.Distance(transform.position, followingPosition.position) > 2)

@@ -27,9 +27,6 @@ namespace Game.Actors
         private KinematicCharacterMotor _motor;
         private IActorController _owner;
         
-        [SerializeField]
-        private Animator heroAnimator;
-        
         public float CapsuleRadius => _motor.Capsule.radius;
         
         public Vector3 Velocity => _motor.Velocity;
@@ -166,11 +163,6 @@ namespace Game.Actors
 
         public void AfterCharacterUpdate(float deltaTime)
         {
-            /*if (heroAnimator)
-            {
-                heroAnimator.SetFloat("XCoord", _motor.BaseVelocity.x);
-                heroAnimator.SetFloat("YCoord", _motor.BaseVelocity.z);
-            }*/
         }
 
         public bool IsColliderValidForCollisions(Collider coll)
