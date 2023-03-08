@@ -32,6 +32,7 @@ namespace Game.Actors
         public float CapsuleRadius => _motor.Capsule.radius;
         
         public Vector3 Velocity => _motor.Velocity;
+        public bool IsGrounded => _motor.GroundingStatus.IsStableOnGround;
 
         private void Awake()
         {
