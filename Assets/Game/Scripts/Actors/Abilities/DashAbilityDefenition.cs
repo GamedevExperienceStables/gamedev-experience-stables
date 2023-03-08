@@ -1,8 +1,5 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
-using Game.Hero;
-using Game.Stats;
-using KinematicCharacterController;
+﻿using Game.Stats;
+using Game.Utils;
 using UnityEngine;
 
 namespace Game.Actors
@@ -11,15 +8,11 @@ namespace Game.Actors
         public class DashAbilityDefinition : AbilityDefinition<DashAbility>
         {
             [SerializeField]
-            private StatModifier speedModifier;
-            
-            [SerializeField]
             private float dashRange;
             
             [SerializeField]
             private StatModifier staminaCost;
             
-            public StatModifier SpeedModifier => speedModifier;
             public float DashRange => dashRange;
             public StatModifier StaminaCost => staminaCost;
 
@@ -29,12 +22,15 @@ namespace Game.Actors
         {
             private MovementController _movementController;
             private IActorInputController _inputController;
-            private KinematicCharacterMotor _kinematicCharacterMotor;
 
             public override bool CanActivateAbility()
             {
                 if (IsActive) 
                     return false;
+
+                if (!_movementController.IsGrounded)
+                    return false;
+                
                 return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
             }
                  
@@ -42,7 +38,6 @@ namespace Game.Actors
             protected override void OnInitAbility()
             {
                 _inputController = Owner.GetComponent<IActorInputController>();
-                _kinematicCharacterMotor = Owner.GetComponent<KinematicCharacterMotor>();
                 _movementController = Owner.GetComponent<MovementController>();
             }
 
@@ -50,9 +45,9 @@ namespace Game.Actors
             {
                 _inputController.BlockInput(IsActive);
                 Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
-                _inputController.BlockInput(true);
-                
-                Vector3 dashVelocity = _kinematicCharacterMotor.CharacterForward * Definition.DashRange;
+
+                Vector3 dashDirection = GetDashDirection();
+                Vector3 dashVelocity = dashDirection * Definition.DashRange;
                 // to do: change to timer from assets and add ability deactivate after enviroment collision
                 _movementController.AddVelocity(dashVelocity);
                 EndAbility();
@@ -61,8 +56,16 @@ namespace Game.Actors
             protected override void OnEndAbility(bool wasCancelled)
             {
                 _inputController.BlockInput(false);
-                Owner.RemoveModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
             }
-            
+
+            private Vector3 GetDashDirection()
+            {
+                Vector3 direction = _inputController.DesiredDirection;
+                
+                if (direction.sqrMagnitude.AlmostZero())
+                    direction = Owner.Transform.forward;
+                
+                return direction;
+            }
         }
 }

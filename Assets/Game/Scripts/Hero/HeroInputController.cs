@@ -25,6 +25,8 @@ namespace Game.Hero
         private IActorController _owner;
         private bool _isBlocked;
         
+        public Vector3 DesiredDirection => _movementDirection;
+        
         [Inject]
         public void Construct(IInputControlGameplay input, SceneCamera sceneCamera)
         {
@@ -114,8 +116,7 @@ namespace Game.Hero
 
         public void BlockInput(bool isBlocked)
             =>_isBlocked = isBlocked;
-        
-        
+
         private Vector3 GetMovementDirection()
         {
             Vector3 movementDirection = _sceneCamera.TransformDirection(_input.PrimaryMovement);
