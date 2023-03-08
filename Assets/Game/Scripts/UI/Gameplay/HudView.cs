@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Inventory;
 using Game.Stats;
-using Game.UI.MiniMap;
 using Game.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;

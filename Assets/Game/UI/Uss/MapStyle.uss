@@ -1,11 +1,9 @@
 .map-img {
-    height: 100%;
-    width: 115%;
     -unity-background-scale-mode: scale-and-crop;
     align-items: center;
     justify-content: center;
     position: absolute;
-    background-image: url('project://database/Assets/Game/UI/Textures/Level1_small_map.png?fileID=2800000&guid=59b3d7ec029accf478859a80b27270e3&type=3#Level1_small_map');
+    background-image: url('project://database/Assets/Game/UI/Textures/Level1Map.png?fileID=2800000&guid=6f0e5cbd93fa9b8499fefa94ebb52201&type=3#Level1Map');
 }
 
 .map-container {

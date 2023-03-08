@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.UI.MiniMap
+namespace Game.UI
 {
     public class MiniMapView : ILateTickable
     {
