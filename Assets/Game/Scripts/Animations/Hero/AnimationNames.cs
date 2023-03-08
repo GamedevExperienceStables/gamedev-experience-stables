@@ -11,5 +11,6 @@ namespace Game.Animations.Hero
         public static readonly string Aiming = "IsAiming";
         public static readonly string Death = "IsDied";
         public static readonly string Damage = "IsDamaged";
+        public static readonly string Dash = "IsDash";
     }
 }

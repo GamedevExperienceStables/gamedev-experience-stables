@@ -58,7 +58,7 @@ namespace Game.Actors
             _lookDirection = lookDirection;
         }
 
-        public Vector3 GetMovementDirection() => _movementDirection;
+        public Vector3 GetMovementDirection() => _motor.BaseVelocity;
 
         public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
         {
@@ -166,11 +166,11 @@ namespace Game.Actors
 
         public void AfterCharacterUpdate(float deltaTime)
         {
-            if (heroAnimator)
+            /*if (heroAnimator)
             {
                 heroAnimator.SetFloat("XCoord", _motor.BaseVelocity.x);
                 heroAnimator.SetFloat("YCoord", _motor.BaseVelocity.z);
-            }
+            }*/
         }
 
         public bool IsColliderValidForCollisions(Collider coll)

@@ -13,6 +13,7 @@ namespace Game.Animations.Hero
         private ActorAnimator _animator;
         private DeathController _deathController;
         private DamageableController _damageableController;
+        private bool _isDied;
 
         private void Awake()
         {
@@ -32,19 +33,25 @@ namespace Game.Animations.Hero
         private void MovementAnimation()
         {
             Vector3 direction = movementController.GetMovementDirection();
+            Debug.Log(direction);
             _animator.SetAnimation(AnimationNames.XCoordinate, direction.x);
             _animator.SetAnimation(AnimationNames.YCoordinate, direction.z);
         }
 
         private void OnDiedAnimation()
         {
+            _isDied = true;
+            _animator.ResetAnimation(AnimationNames.Damage);
             _animator.SetAnimation(AnimationNames.Death);
         }
         
         private void OnDamageAnimation()
         {
+            if (_isDied) return;
             _animator.SetAnimation(AnimationNames.Damage);
         }
+        
+        
         
     }
 }

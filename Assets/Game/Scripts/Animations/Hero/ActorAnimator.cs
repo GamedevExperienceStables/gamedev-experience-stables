@@ -28,6 +28,9 @@ namespace Game.Animations.Hero
         public void SetAnimation(string animationParameter)
             => animator.SetTrigger(animationParameter);
 
+        public void ResetAnimation(string animationParameter)
+            => animator.ResetTrigger(animationParameter);
+        
         public void PlayAnimation(string animationName)
             => animator.Play(animationName);
     }

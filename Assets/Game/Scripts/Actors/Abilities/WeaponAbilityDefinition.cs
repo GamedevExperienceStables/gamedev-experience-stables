@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Game.Animations.Hero;
 using Game.Weapons;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -21,14 +22,14 @@ namespace Game.Actors
     {
         private AimAbility _aim;
         private ProjectileWeapon _currentWeapon;
-        private Animator _animator;
+        private ActorAnimator _animator;
         private bool _isAnimationEnded;
 
         protected override void OnInitAbility()
         {
             _aim = Owner.GetAbility<AimAbility>();
             var view = Owner.GetComponent<WeaponAbilityView>();
-            _animator = Owner.GetComponent<Animator>();
+            _animator = Owner.GetComponent<ActorAnimator>();
             _currentWeapon = view.CurrentWeapon;
             _currentWeapon.SetOwner(Owner);
             _isAnimationEnded = true;
@@ -41,10 +42,10 @@ namespace Game.Actors
         {
             if (_animator != null)
             {
-                _animator.SetBool("IsAttacked", true);
+                _animator.SetAnimation(AnimationNames.RangeAttack, true);
                 _isAnimationEnded = false;
                 await WaitAnimationEnd();
-                _animator.SetBool("IsAttacked", false);
+                _animator.SetAnimation(AnimationNames.RangeAttack, false);
             }
             _currentWeapon.SpawnProjectile();
         }
