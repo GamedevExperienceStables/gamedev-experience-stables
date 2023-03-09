@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=-1827714293&amp;guid=f26b7e5c4a0732e4791437640237c7ae&amp;type=3#HUD_atlas_3&apos;); -unity-background-scale-mode: stretch-to-fill;">
-        <ui:VisualElement name="front-frame" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=-1923150220&amp;guid=f26b7e5c4a0732e4791437640237c7ae&amp;type=3#HUD_atlas_4&apos;); position: absolute; left: 0; top: 0; right: 0; bottom: 0; display: flex; -unity-background-scale-mode: stretch-to-fill;" />
-        <ui:Image name="icon" style="flex-grow: 1; background-color: rgb(79, 79, 79);" />
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; background-image: none; -unity-background-scale-mode: stretch-to-fill;">
+        <ui:Image name="icon" style="flex-grow: 1; background-color: rgba(48, 48, 48, 0); background-image: none;">
+            <ui:VisualElement name="background" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Empty_runes.psd?fileID=989003850&amp;guid=ec918326615d9c343877c1f774a4af46&amp;type=3#Empty_runes_1&apos;);" />
+        </ui:Image>
     </ui:VisualElement>
 </ui:UXML>

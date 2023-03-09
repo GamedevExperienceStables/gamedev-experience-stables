@@ -9,6 +9,7 @@ namespace Game.UI
     public class RuneSlotHudView
     {
         private readonly Image _icon;
+        private readonly VisualElement _background;
         private bool _interactable;
         private RuneDefinition _runeDefinition;
 
@@ -20,6 +21,7 @@ namespace Game.UI
             Element = element;
 
             _icon = element.Q<Image>(LayoutNames.Hud.RUNE_SLOT_ICON);
+            _background = element.Q<VisualElement>(LayoutNames.Hud.RUNE_SLOT_BACKGROUND);
 
             element.RegisterCallback<PointerDownEvent>(OnPointerDown);
         }
@@ -37,22 +39,26 @@ namespace Game.UI
         public void Clear()
         {
             _runeDefinition = null;
-            _icon.image = null;
+            _icon.sprite = null;
+            _background.visible = true;
         }
 
         public void Set(RuneDefinition rune)
         {
             _runeDefinition = rune;
+
+            if (!rune.Icon)
+                return;
             
-            if (rune.Icon)
-                _icon.image = rune.Icon.texture;
+            _icon.sprite = rune.Icon;
+            _background.visible = false;
         }
 
         public void Activate()
-            => Element.AddToClassList(LayoutNames.Hud.RUNE_SLOT_ACTIVE_CLASS_NAME);
+            => _icon.sprite = _runeDefinition.IconActive;
 
         public void Deactivate()
-            => Element.RemoveFromClassList(LayoutNames.Hud.RUNE_SLOT_ACTIVE_CLASS_NAME);
+            => _icon.sprite = _runeDefinition.Icon;
 
 
         private void OnPointerDown(PointerDownEvent evt)

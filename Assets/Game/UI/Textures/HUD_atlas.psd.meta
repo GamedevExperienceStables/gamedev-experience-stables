@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f26b7e5c4a0732e4791437640237c7ae
+guid: 04fa941512f200843b6c60489583d9fb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -122,10 +122,10 @@ TextureImporter:
       name: HUD_atlas_0
       rect:
         serializedVersion: 2
-        x: 138
-        y: 2961
-        width: 238
-        height: 392
+        x: 9
+        y: 1465
+        width: 758
+        height: 757
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,8 +133,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2857fa734249aee49b5d77f38041fda5
-      internalID: 1232523547
+      spriteID: 8892d3f8a2a0c75418858d8f1a0ce384
+      internalID: 895375038
       vertices: []
       indices: 
       edges: []
@@ -143,72 +143,9 @@ TextureImporter:
       name: HUD_atlas_1
       rect:
         serializedVersion: 2
-        x: 454
-        y: 2965
-        width: 208
-        height: 384
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bee45a32ed041b846bd57dd53e13306c
-      internalID: -945740244
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_2
-      rect:
-        serializedVersion: 2
-        x: 738
-        y: 2967
-        width: 212
-        height: 382
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7237ec593e2858f44a884332ab0836c9
-      internalID: 1717201878
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_3
-      rect:
-        serializedVersion: 2
-        x: 1211
-        y: 2547
-        width: 759
-        height: 773
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 770f14e828d39dd4697a71786367809f
-      internalID: 840681649
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_4
-      rect:
-        serializedVersion: 2
-        x: 2184
-        y: 2605
-        width: 717
+        x: 774
+        y: 1503
+        width: 715
         height: 715
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -217,62 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a9a29054055fd141b32e77670d4a8d3
-      internalID: 46647803
+      spriteID: e8899fec755f43440ba16cc8848c173c
+      internalID: 1698681841
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUD_atlas_5
+      name: HUD_atlas_2
       rect:
         serializedVersion: 2
-        x: 268
-        y: 2499
-        width: 213
-        height: 382
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: df7ea91d3d067ca489be494245990526
-      internalID: -1542294138
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_6
-      rect:
-        serializedVersion: 2
-        x: 635
-        y: 2499
-        width: 213
-        height: 382
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 829c33f2460d054438dc2bf5e7c7ff03
-      internalID: -216879603
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_7
-      rect:
-        serializedVersion: 2
-        x: 427
-        y: 1941
+        x: 1505
+        y: 1844
         width: 352
-        height: 362
+        height: 361
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -280,18 +175,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 724abf5fd61c2b04891885e234cd9ff9
-      internalID: -1621022323
+      spriteID: a8956caa2f9326d419da6c5eb5972bb6
+      internalID: 778148342
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUD_atlas_8
+      name: HUD_atlas_3
       rect:
         serializedVersion: 2
-        x: 896
-        y: 1953
+        x: 1873
+        y: 1865
+        width: 330
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7272053ee71cff74180eddace73c4d23
+      internalID: -1752283330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_4
+      rect:
+        serializedVersion: 2
+        x: 2223
+        y: 1865
         width: 329
         height: 340
       alignment: 0
@@ -301,20 +217,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55e24b2422da2204bbd78c0b9d8d5218
-      internalID: -70775643
+      spriteID: 4ec329ad850f1bb469d4a671b99b3689
+      internalID: -1975818023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUD_atlas_9
+      name: HUD_atlas_5
       rect:
         serializedVersion: 2
-        x: 1342
-        y: 1953
-        width: 329
-        height: 339
+        x: 1514
+        y: 1478
+        width: 350
+        height: 356
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -322,125 +238,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3df9b2290e8bc349ae22b66a5cb426e
-      internalID: 1404144069
+      spriteID: d076fd03015196c4c843248203df4588
+      internalID: 1203688037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUD_atlas_10
+      name: HUD_atlas_6
       rect:
         serializedVersion: 2
-        x: 1787
-        y: 1953
-        width: 328
-        height: 339
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6a68ad07c494d61438a37134d497f14a
-      internalID: 1058294056
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_11
-      rect:
-        serializedVersion: 2
-        x: 2231
-        y: 1953
-        width: 329
-        height: 339
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f269cea6fd322794d85242c2a5755f46
-      internalID: -486518697
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_12
-      rect:
-        serializedVersion: 2
-        x: 428
-        y: 1435
-        width: 351
-        height: 357
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 90fc0990a115bbd458fbc802376cd0c6
-      internalID: -403211107
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_13
-      rect:
-        serializedVersion: 2
-        x: 898
-        y: 1447
-        width: 327
-        height: 331
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 298e2c2b77a25ed438b8b9b092c4f1e3
-      internalID: 1087403035
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_14
-      rect:
-        serializedVersion: 2
-        x: 1344
-        y: 1447
-        width: 327
-        height: 333
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 13bb93a86130f9d409cdda8dbefa97f1
-      internalID: 1978125208
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_15
-      rect:
-        serializedVersion: 2
-        x: 1789
-        y: 1447
+        x: 1873
+        y: 1502
         width: 326
-        height: 333
+        height: 332
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -448,18 +259,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0767c926fddf60f40a8839ef5b60ede3
-      internalID: -554671214
+      spriteID: 5cdef443630fe1a4e8609549d218666a
+      internalID: 1666419500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUD_atlas_16
+      name: HUD_atlas_7
       rect:
         serializedVersion: 2
-        x: 2235
-        y: 1460
+        x: 2224
+        y: 1502
         width: 325
         height: 332
       alignment: 0
@@ -469,272 +280,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8a039e0a19b6eb499efd7b62d53deb3
-      internalID: 588127934
+      spriteID: c1c9f5a96577ad443a2b803f798b7212
+      internalID: -1386236918
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUD_atlas_17
+      name: HUD_atlas_8
       rect:
         serializedVersion: 2
-        x: 130
-        y: 1102
-        width: 349
-        height: 158
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e08f23241aa7a0a47b4d3c060239a8fd
-      internalID: -78959028
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_18
-      rect:
-        serializedVersion: 2
-        x: 833
-        y: 1081
-        width: 1322
-        height: 193
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 25838a897193ec64f9763123fcf6b0ee
-      internalID: 2095280001
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_19
-      rect:
-        serializedVersion: 2
-        x: 2501
-        y: 1090
-        width: 336
-        height: 161
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: db0540ce552001d43b0a44ac34b6a335
-      internalID: 1796859744
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_20
-      rect:
-        serializedVersion: 2
-        x: 130
-        y: 858
-        width: 349
-        height: 158
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7085cd90f6234d94bb2cdd9f30fd4ed2
-      internalID: -420370288
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_21
-      rect:
-        serializedVersion: 2
-        x: 833
-        y: 837
-        width: 1322
-        height: 193
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 09670e25d4e46e847bd37366428e30fc
-      internalID: 634328786
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_22
-      rect:
-        serializedVersion: 2
-        x: 2501
-        y: 846
-        width: 336
-        height: 161
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a1209cba0753d044eaf47b7fc7479261
-      internalID: 999504760
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_23
-      rect:
-        serializedVersion: 2
-        x: 138
-        y: 614
-        width: 348
-        height: 158
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 319b07ce190bb5a479c9e36b7eb900aa
-      internalID: -1636681342
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_24
-      rect:
-        serializedVersion: 2
-        x: 841
-        y: 593
-        width: 1323
-        height: 194
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6ddb0b864998d5647a5014f289ee1174
-      internalID: 1173122105
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_25
-      rect:
-        serializedVersion: 2
-        x: 2508
-        y: 602
-        width: 338
-        height: 161
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1e910227fa8407f4bbbe26e066931198
-      internalID: -124136053
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_26
-      rect:
-        serializedVersion: 2
-        x: 134
-        y: 378
-        width: 344
-        height: 154
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8d898a486ac75364d9cb4221d5f65d50
-      internalID: 1084223298
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_27
-      rect:
-        serializedVersion: 2
-        x: 851
-        y: 356
-        width: 1317
-        height: 185
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3ea5273510a7a1c46a0c52f6569d392a
-      internalID: -1706050131
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_28
-      rect:
-        serializedVersion: 2
-        x: 2517
-        y: 363
-        width: 320
-        height: 151
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c504d3ed12effea468e2dab07e5adbf3
-      internalID: -1157367548
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_atlas_29
-      rect:
-        serializedVersion: 2
-        x: 130
-        y: 114
+        x: 68
+        y: 1277
         width: 367
-        height: 176
+        height: 177
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -742,18 +301,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f80cdd310296ac1418370b8644f5724d
-      internalID: -1592015478
+      spriteID: 72916798a1826f24cbb5070a8edc7863
+      internalID: -770819595
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUD_atlas_30
+      name: HUD_atlas_9
       rect:
         serializedVersion: 2
-        x: 831
-        y: 93
+        x: 769
+        y: 1257
         width: 1343
         height: 211
       alignment: 0
@@ -763,18 +322,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f51489094d33d844ac797c94e000de1
-      internalID: -1381307903
+      spriteID: 3e95db8f5e699744fa5568d7eca4bf8b
+      internalID: -1581490017
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUD_atlas_31
+      name: HUD_atlas_10
       rect:
         serializedVersion: 2
-        x: 2497
-        y: 100
+        x: 2435
+        y: 1264
         width: 360
         height: 180
       alignment: 0
@@ -784,8 +343,701 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18d69c00afbe7d34b95493259ee805ff
-      internalID: 1240862137
+      spriteID: e0b7c6555a8405c4589a20bd3b0d7ed3
+      internalID: -1833940999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_11
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 1076
+        width: 347
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89ab75f82f17b8c459bdcf2903a4551b
+      internalID: 1902755291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_12
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 1056
+        width: 1329
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfd5e7cfde5b0454fbb5a7729cc1d6db
+      internalID: -1761811293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_13
+      rect:
+        serializedVersion: 2
+        x: 2439
+        y: 1063
+        width: 336
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45eaaa3350cd720479357a2cde680817
+      internalID: 2001165439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_14
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 880
+        width: 344
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 297679d793230774a8b2c1b91f696125
+      internalID: -1422520216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_15
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 858
+        width: 1319
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86a29418002661d40ac3c955481a62c5
+      internalID: -845607444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_16
+      rect:
+        serializedVersion: 2
+        x: 2446
+        y: 862
+        width: 328
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34fe0060bdba60f4883756db4b1e6bb9
+      internalID: -1094414336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_17
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 570
+        width: 251
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53f8c1cd7185ffa4098df20e91961b35
+      internalID: 1093397375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_18
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 569
+        width: 248
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b619b5c736ebb6479fb5f67251ed210
+      internalID: 1427311447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_19
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 573
+        width: 258
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a51e781ebc42c9468d1a7635f4effa9
+      internalID: 723800437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_20
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 569
+        width: 261
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea8c9ba10067737438afe343bc21458b
+      internalID: -999249166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_21
+      rect:
+        serializedVersion: 2
+        x: 1126
+        y: 563
+        width: 252
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6024261c22d71354588684a52251484e
+      internalID: -1935370745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_22
+      rect:
+        serializedVersion: 2
+        x: 1379
+        y: 561
+        width: 249
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3414df30317d9434a8da6ab999f101d6
+      internalID: -1718111601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_23
+      rect:
+        serializedVersion: 2
+        x: 1628
+        y: 565
+        width: 259
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f36bf1c71fbea7429e439877f91af64
+      internalID: -2050965553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_24
+      rect:
+        serializedVersion: 2
+        x: 1889
+        y: 579
+        width: 261
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9490bcde094ca574e97ae28731f70871
+      internalID: -1256540704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_25
+      rect:
+        serializedVersion: 2
+        x: 2326
+        y: 445
+        width: 237
+        height: 391
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8f0383e80db78348b7352733f5077fa
+      internalID: -1105369217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_26
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 308
+        width: 251
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae3376d1470721540959f5419c24e47c
+      internalID: 470861695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_27
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 305
+        width: 248
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8985c92bbca2d1b4a80ac2274e81b15c
+      internalID: -1466209955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_28
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 309
+        width: 258
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 479c94f7d5139ae499fb3f64971a177e
+      internalID: -125891275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_29
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 315
+        width: 261
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a50d7f2ecf65a294c86b623ab8e50f17
+      internalID: -1806542887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_30
+      rect:
+        serializedVersion: 2
+        x: 1126
+        y: 300
+        width: 252
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7220316a026a3384a99e38242dfbfd5b
+      internalID: 360361363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_31
+      rect:
+        serializedVersion: 2
+        x: 1379
+        y: 297
+        width: 249
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2cddd548d1a4e040a376cda3d5dd5ae
+      internalID: -1261499315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_32
+      rect:
+        serializedVersion: 2
+        x: 1629
+        y: 301
+        width: 258
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 857d1d6f10c88094fa9cf20567bc9048
+      internalID: -1511652876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_33
+      rect:
+        serializedVersion: 2
+        x: 1889
+        y: 313
+        width: 261
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4375f8abb462c94e9371abc729959b7
+      internalID: 1489141592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_34
+      rect:
+        serializedVersion: 2
+        x: 2326
+        y: 47
+        width: 211
+        height: 388
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7225e0705ae0c946b82316def7038f8
+      internalID: -1553497233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_35
+      rect:
+        serializedVersion: 2
+        x: 2559
+        y: 47
+        width: 215
+        height: 388
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfaae1eb21a70204fba5cf5b3d319b81
+      internalID: 1524263414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_36
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 34
+        width: 252
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5450cb4357330c42af877331b6883e3
+      internalID: -1830500334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_37
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 29
+        width: 250
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 389131f4dfc3d2949a788b676a2284d0
+      internalID: 788313177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_38
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 30
+        width: 259
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7f19d6cc7f2836449bf9147a0f7a1fc
+      internalID: -68531845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_39
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 44
+        width: 261
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c21f5070db5d8d243a94b1f9d34b78b9
+      internalID: 2109356779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_40
+      rect:
+        serializedVersion: 2
+        x: 1126
+        y: 34
+        width: 252
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 349e533118904f5409f3944a2030efc8
+      internalID: 732091812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_41
+      rect:
+        serializedVersion: 2
+        x: 1379
+        y: 29
+        width: 249
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 761cd393ced6f314787d9cd5442a16fa
+      internalID: -1098794696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_42
+      rect:
+        serializedVersion: 2
+        x: 1628
+        y: 26
+        width: 259
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cb1ed2bb051c5f4a9f4a5c9e1225cd7
+      internalID: 466366533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_atlas_43
+      rect:
+        serializedVersion: 2
+        x: 1889
+        y: 38
+        width: 261
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ade06c145caa1aa4b847f5d44a400de1
+      internalID: 1355626180
       vertices: []
       indices: 
       edges: []
@@ -793,7 +1045,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: d5f3d240c0f86ad49b6452a8ceb0858f
     internalID: 0
     vertices: []
     indices: 
@@ -801,38 +1053,50 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HUD_atlas_21: 634328786
-      HUD_atlas_10: 1058294056
-      HUD_atlas_20: -420370288
-      HUD_atlas_5: -1542294138
-      HUD_atlas_30: -1381307903
-      HUD_atlas_4: 46647803
-      HUD_atlas_24: 1173122105
-      HUD_atlas_12: -403211107
-      HUD_atlas_28: -1157367548
-      HUD_atlas_15: -554671214
-      HUD_atlas_2: 1717201878
-      HUD_atlas_29: -1592015478
-      HUD_atlas_19: 1796859744
-      HUD_atlas_16: 588127934
-      HUD_atlas_13: 1087403035
-      HUD_atlas_1: -945740244
-      HUD_atlas_27: -1706050131
-      HUD_atlas_23: -1636681342
-      HUD_atlas_9: 1404144069
-      HUD_atlas_26: 1084223298
-      HUD_atlas_11: -486518697
-      HUD_atlas_6: -216879603
-      HUD_atlas_8: -70775643
-      HUD_atlas_14: 1978125208
-      HUD_atlas_17: -78959028
-      HUD_atlas_25: -124136053
-      HUD_atlas_22: 999504760
-      HUD_atlas_3: 840681649
-      HUD_atlas_31: 1240862137
-      HUD_atlas_18: 2095280001
-      HUD_atlas_7: -1621022323
-      HUD_atlas_0: 1232523547
+      HUD_atlas_10: -1833940999
+      HUD_atlas_5: 1203688037
+      HUD_atlas_39: 2109356779
+      HUD_atlas_36: -1830500334
+      HUD_atlas_43: 1355626180
+      HUD_atlas_15: -845607444
+      HUD_atlas_2: 778148342
+      HUD_atlas_29: -1806542887
+      HUD_atlas_19: 723800437
+      HUD_atlas_16: -1094414336
+      HUD_atlas_1: 1698681841
+      HUD_atlas_37: 788313177
+      HUD_atlas_27: -1466209955
+      HUD_atlas_26: 470861695
+      HUD_atlas_11: 1902755291
+      HUD_atlas_6: 1666419500
+      HUD_atlas_3: -1752283330
+      HUD_atlas_25: -1105369217
+      HUD_atlas_22: -1718111601
+      HUD_atlas_0: 895375038
+      HUD_atlas_7: -1386236918
+      HUD_atlas_28: -125891275
+      HUD_atlas_21: -1935370745
+      HUD_atlas_38: -68531845
+      HUD_atlas_20: -999249166
+      HUD_atlas_4: -1975818023
+      HUD_atlas_33: 1489141592
+      HUD_atlas_24: -1256540704
+      HUD_atlas_32: -1511652876
+      HUD_atlas_12: -1761811293
+      HUD_atlas_42: 466366533
+      HUD_atlas_13: 2001165439
+      HUD_atlas_40: 732091812
+      HUD_atlas_35: 1524263414
+      HUD_atlas_23: -2050965553
+      HUD_atlas_41: -1098794696
+      HUD_atlas_9: -1581490017
+      HUD_atlas_8: -770819595
+      HUD_atlas_14: -1422520216
+      HUD_atlas_17: 1093397375
+      HUD_atlas_31: -1261499315
+      HUD_atlas_18: 1427311447
+      HUD_atlas_34: -1553497233
+      HUD_atlas_30: 360361363
   mipmapLimitGroupName: 
   pSDRemoveMatte: 1
   userData: 
