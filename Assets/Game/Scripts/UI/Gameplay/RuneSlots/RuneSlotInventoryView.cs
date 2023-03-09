@@ -21,7 +21,7 @@ namespace Game.UI
 
             _icon = element.Q<Image>(LayoutNames.Inventory.RUNE_SLOT_ICON);
             if (runeDefinition.Icon)
-                _icon.image = runeDefinition.Icon.texture;
+                _icon.sprite = runeDefinition.Icon;
             
             Deactivate();
             
