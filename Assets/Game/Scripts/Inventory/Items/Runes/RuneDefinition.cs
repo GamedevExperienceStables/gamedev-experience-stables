@@ -10,12 +10,16 @@ namespace Game.Inventory
         private Sprite icon;
         
         [SerializeField]
+        private Sprite iconActive;
+        
+        [SerializeField]
         private AbilityDefinition grantAbility;
         
         [SerializeField]
         private RuneType type = RuneType.Active;
 
         public Sprite Icon => icon;
+        public Sprite IconActive => iconActive;
         public AbilityDefinition GrantAbility => grantAbility;
         public RuneType Type => type;
 
