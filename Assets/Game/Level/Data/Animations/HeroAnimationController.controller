@@ -176,7 +176,7 @@ BlendTree:
     m_Motion: {fileID: 1827226128182048838, guid: 938d0b77fcfba4c4bb6fa0cb482029f3,
       type: 3}
     m_Threshold: 0
-    m_Position: {x: 0.66, y: 0}
+    m_Position: {x: 3, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: XCoord
@@ -185,7 +185,7 @@ BlendTree:
     m_Motion: {fileID: 1827226128182048838, guid: 938d0b77fcfba4c4bb6fa0cb482029f3,
       type: 3}
     m_Threshold: 0
-    m_Position: {x: -0.659, y: 0}
+    m_Position: {x: -3, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: XCoord
@@ -194,7 +194,7 @@ BlendTree:
     m_Motion: {fileID: 1827226128182048838, guid: b03c556bd7674aa47902dab25ce4a2a9,
       type: 3}
     m_Threshold: 0
-    m_Position: {x: 0, y: 1}
+    m_Position: {x: 0, y: 3}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: XCoord
@@ -203,7 +203,7 @@ BlendTree:
     m_Motion: {fileID: 1827226128182048838, guid: b03c556bd7674aa47902dab25ce4a2a9,
       type: 3}
     m_Threshold: 0
-    m_Position: {x: 0, y: -1}
+    m_Position: {x: 0, y: -3}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: XCoord
@@ -325,7 +325,7 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
+  - m_ConditionMode: 1
     m_ConditionEvent: IsDash
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -414,49 +414,49 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: YCoord
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsRangeAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsMeleeAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsAiming
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsDamaged
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsDied
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsDash
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
