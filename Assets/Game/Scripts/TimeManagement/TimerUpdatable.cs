@@ -6,10 +6,10 @@ namespace Game.TimeManagement
     {
         private readonly ITimeProvider _timeProvider;
 
-        private readonly float _duration;
-        private readonly bool _ignoreTimeScale;
-        private readonly bool _isLooped;
-        private readonly Action _onComplete;
+        private float _duration;
+        private bool _ignoreTimeScale;
+        private bool _isLooped;
+        private Action _onComplete;
 
         private float _timeElapsedBeforeStop = -1;
         private float _timeElapsedBeforePause = -1;
@@ -49,15 +49,19 @@ namespace Game.TimeManagement
         private float CompletionTime
             => _startTime + _duration;
 
-        public TimerUpdatable(TimeSpan duration, Action onComplete, bool isLooped, bool ignoreTimeScale,
-            ITimeProvider timeProvider)
+        public TimerUpdatable(ITimeProvider timeProvider)
+            => _timeProvider = timeProvider;
+
+        public void Init(TimeSpan duration, Action onComplete, bool isLooped = false, bool ignoreTimeScale = false)
         {
             _duration = (float)duration.TotalSeconds;
             _onComplete = onComplete;
             _isLooped = isLooped;
             _ignoreTimeScale = ignoreTimeScale;
-            _timeProvider = timeProvider;
         }
+
+        public void Reset() 
+            => _onComplete = null;
 
         public void Start()
         {
