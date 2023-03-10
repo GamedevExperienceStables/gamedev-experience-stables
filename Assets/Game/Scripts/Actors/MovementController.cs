@@ -31,7 +31,7 @@ namespace Game.Actors
         
         public Vector3 Velocity => _motor.Velocity;
         public bool IsGrounded => _motor.GroundingStatus.IsStableOnGround;
-
+        
         private void Awake()
         {
             _motor = GetComponent<KinematicCharacterMotor>();

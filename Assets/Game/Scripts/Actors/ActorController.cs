@@ -1,4 +1,6 @@
-﻿using Game.Stats;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
+using Game.Stats;
 using UnityEngine;
 
 namespace Game.Actors
@@ -11,6 +13,7 @@ namespace Game.Actors
 
         protected abstract IStats Stats { get; }
 
+        public CancellationToken CancellationToken() => destroyCancellationToken;
         private void Awake()
             => OnActorAwake();
 

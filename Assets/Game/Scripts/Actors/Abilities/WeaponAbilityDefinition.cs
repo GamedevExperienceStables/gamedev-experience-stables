@@ -52,7 +52,8 @@ namespace Game.Actors
 
         private async UniTask WaitAnimationEnd()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), ignoreTimeScale: false);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), ignoreTimeScale: false, 
+                cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
             _isAnimationEnded = true;
         }
     }
