@@ -10,6 +10,6 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="front-frame" class="map-container" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=895375038&amp;guid=04fa941512f200843b6c60489583d9fb&amp;type=3#HUD_atlas_0&apos;); position: absolute; display: flex; -unity-background-image-tint-color: rgb(255, 255, 255); width: 200px; height: 200px; align-items: auto; overflow: visible; flex-grow: 0; right: 0;" />
+        <ui:VisualElement name="front-frame" class="map-container" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=-2136378921&amp;guid=04fa941512f200843b6c60489583d9fb&amp;type=3#HUD_Atlas_0&apos;); position: absolute; display: flex; -unity-background-image-tint-color: rgb(255, 255, 255); width: 200px; height: 200px; align-items: auto; overflow: visible; flex-grow: 0; right: 0;" />
     </ui:VisualElement>
 </ui:UXML>
