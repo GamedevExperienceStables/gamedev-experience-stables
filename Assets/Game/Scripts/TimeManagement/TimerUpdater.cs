@@ -10,32 +10,52 @@ namespace Game.TimeManagement
     {
         private readonly List<TimerUpdatable> _timers = new();
         private readonly List<TimerUpdatable> _timersToAdd = new();
+        private readonly List<TimerUpdatable> _timersToRemove = new();
 
         public void Add(TimerUpdatable timer)
             => _timersToAdd.Add(timer);
 
         public void Remove(TimerUpdatable timer)
-        {
-            _timers.Remove(timer);
-            _timersToAdd.Remove(timer);
-        }
+            => _timersToRemove.Add(timer);
 
         public void Tick()
         {
-            if (_timersToAdd.Count > 0)
-            {
-                _timers.AddRange(_timersToAdd);
-                _timersToAdd.Clear();
-            }
+            AddTimers();
+            UpdateTimers();
+            RemoveTimers();
+        }
 
-            for (int i = _timers.Count - 1; i >= 0; i--) 
-                _timers[i].Tick();
+        private void UpdateTimers()
+        {
+            foreach (TimerUpdatable timer in _timers)
+                timer.Tick();
+        }
+
+        private void AddTimers()
+        {
+            if (_timersToAdd.Count <= 0)
+                return;
+
+            _timers.AddRange(_timersToAdd);
+            _timersToAdd.Clear();
+        }
+
+        private void RemoveTimers()
+        {
+            if (_timersToRemove.Count <= 0)
+                return;
+
+            foreach (TimerUpdatable timer in _timersToRemove)
+                _timers.Remove(timer);
+
+            _timersToRemove.Clear();
         }
 
         public void Dispose()
         {
             _timers.Clear();
             _timersToAdd.Clear();
+            _timersToRemove.Clear();
         }
     }
 }
