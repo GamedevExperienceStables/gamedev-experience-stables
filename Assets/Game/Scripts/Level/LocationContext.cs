@@ -8,7 +8,6 @@ namespace Game.Level
     public class LocationContext : MonoBehaviour
     {
         private Transform _enemiesContainer;
-        private LocationPoint _spawnPoint;
 
         public void InitEnemySpawners(Transform target)
         {
@@ -23,6 +22,11 @@ namespace Game.Level
                 spawnZone.Init(_enemiesContainer);
                 spawnZone.SetTarget(target);
             }
+        }
+
+        public ILevelBoundary FindBoundaries()
+        {
+            return GetComponentInChildren<ILevelBoundary>();
         }
 
         public void DestroyEnemies()

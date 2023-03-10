@@ -66,5 +66,10 @@ namespace Game.Level
             _followCamera.SetTarget(_hero.CameraTarget);
             _audioListener.SetTarget(_hero.CameraTarget);
         }
+
+        public ILevelBoundary GetLevelBoundary()
+        {
+            return _context.FindBoundaries();
+        }
     }
 }
