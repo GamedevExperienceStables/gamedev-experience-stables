@@ -26,6 +26,8 @@ namespace Game.GameFlow
 
         private void OnHeroDied(HeroController hero)
         {
+            hero.CancelEffects();
+            
             if (CanRevive(hero))
                 return;
 

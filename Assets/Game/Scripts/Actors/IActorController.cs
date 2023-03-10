@@ -22,5 +22,8 @@ namespace Game.Actors
         void GiveAbility(AbilityDefinition definition);
         T GetAbility<T>() where T : ActorAbility;
         bool TryGetAbility(AbilityDefinition definition, out ActorAbility foundAbility);
+
+        void AddEffect(Effect effect);
+        void RemoveEffectsByInstigator(object instigator);
     }
 }

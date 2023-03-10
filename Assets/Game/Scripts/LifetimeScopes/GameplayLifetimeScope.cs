@@ -40,6 +40,7 @@ namespace Game.LifetimeScopes
             RegisterLocationStateMachine(builder);
             RegisterLootSystem(builder);
             RegisterAbilities(builder);
+            RegisterEffects(builder);
 
             builder.RegisterEntryPoint<GameplayEntryPoint>();
         }
@@ -58,6 +59,15 @@ namespace Game.LifetimeScopes
             builder.Register<WeaponAbility>(Lifetime.Transient);
             builder.Register<ProjectileAbility>(Lifetime.Transient);
             builder.Register<ActiveSkillAbility>(Lifetime.Transient);
+        }
+
+        private static void RegisterEffects(IContainerBuilder builder)
+        {
+            builder.Register<EffectFactory>(Lifetime.Scoped);
+            builder.Register<EffectHandler>(Lifetime.Scoped);
+            
+            builder.Register<EffectStatChange>(Lifetime.Transient);
+            builder.Register<EffectStun>(Lifetime.Transient);
         }
 
         private static void RegisterServices(IContainerBuilder builder)
