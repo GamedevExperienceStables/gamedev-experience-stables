@@ -23,7 +23,7 @@ namespace Game.UI.Elements
         {
             Rune = definition;
 
-            _icon.image = definition.Icon.texture;
+            _icon.sprite = definition.Icon;
             
             AddToClassList(LayoutNames.Inventory.RUNE_DRAGGER_DRAG_CLASS_NAME);
         }

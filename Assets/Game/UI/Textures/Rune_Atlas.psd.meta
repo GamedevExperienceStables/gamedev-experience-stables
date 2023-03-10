@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 04fa941512f200843b6c60489583d9fb
+guid: 6fd4af8f3cf0c7e4b9aaadfe0af4ee75
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -119,370 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HUD_Atlas_0
-      rect:
-        serializedVersion: 2
-        x: 38
-        y: 679
-        width: 757
-        height: 756
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3147bfbe4517cd24a9bbe783e6efe042
-      internalID: -2136378921
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_1
-      rect:
-        serializedVersion: 2
-        x: 863
-        y: 717
-        width: 715
-        height: 715
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8493f586e22e3d94cbaa12fdf4382a3c
-      internalID: 1963239557
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_2
-      rect:
-        serializedVersion: 2
-        x: 1625
-        y: 1055
-        width: 350
-        height: 361
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5beca91afd4be5a449b5525568f0b2ab
-      internalID: -125791844
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_3
-      rect:
-        serializedVersion: 2
-        x: 2011
-        y: 1079
-        width: 330
-        height: 337
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0230a52a9bfcfe949874380303be3892
-      internalID: -1715734292
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_4
-      rect:
-        serializedVersion: 2
-        x: 2381
-        y: 1078
-        width: 328
-        height: 341
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f7002199459391647850173bf5efa276
-      internalID: -557484013
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_5
-      rect:
-        serializedVersion: 2
-        x: 2756
-        y: 1025
-        width: 238
-        height: 391
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 99e4cdf4e57efb345a81e364e93df140
-      internalID: -276402772
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_6
-      rect:
-        serializedVersion: 2
-        x: 1613
-        y: 689
-        width: 349
-        height: 356
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eab88c132bcf4a7499e9228cfba89c6e
-      internalID: 1408987414
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_7
-      rect:
-        serializedVersion: 2
-        x: 1993
-        y: 714
-        width: 324
-        height: 331
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 41985ea0975fc1848afc105d434b93e4
-      internalID: 1709123593
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_8
-      rect:
-        serializedVersion: 2
-        x: 2373
-        y: 714
-        width: 326
-        height: 331
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: db07dde39bdaf0b489e668815dd8a796
-      internalID: -1904275827
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_9
-      rect:
-        serializedVersion: 2
-        x: 2770
-        y: 633
-        width: 210
-        height: 380
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 074327ee0f79bd348876c2ad3adceecf
-      internalID: 1897437579
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_10
-      rect:
-        serializedVersion: 2
-        x: 13
-        y: 456
-        width: 368
-        height: 176
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 39a8f7a0962f38d46be5f8bf0fc433ae
-      internalID: 225229312
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_11
-      rect:
-        serializedVersion: 2
-        x: 714
-        y: 435
-        width: 1344
-        height: 211
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 39af197901b6c814f8e70a90bdc57047
-      internalID: -9044481
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_12
-      rect:
-        serializedVersion: 2
-        x: 2381
-        y: 443
-        width: 359
-        height: 179
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ae581dd7722854144affe2e80810736f
-      internalID: 1025548257
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_13
-      rect:
-        serializedVersion: 2
-        x: 2756
-        y: 239
-        width: 211
-        height: 380
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b08f85c1fed3e3343bcdd6743aac8a12
-      internalID: -1964890988
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_14
-      rect:
-        serializedVersion: 2
-        x: 13
-        y: 254
-        width: 348
-        height: 158
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 13668d0a69fd8194fa9c442d726bfc9e
-      internalID: 1867629415
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_15
-      rect:
-        serializedVersion: 2
-        x: 717
-        y: 234
-        width: 1322
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 29d9377dd7a76d046bb58ef32eaecdd0
-      internalID: 978964763
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_16
-      rect:
-        serializedVersion: 2
-        x: 2384
-        y: 241
-        width: 337
-        height: 162
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 37f29cb4e8ddffd4aa1214898efe96bc
-      internalID: 129311243
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HUD_Atlas_17
+      name: Rune_Atlas_0
       rect:
         serializedVersion: 2
         x: 14
-        y: 54
-        width: 348
-        height: 157
+        y: 822
+        width: 248
+        height: 258
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -490,20 +133,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75670f72bf4ebad4eb430d54f4b7b4ad
-      internalID: 806780377
+      spriteID: 288db7931f04bd348939c4ecb569ea02
+      internalID: 1873441744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUD_Atlas_18
+      name: Rune_Atlas_1
       rect:
         serializedVersion: 2
-        x: 717
-        y: 36
-        width: 1323
-        height: 190
+        x: 283
+        y: 820
+        width: 248
+        height: 258
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -511,20 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e922cf73e964d4e4d998da52d4b7db92
-      internalID: -769944276
+      spriteID: 345e9debfae6cb94a866004632770a76
+      internalID: 141788313
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUD_Atlas_19
+      name: Rune_Atlas_2
       rect:
         serializedVersion: 2
-        x: 2385
-        y: 42
-        width: 335
-        height: 161
+        x: 552
+        y: 827
+        width: 248
+        height: 258
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -532,8 +175,533 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 201fd7d7446198f46a04eb49ad08c7ec
-      internalID: -332204230
+      spriteID: 7b5c8b5ba116dc54fb51ae127bc15a4c
+      internalID: 1298988941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_3
+      rect:
+        serializedVersion: 2
+        x: 877
+        y: 827
+        width: 248
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f74f3f261bcf1f49af9f82e7cdd92fe
+      internalID: 1728212321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_4
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 822
+        width: 248
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5e716d2cccbfb247bcbef93ec09dfff
+      internalID: 444655936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_5
+      rect:
+        serializedVersion: 2
+        x: 1415
+        y: 822
+        width: 248
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60ccda59552440e47b7ce239e79c5f1c
+      internalID: 782295350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_6
+      rect:
+        serializedVersion: 2
+        x: 1740
+        y: 791
+        width: 258
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe1bbbe1172bad7409f824bf4dbee886
+      internalID: 960232742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_7
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 553
+        width: 246
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 076c49c52ec882045b9b3b79036e6ac9
+      internalID: 1148496803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_8
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 552
+        width: 246
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c1ef9a24ee2b6445bfeba549618e50c
+      internalID: 330004228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_9
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 553
+        width: 246
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67587d98453066d4c8638c911ec1b600
+      internalID: 1085643959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_10
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 556
+        width: 246
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0442180097800d042ba0fcffe441375c
+      internalID: 1459473957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_11
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 551
+        width: 246
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd3a19f28c601104bb4c36bb58df990c
+      internalID: -1255183285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_12
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 553
+        width: 246
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2e9a7ead70d46b488ea4156bed9eda7
+      internalID: -2117765551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_13
+      rect:
+        serializedVersion: 2
+        x: 1755
+        y: 533
+        width: 228
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76b14744b72e4ec4dbfbf50677234db2
+      internalID: -1042394706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_14
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 283
+        width: 255
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4905c1c7098878042a2e56ea8e07c2ec
+      internalID: 52044678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_15
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 282
+        width: 255
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70a202e00e1f5af46905d63de26c67fd
+      internalID: -240247941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_16
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 281
+        width: 255
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 385180b0e8a0e624b894f8a3dcca25be
+      internalID: -43117877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_17
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 283
+        width: 255
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7074791ba8d081e4f9b0fa0d5b51f0fb
+      internalID: -1266733905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_18
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 280
+        width: 255
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfc4bba710cccc0498e8680acadb1d9b
+      internalID: -182538164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_19
+      rect:
+        serializedVersion: 2
+        x: 1426
+        y: 284
+        width: 255
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc4e2036204eba14895f47d7494d8727
+      internalID: -241429601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_20
+      rect:
+        serializedVersion: 2
+        x: 1761
+        y: 268
+        width: 228
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ad0e60b9591a284891141b47a719b46
+      internalID: -1162793113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_21
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 23
+        width: 258
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 085eac5af6c194f4b8e1c15d2c5def7c
+      internalID: -471108406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_22
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 22
+        width: 258
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3425eb60855ecc14e93264a5fc94e27b
+      internalID: 218867334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_23
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 20
+        width: 258
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b576130bc5e8617468b724b0ba8847bb
+      internalID: 165856454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_24
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 20
+        width: 258
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c191a8e005552b04581e1566d4d51146
+      internalID: -242157000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_25
+      rect:
+        serializedVersion: 2
+        x: 1154
+        y: 20
+        width: 258
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f92bc1d28f24404fa64bacc683ca24c
+      internalID: -1796474913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_26
+      rect:
+        serializedVersion: 2
+        x: 1430
+        y: 25
+        width: 258
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 074623417af3a4244880b46749a5d557
+      internalID: 116559735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_27
+      rect:
+        serializedVersion: 2
+        x: 1767
+        y: 15
+        width: 222
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 289b17f5cd492d643bc4bad0cf05c66e
+      internalID: 234297445
       vertices: []
       indices: 
       edges: []
@@ -541,7 +709,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 517b745187ebc2044b551fb8bf1c9856
+    spriteID: d66810d18637a0548b2f2d49b060ae1f
     internalID: 0
     vertices: []
     indices: 
@@ -549,26 +717,34 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HUD_Atlas_2: -125791844
-      HUD_Atlas_7: 1709123593
-      HUD_Atlas_10: 225229312
-      HUD_Atlas_16: 129311243
-      HUD_Atlas_6: 1408987414
-      HUD_Atlas_11: -9044481
-      HUD_Atlas_18: -769944276
-      HUD_Atlas_3: -1715734292
-      HUD_Atlas_8: -1904275827
-      HUD_Atlas_5: -276402772
-      HUD_Atlas_15: 978964763
-      HUD_Atlas_1: 1963239557
-      HUD_Atlas_0: -2136378921
-      HUD_Atlas_19: -332204230
-      HUD_Atlas_9: 1897437579
-      HUD_Atlas_12: 1025548257
-      HUD_Atlas_14: 1867629415
-      HUD_Atlas_17: 806780377
-      HUD_Atlas_4: -557484013
-      HUD_Atlas_13: -1964890988
+      Rune_Atlas_23: 165856454
+      Rune_Atlas_5: 782295350
+      Rune_Atlas_19: -241429601
+      Rune_Atlas_6: 960232742
+      Rune_Atlas_16: -43117877
+      Rune_Atlas_3: 1728212321
+      Rune_Atlas_20: -1162793113
+      Rune_Atlas_10: 1459473957
+      Rune_Atlas_22: 218867334
+      Rune_Atlas_2: 1298988941
+      Rune_Atlas_24: -242157000
+      Rune_Atlas_8: 330004228
+      Rune_Atlas_11: -1255183285
+      Rune_Atlas_27: 234297445
+      Rune_Atlas_14: 52044678
+      Rune_Atlas_13: -1042394706
+      Rune_Atlas_15: -240247941
+      Rune_Atlas_18: -182538164
+      Rune_Atlas_7: 1148496803
+      Rune_Atlas_25: -1796474913
+      Rune_Atlas_17: -1266733905
+      Rune_Atlas_0: 1873441744
+      Rune_Atlas_12: -2117765551
+      Rune_Atlas_9: 1085643959
+      Rune_Atlas_26: 116559735
+      Rune_Atlas_21: -471108406
+      Rune_Atlas_4: 444655936
+      Rune_Atlas_1: 141788313
   mipmapLimitGroupName: 
   pSDRemoveMatte: 1
   userData: 
