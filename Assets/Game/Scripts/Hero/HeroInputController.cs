@@ -24,6 +24,12 @@ namespace Game.Hero
         private MeleeAbility _melee;
         private IActorController _owner;
         private bool _isBlocked;
+        private Vector3 _mousePosition;
+        private Plane _plane;
+        [SerializeField]
+        private GameObject aimSpriteTest;
+        [SerializeField]
+        private bool isAimRestricted;
         
         public Vector3 DesiredDirection => _movementDirection;
         
@@ -36,6 +42,7 @@ namespace Game.Hero
 
         private void Awake()
         {
+            _plane = new Plane(Vector3.up, new Vector3(0, 0, 0));
             _movement = GetComponent<MovementController>();
             _owner = GetComponent<IActorController>();
         }
@@ -72,9 +79,45 @@ namespace Game.Hero
         {
             HandleInputs();
             Move();
+            Aiming();
         }
         
+        private void Aiming()
+        {
+            if (_aim.IsActive)
+            {
+                if (!aimSpriteTest.activeSelf)
+                    aimSpriteTest.SetActive(true);
+                
+                Ray ray = _sceneCamera.ScreenPointToRay(_input.MousePosition);
+                if (_plane.Raycast(ray, out float distance))
+                {
+                    _mousePosition = ray.GetPoint(distance);
+                    Vector3 position = transform.position;
+                    float x = _mousePosition.x - position.x;
+                    float z = _mousePosition.z - position.z;
+                    if (isAimRestricted)
+                    {
+                        Vector3 newPosition = position + new Vector3(x, 0, z).normalized * 3; 
+                        aimSpriteTest.transform.position = 
+                            new Vector3(newPosition.x, aimSpriteTest.transform.position.y, newPosition.z);
+                    }
+                    else
+                    {
+                        
+                        aimSpriteTest.transform.position = 
+                            new Vector3(_mousePosition.x, aimSpriteTest.transform.position.y, _mousePosition.z);
+                    }
+                }
+            }
+            else
+            {
+                aimSpriteTest.SetActive(false);
+            }
+        }
         
+        public Vector3 GetRealMousePosition() => _mousePosition;
+
         private void OnFire() 
             => _activeSkill.TryActivateAbility();
 
