@@ -63,15 +63,25 @@ namespace Game.Weapons
             _timer.Init(TimeSpan.FromSeconds(_settings.LifeTime.Duration), OnLifetimeEnd);
         }
 
-        public void Fire(Transform spawnPoint)
+        public void Fire(Transform spawnPoint, Vector3 targetPosition)
         {
-            _timer.Start();
+            Vector3 startPosition = spawnPoint.position;
+            Quaternion startRotation = spawnPoint.rotation;
+            
+            if (targetPosition != Vector3.zero)
+            {
+                float coord1 = targetPosition.x - startPosition.x;
+                float coord2 = targetPosition.z - startPosition.z;
+                float angle = Mathf.Atan2(coord1, coord2) * Mathf.Rad2Deg;
+                startRotation = Quaternion.Euler(new Vector3(0, angle, 0));
+            }
 
             Transform t = transform;
-            t.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+            t.SetPositionAndRotation(startPosition, startRotation);
 
             _velocity = _settings.Trajectory.GetInitialDirection(t) * _settings.Speed;
 
+            _timer.Start();
             Show();
         }
 
