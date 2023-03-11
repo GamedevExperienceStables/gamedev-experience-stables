@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2169979632489900424}
   - component: {fileID: 2169979632489900425}
   - component: {fileID: 2169979632489900430}
-  m_Layer: 3
+  m_Layer: 11
   m_Name: BasicBulletZombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 2169979633855609758}
   - component: {fileID: 2169979633855609752}
   - component: {fileID: 2169979633855609753}
-  m_Layer: 3
+  m_Layer: 11
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
