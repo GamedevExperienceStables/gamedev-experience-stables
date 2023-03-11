@@ -97,6 +97,7 @@ namespace Game.LifetimeScopes
         {
             builder.Register<EnemyFactory>(Lifetime.Scoped);
             builder.Register<HeroFactory>(Lifetime.Scoped);
+            builder.Register<TrapFactory>(Lifetime.Scoped);
             builder.Register<ProjectileFactory>(Lifetime.Scoped);
         }
 
