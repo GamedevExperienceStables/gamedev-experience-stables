@@ -6,8 +6,8 @@
 }
 
 .hud-bar-size {
-    height: 150px;
-    width: 145px;
+    height: 130px;
+    width: 125px;
 }
 
 .hud-bar-stamina-size {
@@ -27,8 +27,8 @@
 }
 
 .hud-spell-size {
-    height: 85px;
-    width: 85px;
+    height: 100px;
+    width: 100px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -37,8 +37,8 @@
 }
 
 .crystal-bar-size {
-    height: 120px;
-    width: 70px;
+    height: 140px;
+    width: 90px;
 }
 
 .crystal-bar-fill {
@@ -49,12 +49,12 @@
 }
 
 .hud-bar-stamina-side-size {
-    height: 69px;
+    height: 64px;
     width: 330px;
 }
 
 .hud-bar-stamina-center-size {
-    height: 69px;
+    height: 64px;
     width: 958px;
 }
 

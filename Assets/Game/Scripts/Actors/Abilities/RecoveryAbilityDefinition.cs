@@ -51,7 +51,8 @@ namespace Game.Actors
         {
             while (IsActive)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(Definition.RecoveryTime), cancellationToken:_cancellationTokenSource.Token);
+                await UniTask.Delay(TimeSpan.FromSeconds(Definition.RecoveryTime), 
+                    cancellationToken:_cancellationTokenSource.Token);
                 Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaRegeneration);
                 Owner.ApplyModifier(CharacterStats.Mana, Definition.ManaRegeneration);
                 Owner.ApplyModifier(CharacterStats.Health, Definition.HealthRegeneration);

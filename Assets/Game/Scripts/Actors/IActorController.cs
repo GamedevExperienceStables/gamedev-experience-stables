@@ -1,4 +1,5 @@
-﻿using Game.Stats;
+﻿using System.Threading;
+using Game.Stats;
 using UnityEngine;
 
 namespace Game.Actors
@@ -22,5 +23,7 @@ namespace Game.Actors
         void GiveAbility(AbilityDefinition definition);
         T GetAbility<T>() where T : ActorAbility;
         bool TryGetAbility(AbilityDefinition definition, out ActorAbility foundAbility);
+        
+        CancellationToken CancellationToken();
     }
 }

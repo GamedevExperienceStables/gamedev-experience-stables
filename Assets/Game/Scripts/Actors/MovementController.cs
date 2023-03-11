@@ -1,4 +1,5 @@
-﻿using Game.Stats;
+﻿using Game.Animations.Hero;
+using Game.Stats;
 using KinematicCharacterController;
 using UnityEngine;
 
@@ -26,14 +27,11 @@ namespace Game.Actors
         private KinematicCharacterMotor _motor;
         private IActorController _owner;
         
-        [SerializeField]
-        private Animator heroAnimator;
-        
         public float CapsuleRadius => _motor.Capsule.radius;
         
         public Vector3 Velocity => _motor.Velocity;
         public bool IsGrounded => _motor.GroundingStatus.IsStableOnGround;
-
+        
         private void Awake()
         {
             _motor = GetComponent<KinematicCharacterMotor>();
@@ -57,6 +55,7 @@ namespace Game.Actors
             _lookDirection = lookDirection;
         }
 
+        public Vector3 GetMovementDirection() => _motor.BaseVelocity;
 
         public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
         {
@@ -164,11 +163,6 @@ namespace Game.Actors
 
         public void AfterCharacterUpdate(float deltaTime)
         {
-            if (heroAnimator)
-            {
-                heroAnimator.SetFloat("XCoord", _motor.BaseVelocity.x);
-                heroAnimator.SetFloat("YCoord", _motor.BaseVelocity.z);
-            }
         }
 
         public bool IsColliderValidForCollisions(Collider coll)

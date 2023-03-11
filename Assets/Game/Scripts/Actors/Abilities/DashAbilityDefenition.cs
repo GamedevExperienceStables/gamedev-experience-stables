@@ -1,4 +1,7 @@
-﻿using Game.Stats;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using Game.Animations.Hero;
+using Game.Stats;
 using Game.Utils;
 using UnityEngine;
 
@@ -22,6 +25,8 @@ namespace Game.Actors
         {
             private MovementController _movementController;
             private IActorInputController _inputController;
+            private ActorAnimator _animator;
+            private bool _isAnimationEnded;
 
             public override bool CanActivateAbility()
             {
@@ -39,10 +44,21 @@ namespace Game.Actors
             {
                 _inputController = Owner.GetComponent<IActorInputController>();
                 _movementController = Owner.GetComponent<MovementController>();
+                _animator = Owner.GetComponent<ActorAnimator>();
+                _isAnimationEnded = true;
             }
 
-            protected override void OnActivateAbility()
+            protected override async void OnActivateAbility()
             {
+                if (_animator != null)
+                {
+                    _animator.ResetAnimation(AnimationNames.Damage);
+                    _animator.SetAnimation(AnimationNames.Dash, true);
+                    _isAnimationEnded = false;
+                    await WaitAnimationEnd();
+                    _animator.SetAnimation(AnimationNames.Dash, false);
+                }
+                
                 _inputController.BlockInput(IsActive);
                 Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
 
@@ -66,6 +82,13 @@ namespace Game.Actors
                     direction = Owner.Transform.forward;
                 
                 return direction;
+            }
+            
+            private async UniTask WaitAnimationEnd()
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(0.5f), ignoreTimeScale: false, 
+                    cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
+                _isAnimationEnded = true;
             }
         }
 }
