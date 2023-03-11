@@ -1,19 +1,14 @@
 ﻿using System;
 using Game.Actors;
+using Game.TimeManagement;
 using UnityEngine;
 using UnityEngine.Serialization;
+using VContainer;
 
 namespace Game.Weapons
 {
     public class Projectile : MonoBehaviour
     {
-        private struct CollisionData
-        {
-            public Transform target;
-            public Vector3 hitPoint;
-            public Vector3 hitNormal;
-        }
-
         [SerializeField]
         private float raycastRadius = 0.1f;
 
@@ -23,36 +18,54 @@ namespace Game.Weapons
 
         private Vector3 _velocity;
 
-        private float _timer;
+        private float _timer2;
+        private TimerUpdatable _timer;
 
         private readonly RaycastHit[] _hits = new RaycastHit[5];
         private IActorController _owner;
-        
+
         private IProjectileSettings _settings;
+        private ProjectileBehaviour _behaviour;
+        private TimerPool _timers;
 
         public event Action<Projectile> Completed;
-
-        private void Update() 
-            => UpdateLifeTimer();
-
+        
         private void FixedUpdate()
         {
             float time = Time.fixedDeltaTime;
-            
+
             UpdateVelocity();
             UpdatePosition(time);
             UpdateRotation();
-            
+
             if (DetectCollisions(out CollisionData collision))
                 DestroyProjectile(collision);
         }
 
-        public void Init(IProjectileSettings settings) 
-            => _settings = settings;
+        [Inject]
+        public void Construct(ProjectileBehaviour behaviour, TimerPool timers)
+        {
+            _behaviour = behaviour;
+
+            _timers = timers;
+            _timer = _timers.GetTimer();
+        }
+
+        private void OnDisable() 
+            => _timer?.Stop();
+
+        private void OnDestroy() 
+            => _timers?.ReleaseTimer(_timer);
+
+        public void Init(IProjectileSettings settings)
+        {
+            _settings = settings;
+            _timer.Init(TimeSpan.FromSeconds(_settings.LifeTime.Duration), OnLifetimeEnd);
+        }
 
         public void Fire(Transform spawnPoint)
         {
-            _timer = _settings.LifeTime.Duration;
+            _timer.Start();
 
             Transform t = transform;
             t.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
@@ -64,19 +77,12 @@ namespace Game.Weapons
 
         private void UpdateRotation()
             => transform.forward = _velocity;
-        
-        private void UpdatePosition(float deltaTime) 
+
+        private void UpdatePosition(float deltaTime)
             => transform.Translate(_velocity * deltaTime, Space.World);
 
-        private void UpdateVelocity() 
+        private void UpdateVelocity()
             => _velocity = _settings.Trajectory.CalculateVelocity(_velocity);
-
-        private void UpdateLifeTimer()
-        {
-            _timer -= Time.deltaTime;
-            if (_timer <= 0f)
-                OnLifetimeEnd();
-        }
 
         private void OnLifetimeEnd()
         {
@@ -138,7 +144,7 @@ namespace Game.Weapons
         private void DestroyProjectile(CollisionData collision)
         {
             foreach (DamageDefinition damage in _settings.Damages)
-                damage.TryDealDamage(transform, collision.target, collision.hitPoint);
+                _behaviour.Execute(transform, damage, collision);
 
             PlayDeathFeedback(collision.hitPoint, collision.hitNormal);
             Complete();
@@ -150,12 +156,12 @@ namespace Game.Weapons
             Hide();
         }
 
-        private void Show() 
+        private void Show()
             => gameObject.SetActive(true);
 
-        private void Hide() 
+        private void Hide()
             => gameObject.SetActive(false);
-        
+
         private void OnDrawGizmosSelected()
             => Gizmos.DrawSphere(transform.position, raycastRadius);
     }

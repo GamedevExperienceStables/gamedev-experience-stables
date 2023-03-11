@@ -40,7 +40,9 @@ namespace Game.LifetimeScopes
             RegisterLocationStateMachine(builder);
             RegisterLootSystem(builder);
             RegisterAbilities(builder);
+            RegisterProjectile(builder);
             RegisterEffects(builder);
+            RegisterInteractions(builder);
 
             builder.RegisterEntryPoint<GameplayEntryPoint>();
         }
@@ -70,6 +72,12 @@ namespace Game.LifetimeScopes
             builder.Register<EffectStun>(Lifetime.Transient);
         }
 
+        private static void RegisterProjectile(IContainerBuilder builder)
+        {
+            builder.Register<ProjectileFactory>(Lifetime.Scoped);
+            builder.Register<ProjectileBehaviour>(Lifetime.Scoped);
+        }
+
         private static void RegisterServices(IContainerBuilder builder)
         {
             builder.Register<GameplayPause>(Lifetime.Scoped);
@@ -78,8 +86,6 @@ namespace Game.LifetimeScopes
             builder.Register<GameplayInventory>(Lifetime.Scoped);
             builder.Register<LocationController>(Lifetime.Scoped);
             builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
-
-            RegisterInteractions(builder);
         }
 
         private static void RegisterInteractions(IContainerBuilder builder)
@@ -98,7 +104,6 @@ namespace Game.LifetimeScopes
             builder.Register<EnemyFactory>(Lifetime.Scoped);
             builder.Register<HeroFactory>(Lifetime.Scoped);
             builder.Register<TrapFactory>(Lifetime.Scoped);
-            builder.Register<ProjectileFactory>(Lifetime.Scoped);
         }
 
         private void RegisterUi(IContainerBuilder builder)
@@ -152,7 +157,7 @@ namespace Game.LifetimeScopes
             builder.Register<LootFactory>(Lifetime.Scoped);
         }
 
-        private void RegisterAudio(IContainerBuilder builder) 
+        private void RegisterAudio(IContainerBuilder builder)
             => builder.RegisterComponent(cameraAudioListener);
     }
 }
