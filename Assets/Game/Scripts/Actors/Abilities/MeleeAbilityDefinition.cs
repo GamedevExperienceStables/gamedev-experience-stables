@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Game.Actors.Health;
+using Game.Animations.Hero;
 using Game.Stats;
 using Game.Utils;
 using UnityEngine;
@@ -47,8 +48,9 @@ namespace Game.Actors
     {
         private AimAbility _aim;
         private Collider[] _hitColliders;
-        private Animator _animator;
+        private ActorAnimator _animator;
         private bool _isAnimationEnded;
+        private IActorInputController _inputController;
 
         
         public override bool CanActivateAbility()
@@ -57,26 +59,17 @@ namespace Game.Actors
         
         protected override void OnInitAbility()
         {
+            _inputController = Owner.GetComponent<IActorInputController>();
             _aim = Owner.GetAbility<AimAbility>();
             _hitColliders = new Collider[Definition.MaxTargets];
-            _animator = Owner.GetComponent<Animator>();
+            _animator = Owner.GetComponent<ActorAnimator>();
             _isAnimationEnded = true;
         }
 
-        protected override async void OnActivateAbility()
+        protected override void OnActivateAbility()
         {
-            if (_animator != null)
-            {
-                _animator.SetBool("IsMeleeAttacked", true);
-                _isAnimationEnded = false;
-                await WaitAnimationEnd();
-                
-                if (!IsActive)
-                    EndAbility();
-                
-                _animator.SetBool("IsMeleeAttacked", false);
-            }
-            
+            _inputController.BlockInput(true);
+            AbilityAnimation();
             Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
             Vector3 sphereShift = Owner.Transform.position +  Definition.SphereColliderShift;
             #if UNITY_EDITOR
@@ -98,8 +91,25 @@ namespace Game.Actors
         
         private async UniTask WaitAnimationEnd()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.75f), ignoreTimeScale: false);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.75f), ignoreTimeScale: false, 
+                cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
             _isAnimationEnded = true;
+            _inputController.BlockInput(false);
+        }
+
+        private async void AbilityAnimation()
+        {
+            if (_animator != null)
+            {
+                _animator.SetAnimation(AnimationNames.MeleeAttack, true);
+                _isAnimationEnded = false;
+                await WaitAnimationEnd();
+                
+                if (!IsActive)
+                    EndAbility();
+                
+                _animator.SetAnimation(AnimationNames.MeleeAttack, false);
+            }
         }
         
     }

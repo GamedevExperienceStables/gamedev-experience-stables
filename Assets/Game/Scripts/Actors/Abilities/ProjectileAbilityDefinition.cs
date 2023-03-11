@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using FMODUnity;
+using Game.Animations.Hero;
 using Game.Audio;
 using Game.Stats;
 using Game.Weapons;
@@ -42,8 +43,9 @@ namespace Game.Actors
 
         private Transform _spawnPoint;
         private bool _hasMana;
-        private Animator _animator;
+        private ActorAnimator _animator;
         private bool _isAnimationEnded;
+        private AimAbility _aim;
 
         public ProjectileAbility(ProjectileFactory projectileFactory, FmodService audio)
         {
@@ -73,8 +75,9 @@ namespace Game.Actors
             _hasMana = Owner.HasStat(CharacterStats.Mana);
             var view = Owner.GetComponent<ProjectileAbilityView>();
             _spawnPoint = view.SpawnPoint;
-            _animator = Owner.GetComponent<Animator>();
+            _animator = Owner.GetComponent<ActorAnimator>();
             _isAnimationEnded = true;
+            _aim = Owner.GetAbility<AimAbility>();
         }
 
         public override bool CanActivateAbility()
@@ -95,10 +98,10 @@ namespace Game.Actors
 
             if (_animator != null)
             {
-                _animator.SetBool("IsAttacked", true);
+                _animator.SetAnimation(AnimationNames.RangeAttack, true);
                 _isAnimationEnded = false;
                 await WaitAnimationEnd();
-                _animator.SetBool("IsAttacked", false);
+                _animator.SetAnimation(AnimationNames.RangeAttack, false);
             }
 
             FireProjectile();
@@ -108,7 +111,7 @@ namespace Game.Actors
         private void FireProjectile()
         {
             _projectilePool.Get(out Projectile projectile);
-            projectile.Fire(_spawnPoint);
+            projectile.Fire(_spawnPoint, _aim.GetRealPosition());
 
             if (!Definition.FireSfx.IsNull)
                 _audio.PlayOneShot(Definition.FireSfx, Owner.Transform);
@@ -116,7 +119,8 @@ namespace Game.Actors
 
         private async UniTask WaitAnimationEnd()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(Definition.CastTime), ignoreTimeScale: false);
+            await UniTask.Delay(TimeSpan.FromSeconds(Definition.CastTime), ignoreTimeScale: false, 
+                cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
             _isAnimationEnded = true;
         }
     }

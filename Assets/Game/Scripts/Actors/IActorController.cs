@@ -1,4 +1,5 @@
-﻿using Game.Stats;
+﻿using System.Threading;
+using Game.Stats;
 using UnityEngine;
 
 namespace Game.Actors
@@ -25,5 +26,7 @@ namespace Game.Actors
 
         void AddEffect(Effect effect);
         void RemoveEffectsByInstigator(object instigator);
+        
+        CancellationToken CancellationToken();
     }
 }
