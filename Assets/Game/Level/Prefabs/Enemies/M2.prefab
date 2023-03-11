@@ -94,7 +94,8 @@ PrefabInstance:
     - target: {fileID: 1116112153, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 158874bb2e1ab5a499d3c64bb1bd7191, type: 2}
+      objectReference: {fileID: 22100000, guid: b69ef36201f6c404d9c9528e423f904c,
+        type: 2}
     - target: {fileID: 1646171557498439825, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
         type: 3}
       propertyPath: m_RootOrder
@@ -153,7 +154,7 @@ PrefabInstance:
     - target: {fileID: 1646171557498439826, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
         type: 3}
       propertyPath: m_Name
-      value: SmallRange
+      value: M2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
