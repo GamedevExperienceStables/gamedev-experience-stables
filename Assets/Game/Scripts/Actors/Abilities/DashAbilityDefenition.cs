@@ -35,6 +35,9 @@ namespace Game.Actors
 
                 if (!_movementController.IsGrounded)
                     return false;
+
+                if (!_isAnimationEnded)
+                    return false;
                 
                 return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
             }
@@ -50,14 +53,11 @@ namespace Game.Actors
 
             protected override async void OnActivateAbility()
             {
-                if (_animator != null)
-                {
-                    _animator.ResetAnimation(AnimationNames.Damage);
-                    _animator.SetAnimation(AnimationNames.Dash, true);
-                    _isAnimationEnded = false;
-                    await WaitAnimationEnd();
-                    _animator.SetAnimation(AnimationNames.Dash, false);
-                }
+                _animator.ResetAnimation(AnimationNames.Damage);
+                _animator.SetAnimation(AnimationNames.Dash, true);
+                _isAnimationEnded = false;
+                await WaitAnimationEnd();
+                _animator.SetAnimation(AnimationNames.Dash, false);
                 
                 _inputController.BlockInput(IsActive);
                 Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
@@ -86,7 +86,8 @@ namespace Game.Actors
             
             private async UniTask WaitAnimationEnd()
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(0.5f), ignoreTimeScale: false, 
+                float dashAnimationTime = Definition.DashRange * 10;
+                await UniTask.Delay(TimeSpan.FromMilliseconds(dashAnimationTime), ignoreTimeScale: false, 
                     cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
                 _isAnimationEnded = true;
             }
