@@ -100,7 +100,17 @@ namespace Game.Actors
             {
                 _animator.SetAnimation(AnimationNames.RangeAttack, true);
                 _isAnimationEnded = false;
-                await WaitAnimationEnd();
+
+                try
+                {
+                    await WaitAnimationEnd();
+                }
+                catch (OperationCanceledException)
+                {
+                    EndAbility();
+                    return;
+                }
+
                 _animator.SetAnimation(AnimationNames.RangeAttack, false);
             }
 
@@ -120,7 +130,7 @@ namespace Game.Actors
         private async UniTask WaitAnimationEnd()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(Definition.CastTime), ignoreTimeScale: false, 
-                cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
+                cancellationToken: Owner.CancellationToken());
             _isAnimationEnded = true;
         }
     }

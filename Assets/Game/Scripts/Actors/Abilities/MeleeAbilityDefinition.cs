@@ -66,10 +66,20 @@ namespace Game.Actors
             _isAnimationEnded = true;
         }
 
-        protected override void OnActivateAbility()
+        protected override async void OnActivateAbility()
         {
             _inputController.BlockInput(true);
-            AbilityAnimation();
+            
+            try
+            {
+                await AbilityAnimation();
+            }
+            catch (OperationCanceledException)
+            {
+                EndAbility();
+                return;
+            }
+            
             Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
             Vector3 sphereShift = Owner.Transform.position +  Definition.SphereColliderShift;
             #if UNITY_EDITOR
@@ -92,22 +102,19 @@ namespace Game.Actors
         private async UniTask WaitAnimationEnd()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(0.75f), ignoreTimeScale: false, 
-                cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
+                cancellationToken: Owner.CancellationToken());
             _isAnimationEnded = true;
             _inputController.BlockInput(false);
         }
 
-        private async void AbilityAnimation()
+        private async UniTask AbilityAnimation()
         {
             if (_animator != null)
             {
                 _animator.SetAnimation(AnimationNames.MeleeAttack, true);
                 _isAnimationEnded = false;
                 await WaitAnimationEnd();
-                
-                if (!IsActive)
-                    EndAbility();
-                
+
                 _animator.SetAnimation(AnimationNames.MeleeAttack, false);
             }
         }
