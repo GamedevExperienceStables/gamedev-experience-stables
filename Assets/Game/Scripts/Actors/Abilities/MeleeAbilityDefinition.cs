@@ -46,21 +46,33 @@ namespace Game.Actors
     }
     public class MeleeAbility : ActorAbility<MeleeAbilityDefinition>
     {
+        private bool _hasAim;
         private AimAbility _aim;
+        
         private Collider[] _hitColliders;
         private ActorAnimator _animator;
         private bool _isAnimationEnded;
         private IActorInputController _inputController;
 
-        
+
         public override bool CanActivateAbility()
-            => _isAnimationEnded && !_aim.IsActive && Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
-        
-        
+        {
+            if (!_isAnimationEnded)
+                return false;
+            
+            if (_hasAim && _aim.IsActive) 
+                return false;
+
+            return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
+        }
+
+
         protected override void OnInitAbility()
         {
             _inputController = Owner.GetComponent<IActorInputController>();
-            _aim = Owner.GetAbility<AimAbility>();
+            
+            _hasAim = Owner.TryGetAbility(out _aim);
+            
             _hitColliders = new Collider[Definition.MaxTargets];
             _animator = Owner.GetComponent<ActorAnimator>();
             _isAnimationEnded = true;

@@ -45,7 +45,9 @@ namespace Game.Actors
         private bool _hasMana;
         private ActorAnimator _animator;
         private bool _isAnimationEnded;
+
         private AimAbility _aim;
+        private bool _hasAim;
 
         public ProjectileAbility(ProjectileFactory projectileFactory, FmodService audio)
         {
@@ -77,7 +79,8 @@ namespace Game.Actors
             _spawnPoint = view.SpawnPoint;
             _animator = Owner.GetComponent<ActorAnimator>();
             _isAnimationEnded = true;
-            _aim = Owner.GetAbility<AimAbility>();
+
+            _hasAim = Owner.TryGetAbility(out _aim);
         }
 
         public override bool CanActivateAbility()
@@ -121,7 +124,9 @@ namespace Game.Actors
         private void FireProjectile()
         {
             _projectilePool.Get(out Projectile projectile);
-            projectile.Fire(_spawnPoint, _aim.GetRealPosition());
+
+            Vector3 targetPosition = _hasAim ? _aim.GetRealPosition() : Vector3.zero;
+            projectile.Fire(_spawnPoint, targetPosition);
 
             if (!Definition.FireSfx.IsNull)
                 _audio.PlayOneShot(Definition.FireSfx, Owner.Transform);
