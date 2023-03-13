@@ -1,12 +1,10 @@
-using UnityEngine;
+using Game.Utils.Factory;
 
 namespace Game.Actors
 {
-    public abstract class AbilityDefinition : ScriptableObject
+    public abstract class AbilityDefinition : DefinitionFactory<ActorAbility, AbilityFactory>
     {
         protected const string MENU_PATH = "★ Abilities/";
-        
-        public abstract ActorAbility CreateRuntimeInstance(AbilityFactory factory);
     }
 
     public abstract class AbilityDefinition<T> : AbilityDefinition where T : ActorAbility

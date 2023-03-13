@@ -21,32 +21,33 @@ namespace Game.Level
         private readonly List<DamageableController> _damageables = new();
 
         private ZoneEffect _zone;
-        private TimerUpdatable _timer;
         private StatModifier _modifier;
-        private bool _initialized;
+
+        private TimerPool _timers;
+        private TimerUpdatable _timer;
 
         [Inject]
-        public void Construct(TimerFactory timers)
+        public void Construct(TimerPool timers)
         {
             _modifier = new StatModifier(-damage, StatsModifierType.Flat);
-            _timer = timers.CreateTimer(TimeSpan.FromSeconds(interval), OnInterval, isLooped: true);
 
-            _initialized = true;
-        }
+            _timers = timers;
+            _timer = _timers.GetTimerStarted(TimeSpan.FromSeconds(interval), OnInterval, isLooped: true);
 
-        private void Awake()
-            => _zone = GetComponent<ZoneEffect>();
-
-        private void OnEnable()
-        {
+            _zone = GetComponent<ZoneEffect>();
             _zone.ActorAdded += OnActorAdded;
             _zone.ActorRemoved += OnActorRemoved;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
+            if (!_zone)
+                return;
+
             _zone.ActorAdded -= OnActorAdded;
             _zone.ActorRemoved -= OnActorRemoved;
+
+            _timers.ReleaseTimer(_timer);
         }
 
         private void OnActorAdded(IActorController actor)
@@ -59,12 +60,6 @@ namespace Game.Level
         {
             if (actor.TryGetComponent(out DamageableController damageable)) 
                 _damageables.Remove(damageable);
-        }
-
-        private void Update()
-        {
-            if (_initialized)
-                _timer.Tick();
         }
 
         private void OnInterval()

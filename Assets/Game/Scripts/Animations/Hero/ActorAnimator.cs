@@ -11,11 +11,8 @@ namespace Game.Animations.Hero
             animator = GetComponent<Animator>();
         }
 
-        public void SetAnimation(string animationName, bool isActive)
-        {
-            if (animator != null)
-                animator.SetBool(animationName, isActive);
-        }
+        public void SetAnimation(string animationName, bool isActive) 
+            => animator.SetBool(animationName, isActive);
 
 
         public void SetAnimation(string animationName, float animationParameter)

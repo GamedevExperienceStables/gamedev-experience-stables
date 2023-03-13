@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2169979632489900424}
   - component: {fileID: 2169979632489900425}
   - component: {fileID: 2169979632489900430}
-  m_Layer: 3
+  m_Layer: 11
   m_Name: BasicBulletZombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,14 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4edaf6ed77264604bb976d4ccfd95f41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 30
-  acceleration: 0
-  lifeTime: 3
-  raycastMaxDistance: 0.5
   raycastRadius: 0.1
-  collisionLayerMask:
-    serializedVersion: 2
-    m_Bits: 585
   deathFeedbackPrefab: {fileID: 0}
 --- !u!114 &2169979632489900430
 MonoBehaviour:
@@ -80,7 +73,7 @@ GameObject:
   - component: {fileID: 2169979633855609758}
   - component: {fileID: 2169979633855609752}
   - component: {fileID: 2169979633855609753}
-  m_Layer: 3
+  m_Layer: 11
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}

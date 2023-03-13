@@ -13,19 +13,11 @@ namespace Game.Audio
     {
         private readonly List<StudioEventEmitter> _onStartEmitters = new();
 
-        private Bus _gameplaySoundsLayer;
-        private Bus _musicLayer;
-
         private EventInstance _pauseSnapshot;
 
         [Inject]
-        public FmodService()
-        {
-            // _musicLayer = RuntimeManager.GetBus(AudioNames.Routing.MUSIC);
-            // _gameplaySoundsLayer = RuntimeManager.GetBus(AudioNames.Routing.SOUNDS_GAMEPLAY);
-
-            _pauseSnapshot = CreateInstance(AudioNames.Snapshot.PAUSE);
-        }
+        public FmodService() 
+            => _pauseSnapshot = CreateInstance(AudioNames.Snapshot.PAUSE);
 
         public void PlayOneShot(EventReference eventReference, Transform source)
             => RuntimeManager.PlayOneShot(eventReference, source.position);

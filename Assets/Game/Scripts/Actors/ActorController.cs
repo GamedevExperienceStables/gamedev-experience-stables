@@ -8,6 +8,7 @@ namespace Game.Actors
     public abstract class ActorController : MonoBehaviour, IActorController
     {
         private readonly ActorAbilities _abilities = new();
+        private readonly ActorEffects _effects = new();
 
         public Transform Transform => transform;
 
@@ -20,9 +21,13 @@ namespace Game.Actors
         private void OnDestroy()
         {
             DestroyAbilities();
+            CancelEffects();
 
             OnActorDestroy();
         }
+
+        private void Update()
+            => _effects.Tick();
 
         public bool HasStat(CharacterStats key)
             => Stats.HasStat(key);
@@ -35,7 +40,7 @@ namespace Game.Actors
             var data = new StatModifierApplyData(key, modifier.Type, modifier.Value, this);
             Stats.ApplyModifier(key, data);
         }
-        
+
         public void ApplyModifier(CharacterStats key, float value)
         {
             var data = new StatModifierApplyData(key, StatsModifierType.Flat, value, this);
@@ -72,6 +77,16 @@ namespace Game.Actors
         public T GetAbility<T>() where T : ActorAbility
             => _abilities.GetAbility<T>();
 
+        public void AddEffect(Effect effect)
+        {
+            // allow only one status per definition
+            _effects.Cancel(effect.Definition.Status);
+            _effects.Add(effect, this);
+        }
+
+        public void RemoveEffectsByInstigator(object instigator) 
+            => _effects.CancelAll(instigator);
+
         public void InitAbilities()
             => _abilities.InitAbilities();
 
@@ -83,6 +98,9 @@ namespace Game.Actors
 
         private void DestroyAbilities()
             => _abilities.DestroyAbilities();
+
+        public void CancelEffects()
+            => _effects.CancelAll();
 
         protected virtual void OnActorAwake()
         {

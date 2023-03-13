@@ -46,30 +46,52 @@ namespace Game.Actors
     }
     public class MeleeAbility : ActorAbility<MeleeAbilityDefinition>
     {
+        private bool _hasAim;
         private AimAbility _aim;
+        
         private Collider[] _hitColliders;
         private ActorAnimator _animator;
         private bool _isAnimationEnded;
         private IActorInputController _inputController;
 
-        
+
         public override bool CanActivateAbility()
-            => _isAnimationEnded && !_aim.IsActive && Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
-        
-        
+        {
+            if (!_isAnimationEnded)
+                return false;
+            
+            if (_hasAim && _aim.IsActive) 
+                return false;
+
+            return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
+        }
+
+
         protected override void OnInitAbility()
         {
             _inputController = Owner.GetComponent<IActorInputController>();
-            _aim = Owner.GetAbility<AimAbility>();
+            
+            _hasAim = Owner.TryGetAbility(out _aim);
+            
             _hitColliders = new Collider[Definition.MaxTargets];
             _animator = Owner.GetComponent<ActorAnimator>();
             _isAnimationEnded = true;
         }
 
-        protected override void OnActivateAbility()
+        protected override async void OnActivateAbility()
         {
             _inputController.BlockInput(true);
-            AbilityAnimation();
+            
+            try
+            {
+                await AbilityAnimation();
+            }
+            catch (OperationCanceledException)
+            {
+                EndAbility();
+                return;
+            }
+            
             Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
             Vector3 sphereShift = Owner.Transform.position +  Definition.SphereColliderShift;
             #if UNITY_EDITOR
@@ -92,22 +114,19 @@ namespace Game.Actors
         private async UniTask WaitAnimationEnd()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(0.75f), ignoreTimeScale: false, 
-                cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
+                cancellationToken: Owner.CancellationToken());
             _isAnimationEnded = true;
             _inputController.BlockInput(false);
         }
 
-        private async void AbilityAnimation()
+        private async UniTask AbilityAnimation()
         {
             if (_animator != null)
             {
                 _animator.SetAnimation(AnimationNames.MeleeAttack, true);
                 _isAnimationEnded = false;
                 await WaitAnimationEnd();
-                
-                if (!IsActive)
-                    EndAbility();
-                
+
                 _animator.SetAnimation(AnimationNames.MeleeAttack, false);
             }
         }

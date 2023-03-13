@@ -5,10 +5,13 @@ using UnityEngine;
 namespace Game.Weapons
 {
     [CreateAssetMenu(menuName = "Projectile/Base")]
-    public class ProjectileDefinition : ScriptableObject
+    public class ProjectileDefinition : ScriptableObject, IProjectileSettings
     {
         [SerializeField]
         private Projectile projectilePrefab;
+
+        [SerializeField, Expandable]
+        private ProjectileTrajectory trajectory;
 
         [SerializeField, Expandable]
         private DamageDefinition[] damages;
@@ -29,6 +32,8 @@ namespace Game.Weapons
 
         public float Speed => speed;
 
-        public IList<DamageDefinition> Damages => damages;
+        public IEnumerable<DamageDefinition> Damages => damages;
+
+        public ProjectileTrajectory Trajectory => trajectory;
     }
 }

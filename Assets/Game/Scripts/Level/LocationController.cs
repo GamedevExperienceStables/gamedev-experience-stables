@@ -59,12 +59,18 @@ namespace Game.Level
             if (!_hero) 
                 _hero = _heroFactory.Create();
 
-            _followCamera.ClearTarget();
-            _audioListener.ClearTarget();
+            UnbindHero();
+            
             _hero.SetActive(true);
             _hero.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             _followCamera.SetTarget(_hero.CameraTarget);
             _audioListener.SetTarget(_hero.CameraTarget);
+        }
+
+        public void UnbindHero()
+        {
+            _followCamera.ClearTarget();
+            _audioListener.ClearTarget();
         }
     }
 }

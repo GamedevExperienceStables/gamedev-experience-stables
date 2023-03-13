@@ -1,5 +1,6 @@
-﻿using Game.Actors.Health;
-using Game.Stats;
+﻿using System.Collections.Generic;
+using Game.Actors;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Game.Weapons
@@ -13,19 +14,12 @@ namespace Game.Weapons
         [SerializeField]
         private GameObject hitFeedback;
 
-        protected override void OnDamage(Transform source, DamageableController damageable, Vector3 hitPoint)
-        {
-            PlayHitFeedback(source);
-            ApplyDamage(damageable);
-        }
+        [SerializeField, Expandable]
+        private List<EffectDefinition> effects;
 
-        private void PlayHitFeedback(Transform source)
-        {
-            if (hitFeedback)
-                Instantiate(hitFeedback, source.position, source.rotation);
-        }
+        public GameObject HitFeedback => hitFeedback;
+        public float Damage => baseDamage;
 
-        private void ApplyDamage(DamageableController damageable)
-            => damageable.Damage(new StatModifier(-baseDamage, StatsModifierType.Flat));
+        public IEnumerable<EffectDefinition> Effects => effects;
     }
 }

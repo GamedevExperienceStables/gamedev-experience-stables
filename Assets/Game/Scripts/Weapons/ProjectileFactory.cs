@@ -7,20 +7,16 @@ namespace Game.Weapons
     {
         private readonly IObjectResolver _resolver;
 
-        public ProjectileFactory(IObjectResolver resolver) 
+        [Inject]
+        public ProjectileFactory(IObjectResolver resolver)
             => _resolver = resolver;
 
         public Projectile Create(ProjectileDefinition definition)
         {
-            Projectile instance = _resolver.Instantiate(definition.Prefab);
-            instance.Init(
-                definition.CollisionLayers, 
-                definition.Speed,
-                definition.LifeTime, 
-                definition.Damages
-            );
+            Projectile projectile = _resolver.Instantiate(definition.Prefab);
+            projectile.Init(definition);
 
-            return instance;
+            return projectile;
         }
     }
 }
