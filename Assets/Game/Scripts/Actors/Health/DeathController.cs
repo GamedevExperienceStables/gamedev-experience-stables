@@ -15,6 +15,7 @@ namespace Game.Actors.Health
         private bool destroyOnDeath = true;
 
         public event Action Died;
+        public event Action Revived;
 
         private DamageableController _damageableController;
         private bool _isDead;
@@ -38,6 +39,8 @@ namespace Game.Actors.Health
         {
             _isDead = false;
             _damageableController.MakeVulnerable();
+            
+            Revived?.Invoke();
         }
 
         private void OnHealthChanged(StatValueChange change)
