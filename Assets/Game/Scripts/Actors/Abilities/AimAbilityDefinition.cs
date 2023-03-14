@@ -21,6 +21,7 @@ namespace Game.Actors
         private readonly FollowSceneCamera _followCamera;
         private ActorAnimator _animator;
         private HeroInputController _heroInputController;
+        private bool _isHeroNull;
 
         [Inject]
         public AimAbility(FollowSceneCamera followCamera)
@@ -33,6 +34,7 @@ namespace Game.Actors
         {
             _animator = Owner.GetComponent<ActorAnimator>();
             _heroInputController = Owner.GetComponent<HeroInputController>();
+            _isHeroNull = _heroInputController != null;
         }
         
         protected override void OnActivateAbility()
@@ -51,11 +53,7 @@ namespace Game.Actors
         
         public Vector3 GetRealPosition()
         {
-            if (_heroInputController != null)
-            {
-                return _heroInputController.GetRealMousePosition();
-            }
-            return default;
+            return _isHeroNull ? _heroInputController.GetRealMousePosition() : default;
         }
     }
 }

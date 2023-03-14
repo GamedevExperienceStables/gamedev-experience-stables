@@ -19,10 +19,14 @@ namespace Game.Hero
         [SerializeField]
         private List<AbilityDefinition> abilities;
 
+        [SerializeField]
+        private GameObject petPrefab;
+        
         public List<AbilityDefinition> InitialAbilities => initialAbilities;
         public List<AbilityDefinition> Abilities => abilities;
 
         public HeroController Prefab => prefab;
         public HeroStats.InitialStats InitialStats => initialStats;
+        public GameObject Pet => petPrefab;
     }
 }

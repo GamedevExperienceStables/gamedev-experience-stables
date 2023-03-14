@@ -99,17 +99,13 @@ namespace Game.Actors
         protected override async void OnActivateAbility()
         {
             _inputController.BlockInput(true);
-
-            try
+            
+            bool isEnded = await AbilityAnimation();
+            if (isEnded)
             {
-                await AbilityAnimation();
-            }
-            catch (OperationCanceledException)
-            {
-                EndAbility();
                 return;
             }
-
+            _animator.SetAnimation(AnimationNames.MeleeAttack, false);
             Owner.ApplyModifier(CharacterStats.Stamina, -GetCost());
             Vector3 sphereShift = Owner.Transform.position + Definition.SphereColliderShift;
 #if UNITY_EDITOR
@@ -129,24 +125,22 @@ namespace Game.Actors
             }
         }
 
-        private async UniTask WaitAnimationEnd()
+        private async UniTask<bool> WaitAnimationEnd()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.75f), ignoreTimeScale: false,
-                cancellationToken: Owner.CancellationToken());
+            bool isCancelled = await UniTask.Delay(TimeSpan.FromSeconds(0.75f), 
+                ignoreTimeScale: false, 
+                cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
             _isAnimationEnded = true;
             _inputController.BlockInput(false);
+            return isCancelled;
         }
 
-        private async UniTask AbilityAnimation()
+        private async UniTask<bool> AbilityAnimation()
         {
-            if (_animator != null)
-            {
-                _animator.SetAnimation(AnimationNames.MeleeAttack, true);
-                _isAnimationEnded = false;
-                await WaitAnimationEnd();
-
-                _animator.SetAnimation(AnimationNames.MeleeAttack, false);
-            }
+            _animator.SetAnimation(AnimationNames.MeleeAttack, true);
+            _isAnimationEnded = false;
+            bool isEnded = await WaitAnimationEnd();
+            return isEnded;
         }
 
         private float GetCost()

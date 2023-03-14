@@ -85,6 +85,9 @@ namespace Game.Actors
 
         public override bool CanActivateAbility()
         {
+            if (!_isAnimationEnded)
+                return false;
+            
             if (IsActive)
                 return false;
 
@@ -98,25 +101,19 @@ namespace Game.Actors
         {
             if (_hasMana)
                 Owner.ApplyModifier(CharacterStats.Mana, -Definition.ManaCost);
+        
+            _animator.SetAnimation(AnimationNames.RangeAttack, true);
+            _isAnimationEnded = false;
 
-            if (_animator != null)
+            
+            
+            bool isEnded = await WaitAnimationEnd();
+            if (isEnded)
             {
-                _animator.SetAnimation(AnimationNames.RangeAttack, true);
-                _isAnimationEnded = false;
-
-                try
-                {
-                    await WaitAnimationEnd();
-                }
-                catch (OperationCanceledException)
-                {
-                    EndAbility();
-                    return;
-                }
-
-                _animator.SetAnimation(AnimationNames.RangeAttack, false);
+                EndAbility();
+                return;
             }
-
+            _animator.SetAnimation(AnimationNames.RangeAttack, false);
             FireProjectile();
             EndAbility();
         }
@@ -132,11 +129,12 @@ namespace Game.Actors
                 _audio.PlayOneShot(Definition.FireSfx, Owner.Transform);
         }
 
-        private async UniTask WaitAnimationEnd()
+        private async UniTask<bool> WaitAnimationEnd()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(Definition.CastTime), ignoreTimeScale: false, 
-                cancellationToken: Owner.CancellationToken());
+            bool isEnded = await UniTask.Delay(TimeSpan.FromSeconds(Definition.CastTime), ignoreTimeScale: false, 
+                cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
             _isAnimationEnded = true;
+            return isEnded;
         }
     }
 }

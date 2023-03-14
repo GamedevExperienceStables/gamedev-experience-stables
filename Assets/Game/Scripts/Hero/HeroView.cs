@@ -7,9 +7,12 @@ namespace Game.Hero
     {
         [SerializeField]
         private Transform cameraTarget;
-
+        [SerializeField]
+        private Transform petPosition;
+        
         private SceneCamera _sceneCamera;
 
         public Transform CameraTarget => cameraTarget;
+        public Transform PetPosition => petPosition;
     }
 }

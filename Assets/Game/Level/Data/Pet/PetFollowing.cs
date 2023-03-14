@@ -5,8 +5,7 @@ namespace Game.Level.Data.Pet
 {
     public class PetFollowing : MonoBehaviour
     {
-        [SerializeField]
-        private Transform followingPosition;
+        private Transform _followingPosition;
 
         [SerializeField]
         private float speed;
@@ -14,19 +13,20 @@ namespace Game.Level.Data.Pet
         private bool _isChasing;
         
 
-        private void Start()
+        public void SetFollowingPosition(Transform heroPetTransform)
         {
-            _petPosition = transform.position;
+            _followingPosition = heroPetTransform;
+            _petPosition = heroPetTransform.position;
         }
-
+        
         void LateUpdate()
         {
             Chasing(_isChasing);
-            if (!_isChasing && Vector3.Distance(transform.position, followingPosition.position) > 2)
+            if (!_isChasing && Vector3.Distance(transform.position, _followingPosition.position) > 0.5f)
             {
                 _isChasing = true;
             }
-            else if (_isChasing && Vector3.Distance(transform.position, followingPosition.position) < 0.2)
+            else if (_isChasing && Vector3.Distance(transform.position, _followingPosition.position) < 0.2f)
             {
                 _isChasing = false;
             }
@@ -39,9 +39,11 @@ namespace Game.Level.Data.Pet
         private void Chasing(bool isChasing)
         {
             if (!isChasing) return;
-            transform.position = Vector3.MoveTowards(transform.position, followingPosition.position,
+            var position = transform.position;
+            position = Vector3.MoveTowards(position, _followingPosition.position,
                 speed * Time.deltaTime);
-            _petPosition = transform.position;
+            transform.position = position;
+            _petPosition = position;
         }
     }
 }

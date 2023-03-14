@@ -68,9 +68,13 @@ namespace Game.Actors
                 _animator.ResetAnimation(AnimationNames.Damage);
                 _animator.SetAnimation(AnimationNames.Dash, true);
                 _isAnimationEnded = false;
-                await WaitAnimationEnd();
+                bool isEnded = await WaitAnimationEnd();
+                if (isEnded)
+                {
+                    EndAbility();
+                    return;
+                }
                 _animator.SetAnimation(AnimationNames.Dash, false);
-                
                 _inputController.BlockInput(IsActive);
                 Owner.ApplyModifier(CharacterStats.Stamina, -GetCost());
 
@@ -97,12 +101,14 @@ namespace Game.Actors
                 return direction;
             }
 
-            private async UniTask WaitAnimationEnd()
+            private async UniTask<bool> WaitAnimationEnd()
             {
                 float dashAnimationTime = Definition.DashRange * 10;
-                await UniTask.Delay(TimeSpan.FromMilliseconds(dashAnimationTime), ignoreTimeScale: false, 
+                bool isCancelled = await UniTask.Delay(TimeSpan.FromMilliseconds(dashAnimationTime), 
+                    ignoreTimeScale: false, 
                     cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
                 _isAnimationEnded = true;
+                return isCancelled;
             }
 
             private float GetCost()

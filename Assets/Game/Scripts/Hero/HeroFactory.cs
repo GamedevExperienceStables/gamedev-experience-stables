@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using Game.Actors;
 using Game.Inventory;
+using Game.Level.Data.Pet;
 using Game.Player;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -36,14 +38,26 @@ namespace Game.Hero
         {
             HeroController hero = _resolver.Instantiate(_heroDefinition.Prefab);
             _resolver.InjectGameObject(hero.gameObject);
-
+            
             _player.BindHero(hero);
             AddAbilities(hero);
             GiveObtainedRunes(hero, _runes.Items);
+            CreatePet(hero);
 
             return hero;
         }
 
+        private void CreatePet(HeroController hero)
+        {
+            GameObject heroGameObject = hero.gameObject;
+            
+            Transform petPosition = heroGameObject.gameObject.GetComponent<HeroView>().PetPosition;
+            GameObject pet = _resolver.Instantiate(_heroDefinition.Pet, 
+                petPosition.position, 
+                petPosition.rotation);
+            pet.GetComponent<PetFollowing>().SetFollowingPosition(petPosition);
+        }
+        
         private void AddAbilities(ActorController actor)
         {
             RegisterAbilities(actor, _heroDefinition.Abilities);

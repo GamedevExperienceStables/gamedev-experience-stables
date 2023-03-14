@@ -11,24 +11,27 @@ namespace Game.Animations.Hero
             animator = GetComponent<Animator>();
         }
 
-        public void SetAnimation(string animationName, bool isActive) 
-            => animator.SetBool(animationName, isActive);
+        public void SetAnimation(int animationName, bool isActive)
+        {
+            animator.SetBool(animationName, isActive);
+        }
+        
 
 
-        public void SetAnimation(string animationName, float animationParameter)
+        public void SetAnimation(int animationName, float animationParameter)
             => animator.SetFloat(animationName, animationParameter);
         
         
-        public void SetAnimation(string animationName, int animationParameter)
+        public void SetAnimation(int animationName, int animationParameter)
             => animator.SetInteger(animationName, animationParameter);
         
-        public void SetAnimation(string animationParameter)
+        public void SetAnimation(int animationParameter)
             => animator.SetTrigger(animationParameter);
 
-        public void ResetAnimation(string animationParameter)
+        public void ResetAnimation(int animationParameter)
             => animator.ResetTrigger(animationParameter);
         
-        public void PlayAnimation(string animationName)
+        public void PlayAnimation(int animationName)
             => animator.Play(animationName);
     }
 }
