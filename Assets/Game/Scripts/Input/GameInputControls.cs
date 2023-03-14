@@ -91,6 +91,15 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Melee"",
+                    ""type"": ""Button"",
+                    ""id"": ""50a5a018-9ea9-4f9c-ab0f-3d7a95e17c85"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Interaction"",
                     ""type"": ""Button"",
                     ""id"": ""ab6a280b-79bc-4ef2-beef-82b9cea999f6"",
@@ -508,6 +517,39 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0792ec5c-900b-43e4-89e0-631c816c8913"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f93c4f9c-1ec3-46bf-a468-0c683e2e09b7"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65e4431a-2b01-42f5-8562-48e6cc5d60dd"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -641,6 +683,7 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
         m_Gameplay_Inventory = m_Gameplay.FindAction("Inventory", throwIfNotFound: true);
         m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
         m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
+        m_Gameplay_Melee = m_Gameplay.FindAction("Melee", throwIfNotFound: true);
         m_Gameplay_Interaction = m_Gameplay.FindAction("Interaction", throwIfNotFound: true);
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
         m_Gameplay_Slot1 = m_Gameplay.FindAction("Slot1", throwIfNotFound: true);
@@ -718,6 +761,7 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Inventory;
     private readonly InputAction m_Gameplay_Aim;
     private readonly InputAction m_Gameplay_Fire;
+    private readonly InputAction m_Gameplay_Melee;
     private readonly InputAction m_Gameplay_Interaction;
     private readonly InputAction m_Gameplay_Dash;
     private readonly InputAction m_Gameplay_Slot1;
@@ -735,6 +779,7 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
         public InputAction @Inventory => m_Wrapper.m_Gameplay_Inventory;
         public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
         public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
+        public InputAction @Melee => m_Wrapper.m_Gameplay_Melee;
         public InputAction @Interaction => m_Wrapper.m_Gameplay_Interaction;
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
         public InputAction @Slot1 => m_Wrapper.m_Gameplay_Slot1;
@@ -771,6 +816,9 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
                 @Fire.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
+                @Melee.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMelee;
+                @Melee.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMelee;
+                @Melee.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMelee;
                 @Interaction.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteraction;
                 @Interaction.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteraction;
                 @Interaction.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteraction;
@@ -814,6 +862,9 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @Melee.started += instance.OnMelee;
+                @Melee.performed += instance.OnMelee;
+                @Melee.canceled += instance.OnMelee;
                 @Interaction.started += instance.OnInteraction;
                 @Interaction.performed += instance.OnInteraction;
                 @Interaction.canceled += instance.OnInteraction;
@@ -912,6 +963,7 @@ public partial class @GameInputControls : IInputActionCollection2, IDisposable
         void OnInventory(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnMelee(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnSlot1(InputAction.CallbackContext context);

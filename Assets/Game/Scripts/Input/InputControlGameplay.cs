@@ -11,6 +11,7 @@ namespace Game.Input
         public Vector2 MousePosition { get; private set; }
 
         public InputButton FireButton { get; } = new();
+        public InputButton MeleeButton { get; } = new();
         public InputButton AimButton { get; } = new();
         public InputButton MenuButton { get; } = new();
         public InputButton InventoryButton { get; } = new();
@@ -48,6 +49,18 @@ namespace Game.Input
             else if (context.canceled)
             {
                 FireButton.TriggerButtonUp();
+            }
+        }
+        
+        public void OnMelee(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                MeleeButton.TriggerButtonDown();
+            }
+            else if (context.canceled)
+            {
+                MeleeButton.TriggerButtonUp();
             }
         }
 
