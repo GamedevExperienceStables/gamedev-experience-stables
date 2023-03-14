@@ -1,4 +1,5 @@
-﻿using Game.Stats;
+﻿using System.Threading;
+using Game.Stats;
 using UnityEngine;
 
 namespace Game.Actors
@@ -22,5 +23,11 @@ namespace Game.Actors
         void GiveAbility(AbilityDefinition definition);
         T GetAbility<T>() where T : ActorAbility;
         bool TryGetAbility(AbilityDefinition definition, out ActorAbility foundAbility);
+        bool TryGetAbility<T>(out T foundAbility) where T : ActorAbility;
+
+        void AddEffect(Effect effect);
+        void RemoveEffectsByInstigator(object instigator);
+        
+        CancellationToken CancellationToken();
     }
 }

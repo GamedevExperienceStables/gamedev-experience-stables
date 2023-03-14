@@ -41,6 +41,7 @@ namespace Game.LifetimeScopes
             RegisterServices(builder);
             RegisterSaveSystem(builder);
             RegisterAudio(builder);
+            RegisterTime(builder);
         }
 
         private static void RegisterData(IContainerBuilder builder)
@@ -65,8 +66,6 @@ namespace Game.LifetimeScopes
 
         private static void RegisterServices(IContainerBuilder builder)
         {
-            builder.Register<TimeService>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<TimerFactory>(Lifetime.Singleton);
             builder.Register<RandomService>(Lifetime.Singleton);
             builder.Register<QuitGameService>(Lifetime.Singleton);
         }
@@ -143,6 +142,15 @@ namespace Game.LifetimeScopes
             builder.Register<FmodService>(Lifetime.Singleton).As<IAudioService>().AsSelf();
             builder.Register<FmodFootsteps>(Lifetime.Singleton).As<IFootstepsAudio>();
             builder.Register<FootstepsEmitter>(Lifetime.Transient);
+        }
+        
+        private static void RegisterTime(IContainerBuilder builder)
+        {
+            builder.Register<TimeService>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+            builder.Register<TimerFactory>(Lifetime.Singleton);
+            builder.Register<TimerPool>(Lifetime.Singleton);
+            builder.Register<TimerUpdater>(Lifetime.Singleton).AsImplementedInterfaces();
         }
     }
 }

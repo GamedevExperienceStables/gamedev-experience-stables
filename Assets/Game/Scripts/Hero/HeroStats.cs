@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Actors;
+using Game.Stats;
 using UnityEngine;
 
 namespace Game.Hero
@@ -12,6 +13,11 @@ namespace Game.Hero
             this.CreateStatsMana();
             this.CreateStatsStamina();
             this.CreateStatsMovement();
+
+            CreateStat(CharacterStats.DashMultiplier);
+            CreateStat(CharacterStats.DashStaminaMultiplier);
+            CreateStat(CharacterStats.MeleeDamageMultiplier);
+            CreateStat(CharacterStats.MeleeStaminaMultiplier);
         }
 
         public void Init(InitialStats initial)
@@ -20,6 +26,11 @@ namespace Game.Hero
             this.InitStatsMana(initial.ManaPoints);
             this.InitStatsStamina(initial.StaminaPoints);
             this.InitStatsMovement(initial.MovementSpeed);
+
+            InitStat(CharacterStats.DashMultiplier, 0);
+            InitStat(CharacterStats.DashStaminaMultiplier, 0);
+            InitStat(CharacterStats.MeleeDamageMultiplier, 0);
+            InitStat(CharacterStats.MeleeStaminaMultiplier, 0);
         }
 
 
@@ -38,7 +49,7 @@ namespace Game.Hero
             [Header("Movement")]
             [SerializeField]
             private float movementSpeed = 6f;
-            
+
             public float MovementSpeed => movementSpeed;
             public float HealthPoints => healthPoints;
             public float StaminaPoints => staminaPoints;

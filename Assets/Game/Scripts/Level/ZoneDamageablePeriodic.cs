@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Game.Actors;
 using Game.Actors.Health;
-using Game.Stats;
 using Game.TimeManagement;
 using UnityEngine;
 using VContainer;
@@ -21,32 +20,30 @@ namespace Game.Level
         private readonly List<DamageableController> _damageables = new();
 
         private ZoneEffect _zone;
+
+        private TimerPool _timers;
         private TimerUpdatable _timer;
-        private StatModifier _modifier;
-        private bool _initialized;
 
         [Inject]
-        public void Construct(TimerFactory timers)
+        public void Construct(TimerPool timers)
         {
-            _modifier = new StatModifier(-damage, StatsModifierType.Flat);
-            _timer = timers.CreateTimer(TimeSpan.FromSeconds(interval), OnInterval, isLooped: true);
+            _timers = timers;
+            _timer = _timers.GetTimerStarted(TimeSpan.FromSeconds(interval), OnInterval, isLooped: true);
 
-            _initialized = true;
-        }
-
-        private void Awake()
-            => _zone = GetComponent<ZoneEffect>();
-
-        private void OnEnable()
-        {
+            _zone = GetComponent<ZoneEffect>();
             _zone.ActorAdded += OnActorAdded;
             _zone.ActorRemoved += OnActorRemoved;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
+            if (!_zone)
+                return;
+
             _zone.ActorAdded -= OnActorAdded;
             _zone.ActorRemoved -= OnActorRemoved;
+
+            _timers.ReleaseTimer(_timer);
         }
 
         private void OnActorAdded(IActorController actor)
@@ -61,16 +58,10 @@ namespace Game.Level
                 _damageables.Remove(damageable);
         }
 
-        private void Update()
-        {
-            if (_initialized)
-                _timer.Tick();
-        }
-
         private void OnInterval()
         {
             foreach (DamageableController damageable in _damageables)
-                damageable.Damage(_modifier);
+                damageable.Damage(damage);
         }
     }
 }

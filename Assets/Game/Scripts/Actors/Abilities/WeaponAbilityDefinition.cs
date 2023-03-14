@@ -1,11 +1,13 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Game.Animations.Hero;
 using Game.Weapons;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Game.Actors
 {
+    [Obsolete("Should be used " + nameof(ProjectileAbilityDefinition))]
     [CreateAssetMenu(menuName = MENU_PATH + "Weapon")]
     public class WeaponAbilityDefinition : AbilityDefinition<WeaponAbility>
     {
@@ -17,18 +19,19 @@ namespace Game.Actors
         public LayerMask Mask => mask;
     }
 
+    [Obsolete("Should be used " + nameof(ProjectileAbility))]
     public class WeaponAbility : ActorAbility<WeaponAbilityDefinition>
     {
         private AimAbility _aim;
         private ProjectileWeapon _currentWeapon;
-        private Animator _animator;
+        private ActorAnimator _animator;
         private bool _isAnimationEnded;
 
         protected override void OnInitAbility()
         {
             _aim = Owner.GetAbility<AimAbility>();
             var view = Owner.GetComponent<WeaponAbilityView>();
-            _animator = Owner.GetComponent<Animator>();
+            _animator = Owner.GetComponent<ActorAnimator>();
             _currentWeapon = view.CurrentWeapon;
             _currentWeapon.SetOwner(Owner);
             _isAnimationEnded = true;
@@ -41,17 +44,18 @@ namespace Game.Actors
         {
             if (_animator != null)
             {
-                _animator.SetBool("IsAttacked", true);
+                _animator.SetAnimation(AnimationNames.RangeAttack, true);
                 _isAnimationEnded = false;
                 await WaitAnimationEnd();
-                _animator.SetBool("IsAttacked", false);
+                _animator.SetAnimation(AnimationNames.RangeAttack, false);
             }
             _currentWeapon.SpawnProjectile();
         }
 
         private async UniTask WaitAnimationEnd()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), ignoreTimeScale: false);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), ignoreTimeScale: false, 
+                cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
             _isAnimationEnded = true;
         }
     }

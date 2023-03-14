@@ -1,4 +1,6 @@
-﻿using Game.Cameras;
+﻿using Game.Animations.Hero;
+using Game.Cameras;
+using Game.Hero;
 using Game.Stats;
 using UnityEngine;
 using VContainer;
@@ -17,6 +19,8 @@ namespace Game.Actors
     public class AimAbility : ActorAbility<AimAbilityDefinition>
     {
         private readonly FollowSceneCamera _followCamera;
+        private ActorAnimator _animator;
+        private HeroInputController _heroInputController;
 
         [Inject]
         public AimAbility(FollowSceneCamera followCamera)
@@ -25,16 +29,33 @@ namespace Game.Actors
         public override bool CanActivateAbility()
             => true;
 
+        protected override void OnInitAbility()
+        {
+            _animator = Owner.GetComponent<ActorAnimator>();
+            _heroInputController = Owner.GetComponent<HeroInputController>();
+        }
+        
         protected override void OnActivateAbility()
         {
+            _animator.SetAnimation(AnimationNames.Aiming, true);
             _followCamera.ZoomOut();
             Owner.AddModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
         }
 
         protected override void OnEndAbility(bool wasCancelled)
         {
+            _animator.SetAnimation(AnimationNames.Aiming, false);
             _followCamera.ZoomReset();
             Owner.RemoveModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
+        }
+        
+        public Vector3 GetRealPosition()
+        {
+            if (_heroInputController != null)
+            {
+                return _heroInputController.GetRealMousePosition();
+            }
+            return default;
         }
     }
 }
