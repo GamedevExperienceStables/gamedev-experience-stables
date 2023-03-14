@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Game.Actors;
 using Game.Actors.Health;
-using Game.Stats;
 using Game.TimeManagement;
 using UnityEngine;
 using VContainer;
@@ -21,7 +20,6 @@ namespace Game.Level
         private readonly List<DamageableController> _damageables = new();
 
         private ZoneEffect _zone;
-        private StatModifier _modifier;
 
         private TimerPool _timers;
         private TimerUpdatable _timer;
@@ -29,8 +27,6 @@ namespace Game.Level
         [Inject]
         public void Construct(TimerPool timers)
         {
-            _modifier = new StatModifier(-damage, StatsModifierType.Flat);
-
             _timers = timers;
             _timer = _timers.GetTimerStarted(TimeSpan.FromSeconds(interval), OnInterval, isLooped: true);
 
@@ -65,7 +61,7 @@ namespace Game.Level
         private void OnInterval()
         {
             foreach (DamageableController damageable in _damageables)
-                damageable.Damage(_modifier);
+                damageable.Damage(damage);
         }
     }
 }

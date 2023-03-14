@@ -47,6 +47,6 @@ namespace Game.Actors.Damage
         }
 
         private void ApplyDamage(DamageableController damageable) 
-            => damageable.Damage(_damageModifier);
+            => damageable.Damage(_damageModifier.Value);
     }
 }

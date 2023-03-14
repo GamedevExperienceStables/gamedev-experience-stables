@@ -11,6 +11,12 @@
         Stamina,
         StaminaMax,
         
-        MovementSpeed
+        MovementSpeed,
+        
+        MeleeDamageMultiplier,
+        MeleeStaminaMultiplier,
+        
+        DashMultiplier,
+        DashStaminaMultiplier,
     }
 }
