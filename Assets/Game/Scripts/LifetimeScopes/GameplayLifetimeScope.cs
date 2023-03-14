@@ -114,6 +114,9 @@ namespace Game.LifetimeScopes
             
             builder.Register<HudRuneSlotsView>(Lifetime.Scoped);
             builder.Register<HudRuneSlotsViewModel>(Lifetime.Scoped);
+            
+            builder.Register<InteractionView>(Lifetime.Scoped);
+            builder.Register<InteractionViewModel>(Lifetime.Scoped);
 
             builder.RegisterInstance(gameplayView);
             Transform uiRoot = gameplayView.transform;

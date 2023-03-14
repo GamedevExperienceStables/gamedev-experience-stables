@@ -42,14 +42,16 @@ namespace Game.UI
         private VisualElement _spBarWidgetMaskRight;
         
         private HudRuneSlotsView _runeSlotsView;
+        private InteractionView _interactionView;
 
         public IReadOnlyList<RuneSlotHudView> RuneSlots => _runeSlotsView.Slots;
 
         [Inject]
-        public void Construct(GameplayViewModel viewModel, HudRuneSlotsView runeSlotsView)
+        public void Construct(GameplayViewModel viewModel, HudRuneSlotsView runeSlotsView, InteractionView interactionView)
         {
             _viewModel = viewModel;
             _runeSlotsView = runeSlotsView;
+            _interactionView = interactionView;
         }
 
         private void Awake()
@@ -78,7 +80,8 @@ namespace Game.UI
 
             var crystalWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_CRYSTAL);
             _crystalMask = crystalWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
-            
+
+            _interactionView.Create(_root);
             _runeSlotsView.Create(_root);
 
             InitCrystalView(_viewModel.GetCurrentMaterial());
@@ -90,6 +93,7 @@ namespace Game.UI
         {
             _buttonMenu.clicked -= PauseGame;
 
+            _interactionView.Destroy();
             _runeSlotsView.Destroy();
             UnSubscribeStats();
         }

@@ -36,6 +36,9 @@
             public const string RUNE_SLOT_INTERACTABLE_CLASS_NAME = "hud-rune-slot--interactable";
             public const string RUNE_SLOT_ICON = "icon";
             public const string RUNE_SLOT_BACKGROUND = "background";
+            
+            public const string WIDGET_INTERACTION = "widget-interaction";
+            public const string WIDGET_INTERACTION_TEXT = "text";
         }
 
         public static class LoadingScreen
