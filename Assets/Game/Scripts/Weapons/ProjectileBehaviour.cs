@@ -3,7 +3,6 @@ using Cinemachine.Utility;
 using Game.Actors;
 using Game.Actors.Health;
 using Game.Level;
-using Game.Stats;
 using Game.Utils;
 using UnityEngine;
 using VContainer;
@@ -101,7 +100,7 @@ namespace Game.Weapons
         }
 
         private static void ApplyDamage(DamageableController damageable, float damage)
-            => damageable.Damage(new StatModifier(-damage, StatsModifierType.Flat));
+            => damageable.Damage(damage);
 
         private static bool IsValidTarget(Component target, out DamageableController damageable)
         {

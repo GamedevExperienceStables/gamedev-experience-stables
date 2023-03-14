@@ -19,10 +19,9 @@ namespace Game.Actors.Health
         private void Awake()
         {
             _owner = GetComponent<IActorController>();
-            DamageFeedback += PlayDamageFeedback;
         }
 
-        public void Damage(StatModifier damage)
+        public void Damage(float damage)
         {
             if (IsInvulnerable)
                 return;
@@ -41,8 +40,11 @@ namespace Game.Actors.Health
             }
         }
 
-        public void MakeDamage(StatModifier damageModifier) 
-            => _owner.ApplyModifier(CharacterStats.Health, damageModifier);
+        private void MakeDamage(float damage)
+        {
+            _owner.ApplyModifier(CharacterStats.Health, -damage);
+            PlayDamageFeedback();
+        }
 
         public void MakeInvulnerable()
             => IsInvulnerable = true;

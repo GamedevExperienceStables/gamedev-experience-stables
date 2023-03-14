@@ -61,6 +61,7 @@ namespace Game.LifetimeScopes
             builder.Register<WeaponAbility>(Lifetime.Transient);
             builder.Register<ProjectileAbility>(Lifetime.Transient);
             builder.Register<ActiveSkillAbility>(Lifetime.Transient);
+            builder.Register<StatsModifiersAbility>(Lifetime.Transient);
         }
 
         private static void RegisterEffects(IContainerBuilder builder)
