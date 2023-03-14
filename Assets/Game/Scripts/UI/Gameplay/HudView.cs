@@ -43,15 +43,23 @@ namespace Game.UI
         
         private HudRuneSlotsView _runeSlotsView;
         private InteractionView _interactionView;
+        private SavingView _savingView;
 
         public IReadOnlyList<RuneSlotHudView> RuneSlots => _runeSlotsView.Slots;
 
         [Inject]
-        public void Construct(GameplayViewModel viewModel, HudRuneSlotsView runeSlotsView, InteractionView interactionView)
+        public void Construct(
+            GameplayViewModel viewModel, 
+            HudRuneSlotsView runeSlotsView,
+            InteractionView interactionView,
+            SavingView savingView
+            )
         {
             _viewModel = viewModel;
+            
             _runeSlotsView = runeSlotsView;
             _interactionView = interactionView;
+            _savingView = savingView;
         }
 
         private void Awake()
@@ -83,6 +91,7 @@ namespace Game.UI
 
             _interactionView.Create(_root);
             _runeSlotsView.Create(_root);
+            _savingView.Create(_root);
 
             InitCrystalView(_viewModel.GetCurrentMaterial());
             
@@ -93,6 +102,7 @@ namespace Game.UI
         {
             _buttonMenu.clicked -= PauseGame;
 
+            _savingView.Destroy();
             _interactionView.Destroy();
             _runeSlotsView.Destroy();
             UnSubscribeStats();

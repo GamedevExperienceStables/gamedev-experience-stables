@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="SavingWidget" src="project://database/Assets/Game/UI/Uxml/Partial/SavingWidget.uxml?fileID=9197481963319205126&amp;guid=15c24c93f7d8ee548ad2ab11d547307b&amp;type=3#SavingWidget" />
     <ui:Template name="InteractionWidget" src="project://database/Assets/Game/UI/Uxml/Partial/InteractionWidget.uxml?fileID=9197481963319205126&amp;guid=41441a377c5387649a739155e8c3b5eb&amp;type=3#InteractionWidget" />
     <ui:Template name="Spell" src="project://database/Assets/Game/UI/Uxml/Partial/Spell.uxml?fileID=9197481963319205126&amp;guid=19aa79aeda9e27e46b1c979eb4d2f55a&amp;type=3#Spell" />
     <Style src="project://database/Assets/Game/UI/Uss/HudStyle.uss?fileID=7433441132597879392&amp;guid=43fb365d5654783488ae02a43eaf455d&amp;type=3#HudStyle" />
@@ -19,6 +20,7 @@
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
         <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center;">
+            <ui:Instance template="SavingWidget" name="widget-saving" style="position: absolute; right: 20px; bottom: 10px;" />
             <ui:Instance template="InteractionWidget" name="widget-interaction" style="top: -120px;" />
             <ui:VisualElement name="spells" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 500px; height: 100px; flex-direction: row; position: relative; top: -88px; justify-content: space-around; align-items: flex-end;">
                 <ui:Instance template="Spell" name="spell-1" class="hud-rune-slot hud-spell-size" style="flex-grow: 0;" />

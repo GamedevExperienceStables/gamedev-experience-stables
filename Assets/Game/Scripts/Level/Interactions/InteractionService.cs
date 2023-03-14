@@ -24,11 +24,7 @@ namespace Game.Level
         public void ReleaseInteraction() 
             => Disabled?.Invoke();
 
-        public void StartInteraction(Interaction interaction)
-        {
-            ReleaseInteraction();
-            
-            interaction.Execute();
-        }
+        public void StartInteraction(Interaction interaction) 
+            => interaction.Execute();
     }
 }
