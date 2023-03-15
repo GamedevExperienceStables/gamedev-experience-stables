@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Level;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Settings
 {
     [Serializable]
     public class LevelsSettings
     {
+        [SerializeField]
+        private LocationPointStaticDefinition loadGameStartPoint;
+        
         [SerializeField]
         private LocationPointStaticDefinition levelStartPoint;
 
@@ -17,7 +21,9 @@ namespace Game.Settings
 
         public List<LevelDefinition> Levels => levels;
 
+        public ILocationPoint LoadGameStartPoint => loadGameStartPoint;
         public ILocationPoint LevelStartPoint => levelStartPoint;
+
 
         public LevelDefinition FindLevelById(string levelId)
             => levels.Find(level => level.Id == levelId);

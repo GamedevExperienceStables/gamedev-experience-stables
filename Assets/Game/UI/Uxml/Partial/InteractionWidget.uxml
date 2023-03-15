@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:Label name="text" tabindex="-1" text="Press &apos;E&apos; to interact" display-tooltip-when-elided="true" style="-unity-font-style: bold; color: rgb(255, 255, 255); -unity-text-align: upper-center; font-size: 18px;" />
+    </ui:VisualElement>
+</ui:UXML>
