@@ -11,6 +11,8 @@ namespace Game.Persistence
 
         private readonly Settings _settings;
         private readonly GameImportExport _game;
+        
+        public event Action<bool> SavingChanged;
 
         [Inject]
         public PersistenceService(Settings settings, GameImportExport game, IPersistence persistence)
@@ -57,9 +59,13 @@ namespace Game.Persistence
 
         private async UniTask SavingProcess()
         {
+            SavingChanged?.Invoke(true);
+            
             GameSaveData data = _game.Export();
             await _persistence.SerializeAsync(data, _settings.Filename);
-
+            
+            SavingChanged?.Invoke(false);
+            
             Debug.Log("[SAVE_GAME] Saved!");
         }
 

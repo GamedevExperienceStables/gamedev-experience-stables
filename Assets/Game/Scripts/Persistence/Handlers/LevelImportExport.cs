@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Game.Level;
 using Game.Settings;
 using UnityEngine;
@@ -11,20 +10,22 @@ namespace Game.Persistence
     {
         private readonly LevelController _level;
         private readonly LevelsSettings _settings;
-        private readonly ILocationPoint _startPoint;
+        private readonly ILocationPoint _levelStartPoint;
+        private readonly ILocationPoint _loadGameStartPoint;
 
         [Inject]
         public LevelImportExport(LevelController level, LevelsSettings settings)
         {
             _level = level;
             _settings = settings;
-            _startPoint = _settings.LevelStartPoint;
+            _levelStartPoint = _settings.LevelStartPoint;
+            _loadGameStartPoint = _settings.LoadGameStartPoint;
         }
 
         public void Reset()
         {
             LevelDefinition firstLevel = _settings.GetFirstLevel();
-            _level.InitLevel(firstLevel, _startPoint);
+            _level.InitLevel(firstLevel, _levelStartPoint);
         }
 
         public void Import(GameSaveData.Level data)
@@ -36,7 +37,7 @@ namespace Game.Persistence
                 currentLevel = _settings.GetFirstLevel();
             }
 
-            _level.InitLevel(currentLevel, _startPoint);
+            _level.InitLevel(currentLevel, _loadGameStartPoint);
         }
 
         public GameSaveData.Level Export()
