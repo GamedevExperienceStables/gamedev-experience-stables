@@ -46,7 +46,7 @@ namespace Game.GameFlow
 
             ILocationPoint spawnLocationPoint = _level.GetCurrentLocationPoint();
             Scene location = await LoadLocationAsync(spawnLocationPoint.Location);
-            InitLocation(location, spawnLocationPoint.PointKey);
+            InitLocation(location, spawnLocationPoint.Location, spawnLocationPoint.PointKey);
 
             await Parent.EnterState<PlanetPlayState>();
         }
@@ -57,12 +57,13 @@ namespace Game.GameFlow
             return UniTask.CompletedTask;
         }
 
-        private void InitLocation(Scene location, ILocationPointKey locationPoint)
+        private void InitLocation(Scene location, ILocationDefinition locationDefinition,
+            ILocationPointKey locationPoint)
         {
             LocationContext context = GetContext(location);
             LocationPoint spawnPoint = context.FindLocationPoint(locationPoint);
 
-            _locationController.Init(context, spawnPoint.transform);
+            _locationController.Init(locationDefinition, context, spawnPoint.transform);
         }
 
         private async UniTask UnloadLastLocationIfExists()

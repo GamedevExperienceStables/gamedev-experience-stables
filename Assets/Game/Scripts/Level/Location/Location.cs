@@ -1,4 +1,6 @@
-﻿namespace Game.Level
+﻿using UnityEngine;
+
+namespace Game.Level
 {
     public class Location : ILocationDefinition
     {
@@ -6,5 +8,6 @@
             => SceneName = sceneName;
 
         public string SceneName { get; }
+        public Sprite MapImage => default;
     }
 }

@@ -2,6 +2,7 @@
     <ui:Template name="SavingWidget" src="project://database/Assets/Game/UI/Uxml/Partial/SavingWidget.uxml?fileID=9197481963319205126&amp;guid=15c24c93f7d8ee548ad2ab11d547307b&amp;type=3#SavingWidget" />
     <ui:Template name="InteractionWidget" src="project://database/Assets/Game/UI/Uxml/Partial/InteractionWidget.uxml?fileID=9197481963319205126&amp;guid=41441a377c5387649a739155e8c3b5eb&amp;type=3#InteractionWidget" />
     <ui:Template name="Spell" src="project://database/Assets/Game/UI/Uxml/Partial/Spell.uxml?fileID=9197481963319205126&amp;guid=19aa79aeda9e27e46b1c979eb4d2f55a&amp;type=3#Spell" />
+    <ui:Template name="MiniMap" src="project://database/Assets/Game/UI/Uxml/Partial/MiniMap.uxml?fileID=9197481963319205126&amp;guid=112172bd361597c42b1fbca0b63a6cda&amp;type=3#MiniMap" />
     <Style src="project://database/Assets/Game/UI/Uss/HudStyle.uss?fileID=7433441132597879392&amp;guid=43fb365d5654783488ae02a43eaf455d&amp;type=3#HudStyle" />
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
         <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: space-between; align-items: flex-start; margin-left: 20px; margin-top: 20px; margin-right: 30px;">
@@ -13,10 +14,7 @@
                 <ui:VisualElement name="front-crystal" class="crystal-bar-size" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=-276402772&amp;guid=04fa941512f200843b6c60489583d9fb&amp;type=3#HUD_Atlas_5&apos;); bottom: -3px; display: flex; -unity-background-image-tint-color: rgb(255, 255, 255); position: absolute; left: -3px; width: 96px; height: 143px;" />
             </ui:VisualElement>
             <ui:Button text="Menu" display-tooltip-when-elided="true" focusable="false" name="button-menu" style="-unity-font-style: normal; display: none;" />
-            <ui:VisualElement name="mini-map" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); background-image: none; align-items: stretch; width: 250px; height: 230px; opacity: 1;">
-                <ui:VisualElement name="background" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=1963239557&amp;guid=04fa941512f200843b6c60489583d9fb&amp;type=3#HUD_Atlas_1&apos;); align-items: center; justify-content: center; -unity-background-scale-mode: stretch-to-fill; opacity: 0.5; -unity-background-image-tint-color: rgb(255, 255, 255); margin-left: 9px; margin-right: 6px; margin-top: 10px; margin-bottom: 15px;" />
-                <ui:VisualElement name="front-frame" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=-2136378921&amp;guid=04fa941512f200843b6c60489583d9fb&amp;type=3#HUD_Atlas_0&apos;); position: absolute; left: 0; top: 0; right: 0; bottom: 0; display: flex; -unity-background-image-tint-color: rgb(255, 255, 255);" />
-            </ui:VisualElement>
+            <ui:Instance template="MiniMap" name="widget-map" />
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
         <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center;">
