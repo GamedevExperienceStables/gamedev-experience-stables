@@ -24,10 +24,8 @@ namespace Game.Level
             }
         }
 
-        public ILevelBoundary FindBoundaries()
-        {
-            return GetComponentInChildren<ILevelBoundary>();
-        }
+        public ILocationBounds FindBounds() 
+            => GetComponentInChildren<ILocationBounds>();
 
         public void DestroyEnemies()
         {

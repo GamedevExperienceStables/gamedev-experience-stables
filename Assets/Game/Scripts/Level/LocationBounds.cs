@@ -1,10 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Level
 {
     [RequireComponent(typeof(BoxCollider))]
-    public class LevelBoundary : MonoBehaviour, ILevelBoundary
+    public class LocationBounds : MonoBehaviour, ILocationBounds
     {
         private BoxCollider _collider;
         public Vector3 Center => _collider.center + transform.position;

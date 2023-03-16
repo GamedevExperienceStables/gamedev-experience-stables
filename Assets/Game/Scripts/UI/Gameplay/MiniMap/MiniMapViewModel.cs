@@ -1,5 +1,6 @@
-﻿using Game.Level;
-using Game.Player;
+﻿using System;
+using Game.Cameras;
+using Game.Level;
 using UnityEngine;
 using VContainer;
 
@@ -7,26 +8,26 @@ namespace Game.UI
 {
     public class MiniMapViewModel
     {
-        private readonly PlayerController _player;
         private readonly LocationController _location;
+        private readonly SceneCamera _sceneCamera;
 
         [Inject]
-        public MiniMapViewModel(PlayerController player, LocationController location)
+        public MiniMapViewModel(LocationController location, SceneCamera sceneCamera)
         {
-            _player = player;
             _location = location;
+            _sceneCamera = sceneCamera;
         }
 
-        public Vector3 HeroPosition
-            => _player.GetHeroPosition();
+        public void SubscribeLocationInitialized(Action callback) 
+            => _location.Initialized += callback;
 
-        public Quaternion HeroRotation
-            => _player.GetHeroRotation();
+        public void UnSubscribeLocationInitialized(Action callback)
+            => _location.Initialized -= callback;
 
-        public Vector3 MapCenter
-            => _location.GetLevelBoundary()?.Center ?? Vector3.zero;
+        public Transform Hero => _location.Hero;
+        public Transform LocationCamera => _sceneCamera.transform;
 
-        public Vector3 MapSize
-            => _location.GetLevelBoundary()?.Size ?? Vector3.zero;
+        public Bounds LocationBounds => _location.Bounds;
+        public ILocationDefinition LocationDefinition => _location.LocationDefinition;
     }
 }

@@ -109,6 +109,8 @@ namespace Game.UI
             _savingView.Destroy();
             _interactionView.Destroy();
             _runeSlotsView.Destroy();
+            _miniMapView.Destroy();
+            
             UnSubscribeStats();
         }
 

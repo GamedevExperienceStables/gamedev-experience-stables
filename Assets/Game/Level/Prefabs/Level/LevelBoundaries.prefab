@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &492949131404094466
 BoxCollider:
@@ -50,10 +50,10 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 624.5019, y: 0, z: 350.21442}
-  m_Center: {x: 44.000824, y: 0, z: 6.743141}
+  m_Size: {x: 600, y: 0, z: 600}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5356779249919523018
 MonoBehaviour:
   m_ObjectHideFlags: 0

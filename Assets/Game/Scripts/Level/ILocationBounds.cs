@@ -2,7 +2,7 @@
 
 namespace Game.Level
 {
-    public interface ILevelBoundary
+    public interface ILocationBounds
     {
         Vector3 Center { get; }
         Vector3 Size { get; }

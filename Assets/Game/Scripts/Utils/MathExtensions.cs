@@ -17,7 +17,7 @@ namespace Game.Utils
             return AlmostZero(a - b);
         }
         
-        public static float Map(float input, float inputMin, float inputMax, float min, float max)
+        public static float Remap(float input, float inputMin, float inputMax, float min, float max)
         {
             return min + (input - inputMin) * (max - min) / (inputMax - inputMin);
         }
