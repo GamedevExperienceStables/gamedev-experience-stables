@@ -3,11 +3,10 @@ using Game.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
-using VContainer.Unity;
 
 namespace Game.UI
 {
-    public class MiniMapView : ILateTickable
+    public class MiniMapView
     {
         private struct MiniMapData
         {

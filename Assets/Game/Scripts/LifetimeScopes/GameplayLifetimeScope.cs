@@ -121,7 +121,7 @@ namespace Game.LifetimeScopes
             builder.Register<SavingView>(Lifetime.Scoped);
             builder.Register<SavingViewModel>(Lifetime.Scoped);
             
-            builder.Register<MiniMapView>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
+            builder.Register<MiniMapView>(Lifetime.Scoped);
             builder.Register<MiniMapViewModel>(Lifetime.Scoped);
 
             builder.RegisterInstance(gameplayView);

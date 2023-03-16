@@ -102,6 +102,9 @@ namespace Game.UI
             SubscribeStats();
         }
 
+        private void LateUpdate() 
+            => _miniMapView.LateTick();
+
         private void OnDestroy()
         {
             _buttonMenu.clicked -= PauseGame;
