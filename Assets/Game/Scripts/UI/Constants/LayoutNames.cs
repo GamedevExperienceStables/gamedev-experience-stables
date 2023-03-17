@@ -36,6 +36,16 @@
             public const string RUNE_SLOT_INTERACTABLE_CLASS_NAME = "hud-rune-slot--interactable";
             public const string RUNE_SLOT_ICON = "icon";
             public const string RUNE_SLOT_BACKGROUND = "background";
+            
+            public const string WIDGET_INTERACTION = "widget-interaction";
+            public const string WIDGET_INTERACTION_TEXT = "text";
+            
+            public const string WIDGET_SAVING = "widget-saving";
+            public const string WIDGET_SAVING_CONTAINER = "container";
+            public const string WIDGET_SAVING_TEXT = "text";
+
+            public const string WIDGET_SAVING_CLASS_NAME = "widget-saving";
+            public const string WIDGET_SAVING_ENABLED_CLASS_NAME = "widget-saving--enabled";
         }
 
         public static class LoadingScreen

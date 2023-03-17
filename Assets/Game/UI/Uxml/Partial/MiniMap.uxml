@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/UI/Uss/MapStyle.uss?fileID=7433441132597879392&amp;guid=54f0129aef30dd04ea9c0dd68e83fda9&amp;type=3#MapStyle" />
+    <ui:VisualElement name="mini-map" class="mini-map">
+        <ui:VisualElement name="map-container" usage-hints="MaskContainer" class="mini-map__container">
+            <ui:VisualElement name="map-wrapper" usage-hints="DynamicTransform, GroupTransform" class="mini-map__map-wrapper">
+                <ui:VisualElement name="map" usage-hints="DynamicTransform, GroupTransform" class="mini-map__map">
+                    <ui:VisualElement name="player" usage-hints="DynamicTransform" class="mini-map__pointer" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="front-frame" class="mini-map__frame" />
+    </ui:VisualElement>
+</ui:UXML>

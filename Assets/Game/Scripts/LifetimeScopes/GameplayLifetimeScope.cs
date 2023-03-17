@@ -114,6 +114,15 @@ namespace Game.LifetimeScopes
             
             builder.Register<HudRuneSlotsView>(Lifetime.Scoped);
             builder.Register<HudRuneSlotsViewModel>(Lifetime.Scoped);
+            
+            builder.Register<InteractionView>(Lifetime.Scoped);
+            builder.Register<InteractionViewModel>(Lifetime.Scoped);
+            
+            builder.Register<SavingView>(Lifetime.Scoped);
+            builder.Register<SavingViewModel>(Lifetime.Scoped);
+            
+            builder.Register<MiniMapView>(Lifetime.Scoped);
+            builder.Register<MiniMapViewModel>(Lifetime.Scoped);
 
             builder.RegisterInstance(gameplayView);
             Transform uiRoot = gameplayView.transform;
@@ -142,6 +151,7 @@ namespace Game.LifetimeScopes
             builder.Register<PlanetInventoryState>(Lifetime.Scoped);
             builder.Register<PlanetGameOverState>(Lifetime.Scoped);
             builder.Register<PlanetCompleteState>(Lifetime.Scoped);
+            builder.Register<PlanetSaveGameState>(Lifetime.Scoped);
         }
 
         private static void RegisterLocationStateMachine(IContainerBuilder builder)

@@ -53,9 +53,9 @@ namespace Game.UI
             {
                 foreach (RuneSlotHudView hudRuneSlotView in _hudSlots)
                 {
-                    if (hudRuneSlotView.Id != key || runeSlot.IsEmpty) 
+                    if (hudRuneSlotView.Id != key || runeSlot.IsEmpty)
                         continue;
-                    
+
                     hudRuneSlotView.Set(runeSlot.Rune);
                     break;
                 }
@@ -80,7 +80,7 @@ namespace Game.UI
             {
                 if (slotView.Id == changed.oldId)
                     slotView.Deactivate();
-                
+
                 if (slotView.Id == changed.newId)
                     slotView.Activate();
             }

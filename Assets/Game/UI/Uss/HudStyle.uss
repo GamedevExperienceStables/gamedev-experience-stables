@@ -66,3 +66,21 @@
 .hud-rune-slot--active #icon {
     border-color: gold;
 }
+
+.widget-saving {    
+    opacity: 0;
+
+    transition: opacity 2000ms ease-out 500ms;
+}
+
+.widget-saving--enabled {
+    opacity: 1;
+
+    transition: opacity 100ms ease-out;
+}
+
+#widget-map {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}

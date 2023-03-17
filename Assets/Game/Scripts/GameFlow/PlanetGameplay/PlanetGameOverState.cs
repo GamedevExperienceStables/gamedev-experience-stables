@@ -25,7 +25,7 @@ namespace Game.GameFlow
 
         protected override async UniTask OnEnter()
         {
-            _location.UnbindHero();
+            _location.UnFollowHero();
             
             _input.PushState(InputSchemeGame.None);
             _menuInput.ReplaceState(InputSchemeMenu.None);
