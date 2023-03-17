@@ -16,6 +16,9 @@ namespace Game.Actors
     {
         [SerializeField]
         private EventReference fireSfx;
+        
+        [SerializeField]
+        private bool isCursorInvisible;
 
         [SerializeField, Expandable]
         private ProjectileDefinition projectile;
@@ -33,6 +36,7 @@ namespace Game.Actors
         public float CastTime => castTime;
 
         public EventReference FireSfx => fireSfx;
+        public bool IsCursorInvisible => isCursorInvisible;
     }
 
     public class ProjectileAbility : ActorAbility<ProjectileAbilityDefinition>
@@ -104,9 +108,6 @@ namespace Game.Actors
         
             _animator.SetAnimation(AnimationNames.RangeAttack, true);
             _isAnimationEnded = false;
-
-            
-            
             bool isEnded = await WaitAnimationEnd();
             if (isEnded)
             {
