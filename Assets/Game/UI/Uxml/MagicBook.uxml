@@ -22,7 +22,7 @@
                     <Game.UI.Elements.RuneSlotDraggerElement name="rune-dragger" class="rune-dragger" />
                 </ui:VisualElement>
                 <ui:VisualElement name="side-right" style="background-color: rgba(0, 0, 0, 0); flex-basis: 50%; justify-content: center; align-items: center;">
-                    <ui:Button text="X" display-tooltip-when-elided="true" name="button-close" style="position: absolute; top: 267px; left: 337px; height: 41px; width: 53px;" />
+                    <ui:Button text="X" display-tooltip-when-elided="true" name="button-close" tabindex="-1" style="position: absolute; top: 267px; left: 337px; height: 41px; width: 53px;" />
                     <ui:VisualElement name="page-details" style="background-color: rgba(0, 0, 0, 0); width: 278px; height: 305px; margin-left: -51px;">
                         <ui:VisualElement name="page-title" style="flex-direction: row;">
                             <ui:VisualElement name="image-rune-icon" style="width: 50px; height: 50px; margin-right: 10px; flex-shrink: 0; background-image: url(&apos;project://database/Packages/com.unity.inputsystem/InputSystem/Editor/Icons/InputAction.png?fileID=2800000&amp;guid=40265a896a0f341bb956e90c59025a29&amp;type=3#InputAction&apos;);" />

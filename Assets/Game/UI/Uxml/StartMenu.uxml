@@ -8,6 +8,11 @@
             <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 244px;">
                 <ui:Button text="Continue" display-tooltip-when-elided="true" name="button-continue" />
                 <ui:Button text="New Game" display-tooltip-when-elided="true" name="button-start" />
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 16px;" />
+                <ui:Button text="Settings" display-tooltip-when-elided="true" name="button-settings" />
+                <ui:Button text="Arts" display-tooltip-when-elided="true" name="button-art" />
+                <ui:Button text="About" display-tooltip-when-elided="true" name="button-about" />
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 16px;" />
                 <ui:Button text="Quit" display-tooltip-when-elided="true" name="button-quit" />
             </ui:VisualElement>
         </ui:VisualElement>

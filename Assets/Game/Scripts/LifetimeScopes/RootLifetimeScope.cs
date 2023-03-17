@@ -42,6 +42,7 @@ namespace Game.LifetimeScopes
             RegisterSaveSystem(builder);
             RegisterAudio(builder);
             RegisterTime(builder);
+            RegisterUi(builder);
         }
 
         private static void RegisterData(IContainerBuilder builder)
@@ -121,6 +122,12 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.AudioSettings);
         }
 
+        private static void RegisterUi(IContainerBuilder builder)
+        {
+            builder.Register<SettingsView>(Lifetime.Scoped);
+            builder.Register<SettingsViewModel>(Lifetime.Singleton);
+        }
+
         private void RegisterDataTables(IContainerBuilder builder)
         {
             builder.RegisterInstance(dataTables.Runes);
@@ -139,7 +146,7 @@ namespace Game.LifetimeScopes
         
         private static void RegisterAudio(IContainerBuilder builder)
         {
-            builder.Register<FmodService>(Lifetime.Singleton).As<IAudioService>().AsSelf();
+            builder.Register<FmodService>(Lifetime.Singleton).As<IAudioService>().As<IAudioTuner>().AsSelf();
             builder.Register<FmodFootsteps>(Lifetime.Singleton).As<IFootstepsAudio>();
             builder.Register<FootstepsEmitter>(Lifetime.Transient);
         }

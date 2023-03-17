@@ -1,0 +1,20 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center;">
+        <ui:Label tabindex="-1" text="Settings" display-tooltip-when-elided="true" name="label-settings" style="-unity-text-align: upper-center; font-size: 43px; -unity-font-style: bold;" />
+        <ui:VisualElement style="width: 529px;">
+            <ui:VisualElement>
+                <ui:Label tabindex="-1" text="Graphics" display-tooltip-when-elided="true" name="label-graphics" style="-unity-font-style: bold;" />
+                <ui:DropdownField label="Quality" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="field-quality" />
+                <ui:DropdownField label="Resolution" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="field-resolution" />
+                <ui:Toggle label="Fullscreen" name="field-fullscreen" />
+            </ui:VisualElement>
+            <ui:VisualElement>
+                <ui:Label tabindex="-1" text="Audio" display-tooltip-when-elided="true" name="label-audio" style="-unity-font-style: bold;" />
+                <ui:Slider picking-mode="Ignore" label="Volume" value="42" high-value="100" name="field-audio-master" style="flex-grow: 1;" />
+                <ui:Slider picking-mode="Ignore" label="Effects" value="42" high-value="100" name="field-audio-effects" style="flex-grow: 1;" />
+                <ui:Slider picking-mode="Ignore" label="Music" value="42" high-value="100" name="field-audio-music" style="flex-grow: 1;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:Button text="Back" display-tooltip-when-elided="true" name="button-back" />
+    </ui:VisualElement>
+</ui:UXML>
