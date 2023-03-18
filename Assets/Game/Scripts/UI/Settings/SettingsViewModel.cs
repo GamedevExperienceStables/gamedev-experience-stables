@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Game.Audio;
+using Game.Player;
 using UnityEngine;
 
 // ReSharper disable MemberCanBeMadeStatic.Global
@@ -7,19 +8,24 @@ namespace Game.UI
 {
     public class SettingsViewModel
     {
-        private readonly IAudioTuner _audio;
+        private readonly PlayerAudioPrefs _audio;
+        private readonly PlayerGraphicsPrefs _graphics;
 
-        public SettingsViewModel(IAudioTuner audio) 
-            => _audio = audio;
+        public SettingsViewModel(PlayerAudioPrefs audio, PlayerGraphicsPrefs graphics)
+        {
+            _audio = audio;
+            _graphics = graphics;
+        }
 
-        public bool IsFullscreen => Screen.fullScreen;
-        public Resolution CurrentScreenResolution => Screen.currentResolution;
-        public int CurrentQuality => QualitySettings.GetQualityLevel();
+        public bool IsFullscreen => _graphics.GetFullScreen();
+        public Resolution CurrentScreenResolution => _graphics.GetResolution();
+        public int CurrentQuality => _graphics.GetQualityLevel();
+        
         public int CurrentScreenHeight => Screen.height;
         public int CurrentScreenWidth => Screen.width;
 
         public void SetFullscreen(bool value)
-            => Screen.fullScreen = value;
+            => _graphics.SetFullscreen(value);
 
         public void SetScreenResolution(Resolution resolution)
         {
@@ -27,22 +33,22 @@ namespace Game.UI
                 ? FullScreenMode.FullScreenWindow
                 : FullScreenMode.Windowed;
 
-            Screen.SetResolution(resolution.width, resolution.height, mode, resolution.refreshRateRatio);
+            _graphics.SetResolution(resolution.width, resolution.height, mode, resolution.refreshRateRatio);
         }
 
-        public IList<Resolution> GetScreenResolutions()
-            => Screen.resolutions;
-
-        public void SetVolume(AudioChannel channel, float value) 
-            => _audio.SetVolume(channel, value * 0.01f);
-
-        public float GetVolume(AudioChannel channel)
-            => _audio.GetVolume(channel) * 100;
+        public void SetQuality(int index)
+            => _graphics.SetQuality(index);
 
         public IEnumerable<string> GetQualityNames()
             => QualitySettings.names;
 
-        public void SetQuality(int index)
-            => QualitySettings.SetQualityLevel(index);
+        public IList<Resolution> GetScreenResolutions()
+            => Screen.resolutions;
+        
+        public void SetVolume(AudioChannel channel, float value) 
+            => _audio.SetVolume(channel, value);
+
+        public float GetVolume(AudioChannel channel)
+            => _audio.GetVolume(channel);
     }
 }

@@ -138,19 +138,31 @@ namespace Game.UI
 
         private void InitVolumes()
         {
-            _fieldMasterVolume.SetValueWithoutNotify(_viewModel.GetVolume(AudioChannel.Master));
-            _fieldMusicVolume.SetValueWithoutNotify(_viewModel.GetVolume(AudioChannel.Music));
-            _fieldEffectsVolume.SetValueWithoutNotify(_viewModel.GetVolume(AudioChannel.Effects));
+            _fieldMasterVolume.SetValueWithoutNotify(GetVolume(AudioChannel.Master));
+            _fieldMusicVolume.SetValueWithoutNotify(GetVolume(AudioChannel.Music));
+            _fieldEffectsVolume.SetValueWithoutNotify(GetVolume(AudioChannel.Effects));
         }
 
         private void OnChangeMasterVolume(ChangeEvent<float> evt)
-            => _viewModel.SetVolume(AudioChannel.Master, evt.newValue);
+            => SetVolume(AudioChannel.Master, evt.newValue);
 
         private void OnChangeEffectsVolume(ChangeEvent<float> evt)
-            => _viewModel.SetVolume(AudioChannel.Effects, evt.newValue);
+            => SetVolume(AudioChannel.Effects, evt.newValue);
 
         private void OnChangeMusicVolume(ChangeEvent<float> evt)
-            => _viewModel.SetVolume(AudioChannel.Music, evt.newValue);
+            => SetVolume(AudioChannel.Music, evt.newValue);
+
+        private float GetVolume(AudioChannel audioChannel)
+        {
+            float convertedToFieldVolume = _viewModel.GetVolume(audioChannel) * 100;
+            return convertedToFieldVolume;
+        }
+
+        private void SetVolume(AudioChannel audioChannel, float value)
+        {
+            float convertedFromFieldVolume = value * 0.01f;
+            _viewModel.SetVolume(audioChannel, convertedFromFieldVolume);
+        }
 
         #endregion
     }
