@@ -44,9 +44,10 @@ namespace Game.UI
             
             _showDuration = TimeSpan.FromSeconds(showDuration);
             _hideDuration = TimeSpan.FromSeconds(hideDuration);
-            
-            _router.OpenMenu();
         }
+
+        private void Start() 
+            => _router.OpenMenu();
 
         public void ShowImmediate()
             => _container.SetDisplay(true);
