@@ -9,21 +9,17 @@
                 <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="button-exit" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-direction: row;">
-            <ui:Label tabindex="-1" text="&lt;b&gt;Keyboard&lt;/b&gt;" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 87px;" />
-            <ui:Label tabindex="-1" text="Move: WASD/Arrows" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 150px;" />
-            <ui:Label tabindex="-1" text="Aim: RMB" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 80px;" />
-            <ui:Label tabindex="-1" text="Fire: RMB+LMB" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 120px;" />
-            <ui:Label tabindex="-1" text="Interaction: E" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 120px;" />
-        </ui:VisualElement>
-        <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-direction: row;">
-            <ui:Label tabindex="-1" text="&lt;b&gt;Gamepad&lt;/b&gt;" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 87px;" />
-            <ui:Label tabindex="-1" text="Move: Left Stick" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 150px;" />
-            <ui:Label tabindex="-1" text="Aim: LT" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 80px;" />
-            <ui:Label tabindex="-1" text="Fire: LT+RT" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 120px;" />
-            <ui:Label tabindex="-1" text="Interaction: A" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 120px;" />
-            <ui:Label tabindex="-1" text="Look: LT+Right Stick" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 161px;" />
-            <ui:Label tabindex="-1" text="Menu: Start" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 161px;" />
+        <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); align-items: center;">
+            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-direction: row;">
+                <ui:Label tabindex="-1" text="&lt;b&gt;Keyboard&lt;/b&gt;" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 87px;" />
+                <ui:Label tabindex="-1" text="Move: WASD/Arrows" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 150px;" />
+                <ui:Label tabindex="-1" text="Aim: RMB" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 80px;" />
+                <ui:Label tabindex="-1" text="Fire: RMB+LMB" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 120px;" />
+                <ui:Label tabindex="-1" text="Dash: Space" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 120px;" />
+                <ui:Label tabindex="-1" text="Interaction: E" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 120px;" />
+                <ui:Label tabindex="-1" text="Magic Book: Tab" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 120px;" />
+                <ui:Label tabindex="-1" text="Switch Runes: 1-4" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); width: 120px;" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

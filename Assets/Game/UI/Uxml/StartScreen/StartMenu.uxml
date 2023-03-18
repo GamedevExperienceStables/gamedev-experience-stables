@@ -10,14 +10,14 @@
                 <ui:Button text="New Game" display-tooltip-when-elided="true" name="button-start" />
                 <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 16px;" />
                 <ui:Button text="Settings" display-tooltip-when-elided="true" name="button-settings" />
-                <ui:Button text="Arts" display-tooltip-when-elided="true" name="button-art" />
+                <ui:Button text="Art" display-tooltip-when-elided="true" name="button-art" />
                 <ui:Button text="About" display-tooltip-when-elided="true" name="button-about" />
                 <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 16px;" />
                 <ui:Button text="Quit" display-tooltip-when-elided="true" name="button-quit" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement style="background-color: rgba(0, 0, 0, 0);">
-            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; color: rgb(255, 255, 255); font-size: 12px;">
+            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; font-size: 12px;">
                 <ui:Label tabindex="-1" text="Version:" display-tooltip-when-elided="true" style="font-size: 13px;" />
                 <ui:Label tabindex="-1" text="0.2.0" display-tooltip-when-elided="true" style="font-size: 13px;" />
             </ui:VisualElement>
