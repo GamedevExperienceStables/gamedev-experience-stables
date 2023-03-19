@@ -44,6 +44,7 @@ namespace Game.UI
         private HudRuneSlotsView _runeSlotsView;
         private InteractionView _interactionView;
         private SavingView _savingView;
+        private MiniMapView _miniMapView;
 
         public IReadOnlyList<RuneSlotHudView> RuneSlots => _runeSlotsView.Slots;
 
@@ -52,7 +53,8 @@ namespace Game.UI
             GameplayViewModel viewModel, 
             HudRuneSlotsView runeSlotsView,
             InteractionView interactionView,
-            SavingView savingView
+            SavingView savingView,
+            MiniMapView miniMapView
             )
         {
             _viewModel = viewModel;
@@ -60,6 +62,7 @@ namespace Game.UI
             _runeSlotsView = runeSlotsView;
             _interactionView = interactionView;
             _savingView = savingView;
+            _miniMapView = miniMapView;
         }
 
         private void Awake()
@@ -92,11 +95,15 @@ namespace Game.UI
             _interactionView.Create(_root);
             _runeSlotsView.Create(_root);
             _savingView.Create(_root);
+            _miniMapView.Create(_root);
 
             InitCrystalView(_viewModel.GetCurrentMaterial());
             
             SubscribeStats();
         }
+
+        private void LateUpdate() 
+            => _miniMapView.LateTick();
 
         private void OnDestroy()
         {
@@ -105,6 +112,8 @@ namespace Game.UI
             _savingView.Destroy();
             _interactionView.Destroy();
             _runeSlotsView.Destroy();
+            _miniMapView.Destroy();
+            
             UnSubscribeStats();
         }
 

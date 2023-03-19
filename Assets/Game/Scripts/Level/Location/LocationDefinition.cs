@@ -9,6 +9,11 @@ namespace Game.Level
         [SerializeField, Scene]
         private string sceneName;
 
+        [SerializeField]
+        private Sprite mapImage;
+
         public string SceneName => sceneName;
+
+        public Sprite MapImage => mapImage;
     }
 }
