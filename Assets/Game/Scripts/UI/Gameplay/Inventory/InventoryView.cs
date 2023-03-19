@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
 using VContainer;
+using Button = UnityEngine.UIElements.Button;
 
 namespace Game.UI
 {
@@ -44,6 +45,11 @@ namespace Game.UI
 
         private RuneSlotDraggerElement _runeDragger;
         private RuneDragAndDropManipulator _runeManipulator;
+
+        private VisualElement _runeTitleIcon;
+        private VisualElement _runeDetail;
+        private Label _runeTitleText;
+        private Label _runeDescription;
         
         private readonly List<RuneSlotInventoryView> _runeSlots = new();
         private VisualElement _root;
@@ -61,6 +67,11 @@ namespace Game.UI
 
             _container = _root.Q<VisualElement>(LayoutNames.Inventory.CONTAINER);
             _buttonClose = _root.Q<Button>(LayoutNames.Inventory.BUTTON_CLOSE);
+
+            _runeDetail = _root.Q<VisualElement>(LayoutNames.Inventory.PAGE_DETAILS);
+            _runeTitleIcon = _root.Q<VisualElement>(LayoutNames.Inventory.RUNE_ICON);
+            _runeTitleText = _root.Q<Label>(LayoutNames.Inventory.RUNE_NAME);
+            _runeDescription = _root.Q<Label>(LayoutNames.Inventory.RUNE_DESCRIPTION);
 
             CreateRuneSlots(_root, _viewModel.ObtainedRunes);
 
@@ -100,18 +111,48 @@ namespace Game.UI
         private void CreateRuneSlots(VisualElement root, IReadOnlyList<RuneDefinition> runes)
         {
             var slots = root.Query<VisualElement>(className: LayoutNames.Inventory.RUNE_SLOT_CLASS_NAME).ToList();
+            var passiveSlots = root.Query<VisualElement>(className: LayoutNames.Inventory.RUNE_PASSIVE_SLOT_CLASS_NAME).ToList();
 
-            for (int i = 0; i < _viewModel.AllRunes.Count; i++)
+            List<RuneDefinition> activeRunes = new(); 
+            List<RuneDefinition> passiveRunes = new();
+
+            foreach (RuneDefinition rune in _viewModel.AllRunes)
+            {
+                switch (rune.Type)
+                {
+                    case RuneType.Active:
+                        activeRunes.Add(rune);
+                        break;
+                    case RuneType.Passive:
+                        passiveRunes.Add(rune);
+                        break;
+                }
+            }
+
+            for (int i = 0; i < activeRunes.Count; i++)
             {
                 if (i >= slots.Count)
                     break;
-
-                RuneDefinition runeDefinition = _viewModel.AllRunes[i];
                 
-                var runeView = new RuneSlotInventoryView(slots[i], runeDefinition);
+                var runeView = new RuneSlotInventoryView(slots[i], activeRunes[i]);
                 runeView.SubscribeStartDrag(OnRuneStartDrag);
+                runeView.SubscribeHover(OnRuneHover);
 
-                if (runes.Contains(runeDefinition))
+                if (runes.Contains(activeRunes[i]))
+                    runeView.Activate();
+
+                _runeSlots.Add(runeView);
+            }
+
+            for (int i = 0; i < passiveRunes.Count; i++)
+            {
+                if (i >= passiveSlots.Count)
+                    break;
+                
+                var runeView = new RuneSlotInventoryView(passiveSlots[i], passiveRunes[i]);
+                runeView.SubscribeHover(OnRuneHover);
+
+                if (runes.Contains(passiveRunes[i]))
                     runeView.Activate();
 
                 _runeSlots.Add(runeView);
@@ -121,7 +162,10 @@ namespace Game.UI
         private void CleanupRunes()
         {
             foreach (RuneSlotInventoryView runeElement in _runeSlots)
+            {
                 runeElement.UnSubscribeStartDrag(OnRuneStartDrag);
+                runeElement.UnsubscribeHover(OnRuneHover);
+            }
         }
 
         private void CreateRuneDragger(VisualElement root, IReadOnlyList<RuneSlotHudView> hudSlots)
@@ -139,6 +183,14 @@ namespace Game.UI
         {
             _runeManipulator.StartDrag(evt);
             _runeDragger.StartDrag(evt.definition);
+        }
+
+        private void OnRuneHover(RuneSlotHoverEvent evt)
+        {
+            _runeDetail.visible = evt.state;
+            _runeTitleIcon.style.backgroundImage = new StyleBackground(evt.definition.IconEmpty);
+            _runeTitleText.text = evt.definition.name;
+            _runeDescription.text = evt.definition.name;
         }
 
         private void OnRuneStopDrag()

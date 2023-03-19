@@ -1,28 +1,65 @@
-﻿:root {
-    --slot-size: 50px;
+:root {
+    --slot-size: 60px;
+    --passive-slot-size: 75px;
 }
-
 
 .magic-book-slot {
     position: absolute;
-    background-image: url('project://database/Packages/com.unity.inputsystem/InputSystem/Editor/Icons/d_InputControl@4x.png?fileID=2800000&guid=e2078613efd9e410c8771cbd2717f4e7&type=3#d_InputControl@4x');
+    transition-property: translate, scale;
+    transition-timing-function: ease-in-out, ease-in-out;
+    transition-duration: 500ms, 500ms;
 }
 
-.magic-book-slot,
+.magic-book-slot {
+    width: var(--slot-size);
+    height: var(--slot-size);
+}
+
 .magic-book-slot__icon {
     width: var(--slot-size);
     height: var(--slot-size);
 }
 
+.magic-book-slot:hover {
+    translate: 5px -5px;
+    scale: 1.1 1.1;
+}
+
+.magic-book-passive {
+    rotate: -7deg;
+    transition-duration: 500ms, 500ms;
+    transition-property: rotate, translate;
+    transition-timing-function: ease-out, ease-out;
+    transform-origin: left bottom;
+}
+
+.magic-book-passive:hover {
+    rotate: -10deg;
+    translate: -4px 0;
+    transform-origin: left bottom;
+}
+
+.magic-book-slot-passive {
+    width: var(--passive-slot-size);
+    height: var(--passive-slot-size);
+}
+
+.magic-book-close {
+    transition-property: translate;
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+}
+
+.magic-book-close:hover {
+    translate: 10px 0;
+}
 
 .rune-dragger {
     width: var(--slot-size);
     height: var(--slot-size);
-
     visibility: hidden;
     position: absolute;
     background-image: none;
-
     transition: scale 100ms ease-out;
 }
 

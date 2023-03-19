@@ -70,12 +70,13 @@
             
             public const string RUNE_NAME = "text-rune-name";
             public const string RUNE_DESCRIPTION = "text-rune-description";
-            public const string RUNE_ICON = "image-rune";
+            public const string RUNE_ICON = "image-rune-icon";
 
             public const string RUNE_DRAGGER = "rune-dragger";
             public const string RUNE_DRAGGER_DRAG_CLASS_NAME = "rune-dragger--drag";
             
             public const string RUNE_SLOT_CLASS_NAME = "magic-book-slot";
+            public const string RUNE_PASSIVE_SLOT_CLASS_NAME = "magic-book-slot-passive";
             public const string SLOT_DISABLED_CLASS_NAME = "magic-book-slot--disabled";
             public const string RUNE_SLOT_ICON = "icon";
         }
