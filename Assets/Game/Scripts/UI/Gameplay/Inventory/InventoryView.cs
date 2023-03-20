@@ -187,7 +187,10 @@ namespace Game.UI
         private void OnRuneHover(RuneSlotHoverEvent evt)
         {
             if (!evt.state)
+            {
+                HideDetails();
                 return;
+            }
 
             ShowDetails(evt.definition.IconEmpty, evt.definition.name, evt.definition.name);
         }
