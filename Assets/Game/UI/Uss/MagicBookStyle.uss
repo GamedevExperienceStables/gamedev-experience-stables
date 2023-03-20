@@ -67,3 +67,27 @@
     scale: 1.25;
     visibility: visible;
 }
+
+.magic-book-details {
+    opacity: 1;
+    transition: opacity 300ms ease-in-out;
+}
+
+.magic-book-details--hidden {
+    opacity: 0;
+}
+
+.magic-book-details__title {
+    font-size: 35px;
+    -unity-font-style: bold;
+    flex-shrink: 1;
+    white-space: normal;
+    letter-spacing: -4px;
+}
+
+.magic-book-details__description {
+    flex-grow: 1;
+    padding: 35px 20px 20px 20px;
+    font-size: 20px;
+    white-space: normal;
+}

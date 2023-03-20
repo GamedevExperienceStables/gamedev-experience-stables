@@ -47,7 +47,7 @@ namespace Game.UI
         private RuneDragAndDropManipulator _runeManipulator;
 
         private VisualElement _runeTitleIcon;
-        private VisualElement _runeDetail;
+        private VisualElement _runeDetails;
         private Label _runeTitleText;
         private Label _runeDescription;
         
@@ -68,7 +68,7 @@ namespace Game.UI
             _container = _root.Q<VisualElement>(LayoutNames.Inventory.CONTAINER);
             _buttonClose = _root.Q<Button>(LayoutNames.Inventory.BUTTON_CLOSE);
 
-            _runeDetail = _root.Q<VisualElement>(LayoutNames.Inventory.PAGE_DETAILS);
+            _runeDetails = _root.Q<VisualElement>(LayoutNames.Inventory.PAGE_DETAILS);
             _runeTitleIcon = _root.Q<VisualElement>(LayoutNames.Inventory.RUNE_ICON);
             _runeTitleText = _root.Q<Label>(LayoutNames.Inventory.RUNE_NAME);
             _runeDescription = _root.Q<Label>(LayoutNames.Inventory.RUNE_DESCRIPTION);
@@ -187,11 +187,23 @@ namespace Game.UI
 
         private void OnRuneHover(RuneSlotHoverEvent evt)
         {
-            _runeDetail.visible = evt.state;
-            _runeTitleIcon.style.backgroundImage = new StyleBackground(evt.definition.IconEmpty);
-            _runeTitleText.text = evt.definition.name;
-            _runeDescription.text = evt.definition.name;
+            if (!evt.state)
+                return;
+
+            ShowDetails(evt.definition.IconEmpty, evt.definition.name, evt.definition.name);
         }
+
+        private void ShowDetails(Sprite icon, string runeName, string runeDescription)
+        {
+            _runeTitleIcon.style.backgroundImage = new StyleBackground(icon);
+            _runeTitleText.text = runeName;
+            _runeDescription.text = runeDescription;
+            
+            _runeDetails.RemoveFromClassList(LayoutNames.Inventory.BOOK_DETAILS_HIDDEN_CLASS_NAME);
+        }
+
+        private void HideDetails() 
+            => _runeDetails.AddToClassList(LayoutNames.Inventory.BOOK_DETAILS_HIDDEN_CLASS_NAME);
 
         private void OnRuneStopDrag()
             => _runeDragger.StopDrag();
@@ -225,6 +237,8 @@ namespace Game.UI
             _container.SetDisplay(false);
             _container.SetOpacity(0f);
             _container.style.bottom = OFFSET_BOTTOM;
+            
+            HideDetails();
 
             OnHide();
             HideFeedbacks();

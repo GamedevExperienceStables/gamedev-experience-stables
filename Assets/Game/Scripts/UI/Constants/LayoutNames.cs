@@ -79,6 +79,9 @@
             public const string RUNE_PASSIVE_SLOT_CLASS_NAME = "magic-book-slot-passive";
             public const string SLOT_DISABLED_CLASS_NAME = "magic-book-slot--disabled";
             public const string RUNE_SLOT_ICON = "icon";
+
+            public const string BOOK_DETAILS_CLASS_NAME = "magic-book-details";
+            public const string BOOK_DETAILS_HIDDEN_CLASS_NAME = "magic-book-details--hidden";
         }
     }
 }
