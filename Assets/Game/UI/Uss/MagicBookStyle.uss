@@ -1,31 +1,33 @@
 :root {
-    --slot-size: 60px;
-    --passive-slot-size: 75px;
+    --slot-size: 75px;
+    --passive-slot-size: 88px;
 }
 
 .magic-book {
     translate: 0;
     opacity: 1;
-    transition-property: translate, rotate, scale, opacity;
-    transition-timing-function: ease-out-sine, ease-out-sine, ease-out-sine, ease-out;
-    transition-duration: 300ms, 200ms, 100ms, 150ms;
+
+    transform-origin: center bottom;    
+    transition-property: translate, scale, opacity;
+    transition-timing-function: ease-out, ease-out-sine, ease-out;
+    transition-duration: 300ms, 100ms, 150ms;
 }
 
 .magic-book--hidden {
     translate: 0 -100px;
-    rotate: -35deg;
-    scale: 0.7;
+    scale: 0 0.75;
     opacity: 0;
-    transition-property: translate, rotate, scale, opacity;
-    transition-timing-function: ease-in-sine, ease-in-sine, ease-in-sine, ease-out;
-    transition-duration: 200ms, 200ms, 200ms, 200ms;
+    
+    transition-property: translate, scale, opacity;
+    transition-timing-function: ease-in-sine, ease-in-sine, ease-out;
+    transition-duration: 200ms, 150ms, 175ms;
 }
 
 .magic-book-slot {
     position: absolute;
     transition-property: translate, scale;
-    transition-timing-function: ease-in-out, ease-in-out;
-    transition-duration: 500ms, 500ms;
+    transition-timing-function: ease-in-out, ease-out;
+    transition-duration: 300ms, 200ms;
 }
 
 .magic-book-slot {
@@ -39,13 +41,13 @@
 }
 
 .magic-book-slot:hover {
-    translate: 5px -5px;
-    scale: 1.1 1.1;
+    translate: 5px -10px;
+    scale: 1.2;
 }
 
 .magic-book-passive {
-    rotate: -7deg;
-    transition-duration: 500ms, 500ms;
+    rotate: -6deg;
+    transition-duration: 300ms, 300ms;
     transition-property: rotate, translate;
     transition-timing-function: ease-out, ease-out;
     transform-origin: left bottom;
@@ -53,7 +55,7 @@
 
 .magic-book-passive:hover {
     rotate: -10deg;
-    translate: -4px 0;
+    translate: -12px 16px;
     transform-origin: left bottom;
 }
 
@@ -64,12 +66,12 @@
 
 .magic-book-close {
     transition-property: translate;
-    transition-duration: 500ms;
-    transition-timing-function: ease-out;
+    transition-duration: 300ms;
+    transition-timing-function: ease-out-sine;
 }
 
 .magic-book-close:hover {
-    translate: 10px 0;
+    translate: 14px 2px;
 }
 
 .rune-dragger {
