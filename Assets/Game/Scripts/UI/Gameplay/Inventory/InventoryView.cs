@@ -7,7 +7,6 @@ using Game.UI.Elements;
 using Game.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.UIElements.Experimental;
 using VContainer;
 using Button = UnityEngine.UIElements.Button;
 
@@ -16,8 +15,6 @@ namespace Game.UI
     [RequireComponent(typeof(UIDocument))]
     public class InventoryView : MonoBehaviour
     {
-        private const int OFFSET_BOTTOM = -100;
-
         [SerializeField]
         private HudView hud;
 
@@ -53,6 +50,7 @@ namespace Game.UI
         
         private readonly List<RuneSlotInventoryView> _runeSlots = new();
         private VisualElement _root;
+        private VisualElement _book;
 
         [Inject]
         public void Construct(InventoryViewModel viewModel)
@@ -65,7 +63,8 @@ namespace Game.UI
 
             _root = GetComponent<UIDocument>().rootVisualElement;
 
-            _container = _root.Q<VisualElement>(LayoutNames.Inventory.CONTAINER);
+            _container = _root.Q<VisualElement>(LayoutNames.Inventory.SCREEN);
+            _book = _container.Q<VisualElement>(LayoutNames.Inventory.BOOK);
             _buttonClose = _root.Q<Button>(LayoutNames.Inventory.BUTTON_CLOSE);
 
             _runeDetails = _root.Q<VisualElement>(LayoutNames.Inventory.PAGE_DETAILS);
@@ -234,9 +233,8 @@ namespace Game.UI
 
         public void HideImmediate()
         {
-            _container.SetDisplay(false);
-            _container.SetOpacity(0f);
-            _container.style.bottom = OFFSET_BOTTOM;
+            _container.SetVisibility(false);
+            _book.AddToClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
             
             HideDetails();
 
@@ -258,7 +256,7 @@ namespace Game.UI
 
         public async UniTask ShowAsync()
         {
-            FadeIn(_showDuration);
+            Show();
             await UniTask.Delay(_showDuration);
             OnShow();
         }
@@ -266,32 +264,33 @@ namespace Game.UI
         public async UniTask HideAsync()
         {
             OnHide();
-            FadeOut(_hideDuration);
+            Hide();
             await UniTask.Delay(_hideDuration);
+            _container.SetVisibility(false);
             
             HideFeedbacks();
         }
 
-        private void FadeIn(TimeSpan duration)
+        private void Show()
         {
-            if (showFeedbacks)
-                showFeedbacks.SetActive(true);
+            ShowFeedbacks();
             
-            _container.SetDisplay(true);
-            _container.experimental.animation
-                .Start(new StyleValues { opacity = 1f, bottom = 0 }, (int)duration.TotalMilliseconds)
-                .Ease(Easing.InOutSine);
+            _container.SetVisibility(true);
+            _book.RemoveFromClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
         }
 
-        private void FadeOut(TimeSpan duration)
+        private void Hide()
         {
             if (hideFeedbacks)
                 hideFeedbacks.SetActive(true);
             
-            _container.experimental.animation
-                .Start(new StyleValues { opacity = 0f, bottom = OFFSET_BOTTOM }, (int)duration.TotalMilliseconds)
-                .Ease(Easing.InOutSine)
-                .OnCompleted(() => _container.SetDisplay(false));
+            _book.AddToClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
+        }
+
+        private void ShowFeedbacks()
+        {
+            if (showFeedbacks)
+                showFeedbacks.SetActive(true);
         }
 
         private void HideFeedbacks()

@@ -63,7 +63,8 @@
 
         public static class Inventory
         {
-            public const string CONTAINER = "book-screen";
+            public const string SCREEN = "book-screen";
+            public const string BOOK = "book";
             public const string BUTTON_CLOSE = "button-close";
             
             public const string PAGE_DETAILS = "page-details";
@@ -79,6 +80,9 @@
             public const string RUNE_PASSIVE_SLOT_CLASS_NAME = "magic-book-slot-passive";
             public const string SLOT_DISABLED_CLASS_NAME = "magic-book-slot--disabled";
             public const string RUNE_SLOT_ICON = "icon";
+
+            public const string BOOK_CLASS_NAME = "magic-book";
+            public const string BOOK_HIDDEN_CLASS_NAME = "magic-book--hidden";
 
             public const string BOOK_DETAILS_CLASS_NAME = "magic-book-details";
             public const string BOOK_DETAILS_HIDDEN_CLASS_NAME = "magic-book-details--hidden";

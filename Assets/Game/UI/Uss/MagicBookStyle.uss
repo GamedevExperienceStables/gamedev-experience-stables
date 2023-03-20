@@ -3,6 +3,24 @@
     --passive-slot-size: 75px;
 }
 
+.magic-book {
+    translate: 0;
+    opacity: 1;
+    transition-property: translate, rotate, scale, opacity;
+    transition-timing-function: ease-out-sine, ease-out-sine, ease-out-sine, ease-out;
+    transition-duration: 300ms, 200ms, 100ms, 150ms;
+}
+
+.magic-book--hidden {
+    translate: 0 -100px;
+    rotate: -35deg;
+    scale: 0.7;
+    opacity: 0;
+    transition-property: translate, rotate, scale, opacity;
+    transition-timing-function: ease-in-sine, ease-in-sine, ease-in-sine, ease-out;
+    transition-duration: 200ms, 200ms, 200ms, 200ms;
+}
+
 .magic-book-slot {
     position: absolute;
     transition-property: translate, scale;
