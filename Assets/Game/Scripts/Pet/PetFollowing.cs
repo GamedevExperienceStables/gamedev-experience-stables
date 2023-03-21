@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Game.Level.Data.Pet
+namespace Game.Pet
 {
     public class PetFollowing : MonoBehaviour
     {

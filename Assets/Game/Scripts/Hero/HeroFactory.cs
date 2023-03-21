@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Game.Actors;
 using Game.Inventory;
-using Game.Level.Data.Pet;
+using Game.Pet;
 using Game.Player;
 using UnityEngine;
 using VContainer;
