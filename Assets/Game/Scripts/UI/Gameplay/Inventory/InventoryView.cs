@@ -21,7 +21,7 @@ namespace Game.UI
         [Header("Show")]
         [SerializeField, Min(0f)]
         private float showDuration = 0.4f;
-        
+
         [SerializeField]
         private GameObject showFeedbacks;
 
@@ -47,7 +47,8 @@ namespace Game.UI
         private VisualElement _runeDetails;
         private Label _runeTitleText;
         private Label _runeDescription;
-        
+        private Label _runeLevelText;
+
         private readonly List<RuneSlotInventoryView> _runeSlots = new();
         private VisualElement _root;
         private VisualElement _book;
@@ -70,6 +71,7 @@ namespace Game.UI
             _runeDetails = _root.Q<VisualElement>(LayoutNames.Inventory.PAGE_DETAILS);
             _runeTitleIcon = _root.Q<VisualElement>(LayoutNames.Inventory.RUNE_ICON);
             _runeTitleText = _root.Q<Label>(LayoutNames.Inventory.RUNE_NAME);
+            _runeLevelText = _root.Q<Label>(LayoutNames.Inventory.RUNE_LEVEL);
             _runeDescription = _root.Q<Label>(LayoutNames.Inventory.RUNE_DESCRIPTION);
 
             CreateRuneSlots(_root, _viewModel.ObtainedRunes);
@@ -100,7 +102,7 @@ namespace Game.UI
             foreach (RuneSlotHudView runeSlotHudView in hudRuneSlots)
                 runeSlotHudView.SubscribeRemovingRequest(OnRuneRemovingRequest);
         }
-        
+
         private void UnSubscribeHudRunes(IEnumerable<RuneSlotHudView> hudRuneSlots)
         {
             foreach (RuneSlotHudView runeSlotHudView in hudRuneSlots)
@@ -110,9 +112,10 @@ namespace Game.UI
         private void CreateRuneSlots(VisualElement root, IReadOnlyList<RuneDefinition> runes)
         {
             var slots = root.Query<VisualElement>(className: LayoutNames.Inventory.RUNE_SLOT_CLASS_NAME).ToList();
-            var passiveSlots = root.Query<VisualElement>(className: LayoutNames.Inventory.RUNE_PASSIVE_SLOT_CLASS_NAME).ToList();
+            var passiveSlots = root.Query<VisualElement>(className: LayoutNames.Inventory.RUNE_PASSIVE_SLOT_CLASS_NAME)
+                .ToList();
 
-            List<RuneDefinition> activeRunes = new(); 
+            List<RuneDefinition> activeRunes = new();
             List<RuneDefinition> passiveRunes = new();
 
             foreach (RuneDefinition rune in _viewModel.AllRunes)
@@ -132,7 +135,7 @@ namespace Game.UI
             {
                 if (i >= slots.Count)
                     break;
-                
+
                 var runeView = new RuneSlotInventoryView(slots[i], activeRunes[i]);
                 runeView.SubscribeStartDrag(OnRuneStartDrag);
                 runeView.SubscribeHover(OnRuneHover);
@@ -147,7 +150,7 @@ namespace Game.UI
             {
                 if (i >= passiveSlots.Count)
                     break;
-                
+
                 var runeView = new RuneSlotInventoryView(passiveSlots[i], passiveRunes[i]);
                 runeView.SubscribeHover(OnRuneHover);
 
@@ -192,19 +195,18 @@ namespace Game.UI
                 return;
             }
 
-            ShowDetails(evt.definition.IconEmpty, evt.definition.name, evt.definition.name);
-        }
+            RuneDefinition definition = evt.definition;
 
-        private void ShowDetails(Sprite icon, string runeName, string runeDescription)
-        {
-            _runeTitleIcon.style.backgroundImage = new StyleBackground(icon);
-            _runeTitleText.text = runeName;
-            _runeDescription.text = runeDescription;
-            
+            _runeTitleIcon.style.backgroundImage = new StyleBackground(definition.IconEmpty);
+            _runeTitleText.text = definition.Name;
+            _runeDescription.text = definition.Description;
+            _runeLevelText.text = definition.Level.name;
+            _runeLevelText.style.color = definition.Level.Color;
+
             _runeDetails.RemoveFromClassList(LayoutNames.Inventory.BOOK_DETAILS_HIDDEN_CLASS_NAME);
         }
 
-        private void HideDetails() 
+        private void HideDetails()
             => _runeDetails.AddToClassList(LayoutNames.Inventory.BOOK_DETAILS_HIDDEN_CLASS_NAME);
 
         private void OnRuneStopDrag()
@@ -228,7 +230,7 @@ namespace Game.UI
             }
         }
 
-        private void OnRuneRemovingRequest(RuneSlotRemoveEvent evt) 
+        private void OnRuneRemovingRequest(RuneSlotRemoveEvent evt)
             => _viewModel.RemoveRuneFromHudSlot(evt.id);
 
         private void OnCloseClicked()
@@ -238,7 +240,7 @@ namespace Game.UI
         {
             _container.SetVisibility(false);
             _book.AddToClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
-            
+
             HideDetails();
 
             OnHide();
@@ -253,7 +255,7 @@ namespace Game.UI
 
         private void OnHide()
         {
-            foreach (RuneSlotHudView hudRuneSlotView in hud.RuneSlots) 
+            foreach (RuneSlotHudView hudRuneSlotView in hud.RuneSlots)
                 hudRuneSlotView.DisableInteraction();
         }
 
@@ -270,14 +272,14 @@ namespace Game.UI
             Hide();
             await UniTask.Delay(_hideDuration);
             _container.SetVisibility(false);
-            
+
             HideFeedbacks();
         }
 
         private void Show()
         {
             ShowFeedbacks();
-            
+
             _container.SetVisibility(true);
             _book.RemoveFromClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
         }
@@ -286,7 +288,7 @@ namespace Game.UI
         {
             if (hideFeedbacks)
                 hideFeedbacks.SetActive(true);
-            
+
             _book.AddToClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
         }
 

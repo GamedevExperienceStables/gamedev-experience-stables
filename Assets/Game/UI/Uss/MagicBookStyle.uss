@@ -6,8 +6,7 @@
 .magic-book {
     translate: 0;
     opacity: 1;
-
-    transform-origin: center bottom;    
+    transform-origin: center bottom;
     transition-property: translate, scale, opacity;
     transition-timing-function: ease-out, ease-out-sine, ease-out;
     transition-duration: 300ms, 100ms, 150ms;
@@ -17,7 +16,6 @@
     translate: 0 -100px;
     scale: 0 0.75;
     opacity: 0;
-    
     transition-property: translate, scale, opacity;
     transition-timing-function: ease-in-sine, ease-in-sine, ease-out;
     transition-duration: 200ms, 150ms, 175ms;
@@ -103,6 +101,8 @@
     flex-shrink: 1;
     white-space: normal;
     letter-spacing: -4px;
+    margin: 0;
+    padding: 0;
 }
 
 .magic-book-details__description {
@@ -110,4 +110,11 @@
     padding: 35px 20px 20px 20px;
     font-size: 20px;
     white-space: normal;
+}
+
+.magic-book-details__level {
+    font-size: 20px;
+    -unity-font-style: bold;
+    margin: 0;
+    padding: 0;
 }

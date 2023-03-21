@@ -71,6 +71,7 @@
             
             public const string RUNE_NAME = "text-rune-name";
             public const string RUNE_DESCRIPTION = "text-rune-description";
+            public const string RUNE_LEVEL = "text-rune-level";
             public const string RUNE_ICON = "image-rune-icon";
 
             public const string RUNE_DRAGGER = "rune-dragger";
