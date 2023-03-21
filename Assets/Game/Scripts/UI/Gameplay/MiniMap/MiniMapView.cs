@@ -8,22 +8,18 @@ namespace Game.UI
 {
     public class MiniMapView
     {
-        private struct MiniMapData
-        {
-            public Bounds mapBounds;
-            public Bounds worldBounds;
-        }
-
         private readonly MiniMapViewModel _viewModel;
-        private VisualElement _playerRepresentation;
-        private VisualElement _container;
+        private VisualElement _playerMarker;
+        private VisualElement _root;
         private VisualElement _mapWrapper;
-        private VisualElement _map;
 
         private bool _isActive;
 
-        private MiniMapData _miniMap;
         private Transform _hero;
+
+        private MiniMap _miniMap;
+        private MiniMapMarkers _miniMapMarkers;
+
 
         [Inject]
         public MiniMapView(MiniMapViewModel viewModel)
@@ -34,20 +30,37 @@ namespace Game.UI
             CreateMap(root);
 
             _viewModel.SubscribeLocationInitialized(OnLocationInitialized);
+
+            _viewModel.SubscribeMarkerAdd(OnMarkerAdd);
+            _viewModel.SubscribeMarkerRemove(OnMarkerRemove);
         }
 
         public void Destroy()
-            => _viewModel.UnSubscribeLocationInitialized(OnLocationInitialized);
+        {
+            _viewModel.UnSubscribeLocationInitialized(OnLocationInitialized);
+
+            _viewModel.UnSubscribeMarkerAdd(OnMarkerAdd);
+            _viewModel.UnSubscribeMarkerRemove(OnMarkerRemove);
+        }
 
         private void CreateMap(VisualElement root)
         {
-            _container = root.Q<VisualElement>("mini-map");
-
-            _mapWrapper = _container.Q<VisualElement>("map-wrapper");
-            _map = _container.Q<VisualElement>("map");
-
-            _playerRepresentation = _container.Q<VisualElement>("player");
+            _root = root.Q<VisualElement>(LayoutNames.MiniMap.ROOT);
+            _mapWrapper = _root.Q<VisualElement>(LayoutNames.MiniMap.MAP_WRAPPER);
+            
+            _playerMarker = _root.Q<VisualElement>(LayoutNames.MiniMap.PLAYER);
+            
+            var map = _root.Q<VisualElement>(LayoutNames.MiniMap.MAP);
+            
+            _miniMap = new MiniMap(map);
+            _miniMapMarkers = new MiniMapMarkers(_miniMap);
         }
+
+        private void OnMarkerAdd(ILocationMarker target) 
+            => _miniMapMarkers.Create(target);
+
+        private void OnMarkerRemove(ILocationMarker target) 
+            => _miniMapMarkers.Remove(target);
 
         private void OnLocationInitialized()
         {
@@ -59,18 +72,7 @@ namespace Game.UI
                 return;
             }
 
-            Rect mapRect = definition.MapImage.rect;
-
-            _miniMap = new MiniMapData
-            {
-                mapBounds = new Bounds(mapRect.center, mapRect.size),
-                worldBounds = _viewModel.LocationBounds,
-            };
-
-            _map.style.backgroundImage = new StyleBackground(definition.MapImage);
-            _map.style.width = mapRect.width;
-            _map.style.height = mapRect.height;
-
+            _miniMap.Init(definition.MapImage, _viewModel.LocationBounds);
             _hero = _viewModel.Hero;
 
             Show();
@@ -82,15 +84,17 @@ namespace Game.UI
                 return;
 
             Vector2 heroMapPosition = UpdateHeroMarker();
+            _miniMap.SetCenterPosition(heroMapPosition);
+            _miniMapMarkers.Tick();
 
-            UpdateCenterPosition(heroMapPosition);
             UpdateMapRotation();
         }
 
         private Vector2 UpdateHeroMarker()
         {
-            Vector2 heroMapPosition = WorldToMapPosition(_hero.position);
-            _playerRepresentation.style.translate = new Translate(heroMapPosition.x, heroMapPosition.y);
+            Vector2 heroMapPosition = _miniMap.WorldToMapPosition(_hero.position);
+            _playerMarker.style.translate = new Translate(heroMapPosition.x, heroMapPosition.y);
+            _playerMarker.style.rotate = new Rotate(_hero.eulerAngles.y);
 
             return heroMapPosition;
         }
@@ -101,47 +105,26 @@ namespace Game.UI
             _mapWrapper.style.rotate = new Rotate(angle);
         }
 
-        private void UpdateCenterPosition(Vector2 position)
-            => _map.style.translate = new Translate(-position.x, -position.y);
-
-        private Vector2 WorldToMapPosition(Vector3 position)
-        {
-            Vector3 worldMin = _miniMap.worldBounds.min;
-            Vector3 worldMax = _miniMap.worldBounds.max;
-
-            Vector3 min = _miniMap.mapBounds.min;
-            Vector3 max = _miniMap.mapBounds.max;
-
-            float x = MathExtensions.Remap(position.x, worldMin.x, worldMax.x, min.x, max.x);
-
-            // should be used 'max' value as 'min', because origin of the map coordinates
-            // goes from top to bottom, and the world coordinates from bottom to top 
-            float y = MathExtensions.Remap(position.z, worldMin.z, worldMax.z, max.y, min.y);
-
-            return new Vector2(x, y);
-        }
-
         private void Reset()
         {
             _hero = null;
-            _miniMap = default;
-
-            _map.style.backgroundImage = null;
-            _map.style.translate = default;
-
+            
+            _miniMap.Clear();
+            _miniMapMarkers.Clear();
+            
             _mapWrapper.style.rotate = default;
         }
 
         private void Hide()
         {
             _isActive = false;
-            _container.SetVisibility(false);
+            _root.SetVisibility(false);
         }
 
         private void Show()
         {
             _isActive = true;
-            _container.SetVisibility(true);
+            _root.SetVisibility(true);
         }
 
         private static bool MapExists(ILocationDefinition definition)

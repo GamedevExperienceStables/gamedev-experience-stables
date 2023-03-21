@@ -47,6 +47,19 @@
             public const string WIDGET_SAVING_CLASS_NAME = "widget-saving";
             public const string WIDGET_SAVING_ENABLED_CLASS_NAME = "widget-saving--enabled";
         }
+        
+        public static class MiniMap
+        {
+            public const string ROOT = "mini-map";
+
+            public const string PLAYER = "player";
+            
+            public const string MAP = "map";
+            public const string MAP_WRAPPER = "map-wrapper";
+            public const string MAP_CONTAINER = "map-container";
+            
+            public const string MARKER_CLASS_NAME = "mini-map__marker";
+        }
 
         public static class LoadingScreen
         {
