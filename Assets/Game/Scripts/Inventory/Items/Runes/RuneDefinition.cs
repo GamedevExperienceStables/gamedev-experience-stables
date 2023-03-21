@@ -13,6 +13,15 @@ namespace Game.Inventory
         private Sprite iconActive;
         
         [SerializeField]
+        private Sprite iconEmpty;
+        
+        [SerializeField]
+        private string description;
+        
+        [SerializeField]
+        private RuneLevelDefinition level;
+        
+        [SerializeField]
         private AbilityDefinition grantAbility;
         
         [SerializeField]
@@ -20,6 +29,11 @@ namespace Game.Inventory
 
         public Sprite Icon => icon;
         public Sprite IconActive => iconActive;
+        public Sprite IconEmpty => iconEmpty;
+        public string Name => name;
+        public string Description => description;
+        public RuneLevelDefinition Level => level;
+        
         public AbilityDefinition GrantAbility => grantAbility;
         public RuneType Type => type;
 

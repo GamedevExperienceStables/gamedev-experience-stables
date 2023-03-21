@@ -31,6 +31,8 @@ namespace Game.Inventory
 
         public void Init(IEnumerable<MaterialInitialData> container, IEnumerable<MaterialInitialData> bag)
         {
+            Reset();
+            
             foreach (MaterialInitialData data in container)
                 _container.SetValue(data.material, data.quantity);
             

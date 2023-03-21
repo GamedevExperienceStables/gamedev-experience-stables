@@ -13,6 +13,7 @@ namespace Game.UI
         private readonly VisualElement _element;
         
         private event Action<RuneSlotDragEvent> PointerDownCallback;
+        private event Action<RuneSlotHoverEvent> PointerHoverCallback;
 
         public RuneSlotInventoryView(VisualElement element, RuneDefinition runeDefinition)
         {
@@ -26,16 +27,18 @@ namespace Game.UI
             Deactivate();
             
             element.RegisterCallback<PointerDownEvent>(OnPointerDown);
+            element.RegisterCallback<PointerEnterEvent>(OnPointerEnter);
+            element.RegisterCallback<PointerOutEvent>(OnPointerOut);
         }
-        
+
         public void Activate()
         {
-            _element.SetEnabled(true);
+            _element.SetVisibility(true);
         }
 
         public void Deactivate()
         {
-            _element.SetEnabled(false);
+            _element.SetVisibility(false);
         }
 
         public void UseSlot()
@@ -56,6 +59,12 @@ namespace Game.UI
 
         public void UnSubscribeStartDrag(Action<RuneSlotDragEvent> callback)
             => PointerDownCallback -= callback;
+        
+        public void SubscribeHover(Action<RuneSlotHoverEvent> callback)
+            => PointerHoverCallback += callback;
+
+        public void UnsubscribeHover(Action<RuneSlotHoverEvent> callback)
+            => PointerHoverCallback -= callback;
 
         private void OnPointerDown(PointerDownEvent evt)
         {
@@ -76,6 +85,30 @@ namespace Game.UI
                 definition = _runeDefinition
             };
             PointerDownCallback?.Invoke(dragEvent);
+        }
+
+        private void OnPointerEnter(PointerEnterEvent evt)
+        {
+            OnHover(evt, true);
+        }
+
+        private void OnPointerOut(PointerOutEvent evt)
+        {
+            OnHover(evt, false);
+        }
+
+        private void OnHover(IPointerEvent evt, bool state)
+        {
+            if (_runeDefinition == null)
+                return;
+
+            var hoverEvent = new RuneSlotHoverEvent()
+            {
+                pointerId = evt.pointerId,
+                definition = _runeDefinition,
+                state = state
+            };
+            PointerHoverCallback?.Invoke(hoverEvent);
         }
 
         private Vector2 GetWorldPosition() 
