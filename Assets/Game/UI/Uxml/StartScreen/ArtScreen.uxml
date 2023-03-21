@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center;">
+        <ui:Label tabindex="-1" text="Art" display-tooltip-when-elided="true" name="label-settings" style="-unity-text-align: upper-center; font-size: 43px; -unity-font-style: bold;" />
+        <ui:VisualElement style="background-color: rgba(0, 0, 0, 0);">
+            <ui:Button text="Back" display-tooltip-when-elided="true" name="button-back" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

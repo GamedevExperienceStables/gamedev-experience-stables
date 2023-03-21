@@ -1,114 +1,46 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
-using Game.Level;
-using Game.Utils;
-using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
-using UnityEngine.UIElements.Experimental;
-using VContainer;
+﻿using UnityEngine.UIElements;
 
 namespace Game.UI
 {
-    [RequireComponent(typeof(UIDocument))]
-    public class PauseMenuView : MonoBehaviour
+    public class PauseMenuView : PageView<PauseMenuViewModel>
     {
-        [SerializeField]
-        private float showDuration = 0.2f;
-
-        [SerializeField]
-        private float hideDuration = 0.2f;
-
-        [Header("Blur")]
-        [SerializeField]
-        private Volume globalVolume;
+        private VisualElement _container;
 
         private Button _buttonResume;
         private Button _buttonMainMenu;
+        private Button _buttonSettings;
 
-        private GameplayViewModel _viewModel;
-        private VisualElement _container;
+        private PauseViewRouter _router;
 
-        private TimeSpan _showDuration;
-        private TimeSpan _hideDuration;
-
-        private BlurHandler _blurHandler;
-
-        [Inject]
-        public void Construct(GameplayViewModel viewModel)
-            => _viewModel = viewModel;
-
-        private void Awake()
+        protected override void OnAwake()
         {
-            _blurHandler = new BlurHandler(globalVolume);
+            SetContent(LayoutNames.PauseMenu.CONTAINER);
 
-            VisualElement root = GetComponent<UIDocument>().rootVisualElement;
+            _router = GetComponent<PauseViewRouter>();
 
-            _container = root.Q<VisualElement>(LayoutNames.PauseMenu.CONTAINER);
-            _buttonResume = root.Q<Button>(LayoutNames.PauseMenu.BUTTON_RESUME);
-            _buttonMainMenu = root.Q<Button>(LayoutNames.PauseMenu.BUTTON_MAIN_MENU);
+            _buttonResume = Content.Q<Button>(LayoutNames.PauseMenu.BUTTON_RESUME);
+            _buttonSettings = Content.Q<Button>(LayoutNames.PauseMenu.BUTTON_SETTINGS);
+            _buttonMainMenu = Content.Q<Button>(LayoutNames.PauseMenu.BUTTON_MAIN_MENU);
 
-            _buttonResume.clicked += ResumeGame;
-            _buttonMainMenu.clicked += GoToMainMenu;
-
-            _showDuration = TimeSpan.FromSeconds(showDuration);
-            _hideDuration = TimeSpan.FromSeconds(hideDuration);
+            _buttonResume.clicked += OnResumeButton;
+            _buttonMainMenu.clicked += OnMainMenuButton;
+            _buttonSettings.clicked += OnSettingsButton;
         }
 
-        private void OnDestroy()
+        public void OnDestroy()
         {
-            _buttonResume.clicked -= ResumeGame;
-            _buttonMainMenu.clicked -= GoToMainMenu;
+            _buttonResume.clicked -= OnResumeButton;
+            _buttonMainMenu.clicked -= OnMainMenuButton;
+            _buttonSettings.clicked -= OnSettingsButton;
         }
 
-        public void ShowImmediate()
-            => _container.SetDisplay(true);
+        private void OnResumeButton()
+            => ViewModel.ResumeGame();
 
-        public void HideImmediate()
-        {
-            _container.SetDisplay(false);
-            _container.SetOpacity(0f);
-            
-            _blurHandler.HideImmediate();
-        }
+        private void OnMainMenuButton()
+            => ViewModel.GoToMainMenu();
 
-        public UniTask ShowAsync()
-        {
-            FadeIn(_showDuration);
-            return UniTask.Delay(_showDuration, true);
-        }
-
-        public UniTask HideAsync()
-        {
-            FadeOut(_hideDuration);
-            return UniTask.Delay(_hideDuration, true);
-        }
-
-        private void ResumeGame()
-            => _viewModel.ResumeGame();
-
-        private void GoToMainMenu()
-            => _viewModel.GoToMainMenu();
-
-        private void FadeIn(TimeSpan duration)
-        {
-            _blurHandler.FadeIn(duration);
-
-            _container.SetDisplay(true);
-            _container.experimental.animation
-                .Start(new StyleValues { opacity = 1f }, (int)duration.TotalMilliseconds)
-                .Ease(Easing.InCubic)
-                .OnCompleted(() => _buttonResume.Focus());
-        }
-
-        private void FadeOut(TimeSpan duration)
-        {
-            _blurHandler.FadeOut(duration);
-
-            _container.experimental.animation
-                .Start(new StyleValues { opacity = 0f }, (int)duration.TotalMilliseconds)
-                .Ease(Easing.InCubic)
-                .OnCompleted(() => _container.SetDisplay(false));
-        }
+        private void OnSettingsButton()
+            => _router.OpenSettings();
     }
 }

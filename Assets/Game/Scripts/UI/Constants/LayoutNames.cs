@@ -2,12 +2,24 @@
 {
     public static class LayoutNames
     {
+        public static class Pause
+        {
+            public const string CONTAINER = "pause-screen";
+        }
+        
         public static class PauseMenu
         {
             public const string CONTAINER = "pause-menu";
             
             public const string BUTTON_MAIN_MENU = "button-exit";
             public const string BUTTON_RESUME = "button-resume";
+            public const string BUTTON_SETTINGS = "button-settings";
+        }
+        
+        public static class PauseSettings
+        {
+            public const string CONTAINER = "pause-settings";
+            public const string BUTTON_BACK = "button-back";
         }
 
         public static class StartMenu
@@ -15,6 +27,11 @@
             public const string BUTTON_START = "button-start";
             public const string BUTTON_CONTINUE = "button-continue";
             public const string BUTTON_QUIT = "button-quit";
+            public const string BUTTON_SETTINGS = "button-settings";
+            public const string BUTTON_ABOUT = "button-about";
+            public const string BUTTON_ART = "button-art";
+            
+            public const string BUTTON_BACK = "button-back";
         }
 
         public static class Hud

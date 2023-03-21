@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="PauseMenu" src="project://database/Assets/Game/UI/Uxml/PauseMenu.uxml?fileID=9197481963319205126&amp;guid=07f951873c933ae4fa51681ad4c13f45&amp;type=3#PauseMenu" />
+    <ui:Template name="PauseSettings" src="project://database/Assets/Game/UI/Uxml/PauseSettings.uxml?fileID=9197481963319205126&amp;guid=bf7941e5d7964099af6c0f6ac83757c3&amp;type=3#PauseSettings" />
+    <ui:VisualElement name="pause-screen" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.64); align-items: center; justify-content: center; flex-shrink: 0;">
+            <ui:Instance name="pause-menu" template="PauseMenu" style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; flex-grow: 1;" />
+            <ui:Instance name="pause-settings" template="PauseSettings" style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; flex-grow: 1;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
