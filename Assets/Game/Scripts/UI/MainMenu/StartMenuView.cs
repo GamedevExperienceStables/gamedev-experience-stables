@@ -1,70 +1,77 @@
 ﻿using Game.Utils;
-using UnityEngine;
 using UnityEngine.UIElements;
-using VContainer;
 
 namespace Game.UI
 {
-    [RequireComponent(typeof(UIDocument))]
-    public class StartMenuView : MonoBehaviour
+    public class StartMenuView : PageView<StartMenuViewModel>
     {
-        private VisualElement _root;
-
         private Button _buttonStart;
         private Button _buttonContinue;
         private Button _buttonQuit;
+        private Button _buttonSettings;
+        private Button _buttonAbout;
+        private Button _buttonArt;
 
-        private StartMenuViewModel _viewModel;
-
-        [Inject]
-        public void Construct(StartMenuViewModel viewModel)
+        protected override void OnAwake()
         {
-            _viewModel = viewModel;
-        }
+            _buttonStart = Content.Q<Button>(LayoutNames.StartMenu.BUTTON_START);
+            _buttonContinue = Content.Q<Button>(LayoutNames.StartMenu.BUTTON_CONTINUE);
 
-        private void Awake()
-        {
-            _root = GetComponent<UIDocument>().rootVisualElement;
+            _buttonSettings = Content.Q<Button>(LayoutNames.StartMenu.BUTTON_SETTINGS);
+            _buttonAbout = Content.Q<Button>(LayoutNames.StartMenu.BUTTON_ABOUT);
+            _buttonArt = Content.Q<Button>(LayoutNames.StartMenu.BUTTON_ART);
+            _buttonQuit = Content.Q<Button>(LayoutNames.StartMenu.BUTTON_QUIT);
 
-            _buttonStart = _root.Q<Button>(LayoutNames.StartMenu.BUTTON_START);
             _buttonStart.clicked += NewGame;
-            
-            _buttonContinue = _root.Q<Button>(LayoutNames.StartMenu.BUTTON_CONTINUE);
             _buttonContinue.clicked += ContinueGame;
 
-            _buttonQuit = _root.Q<Button>(LayoutNames.StartMenu.BUTTON_QUIT);
+            _buttonSettings.clicked += OpenSettings;
+            _buttonAbout.clicked += OpenAbout;
+            _buttonArt.clicked += OpenArt;
             _buttonQuit.clicked += QuitGame;
         }
-
-        private void Start() => Show();
 
         private void OnDestroy()
         {
             _buttonStart.clicked -= NewGame;
             _buttonQuit.clicked -= QuitGame;
+
+            _buttonSettings.clicked -= OpenSettings;
+            _buttonAbout.clicked -= OpenAbout;
+            _buttonArt.clicked -= OpenArt;
+            _buttonQuit.clicked -= QuitGame;
         }
 
-        public void Show()
+        public override void Show()
         {
-            _buttonContinue.SetDisplay(_viewModel.IsSaveGameExists());
+            _buttonContinue.SetDisplay(ViewModel.IsSaveGameExists());
 
-            _root.style.display = DisplayStyle.Flex;
+            Content.SetDisplay(true);
 
             _buttonStart.Focus();
         }
 
-        public void Hide()
+        public override void Hide()
         {
-            _root.style.display = DisplayStyle.None;
+            Content.SetDisplay(false);
         }
 
-        private void NewGame() 
-            => _viewModel.NewGame();
-        
-        private void ContinueGame() 
-            => _viewModel.ContinueGame();
+        private void NewGame()
+            => ViewModel.NewGame();
 
-        private void QuitGame() 
-            => _viewModel.QuitGame();
+        private void ContinueGame()
+            => ViewModel.ContinueGame();
+
+        private void QuitGame()
+            => ViewModel.QuitGame();
+
+        private void OpenArt()
+            => ViewModel.OpenArt();
+
+        private void OpenAbout()
+            => ViewModel.OpenAbout();
+
+        private void OpenSettings()
+            => ViewModel.OpenSettings();
     }
 }

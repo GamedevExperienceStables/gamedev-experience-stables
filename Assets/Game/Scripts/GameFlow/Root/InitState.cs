@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using UnityEngine;
 using VContainer;
 
 namespace Game.GameFlow
@@ -13,8 +12,6 @@ namespace Game.GameFlow
 
         protected override UniTask OnEnter()
         {
-            Application.targetFrameRate = 120;
-
             return Parent.EnterState<MainMenuState>();
         }
 
