@@ -86,6 +86,7 @@ namespace Game.LifetimeScopes
             builder.Register<GameplayGameOver>(Lifetime.Scoped);
             builder.Register<GameplayInventory>(Lifetime.Scoped);
             builder.Register<LocationController>(Lifetime.Scoped);
+            builder.Register<LocationMarkers>(Lifetime.Singleton);
             builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
@@ -124,14 +125,21 @@ namespace Game.LifetimeScopes
             builder.Register<MiniMapView>(Lifetime.Scoped);
             builder.Register<MiniMapViewModel>(Lifetime.Scoped);
 
+            builder.Register<PauseMenuViewModel>(Lifetime.Scoped);
+
             builder.RegisterInstance(gameplayView);
             Transform uiRoot = gameplayView.transform;
             builder.UseComponents(uiRoot, componentsBuilder =>
             {
                 componentsBuilder.AddInHierarchy<HudView>();
-                componentsBuilder.AddInHierarchy<PauseMenuView>();
                 componentsBuilder.AddInHierarchy<GameOverView>();
                 componentsBuilder.AddInHierarchy<InventoryView>();
+                
+                componentsBuilder.AddInHierarchy<PauseView>();
+                componentsBuilder.AddInHierarchy<PauseViewRouter>();
+                
+                componentsBuilder.AddInHierarchy<PauseMenuView>();
+                componentsBuilder.AddInHierarchy<PauseSettingsView>();
             });
         }
 

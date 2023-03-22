@@ -123,11 +123,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 14
-        y: 822
+        y: 1496
         width: 248
         height: 258
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -144,11 +144,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 283
-        y: 820
+        y: 1494
         width: 248
         height: 258
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -165,11 +165,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 552
-        y: 827
+        y: 1501
         width: 248
         height: 258
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -185,12 +185,12 @@ TextureImporter:
       name: Rune_Atlas_3
       rect:
         serializedVersion: 2
-        x: 877
-        y: 827
+        x: 947
+        y: 1501
         width: 248
         height: 258
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -206,12 +206,12 @@ TextureImporter:
       name: Rune_Atlas_4
       rect:
         serializedVersion: 2
-        x: 1146
-        y: 822
+        x: 1216
+        y: 1496
         width: 248
         height: 258
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -227,12 +227,12 @@ TextureImporter:
       name: Rune_Atlas_5
       rect:
         serializedVersion: 2
-        x: 1415
-        y: 822
+        x: 1485
+        y: 1496
         width: 248
         height: 258
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -248,12 +248,12 @@ TextureImporter:
       name: Rune_Atlas_6
       rect:
         serializedVersion: 2
-        x: 1740
-        y: 791
-        width: 258
-        height: 292
+        x: 15
+        y: 1227
+        width: 246
+        height: 259
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -269,12 +269,12 @@ TextureImporter:
       name: Rune_Atlas_7
       rect:
         serializedVersion: 2
-        x: 15
-        y: 553
+        x: 285
+        y: 1226
         width: 246
         height: 259
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -290,12 +290,12 @@ TextureImporter:
       name: Rune_Atlas_8
       rect:
         serializedVersion: 2
-        x: 285
-        y: 552
+        x: 555
+        y: 1227
         width: 246
         height: 259
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -311,12 +311,12 @@ TextureImporter:
       name: Rune_Atlas_9
       rect:
         serializedVersion: 2
-        x: 555
-        y: 553
+        x: 948
+        y: 1230
         width: 246
         height: 259
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -332,12 +332,12 @@ TextureImporter:
       name: Rune_Atlas_10
       rect:
         serializedVersion: 2
-        x: 878
-        y: 556
+        x: 1218
+        y: 1225
         width: 246
         height: 259
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -353,12 +353,12 @@ TextureImporter:
       name: Rune_Atlas_11
       rect:
         serializedVersion: 2
-        x: 1148
-        y: 551
+        x: 1487
+        y: 1227
         width: 246
         height: 259
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -374,12 +374,12 @@ TextureImporter:
       name: Rune_Atlas_12
       rect:
         serializedVersion: 2
-        x: 1417
-        y: 553
-        width: 246
+        x: 10
+        y: 957
+        width: 255
         height: 259
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -395,12 +395,12 @@ TextureImporter:
       name: Rune_Atlas_13
       rect:
         serializedVersion: 2
-        x: 1755
-        y: 533
-        width: 228
-        height: 240
+        x: 282
+        y: 956
+        width: 255
+        height: 259
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -416,12 +416,12 @@ TextureImporter:
       name: Rune_Atlas_14
       rect:
         serializedVersion: 2
-        x: 10
-        y: 283
+        x: 554
+        y: 955
         width: 255
         height: 259
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -437,12 +437,12 @@ TextureImporter:
       name: Rune_Atlas_15
       rect:
         serializedVersion: 2
-        x: 282
-        y: 282
+        x: 948
+        y: 957
         width: 255
         height: 259
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -458,12 +458,12 @@ TextureImporter:
       name: Rune_Atlas_16
       rect:
         serializedVersion: 2
-        x: 554
-        y: 281
+        x: 1222
+        y: 954
         width: 255
         height: 259
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -479,12 +479,12 @@ TextureImporter:
       name: Rune_Atlas_17
       rect:
         serializedVersion: 2
-        x: 878
-        y: 283
+        x: 1496
+        y: 958
         width: 255
         height: 259
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -500,12 +500,12 @@ TextureImporter:
       name: Rune_Atlas_18
       rect:
         serializedVersion: 2
-        x: 1152
-        y: 280
-        width: 255
-        height: 259
+        x: 9
+        y: 697
+        width: 258
+        height: 249
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -521,12 +521,12 @@ TextureImporter:
       name: Rune_Atlas_19
       rect:
         serializedVersion: 2
-        x: 1426
-        y: 284
-        width: 255
-        height: 259
+        x: 285
+        y: 696
+        width: 258
+        height: 249
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -542,12 +542,12 @@ TextureImporter:
       name: Rune_Atlas_20
       rect:
         serializedVersion: 2
-        x: 1761
-        y: 268
-        width: 228
-        height: 253
+        x: 561
+        y: 694
+        width: 258
+        height: 249
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -563,12 +563,12 @@ TextureImporter:
       name: Rune_Atlas_21
       rect:
         serializedVersion: 2
-        x: 9
-        y: 23
+        x: 948
+        y: 694
         width: 258
         height: 249
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -584,12 +584,12 @@ TextureImporter:
       name: Rune_Atlas_22
       rect:
         serializedVersion: 2
-        x: 285
-        y: 22
+        x: 1224
+        y: 694
         width: 258
         height: 249
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -605,12 +605,12 @@ TextureImporter:
       name: Rune_Atlas_23
       rect:
         serializedVersion: 2
-        x: 561
-        y: 20
+        x: 1500
+        y: 699
         width: 258
         height: 249
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -626,12 +626,12 @@ TextureImporter:
       name: Rune_Atlas_24
       rect:
         serializedVersion: 2
-        x: 878
-        y: 20
-        width: 258
-        height: 249
+        x: 38
+        y: 375
+        width: 214
+        height: 271
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -647,33 +647,12 @@ TextureImporter:
       name: Rune_Atlas_25
       rect:
         serializedVersion: 2
-        x: 1154
-        y: 20
-        width: 258
-        height: 249
+        x: 274
+        y: 358
+        width: 293
+        height: 303
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8f92bc1d28f24404fa64bacc683ca24c
-      internalID: -1796474913
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rune_Atlas_26
-      rect:
-        serializedVersion: 2
-        x: 1430
-        y: 25
-        width: 258
-        height: 249
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -686,15 +665,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rune_Atlas_27
+      name: Rune_Atlas_26
       rect:
         serializedVersion: 2
-        x: 1767
-        y: 15
-        width: 222
-        height: 240
+        x: 596
+        y: 358
+        width: 295
+        height: 306
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -702,6 +681,195 @@ TextureImporter:
       bones: []
       spriteID: 289b17f5cd492d643bc4bad0cf05c66e
       internalID: 234297445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_27
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 365
+        width: 285
+        height: 292
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 469ba62b1b8aee74ca898f5ae84dc29e
+      internalID: -437920025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_29
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 400
+        width: 241
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 711a5b2e96ae8a342908805b7e9a6d44
+      internalID: -199697329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_28
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 376
+        width: 227
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7afec6738ff51b04c897231e26ba45ea
+      internalID: 559214285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_30
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 31
+        width: 305
+        height: 302
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24d0492ed545aa24893f62fe08b69227
+      internalID: 2145620583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_31
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 29
+        width: 305
+        height: 304
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48ded53e289c86448a928ddbc5b15890
+      internalID: -1898423486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_32
+      rect:
+        serializedVersion: 2
+        x: 652
+        y: 43
+        width: 297
+        height: 290
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3734d442fde48b43aa53685ff7ec2c5
+      internalID: 746029437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_33
+      rect:
+        serializedVersion: 2
+        x: 963
+        y: 28
+        width: 266
+        height: 305
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adcefc6d472200d41a0dddbb6d8026e2
+      internalID: -1275128043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_34
+      rect:
+        serializedVersion: 2
+        x: 1243
+        y: 79
+        width: 237
+        height: 237
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d51381b17e594745a4d59710c85e64a
+      internalID: 28877874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune_Atlas_35
+      rect:
+        serializedVersion: 2
+        x: 1512
+        y: 79
+        width: 258
+        height: 292
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ccc3d03b8f94b349ad2f180bbc7034f
+      internalID: -487602914
       vertices: []
       indices: 
       edges: []
@@ -719,32 +887,49 @@ TextureImporter:
     nameFileIdTable:
       Rune_Atlas_23: 165856454
       Rune_Atlas_5: 782295350
-      Rune_Atlas_19: -241429601
       Rune_Atlas_6: 960232742
-      Rune_Atlas_16: -43117877
-      Rune_Atlas_3: 1728212321
       Rune_Atlas_20: -1162793113
+      Rune_Atlas_40: 1036154736
       Rune_Atlas_10: 1459473957
       Rune_Atlas_22: 218867334
-      Rune_Atlas_2: 1298988941
-      Rune_Atlas_24: -242157000
-      Rune_Atlas_8: 330004228
+      Rune_Atlas_31: -1898423486
       Rune_Atlas_11: -1255183285
-      Rune_Atlas_27: 234297445
-      Rune_Atlas_14: 52044678
+      Rune_Atlas_32: 746029437
+      Rune_Atlas_27: -437920025
+      Rune_Atlas_34: 28877874
+      Rune_Atlas_28: 559214285
+      Rune_Atlas_35: -487602914
+      Rune_Atlas_51: -129911078
       Rune_Atlas_13: -1042394706
       Rune_Atlas_15: -240247941
-      Rune_Atlas_18: -182538164
-      Rune_Atlas_7: 1148496803
-      Rune_Atlas_25: -1796474913
-      Rune_Atlas_17: -1266733905
+      Rune_Atlas_25: 116559735
       Rune_Atlas_0: 1873441744
-      Rune_Atlas_12: -2117765551
+      Rune_Atlas_33: -1275128043
       Rune_Atlas_9: 1085643959
-      Rune_Atlas_26: 116559735
+      Rune_Atlas_38: -900055733
+      Rune_Atlas_50: -1762584114
+      Rune_Atlas_36: 613912731
       Rune_Atlas_21: -471108406
       Rune_Atlas_4: 444655936
       Rune_Atlas_1: 141788313
+      Rune_Atlas_19: -241429601
+      Rune_Atlas_16: -43117877
+      Rune_Atlas_3: 1728212321
+      Rune_Atlas_49: 151907481
+      Rune_Atlas_2: 1298988941
+      Rune_Atlas_24: -242157000
+      Rune_Atlas_43: -1209860796
+      Rune_Atlas_46: -1651002524
+      Rune_Atlas_8: 330004228
+      Rune_Atlas_14: 52044678
+      Rune_Atlas_18: -182538164
+      Rune_Atlas_7: 1148496803
+      Rune_Atlas_17: -1266733905
+      Rune_Atlas_12: -2117765551
+      Rune_Atlas_26: 234297445
+      Rune_Atlas_48: 1959193269
+      Rune_Atlas_30: 2145620583
+      Rune_Atlas_29: -199697329
   mipmapLimitGroupName: 
   pSDRemoveMatte: 1
   userData: 

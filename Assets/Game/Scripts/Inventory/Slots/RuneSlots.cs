@@ -44,7 +44,7 @@ namespace Game.Inventory
 
         public void Init(IDictionary<RuneSlotId, RuneDefinition> slots)
         {
-            ClearActive();
+            Reset();
 
             foreach ((RuneSlotId id, RuneDefinition value) in slots)
             {
