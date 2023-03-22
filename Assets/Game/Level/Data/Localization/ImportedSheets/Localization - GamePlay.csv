@@ -1,0 +1,25 @@
+Key,English(en),Russian(ru),Belarusian(be),Ukrainian(uk)
+Rune_Level_1,First level rune ,Руна первого уровня,,
+Rune_Level_2,Second level rune ,Руна второго уровня,,
+Rune_Level_3,Third level rune ,Руна третьего уровня,,
+Rune_Level_Passive,Passive rune,Пассивная руна,,
+Rune_Fire_Name,Fire,Огонь,Агонь,
+Rune_Water_Name,Water,Вода,,
+Rune_Earth_Name,Earth,Земля,,
+Rune_Air_Name,Air,Воздух,,
+Rune_Lava_Name,Lava,Лава,,
+Rune_Wave_Name,Wave,Волна,,
+Rune_Life_Name,Life,Жизнь,,
+Rune_Lightning_Name,Lightning,Молния,,
+Rune_Fire_Desc,"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+
+asdfasdfdas fasdf asdf asdf asdf asdfa sdfasdf asdf asdf asdf adsf asdf asdf asdfa sdfadsf asdfa dsfadsfadsf.","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+
+Позволяет создать огненный снаряд, который наносит средний урон одной цели и тратит незначительное количество очков маны. Поджигает врага на непродолжительное время.",,
+Rune_Water_Desc,,,,
+Rune_Earth_Desc,,,,
+Rune_Air_Desc,,,,
+Rune_Lava_Desc,,,,
+Rune_Wave_Desc,,,,
+Rune_Life_Desc,,,,
+Rune_Lightning_Desc,,,,

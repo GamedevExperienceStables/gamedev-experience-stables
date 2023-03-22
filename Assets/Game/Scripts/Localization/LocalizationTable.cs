@@ -7,6 +7,8 @@
             New_Game_Button,
             Continue_Button,
             Settings_Button,
+            Artbook_Button,
+            About_Button,
             Quit_Button
         }
     }

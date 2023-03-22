@@ -198,9 +198,9 @@ namespace Game.UI
             RuneDefinition definition = evt.definition;
 
             _runeTitleIcon.style.backgroundImage = new StyleBackground(definition.IconEmpty);
-            _runeTitleText.text = definition.Name;
-            _runeDescription.text = definition.Description;
-            _runeLevelText.text = definition.Level.name;
+            _runeTitleText.text = definition.Name.GetLocalizedString();
+            _runeDescription.text = definition.Description.GetLocalizedString();
+            _runeLevelText.text = definition.Level.Text.GetLocalizedString();
             _runeLevelText.style.color = definition.Level.Color;
 
             _runeDetails.RemoveFromClassList(LayoutNames.Inventory.BOOK_DETAILS_HIDDEN_CLASS_NAME);

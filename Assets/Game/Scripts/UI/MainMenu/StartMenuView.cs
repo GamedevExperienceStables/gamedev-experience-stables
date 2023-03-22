@@ -11,17 +11,17 @@ namespace Game.UI
     {
         private Button _buttonStart;
         private Button _buttonContinue;
-        private Button _buttonQuit;
         private Button _buttonSettings;
-        private Button _buttonAbout;
         private Button _buttonArt;
+        private Button _buttonAbout;
+        private Button _buttonQuit;
         
-        private ILocalizationService _localisation;
+        private ILocalizationService _localization;
         
         [Inject]
-        public void Construct(StartMenuViewModel viewModel, ILocalizationService localisation)
+        public void Construct(ILocalizationService localisation)
         {
-            _localisation = localisation;
+            _localization = localisation;
         }
 
         protected override void OnAwake()
@@ -38,30 +38,27 @@ namespace Game.UI
             _buttonContinue.clicked += ContinueGame;
 
             _buttonSettings.clicked += OpenSettings;
-            _buttonAbout.clicked += OpenAbout;
             _buttonArt.clicked += OpenArt;
+            _buttonAbout.clicked += OpenAbout;
             _buttonQuit.clicked += QuitGame;
             
-            _localisation.Changed += OnLocalisationChanged;
+            _localization.Changed += OnLocalisationChanged;
         }
 
-        private void Start()
-        {
-            Show();
-            UpdateText();
-        }
+        private void Start() 
+            => UpdateText();
 
         private void OnDestroy()
         {
             _buttonStart.clicked -= NewGame;
-            _buttonQuit.clicked -= QuitGame;
+            _buttonContinue.clicked -= ContinueGame;
 
             _buttonSettings.clicked -= OpenSettings;
-            _buttonAbout.clicked -= OpenAbout;
             _buttonArt.clicked -= OpenArt;
+            _buttonAbout.clicked -= OpenAbout;
             _buttonQuit.clicked -= QuitGame;
             
-            _localisation.Changed += OnLocalisationChanged;
+            _localization.Changed += OnLocalisationChanged;
         }
 
         public override void Show()
@@ -80,9 +77,13 @@ namespace Game.UI
         
         private void UpdateText()
         {
-            _buttonStart.text = _localisation.GetText(LocalizationTable.GuiKeys.New_Game_Button);
-            _buttonContinue.text = _localisation.GetText(LocalizationTable.GuiKeys.Continue_Button);
-            _buttonQuit.text = _localisation.GetText(LocalizationTable.GuiKeys.Quit_Button);
+            _buttonStart.text = _localization.GetText(LocalizationTable.GuiKeys.New_Game_Button);
+            _buttonContinue.text = _localization.GetText(LocalizationTable.GuiKeys.Continue_Button);
+            
+            _buttonSettings.text = _localization.GetText(LocalizationTable.GuiKeys.Settings_Button);
+            _buttonArt.text = _localization.GetText(LocalizationTable.GuiKeys.Artbook_Button);
+            _buttonAbout.text = _localization.GetText(LocalizationTable.GuiKeys.About_Button);
+            _buttonQuit.text = _localization.GetText(LocalizationTable.GuiKeys.Quit_Button);
         }
 
         private void NewGame()
@@ -102,5 +103,8 @@ namespace Game.UI
 
         private void OpenSettings()
             => ViewModel.OpenSettings();
+        
+        private void OnLocalisationChanged() 
+            => UpdateText();
     }
 }
