@@ -1,4 +1,5 @@
-﻿using Game.Cameras;
+﻿using System.Collections.Generic;
+using Game.Cameras;
 using UnityEngine;
 
 namespace Game.Hero
@@ -7,12 +8,14 @@ namespace Game.Hero
     {
         [SerializeField]
         private Transform cameraTarget;
+        
         [SerializeField]
-        private Transform petPosition;
+        private List<Transform> petPoints;
         
         private SceneCamera _sceneCamera;
 
         public Transform CameraTarget => cameraTarget;
-        public Transform PetPosition => petPosition;
+        
+        public IList<Transform> PetPoints => petPoints;
     }
 }

@@ -4,7 +4,6 @@ using Game.Actors;
 using Game.Inventory;
 using Game.Pet;
 using Game.Player;
-using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -36,28 +35,28 @@ namespace Game.Hero
 
         public HeroController Create()
         {
-            HeroController hero = _resolver.Instantiate(_heroDefinition.Prefab);
-            _resolver.InjectGameObject(hero.gameObject);
+            HeroController hero = CreateHero();
+            PetController pet = CreatePet();
+            hero.BindPet(pet);
             
             _player.BindHero(hero);
+            
             AddAbilities(hero);
             GiveObtainedRunes(hero, _runes.Items);
-            CreatePet(hero);
 
             return hero;
         }
 
-        private void CreatePet(HeroController hero)
+        private HeroController CreateHero()
         {
-            GameObject heroGameObject = hero.gameObject;
-            
-            Transform petPosition = heroGameObject.gameObject.GetComponent<HeroView>().PetPosition;
-            GameObject pet = _resolver.Instantiate(_heroDefinition.Pet, 
-                petPosition.position, 
-                petPosition.rotation);
-            pet.GetComponent<PetFollowing>().SetFollowingPosition(petPosition);
+            HeroController hero = _resolver.Instantiate(_heroDefinition.Prefab);
+            _resolver.InjectGameObject(hero.gameObject);
+            return hero;
         }
-        
+
+        private PetController CreatePet() 
+            => _resolver.Instantiate(_heroDefinition.PetPrefab);
+
         private void AddAbilities(ActorController actor)
         {
             RegisterAbilities(actor, _heroDefinition.Abilities);
