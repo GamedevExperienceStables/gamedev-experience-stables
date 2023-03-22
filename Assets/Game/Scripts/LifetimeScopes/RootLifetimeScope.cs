@@ -4,6 +4,7 @@ using Game.Hero;
 using Game.Input;
 using Game.Inventory;
 using Game.Level;
+using Game.Localization;
 using Game.Persistence;
 using Game.Player;
 using Game.RandomManagement;
@@ -68,6 +69,7 @@ namespace Game.LifetimeScopes
         {
             builder.Register<RandomService>(Lifetime.Singleton);
             builder.Register<QuitGameService>(Lifetime.Singleton);
+            builder.Register<UnityLocalization>(Lifetime.Singleton).As<ILocalizationService>();
         }
 
         private static void RegisterInput(IContainerBuilder builder)

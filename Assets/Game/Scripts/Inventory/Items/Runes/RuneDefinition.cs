@@ -1,11 +1,18 @@
 ﻿using Game.Actors;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Game.Inventory
 {
     [CreateAssetMenu(menuName = MENU_PATH + "Rune")]
     public class RuneDefinition : ItemInventoryDefinition, IItemExecutableDefinition
     {
+        [SerializeField]
+        private LocalizedString name;
+        
+        [SerializeField]
+        private LocalizedString description;
+        
         [SerializeField]
         private Sprite icon;
         

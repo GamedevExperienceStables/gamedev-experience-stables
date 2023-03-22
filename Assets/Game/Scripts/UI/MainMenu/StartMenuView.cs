@@ -1,4 +1,6 @@
-﻿using Game.Utils;
+﻿using System;
+using Game.Localization;
+using Game.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
@@ -15,11 +17,13 @@ namespace Game.UI
         private Button _buttonQuit;
 
         private StartMenuViewModel _viewModel;
+        private ILocalizationService _localisation;
 
         [Inject]
-        public void Construct(StartMenuViewModel viewModel)
+        public void Construct(StartMenuViewModel viewModel, ILocalizationService localisation)
         {
             _viewModel = viewModel;
+            _localisation = localisation;
         }
 
         private void Awake()
@@ -34,14 +38,21 @@ namespace Game.UI
 
             _buttonQuit = _root.Q<Button>(LayoutNames.StartMenu.BUTTON_QUIT);
             _buttonQuit.clicked += QuitGame;
+
+            _localisation.Changed += OnLocalisationChanged;
         }
 
-        private void Start() => Show();
+        private void Start()
+        {
+            Show();
+            UpdateText();
+        }
 
         private void OnDestroy()
         {
             _buttonStart.clicked -= NewGame;
             _buttonQuit.clicked -= QuitGame;
+            _localisation.Changed += OnLocalisationChanged;
         }
 
         public void Show()
@@ -58,6 +69,13 @@ namespace Game.UI
             _root.style.display = DisplayStyle.None;
         }
 
+        private void UpdateText()
+        {
+            _buttonStart.text = _localisation.GetText(LocalizationTable.GuiKeys.New_Game_Button);
+            _buttonContinue.text = _localisation.GetText(LocalizationTable.GuiKeys.Continue_Button);
+            _buttonQuit.text = _localisation.GetText(LocalizationTable.GuiKeys.Quit_Button);
+        }
+
         private void NewGame() 
             => _viewModel.NewGame();
         
@@ -66,5 +84,8 @@ namespace Game.UI
 
         private void QuitGame() 
             => _viewModel.QuitGame();
+
+        private void OnLocalisationChanged() 
+            => UpdateText();
     }
 }
