@@ -10,5 +10,11 @@ namespace Game.Persistence
 
         public float GetFloat(string key, float defaultValue)
             => PlayerPrefs.GetFloat(key, defaultValue);
+
+        public void SetString(string key, string value) 
+            => PlayerPrefs.SetString(key, value);
+
+        public string GetString(string key, string defaultValue) 
+            => PlayerPrefs.GetString(key, defaultValue);
     }
 }

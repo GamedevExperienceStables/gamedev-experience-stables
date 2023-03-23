@@ -5,6 +5,7 @@ using Game.Hero;
 using Game.Input;
 using Game.Inventory;
 using Game.Level;
+using Game.Localization;
 using Game.Persistence;
 using Game.Player;
 using Game.RandomManagement;
@@ -70,12 +71,14 @@ namespace Game.LifetimeScopes
             builder.Register<PlayerGamePrefs>(Lifetime.Singleton);
             builder.Register<PlayerAudioPrefs>(Lifetime.Singleton);
             builder.Register<PlayerGraphicsPrefs>(Lifetime.Singleton);
+            builder.Register<PlayerLocalizationPrefs>(Lifetime.Singleton);
         }
 
         private static void RegisterServices(IContainerBuilder builder)
         {
             builder.Register<RandomService>(Lifetime.Singleton);
             builder.Register<QuitGameService>(Lifetime.Singleton);
+            builder.Register<UnityLocalization>(Lifetime.Singleton).As<ILocalizationService>();
             builder.Register<CursorService>(Lifetime.Singleton);
         }
 

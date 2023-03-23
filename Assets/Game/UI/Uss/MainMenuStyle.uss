@@ -1,0 +1,43 @@
+.logo {
+    -unity-font-definition: var(--font-heading);
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    
+    font-size: 65px;    
+    color: rgba(155, 89, 199, 1);
+}
+
+.menu-button {
+    -unity-font-definition: var(--font-text);
+
+    font-size: 35px;
+    color: rgb(90, 55, 55);
+}
+
+.menu-button:hover {
+    color: rgb(155, 89, 199);
+}
+
+.menu-button-disabled {
+    color: rgb(163, 133, 127);
+}
+
+.menu-button-icon {
+    background-image: url('project://database/Assets/Plugins/FMOD/images/TransportPlayButtonOff.png?fileID=2800000&guid=29258b1336a580946bc144df00b74ac1&type=3#TransportPlayButtonOff');
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.menu-button:hover .menu-button-icon {
+    background-image: url('project://database/Packages/com.unity.inputsystem/InputSystem/Editor/Icons/d_Gamepad@2x.png?fileID=2800000&guid=bed935caee9524e6780614c2055bfd35&type=3#d_Gamepad@2x');
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.menu-button-label {
+    transition-timing-function: ease-in-out;
+    transition-property: translate;
+    transition-duration: 300ms;
+}
+
+.menu-button:hover .menu-button-label {
+    translate: 10px 0;
+}

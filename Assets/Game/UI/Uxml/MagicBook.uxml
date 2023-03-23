@@ -3,37 +3,38 @@
     <Style src="project://database/Assets/Game/UI/Uss/MagicBookStyle.uss?fileID=7433441132597879392&amp;guid=6831ff871bbd7e448afec2f8860641a4&amp;type=3#MagicBookStyle" />
     <ui:VisualElement name="book-screen" picking-mode="Ignore" style="flex-grow: 1; align-items: center; justify-content: center;">
         <ui:VisualElement name="book" class="magic-book book-wrapper">
-            <ui:VisualElement name="book-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: relative; width: 1250px; height: 700px; bottom: 45px; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Magic_Book_Atlas.psd?fileID=621831437&amp;guid=cb8bf6b2ac4ea1541b25973698fb9ffe&amp;type=3#Magic_Book_Atlas_3&apos;); -unity-background-scale-mode: scale-to-fit;">
+            <ui:VisualElement name="book-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: relative; width: 1250px; height: 700px; bottom: 45px; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Magic_Book_Atlas.psd?fileID=-995416628&amp;guid=cb8bf6b2ac4ea1541b25973698fb9ffe&amp;type=3#Magic_Book_Atlas_4&apos;); -unity-background-scale-mode: scale-to-fit;">
                 <ui:VisualElement name="passive-slots" class="magic-book-passive" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Magic_Book_Atlas.psd?fileID=-1268669046&amp;guid=cb8bf6b2ac4ea1541b25973698fb9ffe&amp;type=3#Magic_Book_Atlas_1&apos;); position: absolute; width: 381px; height: 521px; top: 56px; left: -32px;">
                     <ui:Instance template="MagicBookRuneSlot" name="rune-slot-1" class="magic-book-slot--1 magic-book-slot-passive" style="position: absolute; top: 70px; left: 85px;" />
                     <ui:Instance template="MagicBookRuneSlot" name="rune-slot-2" class="magic-book-slot--2 magic-book-slot-passive" style="position: absolute; top: 217px; left: 80px;" />
                     <ui:Instance template="MagicBookRuneSlot" name="rune-slot-3" class="magic-book-slot--3 magic-book-slot-passive" style="position: absolute; top: 352px; left: 72px;" />
                 </ui:VisualElement>
+                <ui:VisualElement name="book-shadow" picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Magic_Book_Atlas.psd?fileID=1840274032&amp;guid=cb8bf6b2ac4ea1541b25973698fb9ffe&amp;type=3#Magic_Book_Atlas_5&apos;); height: 701px; width: 1092px; -unity-background-scale-mode: scale-to-fit; overflow: visible; position: absolute; top: -24px; left: 76px; visibility: visible;" />
                 <ui:Button enable-rich-text="false" name="button-close" tabindex="-1" class="magic-book-close" style="position: absolute; top: 449px; left: 1080px; height: 122px; width: 231px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Magic_Book_Atlas.psd?fileID=-1410898347&amp;guid=cb8bf6b2ac4ea1541b25973698fb9ffe&amp;type=3#Magic_Book_Atlas_2&apos;); -unity-background-scale-mode: scale-to-fit;" />
-                <ui:VisualElement name="book" style="width: 1133px; height: 709px; background-color: rgba(243, 243, 243, 0); flex-direction: row; position: absolute; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Magic_Book_Atlas.psd?fileID=335486347&amp;guid=cb8bf6b2ac4ea1541b25973698fb9ffe&amp;type=3#Magic_Book_Atlas_0&apos;); -unity-background-scale-mode: scale-to-fit; flex-grow: 1; top: -60px; left: 57px;">
+                <ui:VisualElement name="book" style="width: 1049px; height: 674px; background-color: rgba(243, 243, 243, 0); flex-direction: row; position: absolute; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Magic_Book_Atlas.psd?fileID=335486347&amp;guid=cb8bf6b2ac4ea1541b25973698fb9ffe&amp;type=3#Magic_Book_Atlas_0&apos;); -unity-background-scale-mode: scale-and-crop; flex-grow: 1; top: -41px; left: 100px;">
                     <ui:VisualElement name="side-left" style="background-color: rgba(0, 0, 0, 0.03); flex-basis: 50%;">
                         <ui:VisualElement name="runes-container">
-                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-4" class="magic-book-slot magic-book-slot--4" style="position: absolute; top: 207px; left: 275px;" />
-                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-5" class="magic-book-slot magic-book-slot--5" style="position: absolute; top: 375px; left: 282px;" />
-                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-6" class="magic-book-slot magic-book-slot--6" style="position: absolute; top: 290px; left: 331px;" />
-                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-7" class="magic-book-slot magic-book-slot--7" style="position: absolute; top: 298px; left: 231px;" />
-                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-8" class="magic-book-slot magic-book-slot--8" style="position: absolute; top: 132px; left: 394px;" />
-                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-9" class="magic-book-slot magic-book-slot--9" style="position: absolute; top: 457px; left: 160px;" />
-                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-10" class="magic-book-slot magic-book-slot--10" style="position: absolute; top: 451px; left: 396px;" />
-                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-11" class="magic-book-slot magic-book-slot--11" style="position: absolute; top: 138px; left: 148px;" />
+                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-4" class="magic-book-slot magic-book-slot--4" style="position: absolute; top: 193px; left: 231px;" />
+                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-5" class="magic-book-slot magic-book-slot--5" style="position: absolute; top: 365px; left: 238px;" />
+                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-6" class="magic-book-slot magic-book-slot--6" style="position: absolute; top: 281px; left: 289px;" />
+                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-7" class="magic-book-slot magic-book-slot--7" style="position: absolute; top: 286px; left: 185px;" />
+                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-8" class="magic-book-slot magic-book-slot--8" style="position: absolute; top: 120px; left: 350px;" />
+                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-9" class="magic-book-slot magic-book-slot--9" style="position: absolute; top: 447px; left: 116px;" />
+                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-10" class="magic-book-slot magic-book-slot--10" style="position: absolute; top: 442px; left: 354px;" />
+                            <ui:Instance template="MagicBookRuneSlot" name="rune-slot-11" class="magic-book-slot magic-book-slot--11" style="position: absolute; top: 127px; left: 105px;" />
                         </ui:VisualElement>
                         <Game.UI.Elements.RuneSlotDraggerElement name="rune-dragger" class="rune-dragger" />
                     </ui:VisualElement>
                     <ui:VisualElement name="side-right" style="background-color: rgba(0, 0, 0, 0); flex-basis: 50%; justify-content: center; align-items: center;">
                         <ui:VisualElement name="page-details" class="magic-book-details" style="background-color: rgba(0, 0, 0, 0); width: 278px; height: 305px; margin-left: -51px;">
-                            <ui:VisualElement name="page-title" style="flex-direction: row; position: absolute; top: -119px; left: -57px; width: 376px;">
+                            <ui:VisualElement name="page-title" style="flex-direction: row; position: absolute; top: -115px; left: -35px; width: 376px;">
                                 <ui:VisualElement name="image-rune-icon" style="width: 100px; height: 100px; margin-right: 20px; flex-shrink: 0; background-image: none;" />
                                 <ui:VisualElement style="justify-content: center;">
                                     <ui:Label tabindex="-1" display-tooltip-when-elided="true" name="text-rune-name" text="RUNE_TITLE" class="magic-book-details__title" style="text-overflow: ellipsis;" />
                                     <ui:Label tabindex="-1" display-tooltip-when-elided="true" name="text-rune-level" text="RUNE_LEVEL" class="magic-book-details__level" style="height: 24px;" />
                                 </ui:VisualElement>
                             </ui:VisualElement>
-                            <ui:VisualElement name="page-description" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 370px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; position: absolute; height: 331px; top: 31px; left: -52px;">
+                            <ui:VisualElement name="page-description" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 370px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; position: absolute; height: 331px; top: 31px; left: -30px;">
                                 <ui:Label tabindex="-1" display-tooltip-when-elided="true" name="text-rune-description" text="RUNE_DESCRIPTION" class="magic-book-details__description" />
                             </ui:VisualElement>
                         </ui:VisualElement>
