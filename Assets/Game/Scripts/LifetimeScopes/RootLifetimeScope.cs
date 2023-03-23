@@ -144,7 +144,6 @@ namespace Game.LifetimeScopes
         {
             builder.RegisterInstance(dataTables.Runes);
             builder.RegisterInstance(dataTables.Materials);
-            builder.RegisterInstance(dataTables.Recipes);
         }
 
         private void RegisterSaveSystem(IContainerBuilder builder)
