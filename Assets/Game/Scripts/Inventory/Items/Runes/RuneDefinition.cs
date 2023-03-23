@@ -1,5 +1,6 @@
 ﻿using Game.Actors;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Game.Inventory
 {
@@ -7,10 +8,22 @@ namespace Game.Inventory
     public class RuneDefinition : ItemInventoryDefinition, IItemExecutableDefinition
     {
         [SerializeField]
+        private LocalizedString name;
+        
+        [SerializeField]
+        private LocalizedString description;
+        
+        [SerializeField]
         private Sprite icon;
         
         [SerializeField]
         private Sprite iconActive;
+        
+        [SerializeField]
+        private Sprite iconEmpty;
+        
+        [SerializeField]
+        private RuneLevelDefinition level;
         
         [SerializeField]
         private AbilityDefinition grantAbility;
@@ -20,6 +33,11 @@ namespace Game.Inventory
 
         public Sprite Icon => icon;
         public Sprite IconActive => iconActive;
+        public Sprite IconEmpty => iconEmpty;
+        public LocalizedString Name => name;
+        public LocalizedString Description => description;
+        public RuneLevelDefinition Level => level;
+        
         public AbilityDefinition GrantAbility => grantAbility;
         public RuneType Type => type;
 
