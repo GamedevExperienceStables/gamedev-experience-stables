@@ -22,7 +22,15 @@ namespace Game.Animations.Hero
             _damageableController = GetComponent<DamageableController>();
             
             _deathController.Died += OnDiedAnimation;
+            _deathController.Revived += OnRevivedAnimation;
             _damageableController.DamageFeedback += OnDamageAnimation;
+        }
+
+        private void OnDestroy()
+        {
+            _deathController.Died -= OnDiedAnimation;
+            _deathController.Revived -= OnRevivedAnimation;
+            _damageableController.DamageFeedback -= OnDamageAnimation;
         }
 
         private void Update()
@@ -41,9 +49,12 @@ namespace Game.Animations.Hero
         {
             _isDied = true;
             _animator.ResetAnimation(AnimationNames.Damage);
-            _animator.SetAnimation(AnimationNames.Death);
+            _animator.SetAnimation(AnimationNames.Death, true);
         }
-        
+
+        private void OnRevivedAnimation() 
+            => _animator.SetAnimation(AnimationNames.Death, false);
+
         private void OnDamageAnimation()
         {
             if (_isDied) return;

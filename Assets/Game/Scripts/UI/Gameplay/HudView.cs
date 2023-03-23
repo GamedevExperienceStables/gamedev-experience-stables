@@ -42,14 +42,27 @@ namespace Game.UI
         private VisualElement _spBarWidgetMaskRight;
         
         private HudRuneSlotsView _runeSlotsView;
+        private InteractionView _interactionView;
+        private SavingView _savingView;
+        private MiniMapView _miniMapView;
 
         public IReadOnlyList<RuneSlotHudView> RuneSlots => _runeSlotsView.Slots;
 
         [Inject]
-        public void Construct(GameplayViewModel viewModel, HudRuneSlotsView runeSlotsView)
+        public void Construct(
+            GameplayViewModel viewModel, 
+            HudRuneSlotsView runeSlotsView,
+            InteractionView interactionView,
+            SavingView savingView,
+            MiniMapView miniMapView
+            )
         {
             _viewModel = viewModel;
+            
             _runeSlotsView = runeSlotsView;
+            _interactionView = interactionView;
+            _savingView = savingView;
+            _miniMapView = miniMapView;
         }
 
         private void Awake()
@@ -78,19 +91,29 @@ namespace Game.UI
 
             var crystalWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_CRYSTAL);
             _crystalMask = crystalWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
-            
+
+            _interactionView.Create(_root);
             _runeSlotsView.Create(_root);
+            _savingView.Create(_root);
+            _miniMapView.Create(_root);
 
             InitCrystalView(_viewModel.GetCurrentMaterial());
             
             SubscribeStats();
         }
 
+        private void LateUpdate() 
+            => _miniMapView.LateTick();
+
         private void OnDestroy()
         {
             _buttonMenu.clicked -= PauseGame;
 
+            _savingView.Destroy();
+            _interactionView.Destroy();
             _runeSlotsView.Destroy();
+            _miniMapView.Destroy();
+            
             UnSubscribeStats();
         }
 

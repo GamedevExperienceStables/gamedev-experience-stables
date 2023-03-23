@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="SettingsControls" src="project://database/Assets/Game/UI/Uxml/Partial/SettingsControls.uxml?fileID=9197481963319205126&amp;guid=45231408b5ad4163b1e281ab4cc52d25&amp;type=3#SettingsControls" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement style="flex-grow: 1; color: rgb(255, 255, 255);  align-items: center; justify-content: center; flex-shrink: 0;">
+            <ui:Label tabindex="-1" text="Settings" display-tooltip-when-elided="true" enable-rich-text="true" style="font-size: 46px; -unity-font-style: bold;" />
+            <ui:Instance template="SettingsControls" name="SettingsControls" />
+            <ui:Button text="Back" display-tooltip-when-elided="true" name="button-back" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

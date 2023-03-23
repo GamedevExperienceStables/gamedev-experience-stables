@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="container" class="widget-saving" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:Label name="text" tabindex="-1" text="Saving..." display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-font-style: bold-and-italic;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -9,79 +9,97 @@ using UnityEngine.Serialization;
 
 namespace Game.Actors
 {
-    
     [CreateAssetMenu(menuName = MENU_PATH + "MeleeAbility")]
     public class MeleeAbilityDefinition : AbilityDefinition<MeleeAbility>
     {
+        [SerializeField, Min(0)]
+        private float baseDamage;
+
+        [SerializeField, Min(0)]
+        private float staminaCost;
+
+        [Space]
         [FormerlySerializedAs("MeleeAtkArea")]
         [SerializeField]
         private float meleeRangeRadius;
 
         [SerializeField]
         private float pushForce;
-        
+
         [SerializeField]
         private int maxTargets;
-        
+
         [SerializeField]
         private Vector3 sphereColliderShift;
-        
-        [FormerlySerializedAs("MeleeDamage")]
-        [SerializeField]
-        private StatModifier meleeDamage;
-        
-        [SerializeField]
-        private StatModifier staminaCost;
-        
+
+        [Space]
         [SerializeField]
         private LayerMask mask;
-        
+
+        [Header("Deprecated")]
+        [Obsolete("use simplified damage")]
+        [FormerlySerializedAs("meleeDamage")]
+        [FormerlySerializedAs("MeleeDamage")]
+        [SerializeField]
+        private StatModifier meleeDamageDeprecated;
+
+        [Obsolete("use simplified stamina cost")]
+        [FormerlySerializedAs("staminaCost")]
+        [SerializeField]
+        private StatModifier staminaCostDeprecated;
+
         public float MeleeRangeRadius => meleeRangeRadius;
-        public StatModifier MeleeDamage => meleeDamage;
-        public StatModifier StaminaCost => staminaCost;
+        public float MeleeDamage => baseDamage;
+        public float StaminaCost => staminaCost;
         public float PushForce => pushForce;
         public LayerMask Mask => mask;
         public Vector3 SphereColliderShift => sphereColliderShift;
         public int MaxTargets => maxTargets;
     }
+
     public class MeleeAbility : ActorAbility<MeleeAbilityDefinition>
     {
         private bool _hasAim;
         private AimAbility _aim;
-        
+
         private Collider[] _hitColliders;
         private ActorAnimator _animator;
         private bool _isAnimationEnded;
         private IActorInputController _inputController;
+
+        private bool _hasDamageModifier;
+        private bool _hasStaminaModifier;
 
 
         public override bool CanActivateAbility()
         {
             if (!_isAnimationEnded)
                 return false;
-            
-            if (_hasAim && _aim.IsActive) 
+
+            if (_hasAim && _aim.IsActive)
                 return false;
 
-            return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(Definition.StaminaCost.Value);
+            return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(GetCost());
         }
-
 
         protected override void OnInitAbility()
         {
             _inputController = Owner.GetComponent<IActorInputController>();
-            
+
             _hasAim = Owner.TryGetAbility(out _aim);
-            
+
             _hitColliders = new Collider[Definition.MaxTargets];
             _animator = Owner.GetComponent<ActorAnimator>();
             _isAnimationEnded = true;
+
+            _hasDamageModifier = Owner.HasStat(CharacterStats.MeleeDamageMultiplier);
+            _hasStaminaModifier = Owner.HasStat(CharacterStats.MeleeStaminaMultiplier);
         }
 
         protected override async void OnActivateAbility()
         {
             _inputController.BlockInput(true);
-            
+
             try
             {
                 await AbilityAnimation();
@@ -91,29 +109,29 @@ namespace Game.Actors
                 EndAbility();
                 return;
             }
-            
-            Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaCost);
-            Vector3 sphereShift = Owner.Transform.position +  Definition.SphereColliderShift;
-            #if UNITY_EDITOR
-                DebugExtensions.DebugWireSphere(sphereShift, radius: Definition.MeleeRangeRadius);
-             #endif
-            int numColliders = Physics.OverlapSphereNonAlloc(sphereShift, 
+
+            Owner.ApplyModifier(CharacterStats.Stamina, -GetCost());
+            Vector3 sphereShift = Owner.Transform.position + Definition.SphereColliderShift;
+#if UNITY_EDITOR
+            DebugExtensions.DebugWireSphere(sphereShift, radius: Definition.MeleeRangeRadius);
+#endif
+            int numColliders = Physics.OverlapSphereNonAlloc(sphereShift,
                 Definition.MeleeRangeRadius, _hitColliders, Definition.Mask);
             for (int i = 0; i < numColliders; i++)
             {
                 Transform hit = _hitColliders[i].transform;
                 Debug.Log(hit.gameObject + "MELEE ATTACKED");
                 if (hit.gameObject.TryGetComponent(out IActorController destinationOwner))
-                    destinationOwner.GetComponent<DamageableController>().Damage(Definition.MeleeDamage);
+                    destinationOwner.GetComponent<DamageableController>().Damage(GetDamage());
                 Vector3 dir = hit.position - Owner.Transform.position;
                 dir = dir.normalized * Definition.PushForce;
                 hit.GetComponent<MovementController>().AddVelocity(dir);
             }
         }
-        
+
         private async UniTask WaitAnimationEnd()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.75f), ignoreTimeScale: false, 
+            await UniTask.Delay(TimeSpan.FromSeconds(0.75f), ignoreTimeScale: false,
                 cancellationToken: Owner.CancellationToken());
             _isAnimationEnded = true;
             _inputController.BlockInput(false);
@@ -130,6 +148,27 @@ namespace Game.Actors
                 _animator.SetAnimation(AnimationNames.MeleeAttack, false);
             }
         }
-        
+
+        private float GetCost()
+        {
+            float baseCost = Definition.StaminaCost;
+            if (!_hasStaminaModifier)
+                return baseCost;
+
+            float modifier = baseCost * Owner.GetCurrentValue(CharacterStats.MeleeStaminaMultiplier);
+            float cost = baseCost - +modifier;
+            return cost;
+        }
+
+        private float GetDamage()
+        {
+            float baseDamage = Definition.MeleeDamage;
+            if (!_hasDamageModifier)
+                return baseDamage;
+
+            float modifier = baseDamage * Owner.GetCurrentValue(CharacterStats.MeleeStaminaMultiplier);
+            float damage = baseDamage + modifier;
+            return damage;
+        }
     }
 }

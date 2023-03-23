@@ -4,6 +4,7 @@ using Game.GameFlow;
 using Game.Level;
 using Game.Persistence;
 using NaughtyAttributes;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer;
@@ -150,10 +151,36 @@ namespace Game.Utils
         private static ILocationPoint CreateLocationPoint(ILocationPointKey locationPointKey)
         {
             Scene activeScene = SceneManager.GetActiveScene();
-            var location = new Location(activeScene.name);
+            ILocationDefinition location = GetLocation(activeScene);
             var locationPoint = new LocationPointData(location, locationPointKey);
 
             return locationPoint;
+        }
+
+        private static ILocationDefinition GetLocation(Scene activeScene)
+        {
+            // ReSharper disable once ConvertIfStatementToReturnStatement
+            if (FindLocationDefinition(activeScene, out ILocationDefinition location))
+                return location;
+
+            return new Location(activeScene.name);
+        }
+
+        private static bool FindLocationDefinition(Scene activeScene, out ILocationDefinition location)
+        {
+            foreach (string guid in AssetDatabase.FindAssets($"t:{typeof(LocationDefinition)}"))
+            {
+                string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                var asset = AssetDatabase.LoadAssetAtPath<LocationDefinition>(assetPath);
+                if (!asset.SceneName.Equals(activeScene.name))
+                    continue;
+
+                location = asset;
+                return true;
+            }
+
+            location = default;
+            return false;
         }
 
         private void DestroyCamera()

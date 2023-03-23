@@ -12,7 +12,8 @@ namespace Game.GameFlow
             PlanetPauseState pauseState,
             PlanetInventoryState inventoryState,
             PlanetGameOverState gameOverState,
-            PlanetCompleteState completeState
+            PlanetCompleteState completeState,
+            PlanetSaveGameState saveState
         )
         {
             parentState.Child = stateMachine;
@@ -23,6 +24,7 @@ namespace Game.GameFlow
             stateMachine.AddState(inventoryState);
             stateMachine.AddState(gameOverState);
             stateMachine.AddState(completeState);
+            stateMachine.AddState(saveState);
         }
     }
 }

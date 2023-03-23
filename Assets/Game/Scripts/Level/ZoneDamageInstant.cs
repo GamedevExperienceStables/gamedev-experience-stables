@@ -12,13 +12,9 @@ namespace Game.Level
         private float damage;
 
         private ZoneTrigger _trigger;
-        private StatModifier _statModifier;
 
-        private void Awake()
-        {
-            _trigger = GetComponent<ZoneTrigger>();
-            _statModifier = new StatModifier(-damage, StatsModifierType.Flat);
-        }
+        private void Awake() 
+            => _trigger = GetComponent<ZoneTrigger>();
 
         private void OnEnable() 
             => _trigger.TriggerEntered += OnTriggerEntered;
@@ -32,7 +28,7 @@ namespace Game.Level
                 return;
 
             if (actor.TryGetComponent(out DamageableController damageable)) 
-                damageable.Damage(_statModifier);
+                damageable.Damage(damage);
         }
     }
 }

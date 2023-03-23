@@ -61,6 +61,7 @@ namespace Game.LifetimeScopes
             builder.Register<WeaponAbility>(Lifetime.Transient);
             builder.Register<ProjectileAbility>(Lifetime.Transient);
             builder.Register<ActiveSkillAbility>(Lifetime.Transient);
+            builder.Register<StatsModifiersAbility>(Lifetime.Transient);
         }
 
         private static void RegisterEffects(IContainerBuilder builder)
@@ -85,6 +86,7 @@ namespace Game.LifetimeScopes
             builder.Register<GameplayGameOver>(Lifetime.Scoped);
             builder.Register<GameplayInventory>(Lifetime.Scoped);
             builder.Register<LocationController>(Lifetime.Scoped);
+            builder.Register<LocationMarkers>(Lifetime.Singleton);
             builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
@@ -113,15 +115,31 @@ namespace Game.LifetimeScopes
             
             builder.Register<HudRuneSlotsView>(Lifetime.Scoped);
             builder.Register<HudRuneSlotsViewModel>(Lifetime.Scoped);
+            
+            builder.Register<InteractionView>(Lifetime.Scoped);
+            builder.Register<InteractionViewModel>(Lifetime.Scoped);
+            
+            builder.Register<SavingView>(Lifetime.Scoped);
+            builder.Register<SavingViewModel>(Lifetime.Scoped);
+            
+            builder.Register<MiniMapView>(Lifetime.Scoped);
+            builder.Register<MiniMapViewModel>(Lifetime.Scoped);
+
+            builder.Register<PauseMenuViewModel>(Lifetime.Scoped);
 
             builder.RegisterInstance(gameplayView);
             Transform uiRoot = gameplayView.transform;
             builder.UseComponents(uiRoot, componentsBuilder =>
             {
                 componentsBuilder.AddInHierarchy<HudView>();
-                componentsBuilder.AddInHierarchy<PauseMenuView>();
                 componentsBuilder.AddInHierarchy<GameOverView>();
                 componentsBuilder.AddInHierarchy<InventoryView>();
+                
+                componentsBuilder.AddInHierarchy<PauseView>();
+                componentsBuilder.AddInHierarchy<PauseViewRouter>();
+                
+                componentsBuilder.AddInHierarchy<PauseMenuView>();
+                componentsBuilder.AddInHierarchy<PauseSettingsView>();
             });
         }
 
@@ -141,6 +159,7 @@ namespace Game.LifetimeScopes
             builder.Register<PlanetInventoryState>(Lifetime.Scoped);
             builder.Register<PlanetGameOverState>(Lifetime.Scoped);
             builder.Register<PlanetCompleteState>(Lifetime.Scoped);
+            builder.Register<PlanetSaveGameState>(Lifetime.Scoped);
         }
 
         private static void RegisterLocationStateMachine(IContainerBuilder builder)
