@@ -4,6 +4,7 @@ using Game.Hero;
 using Game.Input;
 using Game.Inventory;
 using Game.Level;
+using Game.Localization;
 using Game.Persistence;
 using Game.Player;
 using Game.RandomManagement;
@@ -42,6 +43,9 @@ namespace Game.LifetimeScopes
             RegisterSaveSystem(builder);
             RegisterAudio(builder);
             RegisterTime(builder);
+            RegisterUi(builder);
+
+            builder.RegisterEntryPoint<GameEntryPoint>();
         }
 
         private static void RegisterData(IContainerBuilder builder)
@@ -62,12 +66,18 @@ namespace Game.LifetimeScopes
 
             builder.Register<LocationData>(Lifetime.Singleton);
             builder.Register<LocationDataHandler>(Lifetime.Singleton);
+            
+            builder.Register<PlayerGamePrefs>(Lifetime.Singleton);
+            builder.Register<PlayerAudioPrefs>(Lifetime.Singleton);
+            builder.Register<PlayerGraphicsPrefs>(Lifetime.Singleton);
+            builder.Register<PlayerLocalizationPrefs>(Lifetime.Singleton);
         }
 
         private static void RegisterServices(IContainerBuilder builder)
         {
             builder.Register<RandomService>(Lifetime.Singleton);
             builder.Register<QuitGameService>(Lifetime.Singleton);
+            builder.Register<UnityLocalization>(Lifetime.Singleton).As<ILocalizationService>();
         }
 
         private static void RegisterInput(IContainerBuilder builder)
@@ -121,6 +131,12 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.AudioSettings);
         }
 
+        private static void RegisterUi(IContainerBuilder builder)
+        {
+            builder.Register<SettingsView>(Lifetime.Scoped);
+            builder.Register<SettingsViewModel>(Lifetime.Singleton);
+        }
+
         private void RegisterDataTables(IContainerBuilder builder)
         {
             builder.RegisterInstance(dataTables.Runes);
@@ -132,6 +148,7 @@ namespace Game.LifetimeScopes
         {
             builder.Register<PersistenceService>(Lifetime.Singleton);
 
+            builder.Register<PrefsPersistence>(Lifetime.Singleton).As<IPlayerPrefs>();
             builder.Register<LocalPersistence>(Lifetime.Singleton).As<IPersistence>();
             builder.Register<NewtonJsonDataSerializer>(Lifetime.Singleton).As<IDataSerializer>()
                 .WithParameter(gameSettings.SaveSettings.Formatting);
@@ -139,7 +156,7 @@ namespace Game.LifetimeScopes
         
         private static void RegisterAudio(IContainerBuilder builder)
         {
-            builder.Register<FmodService>(Lifetime.Singleton).As<IAudioService>().AsSelf();
+            builder.Register<FmodService>(Lifetime.Singleton).As<IAudioService>().As<IAudioTuner>().AsSelf();
             builder.Register<FmodFootsteps>(Lifetime.Singleton).As<IFootstepsAudio>();
             builder.Register<FootstepsEmitter>(Lifetime.Transient);
         }
