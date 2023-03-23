@@ -1,0 +1,199 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3533672062952369324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3533672062952369315}
+  m_Layer: 0
+  m_Name: Rock Step Cluster 02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3533672062952369315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3533672062952369324}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3927307623104211878}
+  - {fileID: 3927307622816656388}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &450127300300221495
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3533672062952369315}
+    m_Modifications:
+    - target: {fileID: 3512725369116557363, guid: b0b6bfbcbb3462840a4a8604c800ef44,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512725369116557363, guid: b0b6bfbcbb3462840a4a8604c800ef44,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512725369116557363, guid: b0b6bfbcbb3462840a4a8604c800ef44,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512725369116557363, guid: b0b6bfbcbb3462840a4a8604c800ef44,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512725369116557363, guid: b0b6bfbcbb3462840a4a8604c800ef44,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512725369116557363, guid: b0b6bfbcbb3462840a4a8604c800ef44,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512725369116557363, guid: b0b6bfbcbb3462840a4a8604c800ef44,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512725369116557363, guid: b0b6bfbcbb3462840a4a8604c800ef44,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512725369116557363, guid: b0b6bfbcbb3462840a4a8604c800ef44,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512725369116557363, guid: b0b6bfbcbb3462840a4a8604c800ef44,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512725369116557363, guid: b0b6bfbcbb3462840a4a8604c800ef44,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512725369116557363, guid: b0b6bfbcbb3462840a4a8604c800ef44,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.70312
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320189749966035593, guid: b0b6bfbcbb3462840a4a8604c800ef44,
+        type: 3}
+      propertyPath: m_Name
+      value: Rock Step 03
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b0b6bfbcbb3462840a4a8604c800ef44, type: 3}
+--- !u!4 &3927307622816656388 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3512725369116557363, guid: b0b6bfbcbb3462840a4a8604c800ef44,
+    type: 3}
+  m_PrefabInstance: {fileID: 450127300300221495}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5023986524575145937
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3533672062952369315}
+    m_Modifications:
+    - target: {fileID: 8302474258645906551, guid: 3ae49817b6e39e04b836e8cc217d9345,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302474258645906551, guid: 3ae49817b6e39e04b836e8cc217d9345,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302474258645906551, guid: 3ae49817b6e39e04b836e8cc217d9345,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.24000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302474258645906551, guid: 3ae49817b6e39e04b836e8cc217d9345,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302474258645906551, guid: 3ae49817b6e39e04b836e8cc217d9345,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302474258645906551, guid: 3ae49817b6e39e04b836e8cc217d9345,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302474258645906551, guid: 3ae49817b6e39e04b836e8cc217d9345,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302474258645906551, guid: 3ae49817b6e39e04b836e8cc217d9345,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302474258645906551, guid: 3ae49817b6e39e04b836e8cc217d9345,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302474258645906551, guid: 3ae49817b6e39e04b836e8cc217d9345,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302474258645906551, guid: 3ae49817b6e39e04b836e8cc217d9345,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302474258645906551, guid: 3ae49817b6e39e04b836e8cc217d9345,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0458909
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302474258645906551, guid: 3ae49817b6e39e04b836e8cc217d9345,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0494
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679422696995008205, guid: 3ae49817b6e39e04b836e8cc217d9345,
+        type: 3}
+      propertyPath: m_Name
+      value: Rock Step 02
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3ae49817b6e39e04b836e8cc217d9345, type: 3}
+--- !u!4 &3927307623104211878 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8302474258645906551, guid: 3ae49817b6e39e04b836e8cc217d9345,
+    type: 3}
+  m_PrefabInstance: {fileID: 5023986524575145937}
+  m_PrefabAsset: {fileID: 0}
