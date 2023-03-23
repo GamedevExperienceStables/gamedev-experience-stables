@@ -4,12 +4,18 @@
     {
         public enum GuiKeys
         {
-            New_Game_Button,
-            Continue_Button,
-            Settings_Button,
-            Artbook_Button,
-            About_Button,
-            Quit_Button
+            Menu_NewGame_Button,
+            Menu_Continue_Button,
+            Menu_Settings_Button,
+            Menu_About_Button,
+            Menu_Artbook_Button,
+            Menu_Quit_Button,
+            Menu_NewGame_Caption,
+            Menu_Continue_Caption,
+            Menu_Settings_Caption,
+            Menu_About_Caption,
+            Menu_Artbook_Caption,
+            Menu_Quit_Caption
         }
     }
 }

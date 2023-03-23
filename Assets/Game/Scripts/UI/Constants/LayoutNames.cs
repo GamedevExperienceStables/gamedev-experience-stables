@@ -32,6 +32,8 @@
             public const string BUTTON_ART = "button-art";
             
             public const string BUTTON_BACK = "button-back";
+
+            public const string BUTTON_ICON = "icon";
         }
 
         public static class Hud
