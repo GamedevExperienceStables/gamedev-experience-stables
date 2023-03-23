@@ -4,8 +4,10 @@ using UnityEngine.Localization.Settings;
 
 namespace Game.Localization
 {
-    public class UnityLocalization : ILocalizationService
+    public sealed class UnityLocalization : ILocalizationService, IDisposable
     {
+        private const string GUI_TABLE = "GUI";
+
         public event Action Changed;
 
         public UnityLocalization()
@@ -13,9 +15,14 @@ namespace Game.Localization
             LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
         }
 
-        public string GetText(LocalizationTable.GuiKeys guiKeys)
+        public void Dispose()
         {
-            return LocalizationSettings.StringDatabase.GetLocalizedString("GUI", guiKeys.ToString());
+            LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+        }
+
+        public string GetText(LocalizationTable.GuiKeys key)
+        {
+            return LocalizationSettings.StringDatabase.GetLocalizedString(GUI_TABLE, key.ToString());
         }
 
         private void OnLocaleChanged(Locale _)

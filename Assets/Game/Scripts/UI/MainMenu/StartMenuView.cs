@@ -1,5 +1,3 @@
-using System;
-using Game.Localization;
 using Game.Localization;
 using Game.Utils;
 using UnityEngine.UIElements;
@@ -58,7 +56,7 @@ namespace Game.UI
             _buttonAbout.clicked -= OpenAbout;
             _buttonQuit.clicked -= QuitGame;
             
-            _localization.Changed += OnLocalisationChanged;
+            _localization.Changed -= OnLocalisationChanged;
         }
 
         public override void Show()

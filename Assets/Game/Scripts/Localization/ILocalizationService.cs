@@ -5,6 +5,6 @@ namespace Game.Localization
     public interface ILocalizationService
     {
         event Action Changed;
-        string GetText(LocalizationTable.GuiKeys guiKeys);
+        string GetText(LocalizationTable.GuiKeys key);
     }
 }
