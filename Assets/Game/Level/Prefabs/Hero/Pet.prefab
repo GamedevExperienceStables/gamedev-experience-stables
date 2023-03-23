@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef32c14409d95ce478effcc21b7a9926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  v3_minDamping: 0.4
-  v3_maxDamping: 2
-  v3_maxDistance: 4
-  v3_rotationDamping: 0.8
+  minDamping: 0.8
+  maxDamping: 2
+  maxDistance: 1
+  rotationDamping: 1
