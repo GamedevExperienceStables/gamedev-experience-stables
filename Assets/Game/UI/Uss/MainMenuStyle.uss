@@ -1,5 +1,15 @@
+.logo {
+    -unity-font-definition: var(--font-heading);
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    
+    font-size: 65px;    
+    color: rgba(155, 89, 199, 1);
+}
+
 .menu-button {
-    -unity-font: url('project://database/Assets/Game/UI/Fonts/koliko-Regular.ttf?fileID=12800000&guid=07d64e4d9d667a74289e7f354231c512&type=3#koliko-Regular');
+    -unity-font-definition: var(--font-text);
+
     font-size: 35px;
     color: rgb(90, 55, 55);
 }
@@ -30,5 +40,4 @@
 
 .menu-button:hover .menu-button-label {
     translate: 10px 0;
-    -unity-font: url('project://database/Assets/Game/UI/Fonts/koliko-Bold.ttf?fileID=12800000&guid=ce02022517728f8448e34b2e1efe7660&type=3#koliko-Bold');
 }
