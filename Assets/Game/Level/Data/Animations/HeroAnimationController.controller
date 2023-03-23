@@ -164,7 +164,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 1827226128182048838, guid: e3cac06ff6a512944ba5e58b522a0c44,
+    m_Motion: {fileID: 1827226128182048838, guid: 74ee6e568485a4f4cb329b722c758740,
       type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
@@ -173,7 +173,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 1827226128182048838, guid: 938d0b77fcfba4c4bb6fa0cb482029f3,
+    m_Motion: {fileID: 1827226128182048838, guid: 74ee6e568485a4f4cb329b722c758740,
       type: 3}
     m_Threshold: 0
     m_Position: {x: 3, y: 0}
@@ -182,7 +182,7 @@ BlendTree:
     m_DirectBlendParameter: XCoord
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 1827226128182048838, guid: 938d0b77fcfba4c4bb6fa0cb482029f3,
+    m_Motion: {fileID: 1827226128182048838, guid: 74ee6e568485a4f4cb329b722c758740,
       type: 3}
     m_Threshold: 0
     m_Position: {x: -3, y: 0}
@@ -191,7 +191,7 @@ BlendTree:
     m_DirectBlendParameter: XCoord
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 1827226128182048838, guid: b03c556bd7674aa47902dab25ce4a2a9,
+    m_Motion: {fileID: 1827226128182048838, guid: 74ee6e568485a4f4cb329b722c758740,
       type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 3}
@@ -200,7 +200,7 @@ BlendTree:
     m_DirectBlendParameter: XCoord
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 1827226128182048838, guid: b03c556bd7674aa47902dab25ce4a2a9,
+    m_Motion: {fileID: 1827226128182048838, guid: 74ee6e568485a4f4cb329b722c758740,
       type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: -3}
@@ -415,49 +415,49 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: YCoord
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsRangeAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsMeleeAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsAiming
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsDamaged
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsDash
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsDied
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
