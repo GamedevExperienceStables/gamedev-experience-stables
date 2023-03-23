@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Game.Localization
 {
@@ -6,5 +7,8 @@ namespace Game.Localization
     {
         event Action Changed;
         string GetText(LocalizationTable.GuiKeys key);
+        string CurrentLocale { get; }
+        void SetLocale(string localeName);
+        List<string> GetLocales();
     }
 }

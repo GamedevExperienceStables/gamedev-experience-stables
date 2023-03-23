@@ -70,6 +70,7 @@ namespace Game.LifetimeScopes
             builder.Register<PlayerGamePrefs>(Lifetime.Singleton);
             builder.Register<PlayerAudioPrefs>(Lifetime.Singleton);
             builder.Register<PlayerGraphicsPrefs>(Lifetime.Singleton);
+            builder.Register<PlayerLocalizationPrefs>(Lifetime.Singleton);
         }
 
         private static void RegisterServices(IContainerBuilder builder)

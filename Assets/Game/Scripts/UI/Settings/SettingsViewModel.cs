@@ -10,11 +10,13 @@ namespace Game.UI
     {
         private readonly PlayerAudioPrefs _audio;
         private readonly PlayerGraphicsPrefs _graphics;
+        private readonly PlayerLocalizationPrefs _localization;
 
-        public SettingsViewModel(PlayerAudioPrefs audio, PlayerGraphicsPrefs graphics)
+        public SettingsViewModel(PlayerAudioPrefs audio, PlayerGraphicsPrefs graphics, PlayerLocalizationPrefs localization)
         {
             _audio = audio;
             _graphics = graphics;
+            _localization = localization;
         }
 
         public bool IsFullscreen => _graphics.GetFullScreen();
@@ -23,6 +25,7 @@ namespace Game.UI
         
         public int CurrentScreenHeight => Screen.height;
         public int CurrentScreenWidth => Screen.width;
+        public string CurrentLocale => _localization.CurrentLocale;
 
         public void SetFullscreen(bool value)
             => _graphics.SetFullscreen(value);
@@ -50,5 +53,11 @@ namespace Game.UI
 
         public float GetVolume(AudioChannel channel)
             => _audio.GetVolume(channel);
+
+        public List<string> GetLocales() 
+            => _localization.GetLocales();
+
+        public void SetLocale(string locale) 
+            => _localization.SetLocale(locale);
     }
 }
