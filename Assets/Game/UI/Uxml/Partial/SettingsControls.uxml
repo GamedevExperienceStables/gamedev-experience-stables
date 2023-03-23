@@ -1,6 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
     <ui:VisualElement style="width: 550px;">
         <ui:VisualElement style="margin-top: 20px;">
+            <ui:DropdownField label="Language" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="field-locale" />
+        </ui:VisualElement>
+        <ui:VisualElement style="margin-top: 20px;">
             <ui:Label tabindex="-1" text="Graphics" display-tooltip-when-elided="true" name="label-graphics" style="-unity-font-style: bold;" />
             <ui:DropdownField label="Quality" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="field-quality" />
             <ui:DropdownField label="Resolution" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="field-resolution" />

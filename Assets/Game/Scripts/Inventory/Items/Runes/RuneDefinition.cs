@@ -1,11 +1,18 @@
 ﻿using Game.Actors;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Game.Inventory
 {
     [CreateAssetMenu(menuName = MENU_PATH + "Rune")]
     public class RuneDefinition : ItemInventoryDefinition, IItemExecutableDefinition
     {
+        [SerializeField]
+        private LocalizedString name;
+        
+        [SerializeField]
+        private LocalizedString description;
+        
         [SerializeField]
         private Sprite icon;
         
@@ -14,9 +21,6 @@ namespace Game.Inventory
         
         [SerializeField]
         private Sprite iconEmpty;
-        
-        [SerializeField]
-        private string description;
         
         [SerializeField]
         private RuneLevelDefinition level;
@@ -30,8 +34,8 @@ namespace Game.Inventory
         public Sprite Icon => icon;
         public Sprite IconActive => iconActive;
         public Sprite IconEmpty => iconEmpty;
-        public string Name => name;
-        public string Description => description;
+        public LocalizedString Name => name;
+        public LocalizedString Description => description;
         public RuneLevelDefinition Level => level;
         
         public AbilityDefinition GrantAbility => grantAbility;

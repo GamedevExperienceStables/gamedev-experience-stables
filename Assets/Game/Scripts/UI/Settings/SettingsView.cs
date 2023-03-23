@@ -22,6 +22,8 @@ namespace Game.UI
         private List<string> _resolutionsOptions;
 
         private List<string> _qualityOptions;
+        
+        private DropdownField _fieldLocale;
 
         public SettingsView(SettingsViewModel viewModel)
             => _viewModel = viewModel;
@@ -35,6 +37,8 @@ namespace Game.UI
             _fieldMasterVolume = root.Q<Slider>("field-audio-master");
             _fieldEffectsVolume = root.Q<Slider>("field-audio-effects");
             _fieldMusicVolume = root.Q<Slider>("field-audio-music");
+            
+            _fieldLocale = root.Q<DropdownField>("field-locale");
 
             RegisterCallbacks();
         }
@@ -48,6 +52,7 @@ namespace Game.UI
             InitVolumes();
             InitFullscreen();
             InitScreenResolutions();
+            InitLocalization();
         }
 
         private void RegisterCallbacks()
@@ -59,6 +64,8 @@ namespace Game.UI
             _fieldMasterVolume.RegisterValueChangedCallback(OnChangeMasterVolume);
             _fieldEffectsVolume.RegisterValueChangedCallback(OnChangeEffectsVolume);
             _fieldMusicVolume.RegisterValueChangedCallback(OnChangeMusicVolume);
+
+            _fieldLocale.RegisterValueChangedCallback(OnChangeLocale);
         }
 
         private void UnregisterCallbacks()
@@ -70,6 +77,8 @@ namespace Game.UI
             _fieldMasterVolume.UnregisterValueChangedCallback(OnChangeMasterVolume);
             _fieldEffectsVolume.UnregisterValueChangedCallback(OnChangeEffectsVolume);
             _fieldMusicVolume.UnregisterValueChangedCallback(OnChangeMusicVolume);
+            
+            _fieldLocale.UnregisterValueChangedCallback(OnChangeLocale);
         }
 
         #region Graphics
@@ -163,6 +172,21 @@ namespace Game.UI
             float convertedFromFieldVolume = value * 0.01f;
             _viewModel.SetVolume(audioChannel, convertedFromFieldVolume);
         }
+
+        #endregion
+
+        #region Localization
+        
+        private void InitLocalization()
+        {
+            _fieldLocale.choices = _viewModel.GetLocales();
+
+            string current = _viewModel.CurrentLocale;
+            _fieldLocale.SetValueWithoutNotify(current);
+        }
+
+        private void OnChangeLocale(ChangeEvent<string> evt) 
+            => _viewModel.SetLocale(evt.newValue);
 
         #endregion
     }
