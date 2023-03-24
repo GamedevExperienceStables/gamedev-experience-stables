@@ -16,6 +16,9 @@ namespace Game.Actors
     {
         [SerializeField]
         private EventReference fireSfx;
+        
+        [SerializeField]
+        private bool isCursorInvisible;
 
         [SerializeField, Expandable]
         private ProjectileDefinition projectile;
@@ -33,6 +36,7 @@ namespace Game.Actors
         public float CastTime => castTime;
 
         public EventReference FireSfx => fireSfx;
+        public bool IsCursorInvisible => isCursorInvisible;
     }
 
     public class ProjectileAbility : ActorAbility<ProjectileAbilityDefinition>
@@ -85,6 +89,9 @@ namespace Game.Actors
 
         public override bool CanActivateAbility()
         {
+            if (!_isAnimationEnded)
+                return false;
+            
             if (IsActive)
                 return false;
 
@@ -98,25 +105,16 @@ namespace Game.Actors
         {
             if (_hasMana)
                 Owner.ApplyModifier(CharacterStats.Mana, -Definition.ManaCost);
-
-            if (_animator != null)
+        
+            _animator.SetAnimation(AnimationNames.RangeAttack, true);
+            _isAnimationEnded = false;
+            bool isEnded = await WaitAnimationEnd();
+            if (isEnded)
             {
-                _animator.SetAnimation(AnimationNames.RangeAttack, true);
-                _isAnimationEnded = false;
-
-                try
-                {
-                    await WaitAnimationEnd();
-                }
-                catch (OperationCanceledException)
-                {
-                    EndAbility();
-                    return;
-                }
-
-                _animator.SetAnimation(AnimationNames.RangeAttack, false);
+                EndAbility();
+                return;
             }
-
+            _animator.SetAnimation(AnimationNames.RangeAttack, false);
             FireProjectile();
             EndAbility();
         }
@@ -132,11 +130,12 @@ namespace Game.Actors
                 _audio.PlayOneShot(Definition.FireSfx, Owner.Transform);
         }
 
-        private async UniTask WaitAnimationEnd()
+        private async UniTask<bool> WaitAnimationEnd()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(Definition.CastTime), ignoreTimeScale: false, 
-                cancellationToken: Owner.CancellationToken());
+            bool isEnded = await UniTask.Delay(TimeSpan.FromSeconds(Definition.CastTime), ignoreTimeScale: false, 
+                cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
             _isAnimationEnded = true;
+            return isEnded;
         }
     }
 }

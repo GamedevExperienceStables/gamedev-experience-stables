@@ -42,21 +42,24 @@ namespace Game.Actors
 
         protected override async void OnActivateAbility()
         {
-            if (_animator != null)
+            _animator.SetAnimation(AnimationNames.RangeAttack, true);
+            _isAnimationEnded = false;
+            bool isEnded =  await WaitAnimationEnd();
+            if (isEnded)
             {
-                _animator.SetAnimation(AnimationNames.RangeAttack, true);
-                _isAnimationEnded = false;
-                await WaitAnimationEnd();
-                _animator.SetAnimation(AnimationNames.RangeAttack, false);
+                EndAbility();
+                return;
             }
+            _animator.SetAnimation(AnimationNames.RangeAttack, false);
             _currentWeapon.SpawnProjectile();
         }
 
-        private async UniTask WaitAnimationEnd()
+        private async UniTask<bool> WaitAnimationEnd()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), ignoreTimeScale: false, 
+            bool isEnded = await UniTask.Delay(TimeSpan.FromSeconds(0.5f), ignoreTimeScale: false, 
                 cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
             _isAnimationEnded = true;
+            return isEnded;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Game.Actors;
 using Game.Inventory;
+using Game.Pet;
 using Game.Player;
 using VContainer;
 using VContainer.Unity;
@@ -34,15 +35,27 @@ namespace Game.Hero
 
         public HeroController Create()
         {
-            HeroController hero = _resolver.Instantiate(_heroDefinition.Prefab);
-            _resolver.InjectGameObject(hero.gameObject);
-
+            HeroController hero = CreateHero();
+            PetController pet = CreatePet();
+            hero.BindPet(pet);
+            
             _player.BindHero(hero);
+            
             AddAbilities(hero);
             GiveObtainedRunes(hero, _runes.Items);
 
             return hero;
         }
+
+        private HeroController CreateHero()
+        {
+            HeroController hero = _resolver.Instantiate(_heroDefinition.Prefab);
+            _resolver.InjectGameObject(hero.gameObject);
+            return hero;
+        }
+
+        private PetController CreatePet() 
+            => _resolver.Instantiate(_heroDefinition.PetPrefab);
 
         private void AddAbilities(ActorController actor)
         {

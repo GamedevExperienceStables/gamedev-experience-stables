@@ -1,4 +1,5 @@
-﻿using Game.Inventory;
+﻿using Game.CursorManagement;
+using Game.Inventory;
 using Game.Level;
 using Game.Persistence;
 using UnityEngine;
@@ -20,7 +21,7 @@ namespace Game.Settings
 
         [SerializeField]
         private LootSettings lootSettings;
-        
+
         [SerializeField]
         private InventorySettings inventorySettings;
 
@@ -33,6 +34,9 @@ namespace Game.Settings
         [SerializeField]
         private PersistenceService.Settings saveSettings;
 
+        [SerializeField]
+        private CursorService.Settings cursorSettings;
+
         public CameraSettings CameraSettings => cameraSettings;
         public UiSettings UiSettings => uiSettings;
         public LootSettings LootSettings => lootSettings;
@@ -40,7 +44,7 @@ namespace Game.Settings
         public PersistenceService.Settings SaveSettings => saveSettings;
         public MagnetSystem.Settings MagnetSettings => magnetSettings;
         public InventorySettings InventorySettings => inventorySettings;
-
         public AudioSettings AudioSettings => audioSettings;
+        public CursorService.Settings CursorSettings => cursorSettings;
     }
 }

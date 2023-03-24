@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Weapons
 {
@@ -24,7 +25,7 @@ namespace Game.Weapons
 
         [SerializeField]
         private LayerMask collisionLayers = ~0;
-
+        
         public Projectile Prefab => projectilePrefab;
         public LayerMask CollisionLayers => collisionLayers;
 

@@ -1,4 +1,5 @@
 ﻿using Game.Audio;
+using Game.CursorManagement;
 using Game.GameFlow;
 using Game.Hero;
 using Game.Input;
@@ -78,6 +79,7 @@ namespace Game.LifetimeScopes
             builder.Register<RandomService>(Lifetime.Singleton);
             builder.Register<QuitGameService>(Lifetime.Singleton);
             builder.Register<UnityLocalization>(Lifetime.Singleton).As<ILocalizationService>();
+            builder.Register<CursorService>(Lifetime.Singleton);
         }
 
         private static void RegisterInput(IContainerBuilder builder)
@@ -129,6 +131,7 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.MagnetSettings);
             builder.RegisterInstance(gameSettings.InventorySettings);
             builder.RegisterInstance(gameSettings.AudioSettings);
+            builder.RegisterInstance(gameSettings.CursorSettings);
         }
 
         private static void RegisterUi(IContainerBuilder builder)
@@ -141,7 +144,6 @@ namespace Game.LifetimeScopes
         {
             builder.RegisterInstance(dataTables.Runes);
             builder.RegisterInstance(dataTables.Materials);
-            builder.RegisterInstance(dataTables.Recipes);
         }
 
         private void RegisterSaveSystem(IContainerBuilder builder)

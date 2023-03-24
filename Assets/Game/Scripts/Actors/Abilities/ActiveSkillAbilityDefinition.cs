@@ -19,7 +19,7 @@ namespace Game.Actors
 
         private AimAbility _aim;
         private ActorAbility _defaultAbility;
-
+        public ActorAbility ActiveAbility => _activeAbility; 
         public ActiveSkillAbility(IInventorySlots slots)
             => _slots = slots;
 
@@ -29,7 +29,6 @@ namespace Game.Actors
             _slots.ActiveSlotChanged += OnActiveSlotChanged;
 
             _aim = Owner.GetAbility<AimAbility>();
-
             SetDefaultAbility();
         }
 
@@ -71,7 +70,6 @@ namespace Game.Actors
                     return;
                 }
             }
-
             _activeAbility = _defaultAbility;
         }
     }
