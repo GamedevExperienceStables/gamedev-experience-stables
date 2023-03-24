@@ -24,7 +24,7 @@ namespace Game.Actors
         
         private ActorAnimator _animator;
         private HeroInputController _heroInputController;
-        private bool _isHeroNull;
+        private bool _isHero;
         private ActiveSkillAbility _activeSkillAbility;
 
         [Inject]
@@ -42,19 +42,32 @@ namespace Game.Actors
             _animator = Owner.GetComponent<ActorAnimator>();
             _heroInputController = Owner.GetComponent<HeroInputController>();
             _activeSkillAbility = Owner.GetAbility<ActiveSkillAbility>();
-            _isHeroNull = _heroInputController != null;
+            _isHero = _heroInputController;
         }
         
         protected override void OnActivateAbility()
         {
-            ProjectileAbilityDefinition def = _activeSkillAbility.ActiveAbility.Definition as ProjectileAbilityDefinition;
-            if (def != null) _cursor.SetVisible(!def.IsCursorInvisible);
+            HandleTargeting();
 
-            _cursor.SetAlternative();
-         
             _animator.SetAnimation(AnimationNames.Aiming, true);
             _followCamera.ZoomOut();
             Owner.AddModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
+        }
+
+        private void HandleTargeting()
+        {
+            var def = _activeSkillAbility.ActiveAbility.Definition as ProjectileAbilityDefinition;
+            if (def && def.IsCursorInvisible)
+            {
+                _cursor.SetVisible(false);
+                _heroInputController.SetTargetingVisible(true);
+            }
+            else
+            {
+                _cursor.SetVisible(true);
+                _cursor.SetAlternative();
+                _heroInputController.SetTargetingVisible(false);
+            }
         }
 
         protected override void OnEndAbility(bool wasCancelled)
@@ -68,7 +81,7 @@ namespace Game.Actors
         
         public Vector3 GetRealPosition()
         {
-            return _isHeroNull ? _heroInputController.GetRealMousePosition() : default;
+            return _isHero ? _heroInputController.GetRealMousePosition() : default;
         }
     }
 }

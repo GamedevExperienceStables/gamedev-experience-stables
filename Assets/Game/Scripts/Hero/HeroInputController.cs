@@ -30,7 +30,9 @@ namespace Game.Hero
         private GameObject aimSpriteTest;
         [SerializeField]
         private bool isAimRestricted;
-        
+
+        private bool _isTargetingActive;
+
         public Vector3 DesiredDirection => _movementDirection;
         
         [Inject]
@@ -84,7 +86,7 @@ namespace Game.Hero
         
         private void Aiming()
         {
-            if (_aim.IsActive)
+            if (_aim.IsActive && _isTargetingActive)
             {
                 if (!aimSpriteTest.activeSelf)
                     aimSpriteTest.SetActive(true);
@@ -196,6 +198,11 @@ namespace Game.Hero
             }
 
             return movementDirection;
+        }
+
+        public void SetTargetingVisible(bool isVisible)
+        {
+            _isTargetingActive = isVisible;
         }
     }
 }
