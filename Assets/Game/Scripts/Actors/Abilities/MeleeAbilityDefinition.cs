@@ -36,18 +36,6 @@ namespace Game.Actors
         [SerializeField]
         private LayerMask mask;
 
-        [Header("Deprecated")]
-        [Obsolete("use simplified damage")]
-        [FormerlySerializedAs("meleeDamage")]
-        [FormerlySerializedAs("MeleeDamage")]
-        [SerializeField]
-        private StatModifier meleeDamageDeprecated;
-
-        [Obsolete("use simplified stamina cost")]
-        [FormerlySerializedAs("staminaCost")]
-        [SerializeField]
-        private StatModifier staminaCostDeprecated;
-
         public float MeleeRangeRadius => meleeRangeRadius;
         public float MeleeDamage => baseDamage;
         public float StaminaCost => staminaCost;

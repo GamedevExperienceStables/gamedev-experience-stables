@@ -4,7 +4,6 @@ using Game.Animations.Hero;
 using Game.Stats;
 using Game.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Actors
 {
@@ -16,11 +15,6 @@ namespace Game.Actors
 
             [SerializeField, Min(0)]
             private float staminaCost;
-            
-            [Header("Deprecated")]
-            [FormerlySerializedAs("staminaCost")]
-            [SerializeField]
-            private StatModifier staminaCostDeprecated;
             
             public float DashRange => dashRange;
             public float StaminaCost => staminaCost;

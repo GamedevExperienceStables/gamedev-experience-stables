@@ -58,7 +58,6 @@ namespace Game.LifetimeScopes
             builder.Register<MeleeAbility>(Lifetime.Transient);
             builder.Register<AutoPickupAbility>(Lifetime.Transient);
             builder.Register<InteractionAbility>(Lifetime.Transient);
-            builder.Register<WeaponAbility>(Lifetime.Transient);
             builder.Register<ProjectileAbility>(Lifetime.Transient);
             builder.Register<ActiveSkillAbility>(Lifetime.Transient);
             builder.Register<StatsModifiersAbility>(Lifetime.Transient);
