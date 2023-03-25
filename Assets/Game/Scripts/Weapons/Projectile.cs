@@ -17,8 +17,9 @@ namespace Game.Weapons
         private GameObject deathFeedbackPrefab;
 
         private Vector3 _velocity;
+        private Vector3 _currentPosition;
+        private float _gravity;
 
-        private float _timer2;
         private TimerUpdatable _timer;
 
         private readonly RaycastHit[] _hits = new RaycastHit[5];
@@ -29,18 +30,6 @@ namespace Game.Weapons
         private TimerPool _timers;
 
         public event Action<Projectile> Completed;
-        
-        private void FixedUpdate()
-        {
-            float time = Time.fixedDeltaTime;
-
-            UpdateVelocity();
-            UpdatePosition(time);
-            UpdateRotation();
-
-            if (DetectCollisions(out CollisionData collision))
-                DestroyProjectile(collision);
-        }
 
         [Inject]
         public void Construct(ProjectileBehaviour behaviour, TimerPool timers)
@@ -49,6 +38,17 @@ namespace Game.Weapons
 
             _timers = timers;
             _timer = _timers.GetTimer();
+        }
+
+        private void FixedUpdate()
+        {
+            float deltaTime = Time.fixedDeltaTime;
+
+            UpdateVelocity(deltaTime);
+            UpdatePositionAndRotation();
+
+            if (DetectCollisions(out CollisionData collision))
+                DestroyProjectile(collision);
         }
 
         private void OnDisable() 
@@ -67,32 +67,29 @@ namespace Game.Weapons
         {
             Vector3 startPosition = spawnPoint.position;
             Quaternion startRotation = spawnPoint.rotation;
-            
-            if (targetPosition != Vector3.zero)
-            {
-                float coord1 = targetPosition.x - startPosition.x;
-                float coord2 = targetPosition.z - startPosition.z;
-                float angle = Mathf.Atan2(coord1, coord2) * Mathf.Rad2Deg;
-                startRotation = Quaternion.Euler(new Vector3(0, angle, 0));
-            }
 
-            Transform t = transform;
-            t.SetPositionAndRotation(startPosition, startRotation);
+            Transform self = transform;
+            self.SetPositionAndRotation(startPosition, startRotation);
 
-            _velocity = _settings.Trajectory.GetInitialDirection(t) * _settings.Speed;
+            _currentPosition = startPosition;
+
+            _settings.Trajectory.GetInitialVelocity(startPosition, targetPosition, _settings.Speed, out _velocity, out _gravity);
 
             _timer.Start();
             Show();
         }
 
-        private void UpdateRotation()
-            => transform.forward = _velocity;
+        private void UpdatePositionAndRotation()
+        {
+            Quaternion rotation = Quaternion.identity;
+            if (_velocity.sqrMagnitude > 0f)
+                rotation = Quaternion.LookRotation(_velocity);
 
-        private void UpdatePosition(float deltaTime)
-            => transform.Translate(_velocity * deltaTime, Space.World);
+            transform.SetPositionAndRotation(_currentPosition, rotation);
+        }
 
-        private void UpdateVelocity()
-            => _velocity = _settings.Trajectory.CalculateVelocity(_velocity);
+        private void UpdateVelocity(float deltaTime)
+            => _settings.Trajectory.Tick(deltaTime, _gravity, ref _currentPosition, ref _velocity);
 
         private void OnLifetimeEnd()
         {
