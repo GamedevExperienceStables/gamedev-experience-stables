@@ -1,4 +1,5 @@
 ﻿using Game.Actors;
+using NodeCanvas.BehaviourTrees;
 using UnityEngine;
 
 namespace Game.Enemies
@@ -10,13 +11,18 @@ namespace Game.Enemies
         private float _sensorDistance;
         private float _attackRange;
         private float _attackInterval;
-        private bool _inputBlocked;
+
+        private BehaviourTreeOwner _brain;
+        private bool _hasBrain;
 
         public Transform Target => _target;
         public float SensorDistance => _sensorDistance;
         public float AttackRange => _attackRange;
         public float AttackInterval => _attackInterval;
-        
+
+        private void Awake()
+            => _hasBrain = TryGetComponent(out _brain);
+
         public void InitSensor(EnemyStats.InitialStats stats)
             => _sensorDistance = stats.SensorDistance;
 
@@ -29,8 +35,21 @@ namespace Game.Enemies
             _attackInterval = interval;
         }
 
-        public void BlockInput(bool isBlocked) 
-            => _inputBlocked = isBlocked;
+        public void BlockInput(bool isBlocked)
+        {
+            if (!_hasBrain)
+                return;
+
+            if (isBlocked)
+            {
+                _brain.PauseBehaviour();
+            }
+            else
+            {
+                if (_brain.isPaused)
+                    _brain.StartBehaviour();
+            }
+        }
 
         public Vector3 DesiredDirection => transform.forward;
     }
