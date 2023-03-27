@@ -19,7 +19,10 @@ namespace Game.Actors
         }
 
         [UsedImplicitly]
-        private void AnimationStepEvent()
-            => _emitter.TryEmitAudio(_movement.Velocity, transform.position);
+        private void AnimationStepEvent(AnimationEvent evt)
+        {
+            if (evt.animatorClipInfo.weight > 0.5f)
+                _emitter.TryEmitAudio(_movement.Velocity, transform.position);
+        }
     }
 }
