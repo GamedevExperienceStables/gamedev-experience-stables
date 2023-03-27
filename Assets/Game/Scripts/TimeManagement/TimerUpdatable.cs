@@ -58,6 +58,8 @@ namespace Game.TimeManagement
             _onComplete = onComplete;
             _isLooped = isLooped;
             _ignoreTimeScale = ignoreTimeScale;
+
+            Stop();
         }
 
         public void Reset() 
