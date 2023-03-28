@@ -100,6 +100,9 @@ namespace Game.Actors
             _hasCompleteEffect = Definition.CompleteEffectPrefab;
         }
 
+        protected override void OnDestroyAbility() 
+            => _timers.ReleaseTimer(_castTimer);
+
         protected override void OnActivateAbility()
         {
             Owner.ApplyModifier(CharacterStats.Stamina, -GetCost());

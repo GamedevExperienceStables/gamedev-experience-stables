@@ -77,15 +77,6 @@ namespace Game.Actors
                 maxSize: POOL_MAX_SIZE);
         }
 
-        protected override void OnDestroyAbility()
-        {
-            _projectilePool.Clear();
-            _projectilePool.Dispose();
-
-            _timers.ReleaseTimer(_fireTimer);
-            _timers.ReleaseTimer(_castTimer);
-        }
-
         private void OnCompleteProjectile(Projectile projectile)
             => _projectilePool.Release(projectile);
 
@@ -99,6 +90,15 @@ namespace Game.Actors
 
             _fireTimer = _timers.GetTimer(TimeSpan.FromSeconds(Definition.FireTime), OnFire);
             _castTimer = _timers.GetTimer(TimeSpan.FromSeconds(Definition.CastTime), OnComplete);
+        }
+
+        protected override void OnDestroyAbility()
+        {
+            _projectilePool.Clear();
+            _projectilePool.Dispose();
+
+            _timers.ReleaseTimer(_fireTimer);
+            _timers.ReleaseTimer(_castTimer);
         }
 
         public override bool CanActivateAbility()
