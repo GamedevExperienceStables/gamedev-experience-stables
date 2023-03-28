@@ -60,7 +60,7 @@ namespace Game.Hero
             _input.AimButton.Canceled += OnAimCanceled;
 
             _input.FireButton.Performed += OnFire;
-            _input.FireButton.Performed += OnMelee;
+            _input.MeleeButton.Performed += OnMelee;
             _input.InteractionButton.Performed += OnInteract;
             _input.DashButton.Performed += OnDash;
         }
@@ -71,7 +71,7 @@ namespace Game.Hero
             _input.AimButton.Canceled -= OnAimCanceled;
 
             _input.FireButton.Performed -= OnFire;
-            _input.FireButton.Performed -= OnMelee;
+            _input.MeleeButton.Performed -= OnMelee;
             _input.InteractionButton.Performed -= OnInteract;
             _input.DashButton.Performed -= OnDash;
 

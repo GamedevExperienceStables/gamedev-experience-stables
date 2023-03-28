@@ -64,7 +64,7 @@ namespace Game.Actors
             if (!_isAnimationEnded)
                 return false;
 
-            if (_hasAim && _aim.IsActive)
+            if (_hasAim && !_aim.IsActive)
                 return false;
 
             return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(GetCost());
