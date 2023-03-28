@@ -76,6 +76,13 @@ namespace Game.TimeManagement
             IsCompleted = false;
         }
 
+        public void Start(TimeSpan duration)
+        {
+            _duration = (float)duration.TotalSeconds;
+            
+            Start();
+        }
+
         public void Tick()
         {
             if (IsDone)
