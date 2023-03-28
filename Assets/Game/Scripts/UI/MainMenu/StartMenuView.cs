@@ -35,6 +35,8 @@ namespace Game.UI
             _buttonQuit = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_QUIT);
 
             _buttonStart.RegisterCallback<ClickEvent>(NewGame);
+            _buttonStart.RegisterCallback<PointerOverEvent>(OnEnter);
+            _buttonStart.RegisterCallback<PointerOutEvent>(OnOut);
             _buttonContinue.RegisterCallback<ClickEvent>(ContinueGame);
 
             _buttonSettings.RegisterCallback<ClickEvent>(OpenSettings);
@@ -108,5 +110,19 @@ namespace Game.UI
         
         private void OnLocalisationChanged() 
             => UpdateText();
+
+        #region OnPointerOverEvents
+        
+        private void OnEnter(PointerOverEvent evt)
+        {
+            throw new System.NotImplementedException();
+        }
+        
+        #endregion
+        
+        private void OnOut(PointerOutEvent evt)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

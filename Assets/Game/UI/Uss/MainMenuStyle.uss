@@ -2,14 +2,12 @@
     -unity-font-definition: var(--font-heading);
     -unity-font-style: bold;
     -unity-text-align: upper-center;
-    
-    font-size: 65px;    
-    color: rgba(155, 89, 199, 1);
+    font-size: 65px;
+    color: rgb(155, 89, 199);
 }
 
 .menu-button {
     -unity-font-definition: var(--font-text);
-
     font-size: 35px;
     color: rgb(90, 55, 55);
 }
@@ -23,13 +21,15 @@
 }
 
 .menu-button-icon {
-    background-image: url('project://database/Assets/Plugins/FMOD/images/TransportPlayButtonOff.png?fileID=2800000&guid=29258b1336a580946bc144df00b74ac1&type=3#TransportPlayButtonOff');
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1641503261&guid=dbdbbdd8c4129294e930e1acba730b50&type=3#Menu_Atlas_13');
     -unity-background-scale-mode: scale-and-crop;
 }
 
 .menu-button:hover .menu-button-icon {
-    background-image: url('project://database/Packages/com.unity.inputsystem/InputSystem/Editor/Icons/d_Gamepad@2x.png?fileID=2800000&guid=bed935caee9524e6780614c2055bfd35&type=3#d_Gamepad@2x');
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1067240888&guid=dbdbbdd8c4129294e930e1acba730b50&type=3#Menu_Atlas_10');
     -unity-background-scale-mode: scale-and-crop;
+    scale: 2 2;
+    translate: 10px 0;
 }
 
 .menu-button-label {
