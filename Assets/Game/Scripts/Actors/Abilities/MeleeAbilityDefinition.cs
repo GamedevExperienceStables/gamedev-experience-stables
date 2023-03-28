@@ -134,23 +134,17 @@ namespace Game.Actors
         private float GetCost()
         {
             float baseCost = Definition.StaminaCost;
-            if (!_hasStaminaModifier)
-                return baseCost;
-
-            float modifier = baseCost * Owner.GetCurrentValue(CharacterStats.MeleeStaminaMultiplier);
-            float cost = baseCost - +modifier;
-            return cost;
+            return _hasStaminaModifier
+                ? baseCost.AddPercent(Owner.GetCurrentValue(CharacterStats.MeleeStaminaMultiplier))
+                : baseCost;
         }
 
         private float GetDamage()
         {
             float baseDamage = Definition.MeleeDamage;
-            if (!_hasDamageModifier)
-                return baseDamage;
-
-            float modifier = baseDamage * Owner.GetCurrentValue(CharacterStats.MeleeStaminaMultiplier);
-            float damage = baseDamage + modifier;
-            return damage;
+            return _hasDamageModifier
+                ? baseDamage.AddPercent(Owner.GetCurrentValue(CharacterStats.MeleeDamageMultiplier))
+                : baseDamage;
         }
     }
 }

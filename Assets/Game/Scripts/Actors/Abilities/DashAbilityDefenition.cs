@@ -108,24 +108,17 @@ namespace Game.Actors
             private float GetCost()
             {
                 float baseCost = Definition.StaminaCost;
-
-                if (!_hasStaminaModifier)
-                    return baseCost;
-                
-                float modifier = baseCost * Owner.GetCurrentValue(CharacterStats.DashStaminaMultiplier);
-                float cost = baseCost + modifier;
-                return cost;
+                return _hasStaminaModifier 
+                    ? baseCost.AddPercent(Owner.GetCurrentValue(CharacterStats.DashStaminaMultiplier)) 
+                    : baseCost;
             }
 
             private float GetRange()
             {
                 float baseRange = Definition.DashRange;
-                if (!_hasModifier)
-                    return baseRange;
-
-                float modifier = baseRange * Owner.GetCurrentValue(CharacterStats.DashMultiplier);
-                float cost = baseRange + modifier;
-                return cost;
+                return _hasModifier 
+                    ? baseRange.AddPercent(Owner.GetCurrentValue(CharacterStats.DashMultiplier)) 
+                    : baseRange;
             }
         }
 }
