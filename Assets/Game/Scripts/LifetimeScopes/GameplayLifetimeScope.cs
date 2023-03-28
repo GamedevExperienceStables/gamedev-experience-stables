@@ -87,6 +87,8 @@ namespace Game.LifetimeScopes
             builder.Register<LocationController>(Lifetime.Scoped);
             builder.Register<LocationMarkers>(Lifetime.Singleton);
             builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
+
+            builder.Register<GameplayPrefabFactory>(Lifetime.Scoped);
         }
 
         private static void RegisterInteractions(IContainerBuilder builder)

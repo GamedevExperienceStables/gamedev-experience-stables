@@ -14,9 +14,9 @@ namespace Game.Weapons
         public override void GetInitialVelocity(Vector3 startPosition, Vector3 targetPosition,
             float speed, out Vector3 startVelocity, out float gravity)
         {
+#if UNITY_EDITOR
             DebugExtensions.DebugPoint(targetPosition, duration: 1f, color: Color.red);
-
-
+#endif
             targetPosition = Correction(startPosition, targetPosition);
 
             gravity = speed;
@@ -24,12 +24,14 @@ namespace Game.Weapons
             if (!solved)
                 startVelocity = Ballistics.GetLinearVelocity(startPosition, targetPosition, speed);
 
+#if UNITY_EDITOR
             DebugExtensions.DebugArrow(startPosition, startVelocity, Color.cyan, 1f);
+#endif
         }
 
         private static Vector3 Correction(Vector3 startPosition, Vector3 targetPosition)
         {
-            if (targetPosition.y < startPosition.y) 
+            if (targetPosition.y < startPosition.y)
                 targetPosition += new Vector3(0, CORRECTION_OFFSET, 0);
 
             return targetPosition;

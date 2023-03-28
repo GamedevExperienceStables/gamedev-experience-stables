@@ -51,6 +51,9 @@ namespace Game.Enemies
             }
         }
 
+        public Vector3 GetTargetPosition(bool grounded = false)
+            => _target.position;
+
         public Vector3 DesiredDirection => transform.forward;
     }
 }

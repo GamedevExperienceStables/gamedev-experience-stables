@@ -692,8 +692,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 045e542f085e4eb58bab3f98b2d01f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimSpriteTest: {fileID: 5125066951741238163}
-  isAimRestricted: 0
 --- !u!114 &3247602722215226883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1079,6 +1077,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aim
       objectReference: {fileID: 0}
+    - target: {fileID: 1784982215875831928, guid: daf285c4edba884458bc942c4ab4a756,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2165637369137863053, guid: daf285c4edba884458bc942c4ab4a756,
         type: 3}
       propertyPath: m_RootOrder
@@ -1142,12 +1145,6 @@ PrefabInstance:
 --- !u!4 &4744402936892512870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2165637369137863053, guid: daf285c4edba884458bc942c4ab4a756,
-    type: 3}
-  m_PrefabInstance: {fileID: 6906941706143941611}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5125066951741238163 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1784982215875831928, guid: daf285c4edba884458bc942c4ab4a756,
     type: 3}
   m_PrefabInstance: {fileID: 6906941706143941611}
   m_PrefabAsset: {fileID: 0}

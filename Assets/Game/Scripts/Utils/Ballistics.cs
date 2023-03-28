@@ -18,13 +18,13 @@ namespace Game.Utils
             var diffXZ = new Vector3(direction.x, 0f, direction.z);
             float horizontalDistance = diffXZ.magnitude;
 
-            bool hasSolution = horizontalDistance > 0;
-            if (!hasSolution)
-                return false;
-
             float angleInRadians = firingAngle * Mathf.Deg2Rad;
             direction.y = horizontalDistance * Mathf.Tan(angleInRadians);
             horizontalDistance += heightDifference / Mathf.Tan(angleInRadians);
+            
+            bool hasSolution = horizontalDistance > 0;
+            if (!hasSolution)
+                return false;
 
             float speed = Mathf.Sqrt(horizontalDistance * gravity / Mathf.Sin(2 * angleInRadians));
             initialVelocity = speed * direction.normalized;
