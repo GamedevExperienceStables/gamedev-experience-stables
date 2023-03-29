@@ -15,6 +15,8 @@ namespace Game.Actors.Health
         private bool destroyOnDeath = true;
 
         public event Action Died;
+        public event Action<DeathCause> DiedWithCause;
+        
         public event Action Revived;
 
         private DamageableController _damageableController;
@@ -51,15 +53,16 @@ namespace Game.Actors.Health
             if (_isDead)
                 return;
 
-            Kill();
+            Kill(DeathCause.Damage);
         }
 
-        private void Kill()
+        public void Kill(DeathCause cause)
         {
             _isDead = true;
             _damageableController.MakeInvulnerable();
 
             Died?.Invoke();
+            DiedWithCause?.Invoke(cause);
 
             PlayDeathFeedback();
 
