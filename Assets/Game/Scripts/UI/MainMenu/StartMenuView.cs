@@ -1,7 +1,8 @@
-using System.Linq;
+using System;
 using Game.Localization;
 using Game.Utils;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.UIElements;
 using VContainer;
 
@@ -9,120 +10,202 @@ namespace Game.UI
 {
     public class StartMenuView : PageView<StartMenuViewModel>
     {
-        private VisualElement _buttonStart;
-        private VisualElement _buttonContinue;
-        private VisualElement _buttonSettings;
-        private VisualElement _buttonArt;
-        private VisualElement _buttonAbout;
-        private VisualElement _buttonQuit;
-        
+        private Button _buttonNewGame;
+        private Button _buttonContinue;
+        private Button _buttonSettings;
+        private Button _buttonArt;
+        private Button _buttonAbout;
+        private Button _buttonQuit;
+
         private ILocalizationService _localization;
-        
+        private PreviewView _preview;
+        private VisualElement _menu;
+
+        private Settings _settings;
+
         [Inject]
-        public void Construct(ILocalizationService localisation)
+        public void Construct(ILocalizationService localisation, Settings settings)
         {
             _localization = localisation;
+            _settings = settings;
         }
 
         protected override void OnAwake()
         {
-            _buttonStart = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_START);
-            _buttonContinue = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_CONTINUE);
+            _buttonNewGame = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_NEW_GAME).Q<Button>();
+            _buttonContinue = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_CONTINUE).Q<Button>();
 
-            _buttonSettings = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_SETTINGS);
-            _buttonAbout = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_ABOUT);
-            _buttonArt = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_ART);
-            _buttonQuit = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_QUIT);
+            _buttonSettings = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_SETTINGS).Q<Button>();
+            _buttonAbout = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_ABOUT).Q<Button>();
+            _buttonArt = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_ART).Q<Button>();
+            _buttonQuit = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_QUIT).Q<Button>();
 
-            _buttonStart.RegisterCallback<ClickEvent>(NewGame);
-            _buttonStart.RegisterCallback<PointerOverEvent>(OnEnter);
-            _buttonStart.RegisterCallback<PointerOutEvent>(OnOut);
-            _buttonContinue.RegisterCallback<ClickEvent>(ContinueGame);
+            _menu = Content.Q<VisualElement>(LayoutNames.StartMenu.MENU);
 
-            _buttonSettings.RegisterCallback<ClickEvent>(OpenSettings);
-            _buttonArt.RegisterCallback<ClickEvent>(OpenArt);
-            _buttonAbout.RegisterCallback<ClickEvent>(OpenAbout);
-            _buttonQuit.RegisterCallback<ClickEvent>(QuitGame);
-            
+            var previewElement = Content.Q<VisualElement>(LayoutNames.StartMenu.PREVIEW);
+            _preview = new PreviewView(previewElement);
+
+            RegisterButtonEvent(_buttonNewGame, NewGame, OnEnterNewGame, OnExit);
+            RegisterButtonEvent(_buttonContinue, ContinueGame, OnEnter, OnExit);
+            RegisterButtonEvent(_buttonSettings, OpenSettings, OnEnterSettings, OnExit);
+            RegisterButtonEvent(_buttonArt, OpenArt, OnEnter, OnExit);
+            RegisterButtonEvent(_buttonAbout, OpenAbout, OnEnter, OnExit);
+            RegisterButtonEvent(_buttonQuit, QuitGame, OnEnter, OnExit);
+
             _localization.Changed += OnLocalisationChanged;
         }
 
-        private void Start() 
+        private void Start()
             => UpdateText();
 
         private void OnDestroy()
         {
-            _buttonStart.UnregisterCallback<ClickEvent>(NewGame);
-            _buttonContinue.UnregisterCallback<ClickEvent>(ContinueGame);
+            UnregisterButtonEvent(_buttonNewGame, NewGame, OnEnter, OnExit);
+            UnregisterButtonEvent(_buttonContinue, ContinueGame, OnEnter, OnExit);
+            UnregisterButtonEvent(_buttonSettings, OpenSettings, OnEnter, OnExit);
+            UnregisterButtonEvent(_buttonArt, OpenArt, OnEnter, OnExit);
+            UnregisterButtonEvent(_buttonAbout, OpenAbout, OnEnter, OnExit);
+            UnregisterButtonEvent(_buttonQuit, QuitGame, OnEnter, OnExit);
 
-            _buttonSettings.UnregisterCallback<ClickEvent>(OpenSettings);
-            _buttonArt.UnregisterCallback<ClickEvent>(OpenArt);
-            _buttonAbout.UnregisterCallback<ClickEvent>(OpenAbout);
-            _buttonQuit.UnregisterCallback<ClickEvent>(QuitGame);
-            
             _localization.Changed -= OnLocalisationChanged;
         }
 
         public override void Show()
         {
-            _buttonContinue.SetDisplay(ViewModel.IsSaveGameExists());
+            _buttonContinue.SetEnabled(ViewModel.IsSaveGameExists());
+            _preview.Hide();
 
             Content.SetDisplay(true);
 
-            _buttonStart.Focus();
+            _buttonNewGame.Focus();
         }
 
         public override void Hide()
+            => Content.SetDisplay(false);
+
+        public void Activate()
         {
-            Content.SetDisplay(false);
+            _menu.SetEnabled(true);
+
+            _buttonSettings.RemoveFromClassList(LayoutNames.StartMenu.BUTTON_ACTIVE_CLASS_NAME);
         }
-        
+
+        public void Deactivate()
+        {
+            _preview.Hide();
+            _menu.SetEnabled(false);
+        }
+
         private void UpdateText()
         {
-            _buttonStart.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_NewGame_Button);
+            _buttonNewGame.Q<Label>().text = _settings.newGameButton.GetLocalizedString();
             _buttonContinue.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_Continue_Button);
-            
-            _buttonSettings.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_Settings_Button);
+
+            _buttonSettings.Q<Label>().text = _settings.settingsButton.GetLocalizedString();
             _buttonArt.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_Artbook_Button);
             _buttonAbout.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_About_Button);
             _buttonQuit.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_Quit_Button);
         }
 
-        private void NewGame(ClickEvent _)
+        private void NewGame()
             => ViewModel.NewGame();
 
-        private void ContinueGame(ClickEvent _)
+        private void ContinueGame()
             => ViewModel.ContinueGame();
 
-        private void QuitGame(ClickEvent _)
+        private void QuitGame()
             => ViewModel.QuitGame();
 
         // TODO: Refactor this in next build
-        private void OpenArt(ClickEvent _)
+        private void OpenArt()
             => Application.OpenURL(
                 "https://drive.google.com/file/d/1j8xxQQ9xu0Hz4JW1MmNpHTwj4yJnndEe/view?usp=share_link");
 
-        private void OpenAbout(ClickEvent _)
+        private void OpenAbout()
             => ViewModel.OpenAbout();
 
-        private void OpenSettings(ClickEvent _)
-            => ViewModel.OpenSettings();
-        
-        private void OnLocalisationChanged() 
+        private void OpenSettings()
+        {
+            ViewModel.OpenSettings();
+
+            _buttonSettings.AddToClassList(LayoutNames.StartMenu.BUTTON_ACTIVE_CLASS_NAME);
+        }
+
+        private void OnLocalisationChanged()
             => UpdateText();
 
         #region OnPointerOverEvents
-        
-        private void OnEnter(PointerOverEvent evt)
+
+        private void OnEnterNewGame(EventBase _)
+            => OnEnter(_settings.newGamePreview, _settings.newGameCaption);
+
+        private void OnEnterSettings(EventBase _)
+            => OnEnter(_settings.settingsPreview, _settings.settingsCaption);
+
+        private void OnEnter(Sprite preview, LocalizedString caption)
         {
-            throw new System.NotImplementedException();
+            if (!_menu.enabledSelf)
+                return;
+
+            _preview.Show(preview, caption.GetLocalizedString());
         }
-        
-        #endregion
-        
-        private void OnOut(PointerOutEvent evt)
+
+        private void OnEnter(EventBase _)
         {
-            throw new System.NotImplementedException();
+            if (!_menu.enabledSelf)
+                return;
+            
+            _preview.Show();
+        }
+
+        #endregion
+
+        private void OnExit(EventBase _)
+        {
+            if (!_menu.enabledSelf)
+                return;
+
+            _preview.Hide();
+        }
+
+        private static void RegisterButtonEvent(Button button, Action onClick,
+            EventCallback<EventBase> onEnter, EventCallback<EventBase> onLeave)
+        {
+            button.clicked += onClick;
+            
+            button.RegisterCallback<FocusInEvent>(onEnter);
+            button.RegisterCallback<FocusOutEvent>(onLeave);
+            
+            button.RegisterCallback<PointerEnterEvent>(onEnter);
+            button.RegisterCallback<PointerLeaveEvent>(onEnter);
+        }
+
+        private static void UnregisterButtonEvent(Button button, Action onClick,
+            EventCallback<EventBase> onEnter, EventCallback<EventBase> onLeave)
+        {
+            button.clicked -= onClick;
+            
+            button.UnregisterCallback<FocusInEvent>(onEnter);
+            button.UnregisterCallback<FocusOutEvent>(onLeave);
+            
+            button.UnregisterCallback<PointerEnterEvent>(onEnter);
+            button.UnregisterCallback<PointerLeaveEvent>(onLeave);
+        }
+
+        [Serializable]
+        public class Settings
+        {
+            [Header("New Game")]
+            public Sprite newGamePreview;
+
+            public LocalizedString newGameButton;
+            public LocalizedString newGameCaption;
+
+            [Header("Settings")]
+            public Sprite settingsPreview;
+
+            public LocalizedString settingsButton;
+            public LocalizedString settingsCaption;
         }
     }
 }

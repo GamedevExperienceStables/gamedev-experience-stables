@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Game/UI/Uss/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=8cedbaaf434e4b94f8c50cc514ad6cf7&amp;type=3#MainMenuStyle" />
-    <ui:VisualElement class="menu-button" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; align-items: center;">
+    <ui:Button class="menu-button">
         <ui:VisualElement name="icon" class="menu-button-icon" style="flex-grow: 0; flex-direction: row; position: relative; width: 10px; height: 10px;" />
         <ui:Label tabindex="-1" text="Text" display-tooltip-when-elided="true" class="menu-button-label" style="flex-direction: row; margin-left: 26px; flex-grow: 1;" />
-    </ui:VisualElement>
+    </ui:Button>
 </ui:UXML>

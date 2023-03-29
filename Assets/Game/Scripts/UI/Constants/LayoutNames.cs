@@ -24,7 +24,7 @@
 
         public static class StartMenu
         {
-            public const string BUTTON_START = "button-start";
+            public const string BUTTON_NEW_GAME = "button-start";
             public const string BUTTON_CONTINUE = "button-continue";
             public const string BUTTON_QUIT = "button-quit";
             public const string BUTTON_SETTINGS = "button-settings";
@@ -34,6 +34,18 @@
             public const string BUTTON_BACK = "button-back";
 
             public const string BUTTON_ICON = "icon";
+            
+            public const string MENU = "menu";
+            public const string PAGES = "pages";
+            
+            public const string PREVIEW = "preview";
+            public const string PREVIEW_IMAGE = "image";
+            public const string PREVIEW_CAPTION = "caption";
+
+            public const string PAGE_SETTINGS = "page-settings";
+            
+            public const string BUTTON_ACTIVE_CLASS_NAME = "menu-button--active";
+            
         }
 
         public static class Hud

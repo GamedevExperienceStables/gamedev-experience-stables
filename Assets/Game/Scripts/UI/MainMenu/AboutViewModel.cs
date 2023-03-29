@@ -8,6 +8,6 @@
             => _router = router;
 
         public void Back() 
-            => _router.OpenStartMenu();
+            => _router.ShowStartMenu();
     }
 }

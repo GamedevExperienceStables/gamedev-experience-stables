@@ -1,4 +1,5 @@
-﻿using UnityEngine.UIElements;
+﻿using Game.Utils;
+using UnityEngine.UIElements;
 using VContainer;
 
 namespace Game.UI
@@ -16,6 +17,8 @@ namespace Game.UI
 
         protected override void OnAwake()
         {
+            SetContent(LayoutNames.StartMenu.PAGE_SETTINGS);
+            
             _router = GetComponentInParent<MainMenuViewRouter>();
 
             _settings.Create(Content);
@@ -34,8 +37,13 @@ namespace Game.UI
         public override void Show()
         {
             _settings.Init();
+            
+            Content.SetVisibility(true);
+        }
 
-            base.Show();
+        public override void Hide()
+        {
+            Content.SetVisibility(false);
         }
 
         private void OnBackButton()

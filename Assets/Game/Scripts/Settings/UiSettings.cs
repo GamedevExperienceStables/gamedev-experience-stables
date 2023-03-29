@@ -1,19 +1,14 @@
-﻿using System;
-using Game.UI;
+﻿using Game.UI;
 using UnityEngine;
 
 namespace Game.Settings
 {
-    [Serializable]
-    public class UiSettings
+    [CreateAssetMenu(menuName = "Settings/UI")]
+    public class UiSettings : ScriptableObject
     {
         [SerializeField]
-        private FaderScreenView fadeScreen;
+        private StartMenuView.Settings startMenu;
 
-        [SerializeField]
-        private LoadingScreenView loadingScreen;
-
-        public FaderScreenView FadeScreen => fadeScreen;
-        public LoadingScreenView LoadingScreen => loadingScreen;
+        public StartMenuView.Settings StartMenu => startMenu;
     }
 }

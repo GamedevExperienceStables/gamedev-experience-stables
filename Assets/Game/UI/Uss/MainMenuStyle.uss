@@ -6,17 +6,25 @@
     color: rgb(155, 89, 199);
 }
 
+.menu:disabled {
+    opacity: 1;
+}
+
 .menu-button {
     -unity-font-definition: var(--font-text);
     font-size: 35px;
     color: rgb(90, 55, 55);
+    flex-direction: row;
+    align-items: center;
+    -unity-text-align: middle-left;
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0;
+    margin: 0;
 }
 
-.menu-button:hover {
-    color: rgb(155, 89, 199);
-}
-
-.menu-button-disabled {
+.menu-button:disabled {
+    opacity: 1;
     color: rgb(163, 133, 127);
 }
 
@@ -25,7 +33,21 @@
     -unity-background-scale-mode: scale-and-crop;
 }
 
-.menu-button:hover .menu-button-icon {
+.menu-button--active .menu-button-icon {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1067240888&guid=dbdbbdd8c4129294e930e1acba730b50&type=3#Menu_Atlas_10');
+    -unity-background-scale-mode: scale-and-crop;
+    scale: 2 2;
+    translate: 10px 0;
+}
+
+.menu-button:enabled:focus .menu-button-icon {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1067240888&guid=dbdbbdd8c4129294e930e1acba730b50&type=3#Menu_Atlas_10');
+    -unity-background-scale-mode: scale-and-crop;
+    scale: 2 2;
+    translate: 10px 0;
+}
+
+.menu-button:enabled:hover .menu-button-icon {
     background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1067240888&guid=dbdbbdd8c4129294e930e1acba730b50&type=3#Menu_Atlas_10');
     -unity-background-scale-mode: scale-and-crop;
     scale: 2 2;
@@ -38,6 +60,17 @@
     transition-duration: 300ms;
 }
 
-.menu-button:hover .menu-button-label {
+.menu-button--active .menu-button-label {
+    color: rgb(155, 89, 199);
+    translate: 10px 0;
+}
+
+.menu-button:enabled:focus .menu-button-label {
+    color: rgb(155, 89, 199);
+    translate: 10px 0;
+}
+
+.menu-button:enabled:hover .menu-button-label {
+    color: rgb(155, 89, 199);
     translate: 10px 0;
 }
