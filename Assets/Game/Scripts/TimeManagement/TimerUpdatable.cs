@@ -58,6 +58,8 @@ namespace Game.TimeManagement
             _onComplete = onComplete;
             _isLooped = isLooped;
             _ignoreTimeScale = ignoreTimeScale;
+
+            Stop();
         }
 
         public void Reset() 
@@ -72,6 +74,13 @@ namespace Game.TimeManagement
             _timeElapsedBeforePause = -1;
 
             IsCompleted = false;
+        }
+
+        public void Start(TimeSpan duration)
+        {
+            _duration = (float)duration.TotalSeconds;
+            
+            Start();
         }
 
         public void Tick()

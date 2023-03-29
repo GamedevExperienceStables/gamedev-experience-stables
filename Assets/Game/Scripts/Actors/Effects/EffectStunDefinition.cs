@@ -27,7 +27,7 @@ namespace Game.Actors
         protected override void OnExecute(IActorController target)
         {
             _brain = target.GetComponent<IActorInputController>();
-            _brain.BlockInput(false);
+            _brain.BlockInput(true);
 
             _timer = _timers.GetTimerStarted(TimeSpan.FromSeconds(Definition.Duration), Cancel);
         }

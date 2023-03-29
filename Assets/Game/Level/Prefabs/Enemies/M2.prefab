@@ -96,10 +96,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22100000, guid: b69ef36201f6c404d9c9528e423f904c,
         type: 2}
+    - target: {fileID: 1646171557498439824, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
+        type: 3}
+      propertyPath: m_Height
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1646171557498439824, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.55
+      objectReference: {fileID: 0}
     - target: {fileID: 1646171557498439825, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1646171557498439825, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
         type: 3}
@@ -155,6 +165,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: M2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1646171557498439827, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
+        type: 3}
+      propertyPath: CapsuleHeight
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1646171557498439827, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
+        type: 3}
+      propertyPath: CapsuleYOffset
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 8473229070387919807, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.013000043
+      objectReference: {fileID: 0}
+    - target: {fileID: 8473229070387919807, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.408
+      objectReference: {fileID: 0}
+    - target: {fileID: 8473229070387919807, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.353
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

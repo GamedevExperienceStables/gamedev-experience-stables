@@ -1,4 +1,3 @@
-using Game.Actors;
 using Game.Enemies;
 using NodeCanvas.Framework;
 using ParadoxNotion.Design;
@@ -30,6 +29,9 @@ namespace Game.BehaviourTree.Actions
                 EndAction(true);
             }
         }
+
+        protected override void OnPause()
+            => agent.Stop();
 
         protected override void OnStop()
             => agent.Stop();

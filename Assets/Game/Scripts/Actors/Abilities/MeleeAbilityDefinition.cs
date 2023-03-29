@@ -1,11 +1,13 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
 using Game.Actors.Health;
 using Game.Animations.Hero;
 using Game.Stats;
+using Game.TimeManagement;
 using Game.Utils;
 using UnityEngine;
 using UnityEngine.Serialization;
+using VContainer;
+using Object = UnityEngine.Object;
 
 namespace Game.Actors
 {
@@ -36,17 +38,12 @@ namespace Game.Actors
         [SerializeField]
         private LayerMask mask;
 
-        [Header("Deprecated")]
-        [Obsolete("use simplified damage")]
-        [FormerlySerializedAs("meleeDamage")]
-        [FormerlySerializedAs("MeleeDamage")]
+        [Space]
         [SerializeField]
-        private StatModifier meleeDamageDeprecated;
+        private float castTime = 0.75f;
 
-        [Obsolete("use simplified stamina cost")]
-        [FormerlySerializedAs("staminaCost")]
         [SerializeField]
-        private StatModifier staminaCostDeprecated;
+        private GameObject completeEffectPrefab;
 
         public float MeleeRangeRadius => meleeRangeRadius;
         public float MeleeDamage => baseDamage;
@@ -55,28 +52,34 @@ namespace Game.Actors
         public LayerMask Mask => mask;
         public Vector3 SphereColliderShift => sphereColliderShift;
         public int MaxTargets => maxTargets;
+
+        public float CastTime => castTime;
+
+        public GameObject CompleteEffectPrefab => completeEffectPrefab;
     }
 
     public class MeleeAbility : ActorAbility<MeleeAbilityDefinition>
     {
-        private bool _hasAim;
-        private AimAbility _aim;
+        private readonly TimerPool _timers;
 
         private Collider[] _hitColliders;
         private ActorAnimator _animator;
-        private bool _isAnimationEnded;
         private IActorInputController _inputController;
 
         private bool _hasDamageModifier;
         private bool _hasStaminaModifier;
 
+        private TimerUpdatable _castTimer;
+        
+        private bool _hasCompleteEffect;
+
+        [Inject]
+        public MeleeAbility(TimerPool timers)
+            => _timers = timers;
 
         public override bool CanActivateAbility()
         {
-            if (!_isAnimationEnded)
-                return false;
-
-            if (_hasAim && _aim.IsActive)
+            if (IsActive)
                 return false;
 
             return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(GetCost());
@@ -86,27 +89,48 @@ namespace Game.Actors
         {
             _inputController = Owner.GetComponent<IActorInputController>();
 
-            _hasAim = Owner.TryGetAbility(out _aim);
-
             _hitColliders = new Collider[Definition.MaxTargets];
             _animator = Owner.GetComponent<ActorAnimator>();
-            _isAnimationEnded = true;
 
             _hasDamageModifier = Owner.HasStat(CharacterStats.MeleeDamageMultiplier);
             _hasStaminaModifier = Owner.HasStat(CharacterStats.MeleeStaminaMultiplier);
+
+            _castTimer = _timers.GetTimer(TimeSpan.FromSeconds(Definition.CastTime), OnComplete);
+
+            _hasCompleteEffect = Definition.CompleteEffectPrefab;
         }
 
-        protected override async void OnActivateAbility()
+        protected override void OnDestroyAbility() 
+            => _timers.ReleaseTimer(_castTimer);
+
+        protected override void OnActivateAbility()
         {
-            _inputController.BlockInput(true);
-            
-            bool isEnded = await AbilityAnimation();
-            if (isEnded)
-            {
-                return;
-            }
-            _animator.SetAnimation(AnimationNames.MeleeAttack, false);
             Owner.ApplyModifier(CharacterStats.Stamina, -GetCost());
+
+            _inputController.BlockInput(true);
+            SetAnimation(true);
+
+            _castTimer.Start();
+        }
+
+        private void OnComplete()
+        {
+            MakeDamage();
+            SpawnEffect();
+
+            EndAbility();
+        }
+
+        protected override void OnEndAbility(bool wasCancelled)
+        {
+            _inputController.BlockInput(false);
+            SetAnimation(false);
+
+            _castTimer?.Stop();
+        }
+
+        private void MakeDamage()
+        {
             Vector3 sphereShift = Owner.Transform.position + Definition.SphereColliderShift;
 #if UNITY_EDITOR
             DebugExtensions.DebugWireSphere(sphereShift, radius: Definition.MeleeRangeRadius);
@@ -116,7 +140,6 @@ namespace Game.Actors
             for (int i = 0; i < numColliders; i++)
             {
                 Transform hit = _hitColliders[i].transform;
-                Debug.Log(hit.gameObject + "MELEE ATTACKED");
                 if (hit.gameObject.TryGetComponent(out IActorController destinationOwner))
                     destinationOwner.GetComponent<DamageableController>().Damage(GetDamage());
                 Vector3 dir = hit.position - Owner.Transform.position;
@@ -125,44 +148,29 @@ namespace Game.Actors
             }
         }
 
-        private async UniTask<bool> WaitAnimationEnd()
-        {
-            bool isCancelled = await UniTask.Delay(TimeSpan.FromSeconds(0.75f), 
-                ignoreTimeScale: false, 
-                cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
-            _isAnimationEnded = true;
-            _inputController.BlockInput(false);
-            return isCancelled;
-        }
-
-        private async UniTask<bool> AbilityAnimation()
-        {
-            _animator.SetAnimation(AnimationNames.MeleeAttack, true);
-            _isAnimationEnded = false;
-            bool isEnded = await WaitAnimationEnd();
-            return isEnded;
-        }
+        private void SetAnimation(bool isActive)
+            => _animator.SetAnimation(AnimationNames.MeleeAttack, isActive);
 
         private float GetCost()
         {
             float baseCost = Definition.StaminaCost;
-            if (!_hasStaminaModifier)
-                return baseCost;
-
-            float modifier = baseCost * Owner.GetCurrentValue(CharacterStats.MeleeStaminaMultiplier);
-            float cost = baseCost - +modifier;
-            return cost;
+            return _hasStaminaModifier
+                ? baseCost.AddPercent(Owner.GetCurrentValue(CharacterStats.MeleeStaminaMultiplier))
+                : baseCost;
         }
 
         private float GetDamage()
         {
             float baseDamage = Definition.MeleeDamage;
-            if (!_hasDamageModifier)
-                return baseDamage;
+            return _hasDamageModifier
+                ? baseDamage.AddPercent(Owner.GetCurrentValue(CharacterStats.MeleeDamageMultiplier))
+                : baseDamage;
+        }
 
-            float modifier = baseDamage * Owner.GetCurrentValue(CharacterStats.MeleeStaminaMultiplier);
-            float damage = baseDamage + modifier;
-            return damage;
+        private void SpawnEffect()
+        {
+            if (_hasCompleteEffect)
+                Object.Instantiate(Definition.CompleteEffectPrefab, Owner.Transform.position, Quaternion.identity);
         }
     }
 }
