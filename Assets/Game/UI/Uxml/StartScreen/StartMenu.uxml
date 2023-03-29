@@ -1,11 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="MenuButton" src="project://database/Assets/Game/UI/Uxml/Partial/MenuButton.uxml?fileID=9197481963319205126&amp;guid=9213202493084284480cab6b7c7100d9&amp;type=3#MenuButton" />
-    <ui:Template name="SettingsPreview" src="project://database/Assets/Game/UI/Uxml/StartScreen/BasePreview.uxml?fileID=9197481963319205126&amp;guid=e77b8bc5b853dde4695a24412e8ea9a5&amp;type=3#BasePreview" />
+    <ui:Template name="SettingsPreview" src="project://database/Assets/Game/UI/Uxml/StartScreen/Preview.uxml?fileID=9197481963319205126&amp;guid=e77b8bc5b853dde4695a24412e8ea9a5&amp;type=3#Preview" />
     <ui:Template name="SettingsScreen" src="project://database/Assets/Game/UI/Uxml/StartScreen/SettingsScreen.uxml?fileID=9197481963319205126&amp;guid=30c7c4c0462a403dad393a8dcd62bacc&amp;type=3#SettingsScreen" />
     <ui:Template name="FooterBar" src="project://database/Assets/Game/UI/Uxml/Partial/FooterBar.uxml?fileID=9197481963319205126&amp;guid=4eb69b1b004fa7348b5c35b231212185&amp;type=3#FooterBar" />
+    <ui:Template name="AboutScreen" src="project://database/Assets/Game/UI/Uxml/StartScreen/AboutScreen.uxml?fileID=9197481963319205126&amp;guid=95c2435e4a4eae5499b96889cd80e23e&amp;type=3#AboutScreen" />
+    <ui:Template name="ArtScreen" src="project://database/Assets/Game/UI/Uxml/StartScreen/ArtScreen.uxml?fileID=9197481963319205126&amp;guid=06e1f63d8faecac49a5bf26912706564&amp;type=3#ArtScreen" />
     <Style src="project://database/Assets/Game/UI/Uss/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=8cedbaaf434e4b94f8c50cc514ad6cf7&amp;type=3#MainMenuStyle" />
-    <ui:VisualElement style="flex-grow: 1;">
-        <ui:VisualElement name="background" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=-833552155&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_0&apos;); -unity-background-scale-mode: scale-and-crop; flex-grow: 1;">
+    <ui:VisualElement style="flex-grow: 1; flex-shrink: 0;">
+        <ui:VisualElement name="background" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=-833552155&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_0&apos;); -unity-background-scale-mode: scale-and-crop; flex-grow: 1; flex-shrink: 0;">
             <ui:VisualElement name="rune1" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=-911050114&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_6&apos;); height: 172px; width: 204px; -unity-background-scale-mode: scale-and-crop; top: -35px; left: -75px; rotate: 9deg;">
                 <ui:VisualElement name="rune" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=-1700437063&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_5&apos;); width: 354px; height: 336px; top: -119px; left: -65px; -unity-background-scale-mode: scale-and-crop; rotate: -7deg;" />
             </ui:VisualElement>
@@ -30,7 +32,7 @@
                 <ui:VisualElement name="book-element" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Book_Atlas.psd?fileID=-266068376&amp;guid=db028da8c75fb7d46a9453c6191377b5&amp;type=3#Menu_Book_Atlas_3&apos;); width: 137px; height: 258px; -unity-background-scale-mode: scale-and-crop; top: -39px; left: -5px;" />
             </ui:VisualElement>
             <ui:VisualElement name="menu-book-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; flex-direction: row; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Book_Atlas.psd?fileID=1295037022&amp;guid=db028da8c75fb7d46a9453c6191377b5&amp;type=3#Menu_Book_Atlas_1&apos;); -unity-background-scale-mode: scale-and-crop; width: 1230px; height: 803px; top: -60px; left: 155px;">
-                <ui:VisualElement name="left-side" style="background-color: rgb(255, 219, 165); flex-shrink: 0; flex-grow: 1; width: 50%;">
+                <ui:VisualElement name="left-side" style="flex-shrink: 0; flex-grow: 1; width: 50%;">
                     <ui:VisualElement name="logo" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); -unity-font-style: bold; font-size: 35px; position: absolute; top: 100px; left: 85px; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1352927749&amp;guid=dbdbbdd8c4129294e930e1acba730b50&amp;type=3#Menu_Atlas_5&apos;); -unity-background-scale-mode: scale-and-crop; width: 445px; height: 229px;" />
                     <ui:VisualElement name="menu" class="menu" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 350px; position: absolute; top: 367px; left: 107px;">
                         <ui:Instance template="MenuButton" name="button-start" />
@@ -41,10 +43,12 @@
                         <ui:Instance template="MenuButton" name="button-quit" />
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="right-side" style="background-color: rgb(248, 198, 148); flex-shrink: 0; flex-grow: 1; width: 50%;">
+                <ui:VisualElement name="right-side" style="flex-shrink: 0; flex-grow: 1; width: 50%;">
                     <ui:Instance template="SettingsPreview" name="preview" style="flex-grow: 1; visibility: visible;" />
                     <ui:VisualElement name="pages" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
-                        <ui:Instance template="SettingsScreen" name="page-settings" style="visibility: hidden; flex-grow: 1;" />
+                        <ui:Instance class="page" template="SettingsScreen" name="page-settings" style="visibility: hidden;" />
+                        <ui:Instance class="page" template="ArtScreen" name="page-art" style="visibility: hidden;" />
+                        <ui:Instance class="page" template="AboutScreen" name="page-about" style="visibility: hidden;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>

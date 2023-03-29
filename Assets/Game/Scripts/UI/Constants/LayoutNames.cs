@@ -43,6 +43,8 @@
             public const string PREVIEW_CAPTION = "caption";
 
             public const string PAGE_SETTINGS = "page-settings";
+            public const string PAGE_ABOUT = "page-about";
+            public const string PAGE_ART = "page-art";
             
             public const string BUTTON_ACTIVE_CLASS_NAME = "menu-button--active";
             
