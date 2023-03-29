@@ -51,5 +51,11 @@ namespace Game.Utils
 		
             return new Quaternion(result.x, result.y, result.z, result.w);
         }
+
+        public static float AddPercent(this float baseValue, float value)
+        {
+            float additiveValue = baseValue * value;
+            return baseValue + additiveValue;
+        }
     }
 }

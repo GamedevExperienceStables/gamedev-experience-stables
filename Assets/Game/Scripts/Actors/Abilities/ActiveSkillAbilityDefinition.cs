@@ -1,4 +1,5 @@
 ﻿using Game.Inventory;
+using Game.Weapons;
 using UnityEngine;
 
 namespace Game.Actors
@@ -19,9 +20,11 @@ namespace Game.Actors
 
         private AimAbility _aim;
         private ActorAbility _defaultAbility;
-        public ActorAbility ActiveAbility => _activeAbility; 
+
         public ActiveSkillAbility(IInventorySlots slots)
             => _slots = slots;
+
+        public bool IsGroundTargeting { get; private set; }
 
 
         protected override void OnInitAbility()
@@ -38,7 +41,7 @@ namespace Game.Actors
         private void SetDefaultAbility()
         {
             if (TryFindAbility(Definition.DefaultAbility, out _defaultAbility))
-                _activeAbility = _defaultAbility;
+                SetActiveAbility(_defaultAbility);
         }
 
         private bool TryFindAbility(AbilityDefinition definition, out ActorAbility foundAbility)
@@ -51,7 +54,7 @@ namespace Game.Actors
         }
 
         public override bool CanActivateAbility()
-            => _aim.IsActive;
+            => true;
 
         protected override void OnActivateAbility()
         {
@@ -66,11 +69,32 @@ namespace Game.Actors
                 AbilityDefinition runeDefinition = _slots.ActiveSlot.Rune.GrantAbility;
                 if (TryFindAbility(runeDefinition, out ActorAbility foundAbility))
                 {
-                    _activeAbility = foundAbility;
+                    SetActiveAbility(foundAbility);
                     return;
                 }
             }
-            _activeAbility = _defaultAbility;
+
+            SetActiveAbility(_defaultAbility);
+        }
+
+        private void SetActiveAbility(ActorAbility ability)
+        {
+            _activeAbility = ability;
+            
+            UpdateTargetingType();
+            _aim.UpdateState();
+        }
+
+
+        private void UpdateTargetingType()
+        {
+            if (_activeAbility.Definition is not ProjectileAbilityDefinition projectileDefinition)
+            {
+                IsGroundTargeting = false;
+                return;
+            }
+
+            IsGroundTargeting = projectileDefinition.Projectile.Trajectory is ProjectileTrajectoryBallistic;
         }
     }
 }

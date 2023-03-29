@@ -11,5 +11,7 @@ namespace Game.Utils
         public static readonly LayerMask Ground = 1 << 8;
         public static readonly LayerMask Environment = 1 << 9;
         public static readonly LayerMask Enemy = 1 << 11;
+        
+        public static LayerMask GroundLayers = Ground | Environment | Default;
     }
 }

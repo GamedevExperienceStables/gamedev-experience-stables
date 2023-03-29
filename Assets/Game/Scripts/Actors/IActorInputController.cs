@@ -4,7 +4,8 @@ namespace Game.Actors
 {
     public interface IActorInputController
     {
-        void BlockInput(bool isBlocked);
         Vector3 DesiredDirection { get; }
+        void BlockInput(bool isBlocked);
+        Vector3 GetTargetPosition(bool grounded = false);
     }
 }
