@@ -1,5 +1,5 @@
-﻿    using System;
-    using Game.Stats;
+﻿using System;
+using Game.Stats;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 
@@ -15,10 +15,22 @@ namespace Game.Actors.Health
         private IActorController _owner;
         public event Action DamageFeedback;
 
-
         private void Awake()
+            => _owner = GetComponent<IActorController>();
+
+        private void Start()
+            => _owner.Subscribe(CharacterStats.Health, OnHealthChanged);
+
+        private void OnDestroy()
+            => _owner.UnSubscribe(CharacterStats.Health, OnHealthChanged);
+
+        private void OnHealthChanged(StatValueChange change)
         {
-            _owner = GetComponent<IActorController>();
+            if (change.newValue >= change.oldValue)
+                return;
+
+            DamageFeedback?.Invoke();
+            PlayDamageFeedback();
         }
 
         public void Damage(float damage)
@@ -26,10 +38,7 @@ namespace Game.Actors.Health
             if (IsInvulnerable)
                 return;
 
-            if (_owner.GetCurrentValue(CharacterStats.Health) <= 0)
-                return;
-            DamageFeedback?.Invoke();
-            MakeDamage(damage);
+            ApplyDamage(damage);
         }
 
         private void PlayDamageFeedback()
@@ -40,16 +49,13 @@ namespace Game.Actors.Health
             }
         }
 
-        private void MakeDamage(float damage)
-        {
-            _owner.ApplyModifier(CharacterStats.Health, -damage);
-            PlayDamageFeedback();
-        }
+        private void ApplyDamage(float damage)
+            => _owner.ApplyModifier(CharacterStats.Health, -damage);
 
         public void MakeInvulnerable()
             => IsInvulnerable = true;
 
-        public void MakeVulnerable() 
+        public void MakeVulnerable()
             => IsInvulnerable = false;
     }
 }
