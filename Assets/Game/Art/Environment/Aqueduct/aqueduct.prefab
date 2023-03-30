@@ -196,6 +196,8 @@ GameObject:
   - component: {fileID: 7436566179297838263}
   - component: {fileID: 8566090784056284075}
   - component: {fileID: 3468129884248197463}
+  - component: {fileID: 1992734873}
+  - component: {fileID: 1992734872}
   m_Layer: 0
   m_Name: aqueduct
   m_TagString: Untagged
@@ -307,6 +309,48 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9511001, y: 13.418585, z: 0.9999997}
   m_Center: {x: 5, y: 6.2092953, z: -14.41}
+--- !u!65 &1992734873
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995297057460863368}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2, z: 13.2}
+  m_Center: {x: 5, y: 12, z: -7.2}
+--- !u!65 &1992734872
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995297057460863368}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2, z: 13.2}
+  m_Center: {x: -0.3, y: 12, z: -7.2}
 --- !u!1 &2066242645826364594
 GameObject:
   m_ObjectHideFlags: 0
