@@ -115,9 +115,6 @@ namespace Game.Hero
         {
             if (_isBlocked) 
                 return;
-
-            if (!_aim.IsActive)
-                return;
             
             _melee.TryActivateAbility();
         }
