@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Game.Stats
 {
@@ -64,8 +63,7 @@ namespace Game.Stats
 
         public float CalculateFinalValue()
         {
-            float flat = 0;
-            float percent = 1;
+            float finalValue = BaseValue;
 
             foreach (StatModifier modifier in _modifiers)
             {
@@ -75,11 +73,11 @@ namespace Game.Stats
                         return modifier.Value;
 
                     case StatsModifierType.Flat:
-                        flat += modifier.Value;
+                        finalValue += modifier.Value;
                         break;
 
                     case StatsModifierType.Percent:
-                        percent += modifier.Value;
+                        finalValue *= 1 + modifier.Value;
                         break;
 
                     default:
@@ -87,7 +85,7 @@ namespace Game.Stats
                 }
             }
 
-            return (BaseValue + flat) * percent;
+            return (float)Math.Round(finalValue, 4);
         }
 
         private void SetDirty()
