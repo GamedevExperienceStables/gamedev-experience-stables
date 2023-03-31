@@ -45,8 +45,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 5
+  m_Intensity: 0.5
+  m_Range: 1
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -185,7 +185,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 31781a463a4da5a44909c748ef6b0cf9, type: 2}
+      objectReference: {fileID: 2100000, guid: 712c02ea0a5d1184491a6db299f276f6, type: 2}
     - target: {fileID: -8421916858719552084, guid: bc97a27f171df4f4dbb7ebddedeed6f7,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
