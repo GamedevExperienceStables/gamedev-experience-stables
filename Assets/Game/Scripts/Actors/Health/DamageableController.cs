@@ -1,6 +1,5 @@
 ﻿using System;
 using Game.Stats;
-using MoreMountains.Feedbacks;
 using UnityEngine;
 
 namespace Game.Actors.Health
@@ -8,7 +7,7 @@ namespace Game.Actors.Health
     public class DamageableController : MonoBehaviour
     {
         [SerializeField]
-        private MMF_Player damageFeedback;
+        private GameObject damageFeedback;
 
         public bool IsInvulnerable { get; private set; }
 

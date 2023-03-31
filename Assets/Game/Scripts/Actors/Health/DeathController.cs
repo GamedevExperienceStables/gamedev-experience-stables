@@ -1,6 +1,5 @@
 ﻿using System;
 using Game.Stats;
-using MoreMountains.Feedbacks;
 using UnityEngine;
 
 namespace Game.Actors.Health
@@ -9,7 +8,7 @@ namespace Game.Actors.Health
     public class DeathController : MonoBehaviour
     {
         [SerializeField]
-        private MMF_Player deathFeedback;
+        private GameObject deathFeedback;
 
         [SerializeField]
         private bool destroyOnDeath = true;
