@@ -1,11 +1,16 @@
 ﻿using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Weapons
 {
     [CreateAssetMenu(menuName = "Projectile/Targeting")]
-    public class TargetingDefinition : ScriptableObject, ITargetingSettings
+    public class TargetingDefinition : ScriptableObject
     {
+        [Header("Target")]
+        [SerializeField]
+        private TargetCollecting collectTargetPosition;
+        
         [Header("Grounding")]
         [SerializeField]
         private Vector3 targetPositionOffset;
@@ -38,5 +43,7 @@ namespace Game.Weapons
         public float MinDistanceToTargetBelow => minDistanceToTargetBelow;
 
         public float MinDistanceToTarget => minDistanceToTarget;
+
+        public TargetCollecting CollectTargetPosition => collectTargetPosition;
     }
 }

@@ -41,7 +41,7 @@ namespace Game.Actors
 
         public EventReference FireSfx => fireSfx;
 
-        public ITargetingSettings Targeting => targeting;
+        public TargetingDefinition Targeting => targeting;
     }
 
     public class ProjectileAbility : ActorAbility<ProjectileAbilityDefinition>
@@ -60,6 +60,7 @@ namespace Game.Actors
 
         private TimerUpdatable _fireTimer;
         private TimerUpdatable _castTimer;
+        private Vector3 _targetPosition;
 
         public ProjectileAbility(ProjectileFactory projectileFactory, FmodService audio, TimerPool timers)
         {
@@ -117,6 +118,9 @@ namespace Game.Actors
             if (_hasMana)
                 Owner.ApplyModifier(CharacterStats.Mana, -Definition.ManaCost);
 
+            if (Definition.Targeting.CollectTargetPosition is TargetCollecting.OnActivate)
+                _targetPosition = GetTargetPosition();
+            
             _fireTimer.Start();
             _castTimer.Start();
 
@@ -125,8 +129,10 @@ namespace Game.Actors
 
         private void OnFire()
         {
-            Vector3 targetPosition = GetTargetPosition();
-            FireProjectile(targetPosition);
+            if (Definition.Targeting.CollectTargetPosition is TargetCollecting.OnFire)
+                _targetPosition = GetTargetPosition();
+            
+            FireProjectile();
 
             SetAnimation(false);
         }
@@ -145,11 +151,11 @@ namespace Game.Actors
         private void SetAnimation(bool isActive)
             => _animator.SetAnimation(AnimationNames.RangeAttack, isActive);
 
-        private void FireProjectile(Vector3 targetPosition)
+        private void FireProjectile()
         {
             _projectilePool.Get(out Projectile projectile);
 
-            projectile.Fire(_spawnPoint, targetPosition);
+            projectile.Fire(_spawnPoint, _targetPosition);
 
             if (!Definition.FireSfx.IsNull)
                 _audio.PlayOneShot(Definition.FireSfx, Owner.Transform);
@@ -157,7 +163,7 @@ namespace Game.Actors
 
         private Vector3 GetTargetPosition()
         {
-            ITargetingSettings targeting = Definition.Targeting;
+            TargetingDefinition targeting = Definition.Targeting;
 
             Vector3 position = Owner.Transform.position;
             bool groundedPosition = targeting.RelativeToGround;
