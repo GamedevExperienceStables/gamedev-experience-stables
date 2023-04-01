@@ -3,20 +3,18 @@ using UnityEngine;
 
 namespace Game.Level
 {
-    [RequireComponent(typeof(TrapView))]
-    public class TrapZoneView : MonoBehaviour
+    public class TrapZoneCollector
     {
-        private TrapZone _trap;
-
         private readonly ActorCollector _collector = new();
+        private readonly TrapZone _trap;
 
-        public void Init(TrapZone trap)
+        public TrapZoneCollector(TrapZone trap)
         {
             _trap = trap;
             _collector.SetLayerMask(trap.LayerMask);
         }
 
-        private void OnDestroy()
+        public void Clear()
         {
             foreach (IActorController actor in _collector.Items)
                 _trap.Exit(actor);
@@ -24,13 +22,16 @@ namespace Game.Level
             _collector.Clear();
         }
 
-        private void OnTriggerEnter(Collider other)
+        public bool OnEnter(Collider other)
         {
-            if (_collector.TryAdd(other, out IActorController target))
-                _trap.Enter(target);
+            if (!_collector.TryAdd(other, out IActorController target)) 
+                return false;
+            
+            _trap.Enter(target);
+            return true;
         }
 
-        private void OnTriggerExit(Collider other)
+        public void OnExit(Collider other)
         {
             if (_collector.TryRemove(other, out IActorController target))
                 _trap.Exit(target);

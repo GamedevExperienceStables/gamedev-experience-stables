@@ -9,7 +9,13 @@ namespace Game.Actors
     public class EffectStunDefinition : EffectDefinition<EffectStun>
     {
         public override bool CanExecute(IActorController target)
-            => true;
+            => EffectType is not EffectDuration.Instant;
+
+        private void OnValidate()
+        {
+            if (EffectType is EffectDuration.Instant)
+                Debug.LogWarning($"Stun effect can't be instant: {name}. It will not affect.", this);
+        }
     }
 
     public class EffectStun : Effect<EffectStunDefinition>

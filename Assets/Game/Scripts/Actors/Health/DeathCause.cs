@@ -3,6 +3,6 @@
     public enum DeathCause
     {
         Damage,
-        PermaDeath
+        PermanentDeath
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Stats;
 using Game.TimeManagement;
+using NaughtyAttributes;
 using UnityEngine;
 using VContainer;
 
@@ -9,6 +10,7 @@ namespace Game.Actors
     [CreateAssetMenu(menuName = MENU_PATH + "Stat Change")]
     public class EffectStatChangeDefinition : EffectDefinition<EffectStatChange>
     {
+        [HideIf(nameof(EffectType), EffectDuration.Instant)]
         [SerializeField, Min(0)]
         private float interval;
 
@@ -46,6 +48,28 @@ namespace Game.Actors
         {
             _target = target;
 
+            switch (Definition.EffectType)
+            {
+                case EffectDuration.Instant:
+                {
+                    ApplyModifier();
+                    break;
+                }
+
+                case EffectDuration.Infinite:
+                case EffectDuration.Limited:
+                {
+                    AddEffect();
+                    break;
+                }
+                
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(Definition.EffectType), Definition.EffectType, null);
+            }
+        }
+
+        private void AddEffect()
+        {
             float interval = Definition.Interval;
             float duration = Definition.Duration;
 

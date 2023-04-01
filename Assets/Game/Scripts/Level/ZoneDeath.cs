@@ -24,7 +24,7 @@ namespace Game.Level
                 return;
 
             if (actor.TryGetComponent(out DeathController death)) 
-                death.Kill(DeathCause.PermaDeath);
+                death.Kill(DeathCause.PermanentDeath);
         }
     }
 }

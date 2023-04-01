@@ -33,6 +33,11 @@ namespace Game.GameFlow
             if (deathCause is DeathCause.Damage && CanRevive(hero))
                 return;
 
+            GameOver(hero);
+        }
+
+        private void GameOver(ActorController hero)
+        {
             hero.RemoveAbilities();
             _planetStateMachine.EnterState<PlanetGameOverState>();
         }

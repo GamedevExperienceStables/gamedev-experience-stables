@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Game.Stats;
+﻿using Game.Stats;
 using UnityEngine;
 
 namespace Game.Actors
@@ -7,6 +6,7 @@ namespace Game.Actors
     public interface IActorController
     {
         Transform Transform { get; }
+        
         T GetComponent<T>();
         bool TryGetComponent<T>(out T component);
         
@@ -25,9 +25,9 @@ namespace Game.Actors
         bool TryGetAbility(AbilityDefinition definition, out ActorAbility foundAbility);
         bool TryGetAbility<T>(out T foundAbility) where T : ActorAbility;
 
+        bool TryGetEffect(StatusDefinition status, out Effect effect);
+        void ApplyEffect(Effect effect);
         void AddEffect(Effect effect);
         void RemoveEffectsByInstigator(object instigator);
-        
-        CancellationToken CancellationToken();
     }
 }

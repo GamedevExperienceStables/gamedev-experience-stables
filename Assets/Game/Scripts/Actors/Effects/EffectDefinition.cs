@@ -8,15 +8,21 @@ namespace Game.Actors
     {
         protected const string MENU_PATH = "★ Effect/";
         
-        [SerializeField, Required]
+        [SerializeField]
+        private EffectDuration effectType;
+        
+        [Space]
+        [SerializeField, HideIf(nameof(effectType), EffectDuration.Instant)]
         private StatusDefinition status;
 
-        [Space]
         [SerializeField, Min(0)]
+        [ShowIf(nameof(effectType), EffectDuration.Limited)]
         private float duration = 3f;
 
         public StatusDefinition Status => status;
         public float Duration => duration;
+
+        public EffectDuration EffectType => effectType;
 
         public abstract bool CanExecute(IActorController target);
     }

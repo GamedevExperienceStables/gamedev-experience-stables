@@ -1,25 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Actors;
 using NaughtyAttributes;
 using UnityEngine;
 
 namespace Game.Level
 {
-    [CreateAssetMenu(menuName = MENU_PATH + "Zone")]
-    public class TrapZoneDefinition : TrapDefinition
+    [Serializable]
+    public class TrapZoneEffectBehaviour
     {
         [SerializeField]
         private LayerMask layerMask = ~0;
-
-        [Space]
+        
         [SerializeField]
-        private bool removeEffectsOnExit;
+        private TrapZoneBehaviour behaviour;
 
         [SerializeField, Expandable]
         private List<EffectDefinition> effects;
 
-        public LayerMask LayerMask => layerMask;
-        public bool RemoveEffectsOnExit => removeEffectsOnExit;
         public IEnumerable<EffectDefinition> Effects => effects;
+        public bool RemoveEffectsOnExit => false;
+        public LayerMask LayerMask => layerMask;
+
+        public TrapZoneBehaviour Behaviour => behaviour;
     }
 }

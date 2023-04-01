@@ -10,7 +10,7 @@ using VContainer;
 
 namespace Game.Weapons
 {
-    public class ProjectileBehaviour
+    public class ProjectileHandler
     {
         private const float DEBUG_DURATION = 0.5f;
 
@@ -20,7 +20,7 @@ namespace Game.Weapons
         private readonly Collider[] _buffer = new Collider[20];
 
         [Inject]
-        public ProjectileBehaviour(TrapFactory trapFactory, EffectHandler effectHandler)
+        public ProjectileHandler(TrapFactory trapFactory, EffectHandler effectHandler)
         {
             _trapFactory = trapFactory;
             _effectHandler = effectHandler;
@@ -80,7 +80,8 @@ namespace Game.Weapons
             if (definition.FaceInDirection)
                 FaceInDirection(source, ref rotation);
 
-            TrapView trap = _trapFactory.Create(definition.SpawnDefinition);
+            TrapDefinition definition1 = definition.SpawnDefinition;
+            TrapView trap = _trapFactory.Create(definition1.PrefabDeprecated, definition1);
             trap.transform.SetPositionAndRotation(spawnPoint, rotation);
         }
 

@@ -17,9 +17,9 @@ namespace Game.Level
             _effectFactory = effectFactory;
         }
 
-        public TrapView Create(TrapDefinition definition)
+        public TrapView Create(TrapView prefab, TrapDefinition definition)
         {
-            TrapView instance = Object.Instantiate(definition.Prefab);
+            TrapView instance = Object.Instantiate(prefab);
             _resolver.InjectGameObject(instance.gameObject);
 
             SetSize(instance, definition.Size);
@@ -46,8 +46,15 @@ namespace Game.Level
         private void InitZone(Component view, TrapZoneDefinition zone)
         {
             var zoneView = view.GetComponent<TrapZoneView>();
-            var trap = new TrapZone(zone, _effectFactory);
-            zoneView.Init(trap);
+            
+            if (zone.Durability > 0) 
+                zoneView.SetDurability(zone.Durability, zone.OnDestroyVFX);
+
+            foreach (TrapZoneEffectBehaviour zoneBehaviour in zone.Behaviours)
+            {
+                var trap = new TrapZone(zoneBehaviour, _effectFactory);
+                zoneView.Add(trap);    
+            }
         }
     }
 }

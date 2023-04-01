@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using Cysharp.Threading.Tasks;
-using Game.Stats;
+﻿using Game.Stats;
 using UnityEngine;
 
 namespace Game.Actors
@@ -14,9 +12,12 @@ namespace Game.Actors
 
         protected abstract IStats Stats { get; }
 
-        public CancellationToken CancellationToken() => destroyCancellationToken;
         private void Awake()
-            => OnActorAwake();
+        {
+            _effects.Init(this);
+            
+            OnActorAwake();
+        }
 
         private void OnDestroy()
         {
@@ -28,6 +29,8 @@ namespace Game.Actors
 
         private void Update()
             => _effects.Tick();
+
+        #region Stats
 
         public bool HasStat(CharacterStats key)
             => Stats.HasStat(key);
@@ -58,6 +61,10 @@ namespace Game.Actors
 
         public void UnSubscribe(CharacterStats key, IStats.StatChangedEvent callback)
             => Stats.UnSubscribe(key, callback);
+        
+        #endregion
+
+        #region Abilities
 
         public void RegisterAbility(ActorAbility ability)
             => _abilities.RegisterAbility(ability, this);
@@ -76,17 +83,7 @@ namespace Game.Actors
 
         public T GetAbility<T>() where T : ActorAbility
             => _abilities.GetAbility<T>();
-
-        public void AddEffect(Effect effect)
-        {
-            // allow only one status per definition
-            _effects.Cancel(effect.Definition.Status);
-            _effects.Add(effect, this);
-        }
-
-        public void RemoveEffectsByInstigator(object instigator) 
-            => _effects.CancelAll(instigator);
-
+        
         public void InitAbilities()
             => _abilities.InitAbilities();
 
@@ -98,9 +95,27 @@ namespace Game.Actors
 
         private void DestroyAbilities()
             => _abilities.DestroyAbilities();
+        
+        #endregion
 
+        #region Effects
+
+        public bool TryGetEffect(StatusDefinition status, out Effect effect) 
+            => _effects.TryGetEffect(status, out effect);
+
+        public void ApplyEffect(Effect effect) 
+            => _effects.Execute(effect);
+
+        public void AddEffect(Effect effect) 
+            => _effects.Add(effect);
+
+        public void RemoveEffectsByInstigator(object instigator) 
+            => _effects.CancelAll(instigator);
+        
         public void CancelEffects()
             => _effects.CancelAll();
+        
+        #endregion
 
         protected virtual void OnActorAwake()
         {
