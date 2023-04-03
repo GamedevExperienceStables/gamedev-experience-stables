@@ -124,6 +124,8 @@ namespace Game.Actors
             _fireTimer.Start();
             _castTimer.Start();
 
+            _input.SetBlock(InputBlock.Rotation);
+
             SetAnimation(true);
         }
 
@@ -146,6 +148,8 @@ namespace Game.Actors
             _castTimer.Stop();
 
             SetAnimation(false);
+
+            _input.RemoveBlock(InputBlock.Rotation);
         }
 
         private void SetAnimation(bool isActive)

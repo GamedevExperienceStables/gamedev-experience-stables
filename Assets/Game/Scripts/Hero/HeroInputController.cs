@@ -31,6 +31,8 @@ namespace Game.Hero
         private Vector3 _mouseFirePosition;
         private Vector3 _mouseGroundPosition;
 
+        private readonly ActorBlock _block = new();
+
         public Vector3 DesiredDirection => _movementDirection;
 
         [Inject]
@@ -102,28 +104,28 @@ namespace Game.Hero
 
         private void OnFire()
         {
-            if (_isBlocked) 
-                return;
-            
             if (!_aim.IsActive)
                 return;
-            
+
+            if (_block.IsBlocked(InputBlock.Action))
+                return;
+
             _activeSkill.TryActivateAbility();
         }
 
         private void OnMelee()
         {
-            if (_isBlocked) 
+            if (_block.IsBlocked(InputBlock.Action))
                 return;
-            
+
             _melee.TryActivateAbility();
         }
 
         private void OnDash()
         {
-            if (_isBlocked) 
+            if (_block.IsBlocked(InputBlock.Action))
                 return;
-            
+
             _dash.TryActivateAbility();
         }
 
@@ -136,25 +138,47 @@ namespace Game.Hero
             => _aim.EndAbility();
 
         private void OnInteract()
-            => _interaction.TryActivateAbility();
+        {
+            if (_block.IsBlocked(InputBlock.Action))
+                return;
+
+            _interaction.TryActivateAbility();
+        }
 
         private void HandleInputs()
         {
-            if (_isBlocked)
-            {
-                _movementDirection = Vector3.zero;
-                return;
-            }
+            HandleMovementInput();
+            HandleRotationInput();
+        }
 
-            _movementDirection = GetMovementDirection();
-            _lookDirection = GetLookDirection(_movementDirection);
+        private void HandleMovementInput()
+            => _movementDirection = _block.IsBlocked(InputBlock.Movement) ? Vector3.zero : GetMovementDirection();
+
+        private void HandleRotationInput()
+        {
+            if (_block.IsBlocked(InputBlock.Rotation))
+                return;
+
+            _lookDirection = _aim.IsActive ? GetLookDirection() : _movementDirection;
         }
 
         private void Move()
             => _movement.UpdateInputs(_movementDirection, _lookDirection.normalized);
 
-        public void BlockInput(bool isBlocked)
-            => _isBlocked = isBlocked;
+        public void SetBlock(bool isBlocked)
+        {
+            if (isBlocked)
+                _block.SetBlock();
+            else
+                _block.RemoveBlock();
+        }
+
+        public void SetBlock(InputBlock input)
+            => _block.SetBlock(input);
+
+        public void RemoveBlock(InputBlock input)
+            => _block.RemoveBlock(input);
+
 
         private Vector3 GetMovementDirection()
         {
@@ -164,11 +188,8 @@ namespace Game.Hero
             return movementDirection;
         }
 
-        private Vector3 GetLookDirection(Vector3 movementDirection)
+        private Vector3 GetLookDirection()
         {
-            if (!_aim.IsActive)
-                return movementDirection;
-
             if (IsSecondaryMovementPerformed())
                 return GetLookDirectionFromSecondaryMovement();
 

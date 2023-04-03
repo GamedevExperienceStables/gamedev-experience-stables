@@ -107,7 +107,7 @@ namespace Game.Actors
         {
             Owner.ApplyModifier(CharacterStats.Stamina, -GetCost());
 
-            _inputController.BlockInput(true);
+            _inputController.SetBlock(true);
             SetAnimation(true);
 
             _castTimer.Start();
@@ -123,7 +123,7 @@ namespace Game.Actors
 
         protected override void OnEndAbility(bool wasCancelled)
         {
-            _inputController.BlockInput(false);
+            _inputController.SetBlock(false);
             SetAnimation(false);
 
             _castTimer?.Stop();

@@ -74,6 +74,7 @@ namespace Game.Actors
             float dynamicCost = GetCost();
             Owner.ApplyModifier(CharacterStats.Stamina, -dynamicCost);
 
+            _inputController.SetBlock(InputBlock.Rotation);
             _animationTimer.Start();
         }
 
@@ -84,7 +85,7 @@ namespace Game.Actors
         {
             SetAnimation(false);
             _animationTimer.Stop();
-            _inputController.BlockInput(false);
+            _inputController.RemoveBlock(InputBlock.Rotation);
 
             if (!wasCancelled)
                 AddVelocity();

@@ -15,6 +15,8 @@ namespace Game.Enemies
         private BehaviourTreeOwner _brain;
         private bool _hasBrain;
 
+        private readonly ActorBlock _block = new();
+
         public Transform Target => _target;
         public float SensorDistance => _sensorDistance;
         public float AttackRange => _attackRange;
@@ -35,20 +37,37 @@ namespace Game.Enemies
             _attackInterval = interval;
         }
 
-        public void BlockInput(bool isBlocked)
+        public void SetBlock(bool isBlocked)
         {
             if (!_hasBrain)
                 return;
 
             if (isBlocked)
-            {
+                SetBlock(InputBlockExtensions.FULL_BLOCK);
+            else 
+                RemoveBlock(InputBlockExtensions.FULL_BLOCK);
+        }
+
+        public void SetBlock(InputBlock input)
+        {
+            if (!_hasBrain) 
+                return;
+            
+            _block.SetBlock();
+            
+            if (!_brain.isPaused)
                 _brain.PauseBehaviour();
-            }
-            else
-            {
-                if (_brain.isPaused)
-                    _brain.StartBehaviour();
-            }
+        }
+
+        public void RemoveBlock(InputBlock input)
+        {
+            if (!_hasBrain) 
+                return;
+            
+            _block.RemoveBlock();
+            
+            if (_brain.isPaused)
+                _brain.StartBehaviour();
         }
 
         public Vector3 GetTargetPosition(bool grounded = false)

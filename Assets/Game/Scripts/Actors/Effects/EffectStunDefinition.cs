@@ -33,14 +33,14 @@ namespace Game.Actors
         protected override void OnExecute(IActorController target)
         {
             _brain = target.GetComponent<IActorInputController>();
-            _brain.BlockInput(true);
+            _brain.SetBlock(true);
 
             _timer = _timers.GetTimerStarted(TimeSpan.FromSeconds(Definition.Duration), Cancel);
         }
 
         protected override void OnCancel()
         {
-            _brain.BlockInput(false);
+            _brain.SetBlock(false);
             _timers.ReleaseTimer(_timer);
         }
     }
