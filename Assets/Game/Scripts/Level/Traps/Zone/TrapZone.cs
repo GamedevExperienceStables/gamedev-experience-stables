@@ -24,14 +24,16 @@ namespace Game.Level
 
         public void Exit(IActorController target)
         {
-            if (_zone.Behaviour is TrapZoneBehaviour.AddOnExit)
-                ApplyEffect(target);
-            
-            if (_zone.Behaviour is TrapZoneBehaviour.AddOnEnterRemoveOnExit)
-                target.RemoveEffectsByInstigator(this);
+            switch (_zone.Behaviour)
+            {
+                case TrapZoneBehaviour.AddOnExit:
+                    _effectHandler.ApplyEffects(target, _zone.Effects, this);
+                    break;
+                
+                case TrapZoneBehaviour.AddOnEnterRemoveOnExit:
+                    _effectHandler.CancelEffectsByInstigator(target, _zone.Effects, this);
+                    break;
+            }
         }
-
-        private void ApplyEffect(IActorController target)
-            => _effectHandler.ApplyEffects(target, _zone.Effects, this);
     }
 }

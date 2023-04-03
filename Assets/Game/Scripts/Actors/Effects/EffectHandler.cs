@@ -31,32 +31,19 @@ namespace Game.Actors
 
         private void AddEffect(IActorController target, EffectDefinition definition, object instigator)
         {
-            // allow only one status per definition
-            if (TryReplaceEffect(target, definition, instigator))
-                 return;
-
             Effect effect = CreateEffect(definition, instigator);
             target.AddEffect(effect);
         }
+
+        // ReSharper disable once MemberCanBeMadeStatic.Global
+        public void CancelEffectsByInstigator(IActorController target,
+            IEnumerable<EffectDefinition> effects, object instigator)
+            => target.CancelEffectsByInstigator(instigator, effects);
 
         private void ApplyEffect(IActorController target, EffectDefinition definition, object instigator)
         {
             Effect effect = CreateEffect(definition, instigator);
             target.ApplyEffect(effect);
-        }
-
-        private static bool TryReplaceEffect(IActorController target, EffectDefinition definition, object instigator)
-        {
-            if (!target.TryGetEffect(definition.Status, out Effect effect))
-                return false;
-            
-            if (effect.IsCanceled)
-                return false;
-
-            effect.Replace(definition, target);
-            effect.Instigator = instigator;
-            
-            return true;
         }
 
         private Effect CreateEffect(EffectDefinition definition, object instigator)

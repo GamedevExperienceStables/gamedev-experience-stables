@@ -62,10 +62,21 @@ namespace Game.Actors
                     AddEffect();
                     break;
                 }
-                
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(Definition.EffectType), Definition.EffectType, null);
             }
+        }
+
+        protected override void OnCancel()
+        {
+            if (Definition.Interval > 0)
+                _timers.ReleaseTimer(_timerInterval);
+
+            if (Definition.Duration > 0)
+                _timers.ReleaseTimer(_timerTotal);
+
+            _target.RemoveModifier(Definition.Stat, Definition.Modifier);
         }
 
         private void AddEffect()
@@ -85,21 +96,13 @@ namespace Game.Actors
                 AddModifier();
         }
 
-        protected override void OnCancel()
-        {
-            if (Definition.Interval > 0)
-                _timers.ReleaseTimer(_timerInterval);
-
-            if (Definition.Duration > 0)
-                _timers.ReleaseTimer(_timerTotal);
-
-            _target.RemoveModifier(Definition.Stat, Definition.Modifier);
-        }
-
         private void AddModifier()
             => _target.AddModifier(Definition.Stat, Definition.Modifier);
 
         private void ApplyModifier()
-            => _target.ApplyModifier(Definition.Stat, Definition.Modifier);
+        {
+            if (!IsSuppressed)
+                _target.ApplyModifier(Definition.Stat, Definition.Modifier);
+        }
     }
 }

@@ -5,20 +5,16 @@ namespace Game.Actors
 {
     public abstract class Effect : IRuntimeInstance<EffectDefinition>
     {
-        private GameObject _view;
-
-        private bool _hasStatusView;
-
         public bool IsCanceled { get; private set; }
 
         public EffectDefinition Definition { get; private set; }
         public object Instigator { get; set; }
 
+        protected bool IsSuppressed { get; private set; }
+
         public virtual void OnCreate(EffectDefinition definition)
         {
             Definition = definition;
-
-            _hasStatusView = HasStatusView(definition.Status);
 
             Validate();
         }
@@ -28,20 +24,6 @@ namespace Game.Actors
 #if UNITY_EDITOR
             Debug.Log($"[Effect] Execute: {Definition.name} | {target.Transform.name}");
 #endif
-            if (_hasStatusView)
-                AttachStatusView(target);
-
-            OnExecute(target);
-        }
-
-        public void Replace(EffectDefinition definition, IActorController target)
-        {
-#if UNITY_EDITOR
-            Debug.Log($"[Effect] Replace: {Definition.name} => {definition.name} | {target.Transform.name}");
-#endif
-            OnCancel();
-            
-            Definition = definition;
             OnExecute(target);
         }
 
@@ -55,22 +37,7 @@ namespace Game.Actors
 #endif
 
             IsCanceled = true;
-
             OnCancel();
-            DestroyView();
-        }
-
-        private void AttachStatusView(IActorController target)
-        {
-            Vector3 position = target.Transform.position + Definition.Status.Offset;
-            _view = Object.Instantiate(Definition.Status.StatusPrefab, position, Quaternion.identity,
-                target.Transform);
-        }
-
-        private void DestroyView()
-        {
-            if (_hasStatusView)
-                Object.Destroy(_view);
         }
 
         private void Validate()
@@ -88,8 +55,21 @@ namespace Game.Actors
 
         protected abstract void OnCancel();
 
-        private static bool HasStatusView(StatusDefinition status)
-            => status && status.StatusPrefab;
+        public void Suppress()
+        {
+#if UNITY_EDITOR
+            Debug.Log($"[Effect] Suppress: {Definition.name}");
+#endif
+            IsSuppressed = true;
+        }
+
+        public void UnSuppress()
+        {
+#if UNITY_EDITOR
+            Debug.Log($"[Effect] Unsuppress: {Definition.name}");
+#endif
+            IsSuppressed = false;
+        }
     }
 
     public abstract class Effect<T> : Effect where T : EffectDefinition

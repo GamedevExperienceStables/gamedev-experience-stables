@@ -1,4 +1,5 @@
-﻿using Game.Stats;
+﻿using System.Collections.Generic;
+using Game.Stats;
 using UnityEngine;
 
 namespace Game.Actors
@@ -6,7 +7,8 @@ namespace Game.Actors
     public abstract class ActorController : MonoBehaviour, IActorController
     {
         private readonly ActorAbilities _abilities = new();
-        private readonly ActorEffects _effects = new();
+        
+        private ActorEffects _effects;
 
         public Transform Transform => transform;
 
@@ -14,8 +16,8 @@ namespace Game.Actors
 
         private void Awake()
         {
-            _effects.Init(this);
-            
+            _effects = new ActorEffects(this);
+
             OnActorAwake();
         }
 
@@ -100,21 +102,18 @@ namespace Game.Actors
 
         #region Effects
 
-        public bool TryGetEffect(StatusDefinition status, out Effect effect) 
-            => _effects.TryGetEffect(status, out effect);
-
         public void ApplyEffect(Effect effect) 
-            => _effects.Execute(effect);
+            => _effects.Apply(effect);
 
         public void AddEffect(Effect effect) 
             => _effects.Add(effect);
 
-        public void RemoveEffectsByInstigator(object instigator) 
-            => _effects.CancelAll(instigator);
+        public void CancelEffectsByInstigator(object instigator, IEnumerable<EffectDefinition> toCancel) 
+            => _effects.CancelAll(instigator, toCancel);
         
-        public void CancelEffects()
+        public void CancelEffects() 
             => _effects.CancelAll();
-        
+
         #endregion
 
         protected virtual void OnActorAwake()
