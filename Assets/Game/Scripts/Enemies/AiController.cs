@@ -39,9 +39,6 @@ namespace Game.Enemies
 
         public void SetBlock(bool isBlocked)
         {
-            if (!_hasBrain)
-                return;
-
             if (isBlocked)
                 SetBlock(InputBlockExtensions.FULL_BLOCK);
             else 
@@ -53,9 +50,8 @@ namespace Game.Enemies
             if (!_hasBrain) 
                 return;
             
-            _block.SetBlock();
-            
-            if (!_brain.isPaused)
+            _block.SetBlock(input);
+            if (_block.IsBlocked(InputBlockExtensions.FULL_BLOCK))
                 _brain.PauseBehaviour();
         }
 
@@ -64,9 +60,8 @@ namespace Game.Enemies
             if (!_hasBrain) 
                 return;
             
-            _block.RemoveBlock();
-            
-            if (_brain.isPaused)
+            _block.RemoveBlock(input);
+            if (!_block.IsBlocked(InputBlockExtensions.FULL_BLOCK) && _brain.isPaused)
                 _brain.StartBehaviour();
         }
 

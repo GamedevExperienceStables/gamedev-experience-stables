@@ -7,8 +7,20 @@ namespace Game.Actors
     {
         private readonly Dictionary<InputBlock, int> _blockCount = new();
 
-        public bool IsBlocked(InputBlock block)
-            => _blockCount.ContainsKey(block);
+        // ReSharper disable once MemberCanBeMadeStatic.Global
+        public bool IsBlocked(InputBlock blocked)
+        {
+            foreach (InputBlock flag in Enum.GetValues(typeof(InputBlock)))
+            {
+                if (!blocked.HasFlagFast(flag))
+                    continue;
+
+                if (!_blockCount.ContainsKey(flag) || _blockCount[flag] == 0)
+                    return false;
+            }
+
+            return true;
+        }
 
         public void SetBlock()
             => SetBlock(InputBlockExtensions.FULL_BLOCK);
