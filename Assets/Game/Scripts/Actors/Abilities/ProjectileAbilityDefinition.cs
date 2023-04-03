@@ -46,10 +46,12 @@ namespace Game.Actors
 
     public class ProjectileAbility : ActorAbility<ProjectileAbilityDefinition>
     {
+        private const int POOL_MAX_SIZE = 20;
+        private const float BACKWARD_THRESHOLD = 0.2f;
+
         private readonly FmodService _audio;
         private readonly TimerPool _timers;
 
-        private const int POOL_MAX_SIZE = 20;
         private readonly ObjectPool<Projectile> _projectilePool;
 
         private Transform _spawnPoint;
@@ -61,8 +63,6 @@ namespace Game.Actors
         private TimerUpdatable _fireTimer;
         private TimerUpdatable _castTimer;
         private Vector3 _targetPosition;
-        
-        private bool _forceCollectOnFire;
 
         public ProjectileAbility(ProjectileFactory projectileFactory, FmodService audio, TimerPool timers)
         {
@@ -121,17 +121,11 @@ namespace Game.Actors
                 Owner.ApplyModifier(CharacterStats.Mana, -Definition.ManaCost);
 
             if (Definition.Targeting.CollectTargetPosition is TargetCollecting.OnActivate)
-            {
                 _targetPosition = GetTargetPosition();
-
-                Vector3 toTarget = _targetPosition - Owner.Transform.position;
-                float sqrMinDistance = Definition.Targeting.MinDistanceToTarget * Definition.Targeting.MinDistanceToTarget;
-                _forceCollectOnFire = toTarget.sqrMagnitude < sqrMinDistance;
-            }
-
+            
             _fireTimer.Start();
             _castTimer.Start();
-
+            
             _input.SetBlock(InputBlock.Rotation);
 
             SetAnimation(true);
@@ -141,12 +135,23 @@ namespace Game.Actors
         {
             if (Definition.Targeting.CollectTargetPosition is TargetCollecting.OnFire)
                 _targetPosition = GetTargetPosition();
-            else if (_forceCollectOnFire)
-                _targetPosition = _spawnPoint.position + _spawnPoint.forward;
+
+            PreventBackwardFiring();
 
             FireProjectile();
-
+            
             SetAnimation(false);
+        }
+
+        private void PreventBackwardFiring()
+        {
+            Vector3 spawnPoint = _spawnPoint.position;
+            Vector3 spawnPointForward = _spawnPoint.forward;
+            Vector3 targetDirection = (_targetPosition - spawnPoint).normalized;
+
+            float dot = Vector3.Dot(targetDirection, spawnPointForward);
+            if (dot < BACKWARD_THRESHOLD)
+                _targetPosition = spawnPoint + spawnPointForward;
         }
 
         private void OnComplete()
@@ -156,9 +161,9 @@ namespace Game.Actors
         {
             _fireTimer.Stop();
             _castTimer.Stop();
-
+            
             SetAnimation(false);
-
+            
             _input.RemoveBlock(InputBlock.Rotation);
         }
 
@@ -184,7 +189,7 @@ namespace Game.Actors
             Vector3 targetPosition = _input.GetTargetPosition(groundedPosition);
 
             Vector3 origin = _spawnPoint.position;
-            if (groundedPosition)
+            if (groundedPosition) 
                 origin.y = position.y;
 
             if (!targeting.AllowTargetAbove)
@@ -201,23 +206,16 @@ namespace Game.Actors
 
             if (!allowTargetBelow)
                 targetPosition.y = Mathf.Max(targetPosition.y, origin.y);
-
-            targetPosition = HandleMinDistanceToTarget(targetPosition, origin, targeting.MinDistanceToTarget);
+            
+            float minDistanceToTarget = targeting.MinDistanceToTarget;
+            if (minDistanceToTarget > 0)
+            {
+                float sqrMinDistance = minDistanceToTarget * minDistanceToTarget;
+                if (sqrMinDistance >= sqrDistance)
+                    targetPosition = origin + _spawnPoint.forward * minDistanceToTarget;
+            }
 
             targetPosition += targeting.TargetPositionOffset;
-
-            return targetPosition;
-        }
-
-        private Vector3 HandleMinDistanceToTarget(Vector3 targetPosition, Vector3 origin, float minDistanceToTarget)
-        {
-            if (minDistanceToTarget <= 0)
-                return targetPosition;
-
-            float sqrDistance = (targetPosition - Owner.Transform.position).sqrMagnitude;
-            float sqrMinDistance = minDistanceToTarget * minDistanceToTarget;
-            if (sqrMinDistance >= sqrDistance)
-                targetPosition = origin + _spawnPoint.forward;
 
             return targetPosition;
         }
