@@ -1,5 +1,4 @@
-﻿using Game.Animations.Hero;
-using Game.Stats;
+﻿using Game.Stats;
 using KinematicCharacterController;
 using UnityEngine;
 
@@ -55,7 +54,8 @@ namespace Game.Actors
             _lookDirection = lookDirection;
         }
 
-        public Vector3 GetMovementDirection() => _motor.BaseVelocity;
+        public Vector3 GetMovementDirection() 
+            => transform.InverseTransformDirection(_motor.BaseVelocity);
 
         public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
         {

@@ -41,8 +41,11 @@ namespace Game.Actors
 
         private void AttachView(IActorController target)
         {
-            if (Definition.Status.StatusPrefab)
-                _view = Object.Instantiate(Definition.Status.StatusPrefab, target.Transform, false);
+            if (!Definition.Status.StatusPrefab) 
+                return;
+            
+            Vector3 position = target.Transform.position + Definition.Status.Offset;
+            _view = Object.Instantiate(Definition.Status.StatusPrefab, position, Quaternion.identity, target.Transform);
         }
 
         private void DestroyView()

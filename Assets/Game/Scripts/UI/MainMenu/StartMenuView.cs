@@ -1,70 +1,112 @@
-﻿using Game.Utils;
+using System.Linq;
+using Game.Localization;
+using Game.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
 
 namespace Game.UI
 {
-    [RequireComponent(typeof(UIDocument))]
-    public class StartMenuView : MonoBehaviour
+    public class StartMenuView : PageView<StartMenuViewModel>
     {
-        private VisualElement _root;
-
-        private Button _buttonStart;
-        private Button _buttonContinue;
-        private Button _buttonQuit;
-
-        private StartMenuViewModel _viewModel;
-
+        private VisualElement _buttonStart;
+        private VisualElement _buttonContinue;
+        private VisualElement _buttonSettings;
+        private VisualElement _buttonArt;
+        private VisualElement _buttonAbout;
+        private VisualElement _buttonQuit;
+        
+        private ILocalizationService _localization;
+        
         [Inject]
-        public void Construct(StartMenuViewModel viewModel)
+        public void Construct(ILocalizationService localisation)
         {
-            _viewModel = viewModel;
+            _localization = localisation;
         }
 
-        private void Awake()
+        protected override void OnAwake()
         {
-            _root = GetComponent<UIDocument>().rootVisualElement;
+            _buttonStart = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_START);
+            _buttonContinue = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_CONTINUE);
 
-            _buttonStart = _root.Q<Button>(LayoutNames.StartMenu.BUTTON_START);
-            _buttonStart.clicked += NewGame;
+            _buttonSettings = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_SETTINGS);
+            _buttonAbout = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_ABOUT);
+            _buttonArt = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_ART);
+            _buttonQuit = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_QUIT);
+
+            _buttonStart.RegisterCallback<ClickEvent>(NewGame);
+            _buttonContinue.RegisterCallback<ClickEvent>(ContinueGame);
+
+            _buttonSettings.RegisterCallback<ClickEvent>(OpenSettings);
+            _buttonArt.RegisterCallback<ClickEvent>(OpenArt);
+            _buttonAbout.RegisterCallback<ClickEvent>(OpenAbout);
+            _buttonQuit.RegisterCallback<ClickEvent>(QuitGame);
             
-            _buttonContinue = _root.Q<Button>(LayoutNames.StartMenu.BUTTON_CONTINUE);
-            _buttonContinue.clicked += ContinueGame;
-
-            _buttonQuit = _root.Q<Button>(LayoutNames.StartMenu.BUTTON_QUIT);
-            _buttonQuit.clicked += QuitGame;
+            _localization.Changed += OnLocalisationChanged;
         }
 
-        private void Start() => Show();
+        private void Start() 
+            => UpdateText();
 
         private void OnDestroy()
         {
-            _buttonStart.clicked -= NewGame;
-            _buttonQuit.clicked -= QuitGame;
+            _buttonStart.UnregisterCallback<ClickEvent>(NewGame);
+            _buttonContinue.UnregisterCallback<ClickEvent>(ContinueGame);
+
+            _buttonSettings.UnregisterCallback<ClickEvent>(OpenSettings);
+            _buttonArt.UnregisterCallback<ClickEvent>(OpenArt);
+            _buttonAbout.UnregisterCallback<ClickEvent>(OpenAbout);
+            _buttonQuit.UnregisterCallback<ClickEvent>(QuitGame);
+            
+            _localization.Changed -= OnLocalisationChanged;
         }
 
-        public void Show()
+        public override void Show()
         {
-            _buttonContinue.SetDisplay(_viewModel.IsSaveGameExists());
+            _buttonContinue.SetDisplay(ViewModel.IsSaveGameExists());
 
-            _root.style.display = DisplayStyle.Flex;
+            Content.SetDisplay(true);
 
             _buttonStart.Focus();
         }
 
-        public void Hide()
+        public override void Hide()
         {
-            _root.style.display = DisplayStyle.None;
+            Content.SetDisplay(false);
+        }
+        
+        private void UpdateText()
+        {
+            _buttonStart.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_NewGame_Button);
+            _buttonContinue.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_Continue_Button);
+            
+            _buttonSettings.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_Settings_Button);
+            _buttonArt.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_Artbook_Button);
+            _buttonAbout.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_About_Button);
+            _buttonQuit.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_Quit_Button);
         }
 
-        private void NewGame() 
-            => _viewModel.NewGame();
-        
-        private void ContinueGame() 
-            => _viewModel.ContinueGame();
+        private void NewGame(ClickEvent _)
+            => ViewModel.NewGame();
 
-        private void QuitGame() 
-            => _viewModel.QuitGame();
+        private void ContinueGame(ClickEvent _)
+            => ViewModel.ContinueGame();
+
+        private void QuitGame(ClickEvent _)
+            => ViewModel.QuitGame();
+
+        // TODO: Refactor this in next build
+        private void OpenArt(ClickEvent _)
+            => Application.OpenURL(
+                "https://drive.google.com/file/d/1j8xxQQ9xu0Hz4JW1MmNpHTwj4yJnndEe/view?usp=share_link");
+
+        private void OpenAbout(ClickEvent _)
+            => ViewModel.OpenAbout();
+
+        private void OpenSettings(ClickEvent _)
+            => ViewModel.OpenSettings();
+        
+        private void OnLocalisationChanged() 
+            => UpdateText();
     }
 }

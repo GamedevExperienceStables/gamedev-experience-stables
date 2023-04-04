@@ -6,6 +6,7 @@ using Game.GameFlow;
 using Game.Hero;
 using Game.Level;
 using Game.UI;
+using Game.Utils;
 using Game.Weapons;
 using UnityEngine;
 using VContainer;
@@ -58,7 +59,6 @@ namespace Game.LifetimeScopes
             builder.Register<MeleeAbility>(Lifetime.Transient);
             builder.Register<AutoPickupAbility>(Lifetime.Transient);
             builder.Register<InteractionAbility>(Lifetime.Transient);
-            builder.Register<WeaponAbility>(Lifetime.Transient);
             builder.Register<ProjectileAbility>(Lifetime.Transient);
             builder.Register<ActiveSkillAbility>(Lifetime.Transient);
             builder.Register<StatsModifiersAbility>(Lifetime.Transient);
@@ -86,7 +86,10 @@ namespace Game.LifetimeScopes
             builder.Register<GameplayGameOver>(Lifetime.Scoped);
             builder.Register<GameplayInventory>(Lifetime.Scoped);
             builder.Register<LocationController>(Lifetime.Scoped);
+            builder.Register<LocationMarkers>(Lifetime.Singleton);
             builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
+
+            builder.Register<GameplayPrefabFactory>(Lifetime.Scoped);
         }
 
         private static void RegisterInteractions(IContainerBuilder builder)
@@ -124,14 +127,21 @@ namespace Game.LifetimeScopes
             builder.Register<MiniMapView>(Lifetime.Scoped);
             builder.Register<MiniMapViewModel>(Lifetime.Scoped);
 
+            builder.Register<PauseMenuViewModel>(Lifetime.Scoped);
+
             builder.RegisterInstance(gameplayView);
             Transform uiRoot = gameplayView.transform;
             builder.UseComponents(uiRoot, componentsBuilder =>
             {
                 componentsBuilder.AddInHierarchy<HudView>();
-                componentsBuilder.AddInHierarchy<PauseMenuView>();
                 componentsBuilder.AddInHierarchy<GameOverView>();
                 componentsBuilder.AddInHierarchy<InventoryView>();
+                
+                componentsBuilder.AddInHierarchy<PauseView>();
+                componentsBuilder.AddInHierarchy<PauseViewRouter>();
+                
+                componentsBuilder.AddInHierarchy<PauseMenuView>();
+                componentsBuilder.AddInHierarchy<PauseSettingsView>();
             });
         }
 

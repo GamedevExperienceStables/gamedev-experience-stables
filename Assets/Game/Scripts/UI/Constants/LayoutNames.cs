@@ -2,12 +2,24 @@
 {
     public static class LayoutNames
     {
+        public static class Pause
+        {
+            public const string CONTAINER = "pause-screen";
+        }
+        
         public static class PauseMenu
         {
             public const string CONTAINER = "pause-menu";
             
             public const string BUTTON_MAIN_MENU = "button-exit";
             public const string BUTTON_RESUME = "button-resume";
+            public const string BUTTON_SETTINGS = "button-settings";
+        }
+        
+        public static class PauseSettings
+        {
+            public const string CONTAINER = "pause-settings";
+            public const string BUTTON_BACK = "button-back";
         }
 
         public static class StartMenu
@@ -15,6 +27,13 @@
             public const string BUTTON_START = "button-start";
             public const string BUTTON_CONTINUE = "button-continue";
             public const string BUTTON_QUIT = "button-quit";
+            public const string BUTTON_SETTINGS = "button-settings";
+            public const string BUTTON_ABOUT = "button-about";
+            public const string BUTTON_ART = "button-art";
+            
+            public const string BUTTON_BACK = "button-back";
+
+            public const string BUTTON_ICON = "icon";
         }
 
         public static class Hud
@@ -47,6 +66,19 @@
             public const string WIDGET_SAVING_CLASS_NAME = "widget-saving";
             public const string WIDGET_SAVING_ENABLED_CLASS_NAME = "widget-saving--enabled";
         }
+        
+        public static class MiniMap
+        {
+            public const string ROOT = "mini-map";
+
+            public const string PLAYER = "player";
+            
+            public const string MAP = "map";
+            public const string MAP_WRAPPER = "map-wrapper";
+            public const string MAP_CONTAINER = "map-container";
+            
+            public const string MARKER_CLASS_NAME = "mini-map__marker";
+        }
 
         public static class LoadingScreen
         {
@@ -63,21 +95,30 @@
 
         public static class Inventory
         {
-            public const string CONTAINER = "book-screen";
+            public const string SCREEN = "book-screen";
+            public const string BOOK = "book";
             public const string BUTTON_CLOSE = "button-close";
             
             public const string PAGE_DETAILS = "page-details";
             
             public const string RUNE_NAME = "text-rune-name";
             public const string RUNE_DESCRIPTION = "text-rune-description";
-            public const string RUNE_ICON = "image-rune";
+            public const string RUNE_LEVEL = "text-rune-level";
+            public const string RUNE_ICON = "image-rune-icon";
 
             public const string RUNE_DRAGGER = "rune-dragger";
             public const string RUNE_DRAGGER_DRAG_CLASS_NAME = "rune-dragger--drag";
             
             public const string RUNE_SLOT_CLASS_NAME = "magic-book-slot";
+            public const string RUNE_PASSIVE_SLOT_CLASS_NAME = "magic-book-slot-passive";
             public const string SLOT_DISABLED_CLASS_NAME = "magic-book-slot--disabled";
             public const string RUNE_SLOT_ICON = "icon";
+
+            public const string BOOK_CLASS_NAME = "magic-book";
+            public const string BOOK_HIDDEN_CLASS_NAME = "magic-book--hidden";
+
+            public const string BOOK_DETAILS_CLASS_NAME = "magic-book-details";
+            public const string BOOK_DETAILS_HIDDEN_CLASS_NAME = "magic-book-details--hidden";
         }
     }
 }

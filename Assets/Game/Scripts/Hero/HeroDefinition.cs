@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Game.Actors;
+using Game.Pet;
 using UnityEngine;
 
 namespace Game.Hero
@@ -9,6 +10,9 @@ namespace Game.Hero
     {
         [SerializeField]
         private HeroController prefab;
+
+        [SerializeField]
+        private PetController petPrefab;
 
         [SerializeField]
         private HeroStats.InitialStats initialStats;
@@ -23,6 +27,8 @@ namespace Game.Hero
         public List<AbilityDefinition> Abilities => abilities;
 
         public HeroController Prefab => prefab;
+        public PetController PetPrefab => petPrefab;
+
         public HeroStats.InitialStats InitialStats => initialStats;
     }
 }

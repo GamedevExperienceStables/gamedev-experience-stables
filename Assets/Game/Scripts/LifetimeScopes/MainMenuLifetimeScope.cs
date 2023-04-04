@@ -9,19 +9,31 @@ namespace Game.LifetimeScopes
     public class MainMenuLifetimeScope : LifetimeScope
     {
         [SerializeField]
-        private StartMenuView startMenuView;
+        private MainMenuViewRouter mainMenuRouter;
 
         protected override void Configure(IContainerBuilder builder)
         {
             RegisterStateMachine(builder);
 
-            RegisterStartMenu(builder);
+            RegisterMainMenu(builder);
         }
 
-        private void RegisterStartMenu(IContainerBuilder builder)
+        private void RegisterMainMenu(IContainerBuilder builder)
         {
-            builder.RegisterComponent(startMenuView);
             builder.Register<StartMenuViewModel>(Lifetime.Scoped);
+            builder.Register<AboutViewModel>(Lifetime.Scoped);
+            builder.Register<ArtViewModel>(Lifetime.Scoped);
+
+            builder.RegisterComponent(mainMenuRouter);
+            
+            Transform uiRoot = mainMenuRouter.transform;
+            builder.UseComponents(uiRoot, componentsBuilder =>
+            {
+                componentsBuilder.AddInHierarchy<StartMenuView>();
+                componentsBuilder.AddInHierarchy<MainMenuSettingsView>();
+                componentsBuilder.AddInHierarchy<AboutView>();
+                componentsBuilder.AddInHierarchy<ArtView>();
+            });
         }
 
         private static void RegisterStateMachine(IContainerBuilder builder)

@@ -6,14 +6,14 @@ namespace Game.UI
     public class GameplayView : MonoBehaviour
     {
         private HudView _hudView;
-        private PauseMenuView _pauseMenuView;
+        private PauseView _pauseView;
         private GameOverView _gameOverView;
         private InventoryView _inventoryView;
 
         private void Awake()
         {
             _hudView = GetComponentInChildren<HudView>();
-            _pauseMenuView = GetComponentInChildren<PauseMenuView>();
+            _pauseView = GetComponentInChildren<PauseView>();
             _gameOverView = GetComponentInChildren<GameOverView>();
             _inventoryView = GetComponentInChildren<InventoryView>();
         }
@@ -21,7 +21,7 @@ namespace Game.UI
         public void Start()
         {
             _hudView.HideImmediate();
-            _pauseMenuView.HideImmediate();
+            _pauseView.HideImmediate();
             _gameOverView.HideImmediate();
             _inventoryView.HideImmediate();
         }
@@ -29,7 +29,7 @@ namespace Game.UI
         public void ShowHud()
         {
             _hudView.Show();
-            _pauseMenuView.HideImmediate();
+            _pauseView.HideImmediate();
             _gameOverView.HideImmediate();
         }
 
@@ -54,7 +54,7 @@ namespace Game.UI
         {
             return UniTask.WhenAll(
                 _hudView.HideAsync(),
-                _pauseMenuView.ShowAsync()
+                _pauseView.ShowAsync()
             );
         }
 
@@ -62,7 +62,7 @@ namespace Game.UI
         {
             return UniTask.WhenAll(
                 _hudView.ShowAsync(),
-                _pauseMenuView.HideAsync()
+                _pauseView.HideAsync()
             );
         }
     }

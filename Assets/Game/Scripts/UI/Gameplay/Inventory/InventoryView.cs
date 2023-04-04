@@ -7,23 +7,21 @@ using Game.UI.Elements;
 using Game.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.UIElements.Experimental;
 using VContainer;
+using Button = UnityEngine.UIElements.Button;
 
 namespace Game.UI
 {
     [RequireComponent(typeof(UIDocument))]
     public class InventoryView : MonoBehaviour
     {
-        private const int OFFSET_BOTTOM = -100;
-
         [SerializeField]
         private HudView hud;
 
         [Header("Show")]
         [SerializeField, Min(0f)]
         private float showDuration = 0.4f;
-        
+
         [SerializeField]
         private GameObject showFeedbacks;
 
@@ -44,9 +42,16 @@ namespace Game.UI
 
         private RuneSlotDraggerElement _runeDragger;
         private RuneDragAndDropManipulator _runeManipulator;
-        
+
+        private VisualElement _runeTitleIcon;
+        private VisualElement _runeDetails;
+        private Label _runeTitleText;
+        private Label _runeDescription;
+        private Label _runeLevelText;
+
         private readonly List<RuneSlotInventoryView> _runeSlots = new();
         private VisualElement _root;
+        private VisualElement _book;
 
         [Inject]
         public void Construct(InventoryViewModel viewModel)
@@ -59,8 +64,15 @@ namespace Game.UI
 
             _root = GetComponent<UIDocument>().rootVisualElement;
 
-            _container = _root.Q<VisualElement>(LayoutNames.Inventory.CONTAINER);
+            _container = _root.Q<VisualElement>(LayoutNames.Inventory.SCREEN);
+            _book = _container.Q<VisualElement>(LayoutNames.Inventory.BOOK);
             _buttonClose = _root.Q<Button>(LayoutNames.Inventory.BUTTON_CLOSE);
+
+            _runeDetails = _root.Q<VisualElement>(LayoutNames.Inventory.PAGE_DETAILS);
+            _runeTitleIcon = _root.Q<VisualElement>(LayoutNames.Inventory.RUNE_ICON);
+            _runeTitleText = _root.Q<Label>(LayoutNames.Inventory.RUNE_NAME);
+            _runeLevelText = _root.Q<Label>(LayoutNames.Inventory.RUNE_LEVEL);
+            _runeDescription = _root.Q<Label>(LayoutNames.Inventory.RUNE_DESCRIPTION);
 
             CreateRuneSlots(_root, _viewModel.ObtainedRunes);
 
@@ -90,7 +102,7 @@ namespace Game.UI
             foreach (RuneSlotHudView runeSlotHudView in hudRuneSlots)
                 runeSlotHudView.SubscribeRemovingRequest(OnRuneRemovingRequest);
         }
-        
+
         private void UnSubscribeHudRunes(IEnumerable<RuneSlotHudView> hudRuneSlots)
         {
             foreach (RuneSlotHudView runeSlotHudView in hudRuneSlots)
@@ -100,18 +112,49 @@ namespace Game.UI
         private void CreateRuneSlots(VisualElement root, IReadOnlyList<RuneDefinition> runes)
         {
             var slots = root.Query<VisualElement>(className: LayoutNames.Inventory.RUNE_SLOT_CLASS_NAME).ToList();
+            var passiveSlots = root.Query<VisualElement>(className: LayoutNames.Inventory.RUNE_PASSIVE_SLOT_CLASS_NAME)
+                .ToList();
 
-            for (int i = 0; i < _viewModel.AllRunes.Count; i++)
+            List<RuneDefinition> activeRunes = new();
+            List<RuneDefinition> passiveRunes = new();
+
+            foreach (RuneDefinition rune in _viewModel.AllRunes)
+            {
+                switch (rune.Type)
+                {
+                    case RuneType.Active:
+                        activeRunes.Add(rune);
+                        break;
+                    case RuneType.Passive:
+                        passiveRunes.Add(rune);
+                        break;
+                }
+            }
+
+            for (int i = 0; i < activeRunes.Count; i++)
             {
                 if (i >= slots.Count)
                     break;
 
-                RuneDefinition runeDefinition = _viewModel.AllRunes[i];
-                
-                var runeView = new RuneSlotInventoryView(slots[i], runeDefinition);
+                var runeView = new RuneSlotInventoryView(slots[i], activeRunes[i]);
                 runeView.SubscribeStartDrag(OnRuneStartDrag);
+                runeView.SubscribeHover(OnRuneHover);
 
-                if (runes.Contains(runeDefinition))
+                if (runes.Contains(activeRunes[i]))
+                    runeView.Activate();
+
+                _runeSlots.Add(runeView);
+            }
+
+            for (int i = 0; i < passiveRunes.Count; i++)
+            {
+                if (i >= passiveSlots.Count)
+                    break;
+
+                var runeView = new RuneSlotInventoryView(passiveSlots[i], passiveRunes[i]);
+                runeView.SubscribeHover(OnRuneHover);
+
+                if (runes.Contains(passiveRunes[i]))
                     runeView.Activate();
 
                 _runeSlots.Add(runeView);
@@ -121,7 +164,10 @@ namespace Game.UI
         private void CleanupRunes()
         {
             foreach (RuneSlotInventoryView runeElement in _runeSlots)
+            {
                 runeElement.UnSubscribeStartDrag(OnRuneStartDrag);
+                runeElement.UnsubscribeHover(OnRuneHover);
+            }
         }
 
         private void CreateRuneDragger(VisualElement root, IReadOnlyList<RuneSlotHudView> hudSlots)
@@ -140,6 +186,28 @@ namespace Game.UI
             _runeManipulator.StartDrag(evt);
             _runeDragger.StartDrag(evt.definition);
         }
+
+        private void OnRuneHover(RuneSlotHoverEvent evt)
+        {
+            if (!evt.state)
+            {
+                HideDetails();
+                return;
+            }
+
+            RuneDefinition definition = evt.definition;
+
+            _runeTitleIcon.style.backgroundImage = new StyleBackground(definition.IconEmpty);
+            _runeTitleText.text = definition.Name.GetLocalizedString();
+            _runeDescription.text = definition.Description.GetLocalizedString();
+            _runeLevelText.text = definition.Level.Text.GetLocalizedString();
+            _runeLevelText.style.color = definition.Level.Color;
+
+            _runeDetails.RemoveFromClassList(LayoutNames.Inventory.BOOK_DETAILS_HIDDEN_CLASS_NAME);
+        }
+
+        private void HideDetails()
+            => _runeDetails.AddToClassList(LayoutNames.Inventory.BOOK_DETAILS_HIDDEN_CLASS_NAME);
 
         private void OnRuneStopDrag()
             => _runeDragger.StopDrag();
@@ -162,7 +230,7 @@ namespace Game.UI
             }
         }
 
-        private void OnRuneRemovingRequest(RuneSlotRemoveEvent evt) 
+        private void OnRuneRemovingRequest(RuneSlotRemoveEvent evt)
             => _viewModel.RemoveRuneFromHudSlot(evt.id);
 
         private void OnCloseClicked()
@@ -170,9 +238,10 @@ namespace Game.UI
 
         public void HideImmediate()
         {
-            _container.SetDisplay(false);
-            _container.SetOpacity(0f);
-            _container.style.bottom = OFFSET_BOTTOM;
+            _container.SetVisibility(false);
+            _book.AddToClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
+
+            HideDetails();
 
             OnHide();
             HideFeedbacks();
@@ -186,13 +255,13 @@ namespace Game.UI
 
         private void OnHide()
         {
-            foreach (RuneSlotHudView hudRuneSlotView in hud.RuneSlots) 
+            foreach (RuneSlotHudView hudRuneSlotView in hud.RuneSlots)
                 hudRuneSlotView.DisableInteraction();
         }
 
         public async UniTask ShowAsync()
         {
-            FadeIn(_showDuration);
+            Show();
             await UniTask.Delay(_showDuration);
             OnShow();
         }
@@ -200,32 +269,33 @@ namespace Game.UI
         public async UniTask HideAsync()
         {
             OnHide();
-            FadeOut(_hideDuration);
+            Hide();
             await UniTask.Delay(_hideDuration);
-            
+            _container.SetVisibility(false);
+
             HideFeedbacks();
         }
 
-        private void FadeIn(TimeSpan duration)
+        private void Show()
         {
-            if (showFeedbacks)
-                showFeedbacks.SetActive(true);
-            
-            _container.SetDisplay(true);
-            _container.experimental.animation
-                .Start(new StyleValues { opacity = 1f, bottom = 0 }, (int)duration.TotalMilliseconds)
-                .Ease(Easing.InOutSine);
+            ShowFeedbacks();
+
+            _container.SetVisibility(true);
+            _book.RemoveFromClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
         }
 
-        private void FadeOut(TimeSpan duration)
+        private void Hide()
         {
             if (hideFeedbacks)
                 hideFeedbacks.SetActive(true);
-            
-            _container.experimental.animation
-                .Start(new StyleValues { opacity = 0f, bottom = OFFSET_BOTTOM }, (int)duration.TotalMilliseconds)
-                .Ease(Easing.InOutSine)
-                .OnCompleted(() => _container.SetDisplay(false));
+
+            _book.AddToClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
+        }
+
+        private void ShowFeedbacks()
+        {
+            if (showFeedbacks)
+                showFeedbacks.SetActive(true);
         }
 
         private void HideFeedbacks()

@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Game.Editor.Tools
@@ -40,23 +41,30 @@ namespace Game.Editor.Tools
 
             string bootScenePath = BootScenePath;
             if (string.IsNullOrEmpty(bootScenePath))
+            {
+                Debug.LogError("Boot scene is not set");
                 return;
+            }
 
             if (!IsSceneContainsInBuild(bootScenePath))
+            {
+                Debug.LogError("Boot scene is not in build");
                 return;
+            }
 
             Scene activeScene = SceneManager.GetActiveScene();
-            if (!SceneIsValid(activeScene, bootScenePath))
+            if (string.IsNullOrEmpty(activeScene.path))
+            {
+                Debug.LogError("Active scene is not set");
                 return;
+            }
 
-            LastScene = activeScene.path;
+            if (bootScenePath != activeScene.path) 
+                LastScene = activeScene.path;
 
             EditorSceneManager.OpenScene(bootScenePath);
             EditorApplication.isPlaying = true;
         }
-
-        private static bool SceneIsValid(Scene activeScene, string bootScenePath)
-            => activeScene.path == string.Empty || !bootScenePath.Contains(activeScene.path);
 
         private static bool IsSceneContainsInBuild(string bootScenePath)
             => System.Array.Exists(EditorBuildSettings.scenes, scene => scene.path == bootScenePath);

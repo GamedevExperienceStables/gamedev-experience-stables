@@ -4,6 +4,7 @@ using Game.Actors;
 using Game.Actors.Health;
 using Game.Level;
 using Game.Utils;
+using MoreMountains.Tools;
 using UnityEngine;
 using VContainer;
 
@@ -11,12 +12,11 @@ namespace Game.Weapons
 {
     public class ProjectileBehaviour
     {
-        private const float RAYCAST_DISTANCE = 5f;
         private const float DEBUG_DURATION = 0.5f;
 
         private readonly TrapFactory _trapFactory;
         private readonly EffectHandler _effectHandler;
-        
+
         private readonly Collider[] _buffer = new Collider[20];
 
         [Inject]
@@ -60,24 +60,59 @@ namespace Game.Weapons
             Vector3 spawnPoint = collision.hitPoint;
             Vector3 spawnNormal = collision.hitNormal;
 
+            if (!IsValidCollisionToSpawn(definition, collision, spawnNormal))
+                return;
+
+            bool hasGround = GroundExistsWithinMaxDistance(definition, spawnPoint, out RaycastHit groundHit);
+            if (!hasGround)
+                return;
+
             if (definition.SnapToGround)
             {
-                var ray = new Ray(spawnPoint, Vector3.down);
-                if (Physics.Raycast(ray, out RaycastHit groundHit, RAYCAST_DISTANCE, definition.GroundLayers,
-                        QueryTriggerInteraction.Ignore))
-                {
-                    spawnPoint = groundHit.point;
-                    spawnNormal = definition.AlignToGround ? groundHit.normal : Vector3.up;
-                }
+                if (!IsValidGroundAngle(groundHit.normal, definition.MaxGroundAngle))
+                    return;
+
+                SnapToGround(definition, groundHit, ref spawnPoint, ref spawnNormal);
             }
 
             Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnNormal);
-            
+
             if (definition.FaceInDirection)
-                rotation *= Quaternion.LookRotation(source.forward.ProjectOntoPlane(Vector3.up));
+                FaceInDirection(source, ref rotation);
 
             TrapView trap = _trapFactory.Create(definition.SpawnDefinition);
             trap.transform.SetPositionAndRotation(spawnPoint, rotation);
+        }
+
+        private static bool GroundExistsWithinMaxDistance(DamageDefinitionTrap definition, Vector3 spawnPoint,
+            out RaycastHit groundHit)
+        {
+            bool foundGround = Physics.Raycast(spawnPoint, Vector3.down, out groundHit, definition.MaxGroundDistance,
+                definition.GroundLayers, QueryTriggerInteraction.Ignore);
+            return foundGround;
+        }
+
+        private static bool IsValidCollisionToSpawn(DamageDefinitionTrap definition, CollisionData collision,
+            Vector3 spawnNormal)
+        {
+            bool isValidLayer = definition.VerticalCollisionLayers.MMContains(collision.target.gameObject);
+            return isValidLayer || IsValidGroundAngle(spawnNormal, definition.MaxGroundAngle);
+        }
+
+        private static void FaceInDirection(Transform source, ref Quaternion rotation)
+            => rotation *= Quaternion.LookRotation(source.forward.ProjectOntoPlane(Vector3.up));
+
+        private static void SnapToGround(DamageDefinitionTrap definition, RaycastHit groundHit, ref Vector3 origin,
+            ref Vector3 normal)
+        {
+            origin = groundHit.point;
+            normal = definition.AlignToGround ? groundHit.normal : Vector3.up;
+        }
+
+        private static bool IsValidGroundAngle(Vector3 normal, float maxAngle)
+        {
+            float angle = Vector3.Angle(normal, Vector3.up);
+            return angle < maxAngle;
         }
 
         private void TryDamageTarget(Transform source, Component target, float damage, GameObject hitFeedback,
@@ -87,7 +122,7 @@ namespace Game.Weapons
                 return;
 
             DamageTarget(source, damageable, damage, hitFeedback);
-            
+
             if (target.TryGetComponent(out IActorController actor))
                 _effectHandler.ApplyEffects(actor, effects, source);
         }

@@ -12,6 +12,15 @@ namespace Game.Weapons
         private TrapDefinition spawn;
 
         [SerializeField]
+        private LayerMask verticalCollisionLayers;
+        
+        [SerializeField, Min(0f)]
+        private float maxGroundDistance = 2f;
+        
+        [SerializeField, Range(0f, 90f)]
+        private float maxGroundAngle = 20f;
+
+        [SerializeField]
         private bool snapToGround = true;
 
         [SerializeField]
@@ -20,7 +29,7 @@ namespace Game.Weapons
         [SerializeField]
         private bool faceInDirection;
 
-        public LayerMask GroundLayers => LayerMasks.Ground | LayerMasks.Environment | LayerMasks.Default;
+        public LayerMask GroundLayers => LayerMasks.GroundLayers;
 
         public bool AlignToGround => alignToGround;
 
@@ -29,5 +38,9 @@ namespace Game.Weapons
         public TrapDefinition SpawnDefinition => spawn;
 
         public bool FaceInDirection => faceInDirection;
+
+        public LayerMask VerticalCollisionLayers => verticalCollisionLayers;
+        public float MaxGroundDistance => maxGroundDistance;
+        public float MaxGroundAngle => maxGroundAngle;
     }
 }
