@@ -4,17 +4,13 @@ using Game.Audio;
 using Game.Localization;
 using UnityEngine;
 using UnityEngine.UIElements;
-using VContainer;
 
 namespace Game.UI
 {
     public class SettingsView
     {
         private readonly SettingsViewModel _viewModel;
-        private ILocalizationService _localization;
-        private StartMenuView.Settings _settings;
-
-        private List<Label> _headerLabels;
+        private readonly ILocalizationService _localization;
 
         private DropdownField _fieldQuality;
         private DropdownField _fieldResolution;
@@ -31,20 +27,14 @@ namespace Game.UI
         
         private DropdownField _fieldLocale;
 
-        public SettingsView(SettingsViewModel viewModel)
-            => _viewModel = viewModel;
-
-        [Inject]
-        public void Construct(ILocalizationService localisation, StartMenuView.Settings settings)
+        public SettingsView(SettingsViewModel viewModel, ILocalizationService localization)
         {
-            _localization = localisation;
-            _settings = settings;
+            _viewModel = viewModel;
+            _localization = localization;
         }
 
         public void Create(VisualElement root)
         {
-            _headerLabels = root.Q<VisualElement>("header").Query<Label>().ToList();
-            
             _fieldQuality = root.Q<DropdownField>("field-quality");
             _fieldResolution = root.Q<DropdownField>("field-resolution");
             _fieldFullscreen = root.Q<Toggle>("field-fullscreen");
@@ -105,10 +95,6 @@ namespace Game.UI
 
         private void UpdateText()
         {
-            foreach (Label headerLabel in _headerLabels)
-            {
-                headerLabel.text = _settings.settings.button.GetLocalizedString();
-            }
         }
 
         #region Graphics
