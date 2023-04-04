@@ -1,4 +1,5 @@
 ﻿using Game.Utils;
+using NaughtyAttributes;
 using UnityEngine;
 using VContainer;
 
@@ -8,7 +9,7 @@ namespace Game.Level
     {
         private const float RAYCAST_DISTANCE = 1f;
 
-        [SerializeField]
+        [SerializeField, Required]
         private TrapDynamicDefinition trap;
 
         private TrapFactory _factory;
