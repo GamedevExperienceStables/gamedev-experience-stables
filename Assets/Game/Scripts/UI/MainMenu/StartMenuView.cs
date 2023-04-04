@@ -46,11 +46,11 @@ namespace Game.UI
             _preview = new PreviewView(previewElement);
 
             RegisterButtonEvent(_buttonNewGame, NewGame, OnHoverNewGame, OnExit);
-            RegisterButtonEvent(_buttonContinue, ContinueGame, OnHover, OnExit);
+            RegisterButtonEvent(_buttonContinue, ContinueGame, OnHoverContinueGame, OnExit);
             RegisterButtonEvent(_buttonSettings, OpenSettings, OnHoverSettings, OnExit);
-            RegisterButtonEvent(_buttonArt, OpenArt, OnHover, OnExit);
-            RegisterButtonEvent(_buttonAbout, OpenAbout, OnHover, OnExit);
-            RegisterButtonEvent(_buttonQuit, QuitGame, OnHover, OnExit);
+            RegisterButtonEvent(_buttonArt, OpenArt, OnHoverArt, OnExit);
+            RegisterButtonEvent(_buttonAbout, OpenAbout, OnHoverAbout, OnExit);
+            RegisterButtonEvent(_buttonQuit, QuitGame, OnHoverQuit, OnExit);
 
             _localization.Changed += OnLocalisationChanged;
         }
@@ -60,12 +60,12 @@ namespace Game.UI
 
         private void OnDestroy()
         {
-            UnregisterButtonEvent(_buttonNewGame, NewGame, OnHover, OnExit);
-            UnregisterButtonEvent(_buttonContinue, ContinueGame, OnHover, OnExit);
-            UnregisterButtonEvent(_buttonSettings, OpenSettings, OnHover, OnExit);
-            UnregisterButtonEvent(_buttonArt, OpenArt, OnHover, OnExit);
-            UnregisterButtonEvent(_buttonAbout, OpenAbout, OnHover, OnExit);
-            UnregisterButtonEvent(_buttonQuit, QuitGame, OnHover, OnExit);
+            UnregisterButtonEvent(_buttonNewGame, NewGame, OnHoverNewGame, OnExit);
+            UnregisterButtonEvent(_buttonContinue, ContinueGame, OnHoverContinueGame, OnExit);
+            UnregisterButtonEvent(_buttonSettings, OpenSettings, OnHoverSettings, OnExit);
+            UnregisterButtonEvent(_buttonArt, OpenArt, OnHoverArt, OnExit);
+            UnregisterButtonEvent(_buttonAbout, OpenAbout, OnHoverAbout, OnExit);
+            UnregisterButtonEvent(_buttonQuit, QuitGame, OnHoverQuit, OnExit);
 
             _localization.Changed -= OnLocalisationChanged;
         }
@@ -76,8 +76,6 @@ namespace Game.UI
             _preview.Hide();
 
             Content.SetDisplay(true);
-
-            _buttonNewGame.Focus();
         }
 
         public override void Hide()
@@ -98,15 +96,18 @@ namespace Game.UI
             _menu.SetEnabled(false);
         }
 
+        private void OnLocalisationChanged()
+            => UpdateText();
+
         private void UpdateText()
         {
             _buttonNewGame.Q<Label>().text = _settings.newGame.button.GetLocalizedString();
-            _buttonContinue.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_Continue_Button);
+            _buttonContinue.Q<Label>().text = _settings.continueGame.button.GetLocalizedString();
 
             _buttonSettings.Q<Label>().text = _settings.settings.button.GetLocalizedString();
-            _buttonArt.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_Artbook_Button);
-            _buttonAbout.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_About_Button);
-            _buttonQuit.Q<Label>().text = _localization.GetText(LocalizationTable.GuiKeys.Menu_Quit_Button);
+            _buttonArt.Q<Label>().text = _settings.art.button.GetLocalizedString();
+            _buttonAbout.Q<Label>().text = _settings.about.button.GetLocalizedString();
+            _buttonQuit.Q<Label>().text =_settings.quit.button.GetLocalizedString();
         }
 
         private void NewGame()
@@ -137,16 +138,25 @@ namespace Game.UI
             _buttonSettings.AddToClassList(LayoutNames.StartMenu.BUTTON_ACTIVE_CLASS_NAME);
         }
 
-        private void OnLocalisationChanged()
-            => UpdateText();
-
         #region OnPointerOverEvents
 
         private void OnHoverNewGame(EventBase _)
             => OnEnter(_settings.newGame.preview, _settings.newGame.caption);
+        
+        private void OnHoverContinueGame(EventBase _)
+            => OnEnter(_settings.continueGame.preview, _settings.continueGame.caption);
 
         private void OnHoverSettings(EventBase _)
             => OnEnter(_settings.settings.preview, _settings.settings.caption);
+        
+        private void OnHoverArt(EventBase _)
+            => OnEnter(_settings.art.preview, _settings.art.caption);
+        
+        private void OnHoverAbout(EventBase _)
+            => OnEnter(_settings.about.preview, _settings.about.caption);
+        
+        private void OnHoverQuit(EventBase _)
+            => OnEnter(_settings.quit.preview, _settings.quit.caption);
 
         private void OnEnter(Sprite preview, LocalizedString caption)
         {
@@ -156,16 +166,6 @@ namespace Game.UI
             _preview.Show(preview, caption.GetLocalizedString());
         }
 
-        private void OnHover(EventBase _)
-        {
-            if (!_menu.enabledSelf)
-                return;
-
-            _preview.Show();
-        }
-
-        #endregion
-
         private void OnExit(EventBase _)
         {
             if (!_menu.enabledSelf)
@@ -173,6 +173,8 @@ namespace Game.UI
 
             _preview.Hide();
         }
+
+        #endregion
 
         private static void RegisterButtonEvent(Button button, Action onClick,
             EventCallback<EventBase> onEnter, EventCallback<EventBase> onLeave)

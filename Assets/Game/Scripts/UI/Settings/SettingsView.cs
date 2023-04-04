@@ -1,14 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Game.Audio;
+using Game.Localization;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VContainer;
 
 namespace Game.UI
 {
     public class SettingsView
     {
         private readonly SettingsViewModel _viewModel;
+        private ILocalizationService _localization;
+        private StartMenuView.Settings _settings;
+
+        private List<Label> _headerLabels;
 
         private DropdownField _fieldQuality;
         private DropdownField _fieldResolution;
@@ -28,8 +34,17 @@ namespace Game.UI
         public SettingsView(SettingsViewModel viewModel)
             => _viewModel = viewModel;
 
+        [Inject]
+        public void Construct(ILocalizationService localisation, StartMenuView.Settings settings)
+        {
+            _localization = localisation;
+            _settings = settings;
+        }
+
         public void Create(VisualElement root)
         {
+            _headerLabels = root.Q<VisualElement>("header").Query<Label>().ToList();
+            
             _fieldQuality = root.Q<DropdownField>("field-quality");
             _fieldResolution = root.Q<DropdownField>("field-resolution");
             _fieldFullscreen = root.Q<Toggle>("field-fullscreen");
@@ -66,6 +81,8 @@ namespace Game.UI
             _fieldMusicVolume.RegisterValueChangedCallback(OnChangeMusicVolume);
 
             _fieldLocale.RegisterValueChangedCallback(OnChangeLocale);
+            
+            _localization.Changed += OnLocalisationChanged;
         }
 
         private void UnregisterCallbacks()
@@ -79,6 +96,19 @@ namespace Game.UI
             _fieldMusicVolume.UnregisterValueChangedCallback(OnChangeMusicVolume);
             
             _fieldLocale.UnregisterValueChangedCallback(OnChangeLocale);
+            
+            _localization.Changed -= OnLocalisationChanged;
+        }
+        
+        private void OnLocalisationChanged()
+            => UpdateText();
+
+        private void UpdateText()
+        {
+            foreach (Label headerLabel in _headerLabels)
+            {
+                headerLabel.text = _settings.settings.button.GetLocalizedString();
+            }
         }
 
         #region Graphics

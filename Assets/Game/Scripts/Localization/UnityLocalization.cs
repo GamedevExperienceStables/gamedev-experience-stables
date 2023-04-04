@@ -8,7 +8,6 @@ namespace Game.Localization
 {
     public sealed class UnityLocalization : ILocalizationService, IDisposable
     {
-        private const string GUI_TABLE = "GUI";
 
         public event Action Changed;
 
@@ -22,11 +21,6 @@ namespace Game.Localization
         public void Dispose()
         {
             LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
-        }
-
-        public string GetText(LocalizationTable.GuiKeys key)
-        {
-            return LocalizationSettings.StringDatabase.GetLocalizedString(GUI_TABLE, key.ToString());
         }
 
         public void SetLocale(string localeName)
