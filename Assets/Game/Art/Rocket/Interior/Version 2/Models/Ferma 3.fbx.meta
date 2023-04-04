@@ -1,54 +1,9 @@
 fileFormatVersion: 2
-guid: 42a3d4b186225ec4aa39bd7e89ef239c
+guid: 11ea29d33c8100e40b911d58994774f7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Earth
-    second: {fileID: 2100000, guid: 0023abdc189385345b95c663474e1da6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Gorshok
-    second: {fileID: 2100000, guid: deec8a65776dde34c8c705b878ebd431, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Listya
-    second: {fileID: 2100000, guid: 6e1f3ea5d8637f5439a632855d9dffb9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.001
-    second: {fileID: 2100000, guid: 0971cb6403f6e49419c93c6998891094, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Poddon 1
-    second: {fileID: 2100000, guid: bab5467844e8ea844baa45a64463406e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Poddon 2
-    second: {fileID: 2100000, guid: e18ea031064af50488ba9239f6c5a733, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Poddon 3
-    second: {fileID: 2100000, guid: 60b24d631aa594b40827367dd5a538f1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Podsolnuh
-    second: {fileID: 2100000, guid: 2df18f8ad2fb5454f88f34eff55a967c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Stebel
-    second: {fileID: 2100000, guid: 753eb25e48e6ae74a9847802eb6e0ecb, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
