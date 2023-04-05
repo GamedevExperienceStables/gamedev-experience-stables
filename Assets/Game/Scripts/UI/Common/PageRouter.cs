@@ -4,15 +4,15 @@ namespace Game.UI
 {
     public class PageRouter : MonoBehaviour
     {
-        private PageView _activePage;
+        protected PageView ActivePage { get; private set; }
 
-        protected void Open(PageView view)
+        protected virtual void Open(PageView view)
         {
-            if (_activePage)
-                _activePage.Hide();
+            if (ActivePage)
+                ActivePage.Hide();
 
-            _activePage = view;
-            _activePage.Show();
+            ActivePage = view;
+            ActivePage.Show();
         }
     }
 }

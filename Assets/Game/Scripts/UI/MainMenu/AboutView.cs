@@ -1,4 +1,5 @@
-﻿using UnityEngine.UIElements;
+﻿using Game.Utils;
+using UnityEngine.UIElements;
 
 namespace Game.UI
 {
@@ -8,6 +9,8 @@ namespace Game.UI
 
         protected override void OnAwake()
         {
+            SetContent(LayoutNames.StartMenu.PAGE_ABOUT);
+            
             _buttonBack = Content.Q<Button>(LayoutNames.StartMenu.BUTTON_BACK);
             
             RegisterCallbacks();
@@ -21,6 +24,16 @@ namespace Game.UI
 
         private void UnregisterCallbacks() 
             => _buttonBack.clicked -= OnBackButton;
+        
+        public override void Show()
+        {
+            Content.SetVisibility(true);
+        }
+
+        public override void Hide()
+        {
+            Content.SetVisibility(false);
+        }
 
         private void OnBackButton() 
             => ViewModel.Back();

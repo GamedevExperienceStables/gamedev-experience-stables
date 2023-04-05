@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Game.Audio;
+using Game.Localization;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,6 +10,7 @@ namespace Game.UI
     public class SettingsView
     {
         private readonly SettingsViewModel _viewModel;
+        private readonly ILocalizationService _localization;
 
         private DropdownField _fieldQuality;
         private DropdownField _fieldResolution;
@@ -25,8 +27,11 @@ namespace Game.UI
         
         private DropdownField _fieldLocale;
 
-        public SettingsView(SettingsViewModel viewModel)
-            => _viewModel = viewModel;
+        public SettingsView(SettingsViewModel viewModel, ILocalizationService localization)
+        {
+            _viewModel = viewModel;
+            _localization = localization;
+        }
 
         public void Create(VisualElement root)
         {
@@ -66,6 +71,8 @@ namespace Game.UI
             _fieldMusicVolume.RegisterValueChangedCallback(OnChangeMusicVolume);
 
             _fieldLocale.RegisterValueChangedCallback(OnChangeLocale);
+            
+            _localization.Changed += OnLocalisationChanged;
         }
 
         private void UnregisterCallbacks()
@@ -79,6 +86,15 @@ namespace Game.UI
             _fieldMusicVolume.UnregisterValueChangedCallback(OnChangeMusicVolume);
             
             _fieldLocale.UnregisterValueChangedCallback(OnChangeLocale);
+            
+            _localization.Changed -= OnLocalisationChanged;
+        }
+        
+        private void OnLocalisationChanged()
+            => UpdateText();
+
+        private void UpdateText()
+        {
         }
 
         #region Graphics
