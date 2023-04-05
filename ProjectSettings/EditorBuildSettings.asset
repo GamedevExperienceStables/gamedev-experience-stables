@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Game/Level/Scenes/Other/Ending.unity
     guid: 5f5a6fa0c7442844f8eb78751396d4a0
   - enabled: 1
+    path: Assets/Game/Level/Scenes/Levels/GameLevel/L1/Level_1V3.unity
+    guid: 82a3b2d558971fe4f8d13e178f8b462f
+  - enabled: 1
     path: Assets/Game/Level/Scenes/Levels/Rocket v2.unity
     guid: f90e0c038c4a7c6408c2f370076eda35
   - enabled: 1
@@ -29,9 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Level/Scenes/Levels/GameLevel/L1D2/Level_1_Dung_2.unity
     guid: 55c4f3fbd99291a489d4ce1ac0071df8
-  - enabled: 1
-    path: Assets/Game/Level/Scenes/Levels/GameLevel/L1/Level_1V2.unity
-    guid: 4c14453ebd686784a90d30913e135008
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 356ab69d75917644f8bb1676edee2467,
       type: 2}
