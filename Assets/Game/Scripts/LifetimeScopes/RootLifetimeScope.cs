@@ -95,11 +95,11 @@ namespace Game.LifetimeScopes
         {
             builder.Register<SceneLoader>(Lifetime.Singleton);
 
-            builder.RegisterComponentInNewPrefab(gameSettings.UiSettings.FadeScreen, Lifetime.Singleton)
+            builder.RegisterComponentInNewPrefab(gameSettings.FaderSettings.FadeScreen, Lifetime.Singleton)
                 .DontDestroyOnLoad()
                 .As<IFaderScreen>();
 
-            builder.RegisterComponentInNewPrefab(gameSettings.UiSettings.LoadingScreen, Lifetime.Singleton)
+            builder.RegisterComponentInNewPrefab(gameSettings.FaderSettings.LoadingScreen, Lifetime.Singleton)
                 .DontDestroyOnLoad()
                 .As<ILoadingScreen>();
         }
@@ -132,6 +132,8 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.InventorySettings);
             builder.RegisterInstance(gameSettings.AudioSettings);
             builder.RegisterInstance(gameSettings.CursorSettings);
+            
+            builder.RegisterInstance(gameSettings.UiSettings.StartMenu);
         }
 
         private static void RegisterUi(IContainerBuilder builder)

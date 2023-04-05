@@ -3,6 +3,7 @@ using Game.Inventory;
 using Game.Level;
 using Game.Persistence;
 using UnityEngine;
+using UnityEngine.Serialization;
 using AudioSettings = Game.Audio.AudioSettings;
 
 namespace Game.Settings
@@ -15,6 +16,10 @@ namespace Game.Settings
 
         [SerializeField]
         private CameraSettings cameraSettings;
+
+        [FormerlySerializedAs("uiSettings")]
+        [SerializeField]
+        private FaderSettings faderSettings;
 
         [SerializeField]
         private UiSettings uiSettings;
@@ -38,7 +43,7 @@ namespace Game.Settings
         private CursorService.Settings cursorSettings;
 
         public CameraSettings CameraSettings => cameraSettings;
-        public UiSettings UiSettings => uiSettings;
+        public FaderSettings FaderSettings => faderSettings;
         public LootSettings LootSettings => lootSettings;
         public LevelsSettings LevelsSettings => levelsSettings;
         public PersistenceService.Settings SaveSettings => saveSettings;
@@ -46,5 +51,6 @@ namespace Game.Settings
         public InventorySettings InventorySettings => inventorySettings;
         public AudioSettings AudioSettings => audioSettings;
         public CursorService.Settings CursorSettings => cursorSettings;
+        public UiSettings UiSettings => uiSettings;
     }
 }

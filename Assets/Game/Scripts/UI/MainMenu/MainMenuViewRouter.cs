@@ -1,6 +1,6 @@
 ﻿namespace Game.UI
 {
-    public class MainMenuViewRouter : PageRouter
+    public sealed class MainMenuViewRouter : PageRouter
     {
         private StartMenuView _startMenu;
         private MainMenuSettingsView _mainMenuSettingsView;
@@ -22,11 +22,11 @@
             _aboutView.Hide();
             _artView.Hide();
 
-            OpenStartMenu();
+            ShowStartMenu();
         }
 
-        public void OpenStartMenu()
-            => Open(_startMenu);
+        public void ShowStartMenu()
+            => _startMenu.Show();
 
         public void OpenSettings()
             => Open(_mainMenuSettingsView);
@@ -37,7 +37,18 @@
         public void OpenArt()
             => Open(_artView);
 
-        public void Back() 
-            => OpenStartMenu();
+        public void Back()
+        {
+            _startMenu.Activate();
+            
+            ActivePage.Hide();
+        }
+
+        protected override void Open(PageView view)
+        {
+            _startMenu.Deactivate();
+
+            base.Open(view);
+        }
     }
 }
