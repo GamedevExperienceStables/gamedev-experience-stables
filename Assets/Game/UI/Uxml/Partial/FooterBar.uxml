@@ -2,7 +2,7 @@
     <ui:VisualElement style="-unity-font-style: bold; color: rgba(255, 255, 255, 0.6);">
         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; font-size: 12px; justify-content: flex-end;">
             <ui:Label tabindex="-1" text="Version:" display-tooltip-when-elided="true" style="font-size: 13px;" />
-            <ui:Label tabindex="-1" text="0.3.1" display-tooltip-when-elided="true" name="version" style="font-size: 13px;" />
+            <ui:Label tabindex="-1" text="0.4.0" display-tooltip-when-elided="true" name="version" style="font-size: 13px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
