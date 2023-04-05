@@ -1,9 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="game-over-screen" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.64); align-items: center; justify-content: center;">
+        <ui:VisualElement style="flex-grow: 1; background-color: rgb(0, 0, 0); align-items: center; justify-content: center;">
             <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center;">
-                <ui:Label tabindex="-1" text="Snoody lost this battle, but this is not the end of his story. &#10;&#10;&lt;b&gt;You can start the New Game or continue from last save." display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 21px; -unity-font-style: normal; white-space: normal; width: 450px; -unity-text-align: upper-center;" />
-                <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); height: 28px;" />
+                <ui:Label tabindex="-1" text="Snoody lost this battle, but this is not the end of his story. " display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 40px; -unity-font-style: bold; white-space: normal; width: 695px; -unity-text-align: upper-center;" />
+                <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 16px;" />
+                <ui:Label tabindex="-1" text="You can start the New Game or continue from last save." display-tooltip-when-elided="true" style="color: rgba(255, 255, 255, 0.6); font-size: 21px; -unity-font-style: normal; white-space: normal; width: 350px; -unity-text-align: upper-center;" />
+                <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); height: 32px;" />
                 <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 244px;">
                     <ui:Button text="Load Last Save" display-tooltip-when-elided="true" name="button-restart" />
                     <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="button-exit" />

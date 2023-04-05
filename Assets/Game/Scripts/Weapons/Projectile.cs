@@ -26,13 +26,13 @@ namespace Game.Weapons
         private IActorController _owner;
 
         private IProjectileSettings _settings;
-        private ProjectileBehaviour _behaviour;
+        private ProjectileHandler _behaviour;
         private TimerPool _timers;
 
         public event Action<Projectile> Completed;
 
         [Inject]
-        public void Construct(ProjectileBehaviour behaviour, TimerPool timers)
+        public void Construct(ProjectileHandler behaviour, TimerPool timers)
         {
             _behaviour = behaviour;
 

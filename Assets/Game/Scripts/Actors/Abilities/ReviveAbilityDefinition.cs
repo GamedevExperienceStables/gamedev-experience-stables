@@ -40,7 +40,7 @@ namespace Game.Actors
 
         private async UniTask Revive()
         {
-            _inputController.BlockInput(true);
+            _inputController.SetBlock(true);
             
             await PlayReviveAnimation();
             ResetStats();
@@ -51,7 +51,8 @@ namespace Game.Actors
 
         protected override void OnEndAbility(bool wasCancelled)
         {
-            _inputController.BlockInput(false);
+            _inputController.SetBlock(false);
+            
             RemoveAbility();
         }
 

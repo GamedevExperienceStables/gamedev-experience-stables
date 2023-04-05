@@ -1,6 +1,4 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
-using Game.Actors;
+﻿using Game.Actors;
 using Game.Actors.Health;
 using UnityEngine;
 
@@ -13,7 +11,6 @@ namespace Game.Animations.Hero
         private ActorAnimator _animator;
         private DeathController _deathController;
         private DamageableController _damageableController;
-        private bool _isDied;
 
         private void Awake()
         {
@@ -47,7 +44,6 @@ namespace Game.Animations.Hero
 
         private void OnDiedAnimation()
         {
-            _isDied = true;
             _animator.ResetAnimation(AnimationNames.Damage);
             _animator.SetAnimation(AnimationNames.Death, true);
         }
@@ -57,7 +53,6 @@ namespace Game.Animations.Hero
 
         private void OnDamageAnimation()
         {
-            if (_isDied) return;
             _animator.SetAnimation(AnimationNames.Damage);
         }
         

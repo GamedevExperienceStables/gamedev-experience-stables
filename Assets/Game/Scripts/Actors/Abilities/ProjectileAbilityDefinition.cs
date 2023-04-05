@@ -41,15 +41,17 @@ namespace Game.Actors
 
         public EventReference FireSfx => fireSfx;
 
-        public ITargetingSettings Targeting => targeting;
+        public TargetingDefinition Targeting => targeting;
     }
 
     public class ProjectileAbility : ActorAbility<ProjectileAbilityDefinition>
     {
+        private const int POOL_MAX_SIZE = 20;
+        private const float BACKWARD_THRESHOLD = 0.2f;
+
         private readonly FmodService _audio;
         private readonly TimerPool _timers;
 
-        private const int POOL_MAX_SIZE = 20;
         private readonly ObjectPool<Projectile> _projectilePool;
 
         private Transform _spawnPoint;
@@ -60,6 +62,7 @@ namespace Game.Actors
 
         private TimerUpdatable _fireTimer;
         private TimerUpdatable _castTimer;
+        private Vector3 _targetPosition;
 
         public ProjectileAbility(ProjectileFactory projectileFactory, FmodService audio, TimerPool timers)
         {
@@ -117,18 +120,38 @@ namespace Game.Actors
             if (_hasMana)
                 Owner.ApplyModifier(CharacterStats.Mana, -Definition.ManaCost);
 
+            if (Definition.Targeting.CollectTargetPosition is TargetCollecting.OnActivate)
+                _targetPosition = GetTargetPosition();
+            
             _fireTimer.Start();
             _castTimer.Start();
+            
+            _input.SetBlock(InputBlock.Rotation);
 
             SetAnimation(true);
         }
 
         private void OnFire()
         {
-            Vector3 targetPosition = GetTargetPosition();
-            FireProjectile(targetPosition);
+            if (Definition.Targeting.CollectTargetPosition is TargetCollecting.OnFire)
+                _targetPosition = GetTargetPosition();
 
+            PreventBackwardFiring();
+
+            FireProjectile();
+            
             SetAnimation(false);
+        }
+
+        private void PreventBackwardFiring()
+        {
+            Vector3 spawnPoint = _spawnPoint.position;
+            Vector3 spawnPointForward = _spawnPoint.forward;
+            Vector3 targetDirection = (_targetPosition - spawnPoint).normalized;
+
+            float dot = Vector3.Dot(targetDirection, spawnPointForward);
+            if (dot < BACKWARD_THRESHOLD)
+                _targetPosition = spawnPoint + spawnPointForward;
         }
 
         private void OnComplete()
@@ -138,18 +161,20 @@ namespace Game.Actors
         {
             _fireTimer.Stop();
             _castTimer.Stop();
-
+            
             SetAnimation(false);
+            
+            _input.RemoveBlock(InputBlock.Rotation);
         }
 
         private void SetAnimation(bool isActive)
             => _animator.SetAnimation(AnimationNames.RangeAttack, isActive);
 
-        private void FireProjectile(Vector3 targetPosition)
+        private void FireProjectile()
         {
             _projectilePool.Get(out Projectile projectile);
 
-            projectile.Fire(_spawnPoint, targetPosition);
+            projectile.Fire(_spawnPoint, _targetPosition);
 
             if (!Definition.FireSfx.IsNull)
                 _audio.PlayOneShot(Definition.FireSfx, Owner.Transform);
@@ -157,7 +182,7 @@ namespace Game.Actors
 
         private Vector3 GetTargetPosition()
         {
-            ITargetingSettings targeting = Definition.Targeting;
+            TargetingDefinition targeting = Definition.Targeting;
 
             Vector3 position = Owner.Transform.position;
             bool groundedPosition = targeting.RelativeToGround;

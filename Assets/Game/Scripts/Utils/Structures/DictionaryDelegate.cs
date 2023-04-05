@@ -7,7 +7,8 @@ namespace Game.Utils.Structures
     {
         private readonly Dictionary<TKey, TDelegate> _eventTable = new();
 
-        public TDelegate this[TKey key] => _eventTable.TryGetValue(key, out TDelegate callback) ? callback : null;
+        public bool TryGetValue(TKey key, out TDelegate callback) 
+            => _eventTable.TryGetValue(key, out callback);
 
         public void AddListener(TKey key, TDelegate callback)
         {
