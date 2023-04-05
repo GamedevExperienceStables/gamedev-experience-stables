@@ -42,8 +42,16 @@ namespace Game.Actors
         [SerializeField]
         private float castTime = 0.75f;
 
+        [Header("FX")]
         [SerializeField]
         private GameObject completeEffectPrefab;
+        
+        [Space]
+        [SerializeField]
+        private GameObject hitEffectPrefab;
+
+        [SerializeField]
+        private Vector3 hitOffset;
 
         public float MeleeRangeRadius => meleeRangeRadius;
         public float MeleeDamage => baseDamage;
@@ -54,6 +62,10 @@ namespace Game.Actors
         public int MaxTargets => maxTargets;
 
         public float CastTime => castTime;
+
+        public GameObject HitEffectPrefab => hitEffectPrefab;
+
+        public Vector3 HitOffset => hitOffset;
 
         public GameObject CompleteEffectPrefab => completeEffectPrefab;
     }
@@ -70,8 +82,9 @@ namespace Game.Actors
         private bool _hasStaminaModifier;
 
         private TimerUpdatable _castTimer;
-        
+
         private bool _hasCompleteEffect;
+        private bool _hasHitEffect;
 
         [Inject]
         public MeleeAbility(TimerPool timers)
@@ -98,9 +111,10 @@ namespace Game.Actors
             _castTimer = _timers.GetTimer(TimeSpan.FromSeconds(Definition.CastTime), OnComplete);
 
             _hasCompleteEffect = Definition.CompleteEffectPrefab;
+            _hasHitEffect = Definition.HitEffectPrefab;
         }
 
-        protected override void OnDestroyAbility() 
+        protected override void OnDestroyAbility()
             => _timers.ReleaseTimer(_castTimer);
 
         protected override void OnActivateAbility()
@@ -131,7 +145,7 @@ namespace Game.Actors
 
         private void MakeDamage()
         {
-            Vector3 sphereShift = Owner.Transform.position + Definition.SphereColliderShift;
+            Vector3 sphereShift = Owner.Transform.position + Owner.Transform.TransformDirection(Definition.SphereColliderShift);
 #if UNITY_EDITOR
             DebugExtensions.DebugWireSphere(sphereShift, radius: Definition.MeleeRangeRadius);
 #endif
@@ -142,9 +156,17 @@ namespace Game.Actors
                 Transform hit = _hitColliders[i].transform;
                 if (hit.gameObject.TryGetComponent(out IActorController destinationOwner))
                     destinationOwner.GetComponent<DamageableController>().Damage(GetDamage());
-                Vector3 dir = hit.position - Owner.Transform.position;
-                dir = dir.normalized * Definition.PushForce;
-                hit.GetComponent<MovementController>().AddVelocity(dir);
+                
+                Vector3 hitPosition = hit.position;
+                
+                if (Definition.PushForce > 0)
+                {
+                    Vector3 dir = hitPosition - Owner.Transform.position;
+                    dir = dir.normalized * Definition.PushForce;
+                    hit.GetComponent<MovementController>().AddVelocity(dir);
+                }
+
+                SpawnHitEffect(hit);
             }
         }
 
@@ -169,8 +191,22 @@ namespace Game.Actors
 
         private void SpawnEffect()
         {
-            if (_hasCompleteEffect)
-                Object.Instantiate(Definition.CompleteEffectPrefab, Owner.Transform.position, Quaternion.identity);
+            if (!_hasCompleteEffect)
+                return;
+            
+            Vector3 spawnPoint = Owner.Transform.position;
+            Quaternion spawnRotation = Quaternion.LookRotation(Owner.Transform.forward);
+            Object.Instantiate(Definition.CompleteEffectPrefab, spawnPoint, spawnRotation);    
+        }
+
+        private void SpawnHitEffect(Transform hit)
+        {
+            if (!_hasHitEffect)
+                return;
+            
+            Vector3 spawnPoint = hit.position + hit.TransformDirection(Definition.HitOffset);
+            Quaternion spawnRotation = Quaternion.LookRotation(hit.forward);
+            Object.Instantiate(Definition.HitEffectPrefab, spawnPoint, spawnRotation);
         }
     }
 }
