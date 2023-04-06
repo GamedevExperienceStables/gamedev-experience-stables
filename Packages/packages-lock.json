@@ -28,6 +28,16 @@
       "dependencies": {},
       "hash": "8a8fa5a9659a6d63f196391c71e06c4286c8acd7"
     },
+    "com.magicasoft.magicacloth": {
+      "version": "https://github.com/GamedevExperienceStables/com.magicasoft.magicacloth.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.burst": "1.7.0",
+        "com.unity.collections": "1.2.0"
+      },
+      "hash": "1a6d21d6243b1820732ea509bc33b61152a95929"
+    },
     "com.moremountains.feel": {
       "version": "https://github.com/GamedevExperienceStables/com.moremountains.feel.git",
       "depth": 0,
@@ -82,7 +92,7 @@
     },
     "com.unity.burst": {
       "version": "1.7.4",
-      "depth": 1,
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1"
@@ -94,6 +104,17 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {
+        "com.unity.test-framework": "1.1.31"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.collections": {
+      "version": "1.4.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.burst": "1.6.6",
+        "com.unity.nuget.mono-cecil": "1.11.4",
         "com.unity.test-framework": "1.1.31"
       },
       "url": "https://packages.unity.com"
