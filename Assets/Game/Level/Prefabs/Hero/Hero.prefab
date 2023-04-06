@@ -626,7 +626,7 @@ MonoBehaviour:
   CapsuleHeight: 1.6
   CapsuleYOffset: 0.8
   CapsulePhysicsMaterial: {fileID: 0}
-  GroundDetectionExtraDistance: 0
+  GroundDetectionExtraDistance: 1
   MaxStableSlopeAngle: 60
   StableGroundLayers:
     serializedVersion: 2
