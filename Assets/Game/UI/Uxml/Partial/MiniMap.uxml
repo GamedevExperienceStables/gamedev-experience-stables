@@ -9,5 +9,6 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="front-frame" class="mini-map__frame" />
+        <ui:Label name="map-coordinates" text="0:0" class="mini-map__coordinates" />
     </ui:VisualElement>
 </ui:UXML>

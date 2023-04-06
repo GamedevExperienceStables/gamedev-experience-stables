@@ -92,6 +92,7 @@
             public const string MAP = "map";
             public const string MAP_WRAPPER = "map-wrapper";
             public const string MAP_CONTAINER = "map-container";
+            public const string MAP_COORDINATES = "map-coordinates";
             
             public const string MARKER_CLASS_NAME = "mini-map__marker";
         }

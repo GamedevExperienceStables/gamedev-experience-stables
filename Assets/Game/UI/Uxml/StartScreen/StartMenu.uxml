@@ -4,7 +4,6 @@
     <ui:Template name="SettingsScreen" src="project://database/Assets/Game/UI/Uxml/StartScreen/SettingsScreen.uxml?fileID=9197481963319205126&amp;guid=30c7c4c0462a403dad393a8dcd62bacc&amp;type=3#SettingsScreen" />
     <ui:Template name="ArtScreen" src="project://database/Assets/Game/UI/Uxml/StartScreen/ArtScreen.uxml?fileID=9197481963319205126&amp;guid=06e1f63d8faecac49a5bf26912706564&amp;type=3#ArtScreen" />
     <ui:Template name="AboutScreen" src="project://database/Assets/Game/UI/Uxml/StartScreen/AboutScreen.uxml?fileID=9197481963319205126&amp;guid=95c2435e4a4eae5499b96889cd80e23e&amp;type=3#AboutScreen" />
-    <ui:Template name="FooterBar" src="project://database/Assets/Game/UI/Uxml/Partial/FooterBar.uxml?fileID=9197481963319205126&amp;guid=4eb69b1b004fa7348b5c35b231212185&amp;type=3#FooterBar" />
     <Style src="project://database/Assets/Game/UI/Uss/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=8cedbaaf434e4b94f8c50cc514ad6cf7&amp;type=3#MainMenuStyle" />
     <ui:VisualElement style="flex-grow: 1; flex-shrink: 0;">
         <ui:VisualElement name="background" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=-833552155&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_0&apos;); -unity-background-scale-mode: scale-and-crop; flex-grow: 1; flex-shrink: 0;">
@@ -55,6 +54,5 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Instance template="FooterBar" name="footer" style="position: absolute; bottom: 0; left: 0; right: 0;" />
     </ui:VisualElement>
 </ui:UXML>

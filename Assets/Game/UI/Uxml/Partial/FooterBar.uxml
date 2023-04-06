@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement style="-unity-font-style: bold; color: rgba(255, 255, 255, 0.6);">
-        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; font-size: 22px; justify-content: flex-start; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&amp;guid=1823e5ab5312e0e40972472a78991947&amp;type=2#borsok SDF&apos;);">
-            <ui:Label tabindex="-1" text="Version:" display-tooltip-when-elided="true" />
-            <ui:Label tabindex="-1" text="0.4.0" display-tooltip-when-elided="true" name="version" />
+    <ui:VisualElement picking-mode="Ignore" style="color: rgba(255, 255, 255, 0.4); position: absolute; bottom: 0; right: 0; left: 0;">
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); font-size: 16px; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&amp;guid=1823e5ab5312e0e40972472a78991947&amp;type=2#borsok SDF&apos;); flex-direction: row; margin-left: 5px;">
+            <ui:Label tabindex="-1" text="Version:" display-tooltip-when-elided="true" name="label" />
+            <ui:Label tabindex="-1" text="X.X.X" display-tooltip-when-elided="true" name="version" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
