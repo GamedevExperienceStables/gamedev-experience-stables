@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Gamedev Experience Stables
-  productName: 'Snoody: One of the Ayrie'
+  productName: Snoody - One of the Ayrie
   defaultCursor: {fileID: 2800000, guid: fb7b3c9b85c37514bafadeb83a1ea9f3, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -99,7 +99,7 @@ PlayerSettings:
   xboxEnableFitness: 0
   visibleInBackground: 1
   allowFullscreenSwitch: 1
-  fullscreenMode: 3
+  fullscreenMode: 1
   xboxSpeechDB: 0
   xboxEnableHeadOrientation: 0
   xboxEnableGuest: 0
@@ -135,6 +135,7 @@ PlayerSettings:
   bundleVersion: 0.4.1
   preloadedAssets:
   - {fileID: 11400000, guid: 24567d516383ca54683a9f0d86631552, type: 2}
+  - {fileID: 11400000, guid: c9446e318bb43da47a7f0e9a2674cb19, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
