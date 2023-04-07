@@ -6,6 +6,8 @@ namespace Game.UI
 {
     public class MiniMap
     {
+        private const float WIDTH = 1600f;
+
         private readonly VisualElement _map;
 
         private Bounds _worldBounds;
@@ -20,7 +22,8 @@ namespace Game.UI
         {
             _worldBounds = worldBounds;
 
-            Rect mapRect = image.rect;
+            float ratio = image.rect.width / WIDTH;
+            var mapRect = new Rect(image.rect.x, image.rect.y, WIDTH, image.rect.height / ratio);
             _mapBounds = new Bounds(mapRect.center, mapRect.size);
 
             SetImage(image, mapRect);
