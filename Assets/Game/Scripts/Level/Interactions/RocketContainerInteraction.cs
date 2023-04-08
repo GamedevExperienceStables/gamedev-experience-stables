@@ -28,15 +28,15 @@ namespace Game.Level
 
         public bool CanExecuteWithResult(out InteractionRocketResult result)
         {
-            if (_inventory.IsBagEmpty(_rocketContainer.TargetMaterial))
-            {
-                result = InteractionRocketResult.Empty;
-                return false;
-            }
-
             if (_inventory.IsContainerFull(_rocketContainer.TargetMaterial))
             {
                 result = InteractionRocketResult.Full;
+                return false;
+            }
+
+            if (_inventory.IsBagEmpty(_rocketContainer.TargetMaterial))
+            {
+                result = InteractionRocketResult.Empty;
                 return false;
             }
 
@@ -49,7 +49,7 @@ namespace Game.Level
         {
             _inventory.TransferToContainer(_levelMaterial);
 
-            _rocketContainer.TransferCompleted();
+            _rocketContainer.TransferComplete();
         }
     }
 }

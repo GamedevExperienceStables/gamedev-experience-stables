@@ -100,9 +100,16 @@ namespace Game.LifetimeScopes
             builder.Register<InteractionFactory>(Lifetime.Scoped);
 
             builder.Register<TransitionToLocationInteraction>(Lifetime.Transient);
-            builder.Register<RocketContainerInteraction>(Lifetime.Transient);
             builder.Register<SaveGameInteraction>(Lifetime.Transient);
             builder.Register<LevelExitInteraction>(Lifetime.Transient);
+            
+            RegisterRocketContainer(builder);
+        }
+
+        private static void RegisterRocketContainer(IContainerBuilder builder)
+        {
+            builder.Register<RocketContainerInteraction>(Lifetime.Transient);
+            builder.Register<RocketContainerHandler>(Lifetime.Transient);
         }
 
         private static void RegisterFactories(IContainerBuilder builder)

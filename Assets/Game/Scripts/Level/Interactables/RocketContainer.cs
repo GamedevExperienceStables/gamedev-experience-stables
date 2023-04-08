@@ -1,5 +1,5 @@
-﻿using Game.Inventory;
-using MoreMountains.Feedbacks;
+﻿using System;
+using Game.Inventory;
 using UnityEngine;
 
 namespace Game.Level
@@ -8,17 +8,13 @@ namespace Game.Level
     public class RocketContainer : Interactable
     {
         [SerializeField]
-        private MMF_Player transferFeedback;
-
-        [SerializeField]
         private MaterialDefinition targetMaterial;
 
         public MaterialDefinition TargetMaterial => targetMaterial;
-        
-        public void TransferCompleted()
-        {
-            if (transferFeedback)
-                transferFeedback.PlayFeedbacks();
-        }
+
+        public event Action TransferCompleted;
+
+        public void TransferComplete()
+            => TransferCompleted?.Invoke();
     }
 }
