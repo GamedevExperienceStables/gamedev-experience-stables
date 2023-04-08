@@ -9,5 +9,8 @@ namespace Game.Inventory
         
         int GetCurrentValue(MaterialDefinition definition);
         int GetTotalValue(MaterialDefinition definition);
+        
+        bool IsFull(MaterialDefinition definition);
+        bool IsEmpty(MaterialDefinition definition);
     }
 }

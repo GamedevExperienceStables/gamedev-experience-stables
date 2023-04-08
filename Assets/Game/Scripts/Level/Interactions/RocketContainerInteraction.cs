@@ -24,7 +24,26 @@ namespace Game.Level
             => _rocketContainer = Source.GetComponent<RocketContainer>();
 
         public override bool CanExecute()
-            => _inventory.CanTransferToContainer(_levelMaterial);
+            => CanExecuteWithResult(out _);
+
+        public bool CanExecuteWithResult(out InteractionRocketResult result)
+        {
+            if (_inventory.IsBagEmpty(_rocketContainer.TargetMaterial))
+            {
+                result = InteractionRocketResult.Empty;
+                return false;
+            }
+
+            if (_inventory.IsContainerFull(_rocketContainer.TargetMaterial))
+            {
+                result = InteractionRocketResult.Full;
+                return false;
+            }
+
+            result = InteractionRocketResult.Ok;
+            return true;
+        }
+
 
         public override void Execute()
         {

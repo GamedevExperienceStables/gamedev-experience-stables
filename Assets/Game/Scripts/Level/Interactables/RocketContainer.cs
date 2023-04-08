@@ -1,4 +1,5 @@
-﻿using MoreMountains.Feedbacks;
+﻿using Game.Inventory;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 namespace Game.Level
@@ -9,6 +10,11 @@ namespace Game.Level
         [SerializeField]
         private MMF_Player transferFeedback;
 
+        [SerializeField]
+        private MaterialDefinition targetMaterial;
+
+        public MaterialDefinition TargetMaterial => targetMaterial;
+        
         public void TransferCompleted()
         {
             if (transferFeedback)

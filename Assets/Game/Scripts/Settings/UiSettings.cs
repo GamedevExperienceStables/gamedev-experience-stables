@@ -1,4 +1,5 @@
-﻿using Game.UI;
+﻿using Game.Level;
+using Game.UI;
 using UnityEngine;
 
 namespace Game.Settings
@@ -8,7 +9,12 @@ namespace Game.Settings
     {
         [SerializeField]
         private StartMenuView.Settings startMenu;
+        
+        [SerializeField]
+        private LocalizationInteractionSettings interaction;
 
         public StartMenuView.Settings StartMenu => startMenu;
+
+        public LocalizationInteractionSettings Interaction => interaction;
     }
 }

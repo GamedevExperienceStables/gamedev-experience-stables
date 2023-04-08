@@ -94,6 +94,8 @@ namespace Game.LifetimeScopes
 
         private static void RegisterInteractions(IContainerBuilder builder)
         {
+            builder.Register<LocalizationInteraction>(Lifetime.Singleton);
+            
             builder.Register<InteractionService>(Lifetime.Scoped);
             builder.Register<InteractionFactory>(Lifetime.Scoped);
 

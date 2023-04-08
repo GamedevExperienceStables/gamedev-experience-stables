@@ -102,7 +102,7 @@ namespace Game.Actors
         {
             foreach (Interaction potentialInteraction in _potentialInteractions)
             {
-                if (!potentialInteraction.CanExecute()) 
+                if (!_interactionService.CanExecute(potentialInteraction))
                     continue;
                 
                 _interactionService.StartInteraction(potentialInteraction);

@@ -21,7 +21,7 @@ namespace Game.Inventory
         public void UnSubscribe(MaterialChangedEvent callback)
             => ValueChanged -= callback;
 
-        public IReadOnlyMaterialData GetMaterialData(MaterialDefinition definition) 
+        public IReadOnlyMaterialData GetMaterialData(MaterialDefinition definition)
             => _container[definition];
 
         public void Create(MaterialDefinition material, int total, int current)
@@ -60,11 +60,18 @@ namespace Game.Inventory
 
         public bool IsFull(MaterialDefinition definition)
         {
-            MaterialData material = _container[definition];
-            return material.Current >= material.Total;
+            if (_container.TryGetValue(definition, out MaterialData material))
+                return material.Current >= material.Total;
+
+            return false;
         }
 
         public bool IsEmpty(MaterialDefinition definition)
-            => _container[definition].Current <= 0;
+        {
+            if (_container.TryGetValue(definition, out MaterialData material))
+                return material.Current <= 0;
+
+            return true;
+        }
     }
 }
