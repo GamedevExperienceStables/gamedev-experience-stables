@@ -33,11 +33,11 @@ namespace Game.Inventory
                 SetValue(material.Definition, 0);
         }
 
-        public int GetCurrentValue(MaterialDefinition definition)
-            => _container[definition].Current;
+        public int GetCurrentValue(MaterialDefinition definition) 
+            => _container.TryGetValue(definition, out MaterialData material) ? material.Current : 0;
 
         public int GetTotalValue(MaterialDefinition definition)
-            => _container[definition].Total;
+            => _container.TryGetValue(definition, out MaterialData material) ? material.Total : 0;
 
         public void Increase(MaterialDefinition definition)
             => SetValue(definition, _container[definition].Current + 1);
