@@ -674,6 +674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5596375626231746842}
   - component: {fileID: 2902236816027691446}
+  - component: {fileID: 5398921595782337527}
   m_Layer: 0
   m_Name: mushroom_2
   m_TagString: Untagged
@@ -688,7 +689,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5107505666122238880}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.18, y: 0.2, z: 8.36}
   m_LocalScale: {x: 1.39896, y: 1.39896, z: 1.39896}
   m_ConstrainProportionsScale: 0
@@ -705,7 +706,7 @@ Transform:
   - {fileID: 2155616012063851087}
   - {fileID: 1530851890459670295}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2902236816027691446
 BoxCollider:
@@ -726,8 +727,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.9763274, y: 12.141207, z: 2.8005996}
-  m_Center: {x: -1.5005014, y: 5.0829406, z: -0.075024754}
+  m_Size: {x: 2.4060292, y: 12.141207, z: 2.8006}
+  m_Center: {x: -0.21534449, y: 5.0829353, z: -0.075024925}
+--- !u!65 &5398921595782337527
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5107505666122238880}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.740223, y: 1.6609508, z: 1}
+  m_Center: {x: -2.3256228, y: 2.153138, z: -0.000003901182}
 --- !u!1 &5367634199861658088
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ namespace Game.UI
 
         private MiniMap _miniMap;
         private MiniMapMarkers _miniMapMarkers;
+        private Label _miniMapCoordinates;
 
 
         [Inject]
@@ -54,6 +55,7 @@ namespace Game.UI
             
             _miniMap = new MiniMap(map);
             _miniMapMarkers = new MiniMapMarkers(_miniMap);
+            _miniMapCoordinates = _root.Q<Label>(LayoutNames.MiniMap.MAP_COORDINATES);
         }
 
         private void OnMarkerAdd(ILocationMarker target) 
@@ -86,9 +88,13 @@ namespace Game.UI
             Vector2 heroMapPosition = UpdateHeroMarker();
             _miniMap.SetCenterPosition(heroMapPosition);
             _miniMapMarkers.Tick();
+            UpdateMapCoordinates(heroMapPosition);
 
             UpdateMapRotation();
         }
+
+        private void UpdateMapCoordinates(Vector2 position) 
+            => _miniMapCoordinates.text = $"{position.x:f0} : {position.y:f0}";
 
         private Vector2 UpdateHeroMarker()
         {

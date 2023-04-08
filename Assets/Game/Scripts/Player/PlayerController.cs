@@ -12,13 +12,14 @@ namespace Game.Player
         private readonly HeroStats _heroStats;
 
         private DeathController _deathController;
-        private HeroController _hero;
 
-        private event Action<HeroController> HeroDeathEvent;
+        private event Action<DeathCause> HeroDeathEvent;
 
         [Inject]
         public PlayerController(PlayerData data)
             => _heroStats = data.HeroStats;
+
+        public HeroController Hero { get; private set; }
 
         public void Init(HeroStats.InitialStats initial)
             => _heroStats.Init(initial);
@@ -29,33 +30,33 @@ namespace Game.Player
         public void HeroStatUnSubscribe(CharacterStats key, IStats.StatChangedEvent callback)
             => _heroStats.UnSubscribe(key, callback);
 
-        public void HeroDiedSubscribe(Action<HeroController> callback)
+        public void HeroDiedSubscribe(Action<DeathCause> callback)
             => HeroDeathEvent += callback;
 
-        public void HeroDiedUnSubscribe(Action<HeroController> callback)
+        public void HeroDiedUnSubscribe(Action<DeathCause> callback)
             => HeroDeathEvent -= callback;
 
         public void BindHero(HeroController hero)
         {
-            _hero = hero;
-            _hero.Bind(_heroStats);
+            Hero = hero;
+            Hero.Bind(_heroStats);
 
-            if (!_hero.TryGetComponent(out _deathController))
+            if (!Hero.TryGetComponent(out _deathController))
                 throw new NoNullAllowedException("Trying subscribe on hero death, but DeathController not exist");
 
-            _deathController.Died += OnDeath;
+            _deathController.DiedWithCause += OnDeath;
         }
 
         public void UnbindHero()
         {
             if (_deathController)
-                _deathController.Died -= OnDeath;
+                _deathController.DiedWithCause -= OnDeath;
 
             _deathController = null;
-            _hero = null;
+            Hero = null;
         }
 
-        private void OnDeath()
-            => HeroDeathEvent?.Invoke(_hero);
+        private void OnDeath(DeathCause deathCause)
+            => HeroDeathEvent?.Invoke(deathCause);
     }
 }
