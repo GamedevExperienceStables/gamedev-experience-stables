@@ -1,4 +1,10 @@
-﻿using UnityEngine.UIElements;
+﻿using System;
+using Game.Localization;
+using UnityEngine;
+using UnityEngine.InputSystem.HID;
+using UnityEngine.Localization;
+using UnityEngine.UIElements;
+using VContainer;
 
 namespace Game.UI
 {
@@ -11,6 +17,14 @@ namespace Game.UI
         private Button _buttonSettings;
 
         private PauseViewRouter _router;
+        
+        private Settings _settings;
+        
+        [Inject]
+        public void Construct(Settings settings)
+        {
+            _settings = settings;
+        }
 
         protected override void OnAwake()
         {
@@ -18,21 +32,31 @@ namespace Game.UI
 
             _router = GetComponent<PauseViewRouter>();
 
-            _buttonResume = Content.Q<Button>(LayoutNames.PauseMenu.BUTTON_RESUME);
-            _buttonSettings = Content.Q<Button>(LayoutNames.PauseMenu.BUTTON_SETTINGS);
-            _buttonMainMenu = Content.Q<Button>(LayoutNames.PauseMenu.BUTTON_MAIN_MENU);
+            _buttonResume = Content.Q<VisualElement>(LayoutNames.PauseMenu.BUTTON_RESUME).Q<Button>();
+            _buttonSettings = Content.Q<VisualElement>(LayoutNames.PauseMenu.BUTTON_SETTINGS).Q<Button>();
+            _buttonMainMenu = Content.Q<VisualElement>(LayoutNames.PauseMenu.BUTTON_MAIN_MENU).Q<Button>();
 
             _buttonResume.clicked += OnResumeButton;
             _buttonMainMenu.clicked += OnMainMenuButton;
             _buttonSettings.clicked += OnSettingsButton;
+            
+            _localization.Changed += OnLocalisationChanged;
         }
+        
+        private void Start()
+            => UpdateText();
 
         public void OnDestroy()
         {
             _buttonResume.clicked -= OnResumeButton;
             _buttonMainMenu.clicked -= OnMainMenuButton;
             _buttonSettings.clicked -= OnSettingsButton;
+            
+            _localization.Changed -= OnLocalisationChanged;
         }
+        
+        private void OnLocalisationChanged()
+            => UpdateText();
 
         private void OnResumeButton()
             => ViewModel.ResumeGame();
@@ -42,5 +66,26 @@ namespace Game.UI
 
         private void OnSettingsButton()
             => _router.OpenSettings();
+        
+        private void UpdateText()
+        {
+            _buttonResume.Q<Label>().text = _settings.resume.button.GetLocalizedString();
+            _buttonSettings.Q<Label>().text = _settings.settings.button.GetLocalizedString();
+            _buttonMainMenu.Q<Label>().text =_settings.mainMenu.button.GetLocalizedString();
+        }
+        
+        [Serializable]
+        public class Settings
+        {
+            [Serializable]
+            public struct Page
+            {
+                public LocalizedString button;
+            }
+
+            public Page resume;
+            public Page settings;
+            public Page mainMenu;
+        }
     }
 }

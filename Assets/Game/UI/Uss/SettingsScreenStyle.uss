@@ -1,4 +1,4 @@
-﻿.header-label {
+.header-label {
     font-size: 60px;
     color: rgb(155, 89, 199);
     -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&guid=1823e5ab5312e0e40972472a78991947&type=2#borsok SDF');
@@ -7,10 +7,14 @@
 }
 
 .back-button {
-    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas_new.psd?fileID=-1683369191&guid=ebc630cc37b7d5f4b87499fc707b5b8b&type=3#Menu_Atlas_new_20');
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1801998966&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_41');
     -unity-background-scale-mode: stretch-to-fill;
     -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&guid=1823e5ab5312e0e40972472a78991947&type=2#borsok SDF');
     font-size: 30px;
     color: rgba(236, 236, 236, 0.9);
     -unity-text-align: upper-center;
+}
+
+.back-button:active {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1523537116&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_43');
 }

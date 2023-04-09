@@ -17,16 +17,15 @@ namespace Game.UI
         private Button _buttonAbout;
         private Button _buttonQuit;
 
-        private ILocalizationService _localization;
         private PreviewView _preview;
         private VisualElement _menu;
+        private VisualElement _modal;
 
         private Settings _settings;
 
         [Inject]
-        public void Construct(ILocalizationService localisation, Settings settings)
+        public void Construct(Settings settings)
         {
-            _localization = localisation;
             _settings = settings;
         }
 
@@ -41,6 +40,7 @@ namespace Game.UI
             _buttonQuit = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_QUIT).Q<Button>();
 
             _menu = Content.Q<VisualElement>(LayoutNames.StartMenu.MENU);
+            _modal = Content.Q<VisualElement>(LayoutNames.StartMenu.MODAL);
 
             var previewElement = Content.Q<VisualElement>(LayoutNames.StartMenu.PREVIEW);
             _preview = new PreviewView(previewElement);
@@ -72,14 +72,16 @@ namespace Game.UI
 
         public override void Show()
         {
-            _buttonContinue.SetEnabled(ViewModel.IsSaveGameExists());
-            _preview.Hide();
+            _buttonContinue.SetDisplay(ViewModel.IsSaveGameExists());
+            ShowPreview();
 
             Content.SetDisplay(true);
         }
 
         public override void Hide()
-            => Content.SetDisplay(false);
+        {
+            Content.SetDisplay(false);
+        }
 
         public void Activate()
         {
@@ -119,10 +121,12 @@ namespace Game.UI
         private void QuitGame()
             => ViewModel.QuitGame();
 
-        // TODO: Refactor this in next build
         private void OpenArt()
-            => Application.OpenURL(
-                "https://drive.google.com/file/d/1j8xxQQ9xu0Hz4JW1MmNpHTwj4yJnndEe/view?usp=share_link");
+        {
+            ViewModel.OpenArt();
+            
+            _buttonArt.AddToClassList(LayoutNames.StartMenu.BUTTON_ART);
+        }
 
         private void OpenAbout()
         {
@@ -171,10 +175,13 @@ namespace Game.UI
             if (!_menu.enabledSelf)
                 return;
 
-            _preview.Hide();
+            ShowPreview();
         }
 
         #endregion
+
+        private void ShowPreview() 
+            => _preview.Show(_settings.preview.preview, _settings.preview.caption.GetLocalizedString());
 
         private static void RegisterButtonEvent(Button button, Action onClick,
             EventCallback<EventBase> onEnter, EventCallback<EventBase> onLeave)
@@ -185,7 +192,7 @@ namespace Game.UI
             button.RegisterCallback<FocusOutEvent>(onLeave);
 
             button.RegisterCallback<PointerEnterEvent>(onEnter);
-            button.RegisterCallback<PointerLeaveEvent>(onEnter);
+            button.RegisterCallback<PointerLeaveEvent>(onLeave);
         }
 
         private static void UnregisterButtonEvent(Button button, Action onClick,
@@ -211,6 +218,7 @@ namespace Game.UI
                 public Sprite preview;
             }
 
+            public Page preview;
             public Page newGame;
             public Page continueGame;
             public Page art;
