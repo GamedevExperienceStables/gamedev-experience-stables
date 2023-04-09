@@ -57,7 +57,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Grass:
-        m_Texture: {fileID: 2800000, guid: 7c336b3b2ecc2e648ae85a73fb3a537f, type: 3}
+        m_Texture: {fileID: 2800000, guid: fbbb6bbb9d3869c4e9cbda0884c281a2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GrassNormal:
