@@ -1,14 +1,15 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="SettingsControls" src="project://database/Assets/Game/UI/Uxml/Partial/SettingsControls.uxml?fileID=9197481963319205126&amp;guid=45231408b5ad4163b1e281ab4cc52d25&amp;type=3#SettingsControls" />
+    <ui:Template name="Dividers" src="project://database/Assets/Game/UI/Uxml/Partial/Dividers.uxml?fileID=9197481963319205126&amp;guid=974d6707c0e349a4eb03afc94780355b&amp;type=3#Dividers" />
     <Style src="project://database/Assets/Game/UI/Uss/SettingsScreenStyle.uss?fileID=7433441132597879392&amp;guid=3d76e5a4081ebca44b676b1d9a52d5eb&amp;type=3#SettingsScreenStyle" />
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center;">
         <ui:VisualElement name="header" style="background-color: rgba(0, 0, 0, 0);">
             <ui:Label tabindex="-1" text="Settings" display-tooltip-when-elided="true" name="label-settings-1" class="header-label" style="color: rgb(253, 253, 253); position: absolute; top: 1px; left: 1px;" />
             <ui:Label tabindex="-1" text="Settings" display-tooltip-when-elided="true" name="label-settings-2" class="header-label" style="display: flex;" />
         </ui:VisualElement>
-        <ui:VisualElement name="separator" style="background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=129328956&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_39&apos;); -unity-background-scale-mode: scale-and-crop; flex-grow: 0; width: 448px; height: 26px; flex-shrink: 1;" />
+        <ui:Instance template="Dividers" name="Dividers" style="flex-shrink: 0; width: 448px; margin-top: 10px;" />
         <ui:Instance template="SettingsControls" name="SettingsControls" style="width: 460px;" />
         <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); height: 20px;" />
-        <ui:Button text="Back" display-tooltip-when-elided="true" name="button-back" class="back-button" style="width: 116px; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-color: rgba(188, 188, 188, 0);" />
+        <ui:Button text="Back" display-tooltip-when-elided="true" name="button-back" class="primary-button" style="width: 116px; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-color: rgba(188, 188, 188, 0);" />
     </ui:VisualElement>
 </ui:UXML>

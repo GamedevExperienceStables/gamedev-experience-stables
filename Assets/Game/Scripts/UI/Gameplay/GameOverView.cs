@@ -13,7 +13,7 @@ namespace Game.UI
     [RequireComponent(typeof(UIDocument))]
     public class GameOverView : MonoBehaviour
     {
-        private const float DELAY = 0.8f;
+        private const float DELAY = 0.4f;
         
         private const float SHOW_DURATION = 1.2f;
         private const float HIDE_DURATION = 0.2f;

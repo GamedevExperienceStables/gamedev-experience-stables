@@ -290,8 +290,8 @@ TextureImporter:
       name: Menu_Atlas_39
       rect:
         serializedVersion: 2
-        x: 710
-        y: 157
+        x: 706
+        y: 156
         width: 488
         height: 29
       alignment: 0
@@ -317,7 +317,7 @@ TextureImporter:
         height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 99, y: 23, z: 98, w: 25}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -626,13 +626,13 @@ TextureImporter:
       name: Menu_Atlas_26
       rect:
         serializedVersion: 2
-        x: 379
+        x: 377
         y: 193
         width: 409
         height: 560
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 206, y: 286, z: 169, w: 256}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -647,13 +647,13 @@ TextureImporter:
       name: Menu_Atlas_27
       rect:
         serializedVersion: 2
-        x: 794
-        y: 193
+        x: 795
+        y: 192
         width: 402
         height: 560
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 83, y: 51, z: 36, w: 43}
+      border: {x: 199, y: 235, z: 185, w: 305}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -774,12 +774,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 50
-        y: 47
+        y: 46
         width: 279
         height: 77
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 97, y: 26, z: 106, w: 28}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -842,9 +842,9 @@ TextureImporter:
       Menu_Atlas_23: 687282172
       Menu_Atlas_29: -1885009778
       Menu_Atlas_9: 587115457
-      Menu_Atlas_31: 1777474290
       Menu_Atlas_35: 1995882461
       Menu_Atlas_12: 607602433
+      Menu_Atlas_31: 1777474290
       Menu_Atlas_8: -1870286374
       Menu_Atlas_18: 604808003
       Menu_Atlas_33: 1180887151

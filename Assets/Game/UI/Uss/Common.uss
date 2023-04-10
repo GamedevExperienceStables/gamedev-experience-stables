@@ -1,4 +1,23 @@
-﻿:root {
+:root {
     --font-heading: url('project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&guid=1823e5ab5312e0e40972472a78991947&type=2#borsok SDF');
-    --font-text:  url('project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&guid=9f296ab3b5e417845bc8de63c7b23c43&type=2#koliko-Regular SDF');    
+    --font-text: url('project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&guid=9f296ab3b5e417845bc8de63c7b23c43&type=2#koliko-Regular SDF');
+}
+
+.primary-button {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1801998966&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_41');
+    
+    -unity-font-definition: var(--font-heading);
+    font-size: 30px;
+    
+    min-width: 250px;    
+    padding: 28px 50px 22px;
+    border-width: 0;
+    
+    color: rgb(255, 255, 255);
+}
+
+.primary-button:active {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1523537116&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_43');
+    padding-top: 29px; 
+    padding-bottom: 21px;
 }
