@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Game.Actors.Health;
+using Game.Animations.Hero;
 using Game.Stats;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -25,11 +26,13 @@ namespace Game.Actors
     {
         private DeathController _deathController;
         private IActorInputController _inputController;
+        private ActorAnimator _animator;
 
         protected override void OnInitAbility()
         {
             _deathController = Owner.GetComponent<DeathController>();
             _inputController = Owner.GetComponent<IActorInputController>();
+            _animator = Owner.GetComponent<ActorAnimator>();
         }
 
         public override bool CanActivateAbility()
@@ -64,7 +67,10 @@ namespace Game.Actors
             if (Definition.ReviveFeedback)
                 Object.Instantiate(Definition.ReviveFeedback, Owner.Transform.position, Quaternion.identity);
             
+            _animator.SetAnimation(AnimationNames.Death, false);
+            _animator.SetAnimation(AnimationNames.Revive, true);
             await UniTask.Delay(TimeSpan.FromSeconds(Definition.AnimationDuration));
+            _animator.SetAnimation(AnimationNames.Revive, false);
         }
 
         private void ResetStats()
