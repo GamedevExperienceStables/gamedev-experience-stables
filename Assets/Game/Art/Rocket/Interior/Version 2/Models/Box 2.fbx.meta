@@ -3,7 +3,17 @@ guid: a859f09d600ad174e8efea322e3b6aab
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Yashik
+    second: {fileID: 2100000, guid: 035e2eb871aac124295b14bb99f529ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Zaklepki
+    second: {fileID: 2100000, guid: 1f9cea3a0889d3c4db64d29409c48454, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
