@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7aebf05ab77df1a44bb2475f50b23c44
+guid: 813eb971598e8864cb82ee6e668a5818
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Hero_Damage
+      name: Hero_Resurrection
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 22
+      lastFrame: 26
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
