@@ -13,5 +13,6 @@ namespace Game.Animations.Hero
         public static readonly int Death = Animator.StringToHash("IsDied");
         public static readonly int Damage = Animator.StringToHash("IsDamaged");
         public static readonly int Dash = Animator.StringToHash("IsDash");
+        public static readonly int Revive = Animator.StringToHash("IsRevived");
     }
 }
