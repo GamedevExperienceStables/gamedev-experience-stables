@@ -40,6 +40,9 @@ namespace Game.Animations.Hero
             Vector3 direction = movementController.GetMovementDirection();
             _animator.SetAnimation(AnimationNames.XCoordinate, direction.x);
             _animator.SetAnimation(AnimationNames.YCoordinate, direction.z);
+            
+            float speed = new Vector3(direction.x, 0, direction.z).sqrMagnitude;
+            _animator.SetAnimation(AnimationNames.Speed, speed);
         }
 
         private void OnDiedAnimation()
