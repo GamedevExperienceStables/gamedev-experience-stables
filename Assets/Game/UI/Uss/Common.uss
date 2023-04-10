@@ -18,6 +18,4 @@
 
 .primary-button:active {
     background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1523537116&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_43');
-    padding-top: 29px; 
-    padding-bottom: 21px;
 }

@@ -1,6 +1,7 @@
 ﻿using Game.Actors;
 using Game.Audio;
 using Game.Cameras;
+using Game.Dialog;
 using Game.Enemies;
 using Game.GameFlow;
 using Game.Hero;
@@ -86,21 +87,32 @@ namespace Game.LifetimeScopes
             builder.Register<GameplayGameOver>(Lifetime.Scoped);
             builder.Register<GameplayInventory>(Lifetime.Scoped);
             builder.Register<LocationController>(Lifetime.Scoped);
-            builder.Register<LocationMarkers>(Lifetime.Singleton);
             builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
+            
+            builder.Register<LocationMarkers>(Lifetime.Singleton);
+            builder.Register<DialogService>(Lifetime.Singleton);
 
             builder.Register<GameplayPrefabFactory>(Lifetime.Scoped);
         }
 
         private static void RegisterInteractions(IContainerBuilder builder)
         {
+            builder.Register<LocalizationInteraction>(Lifetime.Singleton);
+            
             builder.Register<InteractionService>(Lifetime.Scoped);
             builder.Register<InteractionFactory>(Lifetime.Scoped);
 
             builder.Register<TransitionToLocationInteraction>(Lifetime.Transient);
-            builder.Register<RocketContainerInteraction>(Lifetime.Transient);
             builder.Register<SaveGameInteraction>(Lifetime.Transient);
             builder.Register<LevelExitInteraction>(Lifetime.Transient);
+            
+            RegisterRocketContainer(builder);
+        }
+
+        private static void RegisterRocketContainer(IContainerBuilder builder)
+        {
+            builder.Register<RocketContainerInteraction>(Lifetime.Transient);
+            builder.Register<RocketContainerHandler>(Lifetime.Transient);
         }
 
         private static void RegisterFactories(IContainerBuilder builder)
@@ -120,6 +132,9 @@ namespace Game.LifetimeScopes
             
             builder.Register<InteractionView>(Lifetime.Scoped);
             builder.Register<InteractionViewModel>(Lifetime.Scoped);
+
+            builder.Register<DialogView>(Lifetime.Scoped);
+            builder.Register<DialogViewModel>(Lifetime.Scoped);
             
             builder.Register<SavingView>(Lifetime.Scoped);
             builder.Register<SavingViewModel>(Lifetime.Scoped);

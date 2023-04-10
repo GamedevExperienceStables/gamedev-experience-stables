@@ -87,6 +87,7 @@ namespace Game.LifetimeScopes
             builder.Register<GameInputControlsAdapter>(Lifetime.Singleton);
 
             builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
+            builder.Register<InputBindings>(Lifetime.Singleton);
             builder.Register<InputControlGameplay>(Lifetime.Singleton).As<IInputControlGameplay>();
             builder.Register<InputControlMenu>(Lifetime.Singleton).As<IInputControlMenu>();
         }
@@ -136,6 +137,7 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.UiSettings.StartMenu);
             builder.RegisterInstance(gameSettings.UiSettings.PauseMenu);
             builder.RegisterInstance(gameSettings.UiSettings.GameOver);
+            builder.RegisterInstance(gameSettings.UiSettings.Interaction);
         }
 
         private static void RegisterUi(IContainerBuilder builder)

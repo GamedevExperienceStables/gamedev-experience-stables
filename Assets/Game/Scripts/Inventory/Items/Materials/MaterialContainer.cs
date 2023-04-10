@@ -21,7 +21,7 @@ namespace Game.Inventory
         public void UnSubscribe(MaterialChangedEvent callback)
             => ValueChanged -= callback;
 
-        public IReadOnlyMaterialData GetMaterialData(MaterialDefinition definition) 
+        public IReadOnlyMaterialData GetMaterialData(MaterialDefinition definition)
             => _container[definition];
 
         public void Create(MaterialDefinition material, int total, int current)
@@ -33,11 +33,11 @@ namespace Game.Inventory
                 SetValue(material.Definition, 0);
         }
 
-        public int GetCurrentValue(MaterialDefinition definition)
-            => _container[definition].Current;
+        public int GetCurrentValue(MaterialDefinition definition) 
+            => _container.TryGetValue(definition, out MaterialData material) ? material.Current : 0;
 
         public int GetTotalValue(MaterialDefinition definition)
-            => _container[definition].Total;
+            => _container.TryGetValue(definition, out MaterialData material) ? material.Total : 0;
 
         public void Increase(MaterialDefinition definition)
             => SetValue(definition, _container[definition].Current + 1);
@@ -53,18 +53,26 @@ namespace Game.Inventory
 
             int oldValue = material.Current;
             material.Current = newValue;
-
+#if UNITY_EDITOR
             Debug.Log($"[MATERIAL] {Id} | {material.Definition.name}: {oldValue} -> {material.Current}");
+#endif
             ValueChanged?.Invoke(new MaterialChangedData(material.Definition, oldValue, material.Current));
         }
 
         public bool IsFull(MaterialDefinition definition)
         {
-            MaterialData material = _container[definition];
-            return material.Current >= material.Total;
+            if (_container.TryGetValue(definition, out MaterialData material))
+                return material.Current >= material.Total;
+
+            return false;
         }
 
         public bool IsEmpty(MaterialDefinition definition)
-            => _container[definition].Current <= 0;
+        {
+            if (_container.TryGetValue(definition, out MaterialData material))
+                return material.Current <= 0;
+
+            return true;
+        }
     }
 }

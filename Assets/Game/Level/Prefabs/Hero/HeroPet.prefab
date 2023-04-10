@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6919951925965949569}
   - component: {fileID: 1161956552160111450}
   - component: {fileID: 5440446495940607408}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,6 +191,26 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 4a998b4bf40a8a84d87b9c9eb19315d6, type: 2}
+    - target: {fileID: -8189615311361803728, guid: bc97a27f171df4f4dbb7ebddedeed6f7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6814619534552706175, guid: bc97a27f171df4f4dbb7ebddedeed6f7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -5362795699178902145, guid: bc97a27f171df4f4dbb7ebddedeed6f7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4738768961973539779, guid: bc97a27f171df4f4dbb7ebddedeed6f7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -3463508154348114724, guid: bc97a27f171df4f4dbb7ebddedeed6f7,
         type: 3}
       propertyPath: m_CastShadows
@@ -201,16 +221,46 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4a998b4bf40a8a84d87b9c9eb19315d6, type: 2}
+    - target: {fileID: -2500643366329769163, guid: bc97a27f171df4f4dbb7ebddedeed6f7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 424505540561932034, guid: bc97a27f171df4f4dbb7ebddedeed6f7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bc97a27f171df4f4dbb7ebddedeed6f7,
         type: 3}
       propertyPath: m_Name
       value: HeroPet
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bc97a27f171df4f4dbb7ebddedeed6f7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499821522399243590, guid: bc97a27f171df4f4dbb7ebddedeed6f7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: bc97a27f171df4f4dbb7ebddedeed6f7,
         type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 79127ef7f7009db48b4ec439d929faf2, type: 2}
+    - target: {fileID: 6722443881877405157, guid: bc97a27f171df4f4dbb7ebddedeed6f7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166328241000124115, guid: bc97a27f171df4f4dbb7ebddedeed6f7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

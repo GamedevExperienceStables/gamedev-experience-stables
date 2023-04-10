@@ -13,5 +13,8 @@ namespace Game.Inventory
         void TransferToContainer(MaterialDefinition levelMaterial);
 
         IReadOnlyMaterials Materials { get; }
+        
+        bool IsContainerFull(MaterialDefinition levelMaterial);
+        bool IsBagEmpty(MaterialDefinition levelMaterial);
     }
 }
