@@ -1,12 +1,22 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Dividers" src="project://database/Assets/Game/UI/Uxml/Partial/Dividers.uxml?fileID=9197481963319205126&amp;guid=974d6707c0e349a4eb03afc94780355b&amp;type=3#Dividers" />
+    <ui:Template name="MenuButton" src="project://database/Assets/Game/UI/Uxml/Partial/MenuButton.uxml?fileID=9197481963319205126&amp;guid=9213202493084284480cab6b7c7100d9&amp;type=3#MenuButton" />
+    <Style src="project://database/Assets/Game/UI/Uss/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=8cedbaaf434e4b94f8c50cc514ad6cf7&amp;type=3#MainMenuStyle" />
     <ui:VisualElement style="flex-grow: 1;">
         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center;">
-            <ui:Label tabindex="-1" text="Paused" display-tooltip-when-elided="true" enable-rich-text="true" style="color: rgb(255, 255, 255); font-size: 46px; -unity-font-style: bold;" />
-            <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 23px;" />
-            <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 244px;">
-                <ui:Button text="Resume" display-tooltip-when-elided="true" name="button-resume" />
-                <ui:Button text="Settings" display-tooltip-when-elided="true" name="button-settings" />
-                <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="button-exit" />
+            <ui:VisualElement name="pause-menu-container" style="background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-100320597&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_27&apos;); padding-top: 76px; padding-bottom: 120px; padding-left: 144px; padding-right: 144px;">
+                <ui:VisualElement name="background" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center; position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
+                    <ui:VisualElement name="bg-Img" style="background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1995882461&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_35&apos;); width: 328px; height: 356px; opacity: 0.2;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); margin-bottom: 60px;">
+                    <ui:Label tabindex="-1" text="Paused" display-tooltip-when-elided="true" enable-rich-text="true" style="color: rgb(155, 89, 199); font-size: 70px; -unity-font-style: normal; align-items: center; -unity-text-align: upper-center; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&amp;guid=1823e5ab5312e0e40972472a78991947&amp;type=2#borsok SDF&apos;);" />
+                    <ui:Instance template="Dividers" name="Dividers" style="width: 450px; margin-top: 15px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="menu" style="background-color: rgba(0, 0, 0, 0);">
+                    <ui:Instance template="MenuButton" name="button-resume" />
+                    <ui:Instance template="MenuButton" name="button-settings" />
+                    <ui:Instance template="MenuButton" name="button-exit" />
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); align-items: center;">

@@ -1,4 +1,5 @@
-﻿using Game.Utils;
+﻿using Game.Localization;
+using Game.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
@@ -11,6 +12,12 @@ namespace Game.UI
         private VisualElement _root;
         protected VisualElement Content { get; private set; }
         
+        protected ILocalizationService _localization;
+        
+        [Inject]
+        public void Construct(ILocalizationService localisation) 
+            => _localization = localisation;
+
         private void Awake()
         {
             _root = GetComponent<UIDocument>().rootVisualElement;

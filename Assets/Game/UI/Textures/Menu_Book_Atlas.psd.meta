@@ -123,7 +123,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 930
+        y: 920
         width: 1655
         height: 1005
       alignment: 0
@@ -133,8 +133,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da668f33f20fca84a820d22588b18f84
-      internalID: 434660316
+      spriteID: 7cc0d67d24f0fc3438e121d4cd52dda7
+      internalID: 1443071890
       vertices: []
       indices: 
       edges: []
@@ -143,7 +143,7 @@ TextureImporter:
       name: Menu_Book_Atlas_1
       rect:
         serializedVersion: 2
-        x: 10
+        x: 17
         y: 35
         width: 1325
         height: 875
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b19447c971a0494a97f4983355f6c70
-      internalID: 1295037022
+      spriteID: 1d152caa636bd0a4696ed302654eef3e
+      internalID: 1562559283
       vertices: []
       indices: 
       edges: []
@@ -175,8 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b731ef06b4fcd64b85be6233ee20a8e
-      internalID: -1583492365
+      spriteID: cfe8ca9394612c045a0dfc246730a09c
+      internalID: 1036747490
       vertices: []
       indices: 
       edges: []
@@ -185,9 +185,9 @@ TextureImporter:
       name: Menu_Book_Atlas_3
       rect:
         serializedVersion: 2
-        x: 1387
+        x: 1382
         y: 396
-        width: 159
+        width: 166
         height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -196,29 +196,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a953457d19578eb458e041e429c28755
-      internalID: -266068376
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Menu_Book_Atlas_4
-      rect:
-        serializedVersion: 2
-        x: 1387
-        y: 157
-        width: 165
-        height: 219
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e3a9272015f189e4681aff5c677af7e9
-      internalID: -936242337
+      spriteID: 63bc1a8af51c8ff46882330b57d8c878
+      internalID: 486701466
       vertices: []
       indices: 
       edges: []
@@ -226,7 +205,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 1380200d12b4949488c95d02a731f308
+    spriteID: 4f2b71cfbf2500f4189d38c748630cad
     internalID: 0
     vertices: []
     indices: 
@@ -234,11 +213,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Menu_Book_Atlas_4: -936242337
-      Menu_Book_Atlas_2: -1583492365
-      Menu_Book_Atlas_3: -266068376
-      Menu_Book_Atlas_1: 1295037022
-      Menu_Book_Atlas_0: 434660316
+      Menu_Book_Atlas_2: 1036747490
+      Menu_Book_Atlas_3: 486701466
+      Menu_Book_Atlas_1: 1562559283
+      Menu_Book_Atlas_0: 1443071890
   mipmapLimitGroupName: 
   pSDRemoveMatte: 1
   userData: 

@@ -122,19 +122,19 @@ TextureImporter:
       name: Menu_Background_Atlas_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 55
-        width: 1902
-        height: 1061
+        x: 9
+        y: 6
+        width: 1923
+        height: 1080
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8b0b464dfc8f004485610ebee046454
-      internalID: -833552155
+      spriteID: 15188c075e8cb4049abc452c2c9f1313
+      internalID: 1238703295
       vertices: []
       indices: 
       edges: []
@@ -143,19 +143,19 @@ TextureImporter:
       name: Menu_Background_Atlas_1
       rect:
         serializedVersion: 2
-        x: 1962
-        y: 599
-        width: 487
-        height: 526
+        x: 1940
+        y: 603
+        width: 346
+        height: 461
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0480128479cf5754aa71415cb5c2d5e5
-      internalID: 2123481622
+      spriteID: 3e7fb904af22b1e45aba3d3c18be6cad
+      internalID: -1575858355
       vertices: []
       indices: 
       edges: []
@@ -164,19 +164,19 @@ TextureImporter:
       name: Menu_Background_Atlas_2
       rect:
         serializedVersion: 2
-        x: 2480
-        y: 580
-        width: 481
-        height: 543
+        x: 2336
+        y: 826
+        width: 222
+        height: 260
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a30869849c4387845b1cb9b20bbb48dd
-      internalID: -385998350
+      spriteID: d667bcfa7103570478f197a1bd36011a
+      internalID: 1607789654
       vertices: []
       indices: 
       edges: []
@@ -185,19 +185,19 @@ TextureImporter:
       name: Menu_Background_Atlas_3
       rect:
         serializedVersion: 2
-        x: 2986
-        y: 583
-        width: 319
-        height: 500
+        x: 1938
+        y: 83
+        width: 350
+        height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0312fdc54798448418747f79e0824dc9
-      internalID: -19238977
+      spriteID: 2df61b07bbc2d8e4490e583ef8a0aed2
+      internalID: -848115910
       vertices: []
       indices: 
       edges: []
@@ -206,19 +206,19 @@ TextureImporter:
       name: Menu_Background_Atlas_4
       rect:
         serializedVersion: 2
-        x: 1947
-        y: 188
-        width: 290
-        height: 386
+        x: 2298
+        y: 543
+        width: 232
+        height: 267
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b2fcf9d214601f41a86e26876e65414
-      internalID: 1932507360
+      spriteID: 11fcc1e1db79a3547bc25dd8fc70884b
+      internalID: -1181512284
       vertices: []
       indices: 
       edges: []
@@ -227,19 +227,19 @@ TextureImporter:
       name: Menu_Background_Atlas_5
       rect:
         serializedVersion: 2
-        x: 2272
-        y: 171
-        width: 387
-        height: 386
+        x: 2335
+        y: 323
+        width: 188
+        height: 199
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 678209c0704fe3d458254d9399576b51
-      internalID: -1700437063
+      spriteID: 293da82d1fd6b684e85fcd1d5350bb8e
+      internalID: 729183272
       vertices: []
       indices: 
       edges: []
@@ -248,61 +248,19 @@ TextureImporter:
       name: Menu_Background_Atlas_6
       rect:
         serializedVersion: 2
-        x: 2680
-        y: 356
-        width: 202
-        height: 191
+        x: 2301
+        y: 75
+        width: 213
+        height: 219
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 745c1485088ae694b88de526ab507822
-      internalID: -911050114
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Menu_Background_Atlas_7
-      rect:
-        serializedVersion: 2
-        x: 2694
-        y: 153
-        width: 164
-        height: 169
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 288bd3cb76eb5e0419a36bb899e72524
-      internalID: -68543055
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Menu_Background_Atlas_8
-      rect:
-        serializedVersion: 2
-        x: 2878
-        y: 136
-        width: 178
-        height: 201
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 430e603ba6d6a75479543fc70080e131
-      internalID: -236880403
+      spriteID: 2bebdaeaf456df44bbb49d8a5a0a856b
+      internalID: -208653865
       vertices: []
       indices: 
       edges: []
@@ -310,7 +268,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: ceee059e185a86f44a0db046f783a52a
+    spriteID: bff15c7ad85ea9e41a54b49ce90b63a1
     internalID: 0
     vertices: []
     indices: 
@@ -318,15 +276,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Menu_Background_Atlas_6: -911050114
-      Menu_Background_Atlas_3: -19238977
-      Menu_Background_Atlas_7: -68543055
-      Menu_Background_Atlas_8: -236880403
-      Menu_Background_Atlas_0: -833552155
-      Menu_Background_Atlas_1: 2123481622
-      Menu_Background_Atlas_5: -1700437063
-      Menu_Background_Atlas_2: -385998350
-      Menu_Background_Atlas_4: 1932507360
+      Menu_Background_Atlas_6: -208653865
+      Menu_Background_Atlas_3: -848115910
+      Menu_Background_Atlas_0: 1238703295
+      Menu_Background_Atlas_1: -1575858355
+      Menu_Background_Atlas_5: 729183272
+      Menu_Background_Atlas_2: 1607789654
+      Menu_Background_Atlas_4: -1181512284
   mipmapLimitGroupName: 
   pSDRemoveMatte: 1
   userData: 

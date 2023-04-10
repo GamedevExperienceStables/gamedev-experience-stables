@@ -37,6 +37,7 @@
             
             public const string MENU = "menu";
             public const string PAGES = "pages";
+            public const string MODAL = "menu-modal";
             
             public const string PREVIEW = "preview";
             public const string PREVIEW_IMAGE = "image";
@@ -105,6 +106,9 @@
         public static class GameOver
         {
             public const string CONTAINER = "game-over-screen";
+            
+            public const string CAPTION = "caption";
+            public const string DESCRIPTION = "description";
             
             public const string BUTTON_RESTART = "button-restart";
             public const string BUTTON_MAIN_MENU = "button-exit";
