@@ -1,9 +1,9 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
 using FMODUnity;
 using Game.Animations.Hero;
 using Game.Audio;
 using Game.Stats;
+using Game.TimeManagement;
 using Game.Weapons;
 using NaughtyAttributes;
 using UnityEngine;
@@ -16,9 +16,9 @@ namespace Game.Actors
     {
         [SerializeField]
         private EventReference fireSfx;
-        
-        [SerializeField]
-        private bool isCursorInvisible;
+
+        [SerializeField, Expandable]
+        private TargetingDefinition targeting;
 
         [SerializeField, Expandable]
         private ProjectileDefinition projectile;
@@ -27,35 +27,48 @@ namespace Game.Actors
         private int manaCost;
 
         [SerializeField, Min(0)]
-        private float castTime = 0.5f;
+        private float fireTime = 0.1f;
+
+        [SerializeField, Min(0)]
+        private float castTime = 0.4f;
 
         public ProjectileDefinition Projectile => projectile;
 
         public int ManaCost => manaCost;
 
         public float CastTime => castTime;
+        public float FireTime => fireTime;
 
         public EventReference FireSfx => fireSfx;
-        public bool IsCursorInvisible => isCursorInvisible;
+
+        public TargetingDefinition Targeting => targeting;
     }
 
     public class ProjectileAbility : ActorAbility<ProjectileAbilityDefinition>
     {
-        private readonly FmodService _audio;
         private const int POOL_MAX_SIZE = 20;
+        private const float BACKWARD_THRESHOLD = 0.2f;
+
+        private readonly FmodService _audio;
+        private readonly TimerPool _timers;
+
         private readonly ObjectPool<Projectile> _projectilePool;
 
         private Transform _spawnPoint;
         private bool _hasMana;
         private ActorAnimator _animator;
-        private bool _isAnimationEnded;
 
-        private AimAbility _aim;
-        private bool _hasAim;
+        private IActorInputController _input;
 
-        public ProjectileAbility(ProjectileFactory projectileFactory, FmodService audio)
+        private TimerUpdatable _fireTimer;
+        private TimerUpdatable _castTimer;
+        private Vector3 _targetPosition;
+
+        public ProjectileAbility(ProjectileFactory projectileFactory, FmodService audio, TimerPool timers)
         {
             _audio = audio;
+            _timers = timers;
+
             _projectilePool = new ObjectPool<Projectile>(
                 createFunc: () =>
                 {
@@ -67,12 +80,6 @@ namespace Game.Actors
                 maxSize: POOL_MAX_SIZE);
         }
 
-        protected override void OnDestroyAbility()
-        {
-            _projectilePool.Clear();
-            _projectilePool.Dispose();
-        }
-
         private void OnCompleteProjectile(Projectile projectile)
             => _projectilePool.Release(projectile);
 
@@ -81,61 +88,136 @@ namespace Game.Actors
             _hasMana = Owner.HasStat(CharacterStats.Mana);
             var view = Owner.GetComponent<ProjectileAbilityView>();
             _spawnPoint = view.SpawnPoint;
+            _input = Owner.GetComponent<IActorInputController>();
             _animator = Owner.GetComponent<ActorAnimator>();
-            _isAnimationEnded = true;
 
-            _hasAim = Owner.TryGetAbility(out _aim);
+            _fireTimer = _timers.GetTimer(TimeSpan.FromSeconds(Definition.FireTime), OnFire);
+            _castTimer = _timers.GetTimer(TimeSpan.FromSeconds(Definition.CastTime), OnComplete);
+        }
+
+        protected override void OnDestroyAbility()
+        {
+            _projectilePool.Clear();
+            _projectilePool.Dispose();
+
+            _timers.ReleaseTimer(_fireTimer);
+            _timers.ReleaseTimer(_castTimer);
         }
 
         public override bool CanActivateAbility()
         {
-            if (!_isAnimationEnded)
-                return false;
-            
             if (IsActive)
                 return false;
 
-            if (!_hasMana)
-                return true;
+            if (_hasMana)
+                return Owner.GetCurrentValue(CharacterStats.Mana) >= Definition.ManaCost;
 
-            return Owner.GetCurrentValue(CharacterStats.Mana) >= Definition.ManaCost;
+            return true;
         }
 
-        protected override async void OnActivateAbility()
+        protected override void OnActivateAbility()
         {
             if (_hasMana)
                 Owner.ApplyModifier(CharacterStats.Mana, -Definition.ManaCost);
-        
-            _animator.SetAnimation(AnimationNames.RangeAttack, true);
-            _isAnimationEnded = false;
-            bool isEnded = await WaitAnimationEnd();
-            if (isEnded)
-            {
-                EndAbility();
-                return;
-            }
-            _animator.SetAnimation(AnimationNames.RangeAttack, false);
-            FireProjectile();
-            EndAbility();
+
+            if (Definition.Targeting.CollectTargetPosition is TargetCollecting.OnActivate)
+                _targetPosition = GetTargetPosition();
+            
+            _fireTimer.Start();
+            _castTimer.Start();
+            
+            _input.SetBlock(InputBlock.Rotation);
+
+            SetAnimation(true);
         }
+
+        private void OnFire()
+        {
+            if (Definition.Targeting.CollectTargetPosition is TargetCollecting.OnFire)
+                _targetPosition = GetTargetPosition();
+
+            PreventBackwardFiring();
+
+            FireProjectile();
+            
+            SetAnimation(false);
+        }
+
+        private void PreventBackwardFiring()
+        {
+            Vector3 spawnPoint = _spawnPoint.position;
+            Vector3 spawnPointForward = _spawnPoint.forward;
+            Vector3 targetDirection = (_targetPosition - spawnPoint).normalized;
+
+            float dot = Vector3.Dot(targetDirection, spawnPointForward);
+            if (dot < BACKWARD_THRESHOLD)
+                _targetPosition = spawnPoint + spawnPointForward;
+        }
+
+        private void OnComplete()
+            => EndAbility();
+
+        protected override void OnEndAbility(bool wasCancelled)
+        {
+            _fireTimer.Stop();
+            _castTimer.Stop();
+            
+            SetAnimation(false);
+            
+            _input.RemoveBlock(InputBlock.Rotation);
+        }
+
+        private void SetAnimation(bool isActive)
+            => _animator.SetAnimation(AnimationNames.RangeAttack, isActive);
 
         private void FireProjectile()
         {
             _projectilePool.Get(out Projectile projectile);
 
-            Vector3 targetPosition = _hasAim ? _aim.GetRealPosition() : Vector3.zero;
-            projectile.Fire(_spawnPoint, targetPosition);
+            projectile.Fire(_spawnPoint, _targetPosition);
 
             if (!Definition.FireSfx.IsNull)
                 _audio.PlayOneShot(Definition.FireSfx, Owner.Transform);
         }
 
-        private async UniTask<bool> WaitAnimationEnd()
+        private Vector3 GetTargetPosition()
         {
-            bool isEnded = await UniTask.Delay(TimeSpan.FromSeconds(Definition.CastTime), ignoreTimeScale: false, 
-                cancellationToken: Owner.CancellationToken()).SuppressCancellationThrow();
-            _isAnimationEnded = true;
-            return isEnded;
+            TargetingDefinition targeting = Definition.Targeting;
+
+            Vector3 position = Owner.Transform.position;
+            bool groundedPosition = targeting.RelativeToGround;
+            Vector3 targetPosition = _input.GetTargetPosition(groundedPosition);
+
+            Vector3 origin = _spawnPoint.position;
+            if (groundedPosition) 
+                origin.y = position.y;
+
+            if (!targeting.AllowTargetAbove)
+                targetPosition.y = Mathf.Min(targetPosition.y, origin.y);
+
+            float sqrDistance = (targetPosition - position).sqrMagnitude;
+            bool allowTargetBelow = targeting.AllowTargetBelow;
+            float minDistanceBelow = targeting.MinDistanceToTargetBelow;
+            if (allowTargetBelow && minDistanceBelow > 0)
+            {
+                float sqrMinDistance = minDistanceBelow * minDistanceBelow;
+                allowTargetBelow = sqrDistance >= sqrMinDistance;
+            }
+
+            if (!allowTargetBelow)
+                targetPosition.y = Mathf.Max(targetPosition.y, origin.y);
+            
+            float minDistanceToTarget = targeting.MinDistanceToTarget;
+            if (minDistanceToTarget > 0)
+            {
+                float sqrMinDistance = minDistanceToTarget * minDistanceToTarget;
+                if (sqrMinDistance >= sqrDistance)
+                    targetPosition = origin + _spawnPoint.forward * minDistanceToTarget;
+            }
+
+            targetPosition += targeting.TargetPositionOffset;
+
+            return targetPosition;
         }
     }
 }

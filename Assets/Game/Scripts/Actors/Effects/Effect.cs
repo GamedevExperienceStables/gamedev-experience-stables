@@ -5,55 +5,71 @@ namespace Game.Actors
 {
     public abstract class Effect : IRuntimeInstance<EffectDefinition>
     {
-        private GameObject _view;
-
-        public bool IsDone { get; private set; }
+        public bool IsCanceled { get; private set; }
 
         public EffectDefinition Definition { get; private set; }
         public object Instigator { get; set; }
 
+        protected bool IsSuppressed { get; private set; }
+
         public virtual void OnCreate(EffectDefinition definition)
-            => Definition = definition;
+        {
+            Definition = definition;
+
+            Validate();
+        }
 
         public void Execute(IActorController target)
         {
 #if UNITY_EDITOR
-            Debug.Log($"[Effect] Execute: {Definition.name} => {target.Transform.name}");
+            Debug.Log($"[Effect] Execute: {Definition.name} | {target.Transform.name}");
 #endif
-            AttachView(target);
             OnExecute(target);
         }
 
         public void Cancel()
         {
-            if (IsDone)
+            if (IsCanceled)
                 return;
-            
+
 #if UNITY_EDITOR
             Debug.Log($"[Effect] Cancel: {Definition.name}");
 #endif
 
-            IsDone = true;
-
-            DestroyView();
+            IsCanceled = true;
             OnCancel();
         }
 
-        private void AttachView(IActorController target)
+        private void Validate()
         {
-            if (Definition.Status.StatusPrefab)
-                _view = Object.Instantiate(Definition.Status.StatusPrefab, target.Transform, false);
-        }
-
-        private void DestroyView()
-        {
-            if (_view)
-                Object.Destroy(_view);
+            if (Definition.EffectType == EffectDuration.Limited)
+            {
+                float duration = Definition.Duration;
+                Debug.Assert(duration > 0,
+                    $"{Definition.name}: type is {nameof(EffectDuration.Limited)} and {nameof(duration)} must be greater than 0",
+                    context: Definition);
+            }
         }
 
         protected abstract void OnExecute(IActorController target);
 
         protected abstract void OnCancel();
+
+        public void Suppress()
+        {
+#if UNITY_EDITOR
+            Debug.Log($"[Effect] Suppress: {Definition.name}");
+#endif
+            IsSuppressed = true;
+        }
+
+        public void UnSuppress()
+        {
+#if UNITY_EDITOR
+            Debug.Log($"[Effect] Unsuppress: {Definition.name}");
+#endif
+            IsSuppressed = false;
+        }
     }
 
     public abstract class Effect<T> : Effect where T : EffectDefinition

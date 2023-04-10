@@ -1,8 +1,9 @@
 ﻿using Game.Animations.Hero;
 using Game.Cameras;
 using Game.CursorManagement;
-using Game.Hero;
 using Game.Stats;
+using Game.Utils;
+using Game.Weapons;
 using UnityEngine;
 using VContainer;
 
@@ -14,24 +15,38 @@ namespace Game.Actors
         [SerializeField]
         private StatModifier speedModifier;
 
+        [SerializeField]
+        private Reticle groundReticle;
+
         public StatModifier SpeedModifier => speedModifier;
+
+        public Reticle GroundReticle => groundReticle;
     }
 
     public class AimAbility : ActorAbility<AimAbilityDefinition>
     {
         private readonly FollowSceneCamera _followCamera;
         private readonly CursorService _cursor;
-        
+        private readonly GameplayPrefabFactory _prefabFactory;
+
         private ActorAnimator _animator;
-        private HeroInputController _heroInputController;
-        private bool _isHero;
         private ActiveSkillAbility _activeSkillAbility;
 
+        private Reticle _reticle;
+        private IActorInputController _input;
+
         [Inject]
-        public AimAbility(FollowSceneCamera followCamera, CursorService cursor)
+        public AimAbility(FollowSceneCamera followCamera, CursorService cursor, GameplayPrefabFactory prefabFactory)
         {
             _followCamera = followCamera;
             _cursor = cursor;
+            _prefabFactory = prefabFactory;
+        }
+
+        public void UpdateState()
+        {
+            if (IsActive)
+                UpdateTargeting();
         }
 
         public override bool CanActivateAbility()
@@ -40,48 +55,57 @@ namespace Game.Actors
         protected override void OnInitAbility()
         {
             _animator = Owner.GetComponent<ActorAnimator>();
-            _heroInputController = Owner.GetComponent<HeroInputController>();
             _activeSkillAbility = Owner.GetAbility<ActiveSkillAbility>();
-            _isHero = _heroInputController;
+            _input = Owner.GetComponent<IActorInputController>();
+
+            CreateGroundReticle();
         }
-        
+
         protected override void OnActivateAbility()
         {
-            HandleTargeting();
+            UpdateTargeting();
 
             _animator.SetAnimation(AnimationNames.Aiming, true);
             _followCamera.ZoomOut();
             Owner.AddModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
         }
 
-        private void HandleTargeting()
-        {
-            var def = _activeSkillAbility.ActiveAbility.Definition as ProjectileAbilityDefinition;
-            if (def && def.IsCursorInvisible)
-            {
-                _cursor.SetVisible(false);
-                _heroInputController.SetTargetingVisible(true);
-            }
-            else
-            {
-                _cursor.SetVisible(true);
-                _cursor.SetAlternative();
-                _heroInputController.SetTargetingVisible(false);
-            }
-        }
-
         protected override void OnEndAbility(bool wasCancelled)
         {
+            _reticle.Hide();
             _cursor.Reset();
-            
+
             _animator.SetAnimation(AnimationNames.Aiming, false);
             _followCamera.ZoomReset();
             Owner.RemoveModifier(CharacterStats.MovementSpeed, Definition.SpeedModifier);
         }
-        
-        public Vector3 GetRealPosition()
+
+        private void UpdateTargeting()
         {
-            return _isHero ? _heroInputController.GetRealMousePosition() : default;
+            if (_activeSkillAbility.IsGroundTargeting)
+            {
+                _reticle.Show();
+                _cursor.SetVisible(false);
+            }
+            else
+            {
+                _reticle.Hide();
+                _cursor.SetVisible(true);
+                _cursor.SetAlternative();
+            }
+        }
+
+        private void CreateGroundReticle()
+        {
+            _reticle = _prefabFactory.Create(Definition.GroundReticle);
+            _reticle.Init(OnUpdatePositionReticle);
+            _reticle.Hide();
+        }
+
+        private void OnUpdatePositionReticle()
+        {
+            Vector3 targetPosition = _input.GetTargetPosition(grounded: true);
+            _reticle.SetPosition(targetPosition);
         }
     }
 }

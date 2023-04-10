@@ -8,6 +8,7 @@ namespace Game.Input
         Vector2 SecondaryMovement { get; }
         Vector2 MousePosition { get; }
         InputButton FireButton { get; }
+        InputButton MeleeButton { get; }
         InputButton AimButton { get; }
         InputButton MenuButton { get; }
         InputButton InventoryButton { get; }

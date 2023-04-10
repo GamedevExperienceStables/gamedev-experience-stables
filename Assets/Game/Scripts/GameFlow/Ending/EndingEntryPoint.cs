@@ -23,11 +23,11 @@ namespace Game.GameFlow.Ending
         {
             _input.ReplaceState(InputSchemeGame.Menu);
             
-            _menuControl.MenuButton.Performed += OnExitButton;
+            _menuControl.BackButton.Performed += OnExitButton;
         }
 
         public void Dispose() 
-            => _menuControl.MenuButton.Performed -= OnExitButton;
+            => _menuControl.BackButton.Performed -= OnExitButton;
 
         private void OnExitButton()
             => _rootStateMachine.EnterState<MainMenuState>();

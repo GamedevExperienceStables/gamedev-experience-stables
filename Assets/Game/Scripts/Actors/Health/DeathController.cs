@@ -1,6 +1,5 @@
 ﻿using System;
 using Game.Stats;
-using MoreMountains.Feedbacks;
 using UnityEngine;
 
 namespace Game.Actors.Health
@@ -9,12 +8,14 @@ namespace Game.Actors.Health
     public class DeathController : MonoBehaviour
     {
         [SerializeField]
-        private MMF_Player deathFeedback;
+        private GameObject deathFeedback;
 
         [SerializeField]
         private bool destroyOnDeath = true;
 
         public event Action Died;
+        public event Action<DeathCause> DiedWithCause;
+        
         public event Action Revived;
 
         private DamageableController _damageableController;
@@ -51,15 +52,16 @@ namespace Game.Actors.Health
             if (_isDead)
                 return;
 
-            Kill();
+            Kill(DeathCause.Damage);
         }
 
-        private void Kill()
+        public void Kill(DeathCause cause)
         {
             _isDead = true;
             _damageableController.MakeInvulnerable();
 
             Died?.Invoke();
+            DiedWithCause?.Invoke(cause);
 
             PlayDeathFeedback();
 

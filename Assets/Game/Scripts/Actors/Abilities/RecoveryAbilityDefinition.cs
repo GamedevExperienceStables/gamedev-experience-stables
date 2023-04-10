@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using Game.Stats;
+using Game.TimeManagement;
 using UnityEngine;
+using VContainer;
 
 namespace Game.Actors
 {
@@ -11,59 +11,60 @@ namespace Game.Actors
     {
         [SerializeField]
         private StatModifier staminaRegeneration;
-            
+
         [SerializeField]
         private StatModifier manaRegeneration;
-            
+
         [SerializeField]
         private StatModifier healthRegeneration;
-        
+
         [SerializeField]
         private float recoveryTime;
-            
+
         public StatModifier StaminaRegeneration => staminaRegeneration;
         public StatModifier ManaRegeneration => manaRegeneration;
         public StatModifier HealthRegeneration => healthRegeneration;
         public float RecoveryTime => recoveryTime;
-
     }
 
     public class RecoveryAbility : ActorAbility<RecoveryAbilityDefinition>
     {
-        private CancellationTokenSource _cancellationTokenSource;
+        private readonly TimerPool _timers;
+        private TimerUpdatable _recoveryTimer;
+
         public override bool CanActivateAbility()
             => true;
-        
+
+        [Inject]
+        public RecoveryAbility(TimerPool timers)
+            => _timers = timers;
+
+        protected override void OnInitAbility()
+        {
+            TimeSpan interval = TimeSpan.FromSeconds(Definition.RecoveryTime);
+            _recoveryTimer = _timers.GetTimer(interval, Regeneration, isLooped: true);
+        }
+
+        protected override void OnDestroyAbility()
+            => _timers.ReleaseTimer(_recoveryTimer);
 
         protected override void OnActivateAbility()
-        {
-            _cancellationTokenSource = new CancellationTokenSource();
-            UniTask.Run(Regeneration).Forget();
-        }
-        
+            => _recoveryTimer.Start();
+
         protected override void OnGiveAbility()
         {
             base.OnGiveAbility();
             ActivateAbility();
         }
-        
-        private async UniTask Regeneration()
+
+        private void Regeneration()
         {
-            while (IsActive)
-            {
-                await UniTask.Delay(TimeSpan.FromSeconds(Definition.RecoveryTime), 
-                    cancellationToken:_cancellationTokenSource.Token);
-                Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaRegeneration);
-                Owner.ApplyModifier(CharacterStats.Mana, Definition.ManaRegeneration);
-                Owner.ApplyModifier(CharacterStats.Health, Definition.HealthRegeneration);
-            }
+            Owner.ApplyModifier(CharacterStats.Stamina, Definition.StaminaRegeneration);
+            Owner.ApplyModifier(CharacterStats.Mana, Definition.ManaRegeneration);
+            Owner.ApplyModifier(CharacterStats.Health, Definition.HealthRegeneration);
         }
-        
+
         protected override void OnEndAbility(bool wasCancelled)
-        {
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource.Dispose();
-            _cancellationTokenSource = null;
-        }
+            => _recoveryTimer.Stop();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Actors;
+using Game.Actors.Health;
 using Game.Hero;
 using Game.Player;
 using VContainer;
@@ -10,7 +11,7 @@ namespace Game.GameFlow
     {
         private readonly PlayerController _player;
         private readonly PlanetStateMachine _planetStateMachine;
-        
+
         [Inject]
         public GameplayGameOver(PlayerController player, PlanetStateMachine planetStateMachine)
         {
@@ -24,13 +25,19 @@ namespace Game.GameFlow
         public void Dispose()
             => _player.HeroDiedUnSubscribe(OnHeroDied);
 
-        private void OnHeroDied(HeroController hero)
+        private void OnHeroDied(DeathCause deathCause)
         {
+            HeroController hero = _player.Hero;
             hero.CancelEffects();
-            
-            if (CanRevive(hero))
+
+            if (deathCause is DeathCause.Damage && CanRevive(hero))
                 return;
 
+            GameOver(hero);
+        }
+
+        private void GameOver(ActorController hero)
+        {
             hero.RemoveAbilities();
             _planetStateMachine.EnterState<PlanetGameOverState>();
         }

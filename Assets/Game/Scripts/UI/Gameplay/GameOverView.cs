@@ -11,12 +11,11 @@ namespace Game.UI
     [RequireComponent(typeof(UIDocument))]
     public class GameOverView : MonoBehaviour
     {
-        [SerializeField]
-        private float showDuration = 0.4f;
-
-        [SerializeField]
-        private float hideDuration = 0.2f;
+        private const float DELAY = 0.8f;
         
+        private const float SHOW_DURATION = 1.2f;
+        private const float HIDE_DURATION = 0.2f;
+
         private VisualElement _container;
         private GameplayViewModel _viewModel;
         
@@ -32,8 +31,8 @@ namespace Game.UI
         
         private void Awake()
         {
-            _showDuration = TimeSpan.FromSeconds(showDuration);
-            _hideDuration = TimeSpan.FromSeconds(hideDuration);
+            _showDuration = TimeSpan.FromSeconds(SHOW_DURATION);
+            _hideDuration = TimeSpan.FromSeconds(HIDE_DURATION);
             
             VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
@@ -64,10 +63,12 @@ namespace Game.UI
             _container.SetOpacity(0f);
         }
         
-        public UniTask ShowAsync()
+        public async UniTask ShowAsync()
         {
+            await UniTask.Delay(TimeSpan.FromSeconds(DELAY), true);
             FadeIn(_showDuration);
-            return UniTask.Delay(_showDuration, true);
+            
+            await UniTask.Delay(_showDuration, true);
         }
 
         public UniTask HideAsync()
@@ -80,15 +81,13 @@ namespace Game.UI
         {
             _container.SetDisplay(true);
             _container.experimental.animation
-                .Start(new StyleValues { opacity = 1f }, (int)duration.TotalMilliseconds)
-                .Ease(Easing.InCubic);
+                .Start(new StyleValues { opacity = 1f }, (int)duration.TotalMilliseconds);
         }
 
         private void FadeOut(TimeSpan duration)
         {
             _container.experimental.animation
                 .Start(new StyleValues { opacity = 0f }, (int)duration.TotalMilliseconds)
-                .Ease(Easing.InCubic)
                 .OnCompleted(() => _container.SetDisplay(false));
         }
     }

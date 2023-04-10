@@ -23,18 +23,18 @@ namespace Game.Hero
         private DashAbility _dash;
         private MeleeAbility _melee;
         private IActorController _owner;
-        private bool _isBlocked;
-        private Vector3 _mousePosition;
-        private Plane _plane;
-        [SerializeField]
-        private GameObject aimSpriteTest;
-        [SerializeField]
-        private bool isAimRestricted;
+        private ProjectileAbilityView _projectileView;
 
-        private bool _isTargetingActive;
+        private bool _isBlocked;
+
+        private Ray _mouseRay;
+        private Vector3 _mouseFirePosition;
+        private Vector3 _mouseGroundPosition;
+
+        private readonly ActorBlock _block = new();
 
         public Vector3 DesiredDirection => _movementDirection;
-        
+
         [Inject]
         public void Construct(IInputControlGameplay input, SceneCamera sceneCamera)
         {
@@ -44,7 +44,7 @@ namespace Game.Hero
 
         private void Awake()
         {
-            _plane = new Plane(Vector3.up, new Vector3(0, 0, 0));
+            _projectileView = GetComponent<ProjectileAbilityView>();
             _movement = GetComponent<MovementController>();
             _owner = GetComponent<IActorController>();
         }
@@ -60,7 +60,7 @@ namespace Game.Hero
             _input.AimButton.Canceled += OnAimCanceled;
 
             _input.FireButton.Performed += OnFire;
-            _input.FireButton.Performed += OnMelee;
+            _input.MeleeButton.Performed += OnMelee;
             _input.InteractionButton.Performed += OnInteract;
             _input.DashButton.Performed += OnDash;
         }
@@ -71,96 +71,114 @@ namespace Game.Hero
             _input.AimButton.Canceled -= OnAimCanceled;
 
             _input.FireButton.Performed -= OnFire;
-            _input.FireButton.Performed -= OnMelee;
+            _input.MeleeButton.Performed -= OnMelee;
             _input.InteractionButton.Performed -= OnInteract;
             _input.DashButton.Performed -= OnDash;
-
         }
 
         private void Update()
         {
             HandleInputs();
             Move();
-            Aiming();
         }
-        
-        private void Aiming()
-        {
-            if (_aim.IsActive && _isTargetingActive)
-            {
-                if (!aimSpriteTest.activeSelf)
-                    aimSpriteTest.SetActive(true);
-                
-                Ray ray = _sceneCamera.ScreenPointToRay(_input.MousePosition);
-                if (_plane.Raycast(ray, out float distance))
-                {
-                    _mousePosition = ray.GetPoint(distance);
-                    Vector3 position = transform.position;
-                    float x = _mousePosition.x - position.x;
-                    float z = _mousePosition.z - position.z;
-                    if (isAimRestricted)
-                    {
-                        Vector3 newPosition = position + new Vector3(x, 0, z).normalized * 3; 
-                        aimSpriteTest.transform.position = 
-                            new Vector3(newPosition.x, aimSpriteTest.transform.position.y, newPosition.z);
-                    }
-                    else
-                    {
-                        
-                        aimSpriteTest.transform.position = 
-                            new Vector3(_mousePosition.x, aimSpriteTest.transform.position.y, _mousePosition.z);
-                    }
-                }
-            }
-            else
-            {
-                aimSpriteTest.SetActive(false);
-            }
-        }
-        
-        public Vector3 GetRealMousePosition() => _mousePosition;
 
-        private void OnFire() 
-            => _activeSkill.TryActivateAbility();
+        private void FixedUpdate()
+            => UpdateMousePosition();
+
+        public Vector3 GetTargetPosition(bool grounded = false)
+            => grounded ? _mouseGroundPosition : _mouseFirePosition;
+
+        private void UpdateMousePosition()
+        {
+            _mouseRay = _sceneCamera.ScreenPointToRay(_input.MousePosition);
+            _mouseFirePosition = GetMousePosition(_projectileView.SpawnPoint.position);
+            _mouseGroundPosition = GetMousePosition(transform.position);
+        }
+
+        private Vector3 GetMousePosition(Vector3 position)
+        {
+            var plane = new Plane(Vector3.up, position);
+            plane.Raycast(_mouseRay, out float distance);
+            return _mouseRay.GetPoint(distance);
+        }
+
+        private void OnFire()
+        {
+            if (!_aim.IsActive)
+                return;
+
+            if (_block.IsBlocked(InputBlock.Action))
+                return;
+
+            _activeSkill.TryActivateAbility();
+        }
 
         private void OnMelee()
         {
-            if (_isBlocked) return;
+            if (_block.IsBlocked(InputBlock.Action))
+                return;
+
             _melee.TryActivateAbility();
         }
-        
-        private void OnDash() 
-            => _dash.TryActivateAbility();
+
+        private void OnDash()
+        {
+            if (_block.IsBlocked(InputBlock.Action))
+                return;
+
+            _dash.TryActivateAbility();
+        }
 
         private void OnAim()
         {
-            if (_isBlocked) return;
             _aim.TryActivateAbility();
         }
 
-        private void OnAimCanceled() 
+        private void OnAimCanceled()
             => _aim.EndAbility();
 
         private void OnInteract()
-            => _interaction.TryActivateAbility();
+        {
+            if (_block.IsBlocked(InputBlock.Action))
+                return;
+
+            _interaction.TryActivateAbility();
+        }
 
         private void HandleInputs()
         {
-            if (_isBlocked)
-            {
-                _movementDirection = Vector3.zero;
-                return;
-            }
+            HandleMovementInput();
+            HandleRotationInput();
+        }
 
-            _movementDirection = GetMovementDirection();
-            _lookDirection = GetLookDirection(_movementDirection);
+        private void HandleMovementInput()
+            => _movementDirection = _block.IsBlocked(InputBlock.Movement) ? Vector3.zero : GetMovementDirection();
+
+        private void HandleRotationInput()
+        {
+            if (_block.IsBlocked(InputBlock.Rotation))
+                return;
+
+            _lookDirection = _aim.IsActive ? GetLookDirection() : _movementDirection;
         }
 
         private void Move()
             => _movement.UpdateInputs(_movementDirection, _lookDirection.normalized);
 
-        public void BlockInput(bool isBlocked)
-            =>_isBlocked = isBlocked;
+        public void SetBlock(bool isBlocked)
+        {
+            if (isBlocked)
+                _block.SetBlock();
+            else
+                _block.RemoveBlock();
+        }
+
+        public void SetBlock(InputBlock input)
+            => _block.SetBlock(input);
+
+        public void RemoveBlock(InputBlock input)
+            => _block.RemoveBlock(input);
+
 
         private Vector3 GetMovementDirection()
         {
@@ -170,15 +188,12 @@ namespace Game.Hero
             return movementDirection;
         }
 
-        private Vector3 GetLookDirection(Vector3 movementDirection)
+        private Vector3 GetLookDirection()
         {
-            if (!_aim.IsActive)
-                return movementDirection;
-
             if (IsSecondaryMovementPerformed())
                 return GetLookDirectionFromSecondaryMovement();
 
-            return GetLookDirectionFromMousePosition(movementDirection, _input.MousePosition);
+            return GetLookDirectionFromMousePosition();
         }
 
         private Vector3 GetLookDirectionFromSecondaryMovement()
@@ -187,22 +202,7 @@ namespace Game.Hero
         private bool IsSecondaryMovementPerformed()
             => _input.SecondaryMovement.sqrMagnitude > 0;
 
-        private Vector3 GetLookDirectionFromMousePosition(Vector3 movementDirection, Vector2 mousePosition)
-        {
-            Ray ray = _sceneCamera.ScreenPointToRay(mousePosition);
-            var plane = new Plane(Vector3.up, transform.position);
-            if (plane.Raycast(ray, out float distance))
-            {
-                Vector3 hitPosition = ray.GetPoint(distance);
-                return hitPosition - transform.position;
-            }
-
-            return movementDirection;
-        }
-
-        public void SetTargetingVisible(bool isVisible)
-        {
-            _isTargetingActive = isVisible;
-        }
+        private Vector3 GetLookDirectionFromMousePosition()
+            => _mouseFirePosition - transform.position;
     }
 }
