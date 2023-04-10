@@ -74,7 +74,9 @@ namespace Game.Actors
 
         private void AddInteraction(Interactable interactable)
         {
+#if UNITY_EDITOR
             Debug.Log($"[INTERACTION] +{interactable.gameObject.name}");
+#endif
 
             Interaction interaction = _interactionService.CreateInteraction(interactable, Owner);
             _potentialInteractions.Add(interaction);

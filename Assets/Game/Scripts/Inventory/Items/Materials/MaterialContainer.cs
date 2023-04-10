@@ -53,8 +53,9 @@ namespace Game.Inventory
 
             int oldValue = material.Current;
             material.Current = newValue;
-
+#if UNITY_EDITOR
             Debug.Log($"[MATERIAL] {Id} | {material.Definition.name}: {oldValue} -> {material.Current}");
+#endif
             ValueChanged?.Invoke(new MaterialChangedData(material.Definition, oldValue, material.Current));
         }
 

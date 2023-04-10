@@ -65,16 +65,18 @@ namespace Game.Persistence
             await _persistence.SerializeAsync(data, _settings.Filename);
             
             SavingChanged?.Invoke(false);
-            
+#if UNITY_EDITOR
             Debug.Log("[SAVE_GAME] Saved!");
+#endif
         }
 
         private async UniTask LoadingProcess()
         {
             var data = await _persistence.DeserializeAsync<GameSaveData>(_settings.Filename);
             _game.Import(data);
-            
+#if UNITY_EDITOR
             Debug.Log("[SAVE_GAME] Loaded!");
+#endif
         }
 
         [Serializable]

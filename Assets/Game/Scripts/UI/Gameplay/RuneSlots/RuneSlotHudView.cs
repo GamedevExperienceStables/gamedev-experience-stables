@@ -70,8 +70,12 @@ namespace Game.UI
                 return;
 
             if (evt.IsLeftButton())
+            {
+#if UNITY_EDITOR
                 Debug.Log("Clicked");
-            
+#endif
+            }
+
             if (evt.IsRightButton())
                 RemoveRuneFromSlot(evt);
         }
