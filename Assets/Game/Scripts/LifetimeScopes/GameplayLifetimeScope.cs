@@ -1,6 +1,7 @@
 ﻿using Game.Actors;
 using Game.Audio;
 using Game.Cameras;
+using Game.Dialog;
 using Game.Enemies;
 using Game.GameFlow;
 using Game.Hero;
@@ -86,8 +87,10 @@ namespace Game.LifetimeScopes
             builder.Register<GameplayGameOver>(Lifetime.Scoped);
             builder.Register<GameplayInventory>(Lifetime.Scoped);
             builder.Register<LocationController>(Lifetime.Scoped);
-            builder.Register<LocationMarkers>(Lifetime.Singleton);
             builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
+            
+            builder.Register<LocationMarkers>(Lifetime.Singleton);
+            builder.Register<DialogService>(Lifetime.Singleton);
 
             builder.Register<GameplayPrefabFactory>(Lifetime.Scoped);
         }
@@ -129,6 +132,9 @@ namespace Game.LifetimeScopes
             
             builder.Register<InteractionView>(Lifetime.Scoped);
             builder.Register<InteractionViewModel>(Lifetime.Scoped);
+
+            builder.Register<DialogView>(Lifetime.Scoped);
+            builder.Register<DialogViewModel>(Lifetime.Scoped);
             
             builder.Register<SavingView>(Lifetime.Scoped);
             builder.Register<SavingViewModel>(Lifetime.Scoped);

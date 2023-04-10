@@ -1,8 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="MiniMap" src="project://database/Assets/Game/UI/Uxml/Partial/MiniMap.uxml?fileID=9197481963319205126&amp;guid=112172bd361597c42b1fbca0b63a6cda&amp;type=3#MiniMap" />
+    <ui:Template name="DialogWindow" src="project://database/Assets/Game/UI/Uxml/Partial/DialogWindow.uxml?fileID=9197481963319205126&amp;guid=ee493ed27981d2f4f83f4ac0a7748c14&amp;type=3#DialogWindow" />
     <ui:Template name="SavingWidget" src="project://database/Assets/Game/UI/Uxml/Partial/SavingWidget.uxml?fileID=9197481963319205126&amp;guid=15c24c93f7d8ee548ad2ab11d547307b&amp;type=3#SavingWidget" />
     <ui:Template name="InteractionWidget" src="project://database/Assets/Game/UI/Uxml/Partial/InteractionWidget.uxml?fileID=9197481963319205126&amp;guid=41441a377c5387649a739155e8c3b5eb&amp;type=3#InteractionWidget" />
     <ui:Template name="Spell" src="project://database/Assets/Game/UI/Uxml/Partial/Spell.uxml?fileID=9197481963319205126&amp;guid=19aa79aeda9e27e46b1c979eb4d2f55a&amp;type=3#Spell" />
-    <ui:Template name="MiniMap" src="project://database/Assets/Game/UI/Uxml/Partial/MiniMap.uxml?fileID=9197481963319205126&amp;guid=112172bd361597c42b1fbca0b63a6cda&amp;type=3#MiniMap" />
     <Style src="project://database/Assets/Game/UI/Uss/HudStyle.uss?fileID=7433441132597879392&amp;guid=43fb365d5654783488ae02a43eaf455d&amp;type=3#HudStyle" />
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
         <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: space-between; align-items: flex-start; margin-left: 20px; margin-top: 20px; margin-right: 30px;">
@@ -15,6 +16,9 @@
             </ui:VisualElement>
             <ui:Button text="Menu" display-tooltip-when-elided="true" focusable="false" name="button-menu" style="-unity-font-style: normal; display: none;" />
             <ui:Instance template="MiniMap" name="widget-map" />
+            <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; left: 0; right: 0; top: 90px;">
+                <ui:Instance template="DialogWindow" name="widget-dialog" style="align-items: center;" />
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
         <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center;">
