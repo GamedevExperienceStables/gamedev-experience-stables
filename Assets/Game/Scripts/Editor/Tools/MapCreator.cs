@@ -65,6 +65,8 @@ namespace Game.Editor.Tools
             camera.orthographic = true;
             camera.orthographicSize = boxCollider.size.z * 0.5f;
 
+            camera.clearFlags = CameraClearFlags.Nothing;
+
             return camera;
         }
 
