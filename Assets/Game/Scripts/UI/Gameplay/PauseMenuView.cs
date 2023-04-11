@@ -17,9 +17,9 @@ namespace Game.UI
         private Button _buttonSettings;
 
         private PauseViewRouter _router;
-        
+
         private Settings _settings;
-        
+
         [Inject]
         public void Construct(Settings settings)
         {
@@ -39,10 +39,10 @@ namespace Game.UI
             _buttonResume.clicked += OnResumeButton;
             _buttonMainMenu.clicked += OnMainMenuButton;
             _buttonSettings.clicked += OnSettingsButton;
-            
+
             _localization.Changed += OnLocalisationChanged;
         }
-        
+
         private void Start()
             => UpdateText();
 
@@ -51,10 +51,10 @@ namespace Game.UI
             _buttonResume.clicked -= OnResumeButton;
             _buttonMainMenu.clicked -= OnMainMenuButton;
             _buttonSettings.clicked -= OnSettingsButton;
-            
+
             _localization.Changed -= OnLocalisationChanged;
         }
-        
+
         private void OnLocalisationChanged()
             => UpdateText();
 
@@ -62,18 +62,26 @@ namespace Game.UI
             => ViewModel.ResumeGame();
 
         private void OnMainMenuButton()
-            => ViewModel.GoToMainMenu();
+            => ShowMainMenuModal();
+
+        private void ShowMainMenuModal()
+        {
+            ModalContext context =
+                ModalSettingsExtensions.CreateContext(_settings.mainMenuModal, ViewModel.GoToMainMenu);
+            
+            ViewModel.ShowModal(context);
+        }
 
         private void OnSettingsButton()
             => _router.OpenSettings();
-        
+
         private void UpdateText()
         {
             _buttonResume.Q<Label>().text = _settings.resume.button.GetLocalizedString();
             _buttonSettings.Q<Label>().text = _settings.settings.button.GetLocalizedString();
-            _buttonMainMenu.Q<Label>().text =_settings.mainMenu.button.GetLocalizedString();
+            _buttonMainMenu.Q<Label>().text = _settings.mainMenu.button.GetLocalizedString();
         }
-        
+
         [Serializable]
         public class Settings
         {
@@ -86,6 +94,8 @@ namespace Game.UI
             public Page resume;
             public Page settings;
             public Page mainMenu;
+
+            public ModalSettings mainMenuModal;
         }
     }
 }
