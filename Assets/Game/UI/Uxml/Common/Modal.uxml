@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="blocker" style="flex-grow: 1; background-color: rgba(44, 16, 62, 0.6);">
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: center; align-items: center;">
+            <ui:VisualElement name="window-modal" style="background-color: rgb(255, 253, 237); padding-left: 35px; padding-right: 35px; padding-top: 35px; padding-bottom: 35px; min-width: 350px;">
+                <ui:VisualElement style="background-color: rgba(0, 0, 0, 0);">
+                    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-bottom: 20px; margin-top: 20px;">
+                        <ui:Label tabindex="-1" text="title" display-tooltip-when-elided="true" name="text-title" style="-unity-text-align: upper-center; font-size: 29px; -unity-font-style: bold;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="block-message" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-top: 40px; margin-bottom: 40px;">
+                        <ui:Label tabindex="-1" text="Message" display-tooltip-when-elided="true" name="text-message" style="-unity-text-align: upper-center;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: center;">
+                        <ui:Button text="Cancel" display-tooltip-when-elided="true" name="button-cancel" />
+                        <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); width: 50px;" />
+                        <ui:Button text="Ok" display-tooltip-when-elided="true" name="button-confirm" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
