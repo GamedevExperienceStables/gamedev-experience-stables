@@ -145,5 +145,17 @@
             public const string BOOK_DETAILS_CLASS_NAME = "magic-book-details";
             public const string BOOK_DETAILS_HIDDEN_CLASS_NAME = "magic-book-details--hidden";
         }
+        
+        public static class Modal
+        {
+            public const string CONTAINER = "window-modal";
+            
+            public const string TITLE = "text-title";
+            public const string BLOCK_MESSAGE = "block-message";
+            public const string TEXT_MESSAGE = "text-message";
+            
+            public const string BUTTON_CONFIRM = "button-confirm";
+            public const string BUTTON_CANCEL = "button-cancel";
+        }
     }
 }

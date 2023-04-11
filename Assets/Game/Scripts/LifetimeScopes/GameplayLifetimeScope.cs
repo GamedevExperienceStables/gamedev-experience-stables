@@ -145,8 +145,7 @@ namespace Game.LifetimeScopes
             builder.Register<PauseMenuViewModel>(Lifetime.Scoped);
 
             builder.RegisterInstance(gameplayView);
-            Transform uiRoot = gameplayView.transform;
-            builder.UseComponents(uiRoot, componentsBuilder =>
+            builder.UseComponents(gameplayView.transform, componentsBuilder =>
             {
                 componentsBuilder.AddInHierarchy<HudView>();
                 componentsBuilder.AddInHierarchy<GameOverView>();
@@ -157,6 +156,8 @@ namespace Game.LifetimeScopes
                 
                 componentsBuilder.AddInHierarchy<PauseMenuView>();
                 componentsBuilder.AddInHierarchy<PauseSettingsView>();
+                
+                componentsBuilder.AddInHierarchy<ModalView>();
             });
         }
 
