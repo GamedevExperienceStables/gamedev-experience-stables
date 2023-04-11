@@ -30,6 +30,8 @@ namespace Game.UI
 
         protected override void OnAwake()
         {
+            SetContent(LayoutNames.StartMenu.PAGE_BOOK);
+            
             _buttonNewGame = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_NEW_GAME).Q<Button>();
             _buttonContinue = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_CONTINUE).Q<Button>();
 
@@ -143,19 +145,11 @@ namespace Game.UI
             _buttonArt.AddToClassList(LayoutNames.StartMenu.BUTTON_ART);
         }
 
-        private void OpenAbout()
-        {
-            ViewModel.OpenAbout();
+        private void OpenAbout() 
+            => ViewModel.OpenAbout();
 
-            _buttonAbout.AddToClassList(LayoutNames.StartMenu.BUTTON_ACTIVE_CLASS_NAME);
-        }
-
-        private void OpenSettings()
-        {
-            ViewModel.OpenSettings();
-
-            _buttonSettings.AddToClassList(LayoutNames.StartMenu.BUTTON_ACTIVE_CLASS_NAME);
-        }
+        private void OpenSettings() 
+            => ViewModel.OpenSettings();
 
         #region OnPointerOverEvents
 

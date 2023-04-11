@@ -43,6 +43,7 @@
             public const string PREVIEW_IMAGE = "image";
             public const string PREVIEW_CAPTION = "caption";
 
+            public const string PAGE_BOOK = "page-menu";
             public const string PAGE_SETTINGS = "page-settings";
             public const string PAGE_ABOUT = "page-about";
             public const string PAGE_ART = "page-art";
@@ -50,7 +51,6 @@
             public const string PAGE_HEADING = "header";
             
             public const string BUTTON_ACTIVE_CLASS_NAME = "menu-button--active";
-            
         }
 
         public static class Hud

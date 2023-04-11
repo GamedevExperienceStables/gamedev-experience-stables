@@ -1,9 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="MenuButton" src="project://database/Assets/Game/UI/Uxml/Partial/MenuButton.uxml?fileID=9197481963319205126&amp;guid=9213202493084284480cab6b7c7100d9&amp;type=3#MenuButton" />
-    <ui:Template name="SettingsPreview" src="project://database/Assets/Game/UI/Uxml/StartScreen/Preview.uxml?fileID=9197481963319205126&amp;guid=e77b8bc5b853dde4695a24412e8ea9a5&amp;type=3#Preview" />
     <ui:Template name="SettingsScreen" src="project://database/Assets/Game/UI/Uxml/StartScreen/SettingsScreen.uxml?fileID=9197481963319205126&amp;guid=30c7c4c0462a403dad393a8dcd62bacc&amp;type=3#SettingsScreen" />
     <ui:Template name="ArtScreen" src="project://database/Assets/Game/UI/Uxml/StartScreen/ArtScreen.uxml?fileID=9197481963319205126&amp;guid=06e1f63d8faecac49a5bf26912706564&amp;type=3#ArtScreen" />
     <ui:Template name="AboutScreen" src="project://database/Assets/Game/UI/Uxml/StartScreen/AboutScreen.uxml?fileID=9197481963319205126&amp;guid=95c2435e4a4eae5499b96889cd80e23e&amp;type=3#AboutScreen" />
+    <ui:Template name="MenuBookScreen" src="project://database/Assets/Game/UI/Uxml/StartScreen/MenuBookScreen.uxml?fileID=9197481963319205126&amp;guid=a1ade8d7adc734b45b00e9f49cfaf4a7&amp;type=3#MenuBookScreen" />
     <Style src="project://database/Assets/Game/UI/Uss/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=8cedbaaf434e4b94f8c50cc514ad6cf7&amp;type=3#MainMenuStyle" />
     <ui:VisualElement style="flex-grow: 1; flex-shrink: 0;">
         <ui:VisualElement name="background" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=1238703295&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_0&apos;); -unity-background-scale-mode: scale-and-crop; flex-grow: 1; flex-shrink: 0;">
@@ -14,31 +13,12 @@
             <ui:VisualElement name="rune3" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=-208653865&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_6&apos;); height: 209px; width: 213px; -unity-background-scale-mode: scale-and-crop; right: -66px; bottom: -57px;" />
             <ui:VisualElement name="rune4" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=-1181512284&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_4&apos;); height: 226px; width: 244px; -unity-background-scale-mode: scale-and-crop; top: 302px; right: -113px;" />
         </ui:VisualElement>
-        <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); position: absolute; align-items: center; justify-content: center; left: 0; top: 0; right: 0; bottom: 0;">
-            <ui:VisualElement name="menu-book" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Book_Atlas.psd?fileID=1443071890&amp;guid=db028da8c75fb7d46a9453c6191377b5&amp;type=3#Menu_Book_Atlas_0&apos;); width: 1731px; height: 1074px; -unity-background-scale-mode: scale-and-crop; flex-shrink: 0; position: absolute;">
-                <ui:VisualElement name="book-element" class="menu-bookmark" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); visibility: visible; overflow: visible; display: flex; position: absolute; width: 140px; height: 252px; top: 773px; left: 1046px; opacity: 1; -unity-background-scale-mode: scale-and-crop; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Book_Atlas.psd?fileID=486701466&amp;guid=db028da8c75fb7d46a9453c6191377b5&amp;type=3#Menu_Book_Atlas_3&apos;);" />
-                <ui:VisualElement name="shadow" focusable="true" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Book_Atlas.psd?fileID=1036747490&amp;guid=db028da8c75fb7d46a9453c6191377b5&amp;type=3#Menu_Book_Atlas_2&apos;); position: absolute; width: 153px; height: 120px; top: 809px; left: 1049px;" />
-                <ui:VisualElement name="menu-book-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; flex-direction: row; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Book_Atlas.psd?fileID=1562559283&amp;guid=db028da8c75fb7d46a9453c6191377b5&amp;type=3#Menu_Book_Atlas_1&apos;); -unity-background-scale-mode: scale-and-crop; width: 1407px; height: 940px; top: -2px; left: 168px;">
-                    <ui:VisualElement name="left-side" style="flex-shrink: 0; flex-grow: 1; width: 50%;">
-                        <ui:VisualElement name="logo" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); -unity-font-style: bold; font-size: 35px; position: absolute; top: 116px; left: 87px; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1437813421&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_0&apos;); -unity-background-scale-mode: scale-and-crop; width: 537px; height: 277px;" />
-                        <ui:VisualElement name="menu" class="menu" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 350px; position: absolute; top: 441px; left: 131px;">
-                            <ui:Instance template="MenuButton" name="button-start" />
-                            <ui:Instance template="MenuButton" name="button-continue" />
-                            <ui:Instance template="MenuButton" name="button-settings" />
-                            <ui:Instance template="MenuButton" name="button-art" />
-                            <ui:Instance template="MenuButton" name="button-about" />
-                            <ui:Instance template="MenuButton" name="button-quit" />
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                    <ui:VisualElement name="right-side" style="flex-shrink: 0; flex-grow: 1; width: 50%;">
-                        <ui:Instance template="SettingsPreview" name="preview" style="flex-grow: 1; visibility: visible;" />
-                        <ui:VisualElement name="pages" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; height: 100%; width: 100%;">
-                            <ui:Instance template="SettingsScreen" name="page-settings" class="page" style="visibility: hidden;" />
-                            <ui:Instance template="ArtScreen" name="page-art" class="page" style="visibility: hidden;" />
-                            <ui:Instance template="AboutScreen" name="page-about" class="page" style="visibility: hidden;" />
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                </ui:VisualElement>
+        <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center; position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
+            <ui:VisualElement name="pages" style="background-color: rgba(0, 0, 0, 0); flex-grow: 1; width: 100%; height: 100%;">
+                <ui:Instance template="MenuBookScreen" name="page-menu" class="page" />
+                <ui:Instance template="SettingsScreen" name="page-settings" class="page" style="visibility: hidden;" />
+                <ui:Instance template="ArtScreen" name="page-art" class="page" style="visibility: hidden;" />
+                <ui:Instance template="AboutScreen" name="page-about" class="page" style="visibility: hidden;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
