@@ -145,5 +145,26 @@
             public const string BOOK_DETAILS_CLASS_NAME = "magic-book-details";
             public const string BOOK_DETAILS_HIDDEN_CLASS_NAME = "magic-book-details--hidden";
         }
+        
+        public static class Cutscene
+        {
+            public const string CONTAINER = "cutscene";
+            
+            public const string SLIDER = "slider";
+            public const string SLIDE_PREV = "slide-prev";
+            public const string SLIDE_NEXT = "slide-next";
+            public const string SLIDE_CURRENT = "slide-current";
+            
+            public const string BLOCK_SUBTITLES = "block-subtitles";
+            public const string TEXT_SUBTITLES = "text-subtitles";
+
+            public const string BLOCK_ACTION = "block-action";
+            public const string TEXT_ACTION = "text-action";
+            public const string ICON_ACTION = "icon-action";
+
+            public const string BLOCK_SKIP = "block-skip";
+            public const string TEXT_SKIP = "text-skip";
+        }
+        
     }
 }

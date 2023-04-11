@@ -1,0 +1,31 @@
+.slider {
+}
+
+.slider__slide {
+    position: absolute;
+}
+
+.subtitles {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+}
+
+.subtitles__text {
+    -unity-text-align: lower-center;
+    white-space: normal;
+    -unity-font-definition: var(--font-text);
+    font-size: 32px;
+    color: rgb(255, 255, 255);
+}
+
+.action {
+}
+
+.action__text {
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    -unity-font-definition: var(--font-text);
+}

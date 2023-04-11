@@ -4,7 +4,7 @@ using VContainer;
 
 namespace Game.GameFlow
 {
-    public class IntroController : MonoBehaviour
+    public class IntroEntryPoint : MonoBehaviour
     {
         private RootStateMachine _rootStateMachine;
         private IInputService _input;
