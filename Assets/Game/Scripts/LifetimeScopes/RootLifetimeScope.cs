@@ -80,6 +80,8 @@ namespace Game.LifetimeScopes
             builder.Register<QuitGameService>(Lifetime.Singleton);
             builder.Register<UnityLocalization>(Lifetime.Singleton).As<ILocalizationService>();
             builder.Register<CursorService>(Lifetime.Singleton);
+
+            builder.Register<ModalService>(Lifetime.Singleton);
         }
 
         private static void RegisterInput(IContainerBuilder builder)
@@ -144,6 +146,8 @@ namespace Game.LifetimeScopes
         {
             builder.Register<SettingsView>(Lifetime.Scoped);
             builder.Register<SettingsViewModel>(Lifetime.Singleton);
+            
+            builder.Register<ModalViewModel>(Lifetime.Singleton);
 
             builder.Register<Typewriter>(Lifetime.Transient);
         }

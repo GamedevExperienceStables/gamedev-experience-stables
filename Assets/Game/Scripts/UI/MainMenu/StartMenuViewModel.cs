@@ -9,17 +9,20 @@ namespace Game.UI
         private readonly MainMenuViewRouter _router;
         private readonly RootStateMachine _rootStateMachine;
         private readonly PersistenceService _persistence;
+        private readonly ModalService _modal;
 
         [Inject]
         public StartMenuViewModel(
             MainMenuViewRouter router,
             RootStateMachine rootStateMachine,
-            PersistenceService persistence
+            PersistenceService persistence,
+            ModalService modal
         )
         {
             _router = router;
             _rootStateMachine = rootStateMachine;
             _persistence = persistence;
+            _modal = modal;
         }
 
         public bool IsSaveGameExists()
@@ -42,5 +45,8 @@ namespace Game.UI
 
         public void OpenSettings()
             => _router.OpenSettings();
+
+        public void ShowModal(ModalContext context) 
+            => _modal.Request(context);
     }
 }

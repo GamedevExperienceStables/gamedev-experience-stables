@@ -19,7 +19,7 @@ namespace Game.LifetimeScopes
             builder.Register<StartMenuViewModel>(Lifetime.Scoped);
             builder.Register<AboutViewModel>(Lifetime.Scoped);
             builder.Register<ArtViewModel>(Lifetime.Scoped);
-            
+
             builder.UseComponents(componentsBuilder =>
             {
                 componentsBuilder.AddInHierarchy<MainMenuViewRouter>();
@@ -27,6 +27,7 @@ namespace Game.LifetimeScopes
                 componentsBuilder.AddInHierarchy<MainMenuSettingsView>();
                 componentsBuilder.AddInHierarchy<AboutView>();
                 componentsBuilder.AddInHierarchy<ArtView>();
+                componentsBuilder.AddInHierarchy<ModalView>();
             });
         }
 

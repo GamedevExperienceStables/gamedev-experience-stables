@@ -128,6 +128,7 @@ namespace Game.UI
 
         private void ShowNextSlide()
         {
+            _currentTextIndex = 0;
             _currentSlideIndex++;
             ShowSlide(_currentSlideIndex);
         }

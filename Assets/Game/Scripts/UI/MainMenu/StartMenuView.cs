@@ -19,7 +19,6 @@ namespace Game.UI
 
         private PreviewView _preview;
         private VisualElement _menu;
-        private VisualElement _modal;
 
         private Settings _settings;
 
@@ -31,6 +30,8 @@ namespace Game.UI
 
         protected override void OnAwake()
         {
+            SetContent(LayoutNames.StartMenu.PAGE_BOOK);
+            
             _buttonNewGame = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_NEW_GAME).Q<Button>();
             _buttonContinue = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_CONTINUE).Q<Button>();
 
@@ -40,7 +41,6 @@ namespace Game.UI
             _buttonQuit = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_QUIT).Q<Button>();
 
             _menu = Content.Q<VisualElement>(LayoutNames.StartMenu.MENU);
-            _modal = Content.Q<VisualElement>(LayoutNames.StartMenu.MODAL);
 
             var previewElement = Content.Q<VisualElement>(LayoutNames.StartMenu.PREVIEW);
             _preview = new PreviewView(previewElement);
@@ -109,56 +109,65 @@ namespace Game.UI
             _buttonSettings.Q<Label>().text = _settings.settings.button.GetLocalizedString();
             _buttonArt.Q<Label>().text = _settings.art.button.GetLocalizedString();
             _buttonAbout.Q<Label>().text = _settings.about.button.GetLocalizedString();
-            _buttonQuit.Q<Label>().text =_settings.quit.button.GetLocalizedString();
+            _buttonQuit.Q<Label>().text = _settings.quit.button.GetLocalizedString();
         }
 
         private void NewGame()
-            => ViewModel.NewGame();
+        {
+            if (ViewModel.IsSaveGameExists())
+                ShowNewGameModal();
+            else
+                ViewModel.NewGame();
+        }
 
         private void ContinueGame()
             => ViewModel.ContinueGame();
 
         private void QuitGame()
-            => ViewModel.QuitGame();
+            => ShowQuitGameModal();
+
+        private void ShowQuitGameModal()
+        {
+            ModalContext context = ModalSettingsExtensions.CreateContext(_settings.quitModal, ViewModel.QuitGame);
+            ViewModel.ShowModal(context);
+        }
+
+        private void ShowNewGameModal()
+        {
+            ModalContext context = ModalSettingsExtensions.CreateContext(_settings.newGameModal, ViewModel.NewGame);
+            ViewModel.ShowModal(context);
+        }
 
         private void OpenArt()
         {
             ViewModel.OpenArt();
-            
+
             _buttonArt.AddToClassList(LayoutNames.StartMenu.BUTTON_ART);
         }
 
-        private void OpenAbout()
-        {
-            ViewModel.OpenAbout();
-            
-            _buttonAbout.AddToClassList(LayoutNames.StartMenu.BUTTON_ACTIVE_CLASS_NAME);
-        }
+        private void OpenAbout() 
+            => ViewModel.OpenAbout();
 
-        private void OpenSettings()
-        {
-            ViewModel.OpenSettings();
-
-            _buttonSettings.AddToClassList(LayoutNames.StartMenu.BUTTON_ACTIVE_CLASS_NAME);
-        }
+        private void OpenSettings() 
+            => ViewModel.OpenSettings();
 
         #region OnPointerOverEvents
 
         private void OnHoverNewGame(EventBase _)
             => OnEnter(_settings.newGame.preview, _settings.newGame.caption);
-        
+
         private void OnHoverContinueGame(EventBase _)
             => OnEnter(_settings.continueGame.preview, _settings.continueGame.caption);
 
         private void OnHoverSettings(EventBase _)
             => OnEnter(_settings.settings.preview, _settings.settings.caption);
-        
+
         private void OnHoverArt(EventBase _)
             => OnEnter(_settings.art.preview, _settings.art.caption);
-        
+
         private void OnHoverAbout(EventBase _)
             => OnEnter(_settings.about.preview, _settings.about.caption);
-        
+
         private void OnHoverQuit(EventBase _)
             => OnEnter(_settings.quit.preview, _settings.quit.caption);
 
@@ -180,7 +189,7 @@ namespace Game.UI
 
         #endregion
 
-        private void ShowPreview() 
+        private void ShowPreview()
             => _preview.Show(_settings.preview.preview, _settings.preview.caption.GetLocalizedString());
 
         private static void RegisterButtonEvent(Button button, Action onClick,
@@ -225,6 +234,9 @@ namespace Game.UI
             public Page about;
             public Page settings;
             public Page quit;
+
+            public ModalSettings newGameModal;
+            public ModalSettings quitModal;
         }
     }
 }

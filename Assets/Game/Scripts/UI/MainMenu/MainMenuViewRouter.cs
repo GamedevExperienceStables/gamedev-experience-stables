@@ -17,7 +17,6 @@
 
         private void Start()
         {
-            _startMenu.Hide();
             _mainMenuSettingsView.Hide();
             _aboutView.Hide();
             _artView.Hide();
@@ -26,7 +25,7 @@
         }
 
         public void ShowStartMenu()
-            => _startMenu.Show();
+            => Open(_startMenu);
 
         public void OpenSettings()
             => Open(_mainMenuSettingsView);
@@ -37,18 +36,7 @@
         public void OpenArt()
             => Open(_artView);
 
-        public void Back()
-        {
-            _startMenu.Activate();
-            
-            ActivePage.Hide();
-        }
-
-        protected override void Open(PageView view)
-        {
-            _startMenu.Deactivate();
-
-            base.Open(view);
-        }
+        public void Back() 
+            => ShowStartMenu();
     }
 }
