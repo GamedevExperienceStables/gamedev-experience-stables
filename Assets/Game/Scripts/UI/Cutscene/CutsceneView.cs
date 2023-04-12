@@ -60,10 +60,10 @@ namespace Game.UI
         }
 
         private void OnExitButton()
-            => _cutscene.StartHoldExit();
+            => _cutscene.StartHoldSkip();
 
         private void OnExitButtonRelease()
-            => _cutscene.StopHoldExit();
+            => _cutscene.StopHoldSkip();
 
         private void OnCompleted()
             => Complete();
@@ -71,7 +71,7 @@ namespace Game.UI
         private void Complete()
             => Completed?.Invoke();
 
-        private void OnConfirm()
+        private void OnConfirm() 
             => _cutscene.Next();
     }
 }

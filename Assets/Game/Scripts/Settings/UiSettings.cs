@@ -19,10 +19,14 @@ namespace Game.Settings
         [SerializeField]
         private LocalizationInteractionSettings interaction;
 
+        [SerializeField]
+        private Cutscene.Settings cutscene;
+
         public StartMenuView.Settings StartMenu => startMenu;
         public PauseMenuView.Settings PauseMenu => pauseMenu;
         public GameOverView.Settings GameOver => gameOver;
 
         public LocalizationInteractionSettings Interaction => interaction;
+        public Cutscene.Settings Cutscene => cutscene;
     }
 }

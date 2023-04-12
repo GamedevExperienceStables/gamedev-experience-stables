@@ -19,18 +19,17 @@ namespace Game.UI
         private readonly Typewriter _typewriter;
         private readonly TimerUpdatable _holdTimer;
 
+        private readonly CutsceneActionNext _actionNext;
+        private readonly CutsceneActionSkip _actionSkip;
+
         private TypewriterLabel _textSubtitles;
         private Image _slide;
 
         private List<CutsceneSlide> _slides;
 
-        private CutsceneActionArrow _action = new();
-
         private int _currentSlideIndex;
         private int _currentTextIndex;
 
-        private VisualElement _skipAction;
-        private Label _skipActionText;
         private VisualElement _blockSubtitles;
 
         private CancellationToken _cancellationToken;
@@ -39,12 +38,15 @@ namespace Game.UI
         public event Action Completed;
 
         [Inject]
-        public Cutscene(TimerPool timers, Typewriter typewriter)
+        public Cutscene(TimerPool timers, Typewriter typewriter, CutsceneActionNext actionNext,
+            CutsceneActionSkip actionSkip)
         {
             _timers = timers;
             _typewriter = typewriter;
             _typewriter.OnComplete = CompleteText;
 
+            _actionNext = actionNext;
+            _actionSkip = actionSkip;
             _holdTimer = _timers.GetTimer(TimeSpan.FromSeconds(HOLD_TIME), OnHoldComplete);
         }
 
@@ -60,13 +62,12 @@ namespace Game.UI
             _blockSubtitles = container.Q<VisualElement>(LayoutNames.Cutscene.BLOCK_SUBTITLES);
             _textSubtitles = container.Q<TypewriterLabel>(LayoutNames.Cutscene.TEXT_SUBTITLES);
 
-            _action.Create(container);
+            _actionNext.Create(container);
+            _actionSkip.Create(container);
 
-            _skipAction = container.Q<VisualElement>(LayoutNames.Cutscene.BLOCK_SKIP);
-            _skipActionText = container.Q<Label>(LayoutNames.Cutscene.TEXT_SKIP);
+            _actionNext.Hide();
+            _actionSkip.Hide();
 
-            _action.Hide();
-            HideSkipAction();
             HideSlide();
             HideSubtitles();
         }
@@ -88,7 +89,7 @@ namespace Game.UI
         {
             if (_inTransition)
                 return;
-            
+
             if (!_typewriter.IsComplete)
             {
                 CompleteText();
@@ -109,28 +110,28 @@ namespace Game.UI
             else
                 ShowNextSlide();
         }
-        
-        public void StartHoldExit()
+
+        public void StartHoldSkip()
         {
             _holdTimer.Start();
 
-            ShowSkipAction();
+            _actionSkip.Show();
         }
 
-        public void StopHoldExit()
+        public void StopHoldSkip()
         {
             _holdTimer.Stop();
 
-            HideSkipAction();
+            _actionSkip.Hide();
         }
 
         private async UniTask Show(int slideIndex)
         {
             _inTransition = true;
-            
+
             _currentSlideIndex = slideIndex;
 
-            _action.Hide();
+            _actionNext.Hide();
             HideSlide();
             HideSubtitles();
 
@@ -168,14 +169,14 @@ namespace Game.UI
 
             _typewriter.Start(_textSubtitles, TYPE_WRITER_CHAR_PER_SEC);
 
-            _action.Hide();
+            _actionNext.Hide();
         }
 
         private void CompleteText()
         {
             _typewriter.Complete();
 
-            _action.Show();
+            _actionNext.Show();
         }
 
         private void ShowNextSlide()
@@ -213,10 +214,14 @@ namespace Game.UI
         private void HideSubtitles()
             => _blockSubtitles.AddToClassList(LayoutNames.Cutscene.SUBTITLES_HIDDEN_CLASS_NAME);
 
-        private void ShowSkipAction()
-            => _skipAction.RemoveFromClassList(LayoutNames.Cutscene.ACTION_HIDDEN_CLASS_NAME);
 
-        private void HideSkipAction()
-            => _skipAction.AddToClassList(LayoutNames.Cutscene.ACTION_HIDDEN_CLASS_NAME);
+        [Serializable]
+        public class Settings
+        {
+            [SerializeField]
+            private LocalizedString skipLabel;
+
+            public LocalizedString SkipLabel => skipLabel;
+        }
     }
 }

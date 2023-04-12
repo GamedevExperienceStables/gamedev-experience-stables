@@ -3,13 +3,12 @@ using UnityEngine.UIElements;
 
 namespace Game.UI
 {
-    public class CutsceneActionArrow
+    public class CutsceneActionNext
     {
         private const float SHIFT_DISTANCE = 30f;
 
         private VisualElement _container;
         private float _direction = 1;
-
 
         public void Create(VisualElement root)
         {
