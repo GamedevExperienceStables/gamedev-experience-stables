@@ -2,13 +2,11 @@
     <Style src="project://database/Assets/Game/UI/Uss/CutsceneStyle.uss?fileID=7433441132597879392&amp;guid=5d6d5cd37af278140bc8c01b921e9462&amp;type=3#CutsceneStyle" />
     <ui:VisualElement name="cutscene" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
         <ui:VisualElement name="slider" class="slider">
-            <ui:Image name="slide-prev" class="slider__slide" />
             <ui:Image name="slide-current" class="slider__slide" />
-            <ui:Image name="slide-next" class="slider__slide" />
         </ui:VisualElement>
         <ui:VisualElement name="block-subtitles" class="subtitles">
-            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); margin-left: 100px; margin-right: 100px; margin-top: 0; margin-bottom: 80px; max-width: 1200px;">
-                <Game.UI.TypewriterLabel text="Далеко-далеко, во тьме необъятного космического пространства, всеми цветами радуги переливается планета Айрис." maxVisibleCharacters="500" name="text-subtitles" class="subtitles__text" />
+            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); margin-left: 100px; margin-right: 100px; margin-top: 100px; margin-bottom: 80px; max-width: 1200px;">
+                <Game.UI.TypewriterLabel text="Далеко-далеко, во тьме необъятного космического пространства, всеми цветами радуги переливается планета Айрис." name="text-subtitles" maxVisibleCharacters="1000" class="subtitles__text" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="block-action" class="action" style="flex-grow: 1; position: absolute; right: 30px; bottom: 20px; flex-direction: row; align-items: center;">

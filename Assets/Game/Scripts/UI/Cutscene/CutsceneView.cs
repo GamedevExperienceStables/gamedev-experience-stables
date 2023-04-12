@@ -1,163 +1,77 @@
 ﻿using System;
-using System.Collections.Generic;
-using Game.TimeManagement;
-using Game.Utils;
-using UnityEngine.Localization;
+using Game.Input;
+using UnityEngine;
 using UnityEngine.UIElements;
+using VContainer;
 
 namespace Game.UI
 {
-    public class CutsceneView
+    [RequireComponent(typeof(UIDocument))]
+    public class CutsceneView : MonoBehaviour
     {
-        private const int HOLD_TIME = 2;
-        private const int TYPE_WRITER_CHAR_PER_SEC = 30;
+        [SerializeField]
+        private CutsceneDefinition cutscene;
 
-        private readonly TimerPool _timers;
-        private readonly Typewriter _typewriter;
-        private readonly TimerUpdatable _holdTimer;
+        private Cutscene _cutscene;
 
-        private VisualElement _container;
-        private TypewriterLabel _subtitles;
-        private Image _slide;
-
-        private List<CutsceneSlide> _slides;
-        private VisualElement _slider;
+        private IInputService _input;
+        private IInputControlMenu _menuControl;
         
-        private VisualElement _action;
-
-        private int _currentSlideIndex;
-        private int _currentTextIndex;
-        
-        private VisualElement _skipAction;
-        private Label _skipActionText;
-
         public event Action Completed;
 
-        public CutsceneView(TimerPool timers, Typewriter typewriter)
+        [Inject]
+        public void Construct(Cutscene view, IInputService input, IInputControlMenu menuControl)
         {
-            _timers = timers;
-            _typewriter = typewriter;
-            _typewriter.onComplete = CompleteText;
+            _cutscene = view;
 
-            _holdTimer = _timers.GetTimer(TimeSpan.FromSeconds(HOLD_TIME), OnHoldComplete);
+            _input = input;
+            _menuControl = menuControl;
         }
 
-
-        public void Create(VisualElement root)
+        public void Play()
         {
-            _container = root.Q<VisualElement>(LayoutNames.Cutscene.CONTAINER);
-            _slider = root.Q<VisualElement>(LayoutNames.Cutscene.SLIDER);
+            _input.ReplaceState(InputSchemeGame.Menu);
+            _cutscene.Start(cutscene.Slides);
+        }
 
-            _slide = _container.Q<Image>(LayoutNames.Cutscene.SLIDE_CURRENT);
-            _subtitles = _container.Q<TypewriterLabel>(LayoutNames.Cutscene.TEXT_SUBTITLES);
+        private void Awake()
+        {
+            var document = GetComponent<UIDocument>();
 
-            _action = _container.Q<VisualElement>(LayoutNames.Cutscene.BLOCK_ACTION);
+            _cutscene.Create(document.rootVisualElement, destroyCancellationToken);
+            _cutscene.Completed += OnCompleted;
 
-            _skipAction = _container.Q<VisualElement>(LayoutNames.Cutscene.BLOCK_SKIP);
-            _skipActionText = _container.Q<Label>(LayoutNames.Cutscene.TEXT_SKIP);
+            _menuControl.BackButton.Performed += OnExitButton;
+            _menuControl.BackButton.Canceled += OnExitButtonRelease;
+
+            _menuControl.ConfirmButton.Performed += OnConfirm;
+        }
+
+        private void OnDestroy()
+        {
+            _cutscene.Completed -= OnCompleted;
+
+            _menuControl.BackButton.Performed -= OnExitButton;
+            _menuControl.BackButton.Canceled -= OnExitButtonRelease;
+
+            _menuControl.ConfirmButton.Performed -= OnConfirm;
             
-            _action.SetVisibility(false);
-            _skipAction.SetVisibility(false);
+            _cutscene.Destroy();
         }
 
-        public void Destroy()
-        {
-            _timers.ReleaseTimer(_holdTimer);
-            _typewriter.Dispose();
-        }
+        private void OnExitButton()
+            => _cutscene.StartHoldExit();
 
-        public void Start(List<CutsceneSlide> slides)
-        {
-            _slides = slides;
+        private void OnExitButtonRelease()
+            => _cutscene.StopHoldExit();
 
-            ShowSlide(0);
-        }
-
-        private void ShowSlide(int slideIndex)
-        {
-            _currentSlideIndex = slideIndex;
-
-            SetImage(slideIndex);
-            StartText(0);
-        }
-
-        private void SetImage(int slideIndex)
-        {
-            CutsceneSlide slide = _slides[slideIndex];
-            _slide.sprite = slide.Image;
-        }
-
-        private void StartText(int i)
-        {
-            CutsceneSlide slide = GetCurrentSlide();
-            LocalizedString text = slide.Texts[i];
-            _subtitles.Text = text.GetLocalizedString();
-
-            _typewriter.Start(_subtitles, TYPE_WRITER_CHAR_PER_SEC);
-            _action.SetVisibility(false);
-        }
-
-        private void CompleteText()
-        {
-            _typewriter.Complete();
-            _action.SetVisibility(true);
-        }
-
-        public void Next()
-        {
-            if (!_typewriter.IsComplete)
-            {
-                CompleteText();
-                return;
-            }
-
-            bool hasSlides = _currentSlideIndex < _slides.Count - 1;
-            if (!hasSlides)
-            {
-                Complete();
-                return;
-            }
-
-            CutsceneSlide slide = GetCurrentSlide();
-            bool hasTexts = _currentTextIndex < slide.Texts.Count - 1;
-            if (hasTexts)
-                ShowNextText();
-            else
-                ShowNextSlide();
-        }
-
-        private void ShowNextSlide()
-        {
-            _currentTextIndex = 0;
-            _currentSlideIndex++;
-            ShowSlide(_currentSlideIndex);
-        }
-
-        private void ShowNextText()
-        {
-            _currentTextIndex++;
-            StartText(_currentTextIndex);
-        }
+        private void OnCompleted()
+            => Complete();
 
         private void Complete()
             => Completed?.Invoke();
 
-        private CutsceneSlide GetCurrentSlide()
-            => _slides[_currentSlideIndex];
-
-        public void StartHoldExit()
-        {
-            _holdTimer.Start();
-            _skipAction.SetVisibility(true);
-        }
-
-        public void StopHoldExit()
-        {
-            _holdTimer.Stop();
-            _skipAction.SetVisibility(false);
-        }
-
-        private void OnHoldComplete()
-            => Completed?.Invoke();
+        private void OnConfirm()
+            => _cutscene.Next();
     }
 }

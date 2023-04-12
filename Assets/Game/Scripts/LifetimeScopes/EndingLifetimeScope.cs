@@ -1,4 +1,4 @@
-﻿using Game.GameFlow.Ending;
+﻿using Game.UI;
 using VContainer;
 using VContainer.Unity;
 
@@ -7,6 +7,6 @@ namespace Game.LifetimeScopes
     public class EndingLifetimeScope : LifetimeScope
     {
         protected override void Configure(IContainerBuilder builder)
-            => builder.RegisterEntryPoint<EndingEntryPoint>();
+            => builder.Register<Cutscene>(Lifetime.Singleton);
     }
 }

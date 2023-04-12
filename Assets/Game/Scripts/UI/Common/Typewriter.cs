@@ -6,11 +6,12 @@ namespace Game.UI
 {
     public sealed class Typewriter : IDisposable
     {
+        public Action OnComplete { get; set; }
+
         private TypewriterLabel _label;
 
         private readonly TimerUpdatable _timer;
         private readonly TimerPool _timers;
-        public Action onComplete;
 
         [Inject]
         public Typewriter(TimerPool timers)
@@ -40,7 +41,7 @@ namespace Game.UI
             if (_label.IsTextFullyVisible)
             {
                 Complete();
-                onComplete?.Invoke();
+                OnComplete?.Invoke();
             }
             else
             {

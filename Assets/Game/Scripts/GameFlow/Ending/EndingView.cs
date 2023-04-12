@@ -5,7 +5,7 @@ using VContainer;
 namespace Game.GameFlow
 {
     [RequireComponent(typeof(CutsceneView))]
-    public class IntroView : MonoBehaviour
+    public class EndingView : MonoBehaviour
     {
         private RootStateMachine _rootStateMachine;
         private CutsceneView _cutscene;
@@ -24,6 +24,6 @@ namespace Game.GameFlow
             => _cutscene.Play();
 
         private void OnCompleted()
-            => _rootStateMachine.EnterState<PlanetState>();
+            => _rootStateMachine.EnterState<MainMenuState>();
     }
 }

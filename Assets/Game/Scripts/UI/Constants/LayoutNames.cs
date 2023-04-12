@@ -177,7 +177,10 @@
 
             public const string BLOCK_SKIP = "block-skip";
             public const string TEXT_SKIP = "text-skip";
+
+            public const string SLIDE_HIDDEN_CLASS_NAME = "slider__slide--hidden";
+            public const string SUBTITLES_HIDDEN_CLASS_NAME = "subtitles--hidden";
+            public const string ACTION_HIDDEN_CLASS_NAME = "action--hidden";
         }
-        
     }
 }
