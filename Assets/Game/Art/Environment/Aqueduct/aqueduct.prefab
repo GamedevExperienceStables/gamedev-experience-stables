@@ -194,6 +194,8 @@ GameObject:
   - component: {fileID: 1223686857639205682}
   - component: {fileID: 2706713728225873837}
   - component: {fileID: 7436566179297838263}
+  - component: {fileID: 581660664109155821}
+  - component: {fileID: 4405780227754686301}
   m_Layer: 0
   m_Name: aqueduct
   m_TagString: Untagged
@@ -208,7 +210,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995297057460863368}
-  m_LocalRotation: {x: -0, y: -0.7035731, z: -0, w: 0.7106229}
+  m_LocalRotation: {x: 0, y: -0.70357454, z: 0, w: 0.7106215}
   m_LocalPosition: {x: -295.37997, y: -9.32, z: 51.59}
   m_LocalScale: {x: 0.8762599, y: 0.87626, z: 0.8762599}
   m_ConstrainProportionsScale: 0
@@ -219,7 +221,7 @@ Transform:
   - {fileID: 4639839218811713499}
   - {fileID: 3783360796279951302}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -89.429, z: 0}
 --- !u!65 &2706713728225873837
 BoxCollider:
@@ -263,6 +265,48 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9497764, y: 13.56526, z: 0.9999997}
   m_Center: {x: 5.059875, y: 6.282633, z: -0.000000003126921}
+--- !u!65 &581660664109155821
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995297057460863368}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2, z: 13.2}
+  m_Center: {x: 5, y: 12, z: -7.2}
+--- !u!65 &4405780227754686301
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995297057460863368}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2, z: 13.2}
+  m_Center: {x: -0.3, y: 12, z: -7.2}
 --- !u!1 &2066242645826364594
 GameObject:
   m_ObjectHideFlags: 0
