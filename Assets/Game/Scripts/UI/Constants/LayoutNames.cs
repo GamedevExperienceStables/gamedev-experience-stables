@@ -75,7 +75,9 @@
             public const string RUNE_SLOT_BACKGROUND = "background";
             
             public const string WIDGET_INTERACTION = "widget-interaction";
+            public const string WIDGET_INTERACTION_BLOCK = "widget-interaction-block";
             public const string WIDGET_INTERACTION_TEXT = "text";
+            public const string WIDGET_INTERACTION_HIDDEN_CLASS_NAME = "widget-interaction--hidden";
             
             public const string WIDGET_SAVING = "widget-saving";
             public const string WIDGET_SAVING_CONTAINER = "container";
