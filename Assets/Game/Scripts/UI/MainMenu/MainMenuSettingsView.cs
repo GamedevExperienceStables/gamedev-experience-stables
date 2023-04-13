@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Localization;
 using Game.Utils;
+using UnityEngine.Localization;
 using UnityEngine.UIElements;
 using VContainer;
 
@@ -15,10 +17,10 @@ namespace Game.UI
         private IList<Label> _headerLabels;
         
         private ILocalizationService _localisation;
-        private StartMenuView.Settings _settings;
+        private Settings _settings;
 
         [Inject]
-        public void Construct(SettingsView settingsView, ILocalizationService localisation, StartMenuView.Settings settings)
+        public void Construct(SettingsView settingsView, ILocalizationService localisation, Settings settings)
         {
             _settingsView = settingsView;
             _localisation = localisation;
@@ -57,7 +59,9 @@ namespace Game.UI
         private void UpdateText()
         {
             foreach (Label headerLabel in _headerLabels)
-                headerLabel.text = _settings.settings.button.GetLocalizedString();
+                headerLabel.text = _settings.header.label.GetLocalizedString();
+
+            _buttonBack.text = _settings.back.label.GetLocalizedString();
         }
 
         public override void Show()
@@ -74,5 +78,18 @@ namespace Game.UI
 
         private void OnBackButton()
             => _router.Back();
+        
+        [Serializable]
+        public class Settings
+        {
+            [Serializable]
+            public struct Page
+            {
+                public LocalizedString label;
+            }
+
+            public Page header;
+            public Page back;
+        }
     }
 }

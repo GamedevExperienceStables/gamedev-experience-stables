@@ -1,16 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/UI/Uss/SettingsScreenStyle.uss?fileID=7433441132597879392&amp;guid=3d76e5a4081ebca44b676b1d9a52d5eb&amp;type=3#SettingsScreenStyle" />
     <ui:VisualElement>
         <ui:VisualElement style="margin-top: 20px;">
-            <ui:DropdownField label="Language" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="field-locale" />
+            <ui:DropdownField label="Language" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="field-locale" class="field-label" style="overflow: visible; height: 58px;" />
         </ui:VisualElement>
         <ui:VisualElement style="margin-top: 20px;">
-            <ui:Label tabindex="-1" text="Graphics" display-tooltip-when-elided="true" name="label-graphics" style="-unity-font-style: bold;" />
-            <ui:DropdownField label="Quality" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="field-quality" />
-            <ui:DropdownField label="Resolution" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="field-resolution" />
-            <ui:Toggle label="Fullscreen" name="field-fullscreen" />
+            <ui:Label tabindex="-1" text="Graphics" display-tooltip-when-elided="true" name="label-graphics" class="headline-label" style="-unity-font-style: bold;" />
+            <ui:DropdownField label="Quality" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="field-quality" style="height: 58px;" />
+            <ui:DropdownField label="Resolution" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="field-resolution" style="height: 58px;" />
+            <ui:Toggle label="Fullscreen" name="field-fullscreen" style="color: rgb(90, 55, 55); font-size: 35px; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&amp;guid=9f296ab3b5e417845bc8de63c7b23c43&amp;type=2#koliko-Regular SDF&apos;); height: 58px;" />
         </ui:VisualElement>
         <ui:VisualElement style="margin-top: 20px;">
-            <ui:Label tabindex="-1" text="Audio" display-tooltip-when-elided="true" name="label-audio" style="-unity-font-style: bold;" />
+            <ui:Label tabindex="-1" text="Audio" display-tooltip-when-elided="true" name="label-audio" class="headline-label" style="-unity-font-style: bold;" />
             <ui:Slider picking-mode="Ignore" label="Volume" value="42" high-value="100" name="field-audio-master" style="flex-grow: 1;" />
             <ui:Slider picking-mode="Ignore" label="Effects" value="42" high-value="100" name="field-audio-effects" style="flex-grow: 1;" />
             <ui:Slider picking-mode="Ignore" label="Music" value="42" high-value="100" name="field-audio-music" style="flex-grow: 1;" />

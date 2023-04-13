@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Game.Audio;
 using Game.Localization;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.UIElements;
 
 namespace Game.UI
@@ -11,6 +13,10 @@ namespace Game.UI
     {
         private readonly SettingsViewModel _viewModel;
         private readonly ILocalizationService _localization;
+        private Settings _settings;
+        
+        private Label _graphicLabel;
+        private Label _audioLabel;
 
         private DropdownField _fieldQuality;
         private DropdownField _fieldResolution;
@@ -27,14 +33,18 @@ namespace Game.UI
         
         private DropdownField _fieldLocale;
 
-        public SettingsView(SettingsViewModel viewModel, ILocalizationService localization)
+        public SettingsView(SettingsViewModel viewModel, ILocalizationService localization, Settings settings)
         {
             _viewModel = viewModel;
             _localization = localization;
+            _settings = settings;
         }
 
         public void Create(VisualElement root)
         {
+            _graphicLabel = root.Q<Label>("label-graphics");
+            _audioLabel = root.Q<Label>("label-audio");
+            
             _fieldQuality = root.Q<DropdownField>("field-quality");
             _fieldResolution = root.Q<DropdownField>("field-resolution");
             _fieldFullscreen = root.Q<Toggle>("field-fullscreen");
@@ -58,6 +68,7 @@ namespace Game.UI
             InitFullscreen();
             InitScreenResolutions();
             InitLocalization();
+            //UpdateText(); Broken
         }
 
         private void RegisterCallbacks()
@@ -95,6 +106,19 @@ namespace Game.UI
 
         private void UpdateText()
         {
+            // Broken !
+            /*_graphicLabel.text = _settings.graphic.label.GetLocalizedString();
+            _audioLabel.text = _settings.audio.label.GetLocalizedString();
+
+            _fieldLocale.Q<Label>().text = _settings.language.label.GetLocalizedString();
+            
+            _fieldQuality.Q<Label>().text = _settings.quality.label.GetLocalizedString();
+            _fieldResolution.Q<Label>().text = _settings.resolution.label.GetLocalizedString();
+            _fieldFullscreen.Q<Label>().text = _settings.fullscreen.label.GetLocalizedString();
+            
+            _fieldMasterVolume.Q<Label>().text = _settings.master.label.GetLocalizedString();
+            _fieldMusicVolume.Q<Label>().text = _settings.music.label.GetLocalizedString();
+            _fieldEffectsVolume.Q<Label>().text = _settings.effects.label.GetLocalizedString();*/
         }
 
         #region Graphics
@@ -205,5 +229,25 @@ namespace Game.UI
             => _viewModel.SetLocale(evt.newValue);
 
         #endregion
+        
+        [Serializable]
+        public class Settings
+        {
+            [Serializable]
+            public struct Page
+            {
+                public LocalizedString label;
+            }
+
+            public Page language;
+            public Page graphic;
+            public Page quality;
+            public Page resolution;
+            public Page fullscreen;
+            public Page audio;
+            public Page master;
+            public Page music;
+            public Page effects;
+        }
     }
 }

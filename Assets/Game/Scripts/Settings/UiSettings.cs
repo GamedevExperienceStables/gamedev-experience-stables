@@ -11,6 +11,12 @@ namespace Game.Settings
         private StartMenuView.Settings startMenu;
         
         [SerializeField]
+        private MainMenuSettingsView.Settings settingsMenu;
+        
+        [SerializeField]
+        private SettingsView.Settings settingsControlsMenu;
+        
+        [SerializeField]
         private PauseMenuView.Settings pauseMenu;
         
         [SerializeField]
@@ -23,6 +29,8 @@ namespace Game.Settings
         private Cutscene.Settings cutscene;
 
         public StartMenuView.Settings StartMenu => startMenu;
+        public MainMenuSettingsView.Settings SettingsMenu => settingsMenu;
+        public SettingsView.Settings SettingsControlsMenuMenu => settingsControlsMenu;
         public PauseMenuView.Settings PauseMenu => pauseMenu;
         public GameOverView.Settings GameOver => gameOver;
 
