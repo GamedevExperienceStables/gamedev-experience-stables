@@ -78,8 +78,8 @@
 }
 
 .widget-interaction {
-    text-shadow: 1px 2px 1px rgb(0, 0, 0);    
-    opacity: 1;    
+    text-shadow: 1px 2px 1px rgb(0, 0, 0);
+    opacity: 1;
     transition: opacity 150ms ease-out-sine;
 }
 
@@ -88,8 +88,8 @@
 }
 
 .widget-interaction__text {
-    -unity-font-definition: var(--font-text);    
-    
+    -unity-font-definition: var(--font-text);
+
     color: rgb(255, 255, 255);
     -unity-text-align: upper-center;
     font-size: 28px;
@@ -102,10 +102,11 @@
 }
 
 .dialog-window {
-    max-width: 650px;
+    max-width: 750px;
     padding: 16px 22px;
     background-color: rgba(0, 0, 0, 0.59);
     border-radius: 10px;
+    
     opacity: 1;
     scale: 1;
     translate: 0;
@@ -121,10 +122,24 @@
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+
+    -unity-font-definition: var(--font-text);
 }
 
 .dialog-window--hidden {
     opacity: 0;
     scale: 0.98;
     translate: 0 -20px;
+}
+
+.dialog-window__title {
+    color: rgba(255, 255, 255, 0.55);
+    white-space: normal;
+    font-size: 24px;
+}
+
+.dialog-window__text {
+    color: rgb(255, 255, 255);
+    white-space: normal;
+    font-size: 28px;
 }
