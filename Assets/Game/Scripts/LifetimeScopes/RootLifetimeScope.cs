@@ -148,6 +148,8 @@ namespace Game.LifetimeScopes
             builder.Register<SettingsViewModel>(Lifetime.Singleton);
             
             builder.Register<ModalViewModel>(Lifetime.Singleton);
+
+            builder.Register<Typewriter>(Lifetime.Transient);
         }
 
         private void RegisterDataTables(IContainerBuilder builder)

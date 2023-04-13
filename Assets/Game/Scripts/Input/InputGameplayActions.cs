@@ -3,5 +3,6 @@
     public enum InputGameplayActions
     {
         Interaction,
+        Back,
     }
 }

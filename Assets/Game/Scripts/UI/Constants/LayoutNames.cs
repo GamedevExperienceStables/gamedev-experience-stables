@@ -51,6 +51,7 @@
             public const string PAGE_HEADING = "header";
             
             public const string BUTTON_ACTIVE_CLASS_NAME = "menu-button--active";
+            
         }
 
         public static class Hud
@@ -156,6 +157,30 @@
             
             public const string BUTTON_CONFIRM = "button-confirm";
             public const string BUTTON_CANCEL = "button-cancel";
+        }
+        
+        public static class Cutscene
+        {
+            public const string CONTAINER = "cutscene";
+            
+            public const string SLIDER = "slider";
+            public const string SLIDE_PREV = "slide-prev";
+            public const string SLIDE_NEXT = "slide-next";
+            public const string SLIDE_CURRENT = "slide-current";
+            
+            public const string BLOCK_SUBTITLES = "block-subtitles";
+            public const string TEXT_SUBTITLES = "text-subtitles";
+
+            public const string BLOCK_ACTION = "block-action";
+            public const string TEXT_ACTION = "text-action";
+            public const string ICON_ACTION = "icon-action";
+
+            public const string BLOCK_SKIP = "block-skip";
+            public const string TEXT_SKIP = "text-skip";
+
+            public const string SLIDE_HIDDEN_CLASS_NAME = "slider__slide--hidden";
+            public const string SUBTITLES_HIDDEN_CLASS_NAME = "subtitles--hidden";
+            public const string ACTION_HIDDEN_CLASS_NAME = "action--hidden";
         }
     }
 }

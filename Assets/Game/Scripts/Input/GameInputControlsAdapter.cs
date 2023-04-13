@@ -18,6 +18,9 @@ namespace Game.Input
 
         public GameInputControls.GameplayActions GetGameplayActions() 
             => _controls.Gameplay;
+        
+        public GameInputControls.MenuActions GetMenuActions() 
+            => _controls.Menu;
 
         public void GameplayEnable() => _controls.Gameplay.Enable();
         public void GameplayDisable() => _controls.Gameplay.Disable();

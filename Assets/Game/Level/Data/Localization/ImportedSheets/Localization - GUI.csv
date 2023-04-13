@@ -19,3 +19,4 @@ Menu_Modal_Quit_Title,Are you sure you want to exit the game?,"Вы уверен
 Menu_Modal_NewGame_Title,Are you sure you want to start a new game?,"Вы уверены, что хотите начать новую игру?","Вы ўпэўнены, што хочаце пачаць новую гульню?","Ви впевнені, що хочете розпочати нову гру?"
 PauseMenu_Modal_Quit_Title,Are you sure you want to exit the game?,"Вы уверены, что хотите выйти из игры?","Вы ўпэўнены, што хочаце выйсці з гульні?","Ви впевнені, що хочете вийти з гри?"
 PauseMenu_Modal_Quit_Message,Unsaved progress will be lost.,Несавретый прогресс будет потерян.,Недахаваны прагрэс будзе страчаны.,Незбережений прогрес буде втрачено.
+Cutscene_Skip_Label,Hold <b>{0}</b> to skip,"Удерживайте <b>{0}</b>, чтобы пропустить",Трымай <b> {0} </b> прапускаць,Утримуйте <b> {0} </b>

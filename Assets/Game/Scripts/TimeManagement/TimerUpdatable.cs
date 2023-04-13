@@ -11,7 +11,7 @@ namespace Game.TimeManagement
         private bool _isLooped;
         private Action _onComplete;
 
-        private float _timeElapsedBeforeStop = -1;
+        private float _timeElapsedBeforeStop;
         private float _timeElapsedBeforePause = -1;
 
         private float _startTime;
@@ -20,10 +20,10 @@ namespace Game.TimeManagement
         public bool IsCompleted { get; private set; }
 
         public bool IsStopped
-            => _timeElapsedBeforeStop > 0;
+            => _timeElapsedBeforeStop >= 0;
 
         public bool IsPaused
-            => _timeElapsedBeforePause > 0;
+            => _timeElapsedBeforePause >= 0;
 
         public bool IsDone
             => IsCompleted || IsStopped;
@@ -58,11 +58,9 @@ namespace Game.TimeManagement
             _onComplete = onComplete;
             _isLooped = isLooped;
             _ignoreTimeScale = ignoreTimeScale;
-
-            Stop();
         }
 
-        public void Reset() 
+        public void Reset()
             => _onComplete = null;
 
         public void Start()
@@ -79,7 +77,7 @@ namespace Game.TimeManagement
         public void Start(TimeSpan duration)
         {
             _duration = (float)duration.TotalSeconds;
-            
+
             Start();
         }
 

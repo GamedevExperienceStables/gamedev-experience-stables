@@ -5,6 +5,7 @@ namespace Game.Input
 {
     public class InputControlMenu : IInputControlMenu, GameInputControls.IMenuActions
     {
+        public InputButton ConfirmButton { get; } = new();
         public InputButton BackButton { get; } = new();
         public InputButton MenuButton { get; } = new();
         public InputButton OptionButton { get; } = new();
@@ -48,6 +49,18 @@ namespace Game.Input
             else if (context.canceled)
             {
                 OptionButton.TriggerButtonUp();
+            }
+        }
+
+        public void OnConfirm(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                ConfirmButton.TriggerButtonDown();
+            }
+            else if (context.canceled)
+            {
+                ConfirmButton.TriggerButtonUp();
             }
         }
     }
