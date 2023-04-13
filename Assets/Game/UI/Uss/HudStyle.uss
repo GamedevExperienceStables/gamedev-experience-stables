@@ -82,3 +82,31 @@
     right: 20px;
     top: 20px;
 }
+
+.dialog-window {
+    max-width: 650px;
+    padding: 16px 22px;
+    background-color: rgba(0, 0, 0, 0.59);
+    border-radius: 10px;
+    opacity: 1;
+    scale: 1;
+    translate: 0;
+    
+    transition-property: scale, opacity, translate;
+    transition-duration: 350ms, 150ms, 150ms;
+    transition-timing-function: ease-out-sine;
+    
+    background-image: url('project://database/Assets/Epic%20Toon%20FX/Textures/gradient_edges.png?fileID=2800000&guid=2d788eb1d2a7d6a4aa852b2985fd874c&type=3#gradient_edges');
+    -unity-background-image-tint-color: rgba(0, 0, 0, 0.41);
+    
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.dialog-window--hidden {
+    opacity: 0;
+    scale: 0.98;
+    translate: 0 -20px;
+}

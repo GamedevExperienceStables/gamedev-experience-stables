@@ -85,8 +85,11 @@
             public const string WIDGET_SAVING_ENABLED_CLASS_NAME = "widget-saving--enabled";
             
             public const string DIALOG = "widget-dialog";
+            public const string DIALOG_WINDOW = "dialog-window";
             public const string DIALOG_TITLE = "title";
             public const string DIALOG_TEXT = "text";
+
+            public const string DIALOG_HIDDEN_CLASS_NAME = "dialog-window--hidden";
         }
         
         public static class MiniMap

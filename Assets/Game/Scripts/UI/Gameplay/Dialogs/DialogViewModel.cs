@@ -24,7 +24,7 @@ namespace Game.UI
         public void UnSubscribeDialogClosing(Action callback)
             => _dialogService.Closing -= callback;
 
-        public bool TryGetDialog(out DialogData dialog)
-            => _dialogService.PopDialog(out dialog);
+        public bool TryDequeueDialog(out DialogData dialog)
+            => _dialogService.TryDequeueDialog(out dialog);
     }
 }

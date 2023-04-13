@@ -16,7 +16,7 @@
             </ui:VisualElement>
             <ui:Button text="Menu" display-tooltip-when-elided="true" focusable="false" name="button-menu" style="-unity-font-style: normal; display: none;" />
             <ui:Instance template="MiniMap" name="widget-map" />
-            <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; left: 0; right: 0; top: 90px;">
+            <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; left: 0; right: 0; top: 30px;">
                 <ui:Instance template="DialogWindow" name="widget-dialog" style="align-items: center;" />
             </ui:VisualElement>
         </ui:VisualElement>
