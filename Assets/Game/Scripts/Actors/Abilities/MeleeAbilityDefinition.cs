@@ -39,13 +39,16 @@ namespace Game.Actors
         private LayerMask mask;
 
         [Space]
-        [SerializeField]
+        [SerializeField, Min(0)]
         private float castTime = 0.75f;
+
+        [SerializeField, Min(0)]
+        private float animationSpeedMultiplier = 1f;
 
         [Header("FX")]
         [SerializeField]
         private GameObject completeEffectPrefab;
-        
+
         [Space]
         [SerializeField]
         private GameObject hitEffectPrefab;
@@ -68,6 +71,7 @@ namespace Game.Actors
         public Vector3 HitOffset => hitOffset;
 
         public GameObject CompleteEffectPrefab => completeEffectPrefab;
+        public float AnimationSpeedMultiplier => animationSpeedMultiplier;
     }
 
     public class MeleeAbility : ActorAbility<MeleeAbilityDefinition>
@@ -145,7 +149,8 @@ namespace Game.Actors
 
         private void MakeDamage()
         {
-            Vector3 sphereShift = Owner.Transform.position + Owner.Transform.TransformDirection(Definition.SphereColliderShift);
+            Vector3 sphereShift = Owner.Transform.position +
+                                  Owner.Transform.TransformDirection(Definition.SphereColliderShift);
 #if UNITY_EDITOR
             DebugExtensions.DebugWireSphere(sphereShift, radius: Definition.MeleeRangeRadius);
 #endif
@@ -156,9 +161,9 @@ namespace Game.Actors
                 Transform hit = _hitColliders[i].transform;
                 if (hit.gameObject.TryGetComponent(out IActorController destinationOwner))
                     destinationOwner.GetComponent<DamageableController>().Damage(GetDamage());
-                
+
                 Vector3 hitPosition = hit.position;
-                
+
                 if (Definition.PushForce > 0)
                 {
                     Vector3 dir = hitPosition - Owner.Transform.position;
@@ -171,7 +176,11 @@ namespace Game.Actors
         }
 
         private void SetAnimation(bool isActive)
-            => _animator.SetAnimation(AnimationNames.MeleeAttack, isActive);
+        {
+            float animationSpeed = isActive ? Definition.AnimationSpeedMultiplier : 1f;
+            _animator.SetAnimation(AnimationNames.AttackSpeedMultiplier, animationSpeed);
+            _animator.SetAnimation(AnimationNames.MeleeAttack, isActive);
+        }
 
         private float GetCost()
         {
@@ -193,17 +202,17 @@ namespace Game.Actors
         {
             if (!_hasCompleteEffect)
                 return;
-            
+
             Vector3 spawnPoint = Owner.Transform.position;
             Quaternion spawnRotation = Quaternion.LookRotation(Owner.Transform.forward);
-            Object.Instantiate(Definition.CompleteEffectPrefab, spawnPoint, spawnRotation);    
+            Object.Instantiate(Definition.CompleteEffectPrefab, spawnPoint, spawnRotation);
         }
 
         private void SpawnHitEffect(Transform hit)
         {
             if (!_hasHitEffect)
                 return;
-            
+
             Vector3 spawnPoint = hit.position + hit.TransformDirection(Definition.HitOffset);
             Quaternion spawnRotation = Quaternion.LookRotation(hit.forward);
             Object.Instantiate(Definition.HitEffectPrefab, spawnPoint, spawnRotation);
