@@ -1,28 +1,23 @@
-﻿using UnityEngine;
+﻿using Game.Utils;
+using UnityEngine;
 
 namespace Game.Weapons
 {
     [CreateAssetMenu(menuName = "Projectile/Trajectory/Linear")]
     public class ProjectileTrajectoryLinear : ProjectileTrajectory
     {
-        [SerializeField, Range(0, 90)]
-        private float angle;
-
-        [SerializeField]
-        private float mass;
-
-        public override Vector3 GetInitialDirection(Transform transform)
+        public override void GetInitialVelocity(Vector3 startPosition, Vector3 targetPosition,
+            float speed, out Vector3 startVelocity, out float gravity)
         {
-            Quaternion rotation = Quaternion.AngleAxis(-angle, transform.right);
-            Vector3 direction = rotation * transform.forward;
-            return direction;
+            DebugExtensions.DebugPoint(targetPosition, duration: 1f, color: Color.red);
+
+            startVelocity = Ballistics.GetLinearVelocity(startPosition, targetPosition, speed);
+            gravity = 0;
+
+            DebugExtensions.DebugArrow(startPosition, startVelocity, Color.cyan, 1f);
         }
 
-        public override Vector3 CalculateVelocity(Vector3 velocity)
-        {
-            Vector3 gravity = Vector3.down * mass;
-            Vector3 calculatedVelocity = velocity + gravity;
-            return calculatedVelocity;
-        }
+        public override void Tick(float deltaTime, float gravity, ref Vector3 position, ref Vector3 velocity)
+            => position += velocity * deltaTime;
     }
 }

@@ -1,0 +1,22 @@
+Key,English(en),Russian(ru),Belarusian(be),Ukrainian(uk)
+Menu_NewGame_Button,New Game,Новая игра,Новая гульня,Нова гра
+Menu_Continue_Button,Continue,Продолжить,Працягнуць,Продовжувати
+Menu_Settings_Button,Settings,Настройки,Налады,Налаштування
+Menu_About_Button,About Creators,О нас,Пра нас,Про творців
+Menu_Artbook_Button,Artbook,Артбук,Артбук,Художня книга
+Menu_Quit_Button,Quit,Выйти,Выйсці,Кинути
+Menu_NewGame_Caption,Start your adventure with Snoody right now!,Начните свое приключение с Snoody прямо сейчас!,Пачніце сваю прыгоду з Snoody прама зараз!,Почніть свою пригоду з Snoody прямо зараз!
+Menu_Continue_Caption,It's time to save the planet Airi!,Пришло время сэкономить планету Airi!,Час выратаваць планету Эры!,Настав час заощадити планету Ері!
+Menu_Settings_Caption,Make the game more comfortable for yourself!,Сделайте игру более удобной для себя!,Зрабіце гульню больш камфортнай для сябе!,Зробіть гру більш комфортною для себе!
+Menu_About_Caption,Look at our wonderful work. We tried our best!,Посмотрите на нашу замечательную работу. Мы старались изо всех сил!,Паглядзіце на нашу цудоўную працу. Мы паспрабавалі ўсё магчымае!,Подивіться на нашу чудову роботу. Ми намагалися зробити все можливе!
+Menu_Artbook_Caption,Meet the crew of this wonderful ship!,Познакомьтесь с командой этого замечательного корабля!,Пазнаёмцеся з экіпажам гэтага цудоўнага карабля!,Зустріньте екіпаж цього чудового корабля!
+Menu_Quit_Caption,Is it time for a breakup? :(,Настало время для разрыва? :(,Надышоў час разрыву? :(,Настав час для розриву? :(
+Menu_Preview_Caption,Some preview text,Превью текст,Некаторыя тэкст папярэдняга прагляду,Якийсь текст попереднього перегляду
+PauseMenu_Resume_Button,Resume,Возобновить,Аднавіць,Відновивши
+PauseMenu_MainMenu_Button,Main menu,Главное меню,Галоўнае меню,Головне меню
+Menu_LastSave_Button,Last save,Последнее сохранение,Апошняе захаванне,Останнє збереження
+Menu_Modal_Quit_Title,Are you sure you want to exit the game?,"Вы уверены, что хотите выйти из игры?","Вы ўпэўнены, што хочаце выйсці з гульні?","Ви впевнені, що хочете вийти з гри?"
+Menu_Modal_NewGame_Title,Are you sure you want to start a new game?,"Вы уверены, что хотите начать новую игру?","Вы ўпэўнены, што хочаце пачаць новую гульню?","Ви впевнені, що хочете розпочати нову гру?"
+PauseMenu_Modal_Quit_Title,Are you sure you want to exit the game?,"Вы уверены, что хотите выйти из игры?","Вы ўпэўнены, што хочаце выйсці з гульні?","Ви впевнені, що хочете вийти з гри?"
+PauseMenu_Modal_Quit_Message,Unsaved progress will be lost.,Несавретый прогресс будет потерян.,Недахаваны прагрэс будзе страчаны.,Незбережений прогрес буде втрачено.
+Cutscene_Skip_Label,Hold <b>{0}</b> to skip,"Удерживайте <b>{0}</b>, чтобы пропустить",Трымай <b> {0} </b> прапускаць,Утримуйте <b> {0} </b>

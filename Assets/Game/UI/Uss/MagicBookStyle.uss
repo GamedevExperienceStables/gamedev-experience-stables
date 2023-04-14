@@ -96,25 +96,26 @@
 }
 
 .magic-book-details__title {
-    font-size: 35px;
-    -unity-font-style: bold;
+    font-size: 45px;
     flex-shrink: 1;
     white-space: normal;
     letter-spacing: -4px;
     margin: 0;
     padding: 0;
+    -unity-font-definition: var(--font-heading);
 }
 
 .magic-book-details__description {
     flex-grow: 1;
     padding: 35px 20px 20px 20px;
-    font-size: 20px;
+    font-size: 24px;
     white-space: normal;
+    -unity-font-definition: var(--font-text);
 }
 
 .magic-book-details__level {
-    font-size: 20px;
-    -unity-font-style: bold;
+    font-size: 24px;
     margin: 0;
     padding: 0;
+    -unity-font-definition: var(--font-text);
 }

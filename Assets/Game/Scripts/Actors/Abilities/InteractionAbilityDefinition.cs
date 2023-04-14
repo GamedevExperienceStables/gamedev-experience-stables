@@ -74,7 +74,9 @@ namespace Game.Actors
 
         private void AddInteraction(Interactable interactable)
         {
+#if UNITY_EDITOR
             Debug.Log($"[INTERACTION] +{interactable.gameObject.name}");
+#endif
 
             Interaction interaction = _interactionService.CreateInteraction(interactable, Owner);
             _potentialInteractions.Add(interaction);
@@ -102,7 +104,7 @@ namespace Game.Actors
         {
             foreach (Interaction potentialInteraction in _potentialInteractions)
             {
-                if (!potentialInteraction.CanExecute()) 
+                if (!_interactionService.CanExecute(potentialInteraction))
                     continue;
                 
                 _interactionService.StartInteraction(potentialInteraction);

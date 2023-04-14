@@ -122,12 +122,12 @@ TextureImporter:
       name: Magic_Book_Atlas_0
       rect:
         serializedVersion: 2
-        x: 227
-        y: 2972
-        width: 4136
-        height: 2802
+        x: 50
+        y: 1471
+        width: 1101
+        height: 735
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -143,12 +143,12 @@ TextureImporter:
       name: Magic_Book_Atlas_1
       rect:
         serializedVersion: 2
-        x: 4536
-        y: 3998
-        width: 1362
-        height: 1847
+        x: 1175
+        y: 1882
+        width: 252
+        height: 344
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -164,12 +164,12 @@ TextureImporter:
       name: Magic_Book_Atlas_2
       rect:
         serializedVersion: 2
-        x: 4536
-        y: 3223
-        width: 913
-        height: 561
+        x: 1177
+        y: 1705
+        width: 244
+        height: 152
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -185,12 +185,12 @@ TextureImporter:
       name: Magic_Book_Atlas_3
       rect:
         serializedVersion: 2
-        x: 56
-        y: 48
-        width: 4937
-        height: 2759
+        x: 50
+        y: 1465
+        width: 18
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -198,6 +198,48 @@ TextureImporter:
       bones: []
       spriteID: 6f9355fe6f03ce74c9ff67189efb5936
       internalID: 621831437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Magic_Book_Atlas_4
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 706
+        width: 1318
+        height: 740
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f970eabb41e77747a990e927fa11be0
+      internalID: -995416628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Magic_Book_Atlas_5
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 21
+        width: 1152
+        height: 668
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6623552274dbedf4f9f1cc162b473148
+      internalID: 1840274032
       vertices: []
       indices: 
       edges: []
@@ -214,6 +256,8 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Magic_Book_Atlas_2: -1410898347
+      Magic_Book_Atlas_4: -995416628
+      Magic_Book_Atlas_5: 1840274032
       Magic_Book_Atlas_1: -1268669046
       Magic_Book_Atlas_0: 335486347
       Magic_Book_Atlas_3: 621831437

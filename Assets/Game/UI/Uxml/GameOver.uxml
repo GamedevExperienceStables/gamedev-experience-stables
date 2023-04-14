@@ -1,12 +1,24 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Dividers" src="project://database/Assets/Game/UI/Uxml/Partial/Dividers.uxml?fileID=9197481963319205126&amp;guid=974d6707c0e349a4eb03afc94780355b&amp;type=3#Dividers" />
+    <Style src="project://database/Assets/Game/UI/Uss/SettingsScreenStyle.uss?fileID=7433441132597879392&amp;guid=3d76e5a4081ebca44b676b1d9a52d5eb&amp;type=3#SettingsScreenStyle" />
+    <Style src="project://database/Assets/Game/UI/Uss/Common.uss?fileID=7433441132597879392&amp;guid=5ad78f311a7e4511a5e4a1c08a503dc2&amp;type=3#Common" />
     <ui:VisualElement name="game-over-screen" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.64); align-items: center; justify-content: center;">
-            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center;">
-                <ui:Label tabindex="-1" text="Game Over" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 46px; -unity-font-style: bold;" />
-                <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 23px;" />
-                <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 244px;">
-                    <ui:Button text="Load Last Save" display-tooltip-when-elided="true" name="button-restart" />
-                    <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="button-exit" />
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(44, 16, 62, 0.6); align-items: center; justify-content: center;">
+            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-100320597&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_27&apos;); padding-left: 150px; padding-right: 150px; padding-top: 100px; padding-bottom: 125px;">
+                <ui:VisualElement style="background-color: rgba(0, 0, 0, 0);">
+                    <ui:Instance template="Dividers" />
+                    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 0; margin-right: 0; margin-top: 45px; margin-bottom: 35px; width: 900px;">
+                        <ui:Label tabindex="-1" text="Snoody lost this battle, but this is not the end of his story. " display-tooltip-when-elided="true" name="caption" style="color: rgb(90, 55, 55); font-size: 60px; white-space: normal; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&amp;guid=1823e5ab5312e0e40972472a78991947&amp;type=2#borsok SDF&apos;); -unity-text-align: upper-center;" />
+                    </ui:VisualElement>
+                    <ui:Instance template="Dividers" />
+                </ui:VisualElement>
+                <ui:VisualElement style="margin-left: 0; margin-right: 0; margin-top: 60px; margin-bottom: 60px; width: 650px;">
+                    <ui:Label tabindex="-1" text="You can start the New Game or continue from last save." name="description" display-tooltip-when-elided="true" style="color: rgb(155, 89, 199); font-size: 35px; -unity-font-style: bold; white-space: normal; -unity-text-align: upper-center; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&amp;guid=9f296ab3b5e417845bc8de63c7b23c43&amp;type=2#koliko-Regular SDF&apos;);" />
+                </ui:VisualElement>
+                <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-direction: row;">
+                    <ui:Button text="Last Save" display-tooltip-when-elided="true" name="button-restart" enable-rich-text="true" class="primary-button" style="background-color: rgba(188, 188, 188, 0); font-size: 35px; -unity-text-align: middle-center;" />
+                    <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); width: 50px;" />
+                    <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="button-exit" class="primary-button" style="background-color: rgba(188, 188, 188, 0); font-size: 35px; -unity-text-align: middle-center; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

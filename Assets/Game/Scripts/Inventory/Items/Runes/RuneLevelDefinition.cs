@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Game.Inventory
 {
@@ -6,8 +7,13 @@ namespace Game.Inventory
     public class RuneLevelDefinition : ScriptableObject
     {
         [SerializeField]
+        private LocalizedString text;
+        
+        [SerializeField]
         private Color color;
 
+        public LocalizedString Text => text;
+        
         public Color Color => color;
     }
 }

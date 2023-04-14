@@ -1,2 +1,3 @@
 @import url("unity-theme://default");
+@import url("/Assets/Game/UI/Uss/Common.uss");
 VisualElement {}

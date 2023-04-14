@@ -1,0 +1,9 @@
+.header-label {
+    font-size: 60px;
+    
+    color: rgba(155, 89, 199, 1);
+    
+    -unity-font-definition: var(--font-heading);
+    
+    text-shadow: -1px -1px 0 rgb(86, 38, 118), 1px 1px 0 rgb(0, 0, 0);
+}

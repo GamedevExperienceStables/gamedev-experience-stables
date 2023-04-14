@@ -3,7 +3,12 @@ guid: 8e59497e89291fb49a2ada9a92f9e2f6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Monsters_1_Rig_monsters_1_1_Rev01_monster_1.1
+    second: {fileID: 2100000, guid: 7cbc497fae40b3e458630a8880a25e7f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -33,7 +38,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle
+      name: M1_Idle
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
@@ -44,8 +49,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -119,7 +124,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: Monsters_1_Rig:Root
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

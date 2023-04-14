@@ -15,11 +15,11 @@
       "hash": "c395f7671af125d59d69f41b03edba945a2b1a84"
     },
     "com.cysharp.unitask": {
-      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.1.0",
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.3.3",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "52cdadc03519a86af7d80fa2f60dbe684acf247e"
+      "hash": "b992a061fbf68ff1eb475d0837065b0549ed31ba"
     },
     "com.dbrizov.naughtyattributes": {
       "version": "https://github.com/dbrizov/NaughtyAttributes.git#upm",
@@ -27,6 +27,16 @@
       "source": "git",
       "dependencies": {},
       "hash": "8a8fa5a9659a6d63f196391c71e06c4286c8acd7"
+    },
+    "com.magicasoft.magicacloth": {
+      "version": "https://github.com/GamedevExperienceStables/com.magicasoft.magicacloth.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.burst": "1.7.0",
+        "com.unity.collections": "1.2.0"
+      },
+      "hash": "1a6d21d6243b1820732ea509bc33b61152a95929"
     },
     "com.moremountains.feel": {
       "version": "https://github.com/GamedevExperienceStables/com.moremountains.feel.git",
@@ -58,11 +68,11 @@
       "dependencies": {}
     },
     "com.unity.addressables": {
-      "version": "1.21.2",
+      "version": "1.21.9",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.scriptablebuildpipeline": "1.21.1",
+        "com.unity.scriptablebuildpipeline": "1.21.3",
         "com.unity.modules.assetbundle": "1.0.0",
         "com.unity.modules.imageconversion": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0",
@@ -81,8 +91,8 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.burst": {
-      "version": "1.7.4",
-      "depth": 1,
+      "version": "1.8.4",
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1"
@@ -90,10 +100,21 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.cinemachine": {
-      "version": "2.9.4",
+      "version": "2.9.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {
+        "com.unity.test-framework": "1.1.31"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.collections": {
+      "version": "1.4.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.burst": "1.6.6",
+        "com.unity.nuget.mono-cecil": "1.11.4",
         "com.unity.test-framework": "1.1.31"
       },
       "url": "https://packages.unity.com"
@@ -131,11 +152,21 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.inputsystem": {
-      "version": "1.4.4",
+      "version": "1.5.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.uielements": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.localization": {
+      "version": "1.3.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.addressables": "1.19.19",
+        "com.unity.nuget.newtonsoft-json": "2.0.2"
       },
       "url": "https://packages.unity.com"
     },
@@ -154,14 +185,14 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.nuget.newtonsoft-json": {
-      "version": "3.0.2",
+      "version": "3.1.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.core": {
-      "version": "14.0.4",
+      "version": "14.0.7",
       "depth": 1,
       "source": "builtin",
       "dependencies": {
@@ -172,18 +203,18 @@
       }
     },
     "com.unity.render-pipelines.universal": {
-      "version": "14.0.4",
+      "version": "14.0.7",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
-        "com.unity.burst": "1.7.3",
-        "com.unity.render-pipelines.core": "14.0.4",
-        "com.unity.shadergraph": "14.0.4"
+        "com.unity.burst": "1.8.2",
+        "com.unity.render-pipelines.core": "14.0.7",
+        "com.unity.shadergraph": "14.0.7"
       }
     },
     "com.unity.scriptablebuildpipeline": {
-      "version": "1.21.1",
+      "version": "1.21.3",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
@@ -204,16 +235,16 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.shadergraph": {
-      "version": "14.0.4",
+      "version": "14.0.7",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.render-pipelines.core": "14.0.4",
+        "com.unity.render-pipelines.core": "14.0.7",
         "com.unity.searcher": "4.9.2"
       }
     },
     "com.unity.terrain-tools": {
-      "version": "5.0.2",
+      "version": "5.0.3",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -243,7 +274,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.7.2",
+      "version": "1.7.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -264,13 +295,13 @@
       }
     },
     "jp.hadashikick.vcontainer": {
-      "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.12.0",
+      "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.13.1",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.nuget.mono-cecil": "1.10.1"
       },
-      "hash": "9fff851582d14810565f8db3e82dba2227a091d4"
+      "hash": "99c6e8c703b2a14caca566f950aafd0ba3a35f85"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

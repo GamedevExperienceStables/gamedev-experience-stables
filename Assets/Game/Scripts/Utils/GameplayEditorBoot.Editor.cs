@@ -215,7 +215,7 @@ namespace Game.Utils
             if (!plane.Raycast(cameraRay, out float distance))
                 return Vector3.zero;
 
-            if (Physics.Raycast(cameraRay, out RaycastHit hitInfo, distance))
+            if (Physics.Raycast(cameraRay, out RaycastHit hitInfo, distance, ~0, queryTriggerInteraction: QueryTriggerInteraction.Ignore))
                 return hitInfo.point;
 
             return cameraRay.GetPoint(distance);

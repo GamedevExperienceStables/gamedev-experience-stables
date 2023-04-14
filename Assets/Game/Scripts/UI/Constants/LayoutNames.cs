@@ -24,7 +24,7 @@
 
         public static class StartMenu
         {
-            public const string BUTTON_START = "button-start";
+            public const string BUTTON_NEW_GAME = "button-start";
             public const string BUTTON_CONTINUE = "button-continue";
             public const string BUTTON_QUIT = "button-quit";
             public const string BUTTON_SETTINGS = "button-settings";
@@ -32,6 +32,26 @@
             public const string BUTTON_ART = "button-art";
             
             public const string BUTTON_BACK = "button-back";
+
+            public const string BUTTON_ICON = "icon";
+            
+            public const string MENU = "menu";
+            public const string PAGES = "pages";
+            public const string MODAL = "menu-modal";
+            
+            public const string PREVIEW = "preview";
+            public const string PREVIEW_IMAGE = "image";
+            public const string PREVIEW_CAPTION = "caption";
+
+            public const string PAGE_BOOK = "page-menu";
+            public const string PAGE_SETTINGS = "page-settings";
+            public const string PAGE_ABOUT = "page-about";
+            public const string PAGE_ART = "page-art";
+            
+            public const string PAGE_HEADING = "header";
+            
+            public const string BUTTON_ACTIVE_CLASS_NAME = "menu-button--active";
+            
         }
 
         public static class Hud
@@ -63,6 +83,10 @@
 
             public const string WIDGET_SAVING_CLASS_NAME = "widget-saving";
             public const string WIDGET_SAVING_ENABLED_CLASS_NAME = "widget-saving--enabled";
+            
+            public const string DIALOG = "widget-dialog";
+            public const string DIALOG_TITLE = "title";
+            public const string DIALOG_TEXT = "text";
         }
         
         public static class MiniMap
@@ -74,6 +98,7 @@
             public const string MAP = "map";
             public const string MAP_WRAPPER = "map-wrapper";
             public const string MAP_CONTAINER = "map-container";
+            public const string MAP_COORDINATES = "map-coordinates";
             
             public const string MARKER_CLASS_NAME = "mini-map__marker";
         }
@@ -86,6 +111,9 @@
         public static class GameOver
         {
             public const string CONTAINER = "game-over-screen";
+            
+            public const string CAPTION = "caption";
+            public const string DESCRIPTION = "description";
             
             public const string BUTTON_RESTART = "button-restart";
             public const string BUTTON_MAIN_MENU = "button-exit";
@@ -117,6 +145,42 @@
 
             public const string BOOK_DETAILS_CLASS_NAME = "magic-book-details";
             public const string BOOK_DETAILS_HIDDEN_CLASS_NAME = "magic-book-details--hidden";
+        }
+        
+        public static class Modal
+        {
+            public const string CONTAINER = "window-modal";
+            
+            public const string TITLE = "text-title";
+            public const string BLOCK_MESSAGE = "block-message";
+            public const string TEXT_MESSAGE = "text-message";
+            
+            public const string BUTTON_CONFIRM = "button-confirm";
+            public const string BUTTON_CANCEL = "button-cancel";
+        }
+        
+        public static class Cutscene
+        {
+            public const string CONTAINER = "cutscene";
+            
+            public const string SLIDER = "slider";
+            public const string SLIDE_PREV = "slide-prev";
+            public const string SLIDE_NEXT = "slide-next";
+            public const string SLIDE_CURRENT = "slide-current";
+            
+            public const string BLOCK_SUBTITLES = "block-subtitles";
+            public const string TEXT_SUBTITLES = "text-subtitles";
+
+            public const string BLOCK_ACTION = "block-action";
+            public const string TEXT_ACTION = "text-action";
+            public const string ICON_ACTION = "icon-action";
+
+            public const string BLOCK_SKIP = "block-skip";
+            public const string TEXT_SKIP = "text-skip";
+
+            public const string SLIDE_HIDDEN_CLASS_NAME = "slider__slide--hidden";
+            public const string SUBTITLES_HIDDEN_CLASS_NAME = "subtitles--hidden";
+            public const string ACTION_HIDDEN_CLASS_NAME = "action--hidden";
         }
     }
 }

@@ -50,6 +50,12 @@ namespace Game.Inventory
 
         public void TransferToContainer(MaterialDefinition levelMaterial)
             => _materials.TransferToContainer(levelMaterial);
+        
+        public bool IsContainerFull(MaterialDefinition levelMaterial) 
+            => _materials.Container.IsFull(levelMaterial);
+
+        public bool IsBagEmpty(MaterialDefinition levelMaterial) 
+            => _materials.Bag.IsEmpty(levelMaterial);
 
         public bool CanAddToBag(ItemDefinition definition, IActorController owner)
             => definition switch

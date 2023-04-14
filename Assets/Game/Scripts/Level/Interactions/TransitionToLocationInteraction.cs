@@ -23,6 +23,8 @@ namespace Game.Level
             _location = location;
         }
 
+        public LocationPointDefinition TargetLocation => _targetLocation;
+
         public override void OnCreate()
         {
             var door = Source.GetComponent<LocationDoor>();

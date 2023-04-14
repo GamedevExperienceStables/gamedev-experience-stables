@@ -76,3 +76,15 @@
     margin-left: -16px;
     margin-top: -16px;
 } 
+
+.mini-map__coordinates {
+    -unity-font-definition: var(--font-text);
+    
+    position: absolute;
+    top: -30px; 
+    left: 0;
+    right: 0;
+    -unity-text-align: middle-center;
+    
+    color: rgba(255,255,255,0.8);
+}

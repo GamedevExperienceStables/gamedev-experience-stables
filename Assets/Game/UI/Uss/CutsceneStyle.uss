@@ -1,0 +1,57 @@
+.slider {
+    height: 100%;
+    width: 100%;
+
+    background-color: rgb(0, 0, 0);
+}
+
+.slider__slide {
+    flex-grow: 1;
+    -unity-background-scale-mode: scale-to-fit;
+    
+    opacity: 1;
+    transition: opacity 300ms ease-in-out;    
+}
+
+.slider__slide--hidden {
+    opacity: 0;
+}
+
+.subtitles {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    background-image: url('project://database/Assets/Epic%20Toon%20FX/Textures/gradient_horizontal.png?fileID=2800000&guid=e869689c3425dc145a51bd31c5eee138&type=3#gradient_horizontal');
+    -unity-background-image-tint-color: rgba(0, 0, 0, 0.7);
+
+    transition: opacity 300ms ease-in-out;
+}
+
+.subtitles__text {
+    -unity-text-align: lower-center;
+    white-space: normal;
+    -unity-font-definition: var(--font-text);
+    font-size: 32px;
+    color: rgb(255, 255, 255);
+}
+
+.subtitles--hidden {
+    opacity: 0;
+}
+
+.action {    
+    transition: opacity 300ms ease-in-out, translate 0.5s ease-in-out;
+}
+
+.action--hidden {
+    opacity: 0;
+}
+
+.action__text {
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    -unity-font-definition: var(--font-text);
+}

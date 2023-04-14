@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Stats;
 using Game.TimeManagement;
+using NaughtyAttributes;
 using UnityEngine;
 using VContainer;
 
@@ -9,6 +10,7 @@ namespace Game.Actors
     [CreateAssetMenu(menuName = MENU_PATH + "Stat Change")]
     public class EffectStatChangeDefinition : EffectDefinition<EffectStatChange>
     {
+        [HideIf(nameof(EffectType), EffectDuration.Instant)]
         [SerializeField, Min(0)]
         private float interval;
 
@@ -46,6 +48,39 @@ namespace Game.Actors
         {
             _target = target;
 
+            switch (Definition.EffectType)
+            {
+                case EffectDuration.Instant:
+                {
+                    ApplyModifier();
+                    break;
+                }
+
+                case EffectDuration.Infinite:
+                case EffectDuration.Limited:
+                {
+                    AddEffect();
+                    break;
+                }
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(Definition.EffectType), Definition.EffectType, null);
+            }
+        }
+
+        protected override void OnCancel()
+        {
+            if (Definition.Interval > 0)
+                _timers.ReleaseTimer(_timerInterval);
+
+            if (Definition.Duration > 0)
+                _timers.ReleaseTimer(_timerTotal);
+
+            _target.RemoveModifier(Definition.Stat, Definition.Modifier);
+        }
+
+        private void AddEffect()
+        {
             float interval = Definition.Interval;
             float duration = Definition.Duration;
 
@@ -61,21 +96,13 @@ namespace Game.Actors
                 AddModifier();
         }
 
-        protected override void OnCancel()
-        {
-            if (Definition.Interval > 0)
-                _timers.ReleaseTimer(_timerInterval);
-
-            if (Definition.Duration > 0)
-                _timers.ReleaseTimer(_timerTotal);
-
-            _target.RemoveModifier(Definition.Stat, Definition.Modifier);
-        }
-
         private void AddModifier()
             => _target.AddModifier(Definition.Stat, Definition.Modifier);
 
         private void ApplyModifier()
-            => _target.ApplyModifier(Definition.Stat, Definition.Modifier);
+        {
+            if (!IsSuppressed)
+                _target.ApplyModifier(Definition.Stat, Definition.Modifier);
+        }
     }
 }

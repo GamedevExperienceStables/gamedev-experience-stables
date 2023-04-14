@@ -1,0 +1,105 @@
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.logo {
+    -unity-font-definition: var(--font-heading);
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    font-size: 65px;
+    color: rgb(155, 89, 199);
+}
+
+.menu:disabled {
+    opacity: 1;
+    font-size: 14px;
+}
+
+.menu-button {
+    -unity-font-definition: var(--font-text);
+    font-size: 40px;
+    color: rgb(90, 55, 55);
+    flex-direction: row;
+    align-items: center;
+    -unity-text-align: middle-left;
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+}
+
+.menu-button:disabled {
+    opacity: 1;
+    color: rgb(163, 133, 127);
+}
+
+.menu-button-icon {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1731225759&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_13');
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.menu-button--active:disabled .menu-button-icon {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1874764668&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_20');
+    -unity-background-scale-mode: scale-and-crop;
+    scale: 2 2;
+    translate: 10px 0;
+}
+
+.menu-button:enabled:focus .menu-button-icon {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1874764668&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_20');
+    -unity-background-scale-mode: scale-and-crop;
+    scale: 2 2;
+    translate: 10px 0;
+}
+
+.menu-button:enabled:hover .menu-button-icon {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1874764668&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_20');
+    -unity-background-scale-mode: scale-and-crop;
+    scale: 2 2;
+    translate: 10px 0;
+}
+
+.menu-button-icon:disabled {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=607602433&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_12');
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.menu-button-label {
+    transition-timing-function: ease-in-out;
+    transition-property: translate;
+    transition-duration: 300ms;
+    visibility: visible;
+}
+
+.menu-button--active .menu-button-label {
+    color: rgb(155, 89, 199);
+    translate: 10px 0;
+    -unity-font-style: bold;
+}
+
+.menu-button:enabled:focus .menu-button-label {
+    color: rgb(155, 89, 199);
+    translate: 10px 0;
+    -unity-font-style: bold;
+}
+
+.menu-button:enabled:hover .menu-button-label {
+    color: rgb(155, 89, 199);
+    translate: 10px 0;
+    -unity-font-style: bold;
+}
+
+.menu-bookmark {
+    transition-property: translate;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+}
+
+.menu-bookmark:hover {
+    translate: 0 15px;
+}

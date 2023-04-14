@@ -1,9 +1,11 @@
 ﻿using Game.Audio;
+using Game.CursorManagement;
 using Game.GameFlow;
 using Game.Hero;
 using Game.Input;
 using Game.Inventory;
 using Game.Level;
+using Game.Localization;
 using Game.Persistence;
 using Game.Player;
 using Game.RandomManagement;
@@ -69,12 +71,17 @@ namespace Game.LifetimeScopes
             builder.Register<PlayerGamePrefs>(Lifetime.Singleton);
             builder.Register<PlayerAudioPrefs>(Lifetime.Singleton);
             builder.Register<PlayerGraphicsPrefs>(Lifetime.Singleton);
+            builder.Register<PlayerLocalizationPrefs>(Lifetime.Singleton);
         }
 
         private static void RegisterServices(IContainerBuilder builder)
         {
             builder.Register<RandomService>(Lifetime.Singleton);
             builder.Register<QuitGameService>(Lifetime.Singleton);
+            builder.Register<UnityLocalization>(Lifetime.Singleton).As<ILocalizationService>();
+            builder.Register<CursorService>(Lifetime.Singleton);
+
+            builder.Register<ModalService>(Lifetime.Singleton);
         }
 
         private static void RegisterInput(IContainerBuilder builder)
@@ -82,6 +89,7 @@ namespace Game.LifetimeScopes
             builder.Register<GameInputControlsAdapter>(Lifetime.Singleton);
 
             builder.Register<InputService>(Lifetime.Singleton).As<IInputService>();
+            builder.Register<InputBindings>(Lifetime.Singleton);
             builder.Register<InputControlGameplay>(Lifetime.Singleton).As<IInputControlGameplay>();
             builder.Register<InputControlMenu>(Lifetime.Singleton).As<IInputControlMenu>();
         }
@@ -90,11 +98,11 @@ namespace Game.LifetimeScopes
         {
             builder.Register<SceneLoader>(Lifetime.Singleton);
 
-            builder.RegisterComponentInNewPrefab(gameSettings.UiSettings.FadeScreen, Lifetime.Singleton)
+            builder.RegisterComponentInNewPrefab(gameSettings.FaderSettings.FadeScreen, Lifetime.Singleton)
                 .DontDestroyOnLoad()
                 .As<IFaderScreen>();
 
-            builder.RegisterComponentInNewPrefab(gameSettings.UiSettings.LoadingScreen, Lifetime.Singleton)
+            builder.RegisterComponentInNewPrefab(gameSettings.FaderSettings.LoadingScreen, Lifetime.Singleton)
                 .DontDestroyOnLoad()
                 .As<ILoadingScreen>();
         }
@@ -126,19 +134,28 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.MagnetSettings);
             builder.RegisterInstance(gameSettings.InventorySettings);
             builder.RegisterInstance(gameSettings.AudioSettings);
+            builder.RegisterInstance(gameSettings.CursorSettings);
+            
+            builder.RegisterInstance(gameSettings.UiSettings.StartMenu);
+            builder.RegisterInstance(gameSettings.UiSettings.PauseMenu);
+            builder.RegisterInstance(gameSettings.UiSettings.GameOver);
+            builder.RegisterInstance(gameSettings.UiSettings.Interaction);
         }
 
         private static void RegisterUi(IContainerBuilder builder)
         {
             builder.Register<SettingsView>(Lifetime.Scoped);
             builder.Register<SettingsViewModel>(Lifetime.Singleton);
+            
+            builder.Register<ModalViewModel>(Lifetime.Singleton);
+
+            builder.Register<Typewriter>(Lifetime.Transient);
         }
 
         private void RegisterDataTables(IContainerBuilder builder)
         {
             builder.RegisterInstance(dataTables.Runes);
             builder.RegisterInstance(dataTables.Materials);
-            builder.RegisterInstance(dataTables.Recipes);
         }
 
         private void RegisterSaveSystem(IContainerBuilder builder)

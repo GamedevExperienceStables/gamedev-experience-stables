@@ -11,17 +11,18 @@ namespace Game.GameFlow
 
         public UniTask Enter()
         {
+#if UNITY_EDITOR
             Debug.Log($"[STATE] <color=cyan>>>></color> {this}");
-            
+#endif
             return OnEnter();
         }
 
         public UniTask Exit()
         {
             Child?.Exit();
-            
+#if UNITY_EDITOR            
             Debug.Log($"[STATE] <color=grey><<<</color> {this}");
-            
+#endif            
             return OnExit();
         }
 

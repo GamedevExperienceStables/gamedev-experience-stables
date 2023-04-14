@@ -153,7 +153,7 @@ MonoBehaviour:
   CapsuleHeight: 0.73
   CapsuleYOffset: 0.3
   CapsulePhysicsMaterial: {fileID: 0}
-  GroundDetectionExtraDistance: 0
+  GroundDetectionExtraDistance: 0.5
   MaxStableSlopeAngle: 60
   StableGroundLayers:
     serializedVersion: 2
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b950b9bbe5f41259fbd446539fbd7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageFeedback: {fileID: 7383564464360880306, guid: 12f231b81992930419afdbeeb56868b5,
+  damageFeedback: {fileID: 1880431902926044711, guid: 1716b3ffbe1a7e049ae880c1b8ac0d21,
     type: 3}
 --- !u!114 &5183282983791351953
 MonoBehaviour:
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb57b94c7089482398b501bc6f6db0fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathFeedback: {fileID: 7383564464360880306, guid: 12f231b81992930419afdbeeb56868b5,
+  deathFeedback: {fileID: 5464456317419179984, guid: ecb937064369017449f292d8e7c2be25,
     type: 3}
   destroyOnDeath: 1
 --- !u!114 &1141320969658811781

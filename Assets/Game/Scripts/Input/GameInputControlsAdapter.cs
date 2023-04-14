@@ -16,6 +16,12 @@ namespace Game.Input
         public void SetMenuCallbacks(GameInputControls.IMenuActions callback)
             => _controls.Menu.SetCallbacks(callback);
 
+        public GameInputControls.GameplayActions GetGameplayActions() 
+            => _controls.Gameplay;
+        
+        public GameInputControls.MenuActions GetMenuActions() 
+            => _controls.Menu;
+
         public void GameplayEnable() => _controls.Gameplay.Enable();
         public void GameplayDisable() => _controls.Gameplay.Disable();
         public void MenuEnable() => _controls.Menu.Enable();

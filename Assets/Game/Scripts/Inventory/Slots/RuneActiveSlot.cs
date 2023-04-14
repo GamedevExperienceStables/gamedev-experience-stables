@@ -11,12 +11,16 @@ namespace Game.Inventory
         public void Set(RuneSlotId id)
         {
             Value = id;
+#if UNITY_EDITOR
             Debug.Log($"Slot activated: {Value}");
+#endif
         }
 
         public void Clear()
         {
+#if UNITY_EDITOR
             Debug.Log($"Slot deactivated: {Value}");
+#endif  
             Value = RuneSlotId.INVALID_ID;
         }
     }
