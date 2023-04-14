@@ -13,8 +13,8 @@ namespace Game.UI
     {
         private readonly SettingsViewModel _viewModel;
         private readonly ILocalizationService _localization;
-        private Settings _settings;
-        
+        private readonly Settings _settings;
+
         private Label _graphicLabel;
         private Label _audioLabel;
 
@@ -30,7 +30,7 @@ namespace Game.UI
         private List<string> _resolutionsOptions;
 
         private List<string> _qualityOptions;
-        
+
         private DropdownField _fieldLocale;
 
         public SettingsView(SettingsViewModel viewModel, ILocalizationService localization, Settings settings)
@@ -44,7 +44,7 @@ namespace Game.UI
         {
             _graphicLabel = root.Q<Label>("label-graphics");
             _audioLabel = root.Q<Label>("label-audio");
-            
+
             _fieldQuality = root.Q<DropdownField>("field-quality");
             _fieldResolution = root.Q<DropdownField>("field-resolution");
             _fieldFullscreen = root.Q<Toggle>("field-fullscreen");
@@ -52,7 +52,7 @@ namespace Game.UI
             _fieldMasterVolume = root.Q<Slider>("field-audio-master");
             _fieldEffectsVolume = root.Q<Slider>("field-audio-effects");
             _fieldMusicVolume = root.Q<Slider>("field-audio-music");
-            
+
             _fieldLocale = root.Q<DropdownField>("field-locale");
 
             RegisterCallbacks();
@@ -68,7 +68,8 @@ namespace Game.UI
             InitFullscreen();
             InitScreenResolutions();
             InitLocalization();
-            //UpdateText(); Broken
+
+            UpdateText();
         }
 
         private void RegisterCallbacks()
@@ -82,7 +83,7 @@ namespace Game.UI
             _fieldMusicVolume.RegisterValueChangedCallback(OnChangeMusicVolume);
 
             _fieldLocale.RegisterValueChangedCallback(OnChangeLocale);
-            
+
             _localization.Changed += OnLocalisationChanged;
         }
 
@@ -95,30 +96,29 @@ namespace Game.UI
             _fieldMasterVolume.UnregisterValueChangedCallback(OnChangeMasterVolume);
             _fieldEffectsVolume.UnregisterValueChangedCallback(OnChangeEffectsVolume);
             _fieldMusicVolume.UnregisterValueChangedCallback(OnChangeMusicVolume);
-            
+
             _fieldLocale.UnregisterValueChangedCallback(OnChangeLocale);
-            
+
             _localization.Changed -= OnLocalisationChanged;
         }
-        
+
         private void OnLocalisationChanged()
             => UpdateText();
 
         private void UpdateText()
         {
-            // Broken !
-            /*_graphicLabel.text = _settings.graphic.label.GetLocalizedString();
+            _graphicLabel.text = _settings.graphic.label.GetLocalizedString();
             _audioLabel.text = _settings.audio.label.GetLocalizedString();
 
-            _fieldLocale.Q<Label>().text = _settings.language.label.GetLocalizedString();
-            
-            _fieldQuality.Q<Label>().text = _settings.quality.label.GetLocalizedString();
-            _fieldResolution.Q<Label>().text = _settings.resolution.label.GetLocalizedString();
-            _fieldFullscreen.Q<Label>().text = _settings.fullscreen.label.GetLocalizedString();
-            
-            _fieldMasterVolume.Q<Label>().text = _settings.master.label.GetLocalizedString();
-            _fieldMusicVolume.Q<Label>().text = _settings.music.label.GetLocalizedString();
-            _fieldEffectsVolume.Q<Label>().text = _settings.effects.label.GetLocalizedString();*/
+            _fieldLocale.label = _settings.language.label.GetLocalizedString();
+
+            _fieldQuality.label = _settings.quality.label.GetLocalizedString();
+            _fieldResolution.label = _settings.resolution.label.GetLocalizedString();
+            _fieldFullscreen.label= _settings.fullscreen.label.GetLocalizedString();
+
+            _fieldMasterVolume.label = _settings.master.label.GetLocalizedString();
+            _fieldMusicVolume.label = _settings.music.label.GetLocalizedString();
+            _fieldEffectsVolume.label = _settings.effects.label.GetLocalizedString();
         }
 
         #region Graphics
@@ -166,6 +166,9 @@ namespace Game.UI
         private void OnChangeQuality(ChangeEvent<string> evt)
         {
             int i = _qualityOptions.IndexOf(evt.newValue);
+            if (i < 0)
+                return;
+
             _viewModel.SetQuality(i);
         }
 
@@ -176,6 +179,9 @@ namespace Game.UI
         private void OnChangeResolution(ChangeEvent<string> evt)
         {
             int i = _resolutionsOptions.IndexOf(evt.newValue);
+            if (i < 0)
+                return;
+
             Resolution resolution = _resolutions[i];
 
             _viewModel.SetScreenResolution(resolution);
@@ -216,20 +222,29 @@ namespace Game.UI
         #endregion
 
         #region Localization
-        
+
         private void InitLocalization()
         {
             _fieldLocale.choices = _viewModel.GetLocales();
 
             string current = _viewModel.CurrentLocale;
+
+            if (!_fieldLocale.choices.Contains(current))
+                current = _fieldLocale.choices[0];
+
             _fieldLocale.SetValueWithoutNotify(current);
         }
 
-        private void OnChangeLocale(ChangeEvent<string> evt) 
-            => _viewModel.SetLocale(evt.newValue);
+        private void OnChangeLocale(ChangeEvent<string> evt)
+        {
+            if (!_fieldLocale.choices.Contains(evt.newValue))
+                return;
+
+            _viewModel.SetLocale(evt.newValue);
+        }
 
         #endregion
-        
+
         [Serializable]
         public class Settings
         {

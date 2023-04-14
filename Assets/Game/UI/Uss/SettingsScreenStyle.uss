@@ -19,7 +19,7 @@
     border-right-color: rgba(0, 0, 0, 0);
     border-top-color: rgba(0, 0, 0, 0);
     border-bottom-color: rgba(0, 0, 0, 0);
-    width: 307px;
+    width: 435px;
     position: absolute;
     right: 0;
     height: 58px;
@@ -76,6 +76,10 @@
     -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&guid=9f296ab3b5e417845bc8de63c7b23c43&type=2#koliko-Regular SDF');
     color: rgb(90, 55, 55);
     font-size: 35px;
+} 
+
+.unity-base-field__label {
+    min-width: 250px;
 }
 
 .unity-base-slider__drag-container {
