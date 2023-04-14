@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.Localization;
-using Game.Utils;
 using UnityEngine.Localization;
 using UnityEngine.UIElements;
 using VContainer;
@@ -71,12 +70,14 @@ namespace Game.UI
         {
             _settingsView.Init();
             
-            Content.SetVisibility(true);
+            Content.SetEnabled(true);
+            Content.RemoveFromClassList(LayoutNames.StartMenu.PAGE_HIDDEN_CLASS_NAME);
         }
 
         public override void Hide()
         {
-            Content.SetVisibility(false);
+            Content.SetEnabled(false);
+            Content.AddToClassList(LayoutNames.StartMenu.PAGE_HIDDEN_CLASS_NAME);
         }
 
         private void OnBackButton()
