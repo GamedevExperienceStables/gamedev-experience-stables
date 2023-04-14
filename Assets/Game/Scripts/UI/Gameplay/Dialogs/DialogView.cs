@@ -56,28 +56,26 @@ namespace Game.UI
             _viewModel.UnSubscribeDialogClosing(OnDialogClosing);
         }
 
-        private void OnDialogRequested()
+        private void OnDialogRequested(DialogData nextDialog)
         {
-            if (!_viewModel.TryDequeueDialog(out DialogData data))
-                return;
-
-            if (_hideTimer.IsDone)
+            if (_data == nextDialog)
             {
-                ShowDialog(data);
+                _hideTimer.Stop();
+                return;
+            }   
+            
+            bool inTransition = !_hideTimer.IsDone || !_delayTimer.IsDone;
+            if (_data.IsEmpty && !inTransition)
+            {
+                ShowDialog(nextDialog);
                 return;
             }
 
             _hideTimer.Stop();
 
-            if (IsSameDialog(data))
-                return;
-
             HideDialog();
-            ShowDialogWithDelay(data);
+            ShowDialogWithDelay(nextDialog);
         }
-
-        private bool IsSameDialog(DialogData data)
-            => ReferenceEquals(_data.Definition, data.Definition);
 
         private void ShowDialog()
         {
@@ -112,7 +110,12 @@ namespace Game.UI
             => _hideTimer.Start();
 
         private void OnDialogComplete()
-            => HideDialog();
+        {
+            _data = default;
+            _viewModel.DialogClosed();
+
+            HideDialog();
+        }
 
         private void SetupDialog()
         {
@@ -127,7 +130,7 @@ namespace Game.UI
             }
         }
 
-        private void HideDialog()
+        private void HideDialog() 
             => _dialog.AddToClassList(LayoutNames.Hud.DIALOG_HIDDEN_CLASS_NAME);
     }
 }
