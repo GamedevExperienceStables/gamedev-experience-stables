@@ -105,3 +105,18 @@
     border-bottom-color: rgba(0, 0, 0, 0);
     position: relative;
 }
+
+/* For dropdown*/
+.unity-scroll-view {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1693019042&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_44');
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    font-size: 35px;
+    color: rgb(90, 55, 55);
+    -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&guid=9f296ab3b5e417845bc8de63c7b23c43&type=2#koliko-Regular SDF');
+    -unity-font-style: bold;
+}
