@@ -338,7 +338,7 @@ TextureImporter:
         height: 62
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 14, y: 16, z: 13, w: 17}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -359,7 +359,7 @@ TextureImporter:
         height: 62
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 13, y: 12, z: 13, w: 16}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -822,52 +822,52 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Menu_Atlas_32: 554423362
-      Menu_Atlas_13: 1731225759
-      Menu_Atlas_43: -1523537116
-      Menu_Atlas_39: 129328956
-      Menu_Atlas_19: -694284940
       Menu_Atlas_0: 1437813421
-      Menu_Atlas_5: 1922755276
-      Menu_Atlas_4: 1615982731
-      Menu_Atlas_45: -483509735
-      Menu_Atlas_20: -1874764668
-      Menu_Atlas_30: 541439328
-      Menu_Atlas_34: 1993365345
-      Menu_Atlas_42: -306390796
-      Menu_Atlas_22: -86457987
-      Menu_Atlas_21: -1882268378
-      Menu_Atlas_28: 802584919
-      Menu_Atlas_40: 1862385739
-      Menu_Atlas_23: 687282172
-      Menu_Atlas_29: -1885009778
-      Menu_Atlas_9: 587115457
-      Menu_Atlas_35: 1995882461
-      Menu_Atlas_12: 607602433
-      Menu_Atlas_31: 1777474290
-      Menu_Atlas_8: -1870286374
-      Menu_Atlas_18: 604808003
-      Menu_Atlas_33: 1180887151
-      Menu_Atlas_3: 151419712
-      Menu_Atlas_11: -4687780
-      Menu_Atlas_36: 1286348549
-      Menu_Atlas_10: -594685395
-      Menu_Atlas_25: -802615383
-      Menu_Atlas_41: 1801998966
-      Menu_Atlas_37: 271044605
-      Menu_Atlas_2: -806016824
-      Menu_Atlas_27: -100320597
-      Menu_Atlas_26: -1308322280
-      Menu_Atlas_16: -1167106393
       Menu_Atlas_1: 2031693537
-      Menu_Atlas_15: -243629712
-      Menu_Atlas_7: -346281822
-      Menu_Atlas_17: 813002004
-      Menu_Atlas_44: 1693019042
-      Menu_Atlas_24: -1482036419
-      Menu_Atlas_38: 860668894
-      Menu_Atlas_6: -685791844
+      Menu_Atlas_10: -594685395
+      Menu_Atlas_11: -4687780
+      Menu_Atlas_12: 607602433
+      Menu_Atlas_13: 1731225759
       Menu_Atlas_14: 1185398460
+      Menu_Atlas_15: -243629712
+      Menu_Atlas_16: -1167106393
+      Menu_Atlas_17: 813002004
+      Menu_Atlas_18: 604808003
+      Menu_Atlas_19: -694284940
+      Menu_Atlas_2: -806016824
+      Menu_Atlas_20: -1874764668
+      Menu_Atlas_21: -1882268378
+      Menu_Atlas_22: -86457987
+      Menu_Atlas_23: 687282172
+      Menu_Atlas_24: -1482036419
+      Menu_Atlas_25: -802615383
+      Menu_Atlas_26: -1308322280
+      Menu_Atlas_27: -100320597
+      Menu_Atlas_28: 802584919
+      Menu_Atlas_29: -1885009778
+      Menu_Atlas_3: 151419712
+      Menu_Atlas_30: 541439328
+      Menu_Atlas_31: 1777474290
+      Menu_Atlas_32: 554423362
+      Menu_Atlas_33: 1180887151
+      Menu_Atlas_34: 1993365345
+      Menu_Atlas_35: 1995882461
+      Menu_Atlas_36: 1286348549
+      Menu_Atlas_37: 271044605
+      Menu_Atlas_38: 860668894
+      Menu_Atlas_39: 129328956
+      Menu_Atlas_4: 1615982731
+      Menu_Atlas_40: 1862385739
+      Menu_Atlas_41: 1801998966
+      Menu_Atlas_42: -306390796
+      Menu_Atlas_43: -1523537116
+      Menu_Atlas_44: 1693019042
+      Menu_Atlas_45: -483509735
+      Menu_Atlas_5: 1922755276
+      Menu_Atlas_6: -685791844
+      Menu_Atlas_7: -346281822
+      Menu_Atlas_8: -1870286374
+      Menu_Atlas_9: 587115457
   mipmapLimitGroupName: 
   pSDRemoveMatte: 1
   userData: 

@@ -26,11 +26,16 @@ namespace Game.Actors
         [SerializeField, Min(0)]
         private int manaCost;
 
+        [Space]
         [SerializeField, Min(0)]
         private float fireTime = 0.1f;
 
         [SerializeField, Min(0)]
         private float castTime = 0.4f;
+
+        [Space]
+        [SerializeField]
+        private float animationSpeedMultiplier = 1f;
 
         public ProjectileDefinition Projectile => projectile;
 
@@ -42,6 +47,8 @@ namespace Game.Actors
         public EventReference FireSfx => fireSfx;
 
         public TargetingDefinition Targeting => targeting;
+
+        public float AnimationSpeedMultiplier => animationSpeedMultiplier;
     }
 
     public class ProjectileAbility : ActorAbility<ProjectileAbilityDefinition>
@@ -168,7 +175,11 @@ namespace Game.Actors
         }
 
         private void SetAnimation(bool isActive)
-            => _animator.SetAnimation(AnimationNames.RangeAttack, isActive);
+        {
+            float animationSpeed = isActive ? Definition.AnimationSpeedMultiplier : 1;
+            _animator.SetAnimation(AnimationNames.AttackSpeedMultiplier, animationSpeed);
+            _animator.SetAnimation(AnimationNames.RangeAttack, isActive);
+        }
 
         private void FireProjectile()
         {

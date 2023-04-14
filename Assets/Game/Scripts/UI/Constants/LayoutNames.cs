@@ -49,7 +49,10 @@
             public const string PAGE_ART = "page-art";
             
             public const string PAGE_HEADING = "header";
+
             
+            public const string PAGE_HIDDEN_CLASS_NAME = "page--hidden";
+
             public const string BUTTON_ACTIVE_CLASS_NAME = "menu-button--active";
             
         }
