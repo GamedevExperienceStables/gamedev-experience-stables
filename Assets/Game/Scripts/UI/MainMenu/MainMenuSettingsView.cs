@@ -44,6 +44,9 @@ namespace Game.UI
             _localisation.Changed += OnLocalisationChanged;
         }
 
+        private void Start()
+            => UpdateText();
+
         private void OnDestroy()
         {
             _settingsView.Destroy();
