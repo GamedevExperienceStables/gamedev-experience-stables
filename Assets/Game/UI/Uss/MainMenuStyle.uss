@@ -103,3 +103,25 @@
 .menu-bookmark:hover {
     translate: 0 15px;
 }
+
+.page:disabled {
+    opacity: 1;
+}
+
+.page {
+    transition: translate 600ms ease-out 350ms, visibility 950ms;
+}
+
+.page--hidden {
+    transition-delay: 0ms;
+    transition-timing-function: ease-in;
+    visibility: hidden;
+}
+
+.page--main.page--hidden {
+    translate: 0 100%;
+}
+
+.page--side.page--hidden {
+    translate: 0 -100%;
+}

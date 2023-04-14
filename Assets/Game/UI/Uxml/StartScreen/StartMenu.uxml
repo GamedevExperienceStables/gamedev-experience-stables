@@ -15,10 +15,10 @@
         </ui:VisualElement>
         <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center; position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
             <ui:VisualElement name="pages" style="background-color: rgba(0, 0, 0, 0); flex-grow: 1; width: 100%; height: 100%;">
-                <ui:Instance template="MenuBookScreen" name="page-menu" class="page" />
-                <ui:Instance template="SettingsScreen" name="page-settings" class="page" style="visibility: hidden;" />
-                <ui:Instance template="ArtScreen" name="page-art" class="page" style="visibility: hidden;" />
-                <ui:Instance template="AboutScreen" name="page-about" class="page" style="visibility: hidden;" />
+                <ui:Instance template="MenuBookScreen" name="page-menu" class="page page--main" />
+                <ui:Instance template="SettingsScreen" name="page-settings" class="page page--side page--hidden" />
+                <ui:Instance template="ArtScreen" name="page-art" class="page page--side page--hidden" />
+                <ui:Instance template="AboutScreen" name="page-about" class="page page--side page--hidden" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

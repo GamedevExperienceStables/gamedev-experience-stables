@@ -1,5 +1,4 @@
-﻿using Game.Utils;
-using UnityEngine.UIElements;
+﻿using UnityEngine.UIElements;
 
 namespace Game.UI
 {
@@ -27,12 +26,14 @@ namespace Game.UI
         
         public override void Show()
         {
-            Content.SetVisibility(true);
+            Content.SetEnabled(true);
+            Content.RemoveFromClassList(LayoutNames.StartMenu.PAGE_HIDDEN_CLASS_NAME);
         }
 
         public override void Hide()
         {
-            Content.SetVisibility(false);
+            Content.SetEnabled(false);
+            Content.AddToClassList(LayoutNames.StartMenu.PAGE_HIDDEN_CLASS_NAME);
         }
 
         private void OnBackButton() 
