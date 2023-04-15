@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement style="background-color: rgba(0, 0, 0, 0.53); width: 600px; padding-left: 22px; padding-right: 22px; padding-top: 16px; padding-bottom: 16px;">
-        <ui:Label tabindex="-1" text="Narrator" display-tooltip-when-elided="true" name="title" style="-unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&amp;guid=9f296ab3b5e417845bc8de63c7b23c43&amp;type=2#koliko-Regular SDF&apos;); color: rgba(255, 255, 255, 0.55); white-space: normal; font-size: 22px;" />
-        <ui:Label tabindex="-1" text="Snoody lost this battle, but this is not the end of his story.&lt;b&gt;You can start the New Game or continue from last save." display-tooltip-when-elided="true" name="text" style="-unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&amp;guid=9f296ab3b5e417845bc8de63c7b23c43&amp;type=2#koliko-Regular SDF&apos;); color: rgb(255, 255, 255); white-space: normal; font-size: 24px;" />
+    <Style src="project://database/Assets/Game/UI/Uss/HudStyle.uss?fileID=7433441132597879392&amp;guid=43fb365d5654783488ae02a43eaf455d&amp;type=3#HudStyle" />
+    <ui:VisualElement name="dialog-window" class="dialog-window">
+        <ui:Label tabindex="-1" text="Narrator" display-tooltip-when-elided="true" name="title" class="dialog-window__title" />
+        <ui:Label tabindex="-1" text="Snoody lost this battle, but this is not the end of his story.&lt;b&gt;You can start the New Game or continue from last save." display-tooltip-when-elided="true" name="text" class="dialog-window__text" />
     </ui:VisualElement>
 </ui:UXML>

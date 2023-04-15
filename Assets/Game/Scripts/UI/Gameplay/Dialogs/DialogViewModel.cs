@@ -12,10 +12,10 @@ namespace Game.UI
         public DialogViewModel(DialogService dialogService)
             => _dialogService = dialogService;
 
-        public void SubscribeDialogRequested(Action callback)
+        public void SubscribeDialogRequested(Action<DialogData> callback)
             => _dialogService.Showing += callback;
 
-        public void UnSubscribeDialogRequested(Action callback)
+        public void UnSubscribeDialogRequested(Action<DialogData> callback)
             => _dialogService.Showing -= callback;
 
         public void SubscribeDialogClosing(Action callback)
@@ -24,7 +24,7 @@ namespace Game.UI
         public void UnSubscribeDialogClosing(Action callback)
             => _dialogService.Closing -= callback;
 
-        public bool TryGetDialog(out DialogData dialog)
-            => _dialogService.PopDialog(out dialog);
+        public void DialogClosed() 
+            => _dialogService.ClearDialog();
     }
 }

@@ -34,12 +34,9 @@ namespace Game.Level
         }
 
         private void OnTriggerEntered(GameObject obj)
-        {
-            var dialogData = new DialogData(dialog);
-            _dialogService.ShowRequest(dialogData);
-        }
+            => _dialogService.ShowRequest(new DialogData(dialog));
 
         private void OnTriggerExited(GameObject obj)
-            => _dialogService.CloseRequest();
+            => _dialogService.CloseRequest(new DialogData(dialog));
     }
 }

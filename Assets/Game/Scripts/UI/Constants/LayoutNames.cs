@@ -78,7 +78,9 @@
             public const string RUNE_SLOT_BACKGROUND = "background";
             
             public const string WIDGET_INTERACTION = "widget-interaction";
+            public const string WIDGET_INTERACTION_BLOCK = "widget-interaction-block";
             public const string WIDGET_INTERACTION_TEXT = "text";
+            public const string WIDGET_INTERACTION_HIDDEN_CLASS_NAME = "widget-interaction--hidden";
             
             public const string WIDGET_SAVING = "widget-saving";
             public const string WIDGET_SAVING_CONTAINER = "container";
@@ -88,8 +90,11 @@
             public const string WIDGET_SAVING_ENABLED_CLASS_NAME = "widget-saving--enabled";
             
             public const string DIALOG = "widget-dialog";
+            public const string DIALOG_WINDOW = "dialog-window";
             public const string DIALOG_TITLE = "title";
             public const string DIALOG_TEXT = "text";
+
+            public const string DIALOG_HIDDEN_CLASS_NAME = "dialog-window--hidden";
         }
         
         public static class MiniMap

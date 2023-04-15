@@ -5,23 +5,40 @@ namespace Game.Dialog
 {
     public class DialogService
     {
-        private readonly Stack<DialogData> _stack = new();
+        private readonly List<DialogData> _stack = new();
 
-        public event Action Showing;
+        public event Action<DialogData> Showing;
         public event Action Closing;
 
-        public void ShowRequest(DialogData data)
+        public void ShowRequest(DialogData dialogToShow)
         {
-            _stack.Push(data);
-
-            if (_stack.Count == 1)
-                Showing?.Invoke();
+            _stack.Add(dialogToShow);
+            Showing?.Invoke(dialogToShow);
         }
 
-        public bool PopDialog(out DialogData dialog)
-            => _stack.TryPop(out dialog);
+        public void CloseRequest(DialogData dialogToClose)
+        {
+            bool activeClosed = _stack.IndexOf(dialogToClose) == _stack.Count - 1;
 
-        public void CloseRequest() 
-            => Closing?.Invoke();
+            if (!_stack.Remove(dialogToClose))
+                return;
+
+            bool hasOther = _stack.Count > 0;
+            if (hasOther)
+            {
+                if (!activeClosed)
+                    return;
+
+                DialogData next = _stack[^1];
+                Showing?.Invoke(next);
+            }
+            else
+            {
+                Closing?.Invoke();
+            }
+        }
+
+        public void ClearDialog()
+            => _stack.Clear();
     }
 }

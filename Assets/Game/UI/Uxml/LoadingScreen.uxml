@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="loading-screen" picking-mode="Ignore" style="flex-grow: 1; background-color: rgb(24, 24, 24); display: none;">
-        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: center; align-items: center;">
-            <ui:Label tabindex="-1" text="Loading..." display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 33px; -unity-font-style: bold-and-italic;" />
+    <ui:VisualElement name="loading-screen" picking-mode="Ignore" style="flex-grow: 1; background-color: rgb(24, 24, 24); display: flex;">
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+            <ui:Label tabindex="-1" text="Loading..." display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 33px; -unity-font-style: normal; position: absolute; right: 24px; bottom: 19px; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&amp;guid=1823e5ab5312e0e40972472a78991947&amp;type=2#borsok SDF&apos;);" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

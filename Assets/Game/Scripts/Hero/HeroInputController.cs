@@ -131,6 +131,9 @@ namespace Game.Hero
 
         private void OnAim()
         {
+            if (_block.IsBlocked(InputBlock.Action))
+                return; 
+            
             _aim.TryActivateAbility();
         }
 
@@ -139,7 +142,7 @@ namespace Game.Hero
 
         private void OnInteract()
         {
-            if (_block.IsBlocked(InputBlock.Action))
+            if (_block.IsBlocked(InputBlock.Interact))
                 return;
 
             _interaction.TryActivateAbility();

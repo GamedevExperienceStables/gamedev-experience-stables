@@ -77,8 +77,60 @@
     transition: opacity 100ms ease-out;
 }
 
+.widget-interaction {
+    text-shadow: 1px 2px 1px rgb(0, 0, 0);
+    opacity: 1;
+    transition: opacity 150ms ease-out-sine;
+}
+
+.widget-interaction--hidden {
+    opacity: 0;
+}
+
+.widget-interaction__text {
+    -unity-font-definition: var(--font-text);
+
+    color: rgb(255, 255, 255);
+    -unity-text-align: upper-center;
+    font-size: 28px;
+}
+
 #widget-map {
     position: absolute;
     right: 20px;
     top: 20px;
+}
+
+.dialog-window {
+    max-width: 750px;
+    padding: 16px 22px;
+    background-color: rgba(0, 0, 0, 0.6);
+    
+    opacity: 1;
+    scale: 1;
+    translate: 0;
+
+    transition-property: scale, opacity, translate;
+    transition-duration: 350ms, 150ms, 150ms;
+    transition-timing-function: ease-out-sine;
+
+    -unity-font-definition: var(--font-text);
+}
+
+.dialog-window--hidden {
+    opacity: 0;
+    scale: 0.98;
+    translate: 0 -20px;
+}
+
+.dialog-window__title {
+    color: rgba(255, 255, 255, 0.55);
+    white-space: normal;
+    font-size: 24px;
+}
+
+.dialog-window__text {
+    color: rgb(255, 255, 255);
+    white-space: normal;
+    font-size: 28px;
 }

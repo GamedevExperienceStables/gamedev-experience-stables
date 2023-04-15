@@ -1,6 +1,5 @@
 ﻿using Game.Level;
 using Game.Localization;
-using Game.Utils;
 using UnityEngine.UIElements;
 using VContainer;
 
@@ -48,10 +47,11 @@ namespace Game.UI
 
         public void Create(VisualElement root)
         {
-            _container = root.Q<VisualElement>(LayoutNames.Hud.WIDGET_INTERACTION);
-            _container.SetDisplay(false);
-
-            _label = _container.Q<Label>(LayoutNames.Hud.WIDGET_INTERACTION_TEXT);
+            var container = root.Q<VisualElement>(LayoutNames.Hud.WIDGET_INTERACTION);
+            _container = container.Q<VisualElement>(LayoutNames.Hud.WIDGET_INTERACTION_BLOCK);
+            _label = container.Q<Label>(LayoutNames.Hud.WIDGET_INTERACTION_TEXT);
+            
+            Hide();
         }
 
         private void OnEnabled(Interaction interaction)
@@ -69,17 +69,20 @@ namespace Game.UI
         private void OnDisabled()
             => Hide();
 
+        private void Hide()
+            => _container.AddToClassList(LayoutNames.Hud.WIDGET_INTERACTION_HIDDEN_CLASS_NAME);
+
+        private void Show() 
+            => _container.RemoveFromClassList(LayoutNames.Hud.WIDGET_INTERACTION_HIDDEN_CLASS_NAME);
+
         private void Show(string text)
         {
             UpdateText(text);
 
-            _container.SetDisplay(true);
+            Show();
         }
 
         private void UpdateText(string text)
             => _label.text = text;
-
-        private void Hide()
-            => _container.SetDisplay(false);
     }
 }
