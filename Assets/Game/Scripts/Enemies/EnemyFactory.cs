@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Game.Actors;
 using UnityEngine;
+using UnityEngine.AI;
 using VContainer;
 using VContainer.Unity;
 
@@ -8,6 +9,7 @@ namespace Game.Enemies
 {
     public class EnemyFactory
     {
+        private const float VALID_SPAWN_RADIUS = 2f;
         private readonly IObjectResolver _resolver;
         private readonly AbilityFactory _abilityFactory;
 
@@ -18,7 +20,7 @@ namespace Game.Enemies
             _resolver = resolver;
             _abilityFactory = abilityFactory;
         }
-             
+
 
         public EnemyController Create(EnemyDefinition definition, Transform spawnPoint, Transform target,
             Transform spawnContainer)
@@ -32,19 +34,29 @@ namespace Game.Enemies
             enemy.AddSpawn(spawnPoint);
             enemy.SetTarget(target);
             enemy.SetLoot(definition.LootBag);
-            enemy.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+            GetSpawnPoint(spawnPoint, enemy);
             enemy.InitSensor(definition.InitialStats);
 
             return enemy;
         }
-    
+
+        private static void GetSpawnPoint(Transform spawnPoint, EnemyController enemy)
+        {
+            Vector3 spawnPosition = spawnPoint.position;
+
+            if (NavMesh.SamplePosition(spawnPosition, out NavMeshHit navmeshHit, VALID_SPAWN_RADIUS, NavMesh.AllAreas))
+                spawnPosition = navmeshHit.position;
+
+            enemy.SetPositionAndRotation(spawnPosition, spawnPoint.rotation);
+        }
+
         private void AddAbilities(ActorController actor, EnemyDefinition definition)
         {
             RegisterAbilities(actor, definition.Abilities);
             actor.InitAbilities();
             GiveAbilities(actor, definition.Abilities);
         }
-        
+
         private void RegisterAbilities(ActorController actor, List<AbilityDefinition> abilities)
         {
             foreach (AbilityDefinition definition in abilities)
@@ -53,7 +65,7 @@ namespace Game.Enemies
                 actor.RegisterAbility(ability);
             }
         }
-        
+
         private static void GiveAbilities(ActorController actor, List<AbilityDefinition> abilities)
         {
             foreach (AbilityDefinition definition in abilities)
