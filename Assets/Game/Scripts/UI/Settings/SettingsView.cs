@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Game.Audio;
 using Game.Localization;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.UIElements;
 
 namespace Game.UI
@@ -11,6 +13,10 @@ namespace Game.UI
     {
         private readonly SettingsViewModel _viewModel;
         private readonly ILocalizationService _localization;
+        private readonly Settings _settings;
+
+        private Label _graphicLabel;
+        private Label _audioLabel;
 
         private DropdownField _fieldQuality;
         private DropdownField _fieldResolution;
@@ -24,17 +30,21 @@ namespace Game.UI
         private List<string> _resolutionsOptions;
 
         private List<string> _qualityOptions;
-        
+
         private DropdownField _fieldLocale;
 
-        public SettingsView(SettingsViewModel viewModel, ILocalizationService localization)
+        public SettingsView(SettingsViewModel viewModel, ILocalizationService localization, Settings settings)
         {
             _viewModel = viewModel;
             _localization = localization;
+            _settings = settings;
         }
 
         public void Create(VisualElement root)
         {
+            _graphicLabel = root.Q<Label>("label-graphics");
+            _audioLabel = root.Q<Label>("label-audio");
+
             _fieldQuality = root.Q<DropdownField>("field-quality");
             _fieldResolution = root.Q<DropdownField>("field-resolution");
             _fieldFullscreen = root.Q<Toggle>("field-fullscreen");
@@ -42,7 +52,7 @@ namespace Game.UI
             _fieldMasterVolume = root.Q<Slider>("field-audio-master");
             _fieldEffectsVolume = root.Q<Slider>("field-audio-effects");
             _fieldMusicVolume = root.Q<Slider>("field-audio-music");
-            
+
             _fieldLocale = root.Q<DropdownField>("field-locale");
 
             RegisterCallbacks();
@@ -58,6 +68,8 @@ namespace Game.UI
             InitFullscreen();
             InitScreenResolutions();
             InitLocalization();
+
+            UpdateText();
         }
 
         private void RegisterCallbacks()
@@ -71,7 +83,7 @@ namespace Game.UI
             _fieldMusicVolume.RegisterValueChangedCallback(OnChangeMusicVolume);
 
             _fieldLocale.RegisterValueChangedCallback(OnChangeLocale);
-            
+
             _localization.Changed += OnLocalisationChanged;
         }
 
@@ -84,17 +96,29 @@ namespace Game.UI
             _fieldMasterVolume.UnregisterValueChangedCallback(OnChangeMasterVolume);
             _fieldEffectsVolume.UnregisterValueChangedCallback(OnChangeEffectsVolume);
             _fieldMusicVolume.UnregisterValueChangedCallback(OnChangeMusicVolume);
-            
+
             _fieldLocale.UnregisterValueChangedCallback(OnChangeLocale);
-            
+
             _localization.Changed -= OnLocalisationChanged;
         }
-        
+
         private void OnLocalisationChanged()
             => UpdateText();
 
         private void UpdateText()
         {
+            _graphicLabel.text = _settings.graphic.label.GetLocalizedString();
+            _audioLabel.text = _settings.audio.label.GetLocalizedString();
+
+            _fieldLocale.label = _settings.language.label.GetLocalizedString();
+
+            _fieldQuality.label = _settings.quality.label.GetLocalizedString();
+            _fieldResolution.label = _settings.resolution.label.GetLocalizedString();
+            _fieldFullscreen.label= _settings.fullscreen.label.GetLocalizedString();
+
+            _fieldMasterVolume.label = _settings.master.label.GetLocalizedString();
+            _fieldMusicVolume.label = _settings.music.label.GetLocalizedString();
+            _fieldEffectsVolume.label = _settings.effects.label.GetLocalizedString();
         }
 
         #region Graphics
@@ -142,6 +166,9 @@ namespace Game.UI
         private void OnChangeQuality(ChangeEvent<string> evt)
         {
             int i = _qualityOptions.IndexOf(evt.newValue);
+            if (i < 0)
+                return;
+
             _viewModel.SetQuality(i);
         }
 
@@ -152,6 +179,9 @@ namespace Game.UI
         private void OnChangeResolution(ChangeEvent<string> evt)
         {
             int i = _resolutionsOptions.IndexOf(evt.newValue);
+            if (i < 0)
+                return;
+
             Resolution resolution = _resolutions[i];
 
             _viewModel.SetScreenResolution(resolution);
@@ -192,18 +222,47 @@ namespace Game.UI
         #endregion
 
         #region Localization
-        
+
         private void InitLocalization()
         {
             _fieldLocale.choices = _viewModel.GetLocales();
 
             string current = _viewModel.CurrentLocale;
+
+            if (!_fieldLocale.choices.Contains(current))
+                current = _fieldLocale.choices[0];
+
             _fieldLocale.SetValueWithoutNotify(current);
         }
 
-        private void OnChangeLocale(ChangeEvent<string> evt) 
-            => _viewModel.SetLocale(evt.newValue);
+        private void OnChangeLocale(ChangeEvent<string> evt)
+        {
+            if (!_fieldLocale.choices.Contains(evt.newValue))
+                return;
+
+            _viewModel.SetLocale(evt.newValue);
+        }
 
         #endregion
+
+        [Serializable]
+        public class Settings
+        {
+            [Serializable]
+            public struct Page
+            {
+                public LocalizedString label;
+            }
+
+            public Page language;
+            public Page graphic;
+            public Page quality;
+            public Page resolution;
+            public Page fullscreen;
+            public Page audio;
+            public Page master;
+            public Page music;
+            public Page effects;
+        }
     }
 }
