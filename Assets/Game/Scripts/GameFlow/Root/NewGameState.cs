@@ -12,11 +12,12 @@ namespace Game.GameFlow
         public NewGameState(PersistenceService persistenceService) 
             => _persistenceService = persistenceService;
 
-        protected override UniTask OnEnter()
+        protected override async UniTask OnEnter()
         {
             _persistenceService.InitData();
+            await _persistenceService.SaveDataAsync();
 
-            return Parent.EnterState<IntroState>();
+            await Parent.EnterState<IntroState>();
         }
     }
 }
