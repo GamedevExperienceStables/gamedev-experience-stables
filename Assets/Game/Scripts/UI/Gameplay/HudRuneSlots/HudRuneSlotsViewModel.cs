@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.Inventory;
+using Game.Player;
 using VContainer;
 
 namespace Game.UI
@@ -8,10 +9,14 @@ namespace Game.UI
     public class HudRuneSlotsViewModel
     {
         private readonly IInventorySlots _slots;
+        private readonly PlayerController _player;
 
         [Inject]
-        public HudRuneSlotsViewModel(IInventorySlots slots)
-            => _slots = slots;
+        public HudRuneSlotsViewModel(IInventorySlots slots, PlayerController player)
+        {
+            _slots = slots;
+            _player = player;
+        }
 
         public IReadOnlyDictionary<RuneSlotId, RuneSlot> Slots => _slots.Items;
 
@@ -26,5 +31,8 @@ namespace Game.UI
 
         public void UnSubscribeActiveRuneSlotChanged(Action<RuneActiveSlotChangedEvent> callback)
             => _slots.ActiveSlotChanged -= callback;
+
+        public bool CanActivate(RuneDefinition rune) 
+            => _player.CanActivateAbility(rune.GrantAbility);
     }
 }

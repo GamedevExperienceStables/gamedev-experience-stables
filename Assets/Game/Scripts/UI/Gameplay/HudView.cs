@@ -47,7 +47,7 @@ namespace Game.UI
         private MiniMapView _miniMapView;
         private DialogView _dialogView;
 
-        public IReadOnlyList<RuneSlotHudView> RuneSlots => _runeSlotsView.Slots;
+        public IReadOnlyDictionary<RuneSlotId, RuneSlotHudView> RuneSlots => _runeSlotsView.Slots;
 
         [Inject]
         public void Construct(
@@ -106,8 +106,11 @@ namespace Game.UI
             SubscribeStats();
         }
 
-        private void LateUpdate() 
-            => _miniMapView.LateTick();
+        private void LateUpdate()
+        {
+            _miniMapView.LateTick();
+            _runeSlotsView.LateTick();
+        }
 
         private void OnDestroy()
         {

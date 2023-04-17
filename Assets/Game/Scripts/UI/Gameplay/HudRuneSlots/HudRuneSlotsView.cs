@@ -7,14 +7,14 @@ namespace Game.UI
 {
     public class HudRuneSlotsView
     {
-        private readonly List<RuneSlotHudView> _hudSlots = new();
+        private readonly Dictionary<RuneSlotId, RuneSlotHudView> _hudSlots = new();
         private readonly HudRuneSlotsViewModel _viewModel;
 
         [Inject]
         public HudRuneSlotsView(HudRuneSlotsViewModel viewModel)
             => _viewModel = viewModel;
 
-        public IReadOnlyList<RuneSlotHudView> Slots => _hudSlots;
+        public IReadOnlyDictionary<RuneSlotId, RuneSlotHudView> Slots => _hudSlots;
 
         public void Create(VisualElement root)
         {
@@ -31,6 +31,9 @@ namespace Game.UI
             _viewModel.UnSubscribeRuneSlotsChanges(OnRuneSlotsChanged);
         }
 
+        public void LateTick()
+            => UpdateSlotsState();
+
         private void CreateSlots(VisualElement root)
         {
             var slots = root
@@ -43,7 +46,7 @@ namespace Game.UI
                 VisualElement slotElement = slots[i];
 
                 var slotView = new RuneSlotHudView(slotElement, slotId);
-                _hudSlots.Add(slotView);
+                _hudSlots.Add(slotId, slotView);
             }
         }
 
@@ -51,47 +54,48 @@ namespace Game.UI
         {
             foreach ((RuneSlotId key, RuneSlot runeSlot) in slots)
             {
-                foreach (RuneSlotHudView hudRuneSlotView in _hudSlots)
-                {
-                    if (hudRuneSlotView.Id != key || runeSlot.IsEmpty)
-                        continue;
-
-                    hudRuneSlotView.Set(runeSlot.Rune);
-                    break;
-                }
+                if (_hudSlots.TryGetValue(key, out RuneSlotHudView slotView) && !runeSlot.IsEmpty)
+                    slotView.Set(runeSlot.Rune);
             }
         }
 
+        private void UpdateSlotsState()
+        {
+            foreach (RuneSlot slot in _viewModel.Slots.Values)
+            {
+                if (!slot.IsEmpty)
+                    UpdateSlotState(slot);
+            }
+        }
+
+        private void UpdateSlotState(RuneSlot slot)
+        {
+            bool isEnabled = _viewModel.CanActivate(slot.Rune);
+            _hudSlots[slot.Id].SetEnabled(isEnabled);
+        }
+
+
         private void OnRuneSlotsChanged(RuneSlotChangedEvent changed)
         {
-            foreach (RuneSlotHudView slotView in _hudSlots)
-            {
-                if (slotView.Id != changed.id)
-                    continue;
-
+            if (_hudSlots.TryGetValue(changed.id, out RuneSlotHudView slotView))
                 UpdateSlotView(slotView, changed.definition);
-                break;
-            }
         }
 
         private void OnActiveRuneSlotChanged(RuneActiveSlotChangedEvent changed)
         {
-            foreach (RuneSlotHudView slotView in _hudSlots)
-            {
-                if (slotView.Id == changed.oldId)
-                    slotView.Deactivate();
+            if (_hudSlots.TryGetValue(changed.oldId, out RuneSlotHudView oldSlot))
+                oldSlot.Deactivate();
 
-                if (slotView.Id == changed.newId)
-                    slotView.Activate();
-            }
+            if (_hudSlots.TryGetValue(changed.newId, out RuneSlotHudView newSlot))
+                newSlot.Activate();
         }
 
         private static void UpdateSlotView(RuneSlotHudView slotView, RuneDefinition runeDefinition)
         {
-            if (runeDefinition == null)
-                slotView.Clear();
-            else
+            if (runeDefinition)
                 slotView.Set(runeDefinition);
+            else
+                slotView.Clear();
         }
     }
 }

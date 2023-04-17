@@ -82,8 +82,8 @@ namespace Game.UI
 
         private void Start()
         {
-            CreateRuneDragger(_root, hud.RuneSlots);
-            SubscribeHudRunes(hud.RuneSlots);
+            CreateRuneDragger(_root, hud.RuneSlots.Values);
+            SubscribeHudRunes(hud.RuneSlots.Values);
         }
 
         private void OnDestroy()
@@ -93,7 +93,7 @@ namespace Game.UI
 
             _runeManipulator.target.RemoveManipulator(_runeManipulator);
 
-            UnSubscribeHudRunes(hud.RuneSlots);
+            UnSubscribeHudRunes(hud.RuneSlots.Values);
             CleanupRunes();
         }
 
@@ -170,7 +170,7 @@ namespace Game.UI
             }
         }
 
-        private void CreateRuneDragger(VisualElement root, IReadOnlyList<RuneSlotHudView> hudSlots)
+        private void CreateRuneDragger(VisualElement root, IEnumerable<RuneSlotHudView> hudSlots)
         {
             _runeDragger = root.Q<RuneSlotDraggerElement>();
             _runeManipulator = new RuneDragAndDropManipulator(
@@ -249,13 +249,13 @@ namespace Game.UI
 
         private void OnShow()
         {
-            foreach (RuneSlotHudView hudRuneSlotView in hud.RuneSlots)
+            foreach (RuneSlotHudView hudRuneSlotView in hud.RuneSlots.Values)
                 hudRuneSlotView.EnableInteraction();
         }
 
         private void OnHide()
         {
-            foreach (RuneSlotHudView hudRuneSlotView in hud.RuneSlots)
+            foreach (RuneSlotHudView hudRuneSlotView in hud.RuneSlots.Values)
                 hudRuneSlotView.DisableInteraction();
         }
 

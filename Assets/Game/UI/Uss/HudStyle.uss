@@ -58,13 +58,30 @@
     width: 958px;
 }
 
+.hud-rune-slot {
+    transition: translate 100ms ease-in-out, scale 200ms ease-in-out;
+}
+
 .hud-rune-slot #icon {
     border-width: 2px;
     border-color: rgba(0, 0, 0, 0);
 }
 
-.hud-rune-slot--active #icon {
-    border-color: gold;
+.hud-rune-slot--active {
+    scale: 1.1;
+    translate: 0 -10px;
+}
+
+.hud-rune-slot #icon {
+    --unity-image-tint-color: rgb(145, 157, 168);
+    
+    transition-duration: 250ms;
+    transition-timing-function: ease-in-out;
+    transition-property: -unity-background-image-tint-color;
+}
+
+.hud-rune-slot--enabled #icon {
+    --unity-image-tint-color: rgb(255, 255, 255);
 }
 
 .widget-saving {

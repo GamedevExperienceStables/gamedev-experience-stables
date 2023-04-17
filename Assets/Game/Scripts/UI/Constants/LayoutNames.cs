@@ -73,9 +73,11 @@
             public const string WIDGET_BAR_MASK = "mask";
             
             public const string RUNE_SLOT_CLASS_NAME = "hud-rune-slot";
-            public const string RUNE_SLOT_INTERACTABLE_CLASS_NAME = "hud-rune-slot--interactable";
             public const string RUNE_SLOT_ICON = "icon";
             public const string RUNE_SLOT_BACKGROUND = "background";
+            public const string RUNE_SLOT_INTERACTABLE_CLASS_NAME = "hud-rune-slot--interactable";
+            public const string RUNE_SLOT_ENABLED_CLASS_NAME = "hud-rune-slot--enabled";
+            public const string RUNE_SLOT_ACTIVE_CLASS_NAME = "hud-rune-slot--active";
             
             public const string WIDGET_INTERACTION = "widget-interaction";
             public const string WIDGET_INTERACTION_BLOCK = "widget-interaction-block";

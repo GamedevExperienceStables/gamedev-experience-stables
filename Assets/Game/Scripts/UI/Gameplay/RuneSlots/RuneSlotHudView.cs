@@ -55,10 +55,16 @@ namespace Game.UI
         }
 
         public void Activate()
-            => _icon.sprite = _runeDefinition.IconActive;
+        {
+            Element.AddToClassList(LayoutNames.Hud.RUNE_SLOT_ACTIVE_CLASS_NAME);
+            _icon.sprite = _runeDefinition.IconActive;
+        }
 
         public void Deactivate()
-            => _icon.sprite = _runeDefinition.Icon;
+        {
+            Element.RemoveFromClassList(LayoutNames.Hud.RUNE_SLOT_ACTIVE_CLASS_NAME);
+            _icon.sprite = _runeDefinition.Icon;
+        }
 
 
         private void OnPointerDown(PointerDownEvent evt)
@@ -102,6 +108,14 @@ namespace Game.UI
         {
             _interactable = false;
             Element.RemoveFromClassList(LayoutNames.Hud.RUNE_SLOT_INTERACTABLE_CLASS_NAME);
+        }
+        
+        public void SetEnabled(bool isEnabled)
+        {
+            if (isEnabled)
+                Element.AddToClassList(LayoutNames.Hud.RUNE_SLOT_ENABLED_CLASS_NAME);
+            else
+                Element.RemoveFromClassList(LayoutNames.Hud.RUNE_SLOT_ENABLED_CLASS_NAME);
         }
     }
 }
