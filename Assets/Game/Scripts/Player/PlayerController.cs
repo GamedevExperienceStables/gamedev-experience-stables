@@ -44,16 +44,34 @@ namespace Game.Player
             if (!Hero.TryGetComponent(out _deathController))
                 throw new NoNullAllowedException("Trying subscribe on hero death, but DeathController not exist");
 
-            _deathController.DiedWithCause += OnDeath;
+            SubscribeHeroDeath(Hero);
         }
 
         public void UnbindHero()
         {
-            if (_deathController)
-                _deathController.DiedWithCause -= OnDeath;
+            UnSubscribeHeroDeath(Hero);
 
             _deathController = null;
             Hero = null;
+        }
+
+        private void SubscribeHeroDeath(Component hero)
+        {
+            if (!hero.TryGetComponent(out DeathController death))
+                throw new NoNullAllowedException("Trying subscribe on hero death, but DeathController not exist");
+
+            death.DiedWithCause += OnDeath;
+        }
+
+        private void UnSubscribeHeroDeath(Component hero)
+        {
+            if (!hero)
+                return;
+
+            if (!hero.TryGetComponent(out DeathController death))
+                throw new NoNullAllowedException("Trying unsubscribe on hero death, but DeathController not exist");
+
+            death.DiedWithCause -= OnDeath;
         }
 
         private void OnDeath(DeathCause deathCause)
