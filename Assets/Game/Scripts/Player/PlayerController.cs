@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Data;
+using Game.Actors;
 using Game.Actors.Health;
 using Game.Hero;
 using Game.Stats;
+using UnityEngine;
 using VContainer;
 
 namespace Game.Player
@@ -10,8 +12,7 @@ namespace Game.Player
     public sealed class PlayerController
     {
         private readonly HeroStats _heroStats;
-
-        private DeathController _deathController;
+        private bool _isBound;
 
         private event Action<DeathCause> HeroDeathEvent;
 
@@ -41,8 +42,7 @@ namespace Game.Player
             Hero = hero;
             Hero.Bind(_heroStats);
 
-            if (!Hero.TryGetComponent(out _deathController))
-                throw new NoNullAllowedException("Trying subscribe on hero death, but DeathController not exist");
+            _isBound = true;
 
             SubscribeHeroDeath(Hero);
         }
@@ -51,7 +51,8 @@ namespace Game.Player
         {
             UnSubscribeHeroDeath(Hero);
 
-            _deathController = null;
+            _isBound = false;
+
             Hero = null;
         }
 
@@ -76,5 +77,8 @@ namespace Game.Player
 
         private void OnDeath(DeathCause deathCause)
             => HeroDeathEvent?.Invoke(deathCause);
+
+        public bool CanActivateAbility(AbilityDefinition runeGrantAbility)
+            => _isBound && Hero.CanActivate(runeGrantAbility);
     }
 }
