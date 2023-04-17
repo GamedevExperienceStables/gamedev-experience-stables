@@ -98,6 +98,9 @@ namespace Game.Actors
         {
             if (IsActive)
                 return false;
+            
+            if (_inputController.HasAnyBlock(InputBlock.Action))
+                return false;
 
             return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(GetCost());
         }

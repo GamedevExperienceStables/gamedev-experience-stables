@@ -49,8 +49,8 @@ namespace Game.Actors
                 UpdateTargeting();
         }
 
-        public override bool CanActivateAbility()
-            => true;
+        public override bool CanActivateAbility() 
+            => !_input.HasAnyBlock(InputBlock.Action);
 
         protected override void OnInitAbility()
         {

@@ -48,6 +48,9 @@ namespace Game.Actors
 
             if (!_movementController.IsGrounded)
                 return false;
+            
+            if (_inputController.HasAnyBlock(InputBlock.Action))
+                return false;
 
             return Owner.GetCurrentValue(CharacterStats.Stamina) >= Mathf.Abs(GetCost());
         }

@@ -7,7 +7,7 @@ using VContainer;
 namespace Game.Hero
 {
     [RequireComponent(typeof(MovementController))]
-    public class HeroInputController : MonoBehaviour, IActorInputController
+    public sealed class HeroInputController : ActorInputController
     {
         private SceneCamera _sceneCamera;
 
@@ -25,15 +25,11 @@ namespace Game.Hero
         private IActorController _owner;
         private ProjectileAbilityView _projectileView;
 
-        private bool _isBlocked;
-
         private Ray _mouseRay;
         private Vector3 _mouseFirePosition;
         private Vector3 _mouseGroundPosition;
 
-        private readonly ActorBlock _block = new();
-
-        public Vector3 DesiredDirection => _movementDirection;
+        public override Vector3 DesiredDirection => _movementDirection;
 
         [Inject]
         public void Construct(IInputControlGameplay input, SceneCamera sceneCamera)
@@ -85,7 +81,7 @@ namespace Game.Hero
         private void FixedUpdate()
             => UpdateMousePosition();
 
-        public Vector3 GetTargetPosition(bool grounded = false)
+        public override Vector3 GetTargetPosition(bool grounded = false)
             => grounded ? _mouseGroundPosition : _mouseFirePosition;
 
         private void UpdateMousePosition()
@@ -102,51 +98,23 @@ namespace Game.Hero
             return _mouseRay.GetPoint(distance);
         }
 
-        private void OnFire()
-        {
-            if (!_aim.IsActive)
-                return;
+        private void OnFire() 
+            => _activeSkill.TryActivateAbility();
 
-            if (_block.IsBlocked(InputBlock.Action))
-                return;
+        private void OnMelee() 
+            => _melee.TryActivateAbility();
 
-            _activeSkill.TryActivateAbility();
-        }
+        private void OnDash() 
+            => _dash.TryActivateAbility();
 
-        private void OnMelee()
-        {
-            if (_block.IsBlocked(InputBlock.Action))
-                return;
-
-            _melee.TryActivateAbility();
-        }
-
-        private void OnDash()
-        {
-            if (_block.IsBlocked(InputBlock.Action))
-                return;
-
-            _dash.TryActivateAbility();
-        }
-
-        private void OnAim()
-        {
-            if (_block.IsBlocked(InputBlock.Action))
-                return; 
-            
-            _aim.TryActivateAbility();
-        }
+        private void OnAim() 
+            => _aim.TryActivateAbility();
 
         private void OnAimCanceled()
             => _aim.EndAbility();
 
-        private void OnInteract()
-        {
-            if (_block.IsBlocked(InputBlock.Interact))
-                return;
-
-            _interaction.TryActivateAbility();
-        }
+        private void OnInteract() 
+            => _interaction.TryActivateAbility();
 
         private void HandleInputs()
         {
@@ -155,11 +123,11 @@ namespace Game.Hero
         }
 
         private void HandleMovementInput()
-            => _movementDirection = _block.IsBlocked(InputBlock.Movement) ? Vector3.zero : GetMovementDirection();
+            => _movementDirection = block.HasAny(InputBlock.Movement) ? Vector3.zero : GetMovementDirection();
 
         private void HandleRotationInput()
         {
-            if (_block.IsBlocked(InputBlock.Rotation))
+            if (block.HasAny(InputBlock.Rotation))
                 return;
 
             _lookDirection = _aim.IsActive ? GetLookDirection() : _movementDirection;
@@ -167,20 +135,6 @@ namespace Game.Hero
 
         private void Move()
             => _movement.UpdateInputs(_movementDirection, _lookDirection.normalized);
-
-        public void SetBlock(bool isBlocked)
-        {
-            if (isBlocked)
-                _block.SetBlock();
-            else
-                _block.RemoveBlock();
-        }
-
-        public void SetBlock(InputBlock input)
-            => _block.SetBlock(input);
-
-        public void RemoveBlock(InputBlock input)
-            => _block.RemoveBlock(input);
 
 
         private Vector3 GetMovementDirection()

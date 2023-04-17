@@ -116,6 +116,9 @@ namespace Game.Actors
             if (IsActive)
                 return false;
 
+            if (_input.HasAnyBlock(InputBlock.Action))
+                return false;
+
             if (_hasMana)
                 return Owner.GetCurrentValue(CharacterStats.Mana) >= Definition.ManaCost;
 
