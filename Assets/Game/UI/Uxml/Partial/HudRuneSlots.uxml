@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="Spell" src="project://database/Assets/Game/UI/Uxml/Partial/Spell.uxml?fileID=9197481963319205126&amp;guid=19aa79aeda9e27e46b1c979eb4d2f55a&amp;type=3#Spell" />
+    <Style src="project://database/Assets/Game/UI/Uss/HudStyle.uss?fileID=7433441132597879392&amp;guid=43fb365d5654783488ae02a43eaf455d&amp;type=3#HudStyle" />
+    <ui:VisualElement name="spells" style=" flex-direction: row; ">
+        <ui:Instance template="Spell" name="spell-1" class="hud-rune-slot" style="flex-grow: 0;" />
+        <ui:Instance template="Spell" name="spell-2" class="hud-rune-slot" style="flex-grow: 0;" />
+        <ui:Instance template="Spell" name="spell-3" class="hud-rune-slot" style="flex-grow: 0;" />
+        <ui:Instance template="Spell" name="spell-4" class="hud-rune-slot" style="flex-grow: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

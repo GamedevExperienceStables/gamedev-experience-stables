@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Input;
 using Game.Inventory;
 using UnityEngine.UIElements;
 using VContainer;
@@ -9,10 +10,14 @@ namespace Game.UI
     {
         private readonly Dictionary<RuneSlotId, RuneSlotHudView> _hudSlots = new();
         private readonly HudRuneSlotsViewModel _viewModel;
+        private readonly InputBindings _input;
 
         [Inject]
-        public HudRuneSlotsView(HudRuneSlotsViewModel viewModel)
-            => _viewModel = viewModel;
+        public HudRuneSlotsView(HudRuneSlotsViewModel viewModel, InputBindings input)
+        {
+            _viewModel = viewModel;
+            _input = input;
+        }
 
         public IReadOnlyDictionary<RuneSlotId, RuneSlotHudView> Slots => _hudSlots;
 
@@ -40,15 +45,28 @@ namespace Game.UI
                 .Query<VisualElement>(className: LayoutNames.Hud.RUNE_SLOT_CLASS_NAME)
                 .ToList();
 
+            string inputActive = _input.GetBindingDisplayString(InputGameplayActions.Fire);
             for (int i = 0; i < slots.Count; i++)
             {
                 int slotId = i + 1;
                 VisualElement slotElement = slots[i];
 
-                var slotView = new RuneSlotHudView(slotElement, slotId);
+                string inputSelect = GetInput(slotId);
+
+                var slotView = new RuneSlotHudView(slotElement, slotId, inputSelect, inputActive);
                 _hudSlots.Add(slotId, slotView);
             }
         }
+
+        private string GetInput(int slotId) =>
+            slotId switch
+            {
+                1 => _input.GetBindingDisplayString(InputGameplayActions.Slot1),
+                2 => _input.GetBindingDisplayString(InputGameplayActions.Slot2),
+                3 => _input.GetBindingDisplayString(InputGameplayActions.Slot3),
+                4 => _input.GetBindingDisplayString(InputGameplayActions.Slot4),
+                _ => string.Empty
+            };
 
         private void InitSlots(IReadOnlyDictionary<RuneSlotId, RuneSlot> slots)
         {

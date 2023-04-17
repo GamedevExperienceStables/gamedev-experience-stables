@@ -1,4 +1,5 @@
-﻿using VContainer;
+﻿using UnityEngine.InputSystem;
+using VContainer;
 
 namespace Game.Input
 {
@@ -7,7 +8,7 @@ namespace Game.Input
         private readonly GameInputControls _controls;
 
         [Inject]
-        public GameInputControlsAdapter()
+        public GameInputControlsAdapter() 
             => _controls = new GameInputControls();
 
         public void SetGameplayCallbacks(GameInputControls.IGameplayActions callback)
@@ -21,6 +22,9 @@ namespace Game.Input
         
         public GameInputControls.MenuActions GetMenuActions() 
             => _controls.Menu;
+
+        public InputControlScheme GetKeyboardMouseScheme() 
+            => _controls.KeyboardMouseScheme;
 
         public void GameplayEnable() => _controls.Gameplay.Enable();
         public void GameplayDisable() => _controls.Gameplay.Disable();

@@ -1,8 +1,6 @@
-.hud-bar {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
+:root {
+    --rune-slot-height: 95px;
+    --rune-slot-width: 95px;
 }
 
 .hud-bar-size {
@@ -26,9 +24,9 @@
     -unity-background-image-tint-color: rgb(0, 29, 255);
 }
 
-.hud-spell-size {
-    height: 125px;
-    width: 150px;
+.hud-spell-size {    
+    width: var(--rune-slot-width);
+    
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -59,29 +57,62 @@
 }
 
 .hud-rune-slot {
+   margin: 0 20px;
+}
+
+.hud-rune-slot #container {
+    height: var(--rune-slot-height);
+    width: var(--rune-slot-width);
+
+    margin: 15px 0 ;
+    
     transition: translate 100ms ease-in-out, scale 200ms ease-in-out;
 }
 
-.hud-rune-slot #icon {
-    border-width: 2px;
-    border-color: rgba(0, 0, 0, 0);
-}
-
-.hud-rune-slot--active {
+.hud-rune-slot--active #container {
     scale: 1.1;
-    translate: 0 -10px;
+    translate: 0 -20px;
 }
 
 .hud-rune-slot #icon {
-    --unity-image-tint-color: rgb(145, 157, 168);
-    
-    transition-duration: 250ms;
-    transition-timing-function: ease-in-out;
-    transition-property: -unity-background-image-tint-color;
+    --unity-image-tint-color: rgb(152, 164, 176);
 }
 
 .hud-rune-slot--enabled #icon {
     --unity-image-tint-color: rgb(255, 255, 255);
+}
+
+.hud-rune-slot #background {
+    visibility: hidden; 
+}
+
+.hud-rune-slot--empty #background {
+    visibility: visible;
+}
+
+.hud-rune-slot__input {
+    align-items: center;
+
+    transition: translate 100ms ease-in-out;
+}
+
+.hud-rune-slot--active  .hud-rune-slot__input {
+    translate: 0 -20px;
+}
+
+.hud-rune-slot--empty .hud-rune-slot__input {
+    visibility: hidden;
+}
+
+.hud-rune-slot__input-label {
+    -unity-text-align: middle-center;
+    
+    font-size: 20px;
+
+    width: 25px;
+    height: 25px;
+
+    border-radius: 3px;
 }
 
 .widget-saving {
@@ -110,12 +141,6 @@
     color: rgb(255, 255, 255);
     -unity-text-align: upper-center;
     font-size: 28px;
-}
-
-#widget-map {
-    position: absolute;
-    right: 20px;
-    top: 20px;
 }
 
 .dialog-window {
