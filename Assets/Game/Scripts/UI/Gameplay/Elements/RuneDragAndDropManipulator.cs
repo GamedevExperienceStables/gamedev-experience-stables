@@ -19,10 +19,10 @@ namespace Game.UI.Elements
         private readonly Action _stopDragCallback;
         private readonly Action<RuneSlotHudView> _onDragComplete;
 
-        public RuneDragAndDropManipulator(VisualElement target, IReadOnlyList<RuneSlotHudView> hudSlots,
+        public RuneDragAndDropManipulator(VisualElement target, IEnumerable<RuneSlotHudView> hudSlots,
             Action onStopDrag, Action<RuneSlotHudView> onDragComplete)
         {
-            _hudSlots = hudSlots;
+            _hudSlots = hudSlots.ToList();
             _stopDragCallback = onStopDrag;
             _onDragComplete = onDragComplete;
 

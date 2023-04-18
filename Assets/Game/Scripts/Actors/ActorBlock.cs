@@ -7,41 +7,38 @@ namespace Game.Actors
     {
         private readonly Dictionary<InputBlock, int> _blockCount = new();
 
-        // ReSharper disable once MemberCanBeMadeStatic.Global
-        public bool IsBlocked(InputBlock blocked)
-        {
-            foreach (InputBlock flag in Enum.GetValues(typeof(InputBlock)))
-            {
-                if (!blocked.HasFlagFast(flag))
-                    continue;
+        private readonly InputBlock[] _flags = Enum.GetValues(typeof(InputBlock)) as InputBlock[];
 
-                if (!_blockCount.ContainsKey(flag) || _blockCount[flag] == 0)
-                    return false;
+        public bool HasAny(InputBlock input)
+        {
+            foreach (InputBlock flag in _flags)
+            {
+                if (!input.HasFlagFast(flag)) 
+                    continue;
+                
+                if (_blockCount.ContainsKey(flag) && !IsBlockEmpty(flag))
+                    return true;
             }
 
-            return true;
+            return false;
         }
-
-        public void SetBlock()
-            => SetBlock(InputBlockExtensions.FULL_BLOCK);
 
         public void SetBlock(InputBlock toBlock)
         {
-            foreach (InputBlock flag in Enum.GetValues(typeof(InputBlock)))
+            foreach (InputBlock flag in _flags)
             {
                 if (toBlock.HasFlagFast(flag))
                     SetBlockInternal(flag);
             }
         }
 
-        public void RemoveBlock()
-            => RemoveBlock(InputBlockExtensions.FULL_BLOCK);
-
         public void RemoveBlock(InputBlock toRemove)
         {
-            foreach (InputBlock flag in Enum.GetValues(typeof(InputBlock)))
+            foreach (InputBlock flag in _flags)
+            {
                 if (toRemove.HasFlagFast(flag))
                     RemoveBlockInternal(flag);
+            }
         }
 
         public void Reset()
@@ -62,8 +59,11 @@ namespace Game.Actors
 
             _blockCount[flag]--;
 
-            if (_blockCount[flag] == 0)
+            if (IsBlockEmpty(flag))
                 _blockCount.Remove(flag);
         }
+
+        private bool IsBlockEmpty(InputBlock flag)
+            => _blockCount[flag] == 0;
     }
 }

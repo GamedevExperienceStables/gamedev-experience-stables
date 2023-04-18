@@ -6,6 +6,7 @@ namespace Game.Actors
     {
         Vector3 DesiredDirection { get; }
         
+        bool HasAnyBlock(InputBlock input);
         void SetBlock(bool isBlocked);
         void SetBlock(InputBlock input);
         void RemoveBlock(InputBlock input);

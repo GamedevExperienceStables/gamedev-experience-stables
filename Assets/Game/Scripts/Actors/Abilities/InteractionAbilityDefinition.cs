@@ -18,6 +18,7 @@ namespace Game.Actors
         private readonly InteractionService _interactionService;
 
         private ZoneTrigger _trigger;
+        private IActorInputController _input;
 
         [Inject]
         public InteractionAbility(InteractionService interactionService)
@@ -27,10 +28,17 @@ namespace Game.Actors
         {
             var view = Owner.GetComponent<InteractionAbilityView>();
             _trigger = view.Trigger;
+
+            _input = Owner.GetComponent<IActorInputController>();
         }
 
         public override bool CanActivateAbility()
-            => _potentialInteractions.Count > 0;
+        {
+            if (_input.HasAnyBlock(InputBlock.Interact))
+                return false;
+
+            return _potentialInteractions.Count > 0;
+        }
 
         protected override void OnGiveAbility()
         {
@@ -106,7 +114,7 @@ namespace Game.Actors
             {
                 if (!_interactionService.CanExecute(potentialInteraction))
                     continue;
-                
+
                 _interactionService.StartInteraction(potentialInteraction);
                 return;
             }

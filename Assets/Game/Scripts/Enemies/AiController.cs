@@ -1,10 +1,11 @@
 ﻿using Game.Actors;
+using JetBrains.Annotations;
 using NodeCanvas.BehaviourTrees;
 using UnityEngine;
 
 namespace Game.Enemies
 {
-    public class AiController : MonoBehaviour, IActorInputController
+    public sealed class AiController : ActorInputController
     {
         private Transform _target;
 
@@ -15,12 +16,19 @@ namespace Game.Enemies
         private BehaviourTreeOwner _brain;
         private bool _hasBrain;
 
-        private readonly ActorBlock _block = new();
-
+        [UsedImplicitly]
         public Transform Target => _target;
+
+        [UsedImplicitly]
         public float SensorDistance => _sensorDistance;
+
+        [UsedImplicitly]
         public float AttackRange => _attackRange;
+
+        [UsedImplicitly]
         public float AttackInterval => _attackInterval;
+
+        public override Vector3 DesiredDirection => transform.forward;
 
         private void Awake()
             => _hasBrain = TryGetComponent(out _brain);
@@ -37,37 +45,29 @@ namespace Game.Enemies
             _attackInterval = interval;
         }
 
-        public void SetBlock(bool isBlocked)
+        public override void SetBlock(InputBlock input)
         {
-            if (isBlocked)
-                SetBlock(InputBlockExtensions.FULL_BLOCK);
-            else 
-                RemoveBlock(InputBlockExtensions.FULL_BLOCK);
-        }
+            base.SetBlock(input);
 
-        public void SetBlock(InputBlock input)
-        {
-            if (!_hasBrain) 
+            if (!_hasBrain)
                 return;
-            
-            _block.SetBlock(input);
-            if (_block.IsBlocked(InputBlockExtensions.FULL_BLOCK))
+
+            if (block.HasAny(InputBlockExtensions.ALL))
                 _brain.PauseBehaviour();
         }
 
-        public void RemoveBlock(InputBlock input)
+        public override void RemoveBlock(InputBlock input)
         {
-            if (!_hasBrain) 
+            base.RemoveBlock(input);
+
+            if (!_hasBrain)
                 return;
-            
-            _block.RemoveBlock(input);
-            if (!_block.IsBlocked(InputBlockExtensions.FULL_BLOCK) && _brain.isPaused)
+
+            if (_brain.isPaused && !block.HasAny(InputBlockExtensions.ALL)) 
                 _brain.StartBehaviour();
         }
 
-        public Vector3 GetTargetPosition(bool grounded = false)
+        public override Vector3 GetTargetPosition(bool grounded = false)
             => _target.position;
-
-        public Vector3 DesiredDirection => transform.forward;
     }
 }

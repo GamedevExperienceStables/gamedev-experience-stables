@@ -20,6 +20,7 @@ namespace Game.Actors
 
         private AimAbility _aim;
         private ActorAbility _defaultAbility;
+        private IActorInputController _input;
 
         public ActiveSkillAbility(IInventorySlots slots)
             => _slots = slots;
@@ -32,6 +33,8 @@ namespace Game.Actors
             _slots.ActiveSlotChanged += OnActiveSlotChanged;
 
             _aim = Owner.GetAbility<AimAbility>();
+            _input = Owner.GetComponent<IActorInputController>();
+            
             SetDefaultAbility();
         }
 
@@ -54,7 +57,12 @@ namespace Game.Actors
         }
 
         public override bool CanActivateAbility()
-            => true;
+        {
+            if (!_aim.IsActive)
+                return false;
+
+            return !_input.HasAnyBlock(InputBlock.Action);
+        }
 
         protected override void OnActivateAbility()
         {

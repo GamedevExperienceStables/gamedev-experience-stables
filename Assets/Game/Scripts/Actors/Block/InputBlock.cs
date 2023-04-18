@@ -13,7 +13,7 @@ namespace Game.Actors
 
     public static class InputBlockExtensions
     {
-        public const InputBlock FULL_BLOCK = (InputBlock)~0;
+        public const InputBlock ALL = (InputBlock)~0;
 
         public static bool HasFlagFast(this InputBlock value, InputBlock flag)
             => (value & flag) != 0;

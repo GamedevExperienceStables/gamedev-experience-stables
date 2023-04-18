@@ -9,19 +9,31 @@ namespace Game.UI
     public class RuneSlotHudView
     {
         private readonly Image _icon;
-        private readonly VisualElement _background;
         private bool _interactable;
         private RuneDefinition _runeDefinition;
 
+        private readonly Label _inputLabel;
+
+        private readonly string _inputSelect;
+        private readonly string _inputActive;
+
         private event Action<RuneSlotRemoveEvent> RuneRemovingRequest;
 
-        public RuneSlotHudView(VisualElement element, RuneSlotId id)
+        public RuneSlotHudView(VisualElement element, RuneSlotId id, string inputSelect, string inputActive)
         {
             Id = id;
             Element = element;
 
             _icon = element.Q<Image>(LayoutNames.Hud.RUNE_SLOT_ICON);
-            _background = element.Q<VisualElement>(LayoutNames.Hud.RUNE_SLOT_BACKGROUND);
+            element.Q<VisualElement>(LayoutNames.Hud.RUNE_SLOT_BACKGROUND);
+
+            _inputSelect = inputSelect;
+            _inputActive = inputActive;
+
+            _inputLabel = element.Q<Label>(LayoutNames.Hud.RUNE_SLOT_INPUT_LABEL);
+            _inputLabel.text = inputSelect;
+
+            Clear();
 
             element.RegisterCallback<PointerDownEvent>(OnPointerDown);
         }
@@ -29,36 +41,46 @@ namespace Game.UI
         public RuneSlotId Id { get; }
 
         public VisualElement Element { get; }
-        
-        public void SubscribeRemovingRequest(Action<RuneSlotRemoveEvent> callback) 
+
+        public void SubscribeRemovingRequest(Action<RuneSlotRemoveEvent> callback)
             => RuneRemovingRequest += callback;
 
-        public void UnSubscribeRemovingRequest(Action<RuneSlotRemoveEvent> callback) 
+        public void UnSubscribeRemovingRequest(Action<RuneSlotRemoveEvent> callback)
             => RuneRemovingRequest -= callback;
 
         public void Clear()
         {
             _runeDefinition = null;
+
             _icon.sprite = null;
-            _background.visible = true;
+
+            Element.AddToClassList(LayoutNames.Hud.RUNE_SLOT_EMPTY_CLASS_NAME);
         }
 
         public void Set(RuneDefinition rune)
         {
             _runeDefinition = rune;
 
-            if (!rune.Icon)
-                return;
-            
-            _icon.sprite = rune.Icon;
-            _background.visible = false;
+            _icon.sprite = rune.Icon ? rune.Icon : null;
+
+            Element.RemoveFromClassList(LayoutNames.Hud.RUNE_SLOT_EMPTY_CLASS_NAME);
         }
 
         public void Activate()
-            => _icon.sprite = _runeDefinition.IconActive;
+        {
+            _icon.sprite = _runeDefinition.IconActive;
+            _inputLabel.text = _inputActive;
+
+            Element.AddToClassList(LayoutNames.Hud.RUNE_SLOT_ACTIVE_CLASS_NAME);
+        }
 
         public void Deactivate()
-            => _icon.sprite = _runeDefinition.Icon;
+        {
+            _icon.sprite = _runeDefinition.Icon;
+            _inputLabel.text = _inputSelect;
+
+            Element.RemoveFromClassList(LayoutNames.Hud.RUNE_SLOT_ACTIVE_CLASS_NAME);
+        }
 
 
         private void OnPointerDown(PointerDownEvent evt)
@@ -88,7 +110,7 @@ namespace Game.UI
                 pointerId = evt.pointerId,
                 definition = _runeDefinition,
             };
-            
+
             RuneRemovingRequest?.Invoke(removeEvent);
         }
 
@@ -102,6 +124,14 @@ namespace Game.UI
         {
             _interactable = false;
             Element.RemoveFromClassList(LayoutNames.Hud.RUNE_SLOT_INTERACTABLE_CLASS_NAME);
+        }
+
+        public void SetEnabled(bool isEnabled)
+        {
+            if (isEnabled)
+                Element.AddToClassList(LayoutNames.Hud.RUNE_SLOT_ENABLED_CLASS_NAME);
+            else
+                Element.RemoveFromClassList(LayoutNames.Hud.RUNE_SLOT_ENABLED_CLASS_NAME);
         }
     }
 }

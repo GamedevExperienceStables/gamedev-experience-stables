@@ -46,5 +46,8 @@ namespace Game.Hero
 
         public void Reset() 
             => ResetAbilities();
+
+        public bool CanActivate(AbilityDefinition runeGrantAbility)
+            => TryGetAbility(runeGrantAbility, out ActorAbility foundAbility) && foundAbility.CanActivateAbility();
     }
 }
