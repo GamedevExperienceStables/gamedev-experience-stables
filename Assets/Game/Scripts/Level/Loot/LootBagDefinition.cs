@@ -7,8 +7,13 @@ namespace Game.Level
     public class LootBagDefinition : ScriptableObject
     {
         [SerializeField]
+        private List<LootTableDefinitionItem> tables;
+
+        [SerializeField]
         private List<LootDefinitionItem> items;
 
         public List<LootDefinitionItem> Items => items;
+
+        public List<LootTableDefinitionItem> Tables => tables;
     }
 }
