@@ -58,14 +58,14 @@ namespace Game.Level
         private static bool TryGetLootFromTable(LootTableDefinitionItem lootTable, out LootDefinitionItem itemDefinition)
         {
             LootTableItem lootTableItem = lootTable.GetLoot();
-            if (lootTableItem.Loot is null)
+            if (lootTableItem.Loot?.Definition)
             {
-                itemDefinition = null;
-                return false;
+                itemDefinition = lootTableItem.Loot;
+                return true;
             }
 
-            itemDefinition = lootTableItem.Loot;
-            return true;
+            itemDefinition = null;
+            return false;
         }
 
         private void SpawnItem(Vector3 position, LootDefinitionItem item)
