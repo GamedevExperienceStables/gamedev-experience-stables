@@ -1,4 +1,6 @@
-﻿using Game.Dialog;
+﻿using System;
+using Game.Dialog;
+using Game.TimeManagement;
 using Game.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,79 +10,127 @@ namespace Game.UI
 {
     public class DialogView
     {
+        private static readonly TimeSpan HideDelay = TimeSpan.FromSeconds(2);
+        private static readonly TimeSpan ShowDelay = TimeSpan.FromSeconds(0.3);
+
         private readonly DialogViewModel _viewModel;
+        private readonly TimerPool _timers;
+
+        private TimerUpdatable _hideTimer;
 
         private VisualElement _dialog;
 
         private Label _title;
         private Label _text;
+        private TimerUpdatable _delayTimer;
+        private DialogData _data;
 
         [Inject]
-        public DialogView(DialogViewModel viewModel)
-            => _viewModel = viewModel;
+        public DialogView(DialogViewModel viewModel, TimerPool timers)
+        {
+            _viewModel = viewModel;
+            _timers = timers;
+        }
 
         public void Create(VisualElement root)
         {
-            _dialog = root.Q<VisualElement>(LayoutNames.Hud.DIALOG);
+            _dialog = root.Q<VisualElement>(LayoutNames.Hud.DIALOG_WINDOW);
             _title = _dialog.Q<Label>(LayoutNames.Hud.DIALOG_TITLE);
             _text = _dialog.Q<Label>(LayoutNames.Hud.DIALOG_TEXT);
 
             _viewModel.SubscribeDialogRequested(OnDialogRequested);
             _viewModel.SubscribeDialogClosing(OnDialogClosing);
 
+            _hideTimer = _timers.GetTimer(HideDelay, OnDialogComplete);
+            _delayTimer = _timers.GetTimer(ShowDelay, ShowDialog);
+
             HideDialog();
         }
 
         public void Destroy()
         {
+            _timers.ReleaseTimer(_hideTimer);
+            _timers.ReleaseTimer(_delayTimer);
+
             _viewModel.UnSubscribeDialogRequested(OnDialogRequested);
             _viewModel.UnSubscribeDialogClosing(OnDialogClosing);
         }
 
-        private void OnDialogRequested()
+        private void OnDialogRequested(DialogData nextDialog)
         {
-            if (!_viewModel.TryGetDialog(out DialogData data))
+            if (_data == nextDialog)
+            {
+                _hideTimer.Stop();
                 return;
+            }   
+            
+            bool inTransition = !_hideTimer.IsDone || !_delayTimer.IsDone;
+            if (_data.IsEmpty && !inTransition)
+            {
+                ShowDialog(nextDialog);
+                return;
+            }
 
-            ShowDialog(data);
+            _hideTimer.Stop();
+
+            HideDialog();
+            ShowDialogWithDelay(nextDialog);
+        }
+
+        private void ShowDialog()
+        {
+            if (_data.Definition.Single.Text.IsEmpty)
+            {
+                Debug.LogWarning($"Dialog {_data.Definition.name} has no text");
+                return;
+            }
+
+            _hideTimer.Stop();
+
+            SetupDialog();
+
+            _dialog.RemoveFromClassList(LayoutNames.Hud.DIALOG_HIDDEN_CLASS_NAME);
+        }
+
+        private void ShowDialog(DialogData newData)
+        {
+            _data = newData;
+            
+            ShowDialog();
+        }
+
+        private void ShowDialogWithDelay(DialogData data)
+        {
+            _data = data;
+            
+            _delayTimer.Start();
         }
 
         private void OnDialogClosing()
-            => OnDialogComplete();
+            => _hideTimer.Start();
 
         private void OnDialogComplete()
         {
-            if (!_viewModel.TryGetDialog(out DialogData data))
-            {
-                HideDialog();
-                return;
-            }
+            _data = default;
+            _viewModel.DialogClosed();
 
-            ShowDialog(data);
+            HideDialog();
         }
 
-        private void ShowDialog(DialogData data)
+        private void SetupDialog()
         {
-            if (data.Definition.Single.Text.IsEmpty)
-            {
-                Debug.LogWarning($"Dialog {data.Definition.name} has no text");
-                return;
-            }
+            _text.text = _data.Definition.Single.Text.GetLocalizedString();
 
-            _text.text = data.Definition.Single.Text.GetLocalizedString();
-
-            if (data.Definition.Single.Title.IsEmpty)
+            if (_data.Definition.Single.Title.IsEmpty)
                 _title.SetDisplay(false);
             else
             {
                 _title.SetDisplay(true);
-                _title.text = data.Definition.Single.Title.GetLocalizedString();
+                _title.text = _data.Definition.Single.Title.GetLocalizedString();
             }
-
-            _dialog.SetVisibility(true);
         }
 
-        private void HideDialog()
-            => _dialog.SetVisibility(false);
+        private void HideDialog() 
+            => _dialog.AddToClassList(LayoutNames.Hud.DIALOG_HIDDEN_CLASS_NAME);
     }
 }

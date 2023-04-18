@@ -137,6 +137,8 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.CursorSettings);
             
             builder.RegisterInstance(gameSettings.UiSettings.StartMenu);
+            builder.RegisterInstance(gameSettings.UiSettings.SettingsMenu);
+            builder.RegisterInstance(gameSettings.UiSettings.SettingsControlsMenuMenu);
             builder.RegisterInstance(gameSettings.UiSettings.PauseMenu);
             builder.RegisterInstance(gameSettings.UiSettings.GameOver);
             builder.RegisterInstance(gameSettings.UiSettings.Interaction);
@@ -148,6 +150,8 @@ namespace Game.LifetimeScopes
             builder.Register<SettingsViewModel>(Lifetime.Singleton);
             
             builder.Register<ModalViewModel>(Lifetime.Singleton);
+
+            builder.Register<Typewriter>(Lifetime.Transient);
         }
 
         private void RegisterDataTables(IContainerBuilder builder)

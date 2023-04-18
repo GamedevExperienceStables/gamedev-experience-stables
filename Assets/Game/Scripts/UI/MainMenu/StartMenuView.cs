@@ -75,12 +75,14 @@ namespace Game.UI
             _buttonContinue.SetDisplay(ViewModel.IsSaveGameExists());
             ShowPreview();
 
-            Content.SetDisplay(true);
+            Content.SetEnabled(true);
+            Content.RemoveFromClassList(LayoutNames.StartMenu.PAGE_HIDDEN_CLASS_NAME);
         }
 
         public override void Hide()
         {
-            Content.SetDisplay(false);
+            Content.SetEnabled(false);
+            Content.AddToClassList(LayoutNames.StartMenu.PAGE_HIDDEN_CLASS_NAME);
         }
 
         public void Activate()
