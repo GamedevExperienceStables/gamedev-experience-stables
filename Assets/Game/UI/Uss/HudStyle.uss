@@ -64,8 +64,6 @@
     height: var(--rune-slot-height);
     width: var(--rune-slot-width);
 
-    margin: 15px 0 ;
-    
     transition: translate 100ms ease-in-out, scale 200ms ease-in-out;
 }
 
@@ -97,7 +95,7 @@
 }
 
 .hud-rune-slot--active  .hud-rune-slot__input {
-    translate: 0 -20px;
+    translate: 0 -5px;
 }
 
 .hud-rune-slot--empty .hud-rune-slot__input {
