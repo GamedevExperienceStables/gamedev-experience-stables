@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="Employee" src="project://database/Assets/Game/UI/Uxml/Partial/Employee.uxml?fileID=9197481963319205126&amp;guid=c8cb8f191586165478a3c100453974c1&amp;type=3#Employee" />
+    <Style src="project://database/Assets/Game/UI/Uss/AboutScreenStyle.uss?fileID=7433441132597879392&amp;guid=715d4e15f601c8e4f8506a3dddec8436&amp;type=3#AboutScreenStyle" />
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-shrink: 0;">
+        <ui:Label tabindex="-1" text="Team Name" display-tooltip-when-elided="true" name="name" class="team-name" style="align-self: center;" />
+        <ui:Instance template="Employee" name="Employee" style="flex-shrink: 0;" />
+    </ui:VisualElement>
+</ui:UXML>
