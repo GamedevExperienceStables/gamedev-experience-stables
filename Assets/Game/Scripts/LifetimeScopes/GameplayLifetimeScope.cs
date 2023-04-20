@@ -39,7 +39,6 @@ namespace Game.LifetimeScopes
             RegisterCameras(builder);
             RegisterAudio(builder);
             RegisterPlanetStateMachine(builder);
-            RegisterLocationStateMachine(builder);
             RegisterLootSystem(builder);
             RegisterAbilities(builder);
             RegisterProjectile(builder);
@@ -178,14 +177,6 @@ namespace Game.LifetimeScopes
             builder.Register<PlanetGameOverState>(Lifetime.Scoped);
             builder.Register<PlanetCompleteState>(Lifetime.Scoped);
             builder.Register<PlanetSaveGameState>(Lifetime.Scoped);
-        }
-
-        private static void RegisterLocationStateMachine(IContainerBuilder builder)
-        {
-            builder.Register<LocationStateMachine>(Lifetime.Scoped);
-
-            builder.Register<LocationSafeState>(Lifetime.Scoped);
-            builder.Register<LocationBattleState>(Lifetime.Scoped);
         }
 
         private static void RegisterLootSystem(IContainerBuilder builder)

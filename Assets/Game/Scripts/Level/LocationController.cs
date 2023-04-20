@@ -13,7 +13,6 @@ namespace Game.Level
 
         private readonly FollowSceneCamera _followCamera;
         private readonly LocationAudioListener _audioListener;
-        private readonly LocationStateMachine _locationStateMachine;
 
         private HeroController _hero;
         private LocationContext _context;
@@ -25,13 +24,11 @@ namespace Game.Level
             HeroFactory heroFactory,
             FollowSceneCamera followCamera,
             LocationAudioListener audioListener,
-            LocationStateMachine locationStateMachine
         )
         {
             _heroFactory = heroFactory;
             _followCamera = followCamera;
             _audioListener = audioListener;
-            _locationStateMachine = locationStateMachine;
         }
 
         public Bounds Bounds { get; private set; }
@@ -50,8 +47,6 @@ namespace Game.Level
             _context.InitEnemySpawners(_hero.transform);
 
             Initialized?.Invoke();
-            
-            _locationStateMachine.EnterState<LocationSafeState>();
         }
 
         private void InitLocationBounds()
