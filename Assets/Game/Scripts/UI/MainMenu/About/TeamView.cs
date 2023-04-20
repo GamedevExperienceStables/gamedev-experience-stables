@@ -28,12 +28,12 @@ namespace Game.UI
         {
             _name.text = teamData.name;
             
-            foreach (EmployeeData employeeData in teamData.list)
+            for (int i = 1; i <= teamData.list.Count; i++)
             {
                 TemplateContainer element = _template.Instantiate();
                 _listContent.Add(element);
-
-                EmployeeView employeeView = _employeeFactory.Create(element, employeeData);
+                
+                EmployeeView employeeView = _employeeFactory.Create(element, teamData.list[i - 1], i % 2 == 0);
                 _employeeViews.Add(employeeView);
             }
         }

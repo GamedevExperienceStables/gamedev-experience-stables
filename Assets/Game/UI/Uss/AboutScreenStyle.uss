@@ -35,11 +35,11 @@
     margin-bottom: 25px;
 }
 
-.employee__reversed {
+.employee--reversed {
     flex-direction: row-reverse;
 }
 
-.description__reversed {
+.description--reversed {
     align-items: flex-end;
     -unity-text-align: upper-right;
 }

@@ -10,12 +10,12 @@ namespace Game.UI
         public EmployeeViewFactory(IObjectResolver resolver) 
             => _resolver = resolver;
         
-        public EmployeeView Create(TemplateContainer element, EmployeeData employeeData)
+        public EmployeeView Create(TemplateContainer element, EmployeeData employeeData, bool isEven)
         {
             var employeeView = _resolver.Resolve<EmployeeView>();
             
             employeeView.Create(element);
-            employeeView.SetData(employeeData);
+            employeeView.SetData(employeeData, isEven);
 
             return employeeView;
         }

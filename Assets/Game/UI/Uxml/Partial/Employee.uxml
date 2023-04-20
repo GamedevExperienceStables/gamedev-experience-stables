@@ -5,7 +5,7 @@
         <ui:VisualElement name="description" style="margin-top: 40px; margin-bottom: 20px; margin-right: 20px; margin-left: 20px; flex-grow: 1;">
             <ui:Label tabindex="-1" text="Some looooooooong name" display-tooltip-when-elided="true" name="name" enable-rich-text="true" class="employee-name" />
             <ui:Label tabindex="-1" text="Some Position" display-tooltip-when-elided="true" name="position" class="employee-position" />
-            <ui:Button tabindex="-1" text="LinkedIn" display-tooltip-when-elided="true" name="link" class="employee-link" style="-unity-font-style: normal; position: relative; width: 86px;" />
+            <ui:Button tabindex="-1" text="&lt;u&gt;LinkedIn&lt;/u&gt;" display-tooltip-when-elided="true" name="link" class="employee-link" style="-unity-font-style: normal; position: relative; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); background-color: rgba(188, 188, 188, 0); width: 89px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; -unity-text-align: middle-left;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -38,8 +38,14 @@ namespace Game.UI
         public void Destroy()
             => UnregisterCallbacks();
 
-        public void SetData(EmployeeData employeeData)
+        public void SetData(EmployeeData employeeData, bool isEven)
         {
+            if (isEven)
+            {
+                _info.AddToClassList("employee--reversed");
+                _description.AddToClassList("description--reversed");
+            }
+            
             _url = employeeData.url;
 
             bool isEmpty = string.IsNullOrEmpty(_url);

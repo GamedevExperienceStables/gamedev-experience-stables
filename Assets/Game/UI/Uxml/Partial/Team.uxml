@@ -4,7 +4,7 @@
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-shrink: 0;">
         <ui:Label tabindex="-1" text="Team Name" display-tooltip-when-elided="true" name="team-name" class="team-name" style="align-self: center;" />
         <ui:VisualElement name="team-list-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-            <ui:Instance template="Employee" name="item-template" style="flex-shrink: 0;" />
+            <ui:Instance template="Employee" name="item-template" style="flex-shrink: 0; margin-bottom: 20px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
