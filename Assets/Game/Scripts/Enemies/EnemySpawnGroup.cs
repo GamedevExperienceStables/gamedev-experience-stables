@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Level;
 using Game.TimeManagement;
+using NaughtyAttributes;
 using UnityEngine;
 using VContainer;
 
 namespace Game.Enemies
 {
-    public class EnemySpawnGroup : MonoBehaviour
+    public class EnemySpawnGroup : MonoBehaviour, ICounterObject
     {
         [SerializeField, HideInInspector]
         private List<EnemySpawnPoint> enemySpawnPoints;
@@ -25,6 +27,14 @@ namespace Game.Enemies
         private TimerUpdatable _spawnTimer;
         private bool _initialized;
 
+        [ShowNonSerializedField]
+        private int _spawnsLeft;
+
+        // ReSharper disable once ConvertToAutoPropertyWithPrivateSetter
+        public int RemainingCount => _spawnsLeft;
+        
+        public bool IsDirty { get; private set; }
+
         private void OnValidate()
         {
             enemySpawnPoints.Clear();
@@ -41,14 +51,16 @@ namespace Game.Enemies
             _spawnTimer = factory.CreateTimer(TimeSpan.FromSeconds(respawnTimer), OnCompleteSpawnTimer);
         }
 
-        public void Init(Transform spawnContainer)
+        public void Init(Transform spawnContainer, Transform target)
         {
-            _initialized = true;
             _spawnContainer = spawnContainer;
-        }
+            _target = target;
+            _spawnsLeft = spawnCounts;
 
-        public void SetTarget(Transform target)
-            => _target = target;
+            _initialized = true;
+            
+            InitSpawnPoints();
+        }
 
         public void Update()
         {
@@ -68,15 +80,24 @@ namespace Game.Enemies
 
         public void Activate()
         {
-            if (spawnCounts <= 0)
+            if (_spawnsLeft <= 0)
                 return;
 
             if (!_canSpawn)
                 return;
 
-            spawnCounts--;
+            _spawnsLeft--;
             ActivateSpawnPoints();
             _canSpawn = false;
+            
+            IsDirty = true;
+        }
+        
+        public void SetCount(int count)
+        {
+            _spawnsLeft = Mathf.Clamp(count, 0, spawnCounts);
+            
+            IsDirty = true;
         }
 
         private void RestartTimer()
@@ -97,13 +118,19 @@ namespace Game.Enemies
         private void OnCompleteSpawnTimer()
             => _canSpawn = true;
 
-        private void ActivateSpawnPoints()
+        private void InitSpawnPoints()
         {
             enemySpawnPoints.ForEach(spawnPoint =>
             {
                 spawnPoint.SetTarget(_target);
                 spawnPoint.Init(_spawnContainer);
             });
+        }
+        
+        private void ActivateSpawnPoints()
+        {
+            foreach (EnemySpawnPoint enemySpawnPoint in enemySpawnPoints) 
+                enemySpawnPoint.Activate();
         }
 
         private void OnDrawGizmosSelected()
@@ -120,7 +147,7 @@ namespace Game.Enemies
             if (!_canSpawn)
                 return;
 
-            if (spawnCounts <= 0)
+            if (_spawnsLeft <= 0)
                 return;
 
             Vector3 position = transform.position;

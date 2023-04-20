@@ -28,6 +28,13 @@
       "dependencies": {},
       "hash": "8a8fa5a9659a6d63f196391c71e06c4286c8acd7"
     },
+    "com.fluid.unique-id": {
+      "version": "https://github.com/ashblue/fluid-unique-id.git#nightly",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "bfb70221d44b6a35a79ab9a4a86075eb79ab0ad0"
+    },
     "com.magicasoft.magicacloth": {
       "version": "https://github.com/GamedevExperienceStables/com.magicasoft.magicacloth.git",
       "depth": 0,

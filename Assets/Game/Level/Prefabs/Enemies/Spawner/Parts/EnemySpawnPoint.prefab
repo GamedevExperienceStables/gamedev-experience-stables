@@ -434,6 +434,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2350107545435338789}
   - component: {fileID: 2350107545435338788}
+  - component: {fileID: -9173846011038803593}
+  - component: {fileID: 3127282374879466386}
   m_Layer: 0
   m_Name: EnemySpawnPoint
   m_TagString: Untagged
@@ -473,6 +475,31 @@ MonoBehaviour:
   spawnCount: 3
   spawnInterval: 4
   spawnFeedback: {fileID: 5578446121642143856}
+--- !u!114 &-9173846011038803593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2350107545435338778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d1796f3dc38e334ca54f2b0a067111d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 
+--- !u!114 &3127282374879466386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2350107545435338778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcce1879b039401b907813ff6414418b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8102321623001891034
 PrefabInstance:
   m_ObjectHideFlags: 0

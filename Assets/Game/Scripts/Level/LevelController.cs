@@ -14,10 +14,18 @@ namespace Game.Level
 
         public void InitLevel(LevelDefinition level, ILocationPoint startPoint)
         {
+            var levelLocations = new LevelLocations();
+            InitLevel(level, startPoint, levelLocations);
+        }
+
+        public void InitLevel(LevelDefinition level, ILocationPoint startPoint, LevelLocations locations)
+        {
             _levelData.CurrentLevel = level;
 
             _levelData.LastLocationPoint = default;
             _levelData.CurrentLocationPoint = startPoint;
+
+            _levelData.Locations = locations;
         }
 
         public LevelDefinition GetCurrentLevel()
@@ -58,5 +66,16 @@ namespace Game.Level
 
         public MaterialDefinition GetCurrentLevelGoalMaterial() 
             => _levelData.CurrentLevel.Goal.Material;
+
+        public LevelLocations GetLocations() 
+            => _levelData.Locations;
+
+        public LocationCounters GetLocationCounters(ILocationDefinition locationDefinition)
+        {
+            if (!_levelData.Locations.TryGetLocation(locationDefinition, out LocationData location))
+                location = _levelData.Locations.CreateLocation(locationDefinition);
+            
+            return location.Counters;
+        }
     }
 }

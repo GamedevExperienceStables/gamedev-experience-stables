@@ -66,7 +66,6 @@ namespace Game.LifetimeScopes
             builder.Register<InventoryController>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 
             builder.Register<LocationData>(Lifetime.Singleton);
-            builder.Register<LocationDataHandler>(Lifetime.Singleton);
             
             builder.Register<PlayerGamePrefs>(Lifetime.Singleton);
             builder.Register<PlayerAudioPrefs>(Lifetime.Singleton);
@@ -158,6 +157,7 @@ namespace Game.LifetimeScopes
         {
             builder.RegisterInstance(dataTables.Runes);
             builder.RegisterInstance(dataTables.Materials);
+            builder.RegisterInstance(dataTables.Locations);
         }
 
         private void RegisterSaveSystem(IContainerBuilder builder)

@@ -163,7 +163,7 @@ namespace Game.Utils
             if (FindLocationDefinition(activeScene, out ILocationDefinition location))
                 return location;
 
-            return new Location(activeScene.name);
+            return new Location(activeScene.name, activeScene.name);
         }
 
         private static bool FindLocationDefinition(Scene activeScene, out ILocationDefinition location)

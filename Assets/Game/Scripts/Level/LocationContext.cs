@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Game.Enemies;
 using UnityEngine;
@@ -7,31 +8,25 @@ namespace Game.Level
 {
     public class LocationContext : MonoBehaviour
     {
-        private Transform _enemiesContainer;
-
         public void InitEnemySpawners(Transform target)
         {
             var enemySpawnZones = GetComponentsInChildren<EnemySpawnGroup>();
             if (enemySpawnZones.Length == 0)
                 return;
 
-            _enemiesContainer = CreateContainer();
-
+            Transform spawnContainer = CreateContainer();
             foreach (EnemySpawnGroup spawnZone in enemySpawnZones)
-            {
-                spawnZone.Init(_enemiesContainer);
-                spawnZone.SetTarget(target);
-            }
+                spawnZone.Init(spawnContainer, target);
         }
 
-        public ILocationBounds FindBounds() 
+
+        public IEnumerable<ILocationCounter> FindCounters()
+            => GetComponentsInChildren<ILocationCounter>();
+
+
+        public ILocationBounds FindBounds()
             => GetComponentInChildren<ILocationBounds>();
 
-        public void DestroyEnemies()
-        {
-            if (_enemiesContainer)
-                Destroy(_enemiesContainer.gameObject);
-        }
 
         public LocationPoint FindLocationPoint(ILocationPointKey locationPointKey)
         {

@@ -15,7 +15,19 @@
         public struct Level
         {
             public string id;
-            public string[] pointsCleared;
+            public Location[] locations;
+        }
+
+        public struct Location
+        {
+            public string id;
+            public LocationCounter[] counters;
+        }
+
+        public struct LocationCounter
+        {
+            public string id;
+            public int count;
         }
 
         public struct Player

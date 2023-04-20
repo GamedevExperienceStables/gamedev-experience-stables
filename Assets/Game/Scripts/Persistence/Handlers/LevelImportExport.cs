@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using Game.Level;
 using Game.Settings;
 using UnityEngine;
@@ -9,14 +9,16 @@ namespace Game.Persistence
     public class LevelImportExport
     {
         private readonly LevelController _level;
+        private readonly LocationDataTable _locationDb;
         private readonly LevelsSettings _settings;
         private readonly ILocationPoint _levelStartPoint;
         private readonly ILocationPoint _loadGameStartPoint;
 
         [Inject]
-        public LevelImportExport(LevelController level, LevelsSettings settings)
+        public LevelImportExport(LevelController level, LocationDataTable locationDb, LevelsSettings settings)
         {
             _level = level;
+            _locationDb = locationDb;
             _settings = settings;
             _levelStartPoint = _settings.LevelStartPoint;
             _loadGameStartPoint = _settings.LoadGameStartPoint;
@@ -28,25 +30,92 @@ namespace Game.Persistence
             _level.InitLevel(firstLevel, _levelStartPoint);
         }
 
+        #region Import
+        
+
         public void Import(GameSaveData.Level data)
         {
-            LevelDefinition currentLevel = _settings.FindLevelById(data.id);
-            if (!currentLevel)
+            LevelDefinition currentLevel = GetCurrentLevel(data);
+            LevelLocations levelLocations = GetLevelLocations(data);
+
+            _level.InitLevel(currentLevel, _loadGameStartPoint, levelLocations);
+        }
+
+        private LevelLocations GetLevelLocations(GameSaveData.Level data)
+        {
+            var levelLocations = new LevelLocations();
+            foreach (GameSaveData.Location dataLocation in data.locations)
             {
-                Debug.LogError($"Level '{data.id}' not found. Used first level");
-                currentLevel = _settings.GetFirstLevel();
+                if (!_locationDb.TryGetValue(dataLocation.id, out LocationDefinition definition))
+                {
+                    Debug.LogWarning($"Location '{dataLocation.id}' not found. Skipping");
+                    continue;
+                }
+
+                LocationData location = levelLocations.CreateLocation(definition);
+                foreach (GameSaveData.LocationCounter counter in dataLocation.counters)
+                    location.Counters.SetCounter(counter.id, counter.count);
             }
 
-            _level.InitLevel(currentLevel, _loadGameStartPoint);
+            return levelLocations;
         }
+
+        private LevelDefinition GetCurrentLevel(GameSaveData.Level data)
+        {
+            LevelDefinition currentLevel = _settings.FindLevelById(data.id);
+            if (currentLevel) 
+                return currentLevel;
+            
+            Debug.LogError($"Level '{data.id}' not found. Used first level");
+            return _settings.GetFirstLevel();
+        }
+
+        #endregion
+
+        #region Export
 
         public GameSaveData.Level Export()
         {
             return new GameSaveData.Level
             {
                 id = _level.GetCurrentLevelId(),
-                pointsCleared = Array.Empty<string>()
+                locations = ExportLocations()
             };
         }
+
+        private GameSaveData.Location[] ExportLocations()
+        {
+            var locations = new List<GameSaveData.Location>();
+            foreach (LocationData data in _level.GetLocations())
+            {
+                GameSaveData.Location location = ExportLocation(data);
+                locations.Add(location);
+            }
+
+            return locations.ToArray();
+        }
+
+        private static GameSaveData.Location ExportLocation(LocationData locationData) =>
+            new()
+            {
+                id = locationData.Definition.Id,
+                counters = ExportLocationCounters(locationData)
+            };
+
+        private static GameSaveData.LocationCounter[] ExportLocationCounters(LocationData data)
+        {
+            var counters = new List<GameSaveData.LocationCounter>();
+            foreach (LocationCounterData counter in data.Counters)
+            {
+                counters.Add(new GameSaveData.LocationCounter
+                {
+                    id = counter.id,
+                    count = counter.count
+                });
+            }
+            return counters.ToArray();
+        }
+        
+        #endregion
     }
 }
