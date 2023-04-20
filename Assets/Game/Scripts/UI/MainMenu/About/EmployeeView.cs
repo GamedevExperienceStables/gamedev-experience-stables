@@ -1,18 +1,28 @@
-﻿using UnityEngine.UIElements;
+﻿using Game.Utils;
+using UnityEngine.UIElements;
 
-namespace Game.UI.About
+namespace Game.UI
 {
     public class EmployeeView
     {
-        private readonly EmployeeViewModel _viewModel;
-        
+        private readonly AboutViewModel _viewModel;
+        private readonly ModalSettings _linkModal;
+
         private VisualElement _info;
         private Image _icon;
         private VisualElement _description;
         private Label _nameLabel;
         private Label _positionLabel;
         private Button _linkButton;
-        
+
+        private string _url;
+
+        public EmployeeView(AboutViewModel viewModel, AboutSettings settings)
+        {
+            _viewModel = viewModel;
+            _linkModal = settings.LinkModal;
+        }
+
         public void Create(VisualElement root)
         {
             _info = root.Q<VisualElement>("info");
@@ -24,24 +34,41 @@ namespace Game.UI.About
 
             RegisterCallbacks();
         }
-        
-        private void Destroy() 
+
+        public void Destroy()
             => UnregisterCallbacks();
-        
-        private void RegisterCallbacks() 
+
+        public void SetData(EmployeeData employeeData)
+        {
+            _url = employeeData.url;
+
+            bool isEmpty = string.IsNullOrEmpty(_url);
+            _linkButton.SetDisplay(!isEmpty);
+
+            _nameLabel.text = employeeData.name;
+            _positionLabel.text = employeeData.position;
+
+            if (employeeData.icon)
+            {
+                _icon.sprite = employeeData.icon;
+                _icon.style.backgroundImage = default;
+            }
+        }
+
+        private void RegisterCallbacks()
             => _linkButton.clicked += OnLinkButton;
 
-        private void UnregisterCallbacks() 
+        private void UnregisterCallbacks()
             => _linkButton.clicked -= OnLinkButton;
-        
-        
-        private void OnLinkButton() 
+
+
+        private void OnLinkButton()
             => ShowLinkModal();
-        
+
         private void ShowLinkModal()
-        {
-            /*ModalContext context = ModalSettingsExtensions.CreateContext(_settings.linkModal, _viewModel.Link(url));
-            _viewModel.ShowModal(context);*/
-        }
+            => _viewModel.ShowModal(_linkModal, OpenLink);
+
+        private void OpenLink()
+            => _viewModel.OpenURL(_url);
     }
 }

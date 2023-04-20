@@ -1,4 +1,5 @@
-﻿using Game.Level;
+﻿using System;
+using Game.Level;
 using Game.UI;
 using UnityEngine;
 
@@ -27,6 +28,9 @@ namespace Game.Settings
 
         [SerializeField]
         private Cutscene.Settings cutscene;
+        
+        [SerializeField]
+        private AboutSettings about;
 
         public StartMenuView.Settings StartMenu => startMenu;
         public MainMenuSettingsView.Settings SettingsMenu => settingsMenu;
@@ -36,5 +40,7 @@ namespace Game.Settings
 
         public LocalizationInteractionSettings Interaction => interaction;
         public Cutscene.Settings Cutscene => cutscene;
+
+        public AboutSettings About => about;
     }
 }

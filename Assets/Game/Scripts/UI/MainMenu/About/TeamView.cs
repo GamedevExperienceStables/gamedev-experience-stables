@@ -1,26 +1,47 @@
 ﻿using System.Collections.Generic;
-using Unity.Content;
 using UnityEngine.UIElements;
 
-namespace Game.UI.About
+namespace Game.UI
 {
     public class TeamView
     {
-        private Label name;
-        private List<EmployeeView> _employeeViews;
-        
-        private void InitTeams()
-        {
-            for (int i = 1; i <= _employeeViews.Count; i++)
-            {
-                if (i%2 == 0)
-                {
-                    _listContent.Add(_employeeViews[i]); 
-                    // And add styles to _employeeViews[i] elements;
-                }
+        private readonly EmployeeViewFactory _employeeFactory;
+        private readonly List<EmployeeView> _employeeViews = new();
 
-                _listContent.Add(_employeeViews[i]);
+        private VisualTreeAsset _template;
+        private VisualElement _listContent;
+        private Label _name;
+
+        public TeamView(EmployeeViewFactory employeeFactory) 
+            => _employeeFactory = employeeFactory;
+
+        public void Create(VisualElement container)
+        {
+            _name = container.Q<Label>("team-name");
+            _listContent = container.Q<VisualElement>("team-list-container");
+            _template = _listContent.Q<TemplateContainer>("item-template").templateSource;
+            
+            _listContent.Clear();
+        }
+
+        public void SetData(TeamData teamData)
+        {
+            _name.text = teamData.name;
+            
+            foreach (EmployeeData employeeData in teamData.list)
+            {
+                TemplateContainer element = _template.Instantiate();
+                _listContent.Add(element);
+
+                EmployeeView employeeView = _employeeFactory.Create(element, employeeData);
+                _employeeViews.Add(employeeView);
             }
+        }
+
+        public void Destroy()
+        {
+            foreach (EmployeeView employeeView in _employeeViews) 
+                employeeView.Destroy();
         }
     }
 }

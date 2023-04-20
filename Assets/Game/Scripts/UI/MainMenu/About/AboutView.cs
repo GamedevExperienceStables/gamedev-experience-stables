@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Game.UI.About;
-using UnityEngine.Localization;
+﻿using System.Collections.Generic;
 using UnityEngine.UIElements;
+using VContainer;
 
 namespace Game.UI
 {
@@ -14,27 +12,41 @@ namespace Game.UI
         private VisualElement _listContent;
         private Button _buttonBack;
 
+        private TeamsView _teams;
+        
+        private VisualTreeAsset _teamTemplate;
+
+        [Inject]
+        public void Construct(TeamsView teams) 
+            => _teams = teams;
+
         protected override void OnAwake()
         {
             SetContent(LayoutNames.StartMenu.PAGE_ABOUT);
-             
+
             _headerLabels = Content.Q<VisualElement>(LayoutNames.StartMenu.PAGE_HEADING)
                 .Query<Label>().ToList();
-            _listContent = Content.Q<VisualElement>("list-content-element");
-            _buttonBack = Content.Q<Button>(LayoutNames.StartMenu.BUTTON_BACK);
             
+            _teams.Create(Content);
+
+            _buttonBack = Content.Q<Button>(LayoutNames.StartMenu.BUTTON_BACK);
+
             RegisterCallbacks();
         }
-        
-        private void OnDestroy() 
-            => UnregisterCallbacks();
 
-        private void RegisterCallbacks() 
+        private void OnDestroy()
+        {
+            _teams.Destroy();
+            
+            UnregisterCallbacks();
+        }
+
+        private void RegisterCallbacks()
             => _buttonBack.clicked += OnBackButton;
 
-        private void UnregisterCallbacks() 
+        private void UnregisterCallbacks()
             => _buttonBack.clicked -= OnBackButton;
-        
+
         public override void Show()
         {
             Content.SetEnabled(true);
@@ -47,28 +59,7 @@ namespace Game.UI
             Content.AddToClassList(LayoutNames.StartMenu.PAGE_HIDDEN_CLASS_NAME);
         }
 
-        private void InitTeams()
-        {
-            foreach (TeamView teamView in _teamViews)
-            {
-                //_listContent.Add(teamView);
-            }
-        }
-
-        private void OnBackButton() 
+        private void OnBackButton()
             => ViewModel.Back();
-        
-        [Serializable]
-        public class Settings
-        {
-            [Serializable]
-            public struct Page
-            {
-                public LocalizedString label;
-            }
-
-            public Page header;
-            public Page back;
-        }
     }
 }

@@ -1,11 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Game/UI/Uss/AboutScreenStyle.uss?fileID=7433441132597879392&amp;guid=715d4e15f601c8e4f8506a3dddec8436&amp;type=3#AboutScreenStyle" />
-    <ui:VisualElement name="info" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
-        <ui:VisualElement name="icon" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1870286374&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_8&apos;); width: 240px; height: 240px;" />
-        <ui:VisualElement name="description" style="flex-grow: 1; margin-top: 20px; margin-bottom: 20px; margin-right: 20px; margin-left: 20px; justify-content: center;">
+    <ui:VisualElement name="info" style="background-color: rgba(0, 0, 0, 0); flex-direction: row;">
+        <ui:Image name="icon" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1870286374&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_8&apos;); width: 240px; height: 240px;" />
+        <ui:VisualElement name="description" style="margin-top: 40px; margin-bottom: 20px; margin-right: 20px; margin-left: 20px; flex-grow: 1;">
             <ui:Label tabindex="-1" text="Some looooooooong name" display-tooltip-when-elided="true" name="name" enable-rich-text="true" class="employee-name" />
             <ui:Label tabindex="-1" text="Some Position" display-tooltip-when-elided="true" name="position" class="employee-position" />
-            <ui:Label tabindex="-1" text="LinkedIn" display-tooltip-when-elided="true" name="link" class="employee-link" style="-unity-font-style: normal; position: relative; width: 86px;" />
+            <ui:Button tabindex="-1" text="LinkedIn" display-tooltip-when-elided="true" name="link" class="employee-link" style="-unity-font-style: normal; position: relative; width: 86px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -1,5 +1,7 @@
 ﻿using Game.GameFlow;
+using Game.Settings;
 using Game.UI;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -7,14 +9,18 @@ namespace Game.LifetimeScopes
 {
     public class MainMenuLifetimeScope : LifetimeScope
     {
+        [SerializeField]
+        private UiSettings uiSettings;
+
         protected override void Configure(IContainerBuilder builder)
         {
             RegisterStateMachine(builder);
 
             RegisterMainMenu(builder);
+            RegisterAbout(builder);
         }
 
-        private void RegisterMainMenu(IContainerBuilder builder)
+        private static void RegisterMainMenu(IContainerBuilder builder)
         {
             builder.Register<StartMenuViewModel>(Lifetime.Scoped);
             builder.Register<AboutViewModel>(Lifetime.Scoped);
@@ -29,6 +35,19 @@ namespace Game.LifetimeScopes
                 componentsBuilder.AddInHierarchy<ArtView>();
                 componentsBuilder.AddInHierarchy<ModalView>();
             });
+        }
+
+        private void RegisterAbout(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(uiSettings.About);
+
+            builder.Register<TeamsView>(Lifetime.Scoped);
+
+            builder.Register<TeamViewFactory>(Lifetime.Scoped);
+            builder.Register<TeamView>(Lifetime.Scoped);
+
+            builder.Register<EmployeeViewFactory>(Lifetime.Scoped);
+            builder.Register<EmployeeView>(Lifetime.Scoped);
         }
 
         private static void RegisterStateMachine(IContainerBuilder builder)
