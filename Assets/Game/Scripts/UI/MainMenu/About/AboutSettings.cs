@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Game.UI
 {
@@ -11,8 +12,16 @@ namespace Game.UI
         
         [SerializeField]
         private TeamsSettings teams;
+        
+        [SerializeField]
+        public LocalizedString header;
+        [SerializeField]
+        public LocalizedString back;
 
         public ModalSettings LinkModal => linkModal;
         public TeamsSettings Teams => teams;
+
+        public LocalizedString Header => header;
+        public LocalizedString Back => back;
     }
 }

@@ -35,8 +35,17 @@
     margin-bottom: 25px;
 }
 
+.employee--normal {
+    flex-direction: row;
+}
+
 .employee--reversed {
     flex-direction: row-reverse;
+}
+
+.description--normal {
+    align-items: flex-start;
+    -unity-text-align: upper-left;
 }
 
 .description--reversed {
@@ -49,6 +58,7 @@
     -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&guid=1823e5ab5312e0e40972472a78991947&type=2#borsok SDF');
     color: rgb(90, 55, 55);
     white-space: normal;
+    flex-shrink: 1;
 }
 
 .employee-position {
@@ -56,6 +66,8 @@
     -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&guid=9f296ab3b5e417845bc8de63c7b23c43&type=2#koliko-Regular SDF');
     color: rgb(155, 89, 199);
     white-space: normal;
+    flex-grow: 0;
+    flex-shrink: 1;
 }
 
 .employee-link {
@@ -63,4 +75,77 @@
     -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&guid=9f296ab3b5e417845bc8de63c7b23c43&type=2#koliko-Regular SDF');
     color: rgb(90, 55, 55);
     white-space: normal;
+    flex-shrink: 0;
+}
+
+.unity-repeat-button {
+    visibility: hidden;
+}
+
+.unity-base-slider {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 35px;
+}
+
+.unity-base-slider:focus .unity-base-slider__dragger {
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#unity-dragger {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1882268378&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_21');
+    -unity-background-scale-mode: scale-to-fit;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0);
+    max-height: 40px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    cursor: url('center');
+    max-width: 40px;
+    left: 53px;
+}
+
+#unity-tracker {
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    position: absolute;
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1185398460&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_14');
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-top: 0;
+    width: 25%;
+    max-width: 100%;
+    transform-origin: center;
+    left: 55%;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    cursor: url('center');
+    height: 99%;
+    top: 3px;
+}
+
+#unity-drag-container {
+    width: 110px;
+    height: 60px;
+    display: flex;
+    left: -40px;
+    cursor: url('center');
+}
+
+#unity-slider {
+    width: 60px;
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0);
+    height: 61px;
+    cursor: url('center');
 }

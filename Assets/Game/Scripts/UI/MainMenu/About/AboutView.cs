@@ -13,12 +13,16 @@ namespace Game.UI
         private Button _buttonBack;
 
         private TeamsView _teams;
+        private AboutSettings _settings;
         
         private VisualTreeAsset _teamTemplate;
 
         [Inject]
-        public void Construct(TeamsView teams) 
-            => _teams = teams;
+        public void Construct(TeamsView teams, AboutSettings settings)
+        {
+            _teams = teams;
+            _settings = settings;
+        }
 
         protected override void OnAwake()
         {
@@ -33,6 +37,9 @@ namespace Game.UI
 
             RegisterCallbacks();
         }
+        
+        private void Start()
+            => UpdateText();
 
         private void OnDestroy()
         {
@@ -42,10 +49,18 @@ namespace Game.UI
         }
 
         private void RegisterCallbacks()
-            => _buttonBack.clicked += OnBackButton;
+        {
+            _buttonBack.clicked += OnBackButton;
+
+            _localization.Changed += OnLocalisationChanged;
+        }
 
         private void UnregisterCallbacks()
-            => _buttonBack.clicked -= OnBackButton;
+        {
+            _buttonBack.clicked -= OnBackButton;
+
+            _localization.Changed -= OnLocalisationChanged;
+        }
 
         public override void Show()
         {
@@ -57,6 +72,17 @@ namespace Game.UI
         {
             Content.SetEnabled(false);
             Content.AddToClassList(LayoutNames.StartMenu.PAGE_HIDDEN_CLASS_NAME);
+        }
+
+        private void OnLocalisationChanged()
+            => UpdateText();
+        
+        private void UpdateText()
+        {
+            foreach (Label headerLabel in _headerLabels)
+                headerLabel.text = _settings.header.GetLocalizedString();
+
+            _buttonBack.text = _settings.back.GetLocalizedString();
         }
 
         private void OnBackButton()
