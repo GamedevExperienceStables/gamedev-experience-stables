@@ -31,6 +31,9 @@ namespace Game.Settings
         
         [SerializeField]
         private AboutSettings about;
+        
+        [SerializeField]
+        private ArtView.Settings artMenu;
 
         public StartMenuView.Settings StartMenu => startMenu;
         public MainMenuSettingsView.Settings SettingsMenu => settingsMenu;
@@ -42,5 +45,6 @@ namespace Game.Settings
         public Cutscene.Settings Cutscene => cutscene;
 
         public AboutSettings About => about;
+        public ArtView.Settings ArtMenu => artMenu;
     }
 }

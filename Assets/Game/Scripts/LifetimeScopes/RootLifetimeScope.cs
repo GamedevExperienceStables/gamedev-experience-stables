@@ -142,6 +142,7 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.UiSettings.PauseMenu);
             builder.RegisterInstance(gameSettings.UiSettings.GameOver);
             builder.RegisterInstance(gameSettings.UiSettings.Interaction);
+            builder.RegisterInstance(gameSettings.UiSettings.ArtMenu);
         }
 
         private static void RegisterUi(IContainerBuilder builder)

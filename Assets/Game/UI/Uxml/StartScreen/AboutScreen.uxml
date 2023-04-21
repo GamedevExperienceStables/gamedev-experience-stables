@@ -14,10 +14,10 @@
                     <ui:VisualElement name="list-content" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:Instance template="Team" name="team-template" />
                     </ui:VisualElement>
-                    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); top: 48px;">
-                        <ui:Button text="Back" display-tooltip-when-elided="true" name="button-back" class="primary-button" style="border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-color: rgba(188, 188, 188, 0); align-self: center;" />
-                    </ui:VisualElement>
                 </ui:ScrollView>
+            </ui:VisualElement>
+            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-grow: 1; margin-top: 20px; margin-bottom: 20px;">
+                <ui:Button text="Back" display-tooltip-when-elided="true" name="button-back" class="primary-button" style="border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-color: rgba(188, 188, 188, 0); align-self: center; height: 70px;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

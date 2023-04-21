@@ -20,8 +20,5 @@ namespace Game.UI
 
         public ModalSettings LinkModal => linkModal;
         public TeamsSettings Teams => teams;
-
-        public LocalizedString Header => header;
-        public LocalizedString Back => back;
     }
 }
