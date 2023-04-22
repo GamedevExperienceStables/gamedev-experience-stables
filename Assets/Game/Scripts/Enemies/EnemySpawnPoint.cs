@@ -1,6 +1,5 @@
 ﻿using System;
 using Game.Actors.Health;
-using Game.Level;
 using Game.TimeManagement;
 using MoreMountains.Feedbacks;
 using NaughtyAttributes;
@@ -9,7 +8,7 @@ using VContainer;
 
 namespace Game.Enemies
 {
-    public class EnemySpawnPoint : MonoBehaviour, ICounterObject
+    public class EnemySpawnPoint : MonoBehaviour
     {
         [SerializeField, Required]
         private EnemyDefinition enemy;
@@ -18,7 +17,7 @@ namespace Game.Enemies
         [SerializeField, Min(1)]
         private int spawnCount = 3;
 
-        [SerializeField, Min(1f)]
+        [SerializeField, Min(1f), ShowIf(nameof(CanRespawn))]
         private float spawnInterval = 5f;
 
         [Header("FX")]
@@ -31,81 +30,75 @@ namespace Game.Enemies
         [ShowNonSerializedField]
         private int _enemiesLeft;
 
-        private Transform _target;
         private bool _isActive;
+        private Transform _target;
 
         private Transform _spawnContainer;
         private EnemyFactory _factory;
         private TimerUpdatable _spawnTimer;
+        private TimerPool _timers;
 
-        public bool IsCleared => _enemiesLeft <= 0;
-        
-        // ReSharper disable once ConvertToAutoPropertyWithPrivateSetter
-        public int RemainingCount => _spawnsLeft;
+        private bool CanRespawn => spawnCount > 1;
 
-        public bool IsDirty { get; private set; }
+        public bool IsCleared { get; private set; }
+        public event Action Cleared;
 
         [Inject]
-        public void Construct(EnemyFactory enemyFactory, TimerFactory timerFactory)
+        public void Construct(EnemyFactory enemyFactory, TimerPool timers)
         {
             _factory = enemyFactory;
-            _spawnTimer = timerFactory.CreateTimer(TimeSpan.FromSeconds(spawnInterval), Spawn, isLooped: true);
+
+            _timers = timers;
+            _spawnTimer = _timers.GetTimer(TimeSpan.FromSeconds(spawnInterval), Spawn, isLooped: true);
         }
+
+        private void OnDestroy()
+            => _timers?.ReleaseTimer(_spawnTimer);
 
         public void Init(Transform spawnContainer)
-        {
-            _spawnContainer = spawnContainer;
-            _spawnsLeft = spawnCount;
-            _enemiesLeft = spawnCount;
-        }
-        
+            => _spawnContainer = spawnContainer;
+
         public void Activate()
         {
+            if (!isActiveAndEnabled)
+                return;
+
+            if (_isActive && !IsCleared)
+            {
+                Debug.LogWarning($"Trying to activate a non-cleared spawn point {name}", gameObject);
+                return;
+            }
+
             _isActive = true;
 
-            IsDirty = true;
+            _spawnsLeft = spawnCount;
+            _enemiesLeft = spawnCount;
+
+            if (CanRespawn)
+                _spawnTimer.Start();
+
+            Spawn();
         }
 
         public void SetTarget(Transform target)
             => _target = target;
 
-        public void SetCount(int count)
+        private void Spawn()
         {
-            _spawnsLeft = Mathf.Clamp(count, 0, spawnCount);
+            _spawnsLeft--;
 
-            IsDirty = true;
-        }
-
-        public void Update()
-        {
-            if (!_isActive)
-                return;
+            SpawnEnemy();
+            PlaySpawnFeedback();
 
             if (_spawnsLeft <= 0)
-                return;
-
-            if (_spawnsLeft.Equals(spawnCount))
-            {
-                Spawn();
-
-                if (spawnCount <= 1)
-                    return;
-
-                _spawnTimer.Start();
-            }
-
-            _spawnTimer.Tick();
+                _spawnTimer.Stop();
         }
 
-        private void Spawn()
+        private void SpawnEnemy()
         {
             EnemyController instance = _factory.Create(enemy, transform, _target, _spawnContainer);
             var deathController = instance.GetComponent<DeathController>();
             deathController.Died += OnDied;
-
-            _spawnsLeft--;
-
-            PlaySpawnFeedback();
         }
 
         private void PlaySpawnFeedback()
@@ -115,6 +108,14 @@ namespace Game.Enemies
         }
 
         private void OnDied()
-            => _enemiesLeft--;
+        {
+            _enemiesLeft--;
+
+            if (_enemiesLeft > 0)
+                return;
+
+            IsCleared = true;
+            Cleared?.Invoke();
+        }
     }
 }

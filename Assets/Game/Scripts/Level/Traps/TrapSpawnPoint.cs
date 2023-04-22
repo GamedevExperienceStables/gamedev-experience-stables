@@ -5,7 +5,7 @@ using VContainer;
 
 namespace Game.Level
 {
-    public class TrapSpawnPoint : MonoBehaviour
+    public class TrapSpawnPoint : MonoBehaviour, ISwitchObject
     {
         private const float RAYCAST_DISTANCE = 1f;
 
@@ -14,12 +14,26 @@ namespace Game.Level
 
         private TrapFactory _factory;
 
+        [ShowNonSerializedField]
+        private bool _isDestroyed;
+        
+        public bool IsDirty { get; set; }
+
+        public bool IsActive
+        {
+            get => !_isDestroyed;
+            set => _isDestroyed = !value;
+        }
+
         [Inject]
         public void Construct(TrapFactory factory)
             => _factory = factory;
 
         public void Activate()
         {
+            if (_isDestroyed)
+                return;
+            
             TrapView instance = _factory.Create(trap.Prefab, trap.Definition);
 
             Transform self = transform;
@@ -35,6 +49,14 @@ namespace Game.Level
                 spawnRotation = RandomizeY(spawnRotation, normal);
 
             instance.transform.SetPositionAndRotation(spawnPoint, spawnRotation);
+            
+            instance.Destroyed += OnTrapDestroyed;
+        }
+
+        private void OnTrapDestroyed()
+        {
+            _isDestroyed = true;
+            IsDirty = true;
         }
 
         private static Quaternion RandomizeY(Quaternion spawnRotation, Vector3 normal)

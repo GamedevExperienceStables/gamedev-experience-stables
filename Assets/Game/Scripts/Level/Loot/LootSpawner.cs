@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Game.RandomManagement;
 using Game.Settings;
+using Game.Utils;
 using UnityEngine;
 using VContainer;
 
@@ -9,53 +9,68 @@ namespace Game.Level
     public class LootSpawner
     {
         private readonly LootFactory _factory;
-        private readonly RandomService _random;
         private readonly LootSettings _settings;
+        private readonly LocationContextHandler _context;
 
         private readonly List<LootDefinitionItem> _bufferItems = new();
 
         [Inject]
-        public LootSpawner(LootFactory factory, RandomService random, LootSettings settings)
+        public LootSpawner(LootFactory factory, LootSettings settings, LocationContextHandler context)
         {
             _factory = factory;
-            _random = random;
             _settings = settings;
+            _context = context;
         }
 
         public void SpawnScattered(LootBagDefinition lootBagDefinition, Vector3 position)
         {
-            FetchLoot(lootBagDefinition);
+            FetchLoot(lootBagDefinition, _bufferItems);
 
             foreach (LootDefinitionItem definition in _bufferItems)
             {
-                Vector3 spawnPosition = _random.NextRandomInCircle(position, _settings.SpawnScatterRadius);
-                SpawnItem(spawnPosition, definition);
+                Vector3 spawnPosition = RandomUtils.NextRandomInCircle(position, _settings.SpawnScatterRadius);
+                SpawnItem(definition, spawnPosition);
             }
 
             _bufferItems.Clear();
         }
 
-        private void FetchLoot(LootBagDefinition lootBagDefinition)
+        public LootItem Spawn(LootItemDefinition definition, Vector3 position)
+        {
+            LootItem item = _factory.Create(definition, position);
+            _context.AddChild(item.gameObject);
+
+            return item;
+        }
+
+        private void SpawnItem(LootDefinitionItem item, Vector3 position)
+        {
+            Spawn(item.Definition, position);
+            // toss up item? 
+        }
+
+        private static void FetchLoot(LootBagDefinition lootBagDefinition, ICollection<LootDefinitionItem> lootOut)
         {
             foreach (LootTableDefinitionItem lootTable in lootBagDefinition.Tables)
             {
                 lootTable.ComputeWeights();
 
                 if (TryGetLootFromTable(lootTable, out LootDefinitionItem definition))
-                    AddItem(definition);
+                    AddItem(definition, lootOut);
             }
 
             foreach (LootDefinitionItem definition in lootBagDefinition.Items)
-                AddItem(definition);
+                AddItem(definition, lootOut);
         }
 
-        private void AddItem(LootDefinitionItem definition)
+        private static void AddItem(LootDefinitionItem definition, ICollection<LootDefinitionItem> lootOut)
         {
             for (int i = 0; i < definition.Count; i++)
-                _bufferItems.Add(definition);
+                lootOut.Add(definition);
         }
 
-        private static bool TryGetLootFromTable(LootTableDefinitionItem lootTable, out LootDefinitionItem itemDefinition)
+        private static bool TryGetLootFromTable(LootTableDefinitionItem lootTable,
+            out LootDefinitionItem itemDefinition)
         {
             LootTableItem lootTableItem = lootTable.GetLoot();
             if (lootTableItem.Loot?.Definition)
@@ -66,13 +81,6 @@ namespace Game.Level
 
             itemDefinition = null;
             return false;
-        }
-
-        private void SpawnItem(Vector3 position, LootDefinitionItem item)
-        {
-            LootItemDefinition lootDefinition = item.Definition;
-            _factory.Create(lootDefinition, position);
-            // toss up item? 
         }
     }
 }

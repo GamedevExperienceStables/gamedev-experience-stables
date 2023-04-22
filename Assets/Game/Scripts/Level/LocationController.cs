@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Audio;
 using Game.Cameras;
+using Game.Enemies;
 using Game.Hero;
 using UnityEngine;
 using VContainer;
@@ -13,10 +14,8 @@ namespace Game.Level
 
         private readonly FollowSceneCamera _followCamera;
         private readonly LocationAudioListener _audioListener;
-        private readonly LevelController _level;
 
         private HeroController _hero;
-        private LocationContext _context;
 
         public event Action Initialized;
 
@@ -24,32 +23,26 @@ namespace Game.Level
         public LocationController(
             HeroFactory heroFactory,
             FollowSceneCamera followCamera,
-            LocationAudioListener audioListener,
-            LevelController level
+            LocationAudioListener audioListener
         )
         {
             _heroFactory = heroFactory;
             _followCamera = followCamera;
             _audioListener = audioListener;
-            _level = level;
         }
-
-        public Bounds Bounds { get; private set; }
+        
         public ILocationDefinition LocationDefinition { get; private set; }
 
         public Transform Hero => _hero.transform;
 
-        public void Init(ILocationDefinition definition, LocationContext locationContext, Transform spawnPoint)
+        public void Init(ILocationDefinition definition, ILocationContext context, ILocationPointKey locationPoint)
         {
             LocationDefinition = definition;
-            _context = locationContext;
-
-            SpawnHero(spawnPoint);
-            InitLocationBounds();
-
-            _context.InitEnemySpawners(_hero.transform);
-
-            InitLocationState();
+            
+            LocationPoint spawnPoint = context.FindLocationPoint(locationPoint);
+            SpawnHero(spawnPoint.transform);
+            
+            InitEnemySpawners(context, _hero.transform);
 
             Initialized?.Invoke();
         }
@@ -61,48 +54,6 @@ namespace Game.Level
                 _hero.Reset();
                 _hero.SetActive(false);
             }
-
-            if (_context)
-            {
-                PreserveLocationState();
-
-                _context = null;
-            }
-        }
-
-        private void InitLocationState()
-            => InitCountersState();
-
-        private void InitCountersState()
-        {
-            LocationCounters counters = _level.GetLocationCounters(LocationDefinition);
-            foreach (ILocationCounter locationSpawn in _context.FindCounters())
-            {
-                if (counters.TryGetCounter(locationSpawn.Id, out LocationCounterData data))
-                    locationSpawn.SetCount(data.count);
-            }
-        }
-
-        private void PreserveLocationState()
-            => PreserveCountersState();
-
-        private void PreserveCountersState()
-        {
-            LocationCounters counters = _level.GetLocationCounters(LocationDefinition);
-            foreach (ILocationCounter counter in _context.FindCounters())
-            {
-                if (counter.IsDirty)
-                    counters.SetCounter(counter.Id, counter.RemainingCount);
-            }
-        }
-
-        private void InitLocationBounds()
-        {
-            ILocationBounds bounds = _context.FindBounds();
-            if (bounds is null)
-                return;
-
-            Bounds = new Bounds(bounds.Center, bounds.Size);
         }
 
         private void SpawnHero(Transform spawnPoint)
@@ -129,5 +80,19 @@ namespace Game.Level
             _followCamera.ClearTarget();
             _audioListener.ClearTarget();
         }
+        
+        private static void InitEnemySpawners(ILocationContext context, Transform target)
+        {
+            var enemySpawnZones = context.FindAll<EnemySpawnGroup>();
+            if (enemySpawnZones.Count == 0)
+                return;
+
+            Transform spawnContainer = CreateContainer();
+            foreach (EnemySpawnGroup spawnZone in enemySpawnZones)
+                spawnZone.Init(spawnContainer, target);
+        }
+        
+        private static Transform CreateContainer() 
+            => new GameObject("EnemiesContainer").transform;
     }
 }

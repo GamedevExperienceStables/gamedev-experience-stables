@@ -2,9 +2,9 @@
 {
     public interface ICounterObject
     {
-        bool IsDirty { get; }
-        
-        int RemainingCount { get; }
+        bool IsDirty { get; set; }
+
+        int Count { get; }
         
         void SetCount(int count);
     }

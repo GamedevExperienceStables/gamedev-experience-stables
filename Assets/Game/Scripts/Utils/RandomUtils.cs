@@ -1,12 +1,10 @@
-﻿using JetBrains.Annotations;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Game.RandomManagement
+namespace Game.Utils
 {
-    [UsedImplicitly]
-    public class RandomService
+    public static class RandomUtils
     {
-        public Vector3 NextRandomInCircle(Vector3 position, float radius)
+        public static Vector3 NextRandomInCircle(Vector3 position, float radius)
         {
             Vector2 value = GetRandomInsideUnitCircle() * radius;
             return position + new Vector3(value.x, 0, value.y);

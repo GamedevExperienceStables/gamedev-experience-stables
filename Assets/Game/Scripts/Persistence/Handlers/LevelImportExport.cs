@@ -54,7 +54,7 @@ namespace Game.Persistence
 
                 LocationData location = levelLocations.CreateLocation(definition);
                 foreach (GameSaveData.LocationCounter counter in dataLocation.counters)
-                    location.Counters.SetCounter(counter.id, counter.count);
+                    location.Counters.SetValue(counter.id, counter.value);
             }
 
             return levelLocations;
@@ -105,12 +105,12 @@ namespace Game.Persistence
         private static GameSaveData.LocationCounter[] ExportLocationCounters(LocationData data)
         {
             var counters = new List<GameSaveData.LocationCounter>();
-            foreach (LocationCounterData counter in data.Counters)
+            foreach ((string id, int value) in data.Counters)
             {
                 counters.Add(new GameSaveData.LocationCounter
                 {
-                    id = counter.id,
-                    count = counter.count
+                    id = id,
+                    value = value
                 });
             }
             return counters.ToArray();

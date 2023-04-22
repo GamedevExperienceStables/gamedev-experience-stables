@@ -29,5 +29,8 @@ namespace Game.Utils.DataTable
             found = null;
             return false;
         }
+
+        public bool Contains(T item)
+            => items.Contains(item);
     }
 }

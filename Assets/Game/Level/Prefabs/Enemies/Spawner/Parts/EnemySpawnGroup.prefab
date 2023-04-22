@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2350107545435338789}
   - component: {fileID: -4118036941347720173}
   - component: {fileID: 2727247995330800059}
-  - component: {fileID: -6155033277696845316}
+  - component: {fileID: 2546635059608376782}
   m_Layer: 0
   m_Name: EnemySpawnGroup
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -35.057, z: 0}
 --- !u!114 &-4118036941347720173
 MonoBehaviour:
@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpawnPoints: []
-  spawnCounts: 1
   respawnTimer: 0
+  spawnCounts: 1
 --- !u!114 &2727247995330800059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 
---- !u!114 &-6155033277696845316
+--- !u!114 &2546635059608376782
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,6 +71,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2350107545435338778}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcce1879b039401b907813ff6414418b, type: 3}
+  m_Script: {fileID: 11500000, guid: a944499e4a484fabb948cbcb7ad52c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

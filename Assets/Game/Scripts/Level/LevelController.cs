@@ -70,12 +70,12 @@ namespace Game.Level
         public LevelLocations GetLocations() 
             => _levelData.Locations;
 
-        public LocationCounters GetLocationCounters(ILocationDefinition locationDefinition)
+        public LocationData GetOrCreateLocationData(ILocationDefinition locationDefinition)
         {
             if (!_levelData.Locations.TryGetLocation(locationDefinition, out LocationData location))
                 location = _levelData.Locations.CreateLocation(locationDefinition);
             
-            return location.Counters;
+            return location;
         }
     }
 }

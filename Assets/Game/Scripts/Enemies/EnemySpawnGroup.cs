@@ -8,32 +8,42 @@ using VContainer;
 
 namespace Game.Enemies
 {
-    public class EnemySpawnGroup : MonoBehaviour, ICounterObject
+    public class EnemySpawnGroup : MonoBehaviour, ISwitchObject
     {
         [SerializeField, HideInInspector]
         private List<EnemySpawnPoint> enemySpawnPoints;
 
-        [SerializeField, Min(1)]
+        [SerializeField]
+        private bool canRespawn;
+
+        [SerializeField, Min(0.1f), ShowIf(nameof(canRespawn))]
+        private float respawnTimer = 1f;
+
+        [SerializeField, Min(1), ShowIf(nameof(canRespawn))]
         private int spawnCounts = 1;
 
-        [SerializeField, Min(0f)]
-        private float respawnTimer = 0f;
-
-        private float _timeSinceLastSpawn;
-        private Transform _target;
-        private bool _canSpawn = true;
+        [ShowNonSerializedField]
+        private bool _isCleared;
 
         private Transform _spawnContainer;
-        private TimerUpdatable _spawnTimer;
-        private bool _initialized;
+        private Transform _target;
 
-        [ShowNonSerializedField]
+        private bool _canSpawn = true;
         private int _spawnsLeft;
 
-        // ReSharper disable once ConvertToAutoPropertyWithPrivateSetter
-        public int RemainingCount => _spawnsLeft;
-        
-        public bool IsDirty { get; private set; }
+        private TimerPool _timers;
+        private TimerUpdatable _spawnTimer;
+
+
+        private bool CanRespawn => canRespawn && respawnTimer > 0f && spawnCounts > 1 && _spawnsLeft == 0;
+
+        public bool IsDirty { get; set; }
+
+        public bool IsActive
+        {
+            get => !_isCleared;
+            set => _isCleared = !value;
+        }
 
         private void OnValidate()
         {
@@ -46,9 +56,32 @@ namespace Game.Enemies
         }
 
         [Inject]
-        public void Construct(TimerFactory factory)
+        public void Construct(TimerPool timers)
         {
-            _spawnTimer = factory.CreateTimer(TimeSpan.FromSeconds(respawnTimer), OnCompleteSpawnTimer);
+            _timers = timers;
+            _spawnTimer = _timers.GetTimer(TimeSpan.FromSeconds(respawnTimer), OnCompleteSpawnTimer);
+        }
+
+        private void Start()
+            => SubscribeOnSpawnPoints();
+
+        private void OnDestroy()
+        {
+            _timers?.ReleaseTimer(_spawnTimer);
+
+            UnsubscribeOnSpawnPoints();
+        }
+
+        private void SubscribeOnSpawnPoints()
+        {
+            foreach (EnemySpawnPoint spawnPoint in enemySpawnPoints)
+                spawnPoint.Cleared += OnCleared;
+        }
+
+        private void UnsubscribeOnSpawnPoints()
+        {
+            foreach (EnemySpawnPoint spawnPoint in enemySpawnPoints)
+                spawnPoint.Cleared -= OnCleared;
         }
 
         public void Init(Transform spawnContainer, Transform target)
@@ -57,30 +90,29 @@ namespace Game.Enemies
             _target = target;
             _spawnsLeft = spawnCounts;
 
-            _initialized = true;
-            
             InitSpawnPoints();
         }
 
-        public void Update()
+        private void OnCleared()
         {
-            if (!_initialized)
+            if (!CheckAllEnemiesDead())
                 return;
 
-            if (_canSpawn)
+            if (CanRespawn)
             {
-                _spawnTimer.Stop();
+                RestartTimer();
                 return;
             }
 
-            _spawnTimer.Tick();
-            if (!CheckAllEnemiesDead())
-                RestartTimer();
+            _isCleared = true;
         }
 
         public void Activate()
         {
-            if (_spawnsLeft <= 0)
+            if (!isActiveAndEnabled)
+                return;
+
+            if (_isCleared)
                 return;
 
             if (!_canSpawn)
@@ -89,14 +121,7 @@ namespace Game.Enemies
             _spawnsLeft--;
             ActivateSpawnPoints();
             _canSpawn = false;
-            
-            IsDirty = true;
-        }
-        
-        public void SetCount(int count)
-        {
-            _spawnsLeft = Mathf.Clamp(count, 0, spawnCounts);
-            
+
             IsDirty = true;
         }
 
@@ -126,13 +151,14 @@ namespace Game.Enemies
                 spawnPoint.Init(_spawnContainer);
             });
         }
-        
+
         private void ActivateSpawnPoints()
         {
-            foreach (EnemySpawnPoint enemySpawnPoint in enemySpawnPoints) 
+            foreach (EnemySpawnPoint enemySpawnPoint in enemySpawnPoints)
                 enemySpawnPoint.Activate();
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
@@ -144,14 +170,26 @@ namespace Game.Enemies
 
         private void OnDrawGizmos()
         {
+            if (_isCleared)
+            {
+                DrawIcon("CompleteIcon.png");
+                return;
+            }
+
             if (!_canSpawn)
                 return;
 
             if (_spawnsLeft <= 0)
                 return;
 
-            Vector3 position = transform.position;
-            Gizmos.DrawIcon(new Vector3(position.x, 2f, position.z), "fire.png", false);
+            DrawIcon("fire.png");
         }
+
+        private void DrawIcon(string icon)
+        {
+            Vector3 position = transform.position;
+            Gizmos.DrawIcon(new Vector3(position.x, 2f, position.z), icon, true);
+        }
+#endif
     }
 }

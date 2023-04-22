@@ -27,7 +27,7 @@
         public struct LocationCounter
         {
             public string id;
-            public int count;
+            public int value;
         }
 
         public struct Player

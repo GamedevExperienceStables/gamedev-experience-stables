@@ -10,6 +10,8 @@ namespace Game.Level
         private TimerPool _timers;
         private TimerUpdatable _timer;
 
+        public event Action Destroyed;
+
         [Inject]
         public void Construct(TimerPool timers)
             => _timers = timers;
@@ -24,6 +26,8 @@ namespace Game.Level
         {
             if (_timer != null)
                 _timers.ReleaseTimer(_timer);
+
+            Destroyed?.Invoke();
         }
 
         private void DestroySelf()

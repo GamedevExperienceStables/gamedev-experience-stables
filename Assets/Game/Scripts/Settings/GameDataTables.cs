@@ -15,11 +15,16 @@ namespace Game.Settings
 
         [SerializeField]
         private LocationDataTable locations;
+        
+        [SerializeField]
+        private LootDataTable loot;
 
         public RuneDataTable Runes => runes;
 
         public MaterialDataTable Materials => materials;
         
         public LocationDataTable Locations => locations;
+
+        public LootDataTable Loot => loot;
     }
 }

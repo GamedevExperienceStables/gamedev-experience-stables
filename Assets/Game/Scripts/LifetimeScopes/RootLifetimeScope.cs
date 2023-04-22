@@ -8,7 +8,6 @@ using Game.Level;
 using Game.Localization;
 using Game.Persistence;
 using Game.Player;
-using Game.RandomManagement;
 using Game.SceneManagement;
 using Game.Settings;
 using Game.TimeManagement;
@@ -75,7 +74,6 @@ namespace Game.LifetimeScopes
 
         private static void RegisterServices(IContainerBuilder builder)
         {
-            builder.Register<RandomService>(Lifetime.Singleton);
             builder.Register<QuitGameService>(Lifetime.Singleton);
             builder.Register<UnityLocalization>(Lifetime.Singleton).As<ILocalizationService>();
             builder.Register<CursorService>(Lifetime.Singleton);
@@ -158,6 +156,7 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(dataTables.Runes);
             builder.RegisterInstance(dataTables.Materials);
             builder.RegisterInstance(dataTables.Locations);
+            builder.RegisterInstance(dataTables.Loot);
         }
 
         private void RegisterSaveSystem(IContainerBuilder builder)

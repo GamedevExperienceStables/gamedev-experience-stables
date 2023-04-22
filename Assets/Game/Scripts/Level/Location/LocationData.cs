@@ -6,6 +6,8 @@
             => Definition = locationDefinition;
 
         public ILocationDefinition Definition { get; private set; }
-        public LocationCounters Counters { get; } = new();
+        
+        public LocationPersistenceInt Counters { get; } = new();
+        public LocationPersistenceLoot Loot { get; } = new();
     }
 }
