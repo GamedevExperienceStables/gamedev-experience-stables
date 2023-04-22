@@ -90,7 +90,8 @@ namespace Game.LifetimeScopes
             builder.Register<LocationContextHandler>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<LocationStateStore>(Lifetime.Singleton);
             builder.Register<LocationStateStoreLoot>(Lifetime.Singleton);
-            builder.Register<LocationStateStoreCounters>(Lifetime.Singleton);
+            builder.Register<LocationStateStoreCounter>(Lifetime.Singleton);
+            builder.Register<LocationStateStoreFact>(Lifetime.Singleton);
             
             builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
             

@@ -21,8 +21,8 @@
         public struct Location
         {
             public string id;
+            public string[] facts;
             public LocationCounter[] counters;
-            public bool[] facts;
             public LocationLoot[] loot;
         }
 

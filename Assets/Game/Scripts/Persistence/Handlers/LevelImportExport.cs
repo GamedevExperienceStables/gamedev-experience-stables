@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Level;
 using Game.Settings;
 using UnityEngine;
@@ -63,6 +64,7 @@ namespace Game.Persistence
                 }
 
                 LocationData location = levelLocations.CreateLocation(definition);
+                ImportLocationFacts(dataLocation, location);
                 ImportLocationCounters(dataLocation, location);
                 ImportLocationLoot(dataLocation, location);
             }
@@ -107,6 +109,18 @@ namespace Game.Persistence
             }
         }
 
+        private static void ImportLocationFacts(GameSaveData.Location dataLocation, LocationData location)
+        {
+            if (dataLocation.facts is null)
+            {
+                Debug.LogWarning("Save data not contains facts. Skipping");
+                return;
+            }
+
+            foreach (string id in dataLocation.facts)
+                location.Facts.AddFact(id);
+        }
+
         private LevelDefinition GetCurrentLevel(GameSaveData.Level data)
         {
             LevelDefinition currentLevel = _settings.FindLevelById(data.id);
@@ -147,7 +161,8 @@ namespace Game.Persistence
             {
                 id = locationData.Definition.Id,
                 counters = ExportLocationCounters(locationData),
-                loot = ExportLocationLoot(locationData)
+                loot = ExportLocationLoot(locationData),
+                facts = ExportLocationFacts(locationData)
             };
 
         private static GameSaveData.LocationCounter[] ExportLocationCounters(LocationData data)
@@ -161,6 +176,7 @@ namespace Game.Persistence
                     value = value
                 });
             }
+
             return counters.ToArray();
         }
 
@@ -181,5 +197,8 @@ namespace Game.Persistence
         }
 
         #endregion
+
+        private static string[] ExportLocationFacts(LocationData data)
+            => data.Facts.ToArray();
     }
 }

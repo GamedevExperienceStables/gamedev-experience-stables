@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5373483841835594224}
   - component: {fileID: 5373483841835594225}
   - component: {fileID: 2551910523490763596}
-  - component: {fileID: 1460854106669003359}
+  - component: {fileID: 2055931491444061190}
   m_Layer: 0
   m_Name: TrapSpawnPoint
   m_TagString: Untagged
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 
---- !u!114 &1460854106669003359
+--- !u!114 &2055931491444061190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,6 +69,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5373483841835593743}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a944499e4a484fabb948cbcb7ad52c6b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5bb250a7d055453bbc76f9592912a0b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetState: 0
