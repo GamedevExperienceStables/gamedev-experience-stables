@@ -22,12 +22,20 @@
         {
             public string id;
             public LocationCounter[] counters;
+            public bool[] facts;
+            public LocationLoot[] loot;
         }
 
         public struct LocationCounter
         {
             public string id;
             public int value;
+        }
+
+        public struct LocationLoot
+        {
+            public string type;
+            public float[] position;
         }
 
         public struct Player

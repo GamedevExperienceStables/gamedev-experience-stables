@@ -17,7 +17,7 @@ namespace Game.GameFlow
         private readonly SceneLoader _sceneLoader;
         private readonly LocationController _locationController;
         private readonly LocationContextHandler _locationContextHandler;
-        private readonly LocationStateHandler _locationState;
+        private readonly LocationStateStore _locationState;
         private readonly IInputService _inputService;
 
         [Inject]
@@ -27,7 +27,7 @@ namespace Game.GameFlow
             SceneLoader sceneLoader,
             LocationController locationController,
             LocationContextHandler locationContextHandler,
-            LocationStateHandler locationState,
+            LocationStateStore locationState,
             IInputService inputService
         )
         {
@@ -46,7 +46,7 @@ namespace Game.GameFlow
 
             await _loadingScreen.ShowAsync();
             
-            DisposeLocationData();
+            ExitLocation();
 
             await UnloadLastLocationIfExists();
 
@@ -67,10 +67,12 @@ namespace Game.GameFlow
             ILocationPointKey locationPoint)
         {
             LocationContext context = GetContext(location);
-            _locationContextHandler.Init(context);
+            _locationContextHandler.Init(context, locationDefinition);
 
-            _locationController.Init(locationDefinition, _locationContextHandler, locationPoint);
-            _locationState.Init(locationDefinition, _locationContextHandler);
+            _locationController.Init(_locationContextHandler, locationPoint);
+
+            LocationData locationData = _level.GetOrCreateLocationData(locationDefinition);
+            _locationState.Init(locationData, _locationContextHandler);
         }
 
         private async UniTask UnloadLastLocationIfExists()
@@ -81,12 +83,15 @@ namespace Game.GameFlow
             await _sceneLoader.UnloadSceneIfLoadedAsync(lastLocation.Location.SceneName);
         }
 
-        private void DisposeLocationData()
+        private void ExitLocation()
         {
             if (!_locationContextHandler.Initialized)
                 return;
             
-            _locationState.Store(_locationContextHandler);
+            ILocationDefinition locationDefinition = _locationContextHandler.Location;
+            LocationData locationData = _level.GetOrCreateLocationData(locationDefinition);
+            _locationState.Store(locationData, _locationContextHandler);
+            
             _locationController.Clear();
             _locationContextHandler.Clear();
         }

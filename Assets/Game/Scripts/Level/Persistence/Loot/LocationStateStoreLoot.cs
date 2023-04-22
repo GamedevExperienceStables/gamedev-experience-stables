@@ -3,13 +3,13 @@ using VContainer;
 
 namespace Game.Level
 {
-    public class LocationStateHandlerLoot
+    public class LocationStateStoreLoot
     {
         private readonly LootSpawner _spawner;
         private readonly LootDataTable _lootDb;
 
         [Inject]
-        public LocationStateHandlerLoot(LootSpawner spawner, LootDataTable lootDb)
+        public LocationStateStoreLoot(LootSpawner spawner, LootDataTable lootDb)
         {
             _spawner = spawner;
             _lootDb = lootDb;

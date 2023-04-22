@@ -31,14 +31,10 @@ namespace Game.Level
             _audioListener = audioListener;
         }
         
-        public ILocationDefinition LocationDefinition { get; private set; }
-
         public Transform Hero => _hero.transform;
 
-        public void Init(ILocationDefinition definition, ILocationContext context, ILocationPointKey locationPoint)
+        public void Init(ILocationContext context, ILocationPointKey locationPoint)
         {
-            LocationDefinition = definition;
-            
             LocationPoint spawnPoint = context.FindLocationPoint(locationPoint);
             SpawnHero(spawnPoint.transform);
             

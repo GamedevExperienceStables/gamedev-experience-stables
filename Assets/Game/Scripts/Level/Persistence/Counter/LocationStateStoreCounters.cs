@@ -1,6 +1,6 @@
 ﻿namespace Game.Level
 {
-    public class LocationStateHandlerCounters
+    public class LocationStateStoreCounters
     {
         // ReSharper disable once MemberCanBeMadeStatic.Global
         public void Restore(LocationPersistenceInt data, ILocationContext context)

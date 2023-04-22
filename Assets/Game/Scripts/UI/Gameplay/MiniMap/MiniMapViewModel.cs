@@ -33,7 +33,7 @@ namespace Game.UI
         public Transform LocationCamera => _sceneCamera.transform;
 
         public Bounds LocationBounds => _context.LocationBounds.Bounds;
-        public ILocationDefinition LocationDefinition => _location.LocationDefinition;
+        public ILocationDefinition LocationDefinition => _context.Location;
 
         public void SubscribeMarkerAdd(Action<ILocationMarker> callback)
             => _markers.Added += callback;
