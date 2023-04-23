@@ -33,6 +33,9 @@ namespace Game.UI
 
             _scrollContainer = Content.Q<ScrollView>(LayoutNames.StartMenu.SCROLL_CONTAINER);
             
+            // TODO: Add support for downloading
+            _buttonDownload.SetEnabled(false);
+            
             RegisterCallbacks();
         }
         
