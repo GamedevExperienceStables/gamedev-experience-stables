@@ -52,7 +52,7 @@ namespace Game.UI
             RegisterButtonEvent(_buttonAbout, OpenAbout, OnHoverAbout, OnExit);
             RegisterButtonEvent(_buttonQuit, QuitGame, OnHoverQuit, OnExit);
 
-            _localization.Changed += OnLocalisationChanged;
+            localization.Changed += OnLocalisationChanged;
         }
 
         private void Start()
@@ -67,7 +67,7 @@ namespace Game.UI
             UnregisterButtonEvent(_buttonAbout, OpenAbout, OnHoverAbout, OnExit);
             UnregisterButtonEvent(_buttonQuit, QuitGame, OnHoverQuit, OnExit);
 
-            _localization.Changed -= OnLocalisationChanged;
+            localization.Changed -= OnLocalisationChanged;
         }
 
         public override void Show()

@@ -43,14 +43,14 @@ namespace Game.UI
         {
             _buttonBack.clicked += OnBackButton;
 
-            _localization.Changed += OnLocalisationChanged;
+            localization.Changed += OnLocalisationChanged;
         }
 
         private void UnregisterCallbacks()
         {
             _buttonBack.clicked -= OnBackButton;
 
-            _localization.Changed -= OnLocalisationChanged;
+            localization.Changed -= OnLocalisationChanged;
         }
 
         public override void Show()
