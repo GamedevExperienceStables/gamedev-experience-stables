@@ -72,7 +72,12 @@ namespace Game.UI
             => ShowLinkModal();
 
         private void ShowLinkModal()
-            => _viewModel.ShowModal(_linkModal, OpenLink);
+        {
+            ModalContext context = ModalSettingsExtensions.CreateContext(_linkModal, OpenLink);
+            context.message = _url;
+            
+            _viewModel.ShowModal(context);
+        }
 
         private void OpenLink()
             => _viewModel.OpenURL(_url);

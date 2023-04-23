@@ -17,11 +17,8 @@ namespace Game.UI
         public void Back() 
             => _router.Back();
 
-        public void ShowModal(ModalSettings settings, Action confirmCallback)
-        {
-            ModalContext context = ModalSettingsExtensions.CreateContext(settings, confirmCallback);
-            _modal.Request(context);
-        }
+        public void ShowModal(ModalContext context) 
+            => _modal.Request(context);
 
         public void OpenURL(string url) 
             => Application.OpenURL(url);

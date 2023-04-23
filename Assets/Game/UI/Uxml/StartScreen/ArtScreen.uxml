@@ -2,6 +2,7 @@
     <ui:Template name="Dividers" src="project://database/Assets/Game/UI/Uxml/Partial/Dividers.uxml?fileID=9197481963319205126&amp;guid=974d6707c0e349a4eb03afc94780355b&amp;type=3#Dividers" />
     <ui:Template name="Artbook" src="project://database/Assets/Game/UI/Uxml/Partial/Artbook.uxml?fileID=9197481963319205126&amp;guid=8a05425d984fa104cb72b21e92fceffe&amp;type=3#Artbook" />
     <Style src="project://database/Assets/Game/UI/Uss/ArtScreenStyle.uss?fileID=7433441132597879392&amp;guid=8a98b8c6864aa9d4a92f861065763836&amp;type=3#ArtScreenStyle" />
+    <Style src="project://database/Assets/Game/UI/Uss/ScrollSliderStyle.uss?fileID=7433441132597879392&amp;guid=35f508bb58464e13a417b90d871fb061&amp;type=3#ScrollSliderStyle" />
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center;">
         <ui:VisualElement name="container" class="art-container" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-100320597&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_27&apos;); -unity-background-scale-mode: scale-and-crop;">
             <ui:VisualElement name="header" style="background-color: rgba(0, 0, 0, 0); align-self: center; flex-shrink: 0;">
@@ -9,16 +10,14 @@
                 <ui:Label tabindex="-1" text="Art" display-tooltip-when-elided="true" name="label-settings-2" class="header-label" style="display: flex;" />
             </ui:VisualElement>
             <ui:Instance template="Dividers" name="Dividers" style="flex-shrink: 0; width: 800px; margin-top: 20px; margin-bottom: 20px;" />
-            <ui:VisualElement name="VisualElement" style="background-color: rgba(0, 0, 0, 0); margin-top: 10px; flex-grow: 1; width: 100%;">
-                <ui:ScrollView style="flex-grow: 1;">
-                    <ui:VisualElement name="list-content" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-                        <ui:Instance template="Artbook" name="Artbook" style="width: 95%; align-self: center;" />
-                    </ui:VisualElement>
-                    <ui:Button text="Download Artbook" display-tooltip-when-elided="true" name="button-download" class="primary-button" style="border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-color: rgba(188, 188, 188, 0); align-self: center; font-size: 30px; margin-top: 10px;" />
+            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); margin-top: 10px; flex-grow: 1; width: 100%;">
+                <ui:ScrollView name="scroll-container">
+                    <ui:Instance template="Artbook" name="Artbook" style="align-self: center; width: 100%;" />
                 </ui:ScrollView>
             </ui:VisualElement>
-            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-grow: 1; margin-top: 10px;">
-                <ui:Button text="Back" display-tooltip-when-elided="true" name="button-back" class="primary-button" style="border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-color: rgba(188, 188, 188, 0); align-self: center; height: 70px;" />
+            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-direction: row; flex-grow: 1; margin-top: 10px; flex-shrink: 0;">
+                <ui:Button text="Back" display-tooltip-when-elided="true" name="button-back" class="primary-button" />
+                <ui:Button text="Download Artbook" display-tooltip-when-elided="true" name="button-download" class="primary-button" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

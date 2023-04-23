@@ -2,6 +2,7 @@
     <ui:Template name="Dividers" src="project://database/Assets/Game/UI/Uxml/Partial/Dividers.uxml?fileID=9197481963319205126&amp;guid=974d6707c0e349a4eb03afc94780355b&amp;type=3#Dividers" />
     <ui:Template name="Team" src="project://database/Assets/Game/UI/Uxml/Partial/Team.uxml?fileID=9197481963319205126&amp;guid=74aa076e15db0ac429598d12ba942ba6&amp;type=3#Team" />
     <Style src="project://database/Assets/Game/UI/Uss/AboutScreenStyle.uss?fileID=7433441132597879392&amp;guid=715d4e15f601c8e4f8506a3dddec8436&amp;type=3#AboutScreenStyle" />
+    <Style src="project://database/Assets/Game/UI/Uss/ScrollSliderStyle.uss?fileID=7433441132597879392&amp;guid=35f508bb58464e13a417b90d871fb061&amp;type=3#ScrollSliderStyle" />
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center;">
         <ui:VisualElement name="container" class="about-container" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-100320597&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_27&apos;); -unity-background-scale-mode: scale-and-crop;">
             <ui:VisualElement name="header" style="background-color: rgba(0, 0, 0, 0); align-self: center; flex-shrink: 0;">
@@ -10,8 +11,8 @@
             </ui:VisualElement>
             <ui:Instance template="Dividers" name="Dividers" style="flex-shrink: 0; width: 1010px; margin-top: 25px; margin-bottom: 25px;" />
             <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); margin-top: 20px; flex-grow: 1; width: 100%;">
-                <ui:ScrollView>
-                    <ui:VisualElement name="list-content" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                <ui:ScrollView name="scroll-container">
+                    <ui:VisualElement name="list-content">
                         <ui:Instance template="Team" name="team-template" />
                     </ui:VisualElement>
                 </ui:ScrollView>

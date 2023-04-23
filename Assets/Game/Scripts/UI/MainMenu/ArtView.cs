@@ -14,9 +14,10 @@ namespace Game.UI
         private Button _buttonBack;
 
         private Settings _settings;
-        
+        private ScrollView _scrollContainer;
+
         [Inject]
-        public void Construct(TeamsView teams, Settings settings)
+        public void Construct(Settings settings)
         {
             _settings = settings;
         }
@@ -27,8 +28,10 @@ namespace Game.UI
             
             _headerLabels = Content.Q<VisualElement>(LayoutNames.StartMenu.PAGE_HEADING)
                 .Query<Label>().ToList();
-            _buttonDownload = Content.Q<Button>(LayoutNames.StartMenu.PAGE_DOWNLOAD);
+            _buttonDownload = Content.Q<Button>(LayoutNames.StartMenu.BUTTON_DOWNLOAD);
             _buttonBack = Content.Q<Button>(LayoutNames.StartMenu.BUTTON_BACK);
+
+            _scrollContainer = Content.Q<ScrollView>(LayoutNames.StartMenu.SCROLL_CONTAINER);
             
             RegisterCallbacks();
         }
@@ -57,6 +60,8 @@ namespace Game.UI
         {
             Content.SetEnabled(true);
             Content.RemoveFromClassList(LayoutNames.StartMenu.PAGE_HIDDEN_CLASS_NAME);
+            
+            _scrollContainer.scrollOffset = Vector2.zero;
         }
 
         public override void Hide()

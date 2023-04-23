@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
 
@@ -16,6 +17,7 @@ namespace Game.UI
         private AboutSettings _settings;
         
         private VisualTreeAsset _teamTemplate;
+        private ScrollView _scrollContainer;
 
         [Inject]
         public void Construct(TeamsView teams, AboutSettings settings)
@@ -30,6 +32,8 @@ namespace Game.UI
 
             _headerLabels = Content.Q<VisualElement>(LayoutNames.StartMenu.PAGE_HEADING)
                 .Query<Label>().ToList();
+            
+            _scrollContainer = Content.Q<ScrollView>(LayoutNames.StartMenu.SCROLL_CONTAINER);
             
             _teams.Create(Content);
 
@@ -66,6 +70,8 @@ namespace Game.UI
         {
             Content.SetEnabled(true);
             Content.RemoveFromClassList(LayoutNames.StartMenu.PAGE_HIDDEN_CLASS_NAME);
+            
+            _scrollContainer.scrollOffset = Vector2.zero;
         }
 
         public override void Hide()

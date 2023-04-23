@@ -175,7 +175,7 @@ namespace Game.UI
 
         private void OnEnter(Sprite preview, LocalizedString caption)
         {
-            if (!_menu.enabledSelf)
+            if (!_menu.enabledInHierarchy)
                 return;
 
             _preview.Show(preview, caption.GetLocalizedString());
@@ -183,7 +183,7 @@ namespace Game.UI
 
         private void OnExit(EventBase _)
         {
-            if (!_menu.enabledSelf)
+            if (!_menu.enabledInHierarchy)
                 return;
 
             ShowPreview();

@@ -1,11 +1,8 @@
 .art-container {
-    width: 1700px;
     align-items: center;
-    padding-left: 120px;
-    padding-right: 120px;
-    padding-top: 60px;
-    padding-bottom: 100px;
-    height: 990px;
+    padding: 60px 120px 100px;
+    margin: 40px;
+    width: 1200px;    
 }
 
 .header-label {
@@ -16,84 +13,16 @@
     align-self: auto;
 }
 
-.list__content {
-    flex-direction: row;
-    width: 1400px;
-    margin-top: 65px;
+.art__content {
+    flex-shrink: 0;
 }
 
-.unity-repeat-button {
-    visibility: hidden;
+.art__page {
+    flex-shrink: 0;
+    height: 620px;
 }
 
-.unity-base-slider {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    width: 35px;
-}
-
-.unity-base-slider:focus .unity-base-slider__dragger {
-    border-left-color: rgba(0, 0, 0, 0);
-    border-right-color: rgba(0, 0, 0, 0);
-    border-top-color: rgba(0, 0, 0, 0);
-    border-bottom-color: rgba(0, 0, 0, 0);
-    background-color: rgba(0, 0, 0, 0);
-}
-
-#unity-dragger {
-    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1882268378&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_21');
-    -unity-background-scale-mode: scale-to-fit;
-    width: 40px;
-    height: 40px;
-    background-color: rgba(0, 0, 0, 0);
-    max-height: 40px;
-    border-left-color: rgba(0, 0, 0, 0);
-    border-right-color: rgba(0, 0, 0, 0);
-    border-top-color: rgba(0, 0, 0, 0);
-    border-bottom-color: rgba(0, 0, 0, 0);
-    cursor: url('center');
-    max-width: 40px;
-    left: 53px;
-}
-
-#unity-tracker {
-    background-color: rgba(0, 0, 0, 0);
-    display: flex;
-    -unity-background-image-tint-color: rgb(255, 255, 255);
-    position: absolute;
-    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1185398460&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_14');
-    -unity-background-scale-mode: stretch-to-fill;
-    -unity-slice-top: 0;
-    width: 25%;
-    max-width: 100%;
-    transform-origin: center;
-    left: 55%;
-    border-left-color: rgba(0, 0, 0, 0);
-    border-right-color: rgba(0, 0, 0, 0);
-    border-top-color: rgba(0, 0, 0, 0);
-    border-bottom-color: rgba(0, 0, 0, 0);
-    cursor: url('center');
-    height: 99%;
-    top: 3px;
-}
-
-#unity-drag-container {
-    width: 110px;
-    height: 60px;
-    display: flex;
-    left: -40px;
-    cursor: url('center');
-}
-
-#unity-slider {
-    width: 60px;
-    -unity-background-image-tint-color: rgba(255, 255, 255, 0);
-    height: 61px;
-    cursor: url('center');
-}
-
-.page-content {
-    height: 640px;
+.art__image {
+    flex-grow: 1;
+    -unity-background-scale-mode: scale-and-crop;
 }
