@@ -44,10 +44,10 @@ namespace Game.LifetimeScopes
             builder.Register<TeamsView>(Lifetime.Scoped);
 
             builder.Register<TeamViewFactory>(Lifetime.Scoped);
-            builder.Register<TeamView>(Lifetime.Scoped);
+            builder.Register<TeamView>(Lifetime.Transient);
 
             builder.Register<EmployeeViewFactory>(Lifetime.Scoped);
-            builder.Register<EmployeeView>(Lifetime.Scoped);
+            builder.Register<EmployeeView>(Lifetime.Transient);
         }
 
         private static void RegisterStateMachine(IContainerBuilder builder)
