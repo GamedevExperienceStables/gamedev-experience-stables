@@ -3,20 +3,20 @@
     <Style src="project://database/Assets/Game/UI/Uss/ModalScreenStyle.uss?fileID=7433441132597879392&amp;guid=f1fcc209a14e2d147a495e98dd88ddd7&amp;type=3#ModalScreenStyle" />
     <ui:VisualElement name="blocker" style="flex-grow: 1; background-color: rgba(44, 16, 62, 0.6);">
         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: center; align-items: center;">
-            <ui:VisualElement name="window-modal" style="padding-left: 85px; padding-right: 85px; padding-top: 85px; padding-bottom: 85px; min-width: 350px; min-width: 600px; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1308322280&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_26&apos;); align-items: center; min-height: 850px; max-height: 1000px; max-width: 800px;">
+            <ui:VisualElement name="window-modal" class="window-modal">
                 <ui:VisualElement name="background" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-4687780&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_11&apos;); width: 525px; -unity-background-image-tint-color: rgba(255, 255, 255, 0.38); position: absolute; bottom: 0; top: 0; -unity-background-scale-mode: scale-to-fit;" />
                 <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: space-between; align-items: center;">
                     <ui:VisualElement name="VisualElement" style="background-color: rgba(0, 0, 0, 0); align-items: center;">
-                        <ui:Instance template="Dividers" name="Dividers" style="width: 484px;" />
+                        <ui:Instance template="Dividers" name="Dividers" style="width: 100%;" />
                         <ui:Label tabindex="-1" text="Are you sure you want to exit the game?" display-tooltip-when-elided="true" name="text-title" style="-unity-text-align: middle-center; font-size: 60px; -unity-font-style: normal; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&amp;guid=1823e5ab5312e0e40972472a78991947&amp;type=2#borsok SDF&apos;); color: rgb(90, 55, 55); margin-top: 40px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-bottom: 25px; white-space: normal;" />
-                        <ui:Instance template="Dividers" name="Dividers" style="width: 484px;" />
+                        <ui:Instance template="Dividers" name="Dividers" style="width: 100%;" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="block-message" style="justify-content: center; width: 500px;">
-                        <ui:Label tabindex="-1" text="Unsaved progress will be lost." display-tooltip-when-elided="true" name="text-message" style="-unity-text-align: upper-center; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&amp;guid=9f296ab3b5e417845bc8de63c7b23c43&amp;type=2#koliko-Regular SDF&apos;); -unity-font-style: bold; font-size: 35px; color: rgb(155, 89, 199); white-space: normal;" />
+                    <ui:VisualElement name="block-message" class="block-message">
+                        <ui:Label tabindex="-1" text="Unsaved progress will be lost." display-tooltip-when-elided="true" name="text-message" />
                     </ui:VisualElement>
                     <ui:VisualElement style="flex-direction: row; -unity-text-align: lower-left; justify-content: space-around; width: 100%;">
-                        <ui:Button display-tooltip-when-elided="true" name="button-cancel" class="primary-button" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1286348549&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_36&apos;); background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); width: 181px; height: 173px; min-width: 0;" />
-                        <ui:Button display-tooltip-when-elided="true" name="button-confirm" class="primary-button" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=271044605&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_37&apos;); width: 174px; height: 181px; background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); min-width: 0;" />
+                        <ui:Button display-tooltip-when-elided="true" name="button-cancel" class="modal-button modal-button--cancel"/>
+                        <ui:Button display-tooltip-when-elided="true" name="button-confirm" class="modal-button modal-button--confirm" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>

@@ -171,6 +171,9 @@
             
             public const string BUTTON_CONFIRM = "button-confirm";
             public const string BUTTON_CANCEL = "button-cancel";
+
+            public const string HIDDEN_CLASS_NAME = "window-modal--hidden";
+            public const string WIDE_CLASS_NAME = "window-modal--wide";
         }
         
         public static class Cutscene
