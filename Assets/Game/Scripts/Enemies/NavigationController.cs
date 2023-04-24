@@ -38,7 +38,6 @@ namespace Game.Enemies
             _agent.stoppingDistance = stopDistance;
             _agent.radius = _movement.CapsuleRadius;
             _agent.height = _movement.CapsuleHeight;
-            _agent.avoidancePriority = Random.Range(50, 90);
         }
 
         public void Tick()
