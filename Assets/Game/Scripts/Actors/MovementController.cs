@@ -27,10 +27,12 @@ namespace Game.Actors
         private IActorController _owner;
         
         public float CapsuleRadius => _motor.Capsule.radius;
+        public float CapsuleHeight => _motor.Capsule.height;
+        public float Speed => _owner.GetCurrentValue(CharacterStats.MovementSpeed);
         
         public Vector3 Velocity => _motor.Velocity;
         public bool IsGrounded => _motor.GroundingStatus.IsStableOnGround;
-        
+
         private void Awake()
         {
             _motor = GetComponent<KinematicCharacterMotor>();
