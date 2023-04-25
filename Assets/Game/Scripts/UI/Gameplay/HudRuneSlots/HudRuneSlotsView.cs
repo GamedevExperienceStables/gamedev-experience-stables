@@ -34,6 +34,9 @@ namespace Game.UI
         {
             _viewModel.UnSubscribeActiveRuneSlotChanged(OnActiveRuneSlotChanged);
             _viewModel.UnSubscribeRuneSlotsChanges(OnRuneSlotsChanged);
+            
+            foreach (RuneSlotHudView slot in _hudSlots.Values) 
+                slot.Destroy();
         }
 
         public void LateTick()

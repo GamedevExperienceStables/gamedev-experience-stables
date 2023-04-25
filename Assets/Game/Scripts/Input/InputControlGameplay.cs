@@ -21,6 +21,8 @@ namespace Game.Input
         public InputButton Slot2Button { get; } = new();
         public InputButton Slot3Button { get; } = new();
         public InputButton Slot4Button { get; } = new();
+        public InputButton SlotNextButton { get; } = new();
+        public InputButton SlotPrevButton { get; } = new();
 
         [Inject]
         public InputControlGameplay(GameInputControlsAdapter inputControls)
@@ -141,6 +143,22 @@ namespace Game.Input
             if (context.performed)
             {
                 Slot4Button.TriggerButtonDown();
+            }
+        }
+
+        public void OnSlotNext(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                SlotNextButton.TriggerButtonDown();
+            }
+        }
+
+        public void OnSlotPrev(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                SlotPrevButton.TriggerButtonDown();
             }
         }
 

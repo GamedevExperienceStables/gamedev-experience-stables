@@ -152,6 +152,24 @@ public partial class @GameInputControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SlotNext"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc0bcca1-d7c5-4ab9-8026-3aa8ca69a458"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SlotPrev"",
+                    ""type"": ""Button"",
+                    ""id"": ""f99fa6cf-94ca-4348-9593-1823e51415e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -550,6 +568,94 @@ public partial class @GameInputControls: IInputActionCollection2, IDisposable
                     ""action"": ""Melee"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da9abd66-79e0-4784-8072-da25a7210ff0"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""SlotNext"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""76d6b673-e9a7-496f-ac3a-55736ab7fabb"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlotNext"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""f0e04a26-df9b-4561-bcb1-eb469f6808e7"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""SlotNext"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""f28bfa2b-917e-4aab-916c-65848a8cc782"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""SlotNext"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9cb701a1-de4f-42d1-b146-e5a2a63b67c6"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""SlotPrev"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""90c6643b-1a8f-4e56-9ea2-d36dc2c58213"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlotPrev"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""11014614-ddea-4e04-b0e1-1f999f36f477"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""SlotPrev"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""0f190298-1abb-4b32-9f37-5cc535cb5e8a"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""SlotPrev"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -732,6 +838,8 @@ public partial class @GameInputControls: IInputActionCollection2, IDisposable
         m_Gameplay_Slot2 = m_Gameplay.FindAction("Slot2", throwIfNotFound: true);
         m_Gameplay_Slot3 = m_Gameplay.FindAction("Slot3", throwIfNotFound: true);
         m_Gameplay_Slot4 = m_Gameplay.FindAction("Slot4", throwIfNotFound: true);
+        m_Gameplay_SlotNext = m_Gameplay.FindAction("SlotNext", throwIfNotFound: true);
+        m_Gameplay_SlotPrev = m_Gameplay.FindAction("SlotPrev", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
@@ -813,6 +921,8 @@ public partial class @GameInputControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Slot2;
     private readonly InputAction m_Gameplay_Slot3;
     private readonly InputAction m_Gameplay_Slot4;
+    private readonly InputAction m_Gameplay_SlotNext;
+    private readonly InputAction m_Gameplay_SlotPrev;
     public struct GameplayActions
     {
         private @GameInputControls m_Wrapper;
@@ -831,6 +941,8 @@ public partial class @GameInputControls: IInputActionCollection2, IDisposable
         public InputAction @Slot2 => m_Wrapper.m_Gameplay_Slot2;
         public InputAction @Slot3 => m_Wrapper.m_Gameplay_Slot3;
         public InputAction @Slot4 => m_Wrapper.m_Gameplay_Slot4;
+        public InputAction @SlotNext => m_Wrapper.m_Gameplay_SlotNext;
+        public InputAction @SlotPrev => m_Wrapper.m_Gameplay_SlotPrev;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -882,6 +994,12 @@ public partial class @GameInputControls: IInputActionCollection2, IDisposable
             @Slot4.started += instance.OnSlot4;
             @Slot4.performed += instance.OnSlot4;
             @Slot4.canceled += instance.OnSlot4;
+            @SlotNext.started += instance.OnSlotNext;
+            @SlotNext.performed += instance.OnSlotNext;
+            @SlotNext.canceled += instance.OnSlotNext;
+            @SlotPrev.started += instance.OnSlotPrev;
+            @SlotPrev.performed += instance.OnSlotPrev;
+            @SlotPrev.canceled += instance.OnSlotPrev;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -928,6 +1046,12 @@ public partial class @GameInputControls: IInputActionCollection2, IDisposable
             @Slot4.started -= instance.OnSlot4;
             @Slot4.performed -= instance.OnSlot4;
             @Slot4.canceled -= instance.OnSlot4;
+            @SlotNext.started -= instance.OnSlotNext;
+            @SlotNext.performed -= instance.OnSlotNext;
+            @SlotNext.canceled -= instance.OnSlotNext;
+            @SlotPrev.started -= instance.OnSlotPrev;
+            @SlotPrev.performed -= instance.OnSlotPrev;
+            @SlotPrev.canceled -= instance.OnSlotPrev;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -1049,6 +1173,8 @@ public partial class @GameInputControls: IInputActionCollection2, IDisposable
         void OnSlot2(InputAction.CallbackContext context);
         void OnSlot3(InputAction.CallbackContext context);
         void OnSlot4(InputAction.CallbackContext context);
+        void OnSlotNext(InputAction.CallbackContext context);
+        void OnSlotPrev(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

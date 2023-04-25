@@ -128,7 +128,10 @@ namespace Game.Inventory
             ActiveSlotChanged?.Invoke(changedEvent);
         }
 
-        public void SetSlot(RuneSlotId slotId, RuneDefinition targetRune)
+        public RuneDefinition GetRuneFromSlot(RuneSlotId targetId) 
+            => _slots.Get(targetId);
+
+        public void SetRuneToSlot(RuneSlotId slotId, RuneDefinition targetRune)
         {
             if (_slots.Find(targetRune, out RuneSlotId foundSlotId))
             {

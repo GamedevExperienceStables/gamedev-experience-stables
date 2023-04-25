@@ -32,16 +32,19 @@ namespace Game.UI
         public void CloseInventory()
             => _inventorySwitcher.Disable();
 
-        public void SubscribeRuneAdded(Action<RuneDefinition> callback) 
+        public void SubscribeRuneAdded(Action<RuneDefinition> callback)
             => _runes.Subscribe(callback);
 
         public void UnSubscribeRuneAdded(Action<RuneDefinition> callback)
             => _runes.UnSubscribe(callback);
 
-        public void SetRuneToHudSlot(RuneSlotId slotId, RuneDefinition targetRune) 
-            => _slots.SetSlot(slotId, targetRune);
+        public RuneDefinition GetRuneFromHudSlot(RuneSlotId targetId) 
+            => _slots.GetRuneFromSlot(targetId);
 
-        public void RemoveRuneFromHudSlot(RuneSlotId slotId) 
+        public void SetRuneToHudSlot(RuneSlotId slotId, RuneDefinition targetRune)
+            => _slots.SetRuneToSlot(slotId, targetRune);
+
+        public void RemoveRuneFromHudSlot(RuneSlotId slotId)
             => _slots.ClearSlot(slotId);
     }
 }

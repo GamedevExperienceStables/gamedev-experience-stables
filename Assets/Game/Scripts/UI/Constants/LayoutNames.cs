@@ -82,6 +82,7 @@
             public const string RUNE_SLOT_ENABLED_CLASS_NAME = "hud-rune-slot--enabled";
             public const string RUNE_SLOT_ACTIVE_CLASS_NAME = "hud-rune-slot--active";
             public const string RUNE_SLOT_EMPTY_CLASS_NAME = "hud-rune-slot--empty";
+            public const string RUNE_SLOT_DRAG_CLASS_NAME = "hud-rune-slot--drag";
 
             public const string WIDGET_INTERACTION = "widget-interaction";
             public const string WIDGET_INTERACTION_BLOCK = "widget-interaction-block";

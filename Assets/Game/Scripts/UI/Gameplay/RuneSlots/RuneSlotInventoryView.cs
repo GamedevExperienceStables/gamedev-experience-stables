@@ -81,7 +81,7 @@ namespace Game.UI
             {
                 pointerId = evt.pointerId,
                 pointerPosition = evt.position,
-                elementPosition = GetWorldPosition(),
+                elementPosition = _element.worldBound.position,
                 definition = _runeDefinition
             };
             PointerDownCallback?.Invoke(dragEvent);
