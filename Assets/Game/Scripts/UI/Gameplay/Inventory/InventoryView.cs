@@ -15,20 +15,17 @@ namespace Game.UI
     [RequireComponent(typeof(UIDocument))]
     public class InventoryView : MonoBehaviour
     {
+        private const float SHOW_DURATION = 0.1f;
+        private const float HIDE_DURATION = 0.2f;
+        
         [SerializeField]
         private HudView hud;
 
         [Header("Show")]
-        [SerializeField, Min(0f)]
-        private float showDuration = 0.4f;
-
         [SerializeField]
         private GameObject showFeedbacks;
 
         [Header("Hide")]
-        [SerializeField, Min(0f)]
-        private float hideDuration = 0.2f;
-
         [SerializeField]
         private GameObject hideFeedbacks;
 
@@ -59,8 +56,8 @@ namespace Game.UI
 
         private void Awake()
         {
-            _showDuration = TimeSpan.FromSeconds(showDuration);
-            _hideDuration = TimeSpan.FromSeconds(hideDuration);
+            _showDuration = TimeSpan.FromSeconds(SHOW_DURATION);
+            _hideDuration = TimeSpan.FromSeconds(HIDE_DURATION);
 
             _root = GetComponent<UIDocument>().rootVisualElement;
 
@@ -100,13 +97,19 @@ namespace Game.UI
         private void SubscribeHudRunes(IEnumerable<RuneSlotHudView> hudRuneSlots)
         {
             foreach (RuneSlotHudView runeSlotHudView in hudRuneSlots)
+            {
                 runeSlotHudView.SubscribeRemovingRequest(OnRuneRemovingRequest);
+                runeSlotHudView.SubscribeStartDrag(OnRuneStartDrag);
+            }
         }
 
         private void UnSubscribeHudRunes(IEnumerable<RuneSlotHudView> hudRuneSlots)
         {
             foreach (RuneSlotHudView runeSlotHudView in hudRuneSlots)
+            {
                 runeSlotHudView.UnSubscribeRemovingRequest(OnRuneRemovingRequest);
+                runeSlotHudView.UnSubscribeStartDrag(OnRuneStartDrag);
+            }
         }
 
         private void CreateRuneSlots(VisualElement root, IReadOnlyList<RuneDefinition> runes)
@@ -176,8 +179,8 @@ namespace Game.UI
             _runeManipulator = new RuneDragAndDropManipulator(
                 _runeDragger,
                 hudSlots,
-                OnRuneStopDrag,
-                OnRuneCompleteDrag
+                OnRuneDragStop,
+                OnRuneDragComplete
             );
         }
 
@@ -209,13 +212,42 @@ namespace Game.UI
         private void HideDetails()
             => _runeDetails.AddToClassList(LayoutNames.Inventory.BOOK_DETAILS_HIDDEN_CLASS_NAME);
 
-        private void OnRuneStopDrag()
+        private void OnRuneDragStop()
             => _runeDragger.StopDrag();
 
-        private void OnRuneCompleteDrag(RuneSlotHudView targetSlot)
+        private void OnRuneDragComplete(RuneSlotDragCompleteEvent evt)
         {
-            RuneDefinition targetRune = _runeDragger.Rune;
-            _viewModel.SetRuneToHudSlot(targetSlot.Id, targetRune);
+            bool sourceIsEmpty = evt.source is null;
+            bool targetIsEmpty = evt.target is null;
+
+            if (!sourceIsEmpty && !targetIsEmpty)
+            {
+                SwapSlots(evt.source.Id, evt.target.Id);
+            }
+            else
+            {
+                if (!sourceIsEmpty)
+                    _viewModel.RemoveRuneFromHudSlot(evt.source.Id);
+
+                if (!targetIsEmpty)
+                    _viewModel.SetRuneToHudSlot(evt.target.Id, evt.rune);
+            }
+        }
+
+        private void SwapSlots(RuneSlotId sourceId, RuneSlotId targetId)
+        {
+            RuneDefinition sourceRune = _viewModel.GetRuneFromHudSlot(sourceId);
+            RuneDefinition targetRune = _viewModel.GetRuneFromHudSlot(targetId);
+
+            _viewModel.SetRuneToHudSlot(targetId, sourceRune);
+            _viewModel.SetRuneToHudSlot(sourceId, targetRune);
+        }
+
+        private void SwapSlots(RuneSlotId sourceId, RuneDefinition sourceRune, RuneSlotId targetId,
+            RuneDefinition targetRune)
+        {
+            _viewModel.SetRuneToHudSlot(targetId, sourceRune);
+            _viewModel.SetRuneToHudSlot(sourceId, targetRune);
         }
 
         private void OnRuneAdded(RuneDefinition rune)
@@ -255,6 +287,8 @@ namespace Game.UI
 
         private void OnHide()
         {
+            _runeManipulator.StopDrag();
+
             foreach (RuneSlotHudView hudRuneSlotView in hud.RuneSlots.Values)
                 hudRuneSlotView.DisableInteraction();
         }

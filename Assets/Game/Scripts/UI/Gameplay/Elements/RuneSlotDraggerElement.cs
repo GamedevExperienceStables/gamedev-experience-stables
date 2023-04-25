@@ -17,12 +17,8 @@ namespace Game.UI.Elements
             Add(_icon);
         }
 
-        public RuneDefinition Rune { get; private set; }
-
         public void StartDrag(RuneDefinition definition)
         {
-            Rune = definition;
-
             _icon.sprite = definition.Icon;
             
             AddToClassList(LayoutNames.Inventory.RUNE_DRAGGER_DRAG_CLASS_NAME);
@@ -30,7 +26,6 @@ namespace Game.UI.Elements
 
         public void StopDrag()
         {
-            Rune = null;
             _icon.image = null;
             
             RemoveFromClassList(LayoutNames.Inventory.RUNE_DRAGGER_DRAG_CLASS_NAME);

@@ -2,8 +2,8 @@
     <ui:Template name="MagicBookRuneSlot" src="project://database/Assets/Game/UI/Uxml/Partial/MagicBookRuneSlot.uxml?fileID=9197481963319205126&amp;guid=6766df90568442a6be4f3283b4b99506&amp;type=3#MagicBookRuneSlot" />
     <Style src="project://database/Assets/Game/UI/Uss/MagicBookStyle.uss?fileID=7433441132597879392&amp;guid=6831ff871bbd7e448afec2f8860641a4&amp;type=3#MagicBookStyle" />
     <ui:VisualElement name="book-screen" picking-mode="Ignore" style="flex-grow: 1; align-items: center; justify-content: center;">
-        <ui:VisualElement name="book" class="magic-book book-wrapper">
-            <ui:VisualElement name="book-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: relative; width: 1250px; height: 700px; bottom: 45px; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Magic_Book_Atlas.psd?fileID=-995416628&amp;guid=cb8bf6b2ac4ea1541b25973698fb9ffe&amp;type=3#Magic_Book_Atlas_4&apos;); -unity-background-scale-mode: scale-to-fit;">
+        <ui:VisualElement name="book" class="magic-book book-wrapper" picking-mode="Ignore">
+            <ui:VisualElement name="book-container" picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: relative; width: 1250px; height: 700px; bottom: 45px; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Magic_Book_Atlas.psd?fileID=-995416628&amp;guid=cb8bf6b2ac4ea1541b25973698fb9ffe&amp;type=3#Magic_Book_Atlas_4&apos;); -unity-background-scale-mode: scale-to-fit;">
                 <ui:VisualElement name="passive-slots" class="magic-book-passive" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Magic_Book_Atlas.psd?fileID=-1268669046&amp;guid=cb8bf6b2ac4ea1541b25973698fb9ffe&amp;type=3#Magic_Book_Atlas_1&apos;); position: absolute; width: 381px; height: 521px; top: 56px; left: -32px;">
                     <ui:Instance template="MagicBookRuneSlot" name="rune-slot-1" class="magic-book-slot--1 magic-book-slot-passive" style="position: absolute; top: 70px; left: 85px;" />
                     <ui:Instance template="MagicBookRuneSlot" name="rune-slot-2" class="magic-book-slot--2 magic-book-slot-passive" style="position: absolute; top: 217px; left: 80px;" />
@@ -23,7 +23,6 @@
                             <ui:Instance template="MagicBookRuneSlot" name="rune-slot-10" class="magic-book-slot magic-book-slot--10" style="position: absolute; top: 442px; left: 354px;" />
                             <ui:Instance template="MagicBookRuneSlot" name="rune-slot-11" class="magic-book-slot magic-book-slot--11" style="position: absolute; top: 127px; left: 105px;" />
                         </ui:VisualElement>
-                        <Game.UI.Elements.RuneSlotDraggerElement name="rune-dragger" class="rune-dragger" />
                     </ui:VisualElement>
                     <ui:VisualElement name="side-right" style="background-color: rgba(0, 0, 0, 0); flex-basis: 50%; justify-content: center; align-items: center;">
                         <ui:VisualElement name="page-details" class="magic-book-details" style="background-color: rgba(0, 0, 0, 0); width: 278px; height: 305px; margin-left: -51px;">
@@ -42,5 +41,6 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
+        <Game.UI.Elements.RuneSlotDraggerElement name="rune-dragger" class="rune-dragger" style="left: 0; top: 0;" />
     </ui:VisualElement>
 </ui:UXML>

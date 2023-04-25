@@ -1,7 +1,6 @@
 ﻿using System;
 using Game.Inventory;
 using Game.Utils;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Game.UI
@@ -18,6 +17,7 @@ namespace Game.UI
         private readonly string _inputActive;
 
         private event Action<RuneSlotRemoveEvent> RuneRemovingRequest;
+        private event Action<RuneSlotDragEvent> PointerDownCallback;
 
         public RuneSlotHudView(VisualElement element, RuneSlotId id, string inputSelect, string inputActive)
         {
@@ -35,12 +35,21 @@ namespace Game.UI
 
             Clear();
 
-            element.RegisterCallback<PointerDownEvent>(OnPointerDown);
+            _icon.RegisterCallback<PointerDownEvent>(OnPointerDown);
         }
 
         public RuneSlotId Id { get; }
 
         public VisualElement Element { get; }
+
+        public void Destroy() 
+            => _icon.UnregisterCallback<PointerDownEvent>(OnPointerDown);
+
+        public void SubscribeStartDrag(Action<RuneSlotDragEvent> callback)
+            => PointerDownCallback += callback;
+
+        public void UnSubscribeStartDrag(Action<RuneSlotDragEvent> callback)
+            => PointerDownCallback -= callback;
 
         public void SubscribeRemovingRequest(Action<RuneSlotRemoveEvent> callback)
             => RuneRemovingRequest += callback;
@@ -88,18 +97,28 @@ namespace Game.UI
             if (!_interactable)
                 return;
 
-            if (_runeDefinition == null)
+            if (!_runeDefinition)
                 return;
 
-            if (evt.IsLeftButton())
-            {
-#if UNITY_EDITOR
-                Debug.Log("Clicked");
-#endif
-            }
+            if (evt.IsLeftButton()) 
+                StartDrag(evt);
 
             if (evt.IsRightButton())
                 RemoveRuneFromSlot(evt);
+        }
+
+        private void StartDrag(IPointerEvent evt)
+        {
+            var dragEvent = new RuneSlotDragEvent
+            {
+                source = this,
+                pointerId = evt.pointerId,
+                pointerPosition = evt.position,
+                elementPosition = _icon.worldBound.position,
+                definition = _runeDefinition
+            };
+
+            PointerDownCallback?.Invoke(dragEvent);
         }
 
         private void RemoveRuneFromSlot(IPointerEvent evt)
