@@ -1,4 +1,5 @@
-﻿using Game.Inventory;
+﻿using System;
+using Game.Inventory;
 using UnityEngine;
 
 namespace Game.UI
@@ -10,5 +11,7 @@ namespace Game.UI
         public Vector2 pointerPosition;
         public RuneDefinition definition;
         public RuneSlotHudView source;
+        
+        public Action onStopped;
     }
 }

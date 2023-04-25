@@ -14,26 +14,23 @@ namespace Game.UI.Elements
 
         private bool _enabled;
 
-        private readonly VisualElement _root;
         private readonly IReadOnlyList<RuneSlotHudView> _hudSlots;
 
-        private readonly Action _stopDragCallback;
-        private readonly Action<RuneSlotDragCompleteEvent> _onDragComplete;
+        public event Action DragStopped;
+        public event Action<RuneSlotDragCompleteEvent> DragCompleted;
 
         private int _pointerId;
         
         private RuneSlotHudView _source;
         private RuneDefinition _rune;
+        
+        private Action _dragStopCallback;
 
-        public RuneDragAndDropManipulator(VisualElement target, IEnumerable<RuneSlotHudView> hudSlots,
-            Action onStopDrag, Action<RuneSlotDragCompleteEvent> onDragComplete)
+        public RuneDragAndDropManipulator(VisualElement target, IEnumerable<RuneSlotHudView> hudSlots)
         {
             _hudSlots = hudSlots.ToList();
-            _stopDragCallback = onStopDrag;
-            _onDragComplete = onDragComplete;
 
             this.target = target;
-            _root = target.parent;
         }
 
         public void StartDrag(RuneSlotDragEvent evt)
@@ -43,6 +40,7 @@ namespace Game.UI.Elements
             _pointerId = evt.pointerId;
             _source = evt.source;
             _rune = evt.definition;
+            _dragStopCallback = evt.onStopped;
 
             target.transform.position = _targetStartPosition;
 
@@ -60,7 +58,10 @@ namespace Game.UI.Elements
 
             target.transform.position = _targetStartPosition;
 
-            _stopDragCallback.Invoke();
+            DragStopped?.Invoke();
+            
+            _dragStopCallback?.Invoke();
+            _dragStopCallback = null;
 
             _source = null;
             _rune = null;
@@ -123,7 +124,7 @@ namespace Game.UI.Elements
                 rune = _rune
             };
             
-            _onDragComplete.Invoke(result);
+            DragCompleted?.Invoke(result);
 
             StopDrag();
         }

@@ -2,9 +2,8 @@
     <Style src="project://database/Assets/Game/UI/Uss/HudStyle.uss?fileID=7433441132597879392&amp;guid=43fb365d5654783488ae02a43eaf455d&amp;type=3#HudStyle" />
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
         <ui:VisualElement name="container" style="flex-grow: 1; flex-shrink: 0;">
-            <ui:Image name="icon" style="flex-grow: 1; flex-shrink: 0;">
-                <ui:VisualElement name="background" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Rune_Atlas.psd?fileID=-487602914&amp;guid=6fd4af8f3cf0c7e4b9aaadfe0af4ee75&amp;type=3#Rune_Atlas_35&apos;); flex-shrink: 0; -unity-background-scale-mode: scale-to-fit;" />
-            </ui:Image>
+            <ui:VisualElement name="background" />
+            <ui:Image name="icon" style="flex-grow: 1; flex-shrink: 0;"/>                        
         </ui:VisualElement>
         <ui:VisualElement name="input" class="hud-rune-slot__input">
             <ui:Label name="input-label" text="#" class="hud-rune-slot__input-label" />

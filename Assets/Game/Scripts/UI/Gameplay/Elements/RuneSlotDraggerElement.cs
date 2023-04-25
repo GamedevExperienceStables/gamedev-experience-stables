@@ -1,4 +1,4 @@
-﻿using Game.Inventory;
+﻿using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Game.UI.Elements
@@ -17,9 +17,9 @@ namespace Game.UI.Elements
             Add(_icon);
         }
 
-        public void StartDrag(RuneDefinition definition)
+        public void StartDrag(Sprite icon)
         {
-            _icon.sprite = definition.Icon;
+            _icon.sprite = icon;
             
             AddToClassList(LayoutNames.Inventory.RUNE_DRAGGER_DRAG_CLASS_NAME);
         }

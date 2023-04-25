@@ -114,12 +114,20 @@ namespace Game.UI
                 source = this,
                 pointerId = evt.pointerId,
                 pointerPosition = evt.position,
-                elementPosition = _icon.worldBound.position,
-                definition = _runeDefinition
+                elementPosition = Element.worldBound.position,
+                definition = _runeDefinition,
+                
+                onStopped = OnDragStopped
             };
+            
+            Element.AddToClassList(LayoutNames.Hud.RUNE_SLOT_DRAG_CLASS_NAME);
 
             PointerDownCallback?.Invoke(dragEvent);
         }
+
+        private void OnDragStopped() 
+            => Element.RemoveFromClassList(LayoutNames.Hud.RUNE_SLOT_DRAG_CLASS_NAME);
+
 
         private void RemoveRuneFromSlot(IPointerEvent evt)
         {

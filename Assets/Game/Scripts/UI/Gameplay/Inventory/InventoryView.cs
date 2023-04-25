@@ -87,11 +87,9 @@ namespace Game.UI
         {
             _viewModel.UnSubscribeRuneAdded(OnRuneAdded);
             _buttonClose.clicked -= OnCloseClicked;
-
-            _runeManipulator.target.RemoveManipulator(_runeManipulator);
-
+            
             UnSubscribeHudRunes(hud.RuneSlots.Values);
-            CleanupRunes();
+            Cleanup();
         }
 
         private void SubscribeHudRunes(IEnumerable<RuneSlotHudView> hudRuneSlots)
@@ -164,30 +162,32 @@ namespace Game.UI
             }
         }
 
-        private void CleanupRunes()
+        private void CreateRuneDragger(VisualElement root, IEnumerable<RuneSlotHudView> hudSlots)
+        {
+            _runeDragger = root.Q<RuneSlotDraggerElement>();
+            _runeManipulator = new RuneDragAndDropManipulator(_runeDragger, hudSlots);
+            
+            _runeManipulator.DragStopped += OnRuneDragStopped;
+            _runeManipulator.DragCompleted += OnRuneDragCompleted;
+        }
+
+        private void Cleanup()
         {
             foreach (RuneSlotInventoryView runeElement in _runeSlots)
             {
                 runeElement.UnSubscribeStartDrag(OnRuneStartDrag);
                 runeElement.UnsubscribeHover(OnRuneHover);
             }
-        }
 
-        private void CreateRuneDragger(VisualElement root, IEnumerable<RuneSlotHudView> hudSlots)
-        {
-            _runeDragger = root.Q<RuneSlotDraggerElement>();
-            _runeManipulator = new RuneDragAndDropManipulator(
-                _runeDragger,
-                hudSlots,
-                OnRuneDragStop,
-                OnRuneDragComplete
-            );
+            _runeManipulator.target.RemoveManipulator(_runeManipulator);
+            _runeManipulator.DragStopped -= OnRuneDragStopped;
+            _runeManipulator.DragCompleted -= OnRuneDragCompleted;
         }
 
         private void OnRuneStartDrag(RuneSlotDragEvent evt)
         {
             _runeManipulator.StartDrag(evt);
-            _runeDragger.StartDrag(evt.definition);
+            _runeDragger.StartDrag(evt.definition.Icon);
         }
 
         private void OnRuneHover(RuneSlotHoverEvent evt)
@@ -212,10 +212,10 @@ namespace Game.UI
         private void HideDetails()
             => _runeDetails.AddToClassList(LayoutNames.Inventory.BOOK_DETAILS_HIDDEN_CLASS_NAME);
 
-        private void OnRuneDragStop()
+        private void OnRuneDragStopped()
             => _runeDragger.StopDrag();
 
-        private void OnRuneDragComplete(RuneSlotDragCompleteEvent evt)
+        private void OnRuneDragCompleted(RuneSlotDragCompleteEvent evt)
         {
             bool sourceIsEmpty = evt.source is null;
             bool targetIsEmpty = evt.target is null;
@@ -239,13 +239,6 @@ namespace Game.UI
             RuneDefinition sourceRune = _viewModel.GetRuneFromHudSlot(sourceId);
             RuneDefinition targetRune = _viewModel.GetRuneFromHudSlot(targetId);
 
-            _viewModel.SetRuneToHudSlot(targetId, sourceRune);
-            _viewModel.SetRuneToHudSlot(sourceId, targetRune);
-        }
-
-        private void SwapSlots(RuneSlotId sourceId, RuneDefinition sourceRune, RuneSlotId targetId,
-            RuneDefinition targetRune)
-        {
             _viewModel.SetRuneToHudSlot(targetId, sourceRune);
             _viewModel.SetRuneToHudSlot(sourceId, targetRune);
         }
