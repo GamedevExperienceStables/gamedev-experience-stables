@@ -38,11 +38,11 @@ namespace Game.UI
         public void UnSubscribeRuneAdded(Action<RuneDefinition> callback)
             => _runes.UnSubscribe(callback);
 
-        public RuneDefinition GetRuneFromHudSlot(RuneSlotId targetId) 
-            => _slots.GetRuneFromSlot(targetId);
-
         public void SetRuneToHudSlot(RuneSlotId slotId, RuneDefinition targetRune)
             => _slots.SetRuneToSlot(slotId, targetRune);
+        
+        public void SwapSlots(RuneSlotId slotId1, RuneSlotId slotId2)
+            => _slots.SwapSlots(slotId1, slotId2);
 
         public void RemoveRuneFromHudSlot(RuneSlotId slotId)
             => _slots.ClearSlot(slotId);

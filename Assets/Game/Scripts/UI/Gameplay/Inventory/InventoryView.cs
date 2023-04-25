@@ -222,7 +222,7 @@ namespace Game.UI
 
             if (!sourceIsEmpty && !targetIsEmpty)
             {
-                SwapSlots(evt.source.Id, evt.target.Id);
+                _viewModel.SwapSlots(evt.source.Id, evt.target.Id);
             }
             else
             {
@@ -232,15 +232,6 @@ namespace Game.UI
                 if (!targetIsEmpty)
                     _viewModel.SetRuneToHudSlot(evt.target.Id, evt.rune);
             }
-        }
-
-        private void SwapSlots(RuneSlotId sourceId, RuneSlotId targetId)
-        {
-            RuneDefinition sourceRune = _viewModel.GetRuneFromHudSlot(sourceId);
-            RuneDefinition targetRune = _viewModel.GetRuneFromHudSlot(targetId);
-
-            _viewModel.SetRuneToHudSlot(targetId, sourceRune);
-            _viewModel.SetRuneToHudSlot(sourceId, targetRune);
         }
 
         private void OnRuneAdded(RuneDefinition rune)
