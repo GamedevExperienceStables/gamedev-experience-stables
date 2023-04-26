@@ -50,6 +50,14 @@
     opacity: 0;
 }
 
+.action--skip {
+    transition: opacity 50ms ease-out;
+}
+
+.action--hidden.action--skip {
+    transition: opacity 500ms linear 1000ms;
+}
+
 .action__text {
     font-size: 18px;
     color: rgb(255, 255, 255);

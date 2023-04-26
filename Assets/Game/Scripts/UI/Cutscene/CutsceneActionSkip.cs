@@ -19,8 +19,11 @@ namespace Game.UI
         {
             _container = root.Q<VisualElement>(LayoutNames.Cutscene.BLOCK_SKIP);
 
-            string button = _bindings.GetBindingDisplayString(InputGameplayActions.Back);
-            root.Q<Label>(LayoutNames.Cutscene.TEXT_SKIP).text = _settings.SkipLabel.GetLocalizedString(button);
+            InputKeyBinding keyBinding = _bindings.GetBindingDisplay(InputGameplayActions.Back);
+            var inputKey = root.Q<InputKey>(LayoutNames.Cutscene.INPUT_KEY_SKIP);
+            inputKey.Bind(keyBinding);
+            
+            root.Q<Label>(LayoutNames.Cutscene.TEXT_SKIP).text = _settings.SkipLabel.GetLocalizedString();
         }
 
         public void Show()

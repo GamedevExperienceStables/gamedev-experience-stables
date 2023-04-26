@@ -25,3 +25,56 @@
 .primary-button:active {
     background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1523537116&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_43');
 }
+
+
+.input-key {
+    align-items: center;
+    height: 26px;
+}
+
+.input-key__text {
+    flex-grow: 1;
+    
+    min-width: 22px;
+    height: 26px;
+    
+    padding: 9px 6px 2px 6px;
+    
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: rgb(37, 41, 47);
+
+    color: rgb(37, 41, 47);
+    background-color: rgb(206, 210, 217);
+}
+
+.input-key__label {    
+    -unity-text-align: middle-center;
+    
+    -unity-font-definition: var(--font-heading);    
+    font-size: 17px;
+    
+    margin: 0;
+    padding: 0;
+}
+
+.input-key__icon {
+    width: 26px;
+    height: 26px;
+}
+
+.input-key--text .input-key__text {
+    display: flex;
+}
+
+.input-key--text .input-key__icon {
+    display: none;
+}
+
+.input-key--icon .input-key__icon {
+    display: flex;
+}
+
+.input-key--icon .input-key__text {
+    display: none;
+}

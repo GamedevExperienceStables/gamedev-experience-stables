@@ -75,8 +75,8 @@
             public const string RUNE_SLOT_CLASS_NAME = "hud-rune-slot";
             public const string RUNE_SLOT_ICON = "icon";
             public const string RUNE_SLOT_BACKGROUND = "background";
-            public const string RUNE_SLOT_INPUT_LABEL = "input-label";
-            public const string RUNE_SLOT_INPUT_ICON = "input-icon";
+            public const string RUNE_SLOT_INPUT_SELECT = "input-select";
+            public const string RUNE_SLOT_INPUT_ACTIVE = "input-active";            
             
             public const string RUNE_SLOT_INTERACTABLE_CLASS_NAME = "hud-rune-slot--interactable";
             public const string RUNE_SLOT_ENABLED_CLASS_NAME = "hud-rune-slot--enabled";
@@ -87,8 +87,10 @@
             public const string WIDGET_INTERACTION = "widget-interaction";
             public const string WIDGET_INTERACTION_BLOCK = "widget-interaction-block";
             public const string WIDGET_INTERACTION_TEXT = "text";
+            public const string WIDGET_INTERACTION_INPUT_KEY = "input-key";
             public const string WIDGET_INTERACTION_HIDDEN_CLASS_NAME = "widget-interaction--hidden";
-            
+            public const string WIDGET_INTERACTION_ENABLED_CLASS_NAME = "widget-interaction--enabled";
+
             public const string WIDGET_SAVING = "widget-saving";
             public const string WIDGET_SAVING_CONTAINER = "container";
             public const string WIDGET_SAVING_TEXT = "text";
@@ -191,6 +193,7 @@
             public const string ICON_ACTION = "icon-action";
 
             public const string BLOCK_SKIP = "block-skip";
+            public const string INPUT_KEY_SKIP = "input-key";
             public const string TEXT_SKIP = "text-skip";
 
             public const string SLIDE_HIDDEN_CLASS_NAME = "slider__slide--hidden";

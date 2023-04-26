@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/UI/Uss/InputKeyStyle.uss?fileID=7433441132597879392&amp;guid=50a9c23dc2374fb4d829c65b33b716ff&amp;type=3#InputKeyStyle" />
+    <ui:VisualElement class="input-key">
+        <ui:VisualElement name="input-text" class="input-key__text">
+            <ui:Label tabindex="-1" text="#" name="input-label" class="input-key__label" />
+        </ui:VisualElement>
+        <ui:VisualElement name="input-icon" class="input-key__icon" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/Input/input_tilemap_white_packed.png?fileID=1106375549&amp;guid=6809b5cb45b4e5243947d665c87b8fd5&amp;type=3#leftButton&apos;);" />
+    </ui:VisualElement>
+</ui:UXML>

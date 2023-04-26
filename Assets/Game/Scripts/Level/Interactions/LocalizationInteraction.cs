@@ -1,5 +1,4 @@
 ﻿using System;
-using Game.Input;
 using UnityEngine.Localization;
 using VContainer;
 
@@ -8,55 +7,64 @@ namespace Game.Level
     public class LocalizationInteraction
     {
         private readonly LocalizationInteractionSettings _settings;
-        private readonly InputBindings _bindings;
 
         [Inject]
-        public LocalizationInteraction(LocalizationInteractionSettings settings, InputBindings bindings)
-        {
-            _settings = settings;
-            _bindings = bindings;
-        }
+        public LocalizationInteraction(LocalizationInteractionSettings settings)
+            => _settings = settings;
 
-        public string GetText(Interaction interaction)
-        {
-            return interaction switch
+        public InteractionPrompt GetInteractionPrompt(Interaction interaction) =>
+            interaction switch
             {
                 LevelExitInteraction => HandleLevelExit(interaction),
                 RocketContainerInteraction container => HandleContainer(container),
                 TransitionToLocationInteraction transition => HandleTransition(transition),
-                SaveGameInteraction => GetInteractionText(_settings.SaveGame.Text),
-                _ => GetInteractionText(_settings.DefaultText)
+                SaveGameInteraction => GetCommonPrompt(_settings.SaveGame.Text),
+                _ => GetCommonPrompt(_settings.DefaultText)
             };
+
+        private static InteractionPrompt GetCommonPrompt(LocalizedString saveGameText)
+        {
+            string localizedText = saveGameText.GetLocalizedString();
+            return new InteractionPrompt(localizedText, canExecute: true);
         }
 
-        private string HandleTransition(TransitionToLocationInteraction transition)
+        private InteractionPrompt HandleTransition(TransitionToLocationInteraction transition)
         {
+            string localizedText = GetLocalizedText(_settings.Transition.TextDoor);
+
             if (transition.TargetLocation == _settings.Transition.PlanetLocation)
-                return GetInteractionText(_settings.Transition.TextToPlanet);
+                localizedText = GetLocalizedText(_settings.Transition.TextToPlanet);
 
             if (transition.TargetLocation == _settings.Transition.RocketLocation)
-                return GetInteractionText(_settings.Transition.TextToRocket);
+                localizedText = GetLocalizedText(_settings.Transition.TextToRocket);
 
-            return GetInteractionText(_settings.Transition.TextDoor);
+            return new InteractionPrompt(localizedText, canExecute: true);
         }
 
-        private string HandleLevelExit(Interaction interaction)
+        private InteractionPrompt HandleLevelExit(Interaction interaction)
         {
-            return interaction.CanExecute()
-                ? GetInteractionText(_settings.LevelExit.TextTrue)
+            bool canExecute = interaction.CanExecute();
+
+            string localizedText = canExecute
+                ? GetLocalizedText(_settings.LevelExit.TextTrue)
                 : GetText(_settings.LevelExit.TextFalse);
+
+            return new InteractionPrompt(localizedText, canExecute);
         }
 
-        private string HandleContainer(RocketContainerInteraction container)
+        private InteractionPrompt HandleContainer(RocketContainerInteraction container)
         {
-            container.CanExecuteWithResult(out InteractionRocketResult result);
-            return result switch
+            bool canExecute = container.CanExecuteWithResult(out InteractionRocketResult result);
+
+            string localizedText = result switch
             {
-                InteractionRocketResult.Ok => GetInteractionText(_settings.RocketContainer.TextOk),
+                InteractionRocketResult.Ok => GetLocalizedText(_settings.RocketContainer.TextOk),
                 InteractionRocketResult.Empty => GetText(_settings.RocketContainer.TextEmpty),
                 InteractionRocketResult.Full => GetText(_settings.RocketContainer.TextFull),
                 _ => throw new ArgumentOutOfRangeException(nameof(result), result, null)
             };
+
+            return new InteractionPrompt(localizedText, canExecute);
         }
 
         private static string GetText(LocalizedString localizedString)
@@ -66,10 +74,7 @@ namespace Game.Level
                 : localizedString.GetLocalizedString();
         }
 
-        private string GetInteractionText(LocalizedString text)
-        {
-            string button = _bindings.GetBindingDisplayString(InputGameplayActions.Interaction);
-            return text.GetLocalizedString(button);
-        }
+        private static string GetLocalizedText(LocalizedString text)
+            => text.GetLocalizedString();
     }
 }

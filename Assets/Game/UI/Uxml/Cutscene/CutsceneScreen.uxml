@@ -12,7 +12,10 @@
         <ui:VisualElement name="block-action" class="action" style="flex-grow: 1; position: absolute; right: 30px; bottom: 20px; flex-direction: row; align-items: center;">
             <ui:VisualElement name="icon-action" style="background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-694284940&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_19&apos;); width: 32px; height: 32px;" />
         </ui:VisualElement>
-        <ui:VisualElement name="block-skip" class="action" style="flex-grow: 1; position: absolute; flex-direction: row; align-items: center; bottom: 20px; left: 30px;">
+        <ui:VisualElement name="block-skip" class="action action--skip" style="flex-grow: 1; position: absolute; flex-direction: row; align-items: center; bottom: 20px; left: 30px;">
+            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); margin-right: 5px;">
+                <Game.UI.InputKey name="input-key" />
+            </ui:VisualElement>
             <ui:Label tabindex="-1" text="Hold Esc to skip" display-tooltip-when-elided="true" name="text-skip" class="action__text" style="-unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&amp;guid=9f296ab3b5e417845bc8de63c7b23c43&amp;type=2#koliko-Regular SDF&apos;); -unity-font-style: bold; font-size: 20px; color: rgb(255, 255, 255);" />
         </ui:VisualElement>
     </ui:VisualElement>
