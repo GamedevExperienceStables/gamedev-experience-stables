@@ -42,7 +42,7 @@
 
 .mini-map__frame {
     position: absolute;
-    background-image: url('project://database/Assets/Game/UI/Textures/HUD_atlas.psd#HUD_Atlas_0');    
+    background-image: url('project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=-2136378921&guid=04fa941512f200843b6c60489583d9fb&type=3#HUD_Atlas_0');
     flex-grow: 1;
 }
 
@@ -51,18 +51,13 @@
     flex-shrink: 0;
     flex-grow: 0;
     
-    width: 18px;
-    height: 24px;
+    width: 28px;
+    height: 32px;
     
-    margin-left: -9px;
-    margin-top: -12px;
+    margin-left: -14px;
+    margin-top: -16px;
     
-    background-color: white;
-        
-    border-width: 4px;
-    border-color: #2f363d;    
-    border-top-left-radius: 999px;
-    border-top-right-radius: 999px;
+    background-image: url('project://database/Assets/Game/UI/Textures/Map/Map_Snoody.png?fileID=21300000&guid=999ea8ad23a6b7c41b46764adb81866e&type=3#Map_Snoody');
 }
 
 .mini-map__marker {
@@ -75,16 +70,16 @@
 
     margin-left: -16px;
     margin-top: -16px;
-} 
+}
 
 .mini-map__coordinates {
     -unity-font-definition: var(--font-text);
     
     position: absolute;
-    top: -30px; 
+    top: -30px;
     left: 0;
     right: 0;
     -unity-text-align: middle-center;
     
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
 }
