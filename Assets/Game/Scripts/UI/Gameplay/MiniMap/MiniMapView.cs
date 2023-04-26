@@ -21,6 +21,8 @@ namespace Game.UI
         private MiniMapMarkers _miniMapMarkers;
         private Label _miniMapCoordinates;
 
+        private float _lastCameraAngle;
+
 
         [Inject]
         public MiniMapView(MiniMapViewModel viewModel)
@@ -48,20 +50,20 @@ namespace Game.UI
         {
             _root = root.Q<VisualElement>(LayoutNames.MiniMap.ROOT);
             _mapWrapper = _root.Q<VisualElement>(LayoutNames.MiniMap.MAP_WRAPPER);
-            
+
             _playerMarker = _root.Q<VisualElement>(LayoutNames.MiniMap.PLAYER);
-            
+
             var map = _root.Q<VisualElement>(LayoutNames.MiniMap.MAP);
-            
+
             _miniMap = new MiniMap(map);
             _miniMapMarkers = new MiniMapMarkers(_miniMap);
             _miniMapCoordinates = _root.Q<Label>(LayoutNames.MiniMap.MAP_COORDINATES);
         }
 
-        private void OnMarkerAdd(ILocationMarker target) 
+        private void OnMarkerAdd(ILocationMarker target)
             => _miniMapMarkers.Create(target);
 
-        private void OnMarkerRemove(ILocationMarker target) 
+        private void OnMarkerRemove(ILocationMarker target)
             => _miniMapMarkers.Remove(target);
 
         private void OnLocationInitialized()
@@ -85,12 +87,24 @@ namespace Game.UI
             if (!_isActive)
                 return;
 
-            Vector2 heroMapPosition = UpdateHeroMarker();
-            _miniMap.SetCenterPosition(heroMapPosition);
-            _miniMapMarkers.Tick();
-            UpdateMapCoordinates(heroMapPosition);
+            float cameraAngle = _viewModel.LocationCamera.eulerAngles.y;
 
-            UpdateMapRotation();
+            Vector2 heroMapPosition = UpdateHeroMarker();    
+            _miniMap.SetCenterPosition(heroMapPosition);
+            
+            UpdateMapCoordinates(heroMapPosition);
+            UpdateMapRotation(cameraAngle);
+            UpdateMarkers(cameraAngle);
+
+            _lastCameraAngle = cameraAngle;
+        }
+
+        private void UpdateMarkers(float cameraAngle)
+        {
+            _miniMapMarkers.UpdatePosition();
+            
+            if (!_lastCameraAngle.AlmostEquals(cameraAngle))
+                _miniMapMarkers.UpdateRotation(-cameraAngle);
         }
 
         private void UpdateMapCoordinates(Vector2 position) 
@@ -105,19 +119,16 @@ namespace Game.UI
             return heroMapPosition;
         }
 
-        private void UpdateMapRotation()
-        {
-            float angle = _viewModel.LocationCamera.eulerAngles.y;
-            _mapWrapper.style.rotate = new Rotate(angle);
-        }
+        private void UpdateMapRotation(float angle)
+            => _mapWrapper.style.rotate = new Rotate(angle);
 
         private void Reset()
         {
             _hero = null;
-            
+
             _miniMap.Clear();
             _miniMapMarkers.Clear();
-            
+
             _mapWrapper.style.rotate = default;
         }
 
