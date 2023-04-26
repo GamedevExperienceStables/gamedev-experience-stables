@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1646171557498439824}
   - component: {fileID: 1355103369664445220}
   - component: {fileID: 1116112153}
-  - component: {fileID: -9147976717129128296}
+  - component: {fileID: 2243510481174325238}
   - component: {fileID: 1646171557498439827}
   - component: {fileID: 1646171557498439839}
   - component: {fileID: 1646171557498439836}
@@ -120,22 +120,29 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!208 &-9147976717129128296
-NavMeshObstacle:
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!195 &2243510481174325238
+NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646171557498439826}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.3, y: 0.7, z: 0.3}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.7, z: 0}
-  m_TimeToStationary: 0.5
+  m_AgentTypeID: 0
+  m_Radius: 0.3
+  m_Speed: 3
+  m_Acceleration: 5
+  avoidancePriority: 50
+  m_AngularSpeed: 250
+  m_StoppingDistance: 0.5
+  m_AutoTraverseOffMeshLink: 0
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0
+  m_WalkableMask: 1
+  m_ObstacleAvoidanceType: 2
 --- !u!114 &1646171557498439827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,10 +161,10 @@ MonoBehaviour:
   CapsuleYOffset: 0.3
   CapsulePhysicsMaterial: {fileID: 0}
   GroundDetectionExtraDistance: 0.5
-  MaxStableSlopeAngle: 60
+  MaxStableSlopeAngle: 30
   StableGroundLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 769
   DiscreteCollisionEvents: 0
   StepHandling: 1
   MaxStepHeight: 0.5
@@ -198,7 +205,7 @@ MonoBehaviour:
     acceleration: 5
     drag: 0.1
   rotation:
-    sharpness: 10
+    sharpness: 15
     rotateOnlyXZ: 1
   gravity:
     direction: {x: 0, y: -30, z: 0}
@@ -238,8 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b08e6a9dde4c5b995da8bf14caae26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updatePathInterval: 0.2
-  stopDistance: 1
+  updatePathInterval: 0.3
+  stopDistance: 0.5
 --- !u!114 &1815510984333573865
 MonoBehaviour:
   m_ObjectHideFlags: 0
