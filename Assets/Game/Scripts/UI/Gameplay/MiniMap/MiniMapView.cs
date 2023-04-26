@@ -68,10 +68,11 @@ namespace Game.UI
 
         private void OnLocationInitialized()
         {
+            Reset();
+            
             ILocationDefinition definition = _viewModel.LocationDefinition;
             if (!MapExists(definition))
             {
-                Reset();
                 Hide();
                 return;
             }
@@ -129,6 +130,7 @@ namespace Game.UI
             _miniMap.Clear();
             _miniMapMarkers.Clear();
 
+            _lastCameraAngle = 0;
             _mapWrapper.style.rotate = default;
         }
 
