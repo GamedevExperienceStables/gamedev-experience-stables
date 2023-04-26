@@ -135,6 +135,7 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.InventorySettings);
             builder.RegisterInstance(gameSettings.AudioSettings);
             builder.RegisterInstance(gameSettings.CursorSettings);
+            builder.RegisterInstance(gameSettings.InputBindings);
             
             builder.RegisterInstance(gameSettings.UiSettings.StartMenu);
             builder.RegisterInstance(gameSettings.UiSettings.SettingsMenu);
@@ -142,6 +143,9 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.UiSettings.PauseMenu);
             builder.RegisterInstance(gameSettings.UiSettings.GameOver);
             builder.RegisterInstance(gameSettings.UiSettings.Interaction);
+            builder.RegisterInstance(gameSettings.UiSettings.Hud);
+            builder.RegisterInstance(gameSettings.UiSettings.Loading);
+            builder.RegisterInstance(gameSettings.UiSettings.Saving);
         }
 
         private static void RegisterUi(IContainerBuilder builder)

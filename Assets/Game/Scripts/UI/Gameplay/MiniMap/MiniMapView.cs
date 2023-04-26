@@ -68,10 +68,11 @@ namespace Game.UI
 
         private void OnLocationInitialized()
         {
+            Reset();
+            
             ILocationDefinition definition = _viewModel.LocationDefinition;
             if (!MapExists(definition))
             {
-                Reset();
                 Hide();
                 return;
             }
@@ -129,19 +130,20 @@ namespace Game.UI
             _miniMap.Clear();
             _miniMapMarkers.Clear();
 
+            _lastCameraAngle = 0;
             _mapWrapper.style.rotate = default;
         }
 
         private void Hide()
         {
             _isActive = false;
-            _root.SetVisibility(false);
+            _root.AddToClassList(LayoutNames.MiniMap.MAP_HIDDEN_CLASS_NAME);
         }
 
         private void Show()
         {
             _isActive = true;
-            _root.SetVisibility(true);
+            _root.RemoveFromClassList(LayoutNames.MiniMap.MAP_HIDDEN_CLASS_NAME);
         }
 
         private static bool MapExists(ILocationDefinition definition)

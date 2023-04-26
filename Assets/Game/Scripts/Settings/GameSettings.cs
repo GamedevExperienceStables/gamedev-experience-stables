@@ -1,4 +1,5 @@
 ﻿using Game.CursorManagement;
+using Game.Input;
 using Game.Inventory;
 using Game.Level;
 using Game.Persistence;
@@ -41,6 +42,10 @@ namespace Game.Settings
 
         [SerializeField]
         private CursorService.Settings cursorSettings;
+        
+        [SerializeField]
+        private InputBindingsSettings inputBindings;
+
 
         public CameraSettings CameraSettings => cameraSettings;
         public FaderSettings FaderSettings => faderSettings;
@@ -52,5 +57,6 @@ namespace Game.Settings
         public AudioSettings AudioSettings => audioSettings;
         public CursorService.Settings CursorSettings => cursorSettings;
         public UiSettings UiSettings => uiSettings;
+        public InputBindingsSettings InputBindings => inputBindings;
     }
 }

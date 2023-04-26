@@ -48,27 +48,28 @@ namespace Game.UI
                 .Query<VisualElement>(className: LayoutNames.Hud.RUNE_SLOT_CLASS_NAME)
                 .ToList();
 
-            string inputActive = _input.GetBindingDisplayString(InputGameplayActions.Fire);
+            InputKeyBinding inputActive = _input.GetBindingDisplay(InputGameplayActions.Fire);
             for (int i = 0; i < slots.Count; i++)
             {
                 int slotId = i + 1;
                 VisualElement slotElement = slots[i];
 
-                string inputSelect = GetInput(slotId);
+                InputKeyBinding inputSelect = GetInput(slotId);
 
                 var slotView = new RuneSlotHudView(slotElement, slotId, inputSelect, inputActive);
+
                 _hudSlots.Add(slotId, slotView);
             }
         }
 
-        private string GetInput(int slotId) =>
+        private InputKeyBinding GetInput(int slotId) =>
             slotId switch
             {
-                1 => _input.GetBindingDisplayString(InputGameplayActions.Slot1),
-                2 => _input.GetBindingDisplayString(InputGameplayActions.Slot2),
-                3 => _input.GetBindingDisplayString(InputGameplayActions.Slot3),
-                4 => _input.GetBindingDisplayString(InputGameplayActions.Slot4),
-                _ => string.Empty
+                1 => _input.GetBindingDisplay(InputGameplayActions.Slot1),
+                2 => _input.GetBindingDisplay(InputGameplayActions.Slot2),
+                3 => _input.GetBindingDisplay(InputGameplayActions.Slot3),
+                4 => _input.GetBindingDisplay(InputGameplayActions.Slot4),
+                _ => default
             };
 
         private void InitSlots(IReadOnlyDictionary<RuneSlotId, RuneSlot> slots)

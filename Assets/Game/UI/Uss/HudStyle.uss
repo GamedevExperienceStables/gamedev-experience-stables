@@ -72,10 +72,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-
-    background-image: url('project://database/Assets/Game/UI/Textures/Rune_Atlas.psd?fileID=-487602914&amp;guid=6fd4af8f3cf0c7e4b9aaadfe0af4ee75&amp;type=3#Rune_Atlas_35');
+    background-image: url('project://database/Assets/Game/UI/Textures/Rune_Atlas.psd?fileID=-487602914&guid=6fd4af8f3cf0c7e4b9aaadfe0af4ee75&type=3#Rune_Atlas_35');
     -unity-background-scale-mode: scale-to-fit;
-    
     visibility: hidden;
 }
 
@@ -86,7 +84,6 @@
 
 .hud-rune-slot #icon {
     --unity-image-tint-color: rgb(152, 164, 176);
-
     transition: scale 100ms ease-in-out;
 }
 
@@ -109,6 +106,18 @@
 .hud-rune-slot__input {
     align-items: center;
     transition: translate 100ms ease-in-out;
+}
+
+.hud-rune-slot #input-active {
+    display: none;
+}
+
+.hud-rune-slot--active #input-select {
+    display: none;
+}
+
+.hud-rune-slot--active #input-active {
+    display: flex;
 }
 
 .hud-rune-slot--active .hud-rune-slot__input {
@@ -154,7 +163,7 @@
 
 .widget-saving {
     opacity: 0;
-    transition: opacity 2000ms ease-out 500ms;
+    transition: opacity 2000ms ease-out 2000ms;
 }
 
 .widget-saving--enabled {
@@ -162,9 +171,11 @@
     transition: opacity 100ms ease-out;
 }
 
-.widget-interaction {
-    text-shadow: 1px 2px 1px rgb(0, 0, 0);
-    opacity: 1;
+.widget-interaction {    
+    opacity: 1;    
+    flex-direction: row;
+    align-items: center;
+
     transition: opacity 150ms ease-out-sine;
 }
 
@@ -172,7 +183,17 @@
     opacity: 0;
 }
 
+.widget-interaction #input-key {
+    margin-right: 5px;
+    display: none;
+}
+
+.widget-interaction--enabled  #input-key {
+    display: flex;
+}
+
 .widget-interaction__text {
+    text-shadow: 1px 2px 1px rgb(0, 0, 0);
     -unity-font-definition: var(--font-text);
     color: rgb(255, 255, 255);
     -unity-text-align: upper-center;

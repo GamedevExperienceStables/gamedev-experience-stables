@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement>
+        <ui:VisualElement style="flex-direction: row; align-items: center;">
+            <Game.UI.InputKey text="tab" name="input-key" style="margin-right: 10px;" />
+            <ui:Label tabindex="-1" text="Magic Book" display-tooltip-when-elided="true" name="label" style="-unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&amp;guid=9f296ab3b5e417845bc8de63c7b23c43&amp;type=2#koliko-Regular SDF&apos;); color: rgb(255, 255, 255); text-shadow: 1px 1px 0 rgb(0, 0, 0); font-size: 20px; margin-left: 0; margin-right: 0; margin-top: 4px; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
