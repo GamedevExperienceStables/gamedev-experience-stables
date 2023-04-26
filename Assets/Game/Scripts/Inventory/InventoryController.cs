@@ -50,11 +50,11 @@ namespace Game.Inventory
 
         public void TransferToContainer(MaterialDefinition levelMaterial)
             => _materials.TransferToContainer(levelMaterial);
-        
-        public bool IsContainerFull(MaterialDefinition levelMaterial) 
+
+        public bool IsContainerFull(MaterialDefinition levelMaterial)
             => _materials.Container.IsFull(levelMaterial);
 
-        public bool IsBagEmpty(MaterialDefinition levelMaterial) 
+        public bool IsBagEmpty(MaterialDefinition levelMaterial)
             => _materials.Bag.IsEmpty(levelMaterial);
 
         public bool CanAddToBag(ItemDefinition definition, IActorController owner)
@@ -74,10 +74,10 @@ namespace Game.Inventory
             AddToBag(item, owner);
             return true;
         }
-        
-        public void ClearBag() 
+
+        public void ClearBag()
             => _materials.ClearBag();
-        
+
         public void AddToBag(ItemDefinition item, IActorController owner)
         {
             if (item is IItemExecutableDefinition executableItem)
@@ -128,20 +128,37 @@ namespace Game.Inventory
             ActiveSlotChanged?.Invoke(changedEvent);
         }
 
-        public void SetSlot(RuneSlotId slotId, RuneDefinition targetRune)
+        public void SwapSlots(RuneSlotId slotId1, RuneSlotId slotId2)
         {
-            if (_slots.Find(targetRune, out RuneSlotId foundSlotId))
-            {
-                _slots.Clear(foundSlotId);
-                SlotChanged?.Invoke(new RuneSlotChangedEvent
-                {
-                    id = foundSlotId
-                });
-            }
+            RuneDefinition rune1 = _slots.Get(slotId1);
+            RuneDefinition rune2 = _slots.Get(slotId2);
 
-            if (!_slots.IsEmpty(slotId))
+            if (rune1)
+                SetSlot(slotId2, rune1);
+            else
+                ClearSlot(slotId2);
+
+            if (rune2)
+                SetSlot(slotId1, rune2);
+            else
+                ClearSlot(slotId1);
+        }
+
+        public void SetRuneToSlot(RuneSlotId slotId, RuneDefinition targetRune)
+        {
+            bool containsInAnotherSlot = _slots.Find(targetRune, out RuneSlotId foundSlotId);
+            if (containsInAnotherSlot)
+                ClearSlot(foundSlotId);
+
+            bool targetSlotIsEmpty = _slots.IsEmpty(slotId);
+            if (!targetSlotIsEmpty)
                 _slots.Clear(slotId);
 
+            SetSlot(slotId, targetRune);
+        }
+
+        private void SetSlot(RuneSlotId slotId, RuneDefinition targetRune)
+        {
             _slots.Set(slotId, targetRune);
             SlotChanged?.Invoke(new RuneSlotChangedEvent
             {
@@ -165,18 +182,22 @@ namespace Game.Inventory
                 return;
 
             if (_slots.IsActive(slotId))
-            {
-                _slots.ClearActive();
-                ActiveSlotChanged?.Invoke(new RuneActiveSlotChangedEvent
-                {
-                    oldId = slotId
-                });
-            }
+                ClearActive(slotId);
 
             _slots.Clear(slotId);
             SlotChanged?.Invoke(new RuneSlotChangedEvent
             {
-                id = slotId
+                id = slotId,
+                definition = null
+            });
+        }
+
+        private void ClearActive(RuneSlotId slotId)
+        {
+            _slots.ClearActive();
+            ActiveSlotChanged?.Invoke(new RuneActiveSlotChangedEvent
+            {
+                oldId = slotId
             });
         }
 

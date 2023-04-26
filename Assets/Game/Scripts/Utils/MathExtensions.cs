@@ -6,19 +6,21 @@ namespace Game.Utils
     {
         public const float EPSILON = 0.0001f;
 
-        public static bool AlmostZero(this float v)
+        public static bool AlmostZero(this float v, float threshold = EPSILON)
         {
-            return Mathf.Abs(v) < EPSILON;
+            return Mathf.Abs(v) < threshold;
         }
 
-        public static bool AlmostEquals(this float a, float b)
+        public static bool AlmostEquals(this float a, float b, float threshold = EPSILON)
         {
-            return AlmostZero(a - b);
+            return AlmostZero(a - b, threshold);
         }
-        
-        public static bool AlmostEquals(this Vector3 a, Vector3 b)
+
+        public static bool AlmostEquals(this Vector3 a, Vector3 b, float threshold = EPSILON)
         {
-            return AlmostEquals(a.x, b.x) && AlmostEquals(a.y, b.y) && AlmostEquals(a.z, b.z);
+            return AlmostEquals(a.x, b.x, threshold) &&
+                   AlmostEquals(a.y, b.y, threshold) &&
+                   AlmostEquals(a.z, b.z, threshold);
         }
 
         public static float Remap(float input, float inputMin, float inputMax, float min, float max)

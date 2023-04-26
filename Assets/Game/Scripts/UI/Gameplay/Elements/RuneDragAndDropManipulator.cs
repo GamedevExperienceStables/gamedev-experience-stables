@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Inventory;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,41 +14,59 @@ namespace Game.UI.Elements
 
         private bool _enabled;
 
-        private readonly VisualElement _root;
         private readonly IReadOnlyList<RuneSlotHudView> _hudSlots;
 
-        private readonly Action _stopDragCallback;
-        private readonly Action<RuneSlotHudView> _onDragComplete;
+        public event Action DragStopped;
+        public event Action<RuneSlotDragCompleteEvent> DragCompleted;
 
-        public RuneDragAndDropManipulator(VisualElement target, IEnumerable<RuneSlotHudView> hudSlots,
-            Action onStopDrag, Action<RuneSlotHudView> onDragComplete)
+        private int _pointerId;
+        
+        private RuneSlotHudView _source;
+        private RuneDefinition _rune;
+        
+        private Action _dragStopCallback;
+
+        public RuneDragAndDropManipulator(VisualElement target, IEnumerable<RuneSlotHudView> hudSlots)
         {
             _hudSlots = hudSlots.ToList();
-            _stopDragCallback = onStopDrag;
-            _onDragComplete = onDragComplete;
 
             this.target = target;
-            _root = target.parent;
         }
 
         public void StartDrag(RuneSlotDragEvent evt)
         {
             _targetStartPosition = evt.elementPosition;
             _pointerStartPosition = evt.pointerPosition;
+            _pointerId = evt.pointerId;
+            _source = evt.source;
+            _rune = evt.definition;
+            _dragStopCallback = evt.onStopped;
 
             target.transform.position = _targetStartPosition;
 
-            target.CapturePointer(evt.pointerId);
+            target.CapturePointer(_pointerId);
 
             _enabled = true;
         }
 
-        private void StopDrag()
+        public void StopDrag()
         {
+            if (!_enabled)
+                return;
+
+            ReleasePointer(_pointerId);
+
             target.transform.position = _targetStartPosition;
 
-            _stopDragCallback.Invoke();
+            DragStopped?.Invoke();
+            
+            _dragStopCallback?.Invoke();
+            _dragStopCallback = null;
 
+            _source = null;
+            _rune = null;
+            _pointerId = default;
+            
             _enabled = false;
         }
 
@@ -82,10 +101,7 @@ namespace Game.UI.Elements
         }
 
         private void PointerUpHandler(PointerUpEvent evt)
-        {
-            if (_enabled && target.HasPointerCapture(evt.pointerId))
-                target.ReleasePointer(evt.pointerId);
-        }
+            => ReleasePointer(evt.pointerId);
 
         private void PointerCaptureOutHandler(PointerCaptureOutEvent evt)
         {
@@ -95,34 +111,41 @@ namespace Game.UI.Elements
             var overlappingSlots = _hudSlots.Where(OverlapsTarget);
 
             RuneSlotHudView closestOverlappingSlot = FindClosestSlot(overlappingSlots);
-            if (closestOverlappingSlot != null)
+            if (closestOverlappingSlot is not null)
             {
-                Vector3 closestPos = RootSpaceOfSlot(closestOverlappingSlot.Element);
-                closestPos = new Vector2(closestPos.x - 5, closestPos.y - 5);
+                Vector3 closestPos = closestOverlappingSlot.Element.worldBound.position;
                 target.transform.position = closestPos;
+            }
 
-                _onDragComplete.Invoke(closestOverlappingSlot);
-            }
-            else
+            var result = new RuneSlotDragCompleteEvent
             {
-                target.transform.position = _targetStartPosition;
-            }
+                source = _source,
+                target = closestOverlappingSlot,
+                rune = _rune
+            };
             
+            DragCompleted?.Invoke(result);
+
             StopDrag();
         }
 
-        private bool OverlapsTarget(RuneSlotHudView slot) 
+        private void ReleasePointer(int pointerId)
+        {
+            if (_enabled && target.HasPointerCapture(pointerId))
+                target.ReleasePointer(pointerId);
+        }
+
+        private bool OverlapsTarget(RuneSlotHudView slot)
             => target.worldBound.Overlaps(slot.Element.worldBound);
 
-        private RuneSlotHudView FindClosestSlot(IEnumerable<RuneSlotHudView> slotsList)
+        private static RuneSlotHudView FindClosestSlot(IEnumerable<RuneSlotHudView> slotsList)
         {
             float bestDistanceSq = float.MaxValue;
 
             RuneSlotHudView closest = null;
             foreach (RuneSlotHudView slotView in slotsList)
             {
-                VisualElement slot = slotView.Element;
-                Vector3 displacement = RootSpaceOfSlot(slot) - target.transform.position;
+                Vector3 displacement = slotView.Element.worldBound.position;
                 float distanceSq = displacement.sqrMagnitude;
                 if (distanceSq < bestDistanceSq)
                 {
@@ -132,12 +155,6 @@ namespace Game.UI.Elements
             }
 
             return closest;
-        }
-
-        private Vector3 RootSpaceOfSlot(VisualElement slot)
-        {
-            Vector2 slotWorldSpace = slot.parent.LocalToWorld(slot.layout.position);
-            return _root.WorldToLocal(slotWorldSpace);
         }
     }
 }

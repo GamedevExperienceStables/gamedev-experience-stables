@@ -1,5 +1,5 @@
 :root {
-    --slot-size: 75px;
+    --slot-size: 75px;    
     --passive-slot-size: 88px;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .rune-dragger--drag {
-    scale: 1.25;
+    scale: 1.4;
     visibility: visible;
 }
 
