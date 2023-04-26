@@ -124,13 +124,13 @@ namespace Game.UI
         private void Hide()
         {
             _isActive = false;
-            _root.SetVisibility(false);
+            _root.AddToClassList(LayoutNames.MiniMap.MAP_HIDDEN_CLASS_NAME);
         }
 
         private void Show()
         {
             _isActive = true;
-            _root.SetVisibility(true);
+            _root.RemoveFromClassList(LayoutNames.MiniMap.MAP_HIDDEN_CLASS_NAME);
         }
 
         private static bool MapExists(ILocationDefinition definition)

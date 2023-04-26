@@ -24,6 +24,9 @@ namespace Game.Settings
         
         [SerializeField]
         private LocalizationInteractionSettings interaction;
+        
+        [SerializeField]
+        private HudSettings hud;
 
         [SerializeField]
         private Cutscene.Settings cutscene;
@@ -36,5 +39,7 @@ namespace Game.Settings
 
         public LocalizationInteractionSettings Interaction => interaction;
         public Cutscene.Settings Cutscene => cutscene;
+
+        public HudSettings Hud => hud;
     }
 }

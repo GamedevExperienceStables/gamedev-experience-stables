@@ -104,6 +104,9 @@
             public const string DIALOG_TEXT = "text";
 
             public const string DIALOG_HIDDEN_CLASS_NAME = "dialog-window--hidden";
+            
+            public const string WIDGET_PROMPT_INVENTORY = "widget-prompt-inventory";
+            public const string WIDGET_PROMPT_LABEL = "label";
         }
         
         public static class MiniMap
@@ -118,6 +121,7 @@
             public const string MAP_COORDINATES = "map-coordinates";
             
             public const string MARKER_CLASS_NAME = "mini-map__marker";
+            public const string MAP_HIDDEN_CLASS_NAME = "mini-map--hidden";
         }
 
         public static class LoadingScreen

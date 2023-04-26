@@ -16,10 +16,16 @@ namespace Game.UI
         private readonly Label _label;
         private readonly Image _icon;
 
+        public string Text
+        {
+            get => _label.text;
+            set => _label.text = value;
+        }
+
         public InputKey()
         {
             AddToClassList(CONTAINER_CLASS_NAME);
-            usageHints = UsageHints.GroupTransform;
+            usageHints = UsageHints.DynamicColor;
             
             var textContainer = new VisualElement();
             textContainer.AddToClassList(TEXT_CLASS_NAME);
@@ -65,6 +71,21 @@ namespace Game.UI
 
         public new class UxmlFactory : UxmlFactory<InputKey, UxmlTraits>
         {
+        }
+        
+        public new class UxmlTraits : VisualElement.UxmlTraits
+        {
+            private readonly UxmlStringAttributeDescription _text = new() { name = "text", defaultValue = "#" };
+
+            public override void Init(VisualElement element, IUxmlAttributes attr, CreationContext cc)
+            {
+                base.Init(element, attr, cc);
+
+                if (element is not InputKey inputKey)
+                    return;
+
+                inputKey.Text = _text.GetValueFromBag(attr, cc);
+            }
         }
     }
 }
