@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/UI/Uss/HudStyle.uss?fileID=7433441132597879392&amp;guid=43fb365d5654783488ae02a43eaf455d&amp;type=3#HudStyle" />
+    <ui:VisualElement name="dialog-window" class="dialog-window">
+        <ui:Label tabindex="-1" text="Narrator" display-tooltip-when-elided="true" name="title" class="dialog-window__title" />
+        <ui:Label tabindex="-1" text="Snoody lost this battle, but this is not the end of his story.&lt;b&gt;You can start the New Game or continue from last save." display-tooltip-when-elided="true" name="text" class="dialog-window__text" />
+    </ui:VisualElement>
+</ui:UXML>

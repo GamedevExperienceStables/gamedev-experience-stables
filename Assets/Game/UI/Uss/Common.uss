@@ -1,0 +1,80 @@
+:root {
+    --font-heading: url('project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&guid=1823e5ab5312e0e40972472a78991947&type=2#borsok SDF');
+    --font-text: url('project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&guid=9f296ab3b5e417845bc8de63c7b23c43&type=2#koliko-Regular SDF');
+}
+
+.primary-button {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1801998966&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_41');
+    
+    -unity-font-definition: var(--font-heading);
+    font-size: 30px;
+    
+    min-width: 250px;    
+    padding: 28px 50px 22px;
+    border-width: 0;
+    
+    color: rgb(255, 255, 255);
+    
+    transition: color 100ms ease-in-out;
+}
+
+.primary-button:hover {
+    color: rgb(201, 201, 201);
+}
+
+.primary-button:active {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1523537116&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_43');
+}
+
+
+.input-key {
+    align-items: center;
+    height: 26px;
+}
+
+.input-key__text {
+    flex-grow: 1;
+    
+    min-width: 22px;
+    height: 26px;
+    
+    padding: 9px 6px 2px 6px;
+    
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: rgb(37, 41, 47);
+
+    color: rgb(37, 41, 47);
+    background-color: rgb(206, 210, 217);
+}
+
+.input-key__label {    
+    -unity-text-align: middle-center;
+    
+    -unity-font-definition: var(--font-heading);    
+    font-size: 17px;
+    
+    margin: 0;
+    padding: 0;
+}
+
+.input-key__icon {
+    width: 26px;
+    height: 26px;
+}
+
+.input-key--text .input-key__text {
+    display: flex;
+}
+
+.input-key--text .input-key__icon {
+    display: none;
+}
+
+.input-key--icon .input-key__icon {
+    display: flex;
+}
+
+.input-key--icon .input-key__text {
+    display: none;
+}

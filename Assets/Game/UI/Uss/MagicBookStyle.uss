@@ -1,0 +1,121 @@
+:root {
+    --slot-size: 75px;    
+    --passive-slot-size: 88px;
+}
+
+.magic-book {
+    translate: 0;
+    opacity: 1;
+    transform-origin: center bottom;
+    transition-property: translate, scale, opacity;
+    transition-timing-function: ease-out, ease-out-sine, ease-out;
+    transition-duration: 300ms, 100ms, 150ms;
+}
+
+.magic-book--hidden {
+    translate: 0 -100px;
+    scale: 0 0.75;
+    opacity: 0;
+    transition-property: translate, scale, opacity;
+    transition-timing-function: ease-in-sine, ease-in-sine, ease-out;
+    transition-duration: 200ms, 150ms, 175ms;
+}
+
+.magic-book-slot {
+    position: absolute;
+    transition-property: translate, scale;
+    transition-timing-function: ease-in-out, ease-out;
+    transition-duration: 300ms, 200ms;
+}
+
+.magic-book-slot {
+    width: var(--slot-size);
+    height: var(--slot-size);
+}
+
+.magic-book-slot__icon {
+    width: var(--slot-size);
+    height: var(--slot-size);
+}
+
+.magic-book-slot:hover {
+    translate: 5px -10px;
+    scale: 1.2;
+}
+
+.magic-book-passive {
+    rotate: -6deg;
+    transition-duration: 300ms, 300ms;
+    transition-property: rotate, translate;
+    transition-timing-function: ease-out, ease-out;
+    transform-origin: left bottom;
+}
+
+.magic-book-passive:hover {
+    rotate: -10deg;
+    translate: -12px 16px;
+    transform-origin: left bottom;
+}
+
+.magic-book-slot-passive {
+    width: var(--passive-slot-size);
+    height: var(--passive-slot-size);
+}
+
+.magic-book-close {
+    transition-property: translate;
+    transition-duration: 300ms;
+    transition-timing-function: ease-out-sine;
+}
+
+.magic-book-close:hover {
+    translate: 14px 2px;
+}
+
+.rune-dragger {
+    width: var(--slot-size);
+    height: var(--slot-size);
+    visibility: hidden;
+    position: absolute;
+    background-image: none;
+    transition: scale 100ms ease-out;
+}
+
+.rune-dragger--drag {
+    scale: 1.4;
+    visibility: visible;
+}
+
+.magic-book-details {
+    opacity: 1;
+    transition: opacity 300ms ease-in-out;
+}
+
+.magic-book-details--hidden {
+    opacity: 0;
+}
+
+.magic-book-details__title {
+    font-size: 45px;
+    flex-shrink: 1;
+    white-space: normal;
+    letter-spacing: -4px;
+    margin: 0;
+    padding: 0;
+    -unity-font-definition: var(--font-heading);
+}
+
+.magic-book-details__description {
+    flex-grow: 1;
+    padding: 35px 20px 20px 20px;
+    font-size: 24px;
+    white-space: normal;
+    -unity-font-definition: var(--font-text);
+}
+
+.magic-book-details__level {
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+    -unity-font-definition: var(--font-text);
+}

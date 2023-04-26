@@ -1,0 +1,25 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="SettingsScreen" src="project://database/Assets/Game/UI/Uxml/StartScreen/SettingsScreen.uxml?fileID=9197481963319205126&amp;guid=30c7c4c0462a403dad393a8dcd62bacc&amp;type=3#SettingsScreen" />
+    <ui:Template name="ArtScreen" src="project://database/Assets/Game/UI/Uxml/StartScreen/ArtScreen.uxml?fileID=9197481963319205126&amp;guid=06e1f63d8faecac49a5bf26912706564&amp;type=3#ArtScreen" />
+    <ui:Template name="AboutScreen" src="project://database/Assets/Game/UI/Uxml/StartScreen/AboutScreen.uxml?fileID=9197481963319205126&amp;guid=95c2435e4a4eae5499b96889cd80e23e&amp;type=3#AboutScreen" />
+    <ui:Template name="MenuBookScreen" src="project://database/Assets/Game/UI/Uxml/StartScreen/MenuBookScreen.uxml?fileID=9197481963319205126&amp;guid=a1ade8d7adc734b45b00e9f49cfaf4a7&amp;type=3#MenuBookScreen" />
+    <Style src="project://database/Assets/Game/UI/Uss/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=8cedbaaf434e4b94f8c50cc514ad6cf7&amp;type=3#MainMenuStyle" />
+    <ui:VisualElement style="flex-grow: 1; flex-shrink: 0;">
+        <ui:VisualElement name="background" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=1238703295&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_0&apos;); -unity-background-scale-mode: scale-and-crop; flex-grow: 1; flex-shrink: 0;">
+            <ui:VisualElement name="rune1" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=1607789654&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_2&apos;); height: 298px; width: 256px; -unity-background-scale-mode: scale-and-crop; top: -107px; left: -90px;" />
+            <ui:VisualElement name="rune2" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=729183272&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_5&apos;); height: 223px; width: 213px; -unity-background-scale-mode: scale-and-crop; top: 218px; left: -96px;" />
+            <ui:VisualElement name="crystal1" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=-848115910&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_3&apos;); height: 522px; width: 367px; -unity-background-scale-mode: scale-and-crop; left: -118px; bottom: -206px;" />
+            <ui:VisualElement name="crystal2" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=-1575858355&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_1&apos;); height: 425px; width: 338px; -unity-background-scale-mode: scale-and-crop; top: -128px; right: -95px;" />
+            <ui:VisualElement name="rune3" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=-208653865&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_6&apos;); height: 209px; width: 213px; -unity-background-scale-mode: scale-and-crop; right: -66px; bottom: -57px;" />
+            <ui:VisualElement name="rune4" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Background_Atlas.psd?fileID=-1181512284&amp;guid=2e9d16b1fb0ae41408f9b7c9da176272&amp;type=3#Menu_Background_Atlas_4&apos;); height: 226px; width: 244px; -unity-background-scale-mode: scale-and-crop; top: 302px; right: -113px;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center; position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
+            <ui:VisualElement name="pages" style="background-color: rgba(0, 0, 0, 0); flex-grow: 1; width: 100%; height: 100%;">
+                <ui:Instance template="MenuBookScreen" name="page-menu" class="page page--main" />
+                <ui:Instance template="SettingsScreen" name="page-settings" class="page page--side page--hidden" />
+                <ui:Instance template="ArtScreen" name="page-art" class="page page--side page--hidden" />
+                <ui:Instance template="AboutScreen" name="page-about" class="page page--side page--hidden" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/UI/Uss/HudStyle.uss?fileID=7433441132597879392&amp;guid=43fb365d5654783488ae02a43eaf455d&amp;type=3#HudStyle" />
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="container" style="flex-grow: 1; flex-shrink: 0;">
+            <ui:VisualElement name="background" />
+            <ui:Image name="icon" style="flex-grow: 1; flex-shrink: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement class="hud-rune-slot__input" style="margin-top: 8px;">
+            <Game.UI.InputKey name="input-select" />
+            <Game.UI.InputKey name="input-active" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
