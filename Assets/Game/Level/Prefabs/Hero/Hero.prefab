@@ -628,6 +628,7 @@ GameObject:
   - component: {fileID: 5671525594438570833}
   - component: {fileID: 7690238673121470068}
   - component: {fileID: 1790609468623538414}
+  - component: {fileID: -1541074684181528226}
   m_Layer: 3
   m_Name: Hero
   m_TagString: Untagged
@@ -940,6 +941,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83cdeed0980141b0979837c69ce23f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &-1541074684181528226
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247602722215226894}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 0.8, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.8, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3247602723414458277
 GameObject:
   m_ObjectHideFlags: 0
