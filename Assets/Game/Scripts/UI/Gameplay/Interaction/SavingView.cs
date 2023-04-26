@@ -1,20 +1,23 @@
-﻿using UnityEngine.UIElements;
+﻿using System;
+using UnityEngine.Localization;
+using UnityEngine.UIElements;
 using VContainer;
 
 namespace Game.UI
 {
     public class SavingView
     {
-        private readonly string _textSaving = "Saving...";
-        private readonly string _textSaved = "Game Saved!";
-
         private readonly SavingViewModel _viewModel;
+        private readonly Settings _settings;
         private VisualElement _container;
         private Label _text;
 
         [Inject]
-        public SavingView(SavingViewModel viewModel)
-            => _viewModel = viewModel;
+        public SavingView(SavingViewModel viewModel, Settings settings)
+        {
+            _viewModel = viewModel;
+            _settings = settings;
+        }
 
         public void Create(VisualElement root)
         {
@@ -38,14 +41,14 @@ namespace Game.UI
 
         private void OnSaving()
         {
-            _text.text = _textSaving;
+            _text.text = _settings.savingText.GetLocalizedString();
             
             Show();
         }
 
         private void OnSaved()
         {
-            _text.text = _textSaved;
+            _text.text = _settings.savedText.GetLocalizedString();
             
             Hide();
         }
@@ -55,5 +58,13 @@ namespace Game.UI
 
         public void Hide()
             => _container.RemoveFromClassList(LayoutNames.Hud.WIDGET_SAVING_ENABLED_CLASS_NAME);
+        
+        
+        [Serializable]
+        public class Settings
+        {
+            public LocalizedString savingText;
+            public LocalizedString savedText;
+        }
     }
 }

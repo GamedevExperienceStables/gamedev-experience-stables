@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:VisualElement name="container" class="widget-saving" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-        <ui:Label name="text" tabindex="-1" text="Saving..." display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-font-style: bold-and-italic;" />
+        <ui:Label name="text" tabindex="-1" text="Saving..." display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&amp;guid=9f296ab3b5e417845bc8de63c7b23c43&amp;type=2#koliko-Regular SDF&apos;); -unity-font-style: bold; font-size: 24px; text-shadow: 1px 1px 0 rgb(0, 0, 0);" />
     </ui:VisualElement>
 </ui:UXML>

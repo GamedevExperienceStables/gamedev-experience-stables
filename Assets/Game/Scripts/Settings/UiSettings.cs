@@ -24,6 +24,12 @@ namespace Game.Settings
         
         [SerializeField]
         private LocalizationInteractionSettings interaction;
+
+        [SerializeField]
+        private LoadingScreenView.Settings loading;
+        
+        [SerializeField]
+        private SavingView.Settings saving;
         
         [SerializeField]
         private HudSettings hud;
@@ -41,5 +47,8 @@ namespace Game.Settings
         public Cutscene.Settings Cutscene => cutscene;
 
         public HudSettings Hud => hud;
+
+        public LoadingScreenView.Settings Loading => loading;
+        public SavingView.Settings Saving => saving;
     }
 }

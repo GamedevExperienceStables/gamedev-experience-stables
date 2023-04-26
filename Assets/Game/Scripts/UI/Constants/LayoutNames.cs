@@ -127,6 +127,7 @@
         public static class LoadingScreen
         {
             public const string CONTAINER = "loading-screen";
+            public const string LOADING_LABEL = "loading-label";
         }
 
         public static class GameOver
