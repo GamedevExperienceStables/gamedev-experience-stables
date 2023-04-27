@@ -71,7 +71,9 @@ namespace Game.Actors
             if (_inventory.TryAddToBag(loot.Definition.ItemDefinition, target))
             {
                 // getting vfx from settings or loot definition 
-                //Object.Instantiate(loot.Definition.PickupFeedback);
+                if (loot.Definition.PickupFeedback)
+                    Object.Instantiate(loot.Definition.PickupFeedback, target.Transform.position, Quaternion.identity);
+                
                 Object.Destroy(loot.gameObject);
             }
         }
