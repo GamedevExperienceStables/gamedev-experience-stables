@@ -1738,7 +1738,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemy
       value: 
-      objectReference: {fileID: 11400000, guid: 9f21713c8c3452d4698b2693f31cb384,
+      objectReference: {fileID: 11400000, guid: 705bab0504b127949b42755bff03b004,
         type: 2}
     - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
@@ -10788,7 +10788,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemy
       value: 
-      objectReference: {fileID: 11400000, guid: 9f21713c8c3452d4698b2693f31cb384,
+      objectReference: {fileID: 11400000, guid: c3d4ba2f70e017945ad45d284fde1ebe,
         type: 2}
     - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
