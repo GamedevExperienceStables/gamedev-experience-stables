@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
+using Game.Utils;
 using UnityEngine;
 
 namespace Game.Level
@@ -44,7 +45,7 @@ namespace Game.Level
             }
 
             Vector3 sourcePosition = _source.position;
-            Vector3 targetPosition = _target.position + _targetOffset;
+            Vector3 targetPosition = _target.TransformWithOffset(_targetOffset);
 
             _source.position = Vector3.Lerp(sourcePosition, targetPosition, _power * deltaTime);
 

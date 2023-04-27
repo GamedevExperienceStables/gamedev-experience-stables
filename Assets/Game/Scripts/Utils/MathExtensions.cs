@@ -59,5 +59,8 @@ namespace Game.Utils
             float additiveValue = baseValue * value;
             return baseValue + additiveValue;
         }
+
+        public static Vector3 TransformWithOffset(this Transform target, Vector3 offset) 
+            => target.position + target.TransformDirection(offset);
     }
 }

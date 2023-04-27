@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Game.Inventory;
 using Game.Level;
+using Game.Utils;
 using UnityEngine;
 using VContainer;
 
@@ -71,13 +72,13 @@ namespace Game.Actors
 
         private async UniTask PickItemAsync(LootItem loot, IActorController target)
         {
-            await _magnet.StartPullAsync(loot.transform, target.Transform, Definition.Offset);
+            Transform targetTransform = target.Transform;
+            await _magnet.StartPullAsync(loot.transform, targetTransform, Definition.Offset);
 
             if (_inventory.TryAddToBag(loot.Definition.ItemDefinition, target))
             {
-                // getting vfx from settings or loot definition 
                 if (loot.Definition.PickupFeedback)
-                    Object.Instantiate(loot.Definition.PickupFeedback, target.Transform.position, Quaternion.identity);
+                    Object.Instantiate(loot.Definition.PickupFeedback,  targetTransform.TransformWithOffset(Definition.Offset), targetTransform.rotation);
                 
                 Object.Destroy(loot.gameObject);
             }
