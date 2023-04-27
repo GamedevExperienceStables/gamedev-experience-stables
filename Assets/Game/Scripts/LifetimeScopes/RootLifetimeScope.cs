@@ -25,6 +25,9 @@ namespace Game.LifetimeScopes
         private GameSettings gameSettings;
 
         [SerializeField]
+        private FxSettings fxSettings;
+
+        [SerializeField]
         private HeroDefinition heroData;
 
         [SerializeField]
@@ -82,6 +85,8 @@ namespace Game.LifetimeScopes
             builder.Register<CursorService>(Lifetime.Singleton);
 
             builder.Register<ModalService>(Lifetime.Singleton);
+            
+            builder.Register<UiFxService>(Lifetime.Scoped);
         }
 
         private static void RegisterInput(IContainerBuilder builder)
@@ -146,6 +151,9 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.UiSettings.Hud);
             builder.RegisterInstance(gameSettings.UiSettings.Loading);
             builder.RegisterInstance(gameSettings.UiSettings.Saving);
+
+            builder.RegisterInstance(fxSettings.Inventory);
+            builder.RegisterInstance(fxSettings.HudRunes);
         }
 
         private static void RegisterUi(IContainerBuilder builder)
