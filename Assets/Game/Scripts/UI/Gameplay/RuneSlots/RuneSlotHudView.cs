@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Input;
 using Game.Inventory;
 using Game.Utils;
 using UnityEngine.UIElements;
@@ -11,15 +12,10 @@ namespace Game.UI
         private bool _interactable;
         private RuneDefinition _runeDefinition;
 
-        private readonly Label _inputLabel;
-
-        private readonly string _inputSelect;
-        private readonly string _inputActive;
-
         private event Action<RuneSlotRemoveEvent> RuneRemovingRequest;
         private event Action<RuneSlotDragEvent> PointerDownCallback;
 
-        public RuneSlotHudView(VisualElement element, RuneSlotId id, string inputSelect, string inputActive)
+        public RuneSlotHudView(VisualElement element, RuneSlotId id, InputKeyBinding inputSelect, InputKeyBinding inputActive)
         {
             Id = id;
             Element = element;
@@ -27,11 +23,11 @@ namespace Game.UI
             _icon = element.Q<Image>(LayoutNames.Hud.RUNE_SLOT_ICON);
             element.Q<VisualElement>(LayoutNames.Hud.RUNE_SLOT_BACKGROUND);
 
-            _inputSelect = inputSelect;
-            _inputActive = inputActive;
+            var inputKeySelect = element.Q<InputKey>(LayoutNames.Hud.RUNE_SLOT_INPUT_SELECT);
+            inputKeySelect.Bind(inputSelect);
 
-            _inputLabel = element.Q<Label>(LayoutNames.Hud.RUNE_SLOT_INPUT_LABEL);
-            _inputLabel.text = inputSelect;
+            var inputKeyActive = element.Q<InputKey>(LayoutNames.Hud.RUNE_SLOT_INPUT_ACTIVE);
+            inputKeyActive.Bind(inputActive);
 
             Clear();
 
@@ -78,7 +74,6 @@ namespace Game.UI
         public void Activate()
         {
             _icon.sprite = _runeDefinition.IconActive;
-            _inputLabel.text = _inputActive;
 
             Element.AddToClassList(LayoutNames.Hud.RUNE_SLOT_ACTIVE_CLASS_NAME);
         }
@@ -86,7 +81,6 @@ namespace Game.UI
         public void Deactivate()
         {
             _icon.sprite = _runeDefinition.Icon;
-            _inputLabel.text = _inputSelect;
 
             Element.RemoveFromClassList(LayoutNames.Hud.RUNE_SLOT_ACTIVE_CLASS_NAME);
         }

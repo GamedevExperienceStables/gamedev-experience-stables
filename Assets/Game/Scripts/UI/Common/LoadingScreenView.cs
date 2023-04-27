@@ -2,8 +2,10 @@
 using Cysharp.Threading.Tasks;
 using Game.Utils;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
+using VContainer;
 
 namespace Game.UI
 {
@@ -22,12 +24,21 @@ namespace Game.UI
         private VisualElement _container;
         private bool _isActive;
 
+        private Label _label;
+        private Settings _settings;
+
+        [Inject]
+        public void Construct(Settings settings) 
+            => _settings = settings;
+
         private void Awake()
         {
             VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
             _container = root.Q<VisualElement>(LayoutNames.LoadingScreen.CONTAINER);
             _container.SetOpacity(0f);
+
+            _label = _container.Q<Label>(LayoutNames.LoadingScreen.LOADING_LABEL);
             
             _showDuration = TimeSpan.FromSeconds(showDuration);
             _hideDuration = TimeSpan.FromSeconds(hideDuration);
@@ -38,8 +49,16 @@ namespace Game.UI
             if (_isActive)
                 return;
 
+            UpdateText();
+            
             FadeIn(_showDuration);
             _isActive = true;
+        }
+
+        private void UpdateText()
+        {
+            if (_label is not null) 
+                _label.text = _settings.loadingText.GetLocalizedString();
         }
 
         public void Hide()
@@ -89,6 +108,13 @@ namespace Game.UI
                 .Start(new StyleValues { opacity = 0f }, (int)duration.TotalMilliseconds)
                 .Ease(Easing.InCubic)
                 .OnCompleted(() => _container.SetDisplay(false));
+        }
+        
+        
+        [Serializable]
+        public class Settings
+        {
+            public LocalizedString loadingText;
         }
     }
 }

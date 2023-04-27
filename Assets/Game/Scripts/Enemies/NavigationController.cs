@@ -20,12 +20,13 @@ namespace Game.Enemies
 
         private Vector3 _movementDirection;
 
-        public bool IsCompleted => !_agent.pathPending && IsReached(_agent.pathEndPosition);
+        public bool IsCompleted => !_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance;
 
         private void Awake()
         {
             _movement = GetComponent<MovementController>();
             _agent = GetComponent<NavMeshAgent>();
+            _agent.enabled = false;
         }
 
         private void Start()
@@ -49,13 +50,19 @@ namespace Game.Enemies
             _movementDirection = _agent.desiredVelocity.normalized;
             
             _movement.UpdateInputs(_movementDirection, _movementDirection);
+            
+            #if UNITY_EDITOR
+                Debug.DrawLine(transform.position, _agent.steeringTarget, Color.red);
+            #endif
         }
 
         public void Stop()
         {
             if (_agent.isOnNavMesh)
                 _agent.ResetPath();
-            
+
+            _agent.enabled = false;
+
             _movementDirection = Vector3.zero;
 
             _movement.UpdateInputs(_movementDirection, _movementDirection);
@@ -65,7 +72,10 @@ namespace Game.Enemies
             => _movement.UpdateInputs(_movementDirection, direction);
 
         public bool SetDestination(Vector3 target)
-            => _agent.SetDestination(target);
+        {
+            _agent.enabled = true;
+            return _agent.SetDestination(target);
+        }
 
         public bool IsReached(Vector3 target)
             => transform.position.AlmostEquals(target, stopDistance);
