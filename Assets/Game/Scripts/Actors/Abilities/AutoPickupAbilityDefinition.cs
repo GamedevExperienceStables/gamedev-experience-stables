@@ -12,7 +12,12 @@ namespace Game.Actors
         [SerializeField, Range(0.01f, 5f)]
         private float pickupDistance = 3f;
 
+        [SerializeField]
+        private Vector3 offset;
+
         public float PickupDistance => pickupDistance;
+
+        public Vector3 Offset => offset;
     }
 
     public class AutoPickupAbility : ActorAbility<AutoPickupAbilityDefinition>
@@ -66,7 +71,7 @@ namespace Game.Actors
 
         private async UniTask PickItemAsync(LootItem loot, IActorController target)
         {
-            await _magnet.StartPullAsync(loot.transform, target.Transform);
+            await _magnet.StartPullAsync(loot.transform, target.Transform, Definition.Offset);
 
             if (_inventory.TryAddToBag(loot.Definition.ItemDefinition, target))
             {
