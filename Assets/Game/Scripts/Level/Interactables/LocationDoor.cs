@@ -1,4 +1,5 @@
-﻿using NaughtyAttributes;
+﻿using System;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -12,5 +13,10 @@ namespace Game.Level
         private LocationPointDefinition targetLocationPoint;
 
         public LocationPointDefinition TargetLocationPoint => targetLocationPoint;
+        
+        public event Action TransitionStart; 
+
+        public void Transition() 
+            => TransitionStart?.Invoke();
     }
 }
