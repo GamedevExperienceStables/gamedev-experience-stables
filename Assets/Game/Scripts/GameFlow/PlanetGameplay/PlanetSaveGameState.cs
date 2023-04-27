@@ -9,7 +9,7 @@ namespace Game.GameFlow
 {
     public class PlanetSaveGameState : GameState
     {
-        private const float WAIT_TIME = 0.3f;
+        private const float WAIT_TIME = 1f;
 
         private readonly PersistenceService _persistence;
         private readonly ILoadingScreen _faderScreen;
