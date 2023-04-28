@@ -8,6 +8,7 @@ namespace Game.UI
     {
         public LocalizedString title;
         public LocalizedString message;
+        public ModalStyle style;
     }
 
     public static class ModalSettingsExtensions
@@ -17,6 +18,7 @@ namespace Game.UI
             var context = new ModalContext
             {
                 title = settings.title.GetLocalizedString(),
+                style = settings.style,
                 onConfirm = onConfirm
             };
 

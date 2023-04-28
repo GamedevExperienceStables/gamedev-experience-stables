@@ -30,10 +30,11 @@
             public const string BUTTON_SETTINGS = "button-settings";
             public const string BUTTON_ABOUT = "button-about";
             public const string BUTTON_ART = "button-art";
-            
+            public const string BUTTON_DOWNLOAD = "button-download";
             public const string BUTTON_BACK = "button-back";
-
             public const string BUTTON_ICON = "icon";
+            
+            public const string SCROLL_CONTAINER = "scroll-container";
             
             public const string MENU = "menu";
             public const string PAGES = "pages";
@@ -50,7 +51,6 @@
             
             public const string PAGE_HEADING = "header";
 
-            
             public const string PAGE_HIDDEN_CLASS_NAME = "page--hidden";
 
             public const string BUTTON_ACTIVE_CLASS_NAME = "menu-button--active";
@@ -179,6 +179,9 @@
             
             public const string BUTTON_CONFIRM = "button-confirm";
             public const string BUTTON_CANCEL = "button-cancel";
+
+            public const string HIDDEN_CLASS_NAME = "window-modal--hidden";
+            public const string WIDE_CLASS_NAME = "window-modal--wide";
         }
         
         public static class Cutscene

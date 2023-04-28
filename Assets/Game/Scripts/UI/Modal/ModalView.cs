@@ -19,6 +19,7 @@ namespace Game.UI
         private Label _textMessage;
 
         private ModalContext _currentContext;
+        private VisualElement _container;
 
         [Inject]
         public void Construct(ModalViewModel viewModel)
@@ -28,13 +29,13 @@ namespace Game.UI
         {
             _root = GetComponent<UIDocument>().rootVisualElement;
 
-            var container = _root.Q<VisualElement>(LayoutNames.Modal.CONTAINER);
-            _buttonConfirm = container.Q<Button>(LayoutNames.Modal.BUTTON_CONFIRM);
-            _buttonCancel = container.Q<Button>(LayoutNames.Modal.BUTTON_CANCEL);
+            _container = _root.Q<VisualElement>(LayoutNames.Modal.CONTAINER);
+            _buttonConfirm = _container.Q<Button>(LayoutNames.Modal.BUTTON_CONFIRM);
+            _buttonCancel = _container.Q<Button>(LayoutNames.Modal.BUTTON_CANCEL);
 
-            _textTitle = container.Q<Label>(LayoutNames.Modal.TITLE);
-            _blockMessage = container.Q<VisualElement>(LayoutNames.Modal.BLOCK_MESSAGE);
-            _textMessage = container.Q<Label>(LayoutNames.Modal.TEXT_MESSAGE);
+            _textTitle = _container.Q<Label>(LayoutNames.Modal.TITLE);
+            _blockMessage = _container.Q<VisualElement>(LayoutNames.Modal.BLOCK_MESSAGE);
+            _textMessage = _container.Q<Label>(LayoutNames.Modal.TEXT_MESSAGE);
 
             Hide();
         }
@@ -95,9 +96,25 @@ namespace Game.UI
                 _blockMessage.SetDisplay(true);
                 _textMessage.text = context.message;
             }
+
+            SetStyle(context);
         }
 
-        private void Show()
+        private void SetStyle(ModalContext context)
+        {
+            if (context.style == ModalStyle.Wide)
+                SetWideStyle();
+            else
+                SetNarrowStyle();
+        }
+
+        private void SetWideStyle() 
+            => _container.AddToClassList(LayoutNames.Modal.WIDE_CLASS_NAME);
+
+        private void SetNarrowStyle() 
+            => _container.RemoveFromClassList(LayoutNames.Modal.WIDE_CLASS_NAME);
+
+        private void Show() 
             => _root.SetDisplay(true);
 
         private void Hide()

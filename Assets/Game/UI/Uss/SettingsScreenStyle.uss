@@ -12,6 +12,12 @@
     -unity-font-style: bold;
 }
 
+.unity-popup-field {
+    height: 68px;
+    -unity-text-align: middle-left;
+    align-items: center;
+}
+
 .unity-popup-field__input {
     background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-483509735&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_45');
     background-color: rgba(0, 0, 0, 0);
@@ -22,7 +28,7 @@
     width: 435px;
     position: absolute;
     right: 0;
-    height: 58px;
+    height: 65px;
 }
 
 .unity-base-popup-field__label {
@@ -36,6 +42,7 @@
     -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&guid=9f296ab3b5e417845bc8de63c7b23c43&type=2#koliko-Regular SDF');
     -unity-font-style: bold;
     color: rgb(90, 55, 55);
+    -unity-text-align: middle-left;
 }
 
 .unity-base-popup-field__arrow {
@@ -76,7 +83,7 @@
     -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&guid=9f296ab3b5e417845bc8de63c7b23c43&type=2#koliko-Regular SDF');
     color: rgb(90, 55, 55);
     font-size: 35px;
-} 
+}
 
 .unity-base-field__label {
     min-width: 250px;
@@ -110,7 +117,6 @@
     position: relative;
 }
 
-/* For dropdown*/
 .unity-scroll-view {
     background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1693019042&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_44');
     -unity-background-image-tint-color: rgb(255, 255, 255);

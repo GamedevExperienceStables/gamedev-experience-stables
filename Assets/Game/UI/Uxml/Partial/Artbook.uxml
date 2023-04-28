@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="ArtTemplate" src="project://database/Assets/Game/UI/Uxml/Partial/ArtTemplate.uxml?fileID=9197481963319205126&amp;guid=f7dce9bbe9d2ef84dbf524d7607c256e&amp;type=3#ArtTemplate" />
+    <Style src="project://database/Assets/Game/UI/Uss/ArtScreenStyle.uss?fileID=7433441132597879392&amp;guid=8a98b8c6864aa9d4a92f861065763836&amp;type=3#ArtScreenStyle" />
+    <ui:VisualElement name="art-content" class="art__content">
+        <ui:Instance template="ArtTemplate" name="page-template" />
+    </ui:VisualElement>
+</ui:UXML>

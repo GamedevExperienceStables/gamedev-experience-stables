@@ -8,5 +8,6 @@ namespace Game.UI
         public string message;
         public Action onConfirm;
         public Action onCancel;
+        public ModalStyle style;
     }
 }

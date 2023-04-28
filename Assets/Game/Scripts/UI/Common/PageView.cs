@@ -12,11 +12,11 @@ namespace Game.UI
         private VisualElement _root;
         protected VisualElement Content { get; private set; }
         
-        protected ILocalizationService _localization;
+        protected ILocalizationService localization;
         
         [Inject]
         public void Construct(ILocalizationService localisation) 
-            => _localization = localisation;
+            => localization = localisation;
 
         private void Awake()
         {
