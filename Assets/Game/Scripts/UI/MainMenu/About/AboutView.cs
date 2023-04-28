@@ -18,12 +18,15 @@ namespace Game.UI
         
         private VisualTreeAsset _teamTemplate;
         private ScrollView _scrollContainer;
+        
+        private CommonFx _commonFx;
 
         [Inject]
-        public void Construct(TeamsView teams, AboutSettings settings)
+        public void Construct(TeamsView teams, AboutSettings settings, CommonFx commonFx)
         {
             _teams = teams;
             _settings = settings;
+            _commonFx = commonFx;
         }
 
         protected override void OnAwake()
@@ -55,6 +58,7 @@ namespace Game.UI
         private void RegisterCallbacks()
         {
             _buttonBack.clicked += OnBackButton;
+            _commonFx.RegisterButton(_buttonBack, ButtonStyle.Primary);
 
             localization.Changed += OnLocalisationChanged;
         }
@@ -62,6 +66,7 @@ namespace Game.UI
         private void UnregisterCallbacks()
         {
             _buttonBack.clicked -= OnBackButton;
+            _commonFx.UnRegisterButton(_buttonBack, ButtonStyle.Primary);
 
             localization.Changed -= OnLocalisationChanged;
         }

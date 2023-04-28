@@ -16,11 +16,14 @@ namespace Game.UI
         private PauseViewRouter _router;
 
         private Settings _settings;
+        
+        private CommonFx _commonFx;
 
         [Inject]
-        public void Construct(Settings settings)
+        public void Construct(Settings settings, CommonFx commonFx)
         {
             _settings = settings;
+            _commonFx = commonFx;
         }
 
         protected override void OnAwake()
@@ -36,6 +39,10 @@ namespace Game.UI
             _buttonResume.clicked += OnResumeButton;
             _buttonMainMenu.clicked += OnMainMenuButton;
             _buttonSettings.clicked += OnSettingsButton;
+            
+            _commonFx.RegisterButton(_buttonResume, ButtonStyle.Menu);
+            _commonFx.RegisterButton(_buttonSettings, ButtonStyle.Menu);
+            _commonFx.RegisterButton(_buttonMainMenu, ButtonStyle.Menu);
 
             localization.Changed += OnLocalisationChanged;
         }
@@ -48,6 +55,10 @@ namespace Game.UI
             _buttonResume.clicked -= OnResumeButton;
             _buttonMainMenu.clicked -= OnMainMenuButton;
             _buttonSettings.clicked -= OnSettingsButton;
+            
+            _commonFx.UnRegisterButton(_buttonResume, ButtonStyle.Menu);
+            _commonFx.UnRegisterButton(_buttonSettings, ButtonStyle.Menu);
+            _commonFx.UnRegisterButton(_buttonMainMenu, ButtonStyle.Menu);
 
             localization.Changed -= OnLocalisationChanged;
         }

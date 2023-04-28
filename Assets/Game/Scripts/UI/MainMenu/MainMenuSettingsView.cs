@@ -17,13 +17,17 @@ namespace Game.UI
         
         private ILocalizationService _localisation;
         private Settings _settings;
+        
+        private CommonFx _commonFx;
 
         [Inject]
-        public void Construct(SettingsView settingsView, ILocalizationService localisation, Settings settings)
+        public void Construct(SettingsView settingsView, ILocalizationService localisation, Settings settings, CommonFx commonFx)
         {
             _settingsView = settingsView;
             _localisation = localisation;
             _settings = settings;
+            
+            _commonFx = commonFx;
         }
 
         protected override void OnAwake()
@@ -40,6 +44,8 @@ namespace Game.UI
             _headerLabels = Content.Q<VisualElement>(LayoutNames.StartMenu.PAGE_HEADING)
                 .Query<Label>().ToList();
             
+            _commonFx.RegisterButton(_buttonBack, ButtonStyle.Primary);
+            
             _localisation.Changed += OnLocalisationChanged;
         }
 
@@ -51,6 +57,8 @@ namespace Game.UI
             _settingsView.Destroy();
 
             _buttonBack.clicked -= OnBackButton;
+            
+            _commonFx.UnRegisterButton(_buttonBack, ButtonStyle.Primary);
             
             _localisation.Changed -= OnLocalisationChanged;
         }

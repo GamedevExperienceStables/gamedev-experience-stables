@@ -21,9 +21,14 @@ namespace Game.UI
         private ModalContext _currentContext;
         private VisualElement _container;
 
+        private CommonFx _commonFx;
+
         [Inject]
-        public void Construct(ModalViewModel viewModel)
-            => _viewModel = viewModel;
+        public void Construct(ModalViewModel viewModel, CommonFx commonFx)
+        {
+            _viewModel = viewModel;
+            _commonFx = commonFx;
+        }
 
         private void Awake()
         {
@@ -47,6 +52,9 @@ namespace Game.UI
 
             _buttonConfirm.clicked += OnConfirm;
             _buttonCancel.clicked += OnCancel;
+
+            _commonFx.RegisterButton(_buttonConfirm, ButtonStyle.Modal);
+            _commonFx.RegisterButton(_buttonCancel, ButtonStyle.Modal);
         }
 
         private void OnDestroy()
@@ -56,6 +64,9 @@ namespace Game.UI
 
             _buttonConfirm.clicked -= OnConfirm;
             _buttonCancel.clicked -= OnCancel;
+
+            _commonFx.UnRegisterButton(_buttonConfirm, ButtonStyle.Modal);
+            _commonFx.UnRegisterButton(_buttonCancel, ButtonStyle.Modal);
         }
 
         private void OnConfirm()
@@ -108,13 +119,13 @@ namespace Game.UI
                 SetNarrowStyle();
         }
 
-        private void SetWideStyle() 
+        private void SetWideStyle()
             => _container.AddToClassList(LayoutNames.Modal.WIDE_CLASS_NAME);
 
-        private void SetNarrowStyle() 
+        private void SetNarrowStyle()
             => _container.RemoveFromClassList(LayoutNames.Modal.WIDE_CLASS_NAME);
 
-        private void Show() 
+        private void Show()
             => _root.SetDisplay(true);
 
         private void Hide()

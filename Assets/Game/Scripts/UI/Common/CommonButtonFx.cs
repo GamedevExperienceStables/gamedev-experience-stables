@@ -19,7 +19,7 @@ namespace Game.UI
         {
             button.RegisterCallback<FocusInEvent>(OnHover);
             button.RegisterCallback<PointerEnterEvent>(OnHover);
-            
+
             button.clicked += OnClick;
         }
 
@@ -27,18 +27,23 @@ namespace Game.UI
         {
             button.UnregisterCallback<FocusInEvent>(OnHover);
             button.UnregisterCallback<PointerEnterEvent>(OnHover);
-            
+
             button.clicked -= OnClick;
         }
 
-        private void OnHover(FocusInEvent evt)
-            => OnHover();
+        private void OnHover(FocusInEvent evt) 
+            => OnHover(evt.target as VisualElement);
 
         private void OnHover(PointerEnterEvent evt)
-            => OnHover();
+            => OnHover(evt.target as VisualElement);
 
-        private void OnHover()
-            => _uiFx.Play(_settings.hoverFeedback);
+        private void OnHover(VisualElement element)
+        {
+            if (!element.enabledInHierarchy)
+                return;
+
+            _uiFx.Play(_settings.hoverFeedback);
+        }
 
         private void OnClick()
             => _uiFx.Play(_settings.clickFeedback);
