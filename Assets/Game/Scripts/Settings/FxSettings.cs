@@ -7,6 +7,9 @@ namespace Game.Settings
     public class FxSettings : ScriptableObject
     {
         [SerializeField]
+        private CommonFx.Settings common;
+        
+        [SerializeField]
         private InventoryFx.Settings inventory;
         
         [SerializeField]
@@ -20,5 +23,7 @@ namespace Game.Settings
         public HudRunesFx.Settings HudRunes => hudRunes;
 
         public GameOverFx.Settings GameOver => gameOver;
+
+        public CommonFx.Settings Common => common;
     }
 }

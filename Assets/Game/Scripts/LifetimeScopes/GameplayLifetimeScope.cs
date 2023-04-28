@@ -169,6 +169,7 @@ namespace Game.LifetimeScopes
             builder.Register<InventoryFx>(Lifetime.Singleton);
             builder.Register<HudRunesFx>(Lifetime.Singleton);
             builder.Register<GameOverFx>(Lifetime.Singleton);
+            builder.Register<CommonFx>(Lifetime.Singleton);
         }
 
         private void RegisterCameras(IContainerBuilder builder)

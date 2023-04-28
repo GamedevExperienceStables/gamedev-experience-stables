@@ -155,6 +155,7 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(fxSettings.Inventory);
             builder.RegisterInstance(fxSettings.HudRunes);
             builder.RegisterInstance(fxSettings.GameOver);
+            builder.RegisterInstance(fxSettings.Common);
         }
 
         private static void RegisterUi(IContainerBuilder builder)
