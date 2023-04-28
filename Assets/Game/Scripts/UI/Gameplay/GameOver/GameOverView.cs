@@ -33,15 +33,17 @@ namespace Game.UI
         private Settings _settings;
         
         private GameOverFx _fx;
+        private CommonFx _commonFx;
 
         [Inject]
-        public void Construct(GameplayViewModel viewModel, ILocalizationService localization, Settings settings, GameOverFx fx)
+        public void Construct(GameplayViewModel viewModel, ILocalizationService localization, Settings settings, GameOverFx fx, CommonFx commonFx)
         {
             _viewModel = viewModel;
             _localization = localization;
             _settings = settings;
             
             _fx = fx;
+            _commonFx = commonFx;
         }
 
         private void Awake()
@@ -59,6 +61,9 @@ namespace Game.UI
 
             _buttonRestart.clicked += RestartGame;
             _buttonMainMenu.clicked += GoToMainMenu;
+
+            _commonFx.RegisterButton(_buttonRestart, ButtonStyle.Primary);
+            _commonFx.RegisterButton(_buttonMainMenu, ButtonStyle.Primary);
             
             _localization.Changed += OnLocalisationChanged;
         }
@@ -72,6 +77,9 @@ namespace Game.UI
             _buttonMainMenu.clicked -= GoToMainMenu;
             
             _localization.Changed -= OnLocalisationChanged;
+            
+            _commonFx.UnRegisterButton(_buttonRestart, ButtonStyle.Primary);
+            _commonFx.UnRegisterButton(_buttonMainMenu, ButtonStyle.Primary);
 
             _fx.Destroy();
         }
