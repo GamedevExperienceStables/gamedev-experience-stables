@@ -164,10 +164,11 @@ namespace Game.LifetimeScopes
             });
         }
         
-        private void RegisterUiFx(IContainerBuilder builder)
+        private static void RegisterUiFx(IContainerBuilder builder)
         {
             builder.Register<InventoryFx>(Lifetime.Singleton);
             builder.Register<HudRunesFx>(Lifetime.Singleton);
+            builder.Register<GameOverFx>(Lifetime.Singleton);
         }
 
         private void RegisterCameras(IContainerBuilder builder)

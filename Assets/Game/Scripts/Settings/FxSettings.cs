@@ -11,9 +11,14 @@ namespace Game.Settings
         
         [SerializeField]
         private HudRunesFx.Settings hudRunes;
+        
+        [SerializeField]
+        private GameOverFx.Settings gameOver;
 
         public InventoryFx.Settings Inventory => inventory;
 
         public HudRunesFx.Settings HudRunes => hudRunes;
+
+        public GameOverFx.Settings GameOver => gameOver;
     }
 }
