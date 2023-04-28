@@ -35,6 +35,9 @@ namespace Game.Inventory
 
         public void ClearActive()
             => _activeSlot.Clear();
+        
+        public RuneDefinition Get(RuneSlotId id) 
+            => _slots[id].Rune;
 
         public void Set(RuneSlotId id, RuneDefinition rune)
             => _slots[id].Set(rune);

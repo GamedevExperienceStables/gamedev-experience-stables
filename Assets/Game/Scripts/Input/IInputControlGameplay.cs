@@ -18,5 +18,7 @@ namespace Game.Input
         InputButton Slot2Button { get; }
         InputButton Slot3Button { get; }
         InputButton Slot4Button { get; }
+        InputButton SlotNextButton { get; }
+        InputButton SlotPrevButton { get; }
     }
 }
