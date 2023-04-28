@@ -14,5 +14,8 @@ namespace Game.Utils
 
         public T Create<T>(T prefab) where T : MonoBehaviour
             => _resolver.Instantiate(prefab);
+        
+        public GameObject Create(GameObject prefab, Transform parent)
+            => _resolver.Instantiate(prefab, parent);
     }
 }
