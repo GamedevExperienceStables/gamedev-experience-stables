@@ -366,7 +366,7 @@ PrefabInstance:
     - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
       propertyPath: spawnCount
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
@@ -488,7 +488,7 @@ PrefabInstance:
     - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
       propertyPath: spawnInterval
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2350107545435338789, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
@@ -2346,7 +2346,7 @@ PrefabInstance:
     - target: {fileID: 5893306825969737358, guid: 225f616a91570d7498eab718c97c9428,
         type: 3}
       propertyPath: spawnCount
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5893306825969737358, guid: 225f616a91570d7498eab718c97c9428,
         type: 3}
@@ -5023,12 +5023,17 @@ PrefabInstance:
         type: 3}
       propertyPath: enemy
       value: 
-      objectReference: {fileID: 11400000, guid: afe86160fdfe03540b8bdcc1c1812224,
+      objectReference: {fileID: 11400000, guid: 9f21713c8c3452d4698b2693f31cb384,
         type: 2}
     - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
       propertyPath: spawnCount
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
+        type: 3}
+      propertyPath: spawnInterval
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2350107545435338789, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
@@ -6282,12 +6287,17 @@ PrefabInstance:
         type: 3}
       propertyPath: enemy
       value: 
-      objectReference: {fileID: 11400000, guid: 380c20b5024bd234980cdcc227c39d04,
+      objectReference: {fileID: 11400000, guid: 73de3e4ff42d1864285557dc132eaf16,
         type: 2}
     - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
       propertyPath: spawnCount
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
+        type: 3}
+      propertyPath: spawnInterval
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2350107545435338789, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
@@ -7163,7 +7173,7 @@ PrefabInstance:
     - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
       propertyPath: spawnInterval
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2350107545435338789, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
@@ -8087,12 +8097,17 @@ PrefabInstance:
         type: 3}
       propertyPath: enemy
       value: 
-      objectReference: {fileID: 11400000, guid: afe86160fdfe03540b8bdcc1c1812224,
+      objectReference: {fileID: 11400000, guid: 9f21713c8c3452d4698b2693f31cb384,
         type: 2}
     - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
       propertyPath: spawnCount
-      value: 2
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
+        type: 3}
+      propertyPath: spawnInterval
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2350107545435338789, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
@@ -12612,12 +12627,17 @@ PrefabInstance:
         type: 3}
       propertyPath: enemy
       value: 
-      objectReference: {fileID: 11400000, guid: 3dbf3c581371f554f8e1d8d065c697fa,
+      objectReference: {fileID: 11400000, guid: 2a649a952fd83194586bbbc4e42d2e8a,
         type: 2}
     - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
       propertyPath: spawnCount
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
+        type: 3}
+      propertyPath: spawnInterval
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2350107545435338789, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
@@ -15517,7 +15537,7 @@ PrefabInstance:
     - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
       propertyPath: spawnCount
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
@@ -16003,8 +16023,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5893306825969737358, guid: 225f616a91570d7498eab718c97c9428,
         type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 11400000, guid: 2a649a952fd83194586bbbc4e42d2e8a,
+        type: 2}
+    - target: {fileID: 5893306825969737358, guid: 225f616a91570d7498eab718c97c9428,
+        type: 3}
       propertyPath: spawnCount
-      value: 6
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5893306825969737358, guid: 225f616a91570d7498eab718c97c9428,
+        type: 3}
+      propertyPath: spawnInterval
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5893306825969737359, guid: 225f616a91570d7498eab718c97c9428,
         type: 3}
