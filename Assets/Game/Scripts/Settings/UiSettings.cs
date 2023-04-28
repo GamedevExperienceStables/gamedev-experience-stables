@@ -1,5 +1,4 @@
-﻿using System;
-using Game.Level;
+﻿using Game.Level;
 using Game.UI;
 using UnityEngine;
 
@@ -42,7 +41,7 @@ namespace Game.Settings
         private AboutSettings about;
         
         [SerializeField]
-        private ArtView.Settings artMenu;
+        private ArtSettings artMenu;
 
         public StartMenuView.Settings StartMenu => startMenu;
         public MainMenuSettingsView.Settings SettingsMenu => settingsMenu;
@@ -59,6 +58,6 @@ namespace Game.Settings
         public SavingView.Settings Saving => saving;
 
         public AboutSettings About => about;
-        public ArtView.Settings ArtMenu => artMenu;
+        public ArtSettings ArtMenu => artMenu;
     }
 }

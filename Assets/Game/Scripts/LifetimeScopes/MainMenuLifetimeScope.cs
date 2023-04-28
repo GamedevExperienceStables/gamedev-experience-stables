@@ -18,6 +18,7 @@ namespace Game.LifetimeScopes
 
             RegisterMainMenu(builder);
             RegisterAbout(builder);
+            RegisterArt(builder);
         }
 
         private static void RegisterMainMenu(IContainerBuilder builder)
@@ -48,6 +49,16 @@ namespace Game.LifetimeScopes
 
             builder.Register<EmployeeViewFactory>(Lifetime.Scoped);
             builder.Register<EmployeeView>(Lifetime.Transient);
+        }
+        
+        private void RegisterArt(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(uiSettings.ArtMenu);
+            
+            builder.Register<ArtBookView>(Lifetime.Scoped);
+            
+            builder.Register<ArtTemplateViewFactory>(Lifetime.Scoped);
+            builder.Register<ArtTemplateView>(Lifetime.Transient);
         }
 
         private static void RegisterStateMachine(IContainerBuilder builder)

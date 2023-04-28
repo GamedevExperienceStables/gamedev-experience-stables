@@ -2,7 +2,8 @@
     align-items: center;
     padding: 60px 120px 100px;
     margin: 40px;
-    width: 1200px;    
+    width: 1250px;
+    padding-bottom: 50px;
 }
 
 .header-label {
@@ -19,7 +20,7 @@
 
 .art__page {
     flex-shrink: 0;
-    height: 620px;
+    height: 685px;
 }
 
 .art__image {

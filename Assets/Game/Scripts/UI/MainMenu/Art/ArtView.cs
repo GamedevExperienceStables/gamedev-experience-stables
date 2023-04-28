@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Localization;
 using UnityEngine.UIElements;
 using VContainer;
 
@@ -9,17 +7,25 @@ namespace Game.UI
 {
     public class ArtView : PageView<ArtViewModel>
     {
+        private ModalSettings _downloadModal;
+        
         private IList<Label> _headerLabels;
         private Button _buttonDownload;
         private Button _buttonBack;
 
-        private Settings _settings;
+        private ArtSettings _settings;
         private ScrollView _scrollContainer;
 
+        private ArtBookView _artBook;
+        
+        private string _url;
+
         [Inject]
-        public void Construct(Settings settings)
+        public void Construct(ArtSettings settings, ArtBookView artBook)
         {
             _settings = settings;
+            _artBook = artBook;
+            _downloadModal = settings.DownloadModal;
         }
 
         protected override void OnAwake()
@@ -33,8 +39,9 @@ namespace Game.UI
 
             _scrollContainer = Content.Q<ScrollView>(LayoutNames.StartMenu.SCROLL_CONTAINER);
             
-            // TODO: Add support for downloading
-            _buttonDownload.SetEnabled(false);
+            _artBook.Create(Content);
+
+            _url = _settings.DownloadLink;
             
             RegisterCallbacks();
         }
@@ -48,6 +55,7 @@ namespace Game.UI
         private void RegisterCallbacks()
         {
             _buttonBack.clicked += OnBackButton;
+            _buttonDownload.clicked += OnDownloadButton;
 
             localization.Changed += OnLocalisationChanged;
         }
@@ -55,6 +63,7 @@ namespace Game.UI
         private void UnregisterCallbacks()
         {
             _buttonBack.clicked -= OnBackButton;
+            _buttonDownload.clicked -= OnDownloadButton;
 
             localization.Changed -= OnLocalisationChanged;
         }
@@ -88,14 +97,17 @@ namespace Game.UI
         private void OnBackButton() 
             => ViewModel.Back();
         
-        [Serializable]
-        public class Settings
+        private void OnDownloadButton() 
+            => ShowLinkModal();
+        
+        private void ShowLinkModal()
         {
-            public LocalizedString header;
-            public LocalizedString download;
-            public LocalizedString back;
-
-            public ModalSettings linkModal;
+            ModalContext context = ModalSettingsExtensions.CreateContext(_downloadModal, OpenLink);
+            
+            ViewModel.ShowModal(context);
         }
+
+        private void OpenLink()
+            => ViewModel.OpenURL(_url);
     }
 }
