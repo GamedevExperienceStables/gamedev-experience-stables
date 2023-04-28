@@ -37,7 +37,7 @@ namespace Game.UI
             _buttonMainMenu.clicked += OnMainMenuButton;
             _buttonSettings.clicked += OnSettingsButton;
 
-            _localization.Changed += OnLocalisationChanged;
+            localization.Changed += OnLocalisationChanged;
         }
 
         private void Start()
@@ -49,7 +49,7 @@ namespace Game.UI
             _buttonMainMenu.clicked -= OnMainMenuButton;
             _buttonSettings.clicked -= OnSettingsButton;
 
-            _localization.Changed -= OnLocalisationChanged;
+            localization.Changed -= OnLocalisationChanged;
         }
 
         private void OnLocalisationChanged()

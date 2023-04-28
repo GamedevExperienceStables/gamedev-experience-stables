@@ -1,7 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-direction: row; align-items: center;">
-        <ui:VisualElement style="flex-grow: 1; background-color: rgb(155, 89, 199); height: 3px;" />
-        <ui:VisualElement style="background-color: rgb(192, 130, 231); width: 26px; height: 26px; border-top-left-radius: 50px; border-bottom-left-radius: 50px; border-top-right-radius: 50px; border-bottom-right-radius: 50px; margin-left: 30px; margin-right: 30px;" />
-        <ui:VisualElement style="flex-grow: 1; background-color: rgb(155, 89, 199); height: 3px;" />
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center;">
+        <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-direction: row; align-items: center; width: 100%; max-width: 500px; justify-content: center;">
+            <ui:VisualElement style="flex-grow: 1; background-color: rgb(155, 89, 199); height: 3px;" />
+            <ui:VisualElement style="background-color: rgb(192, 130, 231); width: 26px; height: 26px; border-top-left-radius: 50px; border-bottom-left-radius: 50px; border-top-right-radius: 50px; border-bottom-right-radius: 50px; margin-left: 30px; margin-right: 30px;" />
+            <ui:VisualElement style="flex-grow: 1; background-color: rgb(155, 89, 199); height: 3px;" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

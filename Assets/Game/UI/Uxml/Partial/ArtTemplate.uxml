@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/UI/Uss/ArtScreenStyle.uss?fileID=7433441132597879392&amp;guid=8a98b8c6864aa9d4a92f861065763836&amp;type=3#ArtScreenStyle" />
+    <ui:VisualElement name="art-container" class="art__page" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="art" class="art__image" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/Artbook/Artbook-1.png?fileID=2800000&amp;guid=5a9cee56f619f3a488bd316d4da54dab&amp;type=3#Artbook-1&apos;);" />
+    </ui:VisualElement>
+</ui:UXML>

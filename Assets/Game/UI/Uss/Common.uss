@@ -4,23 +4,41 @@
 }
 
 .primary-button {
+    flex-shrink: 0;
     background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1801998966&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_41');
-    
+
     -unity-font-definition: var(--font-heading);
     font-size: 30px;
-    
-    min-width: 250px;    
+
+    min-width: 250px;
     padding: 28px 50px 22px;
+
+    background-color: rgba(0, 0, 0, 0);
     border-width: 0;
-    
+    border-color: rgba(0, 0, 0, 0);
+
     color: rgb(255, 255, 255);
-    
-    transition: color 100ms ease-in-out;
+
+    transition: color 200ms ease-in-out, -unity-background-image-tint-color 200ms ease-in-out;
 }
 
-.primary-button:hover {
-    color: rgb(201, 201, 201);
+.primary-button:enabled:hover {
+    -unity-background-image-tint-color: #af6ed5;
+
+    background-color: rgba(0, 0, 0, 0);
 }
+
+.primary-button:disabled {
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.8);
+
+    opacity: 1;
+}
+
+.primary-button:disabled {
+    color: rgba(255, 255, 255, 0.3);
+}
+
 
 .primary-button:active {
     background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1523537116&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_43');

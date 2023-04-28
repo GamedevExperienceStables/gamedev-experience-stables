@@ -1,0 +1,77 @@
+.about-container {
+    width: 1250px;
+    align-items: center;
+    margin: 40px 0;
+    padding: 80px 120px 100px;
+}
+
+.header-label {
+    font-size: 80px;
+    color: rgb(155, 89, 199);
+    -unity-font-definition: var(--font-heading);
+    text-shadow: -1px -1px 0 rgb(86, 38, 118);
+    align-self: auto;
+}
+
+.list__content {
+    flex-direction: row;
+    width: 1400px;
+    margin-top: 65px;
+}
+
+.team-name {
+    font-size: 50px;
+    -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&guid=1823e5ab5312e0e40972472a78991947&type=2#borsok SDF');
+    color: rgb(221, 192, 174);
+    white-space: normal;
+    text-shadow: -1px -1px 0 rgb(90, 55, 55);
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.employee--normal {
+    flex-direction: row;
+}
+
+.employee--reversed {
+    flex-direction: row-reverse;
+}
+
+.description--normal {
+    align-items: flex-start;
+    -unity-text-align: upper-left;
+}
+
+.description--reversed {
+    align-items: flex-end;
+    -unity-text-align: upper-right;
+}
+
+.employee-name {
+    font-size: 50px;
+    -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&guid=1823e5ab5312e0e40972472a78991947&type=2#borsok SDF');
+    color: rgb(90, 55, 55);
+    white-space: normal;
+    flex-shrink: 1;
+}
+
+.employee-position {
+    font-size: 35px;
+    -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&guid=9f296ab3b5e417845bc8de63c7b23c43&type=2#koliko-Regular SDF');
+    color: rgb(155, 89, 199);
+    white-space: normal;
+    flex-grow: 0;
+    flex-shrink: 1;
+}
+
+.employee-link {
+    font-size: 25px;
+    -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&guid=9f296ab3b5e417845bc8de63c7b23c43&type=2#koliko-Regular SDF');
+    color: rgb(90, 55, 55);
+    white-space: normal;
+    flex-shrink: 0;
+}
+
+.employee-link:hover {
+    color: rgb(155, 89, 199);
+}

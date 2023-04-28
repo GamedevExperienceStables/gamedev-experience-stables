@@ -52,7 +52,7 @@ namespace Game.UI
             RegisterButtonEvent(_buttonAbout, OpenAbout, OnHoverAbout, OnExit);
             RegisterButtonEvent(_buttonQuit, QuitGame, OnHoverQuit, OnExit);
 
-            _localization.Changed += OnLocalisationChanged;
+            localization.Changed += OnLocalisationChanged;
         }
 
         private void Start()
@@ -67,7 +67,7 @@ namespace Game.UI
             UnregisterButtonEvent(_buttonAbout, OpenAbout, OnHoverAbout, OnExit);
             UnregisterButtonEvent(_buttonQuit, QuitGame, OnHoverQuit, OnExit);
 
-            _localization.Changed -= OnLocalisationChanged;
+            localization.Changed -= OnLocalisationChanged;
         }
 
         public override void Show()
@@ -175,7 +175,7 @@ namespace Game.UI
 
         private void OnEnter(Sprite preview, LocalizedString caption)
         {
-            if (!_menu.enabledSelf)
+            if (!_menu.enabledInHierarchy)
                 return;
 
             _preview.Show(preview, caption.GetLocalizedString());
@@ -183,7 +183,7 @@ namespace Game.UI
 
         private void OnExit(EventBase _)
         {
-            if (!_menu.enabledSelf)
+            if (!_menu.enabledInHierarchy)
                 return;
 
             ShowPreview();
