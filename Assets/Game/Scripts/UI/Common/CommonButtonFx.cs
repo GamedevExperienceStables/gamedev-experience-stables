@@ -17,7 +17,7 @@ namespace Game.UI
 
         public void RegisterButton(Button button)
         {
-            button.RegisterCallback<FocusInEvent>(OnHover);
+            button.RegisterCallback<NavigationMoveEvent>(OnNavigationMove);
             button.RegisterCallback<PointerEnterEvent>(OnHover);
 
             button.clicked += OnClick;
@@ -25,13 +25,13 @@ namespace Game.UI
 
         public void UnRegisterButton(Button button)
         {
-            button.UnregisterCallback<FocusInEvent>(OnHover);
+            button.UnregisterCallback<NavigationMoveEvent>(OnNavigationMove);
             button.UnregisterCallback<PointerEnterEvent>(OnHover);
 
             button.clicked -= OnClick;
         }
 
-        private void OnHover(FocusInEvent evt) 
+        private void OnNavigationMove(NavigationMoveEvent evt) 
             => OnHover(evt.target as VisualElement);
 
         private void OnHover(PointerEnterEvent evt)
