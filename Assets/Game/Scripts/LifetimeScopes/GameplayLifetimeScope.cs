@@ -126,6 +126,7 @@ namespace Game.LifetimeScopes
         private void RegisterUi(IContainerBuilder builder)
         {
             builder.Register<HudPromptView>(Lifetime.Scoped);
+            builder.Register<HudDamageView>(Lifetime.Scoped);
 
             builder.Register<GameplayViewModel>(Lifetime.Scoped);
             builder.Register<InventoryViewModel>(Lifetime.Scoped);
@@ -168,6 +169,7 @@ namespace Game.LifetimeScopes
         {
             builder.Register<InventoryFx>(Lifetime.Singleton);
             builder.Register<HudRunesFx>(Lifetime.Singleton);
+            builder.Register<HudDamageFx>(Lifetime.Singleton);
             builder.Register<GameOverFx>(Lifetime.Singleton);
             builder.Register<CommonFx>(Lifetime.Singleton);
         }

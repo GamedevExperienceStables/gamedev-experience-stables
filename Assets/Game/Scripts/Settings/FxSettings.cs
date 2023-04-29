@@ -16,6 +16,9 @@ namespace Game.Settings
         private HudRunesFx.Settings hudRunes;
         
         [SerializeField]
+        private HudDamageFx.Settings hudDamage;
+        
+        [SerializeField]
         private GameOverFx.Settings gameOver;
 
         public InventoryFx.Settings Inventory => inventory;
@@ -25,5 +28,7 @@ namespace Game.Settings
         public GameOverFx.Settings GameOver => gameOver;
 
         public CommonFx.Settings Common => common;
+
+        public HudDamageFx.Settings HudDamage => hudDamage;
     }
 }

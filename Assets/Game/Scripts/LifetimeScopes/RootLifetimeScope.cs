@@ -154,6 +154,7 @@ namespace Game.LifetimeScopes
 
             builder.RegisterInstance(fxSettings.Inventory);
             builder.RegisterInstance(fxSettings.HudRunes);
+            builder.RegisterInstance(fxSettings.HudDamage);
             builder.RegisterInstance(fxSettings.GameOver);
             builder.RegisterInstance(fxSettings.Common);
         }
