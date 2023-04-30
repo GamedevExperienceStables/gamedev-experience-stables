@@ -80,8 +80,8 @@ namespace Game.Weapons
             if (definition.FaceInDirection)
                 FaceInDirection(source, ref rotation);
 
-            TrapDefinition definition1 = definition.SpawnDefinition;
-            TrapView trap = _trapFactory.Create(definition1.PrefabDeprecated, definition1);
+            TrapDefinition trapDefinition = definition.SpawnDefinition;
+            TrapView trap = _trapFactory.Create(trapDefinition.Prefab, trapDefinition);
             trap.transform.SetPositionAndRotation(spawnPoint, rotation);
         }
 
