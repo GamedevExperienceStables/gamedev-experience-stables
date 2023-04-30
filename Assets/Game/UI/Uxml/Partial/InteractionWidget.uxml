@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Game/UI/Uss/HudStyle.uss?fileID=7433441132597879392&amp;guid=43fb365d5654783488ae02a43eaf455d&amp;type=3#HudStyle" />
-    <ui:VisualElement name="widget-interaction-block" class="widget-interaction" style="flex-grow: 1;">
+    <ui:VisualElement name="widget-interaction-block" class="widget-interaction">
+        <Game.UI.InputKey name="input-key" />
         <ui:Label name="text" tabindex="-1" text="Press &apos;E&apos; to interact" display-tooltip-when-elided="true" class="widget-interaction__text" />
     </ui:VisualElement>
 </ui:UXML>

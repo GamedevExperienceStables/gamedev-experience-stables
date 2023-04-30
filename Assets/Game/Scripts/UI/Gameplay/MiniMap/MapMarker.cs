@@ -22,6 +22,9 @@ namespace Game.UI
         public void UpdatePosition(Vector2 value)
             => Element.style.translate = new Translate(value.x, value.y);
 
+        public void UpdateRotation(float mapAngle) 
+            => Element.style.rotate = new Rotate(mapAngle);
+
         public bool IsWorldPositionChanged()
         {
             if (_lastWorldPosition.AlmostEquals(_owner.Position))

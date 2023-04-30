@@ -59,6 +59,9 @@ namespace Game.Actors.Health
         {
             _isDead = true;
             _damageableController.MakeInvulnerable();
+            
+            if (cause == DeathCause.PermanentDeath)
+                RemoveHealth();
 
             Died?.Invoke();
             DiedWithCause?.Invoke(cause);
@@ -67,6 +70,12 @@ namespace Game.Actors.Health
 
             if (destroyOnDeath)
                 Destroy(gameObject);
+        }
+
+        private void RemoveHealth()
+        {
+            float damage = -_owner.GetCurrentValue(CharacterStats.Health);
+            _owner.ApplyModifier(CharacterStats.Health, damage);
         }
 
         private void PlayDeathFeedback()

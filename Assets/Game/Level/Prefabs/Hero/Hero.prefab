@@ -614,7 +614,6 @@ GameObject:
   - component: {fileID: 3247602722215226893}
   - component: {fileID: 3247602722215226892}
   - component: {fileID: -5248227537751363020}
-  - component: {fileID: 4121165560153185053}
   - component: {fileID: 3247602722215226895}
   - component: {fileID: 3247602722215226880}
   - component: {fileID: 3597760082879023102}
@@ -629,6 +628,7 @@ GameObject:
   - component: {fileID: 5671525594438570833}
   - component: {fileID: 7690238673121470068}
   - component: {fileID: 1790609468623538414}
+  - component: {fileID: -1541074684181528226}
   m_Layer: 3
   m_Name: Hero
   m_TagString: Untagged
@@ -710,22 +710,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!208 &4121165560153185053
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3247602722215226894}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.6, y: 0.8, z: 0.6}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!114 &3247602722215226895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -744,13 +728,13 @@ MonoBehaviour:
   CapsuleYOffset: 0.8
   CapsulePhysicsMaterial: {fileID: 0}
   GroundDetectionExtraDistance: 1
-  MaxStableSlopeAngle: 60
+  MaxStableSlopeAngle: 40
   StableGroundLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 769
   DiscreteCollisionEvents: 0
   StepHandling: 1
-  MaxStepHeight: 0.5
+  MaxStepHeight: 0.6
   AllowSteppingWithoutStableGrounding: 0
   MinRequiredStepDepth: 0.1
   LedgeAndDenivelationHandling: 1
@@ -906,6 +890,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1180855024730839192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -956,6 +941,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83cdeed0980141b0979837c69ce23f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &-1541074684181528226
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247602722215226894}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 0.8, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.8, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3247602723414458277
 GameObject:
   m_ObjectHideFlags: 0
@@ -2075,11 +2076,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8a99ca3dfbd5bf34c8c9758ad5e770b6, type: 2}
-    - target: {fileID: 2413166446769820548, guid: e3cac06ff6a512944ba5e58b522a0c44,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2327963345032694654, guid: e3cac06ff6a512944ba5e58b522a0c44,
         type: 3}
       propertyPath: m_Layer
@@ -2099,6 +2095,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413166446769820548, guid: e3cac06ff6a512944ba5e58b522a0c44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2414519961168111372, guid: e3cac06ff6a512944ba5e58b522a0c44,
         type: 3}

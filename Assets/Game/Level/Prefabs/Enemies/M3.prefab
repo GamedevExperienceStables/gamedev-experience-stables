@@ -128,6 +128,11 @@ PrefabInstance:
       propertyPath: MaxStableDistanceFromLedge
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2243510481174325238, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
+        type: 3}
+      propertyPath: avoidancePriority
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 8473229070387919807, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
         type: 3}
       propertyPath: m_LocalPosition.x

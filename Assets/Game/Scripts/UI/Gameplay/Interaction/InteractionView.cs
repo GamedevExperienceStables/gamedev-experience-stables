@@ -1,4 +1,5 @@
-﻿using Game.Level;
+﻿using Game.Input;
+using Game.Level;
 using Game.Localization;
 using UnityEngine.UIElements;
 using VContainer;
@@ -10,6 +11,7 @@ namespace Game.UI
         private readonly InteractionViewModel _viewModel;
         private readonly LocalizationInteraction _interaction;
         private readonly ILocalizationService _localization;
+        private readonly InputBindings _inputBindings;
 
         private VisualElement _container;
 
@@ -17,11 +19,12 @@ namespace Game.UI
 
         [Inject]
         public InteractionView(InteractionViewModel viewModel, LocalizationInteraction interaction,
-            ILocalizationService localization)
+            ILocalizationService localization, InputBindings inputBindings)
         {
             _viewModel = viewModel;
             _interaction = interaction;
             _localization = localization;
+            _inputBindings = inputBindings;
 
             _viewModel.SubscribeEnabled(OnEnabled);
             _viewModel.SubscribeDisabled(OnDisabled);
@@ -41,8 +44,8 @@ namespace Game.UI
 
         private void OnLocalizationChanged()
         {
-            string text = _interaction.GetText(_viewModel.CurrentInteraction);
-            UpdateText(text);
+            InteractionPrompt prompt = _interaction.GetInteractionPrompt(_viewModel.CurrentInteraction);
+            UpdateText(prompt.text);
         }
 
         public void Create(VisualElement root)
@@ -51,19 +54,23 @@ namespace Game.UI
             _container = container.Q<VisualElement>(LayoutNames.Hud.WIDGET_INTERACTION_BLOCK);
             _label = container.Q<Label>(LayoutNames.Hud.WIDGET_INTERACTION_TEXT);
             
+            InputKeyBinding inputKeyBinding = _inputBindings.GetBindingDisplay(InputGameplayActions.Interaction);
+            var inputKey = container.Q<InputKey>(LayoutNames.Hud.WIDGET_INTERACTION_INPUT_KEY);
+            inputKey.Bind(inputKeyBinding);
+            
             Hide();
         }
 
-        private void OnEnabled(Interaction interaction)
-        {
-            string text = _interaction.GetText(interaction);
-            Show(text);
-        }
+        private void OnEnabled(Interaction interaction) 
+            => ShowText(interaction);
 
-        private void OnInteracted(Interaction interaction)
+        private void OnInteracted(Interaction interaction) 
+            => ShowText(interaction);
+
+        private void ShowText(Interaction interaction)
         {
-            string text = _interaction.GetText(interaction);
-            UpdateText(text);
+            InteractionPrompt prompt = _interaction.GetInteractionPrompt(interaction);
+            Show(prompt.text, prompt.canExecute);
         }
 
         private void OnDisabled()
@@ -75,11 +82,20 @@ namespace Game.UI
         private void Show() 
             => _container.RemoveFromClassList(LayoutNames.Hud.WIDGET_INTERACTION_HIDDEN_CLASS_NAME);
 
-        private void Show(string text)
+        private void Show(string text, bool isEnabled)
         {
             UpdateText(text);
+            UpdateState(isEnabled);
 
             Show();
+        }
+
+        private void UpdateState(bool isEnabled)
+        {
+            if (isEnabled)
+                _container.AddToClassList(LayoutNames.Hud.WIDGET_INTERACTION_ENABLED_CLASS_NAME);
+            else 
+                _container.RemoveFromClassList(LayoutNames.Hud.WIDGET_INTERACTION_ENABLED_CLASS_NAME);
         }
 
         private void UpdateText(string text)

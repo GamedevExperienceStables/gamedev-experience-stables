@@ -124,6 +124,8 @@ namespace Game.LifetimeScopes
 
         private void RegisterUi(IContainerBuilder builder)
         {
+            builder.Register<HudPromptView>(Lifetime.Scoped);
+
             builder.Register<GameplayViewModel>(Lifetime.Scoped);
             builder.Register<InventoryViewModel>(Lifetime.Scoped);
             
