@@ -12,6 +12,9 @@ namespace Game.Weapons
         [SerializeField]
         private float raycastRadius = 0.1f;
 
+        [SerializeField]
+        private GameObject muzzleFeedbackPrefab;
+        
         [FormerlySerializedAs("deathFeedback")]
         [SerializeField]
         private GameObject deathFeedbackPrefab;
@@ -164,7 +167,15 @@ namespace Game.Weapons
         }
 
         private void Show()
-            => gameObject.SetActive(true);
+        {
+            gameObject.SetActive(true);
+            
+            if (muzzleFeedbackPrefab)
+            {
+                Transform self = transform;
+                Instantiate(muzzleFeedbackPrefab, self.position, self.rotation);
+            }
+        }
 
         private void Hide()
             => gameObject.SetActive(false);
