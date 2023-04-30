@@ -182,6 +182,12 @@ PrefabInstance:
       propertyPath: CapsuleYOffset
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 1815510984333573865, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
+        type: 3}
+      propertyPath: damageFeedback
+      value: 
+      objectReference: {fileID: 5722597808306690243, guid: 6783f1f19e9b68c418ee9e781cab5600,
+        type: 3}
     - target: {fileID: 8473229070387919807, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
         type: 3}
       propertyPath: m_LocalPosition.y

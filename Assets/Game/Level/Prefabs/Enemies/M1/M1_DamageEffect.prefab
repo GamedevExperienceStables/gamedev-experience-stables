@@ -106,45 +106,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1880431902926044711, guid: 1716b3ffbe1a7e049ae880c1b8ac0d21,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7871649243859250820}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1716b3ffbe1a7e049ae880c1b8ac0d21, type: 3}
---- !u!1 &5722597808306690243 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1880431902926044711, guid: 1716b3ffbe1a7e049ae880c1b8ac0d21,
-    type: 3}
-  m_PrefabInstance: {fileID: 6157092188799592164}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7871649243859250820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5722597808306690243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -1821787239
-      Data2: 1139323056
-      Data3: -468999498
-      Data4: 115072929
-    Path: event:/Enemies/M1/M1Damge
-  Event: 
-  PlayEvent: 11
-  StopEvent: 2
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20

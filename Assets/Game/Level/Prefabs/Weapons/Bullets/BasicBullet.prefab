@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastRadius: 0.05
+  muzzleFeedbackPrefab: {fileID: 0}
   deathFeedbackPrefab: {fileID: 0}
 --- !u!114 &2169979632489900430
 MonoBehaviour:
