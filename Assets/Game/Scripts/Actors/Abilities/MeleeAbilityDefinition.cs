@@ -47,6 +47,9 @@ namespace Game.Actors
 
         [Header("FX")]
         [SerializeField]
+        private GameObject startEffectPrefab;
+
+        [SerializeField]
         private GameObject completeEffectPrefab;
 
         [Space]
@@ -72,6 +75,8 @@ namespace Game.Actors
 
         public GameObject CompleteEffectPrefab => completeEffectPrefab;
         public float AnimationSpeedMultiplier => animationSpeedMultiplier;
+
+        public GameObject StartEffectPrefab => startEffectPrefab;
     }
 
     public class MeleeAbility : ActorAbility<MeleeAbilityDefinition>
@@ -87,6 +92,7 @@ namespace Game.Actors
 
         private TimerUpdatable _castTimer;
 
+        private bool _hasStartEffect;
         private bool _hasCompleteEffect;
         private bool _hasHitEffect;
 
@@ -98,7 +104,7 @@ namespace Game.Actors
         {
             if (IsActive)
                 return false;
-            
+
             if (_inputController.HasAnyBlock(InputBlock.Action))
                 return false;
 
@@ -117,6 +123,7 @@ namespace Game.Actors
 
             _castTimer = _timers.GetTimer(TimeSpan.FromSeconds(Definition.CastTime), OnComplete);
 
+            _hasStartEffect = Definition.StartEffectPrefab;
             _hasCompleteEffect = Definition.CompleteEffectPrefab;
             _hasHitEffect = Definition.HitEffectPrefab;
         }
@@ -126,6 +133,8 @@ namespace Game.Actors
 
         protected override void OnActivateAbility()
         {
+            SpawnStartEffect();
+
             Owner.ApplyModifier(CharacterStats.Stamina, -GetCost());
 
             _inputController.SetBlock(true);
@@ -137,7 +146,7 @@ namespace Game.Actors
         private void OnComplete()
         {
             MakeDamage();
-            SpawnEffect();
+            SpawnCompleteEffect();
 
             EndAbility();
         }
@@ -201,14 +210,17 @@ namespace Game.Actors
                 : baseDamage;
         }
 
-        private void SpawnEffect()
+        private void SpawnEffect(GameObject effectPrefab)
         {
-            if (!_hasCompleteEffect)
-                return;
-
             Vector3 spawnPoint = Owner.Transform.position;
             Quaternion spawnRotation = Quaternion.LookRotation(Owner.Transform.forward);
-            Object.Instantiate(Definition.CompleteEffectPrefab, spawnPoint, spawnRotation);
+            Object.Instantiate(effectPrefab, spawnPoint, spawnRotation);
+        }
+
+        private void SpawnCompleteEffect()
+        {
+            if (_hasCompleteEffect)
+                SpawnEffect(Definition.CompleteEffectPrefab);
         }
 
         private void SpawnHitEffect(Transform hit)
@@ -219,6 +231,12 @@ namespace Game.Actors
             Vector3 spawnPoint = hit.position + hit.TransformDirection(Definition.HitOffset);
             Quaternion spawnRotation = Quaternion.LookRotation(hit.forward);
             Object.Instantiate(Definition.HitEffectPrefab, spawnPoint, spawnRotation);
+        }
+
+        private void SpawnStartEffect()
+        {
+            if (_hasStartEffect)
+                SpawnEffect(Definition.StartEffectPrefab);
         }
     }
 }
