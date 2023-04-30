@@ -23,11 +23,11 @@ Material:
   m_Name: M4 Boss_D2
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: 8308d7136d2d3fc4b89f9ba389cbeb56, type: 2}
-  m_ModifiedSerializedProperties: 2
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _EMISSION
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -38,12 +38,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BaseMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: fd7fad15c06b745419ec61dd3595476a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -51,4 +47,5 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.6603774, g: 0.07787468, b: 0.08309544, a: 1}
     - _Color: {r: 0.6603774, g: 0.07787465, b: 0.083095394, a: 1}
+    - _EmissionColor: {r: 512, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
