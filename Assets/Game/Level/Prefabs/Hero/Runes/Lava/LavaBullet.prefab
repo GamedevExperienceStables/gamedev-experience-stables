@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2169979632489900424}
   - component: {fileID: 2169979632489900425}
-  - component: {fileID: 6173742862215923545}
   m_Layer: 3
   m_Name: LavaBullet
   m_TagString: Untagged
@@ -51,36 +50,6 @@ MonoBehaviour:
     type: 3}
   deathFeedbackPrefab: {fileID: 8127599161980782504, guid: a962ca2f4aa4a8845814403a266804c2,
     type: 3}
---- !u!114 &6173742862215923545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2169979632489900431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -873317044
-      Data2: 1269451075
-      Data3: -1443365218
-      Data4: -981964167
-    Path: event:/Abilities/Lava/SpawnLavaProjectile
-  Event: 
-  PlayEvent: 11
-  StopEvent: 12
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &4172330470719024349
 PrefabInstance:
   m_ObjectHideFlags: 0
