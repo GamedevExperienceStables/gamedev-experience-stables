@@ -40,7 +40,6 @@ namespace Game.LifetimeScopes
             RegisterCameras(builder);
             RegisterAudio(builder);
             RegisterPlanetStateMachine(builder);
-            RegisterLocationStateMachine(builder);
             RegisterLootSystem(builder);
             RegisterAbilities(builder);
             RegisterProjectile(builder);
@@ -87,7 +86,14 @@ namespace Game.LifetimeScopes
             builder.Register<GameplayMenuInput>(Lifetime.Scoped);
             builder.Register<GameplayGameOver>(Lifetime.Scoped);
             builder.Register<GameplayInventory>(Lifetime.Scoped);
-            builder.Register<LocationController>(Lifetime.Scoped);
+            
+            builder.Register<LocationController>(Lifetime.Singleton);
+            builder.Register<LocationContextHandler>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<LocationStateStore>(Lifetime.Singleton);
+            builder.Register<LocationStateStoreLoot>(Lifetime.Singleton);
+            builder.Register<LocationStateStoreCounter>(Lifetime.Singleton);
+            builder.Register<LocationStateStoreFact>(Lifetime.Singleton);
+            
             builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
             
             builder.Register<LocationMarkers>(Lifetime.Singleton);
@@ -191,14 +197,6 @@ namespace Game.LifetimeScopes
             builder.Register<PlanetGameOverState>(Lifetime.Scoped);
             builder.Register<PlanetCompleteState>(Lifetime.Scoped);
             builder.Register<PlanetSaveGameState>(Lifetime.Scoped);
-        }
-
-        private static void RegisterLocationStateMachine(IContainerBuilder builder)
-        {
-            builder.Register<LocationStateMachine>(Lifetime.Scoped);
-
-            builder.Register<LocationSafeState>(Lifetime.Scoped);
-            builder.Register<LocationBattleState>(Lifetime.Scoped);
         }
 
         private static void RegisterLootSystem(IContainerBuilder builder)

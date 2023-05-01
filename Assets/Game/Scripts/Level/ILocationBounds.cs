@@ -6,5 +6,6 @@ namespace Game.Level
     {
         Vector3 Center { get; }
         Vector3 Size { get; }
+        Bounds Bounds { get; }
     }
 }

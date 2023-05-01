@@ -16,6 +16,8 @@ namespace Game.GameFlow
         private readonly LevelController _level;
         private readonly SceneLoader _sceneLoader;
         private readonly LocationController _locationController;
+        private readonly LocationContextHandler _locationContextHandler;
+        private readonly LocationStateStore _locationState;
         private readonly IInputService _inputService;
 
         [Inject]
@@ -24,6 +26,8 @@ namespace Game.GameFlow
             LevelController level,
             SceneLoader sceneLoader,
             LocationController locationController,
+            LocationContextHandler locationContextHandler,
+            LocationStateStore locationState,
             IInputService inputService
         )
         {
@@ -31,6 +35,8 @@ namespace Game.GameFlow
             _level = level;
             _sceneLoader = sceneLoader;
             _locationController = locationController;
+            _locationContextHandler = locationContextHandler;
+            _locationState = locationState;
             _inputService = inputService;
         }
 
@@ -39,8 +45,8 @@ namespace Game.GameFlow
             _inputService.ReplaceState(InputSchemeGame.None);
 
             await _loadingScreen.ShowAsync();
-
-            _locationController.Clear();
+            
+            ExitLocation();
 
             await UnloadLastLocationIfExists();
 
@@ -61,9 +67,12 @@ namespace Game.GameFlow
             ILocationPointKey locationPoint)
         {
             LocationContext context = GetContext(location);
-            LocationPoint spawnPoint = context.FindLocationPoint(locationPoint);
+            _locationContextHandler.Init(context, locationDefinition);
 
-            _locationController.Init(locationDefinition, context, spawnPoint.transform);
+            _locationController.Init(_locationContextHandler, locationPoint);
+
+            LocationData locationData = _level.GetOrCreateLocationData(locationDefinition);
+            _locationState.Init(locationData, _locationContextHandler);
         }
 
         private async UniTask UnloadLastLocationIfExists()
@@ -72,6 +81,19 @@ namespace Game.GameFlow
                 return;
 
             await _sceneLoader.UnloadSceneIfLoadedAsync(lastLocation.Location.SceneName);
+        }
+
+        private void ExitLocation()
+        {
+            if (!_locationContextHandler.Initialized)
+                return;
+            
+            ILocationDefinition locationDefinition = _locationContextHandler.Location;
+            LocationData locationData = _level.GetOrCreateLocationData(locationDefinition);
+            _locationState.Store(locationData, _locationContextHandler);
+            
+            _locationController.Clear();
+            _locationContextHandler.Clear();
         }
 
         private async UniTask<Scene> LoadLocationAsync(ILocationDefinition location)

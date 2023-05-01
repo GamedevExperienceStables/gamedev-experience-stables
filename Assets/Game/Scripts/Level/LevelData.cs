@@ -10,5 +10,7 @@ namespace Game.Level
         
         public ILocationPoint LastLocationPoint { get; set; }
         public ILocationPoint CurrentLocationPoint { get; set; }
+
+        public LevelLocations Locations { get; set; }
     }
 }

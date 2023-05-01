@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Audio;
 using Game.Cameras;
+using Game.Enemies;
 using Game.Hero;
 using UnityEngine;
 using VContainer;
@@ -13,10 +14,8 @@ namespace Game.Level
 
         private readonly FollowSceneCamera _followCamera;
         private readonly LocationAudioListener _audioListener;
-        private readonly LocationStateMachine _locationStateMachine;
 
         private HeroController _hero;
-        private LocationContext _context;
 
         public event Action Initialized;
 
@@ -24,43 +23,24 @@ namespace Game.Level
         public LocationController(
             HeroFactory heroFactory,
             FollowSceneCamera followCamera,
-            LocationAudioListener audioListener,
-            LocationStateMachine locationStateMachine
+            LocationAudioListener audioListener
         )
         {
             _heroFactory = heroFactory;
             _followCamera = followCamera;
             _audioListener = audioListener;
-            _locationStateMachine = locationStateMachine;
         }
-
-        public Bounds Bounds { get; private set; }
-        public ILocationDefinition LocationDefinition { get; private set; }
-
+        
         public Transform Hero => _hero.transform;
 
-        public void Init(ILocationDefinition definition, LocationContext locationContext, Transform spawnPoint)
+        public void Init(ILocationContext context, ILocationPointKey locationPoint)
         {
-            LocationDefinition = definition;
-            _context = locationContext;
-
-            SpawnHero(spawnPoint);
-            InitLocationBounds();
-
-            _context.InitEnemySpawners(_hero.transform);
+            LocationPoint spawnPoint = context.FindLocationPoint(locationPoint);
+            SpawnHero(spawnPoint.transform);
+            
+            InitEnemySpawners(context, _hero.transform);
 
             Initialized?.Invoke();
-            
-            _locationStateMachine.EnterState<LocationSafeState>();
-        }
-
-        private void InitLocationBounds()
-        {
-            ILocationBounds bounds = _context.FindBounds();
-            if (bounds is null) 
-                return;
-            
-            Bounds = new Bounds(bounds.Center, bounds.Size);
         }
 
         public void Clear()
@@ -70,21 +50,18 @@ namespace Game.Level
                 _hero.Reset();
                 _hero.SetActive(false);
             }
-
-            if (_context)
-                _context = null;
         }
 
         private void SpawnHero(Transform spawnPoint)
         {
-            if (!_hero) 
+            if (!_hero)
                 _hero = _heroFactory.Create();
 
             UnFollowHero();
-            
+
             _hero.SetActive(true);
             _hero.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
-            
+
             FollowHero();
         }
 
@@ -99,5 +76,19 @@ namespace Game.Level
             _followCamera.ClearTarget();
             _audioListener.ClearTarget();
         }
+        
+        private static void InitEnemySpawners(ILocationContext context, Transform target)
+        {
+            var enemySpawnZones = context.FindAll<EnemySpawnGroup>();
+            if (enemySpawnZones.Count == 0)
+                return;
+
+            Transform spawnContainer = CreateContainer();
+            foreach (EnemySpawnGroup spawnZone in enemySpawnZones)
+                spawnZone.Init(spawnContainer, target);
+        }
+        
+        private static Transform CreateContainer() 
+            => new GameObject("EnemiesContainer").transform;
     }
 }

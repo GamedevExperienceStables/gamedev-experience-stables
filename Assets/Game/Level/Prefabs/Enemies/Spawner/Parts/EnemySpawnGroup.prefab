@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2350107545435338789}
   - component: {fileID: -4118036941347720173}
+  - component: {fileID: 2727247995330800059}
+  - component: {fileID: 2527899363274412811}
   m_Layer: 0
   m_Name: EnemySpawnGroup
   m_TagString: Untagged
@@ -30,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -35.057, z: 0}
 --- !u!114 &-4118036941347720173
 MonoBehaviour:
@@ -44,6 +46,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e64db72a0b0458192d47f14ac310262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnPoint: []
-  spawnCounts: 1
+  enemySpawnPoints: []
+  canRespawn: 0
   respawnTimer: 0
+  spawnCounts: 1
+--- !u!114 &2727247995330800059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2350107545435338778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d1796f3dc38e334ca54f2b0a067111d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 
+--- !u!114 &2527899363274412811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2350107545435338778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bb250a7d055453bbc76f9592912a0b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetState: 0

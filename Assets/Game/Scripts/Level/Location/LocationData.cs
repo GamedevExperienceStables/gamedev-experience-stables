@@ -2,7 +2,13 @@
 {
     public class LocationData
     {
-        public bool allowExit;
-        public bool allowInventory;
+        public LocationData(ILocationDefinition locationDefinition)
+            => Definition = locationDefinition;
+
+        public ILocationDefinition Definition { get; private set; }
+
+        public LocationPersistenceFact Facts { get; } = new();
+        public LocationPersistenceInt Counters { get; } = new();
+        public LocationPersistenceLoot Loot { get; } = new();
     }
 }

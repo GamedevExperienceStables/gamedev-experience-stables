@@ -7,7 +7,6 @@ namespace Game.Level
     {
         private readonly PlanetStateMachine _planetStateMachine;
         private readonly LevelController _level;
-        private readonly LocationDataHandler _location;
 
         private LocationPointDefinition _targetLocation;
         private LocationDoor _door;
@@ -15,13 +14,11 @@ namespace Game.Level
         [Inject]
         public TransitionToLocationInteraction(
             PlanetStateMachine planetStateMachine,
-            LevelController level,
-            LocationDataHandler location
+            LevelController level
         )
         {
             _planetStateMachine = planetStateMachine;
             _level = level;
-            _location = location;
         }
 
         public LocationPointDefinition TargetLocation => _targetLocation;
@@ -33,7 +30,7 @@ namespace Game.Level
         }
 
         public override bool CanExecute()
-            => _location.CanTransferTo(_targetLocation);
+            => true;
 
         public override void Execute()
         {

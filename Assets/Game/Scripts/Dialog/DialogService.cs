@@ -8,7 +8,7 @@ namespace Game.Dialog
         private readonly List<DialogData> _stack = new();
 
         public event Action<DialogData> Showing;
-        public event Action Closing;
+        public event Action<bool> Closing;
 
         public void ShowRequest(DialogData dialogToShow)
         {
@@ -16,7 +16,7 @@ namespace Game.Dialog
             Showing?.Invoke(dialogToShow);
         }
 
-        public void CloseRequest(DialogData dialogToClose)
+        public void CloseRequest(DialogData dialogToClose, bool immediate = false)
         {
             bool activeClosed = _stack.IndexOf(dialogToClose) == _stack.Count - 1;
 
@@ -34,7 +34,7 @@ namespace Game.Dialog
             }
             else
             {
-                Closing?.Invoke();
+                Closing?.Invoke(immediate);
             }
         }
 

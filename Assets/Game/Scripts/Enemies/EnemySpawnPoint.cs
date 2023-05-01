@@ -17,72 +17,88 @@ namespace Game.Enemies
         [SerializeField, Min(1)]
         private int spawnCount = 3;
 
-        [SerializeField, Min(1f)]
+        [SerializeField, Min(1f), ShowIf(nameof(CanRespawn))]
         private float spawnInterval = 5f;
 
         [Header("FX")]
         [SerializeField]
         private MMF_Player spawnFeedback;
 
-        private int _spawnCount;
+        [ShowNonSerializedField]
+        private int _spawnsLeft;
+
+        [ShowNonSerializedField]
+        private int _enemiesLeft;
+
+        private bool _isActive;
         private Transform _target;
-        private bool _initialized;
 
         private Transform _spawnContainer;
         private EnemyFactory _factory;
         private TimerUpdatable _spawnTimer;
+        private TimerPool _timers;
 
-        private int _enemiesLeft;
+        private bool CanRespawn => spawnCount > 1;
 
-        public bool IsCleared => _enemiesLeft <= 0;
+        public bool IsCleared { get; private set; }
+        public event Action Cleared;
 
         [Inject]
-        public void Construct(EnemyFactory enemyFactory, TimerFactory timerFactory)
+        public void Construct(EnemyFactory enemyFactory, TimerPool timers)
         {
             _factory = enemyFactory;
-            _spawnTimer = timerFactory.CreateTimer(TimeSpan.FromSeconds(spawnInterval), Spawn, isLooped: true);
+
+            _timers = timers;
+            _spawnTimer = _timers.GetTimer(TimeSpan.FromSeconds(spawnInterval), Spawn, isLooped: true);
         }
 
+        private void OnDestroy()
+            => _timers?.ReleaseTimer(_spawnTimer);
+
         public void Init(Transform spawnContainer)
+            => _spawnContainer = spawnContainer;
+
+        public void Activate()
         {
-            _spawnContainer = spawnContainer;
-            _spawnCount = spawnCount;
+            if (!isActiveAndEnabled)
+                return;
+
+            if (_isActive && !IsCleared)
+            {
+                Debug.LogWarning($"Trying to activate a non-cleared spawn point {name}", gameObject);
+                return;
+            }
+
+            _isActive = true;
+
+            _spawnsLeft = spawnCount;
             _enemiesLeft = spawnCount;
-            _initialized = true;
+
+            if (CanRespawn)
+                _spawnTimer.Start();
+
+            Spawn();
         }
 
         public void SetTarget(Transform target)
             => _target = target;
 
-        public void Update()
+        private void Spawn()
         {
-            if (!_initialized)
-                return;
+            _spawnsLeft--;
 
-            if (_spawnCount <= 0)
-                return;
+            SpawnEnemy();
+            PlaySpawnFeedback();
 
-            if (_spawnCount.Equals(spawnCount))
-            {
-                Spawn();
-
-                if (spawnCount <= 1)
-                    return;
-
-                _spawnTimer.Start();
-            }
-
-            _spawnTimer.Tick();
+            if (_spawnsLeft <= 0)
+                _spawnTimer.Stop();
         }
 
-        private void Spawn()
+        private void SpawnEnemy()
         {
             EnemyController instance = _factory.Create(enemy, transform, _target, _spawnContainer);
             var deathController = instance.GetComponent<DeathController>();
             deathController.Died += OnDied;
-            _spawnCount--;
-
-            PlaySpawnFeedback();
         }
 
         private void PlaySpawnFeedback()
@@ -92,6 +108,14 @@ namespace Game.Enemies
         }
 
         private void OnDied()
-            => _enemiesLeft--;
+        {
+            _enemiesLeft--;
+
+            if (_enemiesLeft > 0)
+                return;
+
+            IsCleared = true;
+            Cleared?.Invoke();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Game.Inventory;
+using Game.Level;
 using UnityEngine;
 
 namespace Game.Settings
@@ -12,8 +13,18 @@ namespace Game.Settings
         [SerializeField]
         private MaterialDataTable materials;
 
+        [SerializeField]
+        private LocationDataTable locations;
+        
+        [SerializeField]
+        private LootDataTable loot;
+
         public RuneDataTable Runes => runes;
 
         public MaterialDataTable Materials => materials;
+        
+        public LocationDataTable Locations => locations;
+
+        public LootDataTable Loot => loot;
     }
 }
