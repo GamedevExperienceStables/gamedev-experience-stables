@@ -18,10 +18,10 @@ namespace Game.UI
         public void UnSubscribeDialogRequested(Action<DialogData> callback)
             => _dialogService.Showing -= callback;
 
-        public void SubscribeDialogClosing(Action callback)
+        public void SubscribeDialogClosing(Action<bool> callback)
             => _dialogService.Closing += callback;
 
-        public void UnSubscribeDialogClosing(Action callback)
+        public void UnSubscribeDialogClosing(Action<bool> callback)
             => _dialogService.Closing -= callback;
 
         public void DialogClosed() 

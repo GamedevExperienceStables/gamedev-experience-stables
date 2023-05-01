@@ -62,8 +62,8 @@ namespace Game.UI
             {
                 _hideTimer.Stop();
                 return;
-            }   
-            
+            }
+
             bool inTransition = !_hideTimer.IsDone || !_delayTimer.IsDone;
             if (_data.IsEmpty && !inTransition)
             {
@@ -95,21 +95,29 @@ namespace Game.UI
         private void ShowDialog(DialogData newData)
         {
             _data = newData;
-            
+
             ShowDialog();
         }
 
         private void ShowDialogWithDelay(DialogData data)
         {
             _data = data;
-            
+
             _delayTimer.Start();
         }
 
-        private void OnDialogClosing()
-            => _hideTimer.Start();
+        private void OnDialogClosing(bool immediate)
+        {
+            if (immediate)
+                CloseDialog();
+            else
+                _hideTimer.Start();
+        }
 
         private void OnDialogComplete()
+            => CloseDialog();
+
+        private void CloseDialog()
         {
             _data = default;
             _viewModel.DialogClosed();
@@ -130,7 +138,7 @@ namespace Game.UI
             }
         }
 
-        private void HideDialog() 
+        private void HideDialog()
             => _dialog.AddToClassList(LayoutNames.Hud.DIALOG_HIDDEN_CLASS_NAME);
     }
 }
