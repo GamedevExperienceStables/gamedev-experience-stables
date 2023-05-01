@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using VContainer;
 
@@ -6,17 +7,18 @@ namespace Game.Input
 {
     public class InputBindings
     {
-        private const string KEY_PREFIX = "Key_";
+        private readonly InputBindingsSettings _settings;
 
-        private readonly Dictionary<InputGameplayActions, string> _keyBindings = new();
+        private readonly Dictionary<InputGameplayActions, InputKeyBinding> _keyBindings = new();
 
         private readonly GameInputControls.GameplayActions _gameplayActions;
         private readonly GameInputControls.MenuActions _menuActions;
 
 
         [Inject]
-        public InputBindings(GameInputControlsAdapter adapter)
+        public InputBindings(GameInputControlsAdapter adapter, InputBindingsSettings settings)
         {
+            _settings = settings;
             _gameplayActions = adapter.GetGameplayActions();
             _menuActions = adapter.GetMenuActions();
 
@@ -36,29 +38,24 @@ namespace Game.Input
             _keyBindings.Add(InputGameplayActions.Inventory, GetInputKey(_gameplayActions.Inventory, group));
         }
 
-        private static string GetInputKey(InputAction action, string group)
+        private InputKeyBinding GetInputKey(InputAction action, string group)
         {
             int index = action.GetBindingIndex(group);
             string fallback = action.GetBindingDisplayString(index, out string deviceLayout, out string controlPath);
 
             if (string.IsNullOrEmpty(deviceLayout) || string.IsNullOrEmpty(controlPath))
-                return fallback;
+                return new InputKeyBinding(fallback);
 
-            return deviceLayout switch
+            foreach (InputKeyBinding inputKeyBinding in _settings.Bindings)
             {
-                "Keyboard" => ToSpriteKey(controlPath),
-                "Mouse" => ToSprite(controlPath),
-                _ => fallback
-            };
+                if (inputKeyBinding.Key.Equals(controlPath, StringComparison.OrdinalIgnoreCase))
+                    return inputKeyBinding;
+            }
+
+            return new InputKeyBinding(controlPath);
         }
 
-        public string GetBindingDisplayString(InputGameplayActions inputAction)
+        public InputKeyBinding GetBindingDisplay(InputGameplayActions inputAction)
             => _keyBindings[inputAction];
-
-        private static string ToSprite(string key)
-            => $"<sprite name=\"{key}\">";
-
-        private static string ToSpriteKey(string key)
-            => ToSprite($"{KEY_PREFIX}{key}");
     }
 }

@@ -5,6 +5,6 @@ namespace Game.Level
 {
     public interface IMagnetSystem
     {
-        UniTask StartPullAsync(Transform source, Transform target);
+        UniTask StartPullAsync(Transform source, Transform target, Vector3 targetOffset = default);
     }
 }

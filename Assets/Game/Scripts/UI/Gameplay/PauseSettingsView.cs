@@ -9,10 +9,15 @@ namespace Game.UI
         private Button _backButton;
 
         private SettingsView _settings;
+        
+        private CommonFx _commonFx;
 
         [Inject]
-        public void Construct(SettingsView settings) 
-            => _settings = settings;
+        public void Construct(SettingsView settings, CommonFx commonFx)
+        {
+            _settings = settings;
+            _commonFx = commonFx;
+        }
 
         protected override void OnAwake()
         {
@@ -24,6 +29,8 @@ namespace Game.UI
 
             _backButton = Content.Q<Button>(LayoutNames.PauseSettings.BUTTON_BACK);
             _backButton.clicked += OnBack;
+            
+            _commonFx.RegisterButton(_backButton, ButtonStyle.Primary);
         }
 
         private void OnDestroy()
@@ -31,6 +38,8 @@ namespace Game.UI
             _settings.Destroy();
 
             _backButton.clicked -= OnBack;
+            
+            _commonFx.UnRegisterButton(_backButton, ButtonStyle.Primary);
         }
 
         public override void Show()

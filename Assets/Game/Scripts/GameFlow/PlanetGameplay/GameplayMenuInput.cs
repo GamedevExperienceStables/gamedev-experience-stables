@@ -16,6 +16,7 @@ namespace Game.GameFlow
         private event Action MenuRequested;
         
         private event Action<int> ActiveSlotChanging;
+        private event Action<int> ActiveSlotShifted;
 
         private readonly InputHistory<InputSchemeMenu> _history;
 
@@ -56,6 +57,12 @@ namespace Game.GameFlow
         
         public void UnSubscribeActiveSlot(Action<int> callback)
             => ActiveSlotChanging -= callback;
+        
+        public void SubscribeActiveSlotShifted(Action<int> callback)
+            => ActiveSlotShifted += callback;
+        
+        public void UnSubscribeActiveSlotShifted(Action<int> callback)
+            => ActiveSlotShifted -= callback;
 
         public void PushState(InputSchemeMenu state)
             => _history.Push(state);
@@ -79,6 +86,9 @@ namespace Game.GameFlow
             _inputGameplay.Slot2Button.Performed += OnSlot2;
             _inputGameplay.Slot3Button.Performed += OnSlot3;
             _inputGameplay.Slot4Button.Performed += OnSlot4;
+
+            _inputGameplay.SlotNextButton.Performed += OnSlotNext;
+            _inputGameplay.SlotPrevButton.Performed += OnSlotPrev;
         }
 
         private void UnSubscribeInputs()
@@ -94,6 +104,9 @@ namespace Game.GameFlow
             _inputGameplay.Slot2Button.Performed -= OnSlot2;
             _inputGameplay.Slot3Button.Performed -= OnSlot3;
             _inputGameplay.Slot4Button.Performed -= OnSlot4;
+
+            _inputGameplay.SlotNextButton.Performed -= OnSlotNext;
+            _inputGameplay.SlotPrevButton.Performed -= OnSlotPrev;
         }
 
         private void OnMenu()
@@ -138,6 +151,12 @@ namespace Game.GameFlow
 
         private void OnSlot4() 
             => OnActiveSlotChanging(4);
+        
+        private void OnSlotNext() 
+            => ActiveSlotShifted?.Invoke(1);
+
+        private void OnSlotPrev()
+            => ActiveSlotShifted?.Invoke(-1);
 
         private void OnActiveSlotChanging(int newSlotId) 
             => ActiveSlotChanging?.Invoke(newSlotId);

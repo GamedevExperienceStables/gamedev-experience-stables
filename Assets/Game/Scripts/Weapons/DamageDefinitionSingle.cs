@@ -10,6 +10,9 @@ namespace Game.Weapons
     {
         [SerializeField, Min(0)]
         private float baseDamage;
+        
+        [SerializeField]
+        private float pushForce;
 
         [SerializeField]
         private GameObject hitFeedback;
@@ -21,5 +24,6 @@ namespace Game.Weapons
         public float Damage => baseDamage;
 
         public IEnumerable<EffectDefinition> Effects => effects;
+        public float PushForce => pushForce;
     }
 }

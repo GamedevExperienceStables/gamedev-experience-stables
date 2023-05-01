@@ -33,10 +33,16 @@ namespace Game.UI
             _markers.Remove(marker);
         }
 
-        public void Tick()
+        public void UpdatePosition()
         {
-            for (int i = _markers.Count - 1; i >= 0; i--)
-                UpdateMarker(_markers[i]);
+            for (int i = _markers.Count - 1; i >= 0; i--) 
+                UpdateMarkerPosition(_markers[i]);
+        }
+
+        public void UpdateRotation(float angle)
+        {
+            for (int i = _markers.Count - 1; i >= 0; i--) 
+                _markers[i].UpdateRotation(angle);
         }
 
         private static MapMarker CreateMarker(ILocationMarker target)
@@ -48,7 +54,7 @@ namespace Game.UI
             return marker;
         }
 
-        private void UpdateMarker(MapMarker marker)
+        private void UpdateMarkerPosition(MapMarker marker)
         {
             if (!marker.IsWorldPositionChanged())
                 return;

@@ -49,5 +49,6 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   gameSettings: {fileID: 11400000, guid: 2a6d5e66c7b69114ba250107d23d73ed, type: 2}
+  fxSettings: {fileID: 11400000, guid: 78e774a52b14fe74e89129c5851e82fe, type: 2}
   heroData: {fileID: 11400000, guid: 8c2b9dc66daa1f64d8fae317ee94ad6f, type: 2}
   dataTables: {fileID: 11400000, guid: daf0eea7d6b33164e900ceb65994c0dd, type: 2}

@@ -8,15 +8,13 @@ using Game.Weapons;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Serialization;
 
 namespace Game.Actors
 {
     [CreateAssetMenu(menuName = MENU_PATH + "Projectile")]
     public class ProjectileAbilityDefinition : AbilityDefinition<ProjectileAbility>
     {
-        [SerializeField]
-        private EventReference fireSfx;
-
         [SerializeField, Expandable]
         private TargetingDefinition targeting;
 
@@ -36,6 +34,11 @@ namespace Game.Actors
         [Space]
         [SerializeField]
         private float animationSpeedMultiplier = 1f;
+        
+        [Space]
+        [FormerlySerializedAs("fireSfx")]
+        [SerializeField]
+        private EventReference fireSfxDeprecated;
 
         public ProjectileDefinition Projectile => projectile;
 
@@ -43,8 +46,6 @@ namespace Game.Actors
 
         public float CastTime => castTime;
         public float FireTime => fireTime;
-
-        public EventReference FireSfx => fireSfx;
 
         public TargetingDefinition Targeting => targeting;
 
@@ -189,9 +190,6 @@ namespace Game.Actors
             _projectilePool.Get(out Projectile projectile);
 
             projectile.Fire(_spawnPoint, _targetPosition);
-
-            if (!Definition.FireSfx.IsNull)
-                _audio.PlayOneShot(Definition.FireSfx, Owner.Transform);
         }
 
         private Vector3 GetTargetPosition()

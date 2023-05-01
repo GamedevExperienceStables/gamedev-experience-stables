@@ -13,6 +13,9 @@ namespace Game.Weapons
 
         [SerializeField, Min(0f)]
         private float radius = 1f;
+        
+        [SerializeField]
+        private float pushForce;
 
         [SerializeField]
         private GameObject hitFeedback;
@@ -28,5 +31,7 @@ namespace Game.Weapons
         public GameObject HitFeedback => hitFeedback;
         public LayerMask Layers => layerMask;
         public IEnumerable<EffectDefinition> Effects => effects;
+
+        public float PushForce => pushForce;
     }
 }

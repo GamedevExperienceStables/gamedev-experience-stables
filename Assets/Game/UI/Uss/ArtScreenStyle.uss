@@ -1,0 +1,29 @@
+.art-container {
+    align-items: center;
+    padding: 60px 120px 100px;
+    margin: 40px;
+    width: 1250px;
+    padding-bottom: 50px;
+}
+
+.header-label {
+    font-size: 80px;
+    color: rgb(155, 89, 199);
+    -unity-font-definition: var(--font-heading);
+    text-shadow: -1px -1px 0 rgb(86, 38, 118);
+    align-self: auto;
+}
+
+.art__content {
+    flex-shrink: 0;
+}
+
+.art__page {
+    flex-shrink: 0;
+    height: 685px;
+}
+
+.art__image {
+    flex-grow: 1;
+    -unity-background-scale-mode: scale-and-crop;
+}

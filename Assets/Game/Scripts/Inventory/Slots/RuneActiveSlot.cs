@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Game.Inventory
+﻿namespace Game.Inventory
 {
     public class RuneActiveSlot
     {
@@ -9,19 +7,9 @@ namespace Game.Inventory
         public bool IsEmpty => !Value.IsValid();
 
         public void Set(RuneSlotId id)
-        {
-            Value = id;
-#if UNITY_EDITOR
-            Debug.Log($"Slot activated: {Value}");
-#endif
-        }
+            => Value = id;
 
         public void Clear()
-        {
-#if UNITY_EDITOR
-            Debug.Log($"Slot deactivated: {Value}");
-#endif  
-            Value = RuneSlotId.INVALID_ID;
-        }
+            => Value = RuneSlotId.INVALID_ID;
     }
 }

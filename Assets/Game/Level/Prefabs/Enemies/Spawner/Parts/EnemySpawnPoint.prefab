@@ -456,7 +456,7 @@ Transform:
   m_Children:
   - {fileID: 4084789936463911640}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -35.057, z: 0}
 --- !u!114 &2350107545435338788
 MonoBehaviour:
@@ -470,10 +470,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8318a78858b4a939974071aef0193ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  enemy: {fileID: 11400000, guid: 2a649a952fd83194586bbbc4e42d2e8a, type: 2}
   spawnCount: 3
   spawnInterval: 4
-  spawnFeedback: {fileID: 5578446121642143856}
+  spawnFeedback: {fileID: 0}
 --- !u!114 &-9173846011038803593
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -30,10 +30,11 @@
             public const string BUTTON_SETTINGS = "button-settings";
             public const string BUTTON_ABOUT = "button-about";
             public const string BUTTON_ART = "button-art";
-            
+            public const string BUTTON_DOWNLOAD = "button-download";
             public const string BUTTON_BACK = "button-back";
-
             public const string BUTTON_ICON = "icon";
+            
+            public const string SCROLL_CONTAINER = "scroll-container";
             
             public const string MENU = "menu";
             public const string PAGES = "pages";
@@ -50,7 +51,6 @@
             
             public const string PAGE_HEADING = "header";
 
-            
             public const string PAGE_HIDDEN_CLASS_NAME = "page--hidden";
 
             public const string BUTTON_ACTIVE_CLASS_NAME = "menu-button--active";
@@ -75,19 +75,22 @@
             public const string RUNE_SLOT_CLASS_NAME = "hud-rune-slot";
             public const string RUNE_SLOT_ICON = "icon";
             public const string RUNE_SLOT_BACKGROUND = "background";
-            public const string RUNE_SLOT_INPUT_LABEL = "input-label";
-            public const string RUNE_SLOT_INPUT_ICON = "input-icon";
+            public const string RUNE_SLOT_INPUT_SELECT = "input-select";
+            public const string RUNE_SLOT_INPUT_ACTIVE = "input-active";            
             
             public const string RUNE_SLOT_INTERACTABLE_CLASS_NAME = "hud-rune-slot--interactable";
             public const string RUNE_SLOT_ENABLED_CLASS_NAME = "hud-rune-slot--enabled";
             public const string RUNE_SLOT_ACTIVE_CLASS_NAME = "hud-rune-slot--active";
             public const string RUNE_SLOT_EMPTY_CLASS_NAME = "hud-rune-slot--empty";
+            public const string RUNE_SLOT_DRAG_CLASS_NAME = "hud-rune-slot--drag";
 
             public const string WIDGET_INTERACTION = "widget-interaction";
             public const string WIDGET_INTERACTION_BLOCK = "widget-interaction-block";
             public const string WIDGET_INTERACTION_TEXT = "text";
+            public const string WIDGET_INTERACTION_INPUT_KEY = "input-key";
             public const string WIDGET_INTERACTION_HIDDEN_CLASS_NAME = "widget-interaction--hidden";
-            
+            public const string WIDGET_INTERACTION_ENABLED_CLASS_NAME = "widget-interaction--enabled";
+
             public const string WIDGET_SAVING = "widget-saving";
             public const string WIDGET_SAVING_CONTAINER = "container";
             public const string WIDGET_SAVING_TEXT = "text";
@@ -101,6 +104,12 @@
             public const string DIALOG_TEXT = "text";
 
             public const string DIALOG_HIDDEN_CLASS_NAME = "dialog-window--hidden";
+            
+            public const string WIDGET_PROMPT_INVENTORY = "widget-prompt-inventory";
+            public const string WIDGET_PROMPT_LABEL = "label";
+
+            public const string WIDGET_DAMAGE = "widget-damage";
+            public const string WIDGET_DAMAGE_ENABLED_CLASS_NAME = "widget-damage--enabled";
         }
         
         public static class MiniMap
@@ -115,11 +124,13 @@
             public const string MAP_COORDINATES = "map-coordinates";
             
             public const string MARKER_CLASS_NAME = "mini-map__marker";
+            public const string MAP_HIDDEN_CLASS_NAME = "mini-map--hidden";
         }
 
         public static class LoadingScreen
         {
             public const string CONTAINER = "loading-screen";
+            public const string LOADING_LABEL = "loading-label";
         }
 
         public static class GameOver
@@ -171,6 +182,9 @@
             
             public const string BUTTON_CONFIRM = "button-confirm";
             public const string BUTTON_CANCEL = "button-cancel";
+
+            public const string HIDDEN_CLASS_NAME = "window-modal--hidden";
+            public const string WIDE_CLASS_NAME = "window-modal--wide";
         }
         
         public static class Cutscene
@@ -190,6 +204,7 @@
             public const string ICON_ACTION = "icon-action";
 
             public const string BLOCK_SKIP = "block-skip";
+            public const string INPUT_KEY_SKIP = "input-key";
             public const string TEXT_SKIP = "text-skip";
 
             public const string SLIDE_HIDDEN_CLASS_NAME = "slider__slide--hidden";

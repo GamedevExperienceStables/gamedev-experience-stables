@@ -46,6 +46,8 @@ namespace Game.UI
         private SavingView _savingView;
         private MiniMapView _miniMapView;
         private DialogView _dialogView;
+        private HudPromptView _hudPromptView;
+        private HudDamageView _damageView;
 
         public IReadOnlyDictionary<RuneSlotId, RuneSlotHudView> RuneSlots => _runeSlotsView.Slots;
 
@@ -56,7 +58,9 @@ namespace Game.UI
             InteractionView interactionView,
             SavingView savingView,
             MiniMapView miniMapView,
-            DialogView dialogView
+            DialogView dialogView,
+            HudPromptView hudPromptView,
+            HudDamageView damageView
             )
         {
             _viewModel = viewModel;
@@ -66,6 +70,8 @@ namespace Game.UI
             _savingView = savingView;
             _miniMapView = miniMapView;
             _dialogView = dialogView;
+            _hudPromptView = hudPromptView;
+            _damageView = damageView;
         }
 
         private void Awake()
@@ -95,11 +101,13 @@ namespace Game.UI
             var crystalWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_CRYSTAL);
             _crystalMask = crystalWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
 
+            _hudPromptView.Create(_root);
             _interactionView.Create(_root);
             _runeSlotsView.Create(_root);
             _savingView.Create(_root);
             _miniMapView.Create(_root);
             _dialogView.Create(_root);
+            _damageView.Create(_root);
 
             InitCrystalView(_viewModel.GetCurrentMaterial());
             
@@ -116,11 +124,13 @@ namespace Game.UI
         {
             _buttonMenu.clicked -= PauseGame;
 
+            _hudPromptView.Destroy();
             _savingView.Destroy();
             _interactionView.Destroy();
             _runeSlotsView.Destroy();
             _miniMapView.Destroy();
             _dialogView.Destroy();
+            _damageView.Destroy();
             
             UnSubscribeStats();
         }

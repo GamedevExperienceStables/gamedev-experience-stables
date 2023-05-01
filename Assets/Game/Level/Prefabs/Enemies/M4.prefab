@@ -45,7 +45,7 @@ PrefabInstance:
     - target: {fileID: 1646171557498439824, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
         type: 3}
       propertyPath: m_Radius
-      value: 0.5
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 1646171557498439824, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
         type: 3}
@@ -120,12 +120,23 @@ PrefabInstance:
     - target: {fileID: 1646171557498439827, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
         type: 3}
       propertyPath: CapsuleRadius
-      value: 0.5
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 1646171557498439827, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
         type: 3}
       propertyPath: CapsuleYOffset
       value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815510984333573865, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
+        type: 3}
+      propertyPath: damageFeedback
+      value: 
+      objectReference: {fileID: 5722597808306690243, guid: d25e5c3c9d5e4ba4aa6f781e72e6fecc,
+        type: 3}
+    - target: {fileID: 2243510481174325238, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
+        type: 3}
+      propertyPath: avoidancePriority
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8473229070387919807, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
         type: 3}

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33213597243370872}
   - component: {fileID: 23970499866989466}
   - component: {fileID: 64635387258505284}
+  - component: {fileID: 6158018333501978876}
   m_Layer: 0
   m_Name: SM_Env_Dwarf_Forge_Smelter_01
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   - {fileID: 4763105164370672}
   - {fileID: 4395355650405334}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33213597243370872
 MeshFilter:
@@ -109,6 +110,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 45b9a78b5e67bce428181b6c4a693321, type: 3}
+--- !u!114 &6158018333501978876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228844386416836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468a63fadd2640f887d89b12e9cc0b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 5
 --- !u!1 &1465543574171838
 GameObject:
   m_ObjectHideFlags: 0

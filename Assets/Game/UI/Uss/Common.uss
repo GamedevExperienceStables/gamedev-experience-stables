@@ -4,24 +4,95 @@
 }
 
 .primary-button {
+    flex-shrink: 0;
     background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1801998966&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_41');
-    
+
     -unity-font-definition: var(--font-heading);
     font-size: 30px;
-    
-    min-width: 250px;    
+
+    min-width: 250px;
     padding: 28px 50px 22px;
+
+    background-color: rgba(0, 0, 0, 0);
     border-width: 0;
-    
+    border-color: rgba(0, 0, 0, 0);
+
     color: rgb(255, 255, 255);
-    
-    transition: color 100ms ease-in-out;
+
+    transition: color 200ms ease-in-out, -unity-background-image-tint-color 200ms ease-in-out;
 }
 
-.primary-button:hover {
-    color: rgb(201, 201, 201);
+.primary-button:enabled:hover {
+    -unity-background-image-tint-color: #af6ed5;
+
+    background-color: rgba(0, 0, 0, 0);
 }
+
+.primary-button:disabled {
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.8);
+
+    opacity: 1;
+}
+
+.primary-button:disabled {
+    color: rgba(255, 255, 255, 0.3);
+}
+
 
 .primary-button:active {
     background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1523537116&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_43');
+}
+
+
+.input-key {
+    align-items: center;
+    height: 26px;
+}
+
+.input-key__text {
+    flex-grow: 1;
+    
+    min-width: 22px;
+    height: 26px;
+    
+    padding: 9px 6px 2px 6px;
+    
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: rgb(37, 41, 47);
+
+    color: rgb(37, 41, 47);
+    background-color: rgb(206, 210, 217);
+}
+
+.input-key__label {    
+    -unity-text-align: middle-center;
+    
+    -unity-font-definition: var(--font-heading);    
+    font-size: 17px;
+    
+    margin: 0;
+    padding: 0;
+}
+
+.input-key__icon {
+    width: 26px;
+    height: 26px;
+}
+
+.input-key--text .input-key__text {
+    display: flex;
+}
+
+.input-key--text .input-key__icon {
+    display: none;
+}
+
+.input-key--icon .input-key__icon {
+    display: flex;
+}
+
+.input-key--icon .input-key__text {
+    display: none;
 }

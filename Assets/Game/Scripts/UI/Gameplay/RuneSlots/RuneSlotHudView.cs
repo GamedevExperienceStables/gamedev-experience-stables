@@ -1,7 +1,7 @@
 ﻿using System;
+using Game.Input;
 using Game.Inventory;
 using Game.Utils;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Game.UI
@@ -12,14 +12,10 @@ namespace Game.UI
         private bool _interactable;
         private RuneDefinition _runeDefinition;
 
-        private readonly Label _inputLabel;
-
-        private readonly string _inputSelect;
-        private readonly string _inputActive;
-
         private event Action<RuneSlotRemoveEvent> RuneRemovingRequest;
+        private event Action<RuneSlotDragEvent> PointerDownCallback;
 
-        public RuneSlotHudView(VisualElement element, RuneSlotId id, string inputSelect, string inputActive)
+        public RuneSlotHudView(VisualElement element, RuneSlotId id, InputKeyBinding inputSelect, InputKeyBinding inputActive)
         {
             Id = id;
             Element = element;
@@ -27,20 +23,29 @@ namespace Game.UI
             _icon = element.Q<Image>(LayoutNames.Hud.RUNE_SLOT_ICON);
             element.Q<VisualElement>(LayoutNames.Hud.RUNE_SLOT_BACKGROUND);
 
-            _inputSelect = inputSelect;
-            _inputActive = inputActive;
+            var inputKeySelect = element.Q<InputKey>(LayoutNames.Hud.RUNE_SLOT_INPUT_SELECT);
+            inputKeySelect.Bind(inputSelect);
 
-            _inputLabel = element.Q<Label>(LayoutNames.Hud.RUNE_SLOT_INPUT_LABEL);
-            _inputLabel.text = inputSelect;
+            var inputKeyActive = element.Q<InputKey>(LayoutNames.Hud.RUNE_SLOT_INPUT_ACTIVE);
+            inputKeyActive.Bind(inputActive);
 
             Clear();
 
-            element.RegisterCallback<PointerDownEvent>(OnPointerDown);
+            _icon.RegisterCallback<PointerDownEvent>(OnPointerDown);
         }
 
         public RuneSlotId Id { get; }
 
         public VisualElement Element { get; }
+
+        public void Destroy() 
+            => _icon.UnregisterCallback<PointerDownEvent>(OnPointerDown);
+
+        public void SubscribeStartDrag(Action<RuneSlotDragEvent> callback)
+            => PointerDownCallback += callback;
+
+        public void UnSubscribeStartDrag(Action<RuneSlotDragEvent> callback)
+            => PointerDownCallback -= callback;
 
         public void SubscribeRemovingRequest(Action<RuneSlotRemoveEvent> callback)
             => RuneRemovingRequest += callback;
@@ -69,7 +74,6 @@ namespace Game.UI
         public void Activate()
         {
             _icon.sprite = _runeDefinition.IconActive;
-            _inputLabel.text = _inputActive;
 
             Element.AddToClassList(LayoutNames.Hud.RUNE_SLOT_ACTIVE_CLASS_NAME);
         }
@@ -77,7 +81,6 @@ namespace Game.UI
         public void Deactivate()
         {
             _icon.sprite = _runeDefinition.Icon;
-            _inputLabel.text = _inputSelect;
 
             Element.RemoveFromClassList(LayoutNames.Hud.RUNE_SLOT_ACTIVE_CLASS_NAME);
         }
@@ -88,19 +91,37 @@ namespace Game.UI
             if (!_interactable)
                 return;
 
-            if (_runeDefinition == null)
+            if (!_runeDefinition)
                 return;
 
-            if (evt.IsLeftButton())
-            {
-#if UNITY_EDITOR
-                Debug.Log("Clicked");
-#endif
-            }
+            if (evt.IsLeftButton()) 
+                StartDrag(evt);
 
             if (evt.IsRightButton())
                 RemoveRuneFromSlot(evt);
         }
+
+        private void StartDrag(IPointerEvent evt)
+        {
+            var dragEvent = new RuneSlotDragEvent
+            {
+                source = this,
+                pointerId = evt.pointerId,
+                pointerPosition = evt.position,
+                elementPosition = Element.worldBound.position,
+                definition = _runeDefinition,
+                
+                onStopped = OnDragStopped
+            };
+            
+            Element.AddToClassList(LayoutNames.Hud.RUNE_SLOT_DRAG_CLASS_NAME);
+
+            PointerDownCallback?.Invoke(dragEvent);
+        }
+
+        private void OnDragStopped() 
+            => Element.RemoveFromClassList(LayoutNames.Hud.RUNE_SLOT_DRAG_CLASS_NAME);
+
 
         private void RemoveRuneFromSlot(IPointerEvent evt)
         {

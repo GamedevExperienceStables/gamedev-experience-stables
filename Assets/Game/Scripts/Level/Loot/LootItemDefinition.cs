@@ -12,8 +12,13 @@ namespace Game.Level
 
         [SerializeField]
         private LootItem prefab;
-        
+
+        [Header("FX")]
+        [SerializeField]
+        private GameObject pickupFeedback;
+
         public LootItem Prefab => prefab;
         public ItemDefinition ItemDefinition => item;
+        public GameObject PickupFeedback => pickupFeedback;
     }
 }

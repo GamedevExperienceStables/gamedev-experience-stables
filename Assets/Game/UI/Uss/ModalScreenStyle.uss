@@ -1,14 +1,56 @@
-.primary-button {
+.modal-button {
     transition: color 100ms ease-in-out;
     transition-property: scale;
-    
     scale: 0.9 0.9;
+    
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+
+    width: 181px;
+    height: 173px;
+    min-width: 0;
 }
 
-.primary-button:hover {
+.modal-button--confirm {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=271044605&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_37');
+}
+
+.modal-button--cancel {
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1286348549&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_36');
+}
+
+.modal-button:hover {
     scale: 1 1;
 }
 
-.primary-button:active {
+.modal-button:active {
     scale: 0.8 0.8;
+}
+
+.window-modal {
+    padding: 90px 70px;
+    align-items: center;
+    width: 720px;
+    height: 900px;
+    background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1308322280&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_26');
+}
+
+.window-modal .block-message {
+    max-width: 85%;
+    justify-content: center;
+}
+
+.window-modal .block-message Label {
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    -unity-font-definition: var(--font-text);
+
+    font-size: 35px;
+    color: rgb(155, 89, 199);
+    white-space: normal;
+}
+
+.window-modal--wide {
+    width: 1024px;
 }

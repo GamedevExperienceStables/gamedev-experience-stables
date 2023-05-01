@@ -36,6 +36,7 @@ namespace Game.LifetimeScopes
             RegisterFactories(builder);
 
             RegisterUi(builder);
+            RegisterUiFx(builder);
             RegisterCameras(builder);
             RegisterAudio(builder);
             RegisterPlanetStateMachine(builder);
@@ -130,6 +131,9 @@ namespace Game.LifetimeScopes
 
         private void RegisterUi(IContainerBuilder builder)
         {
+            builder.Register<HudPromptView>(Lifetime.Scoped);
+            builder.Register<HudDamageView>(Lifetime.Scoped);
+
             builder.Register<GameplayViewModel>(Lifetime.Scoped);
             builder.Register<InventoryViewModel>(Lifetime.Scoped);
             
@@ -165,6 +169,15 @@ namespace Game.LifetimeScopes
                 
                 componentsBuilder.AddInHierarchy<ModalView>();
             });
+        }
+        
+        private static void RegisterUiFx(IContainerBuilder builder)
+        {
+            builder.Register<InventoryFx>(Lifetime.Singleton);
+            builder.Register<HudRunesFx>(Lifetime.Singleton);
+            builder.Register<HudDamageFx>(Lifetime.Singleton);
+            builder.Register<GameOverFx>(Lifetime.Singleton);
+            builder.Register<CommonFx>(Lifetime.Singleton);
         }
 
         private void RegisterCameras(IContainerBuilder builder)

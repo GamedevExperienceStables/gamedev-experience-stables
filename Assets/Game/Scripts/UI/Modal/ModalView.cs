@@ -19,22 +19,28 @@ namespace Game.UI
         private Label _textMessage;
 
         private ModalContext _currentContext;
+        private VisualElement _container;
+
+        private CommonFx _commonFx;
 
         [Inject]
-        public void Construct(ModalViewModel viewModel)
-            => _viewModel = viewModel;
+        public void Construct(ModalViewModel viewModel, CommonFx commonFx)
+        {
+            _viewModel = viewModel;
+            _commonFx = commonFx;
+        }
 
         private void Awake()
         {
             _root = GetComponent<UIDocument>().rootVisualElement;
 
-            var container = _root.Q<VisualElement>(LayoutNames.Modal.CONTAINER);
-            _buttonConfirm = container.Q<Button>(LayoutNames.Modal.BUTTON_CONFIRM);
-            _buttonCancel = container.Q<Button>(LayoutNames.Modal.BUTTON_CANCEL);
+            _container = _root.Q<VisualElement>(LayoutNames.Modal.CONTAINER);
+            _buttonConfirm = _container.Q<Button>(LayoutNames.Modal.BUTTON_CONFIRM);
+            _buttonCancel = _container.Q<Button>(LayoutNames.Modal.BUTTON_CANCEL);
 
-            _textTitle = container.Q<Label>(LayoutNames.Modal.TITLE);
-            _blockMessage = container.Q<VisualElement>(LayoutNames.Modal.BLOCK_MESSAGE);
-            _textMessage = container.Q<Label>(LayoutNames.Modal.TEXT_MESSAGE);
+            _textTitle = _container.Q<Label>(LayoutNames.Modal.TITLE);
+            _blockMessage = _container.Q<VisualElement>(LayoutNames.Modal.BLOCK_MESSAGE);
+            _textMessage = _container.Q<Label>(LayoutNames.Modal.TEXT_MESSAGE);
 
             Hide();
         }
@@ -46,6 +52,9 @@ namespace Game.UI
 
             _buttonConfirm.clicked += OnConfirm;
             _buttonCancel.clicked += OnCancel;
+
+            _commonFx.RegisterButton(_buttonConfirm, ButtonStyle.Modal);
+            _commonFx.RegisterButton(_buttonCancel, ButtonStyle.Modal);
         }
 
         private void OnDestroy()
@@ -55,6 +64,9 @@ namespace Game.UI
 
             _buttonConfirm.clicked -= OnConfirm;
             _buttonCancel.clicked -= OnCancel;
+
+            _commonFx.UnRegisterButton(_buttonConfirm, ButtonStyle.Modal);
+            _commonFx.UnRegisterButton(_buttonCancel, ButtonStyle.Modal);
         }
 
         private void OnConfirm()
@@ -95,7 +107,23 @@ namespace Game.UI
                 _blockMessage.SetDisplay(true);
                 _textMessage.text = context.message;
             }
+
+            SetStyle(context);
         }
+
+        private void SetStyle(ModalContext context)
+        {
+            if (context.style == ModalStyle.Wide)
+                SetWideStyle();
+            else
+                SetNarrowStyle();
+        }
+
+        private void SetWideStyle()
+            => _container.AddToClassList(LayoutNames.Modal.WIDE_CLASS_NAME);
+
+        private void SetNarrowStyle()
+            => _container.RemoveFromClassList(LayoutNames.Modal.WIDE_CLASS_NAME);
 
         private void Show()
             => _root.SetDisplay(true);

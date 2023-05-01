@@ -11,8 +11,9 @@ namespace Game.Inventory
 
         event Action<RuneActiveSlotChangedEvent> ActiveSlotChanged;
         event Action<RuneSlotChangedEvent> SlotChanged;
-        
-        void SetSlot(RuneSlotId slotId, RuneDefinition targetRune);
+
+        void SetRuneToSlot(RuneSlotId slotId, RuneDefinition targetRune);
+        void SwapSlots(RuneSlotId slotId1, RuneSlotId slotId2);
         void ClearSlot(RuneSlotId slotId);
         void SetActiveSlot(RuneSlotId slotId);
     }

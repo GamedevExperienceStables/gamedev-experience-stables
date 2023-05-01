@@ -34,9 +34,22 @@ namespace Game.Level
         }
 
         private void OnTriggerEntered(GameObject obj)
-            => _dialogService.ShowRequest(new DialogData(dialog));
+        {
+            if (!dialog)
+            {
+                Debug.LogWarning("Dialog is not set, trigger will not work");
+                return;
+            }
+            
+            _dialogService.ShowRequest(new DialogData(dialog));
+        }
 
         private void OnTriggerExited(GameObject obj)
-            => _dialogService.CloseRequest(new DialogData(dialog));
+        {
+            if (!dialog)
+                return;
+
+            _dialogService.CloseRequest(new DialogData(dialog));
+        }
     }
 }

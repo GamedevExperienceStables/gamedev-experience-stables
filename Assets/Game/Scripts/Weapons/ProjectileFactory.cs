@@ -15,6 +15,7 @@ namespace Game.Weapons
         {
             Projectile projectile = _resolver.Instantiate(definition.Prefab);
             projectile.Init(definition);
+            projectile.gameObject.SetActive(false);
 
             return projectile;
         }

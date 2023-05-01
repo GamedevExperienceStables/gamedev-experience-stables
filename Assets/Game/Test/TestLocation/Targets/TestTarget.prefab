@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 6721898128750939348}
   - component: {fileID: -3157847202471997382}
   - component: {fileID: 7136021734656053165}
+  - component: {fileID: 7708717611004973871}
   m_Layer: 11
   m_Name: TestTarget
   m_TagString: Untagged
@@ -159,7 +160,6 @@ MonoBehaviour:
     rotateOnlyXZ: 1
   gravity:
     direction: {x: 0, y: -30, z: 0}
-  heroAnimator: {fileID: 0}
 --- !u!114 &3513096597601233911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b08e6a9dde4c5b995da8bf14caae26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updatePathInterval: 0.2
   stopDistance: 1
 --- !u!114 &3513096597601233910
 MonoBehaviour:
@@ -198,7 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b950b9bbe5f41259fbd446539fbd7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageFeedback: {fileID: 0}
+  damageFeedback: {fileID: 1880431902926044711, guid: 1716b3ffbe1a7e049ae880c1b8ac0d21,
+    type: 3}
 --- !u!114 &6721898128750939348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb57b94c7089482398b501bc6f6db0fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathFeedback: {fileID: 0}
+  deathFeedback: {fileID: 119968, guid: e73000b12fb76244cbffd6abbf8bb6e4, type: 3}
   destroyOnDeath: 1
 --- !u!114 &-3157847202471997382
 MonoBehaviour:
@@ -237,6 +237,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2903939fd728459f89087d2914af78c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!195 &7708717611004973871
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5541132309074280697}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 1
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &5781873828448875365
 PrefabInstance:
   m_ObjectHideFlags: 0

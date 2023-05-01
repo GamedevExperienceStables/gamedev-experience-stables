@@ -21,11 +21,14 @@ namespace Game.UI
         private VisualElement _menu;
 
         private Settings _settings;
+        
+        private CommonFx _commonFx;
 
         [Inject]
-        public void Construct(Settings settings)
+        public void Construct(Settings settings, CommonFx commonFx)
         {
             _settings = settings;
+            _commonFx = commonFx;
         }
 
         protected override void OnAwake()
@@ -52,7 +55,7 @@ namespace Game.UI
             RegisterButtonEvent(_buttonAbout, OpenAbout, OnHoverAbout, OnExit);
             RegisterButtonEvent(_buttonQuit, QuitGame, OnHoverQuit, OnExit);
 
-            _localization.Changed += OnLocalisationChanged;
+            localization.Changed += OnLocalisationChanged;
         }
 
         private void Start()
@@ -67,7 +70,7 @@ namespace Game.UI
             UnregisterButtonEvent(_buttonAbout, OpenAbout, OnHoverAbout, OnExit);
             UnregisterButtonEvent(_buttonQuit, QuitGame, OnHoverQuit, OnExit);
 
-            _localization.Changed -= OnLocalisationChanged;
+            localization.Changed -= OnLocalisationChanged;
         }
 
         public override void Show()
@@ -175,7 +178,7 @@ namespace Game.UI
 
         private void OnEnter(Sprite preview, LocalizedString caption)
         {
-            if (!_menu.enabledSelf)
+            if (!_menu.enabledInHierarchy)
                 return;
 
             _preview.Show(preview, caption.GetLocalizedString());
@@ -183,7 +186,7 @@ namespace Game.UI
 
         private void OnExit(EventBase _)
         {
-            if (!_menu.enabledSelf)
+            if (!_menu.enabledInHierarchy)
                 return;
 
             ShowPreview();
@@ -194,7 +197,7 @@ namespace Game.UI
         private void ShowPreview()
             => _preview.Show(_settings.preview.preview, _settings.preview.caption.GetLocalizedString());
 
-        private static void RegisterButtonEvent(Button button, Action onClick,
+        private void RegisterButtonEvent(Button button, Action onClick,
             EventCallback<EventBase> onEnter, EventCallback<EventBase> onLeave)
         {
             button.clicked += onClick;
@@ -204,9 +207,12 @@ namespace Game.UI
 
             button.RegisterCallback<PointerEnterEvent>(onEnter);
             button.RegisterCallback<PointerLeaveEvent>(onLeave);
+            
+            
+            _commonFx.RegisterButton(button, ButtonStyle.Menu);
         }
 
-        private static void UnregisterButtonEvent(Button button, Action onClick,
+        private void UnregisterButtonEvent(Button button, Action onClick,
             EventCallback<EventBase> onEnter, EventCallback<EventBase> onLeave)
         {
             button.clicked -= onClick;
@@ -216,6 +222,8 @@ namespace Game.UI
 
             button.UnregisterCallback<PointerEnterEvent>(onEnter);
             button.UnregisterCallback<PointerLeaveEvent>(onLeave);
+            
+            _commonFx.UnRegisterButton(button, ButtonStyle.Menu);
         }
 
         [Serializable]
