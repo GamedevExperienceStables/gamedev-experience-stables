@@ -110,7 +110,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastRadius: 0.3
-  deathFeedbackPrefab: {fileID: 7228695871248509066, guid: 53ab6f6263eec484aa24a45f511240b4,
+  muzzleFeedbackPrefab: {fileID: 3696429573555417670, guid: 0160db6df2543804cbaa0ce11212604e,
+    type: 3}
+  deathFeedbackPrefab: {fileID: 2105710721977991881, guid: bcb70dc642a9e2c4eb9f951aac8c154d,
     type: 3}
 --- !u!1001 &9149278331443085317
 PrefabInstance:
@@ -158,7 +160,7 @@ PrefabInstance:
     - target: {fileID: 8774538362240027727, guid: 95a8a70dfed48e145827005d92e5bd40,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.238
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8774538362240027727, guid: 95a8a70dfed48e145827005d92e5bd40,
         type: 3}

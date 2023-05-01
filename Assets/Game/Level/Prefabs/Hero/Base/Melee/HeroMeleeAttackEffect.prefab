@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 195466, guid: 56c3274d2f9ec214ab584a80b5ce2d6d, type: 3}
       propertyPath: m_Name
-      value: CartoonyBodySlam Variant
+      value: HeroMeleeAttackEffect
       objectReference: {fileID: 0}
     - target: {fileID: 422016, guid: 56c3274d2f9ec214ab584a80b5ce2d6d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -206,11 +206,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -680293507
-      Data2: 1291444953
-      Data3: 1160408210
-      Data4: 661820103
-    Path: event:/Abilities/Earth/DestroyEarthProjectile
+      Data1: 1670889921
+      Data2: 1154563331
+      Data3: -969830470
+      Data4: -535026284
+    Path: event:/Abilities/Melee/MeleeStart
   Event: 
   PlayEvent: 11
   StopEvent: 2
@@ -220,4 +220,4 @@ MonoBehaviour:
   Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 1
-  OverrideMaxDistance: 70
+  OverrideMaxDistance: 20
