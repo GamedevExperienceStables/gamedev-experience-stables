@@ -48,8 +48,9 @@ MonoBehaviour:
   raycastRadius: 0.3
   muzzleFeedbackPrefab: {fileID: 2535758573709319071, guid: a46fc609384aaa748a053a88385a245a,
     type: 3}
-  deathFeedbackPrefab: {fileID: 6030908686318467742, guid: 7f1cbe0ba6d2b52479b39db8a0e66ea8,
+  deathFeedbackPrefab: {fileID: 8207515576174700691, guid: fb0dec5aecae64240bb9060141e7f9d6,
     type: 3}
+  hitRelativeToNormal: 0
 --- !u!1001 &9026481407378642265
 PrefabInstance:
   m_ObjectHideFlags: 0
