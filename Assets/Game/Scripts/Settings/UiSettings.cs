@@ -9,37 +9,40 @@ namespace Game.Settings
     {
         [SerializeField]
         private StartMenuView.Settings startMenu;
-        
+
         [SerializeField]
         private MainMenuSettingsView.Settings settingsMenu;
-        
+
         [SerializeField]
         private SettingsView.Settings settingsControlsMenu;
-        
+
         [SerializeField]
         private PauseMenuView.Settings pauseMenu;
-        
+
+        [SerializeField]
+        private PauseSettingsView.Settings pauseSettings;
+
         [SerializeField]
         private GameOverView.Settings gameOver;
-        
+
         [SerializeField]
         private LocalizationInteractionSettings interaction;
 
         [SerializeField]
         private LoadingScreenView.Settings loading;
-        
+
         [SerializeField]
         private SavingView.Settings saving;
-        
+
         [SerializeField]
         private HudSettings hud;
 
         [SerializeField]
         private Cutscene.Settings cutscene;
-        
+
         [SerializeField]
         private AboutSettings about;
-        
+
         [SerializeField]
         private ArtSettings artMenu;
 
@@ -47,6 +50,7 @@ namespace Game.Settings
         public MainMenuSettingsView.Settings SettingsMenu => settingsMenu;
         public SettingsView.Settings SettingsControlsMenuMenu => settingsControlsMenu;
         public PauseMenuView.Settings PauseMenu => pauseMenu;
+        public PauseSettingsView.Settings PauseSettings => pauseSettings;
         public GameOverView.Settings GameOver => gameOver;
 
         public LocalizationInteractionSettings Interaction => interaction;

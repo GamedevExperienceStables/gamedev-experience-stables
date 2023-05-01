@@ -9,7 +9,7 @@
                     <ui:VisualElement name="bg-Img" style="background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1995882461&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_35&apos;); width: 328px; height: 356px; opacity: 0.2;" />
                 </ui:VisualElement>
                 <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); margin-bottom: 60px;">
-                    <ui:Label tabindex="-1" text="Paused" display-tooltip-when-elided="true" enable-rich-text="true" style="color: rgb(155, 89, 199); font-size: 70px; -unity-font-style: normal; align-items: center; -unity-text-align: upper-center; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&amp;guid=1823e5ab5312e0e40972472a78991947&amp;type=2#borsok SDF&apos;);" />
+                    <ui:Label name="heading" tabindex="-1" text="Paused" display-tooltip-when-elided="true" enable-rich-text="true" style="color: rgb(155, 89, 199); font-size: 70px; -unity-font-style: normal; align-items: center; -unity-text-align: upper-center; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&amp;guid=1823e5ab5312e0e40972472a78991947&amp;type=2#borsok SDF&apos;);" />
                     <ui:Instance template="Dividers" name="Dividers" style="width: 450px; margin-top: 15px;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="menu" style="background-color: rgba(0, 0, 0, 0);">
