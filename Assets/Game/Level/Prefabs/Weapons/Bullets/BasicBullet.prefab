@@ -49,6 +49,7 @@ MonoBehaviour:
   raycastRadius: 0.05
   muzzleFeedbackPrefab: {fileID: 0}
   deathFeedbackPrefab: {fileID: 0}
+  hitRelativeToNormal: 0
 --- !u!114 &2169979632489900430
 MonoBehaviour:
   m_ObjectHideFlags: 0
