@@ -18,6 +18,9 @@ namespace Game.Weapons
         [FormerlySerializedAs("deathFeedback")]
         [SerializeField]
         private GameObject deathFeedbackPrefab;
+        
+        [SerializeField]
+        private bool hitRelativeToNormal;
 
         private Vector3 _velocity;
         private Vector3 _currentPosition;
@@ -121,8 +124,14 @@ namespace Game.Weapons
 
         private void PlayDeathFeedback(Vector3 position, Vector3 normal)
         {
-            if (deathFeedbackPrefab)
-                Instantiate(deathFeedbackPrefab, position, Quaternion.LookRotation(normal));
+            if (!deathFeedbackPrefab) 
+                return;
+
+            Quaternion rotation = Quaternion.identity;
+            if (hitRelativeToNormal)
+                rotation = Quaternion.LookRotation(normal);
+            
+            Instantiate(deathFeedbackPrefab, position, rotation);
         }
 
 
