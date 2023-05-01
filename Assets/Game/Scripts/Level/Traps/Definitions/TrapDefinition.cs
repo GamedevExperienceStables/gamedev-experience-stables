@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Game.Level
@@ -9,10 +8,10 @@ namespace Game.Level
     {
         protected const string MENU_PATH = "★ Trap/";
         
-        [FormerlySerializedAs("prefab")]
+        [FormerlySerializedAs("prefabDeprecated")]
         [Space]
-        [SerializeField, Obsolete]
-        private TrapView prefabDeprecated;
+        [SerializeField]
+        private TrapView prefab;
 
         [Space]
         [SerializeField, Min(0)]
@@ -21,7 +20,7 @@ namespace Game.Level
         [SerializeField, Min(0)]
         private float size = 1f;
 
-        public TrapView PrefabDeprecated => prefabDeprecated;
+        public TrapView Prefab => prefab;
 
         public float Size => size;
         public float Lifetime => lifetime;

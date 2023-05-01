@@ -11,12 +11,14 @@ namespace Game.UI
         private readonly Dictionary<RuneSlotId, RuneSlotHudView> _hudSlots = new();
         private readonly HudRuneSlotsViewModel _viewModel;
         private readonly InputBindings _input;
+        private readonly HudRunesFx _fx;
 
         [Inject]
-        public HudRuneSlotsView(HudRuneSlotsViewModel viewModel, InputBindings input)
+        public HudRuneSlotsView(HudRuneSlotsViewModel viewModel, InputBindings input, HudRunesFx fx)
         {
             _viewModel = viewModel;
             _input = input;
+            _fx = fx;
         }
 
         public IReadOnlyDictionary<RuneSlotId, RuneSlotHudView> Slots => _hudSlots;
@@ -34,9 +36,11 @@ namespace Game.UI
         {
             _viewModel.UnSubscribeActiveRuneSlotChanged(OnActiveRuneSlotChanged);
             _viewModel.UnSubscribeRuneSlotsChanges(OnRuneSlotsChanged);
-            
-            foreach (RuneSlotHudView slot in _hudSlots.Values) 
+
+            foreach (RuneSlotHudView slot in _hudSlots.Values)
                 slot.Destroy();
+
+            _fx.Destroy();
         }
 
         public void LateTick()
@@ -110,6 +114,11 @@ namespace Game.UI
 
             if (_hudSlots.TryGetValue(changed.newId, out RuneSlotHudView newSlot))
                 newSlot.Activate();
+
+            if (changed.newId.IsValid())
+                _fx.ActivateFeedback();
+            else if (changed.oldId.IsValid())
+                _fx.DeactivateFeedback();
         }
 
         private static void UpdateSlotView(RuneSlotHudView slotView, RuneDefinition runeDefinition)

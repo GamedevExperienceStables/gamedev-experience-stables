@@ -8,6 +8,8 @@ namespace Game.Level
     {
         private readonly PlanetStateMachine _gameStateMachine;
         private readonly PersistenceService _persistence;
+        
+        private SavePoint _savePoint;
 
         [Inject]
         public SaveGameInteraction(PersistenceService persistence, PlanetStateMachine gameStateMachine)
@@ -16,10 +18,17 @@ namespace Game.Level
             _gameStateMachine = gameStateMachine;
         }
 
+        public override void OnCreate() 
+            => _savePoint = Source.GetComponent<SavePoint>();
+
         public override bool CanExecute()
             => !_persistence.IsRunning;
 
         public override void Execute()
-            => _gameStateMachine.PushState<PlanetSaveGameState>();
+        {
+            _savePoint.Executed();
+            
+            _gameStateMachine.PushState<PlanetSaveGameState>();
+        }
     }
 }

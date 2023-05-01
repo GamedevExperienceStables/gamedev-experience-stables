@@ -35,10 +35,10 @@ namespace Game.Level
             }
         }
 
-        public UniTask StartPullAsync(Transform source, Transform target)
+        public UniTask StartPullAsync(Transform source, Transform target, Vector3 targetOffset = default)
         {
             var completion = new UniTaskCompletionSource();
-            var magnet = new MagnetTask(source, target, _settings.Power, _settings.MinDistance, completion);
+            var magnet = new MagnetTask(source, target, targetOffset, _settings.Power, _settings.MinDistance, completion);
             _updates.Add(magnet);
 
             return completion.Task;

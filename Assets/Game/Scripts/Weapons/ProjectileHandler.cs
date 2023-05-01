@@ -31,7 +31,7 @@ namespace Game.Weapons
             switch (definition)
             {
                 case DamageDefinitionSingle single:
-                    TryDamageTarget(source, collision.target, single.Damage, single.HitFeedback, single.Effects);
+                    TryDamageTarget(source, collision.target, single.Damage, single.HitFeedback, single.Effects, single.PushForce);
                     break;
 
                 case DamageDefinitionArea area:
@@ -52,7 +52,7 @@ namespace Game.Weapons
             int count = Physics.OverlapSphereNonAlloc(collision.hitPoint, definition.Radius, _buffer, definition.Layers,
                 QueryTriggerInteraction.Ignore);
             for (int i = 0; i < count; i++)
-                TryDamageTarget(source, _buffer[i], definition.Damage, definition.HitFeedback, definition.Effects);
+                TryDamageTarget(source, _buffer[i], definition.Damage, definition.HitFeedback, definition.Effects, definition.PushForce);
         }
 
         private void SpawnObstacle(DamageDefinitionTrap definition, Transform source, CollisionData collision)
@@ -80,8 +80,8 @@ namespace Game.Weapons
             if (definition.FaceInDirection)
                 FaceInDirection(source, ref rotation);
 
-            TrapDefinition definition1 = definition.SpawnDefinition;
-            TrapView trap = _trapFactory.Create(definition1.PrefabDeprecated, definition1);
+            TrapDefinition trapDefinition = definition.SpawnDefinition;
+            TrapView trap = _trapFactory.Create(trapDefinition.Prefab, trapDefinition);
             trap.transform.SetPositionAndRotation(spawnPoint, rotation);
         }
 
@@ -117,7 +117,7 @@ namespace Game.Weapons
         }
 
         private void TryDamageTarget(Transform source, Component target, float damage, GameObject hitFeedback,
-            IEnumerable<EffectDefinition> effects)
+            IEnumerable<EffectDefinition> effects, float pushForce)
         {
             if (!IsValidTarget(target, out DamageableController damageable))
                 return;
@@ -126,6 +126,17 @@ namespace Game.Weapons
 
             if (target.TryGetComponent(out IActorController actor))
                 _effectHandler.ApplyEffects(actor, effects, source);
+
+            if (pushForce != 0 && target.TryGetComponent(out MovementController movement)) 
+                AddPushForce(source, movement, pushForce);
+        }
+
+        private static void AddPushForce(Transform source, MovementController target, float pushForce)
+        {
+            Vector3 dir = target.transform.position - source.position;
+            dir = dir.normalized * pushForce;
+            
+            target.AddVelocity(dir);
         }
 
         private static void DamageTarget(Transform source, DamageableController target, float damage,

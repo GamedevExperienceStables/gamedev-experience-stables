@@ -18,16 +18,22 @@ namespace Game.Actors
 
         [SerializeField]
         private float animationTime = 0.15f;
+        
+        [SerializeField]
+        private GameObject dashFeedback;
 
         public float DashRange => dashRange;
         public float StaminaCost => staminaCost;
 
         public float AnimationTime => animationTime;
+
+        public GameObject DashFeedback => dashFeedback;
     }
 
     public class DashAbility : ActorAbility<DashAbilityDefinition>
     {
         private readonly TimerPool _timers;
+        private readonly GameplayPrefabFactory _prefabFactory;
 
         private MovementController _movementController;
         private IActorInputController _inputController;
@@ -37,9 +43,13 @@ namespace Game.Actors
         private bool _hasStaminaModifier;
 
         private TimerUpdatable _animationTimer;
+        private GameObject _dashFeedback;
 
-        public DashAbility(TimerPool timers)
-            => _timers = timers;
+        public DashAbility(TimerPool timers, GameplayPrefabFactory prefabFactory)
+        {
+            _timers = timers;
+            _prefabFactory = prefabFactory;
+        }
 
         public override bool CanActivateAbility()
         {
@@ -65,6 +75,9 @@ namespace Game.Actors
             _hasStaminaModifier = Owner.HasStat(CharacterStats.DashStaminaMultiplier);
 
             _animationTimer = _timers.GetTimer(TimeSpan.FromSeconds(Definition.AnimationTime), OnComplete);
+            
+            _dashFeedback = _prefabFactory.Create(Definition.DashFeedback, Owner.Transform);
+            _dashFeedback.SetActive(false);
         }
 
         protected override void OnDestroyAbility()
@@ -79,6 +92,9 @@ namespace Game.Actors
 
             _inputController.SetBlock(InputBlock.Rotation);
             _animationTimer.Start();
+            
+            _dashFeedback.SetActive(false);
+            _dashFeedback.SetActive(true);
         }
 
         private void OnComplete()

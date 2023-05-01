@@ -21,11 +21,14 @@ namespace Game.UI
         private VisualElement _menu;
 
         private Settings _settings;
+        
+        private CommonFx _commonFx;
 
         [Inject]
-        public void Construct(Settings settings)
+        public void Construct(Settings settings, CommonFx commonFx)
         {
             _settings = settings;
+            _commonFx = commonFx;
         }
 
         protected override void OnAwake()
@@ -194,7 +197,7 @@ namespace Game.UI
         private void ShowPreview()
             => _preview.Show(_settings.preview.preview, _settings.preview.caption.GetLocalizedString());
 
-        private static void RegisterButtonEvent(Button button, Action onClick,
+        private void RegisterButtonEvent(Button button, Action onClick,
             EventCallback<EventBase> onEnter, EventCallback<EventBase> onLeave)
         {
             button.clicked += onClick;
@@ -204,9 +207,12 @@ namespace Game.UI
 
             button.RegisterCallback<PointerEnterEvent>(onEnter);
             button.RegisterCallback<PointerLeaveEvent>(onLeave);
+            
+            
+            _commonFx.RegisterButton(button, ButtonStyle.Menu);
         }
 
-        private static void UnregisterButtonEvent(Button button, Action onClick,
+        private void UnregisterButtonEvent(Button button, Action onClick,
             EventCallback<EventBase> onEnter, EventCallback<EventBase> onLeave)
         {
             button.clicked -= onClick;
@@ -216,6 +222,8 @@ namespace Game.UI
 
             button.UnregisterCallback<PointerEnterEvent>(onEnter);
             button.UnregisterCallback<PointerLeaveEvent>(onLeave);
+            
+            _commonFx.UnRegisterButton(button, ButtonStyle.Menu);
         }
 
         [Serializable]

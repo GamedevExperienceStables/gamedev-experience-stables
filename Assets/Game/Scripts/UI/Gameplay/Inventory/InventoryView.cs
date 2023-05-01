@@ -21,13 +21,6 @@ namespace Game.UI
         [SerializeField]
         private HudView hud;
 
-        [Header("Show")]
-        [SerializeField]
-        private GameObject showFeedbacks;
-
-        [Header("Hide")]
-        [SerializeField]
-        private GameObject hideFeedbacks;
 
         private InventoryViewModel _viewModel;
 
@@ -49,10 +42,15 @@ namespace Game.UI
         private readonly List<RuneSlotInventoryView> _runeSlots = new();
         private VisualElement _root;
         private VisualElement _book;
+        
+        private InventoryFx _fx;
 
         [Inject]
-        public void Construct(InventoryViewModel viewModel)
-            => _viewModel = viewModel;
+        public void Construct(InventoryViewModel viewModel, InventoryFx fx)
+        {
+            _viewModel = viewModel;
+            _fx = fx;
+        }
 
         private void Awake()
         {
@@ -90,6 +88,8 @@ namespace Game.UI
             
             UnSubscribeHudRunes(hud.RuneSlots.Values);
             Cleanup();
+            
+            _fx.Destroy();
         }
 
         private void SubscribeHudRunes(IEnumerable<RuneSlotHudView> hudRuneSlots)
@@ -207,6 +207,7 @@ namespace Game.UI
             _runeLevelText.style.color = definition.Level.Color;
 
             _runeDetails.RemoveFromClassList(LayoutNames.Inventory.BOOK_DETAILS_HIDDEN_CLASS_NAME);
+            _fx.RuneHoverFeedback();
         }
 
         private void HideDetails()
@@ -223,14 +224,18 @@ namespace Game.UI
             if (!sourceIsEmpty && !targetIsEmpty)
             {
                 _viewModel.SwapSlots(evt.source.Id, evt.target.Id);
+                _fx.PlaceRuneFeedback();
             }
             else
             {
-                if (!sourceIsEmpty)
-                    _viewModel.RemoveRuneFromHudSlot(evt.source.Id);
+                if (!sourceIsEmpty) 
+                    RemoveRune(evt.source.Id);
 
                 if (!targetIsEmpty)
+                {
                     _viewModel.SetRuneToHudSlot(evt.target.Id, evt.rune);
+                    _fx.PlaceRuneFeedback();
+                }
             }
         }
 
@@ -246,8 +251,14 @@ namespace Game.UI
             }
         }
 
-        private void OnRuneRemovingRequest(RuneSlotRemoveEvent evt)
-            => _viewModel.RemoveRuneFromHudSlot(evt.id);
+        private void OnRuneRemovingRequest(RuneSlotRemoveEvent evt) 
+            => RemoveRune(evt.id);
+
+        private void RemoveRune(RuneSlotId slotId)
+        {
+            _fx.RemoveRuneFeedback();
+            _viewModel.RemoveRuneFromHudSlot(slotId);
+        }
 
         private void OnCloseClicked()
             => _viewModel.CloseInventory();
@@ -260,7 +271,6 @@ namespace Game.UI
             HideDetails();
 
             OnHide();
-            HideFeedbacks();
         }
 
         private void OnShow()
@@ -290,13 +300,11 @@ namespace Game.UI
             Hide();
             await UniTask.Delay(_hideDuration);
             _container.SetVisibility(false);
-
-            HideFeedbacks();
         }
 
         private void Show()
         {
-            ShowFeedbacks();
+            _fx.ShowFeedback();
 
             _container.SetVisibility(true);
             _book.RemoveFromClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
@@ -304,25 +312,9 @@ namespace Game.UI
 
         private void Hide()
         {
-            if (hideFeedbacks)
-                hideFeedbacks.SetActive(true);
-
+            _fx.HideFeedback();
+            
             _book.AddToClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
-        }
-
-        private void ShowFeedbacks()
-        {
-            if (showFeedbacks)
-                showFeedbacks.SetActive(true);
-        }
-
-        private void HideFeedbacks()
-        {
-            if (showFeedbacks)
-                showFeedbacks.SetActive(false);
-
-            if (hideFeedbacks)
-                hideFeedbacks.SetActive(false);
         }
     }
 }

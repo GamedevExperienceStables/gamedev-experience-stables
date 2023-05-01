@@ -172,7 +172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b08e6a9dde4c5b995da8bf14caae26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updatePathInterval: 0.2
   stopDistance: 1
 --- !u!114 &3513096597601233910
 MonoBehaviour:
@@ -198,7 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b950b9bbe5f41259fbd446539fbd7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageFeedback: {fileID: 0}
+  damageFeedback: {fileID: 1880431902926044711, guid: 1716b3ffbe1a7e049ae880c1b8ac0d21,
+    type: 3}
 --- !u!114 &6721898128750939348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb57b94c7089482398b501bc6f6db0fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathFeedback: {fileID: 0}
+  deathFeedback: {fileID: 119968, guid: e73000b12fb76244cbffd6abbf8bb6e4, type: 3}
   destroyOnDeath: 1
 --- !u!114 &-3157847202471997382
 MonoBehaviour:

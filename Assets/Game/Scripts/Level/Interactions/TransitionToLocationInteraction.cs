@@ -10,6 +10,7 @@ namespace Game.Level
         private readonly LocationDataHandler _location;
 
         private LocationPointDefinition _targetLocation;
+        private LocationDoor _door;
 
         [Inject]
         public TransitionToLocationInteraction(
@@ -27,8 +28,8 @@ namespace Game.Level
 
         public override void OnCreate()
         {
-            var door = Source.GetComponent<LocationDoor>();
-            _targetLocation = door.TargetLocationPoint;
+            _door = Source.GetComponent<LocationDoor>();
+            _targetLocation = _door.TargetLocationPoint;
         }
 
         public override bool CanExecute()
@@ -36,6 +37,7 @@ namespace Game.Level
 
         public override void Execute()
         {
+            _door.Transition();
             _level.SetLocationPoint(_targetLocation);
 
             _planetStateMachine.EnterState<PlanetLocationLoadingState>();

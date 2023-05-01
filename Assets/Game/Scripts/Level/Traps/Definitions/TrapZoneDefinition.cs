@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Game.Actors;
+﻿using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Level
 {
@@ -20,19 +17,6 @@ namespace Game.Level
         [Space]
         [SerializeField, Expandable]
         private TrapZoneEffectBehaviours behaviours;
-        
-        [FormerlySerializedAs("layerMask")]
-        [Header("Deprecated (Will removed in next update)")]
-        [SerializeField, Obsolete]
-        private LayerMask layerMaskDeprecated = ~0;
-
-        [FormerlySerializedAs("removeEffectsOnExit")]
-        [SerializeField, Obsolete]
-        private bool removeEffectsOnExitDeprecated;
-
-        [FormerlySerializedAs("effects")]
-        [SerializeField, Obsolete]
-        private List<EffectDefinition> effectsDeprecated;
 
         private bool HasDurability => durability > 0;
 

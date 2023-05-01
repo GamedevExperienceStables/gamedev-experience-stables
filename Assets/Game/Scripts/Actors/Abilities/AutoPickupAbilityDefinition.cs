@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Game.Inventory;
 using Game.Level;
+using Game.Utils;
 using UnityEngine;
 using VContainer;
 
@@ -12,7 +13,12 @@ namespace Game.Actors
         [SerializeField, Range(0.01f, 5f)]
         private float pickupDistance = 3f;
 
+        [SerializeField]
+        private Vector3 offset;
+
         public float PickupDistance => pickupDistance;
+
+        public Vector3 Offset => offset;
     }
 
     public class AutoPickupAbility : ActorAbility<AutoPickupAbilityDefinition>
@@ -66,12 +72,14 @@ namespace Game.Actors
 
         private async UniTask PickItemAsync(LootItem loot, IActorController target)
         {
-            await _magnet.StartPullAsync(loot.transform, target.Transform);
+            Transform targetTransform = target.Transform;
+            await _magnet.StartPullAsync(loot.transform, targetTransform, Definition.Offset);
 
             if (_inventory.TryAddToBag(loot.Definition.ItemDefinition, target))
             {
-                // getting vfx from settings or loot definition 
-                //Object.Instantiate(loot.Definition.PickupFeedback);
+                if (loot.Definition.PickupFeedback)
+                    Object.Instantiate(loot.Definition.PickupFeedback,  targetTransform.TransformWithOffset(Definition.Offset), targetTransform.rotation);
+                
                 Object.Destroy(loot.gameObject);
             }
         }

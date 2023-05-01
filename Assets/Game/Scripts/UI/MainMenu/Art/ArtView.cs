@@ -19,13 +19,16 @@ namespace Game.UI
         private ArtBookView _artBook;
         
         private string _url;
+        
+        private CommonFx _commonFx;
 
         [Inject]
-        public void Construct(ArtSettings settings, ArtBookView artBook)
+        public void Construct(ArtSettings settings, ArtBookView artBook, CommonFx commonFx)
         {
             _settings = settings;
             _artBook = artBook;
             _downloadModal = settings.DownloadModal;
+            _commonFx = commonFx;
         }
 
         protected override void OnAwake()
@@ -56,6 +59,9 @@ namespace Game.UI
         {
             _buttonBack.clicked += OnBackButton;
             _buttonDownload.clicked += OnDownloadButton;
+            
+            _commonFx.RegisterButton(_buttonBack, ButtonStyle.Primary);
+            _commonFx.RegisterButton(_buttonDownload, ButtonStyle.Primary);
 
             localization.Changed += OnLocalisationChanged;
         }
@@ -64,6 +70,9 @@ namespace Game.UI
         {
             _buttonBack.clicked -= OnBackButton;
             _buttonDownload.clicked -= OnDownloadButton;
+            
+            _commonFx.UnRegisterButton(_buttonBack, ButtonStyle.Primary);
+            _commonFx.UnRegisterButton(_buttonDownload, ButtonStyle.Primary);
 
             localization.Changed -= OnLocalisationChanged;
         }

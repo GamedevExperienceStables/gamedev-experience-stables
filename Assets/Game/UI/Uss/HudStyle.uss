@@ -171,8 +171,8 @@
     transition: opacity 100ms ease-out;
 }
 
-.widget-interaction {    
-    opacity: 1;    
+.widget-interaction {
+    opacity: 1;
     flex-direction: row;
     align-items: center;
 
@@ -188,7 +188,7 @@
     display: none;
 }
 
-.widget-interaction--enabled  #input-key {
+.widget-interaction--enabled #input-key {
     display: flex;
 }
 
@@ -229,4 +229,23 @@
     color: rgb(255, 255, 255);
     white-space: normal;
     font-size: 28px;
+}
+
+
+.widget-damage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    opacity: 0;
+
+    transition: opacity 1000ms linear 150ms;
+}
+
+.widget-damage.widget-damage--enabled {
+    opacity: 1;
+
+    transition: opacity 100ms ease;
 }

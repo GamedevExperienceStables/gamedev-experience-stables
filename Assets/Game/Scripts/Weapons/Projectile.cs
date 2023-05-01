@@ -12,9 +12,15 @@ namespace Game.Weapons
         [SerializeField]
         private float raycastRadius = 0.1f;
 
+        [SerializeField]
+        private GameObject muzzleFeedbackPrefab;
+        
         [FormerlySerializedAs("deathFeedback")]
         [SerializeField]
         private GameObject deathFeedbackPrefab;
+        
+        [SerializeField]
+        private bool hitRelativeToNormal;
 
         private Vector3 _velocity;
         private Vector3 _currentPosition;
@@ -118,8 +124,14 @@ namespace Game.Weapons
 
         private void PlayDeathFeedback(Vector3 position, Vector3 normal)
         {
-            if (deathFeedbackPrefab)
-                Instantiate(deathFeedbackPrefab, position, Quaternion.LookRotation(normal));
+            if (!deathFeedbackPrefab) 
+                return;
+
+            Quaternion rotation = Quaternion.identity;
+            if (hitRelativeToNormal)
+                rotation = Quaternion.LookRotation(normal);
+            
+            Instantiate(deathFeedbackPrefab, position, rotation);
         }
 
 
@@ -164,7 +176,15 @@ namespace Game.Weapons
         }
 
         private void Show()
-            => gameObject.SetActive(true);
+        {
+            gameObject.SetActive(true);
+            
+            if (muzzleFeedbackPrefab)
+            {
+                Transform self = transform;
+                Instantiate(muzzleFeedbackPrefab, self.position, self.rotation);
+            }
+        }
 
         private void Hide()
             => gameObject.SetActive(false);
