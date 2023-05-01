@@ -4,6 +4,7 @@ using Game.Animations.Hero;
 using Game.Stats;
 using Game.TimeManagement;
 using Game.Utils;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
@@ -46,18 +47,8 @@ namespace Game.Actors
         private float animationSpeedMultiplier = 1f;
 
         [Header("FX")]
-        [SerializeField]
-        private GameObject startEffectPrefab;
-
-        [SerializeField]
-        private GameObject completeEffectPrefab;
-
-        [Space]
-        [SerializeField]
-        private GameObject hitEffectPrefab;
-
-        [SerializeField]
-        private Vector3 hitOffset;
+        [SerializeField, Expandable]
+        private MeleeAbilityFx visualEffects;
 
         public float MeleeRangeRadius => meleeRangeRadius;
         public float MeleeDamage => baseDamage;
@@ -69,14 +60,9 @@ namespace Game.Actors
 
         public float CastTime => castTime;
 
-        public GameObject HitEffectPrefab => hitEffectPrefab;
-
-        public Vector3 HitOffset => hitOffset;
-
-        public GameObject CompleteEffectPrefab => completeEffectPrefab;
         public float AnimationSpeedMultiplier => animationSpeedMultiplier;
 
-        public GameObject StartEffectPrefab => startEffectPrefab;
+        public MeleeAbilityFx VisualEffects => visualEffects;
     }
 
     public class MeleeAbility : ActorAbility<MeleeAbilityDefinition>
@@ -123,9 +109,9 @@ namespace Game.Actors
 
             _castTimer = _timers.GetTimer(TimeSpan.FromSeconds(Definition.CastTime), OnComplete);
 
-            _hasStartEffect = Definition.StartEffectPrefab;
-            _hasCompleteEffect = Definition.CompleteEffectPrefab;
-            _hasHitEffect = Definition.HitEffectPrefab;
+            _hasStartEffect = Definition.VisualEffects && Definition.VisualEffects.OnStart;
+            _hasCompleteEffect = Definition.VisualEffects && Definition.VisualEffects.OnEnd;
+            _hasHitEffect = Definition.VisualEffects && Definition.VisualEffects.OnHit;
         }
 
         protected override void OnDestroyAbility()
@@ -210,17 +196,10 @@ namespace Game.Actors
                 : baseDamage;
         }
 
-        private void SpawnEffect(GameObject effectPrefab)
-        {
-            Vector3 spawnPoint = Owner.Transform.position;
-            Quaternion spawnRotation = Quaternion.LookRotation(Owner.Transform.forward);
-            Object.Instantiate(effectPrefab, spawnPoint, spawnRotation);
-        }
-
         private void SpawnCompleteEffect()
         {
             if (_hasCompleteEffect)
-                SpawnEffect(Definition.CompleteEffectPrefab);
+                SpawnEffect(Definition.VisualEffects.OnEnd);
         }
 
         private void SpawnHitEffect(Transform hit)
@@ -228,15 +207,25 @@ namespace Game.Actors
             if (!_hasHitEffect)
                 return;
 
-            Vector3 spawnPoint = hit.position + hit.TransformDirection(Definition.HitOffset);
+            Vector3 spawnPoint = hit.position + hit.TransformDirection(Definition.VisualEffects.OnHitOffset);
             Quaternion spawnRotation = Quaternion.LookRotation(hit.forward);
-            Object.Instantiate(Definition.HitEffectPrefab, spawnPoint, spawnRotation);
+            SpawnEffect(Definition.VisualEffects.OnHit, spawnPoint, spawnRotation);
         }
 
         private void SpawnStartEffect()
         {
             if (_hasStartEffect)
-                SpawnEffect(Definition.StartEffectPrefab);
+                SpawnEffect(Definition.VisualEffects.OnStart);
         }
+
+        private void SpawnEffect(GameObject effectPrefab)
+        {
+            Vector3 spawnPoint = Owner.Transform.position;
+            Quaternion spawnRotation = Quaternion.LookRotation(Owner.Transform.forward);
+            SpawnEffect(effectPrefab, spawnPoint, spawnRotation);
+        }
+
+        private static void SpawnEffect(GameObject effectPrefab, Vector3 spawnPoint, Quaternion spawnRotation) 
+            => Object.Instantiate(effectPrefab, spawnPoint, spawnRotation);
     }
 }
