@@ -34,11 +34,6 @@ namespace Game.Actors
         [Space]
         [SerializeField]
         private float animationSpeedMultiplier = 1f;
-        
-        [Space]
-        [FormerlySerializedAs("fireSfx")]
-        [SerializeField]
-        private EventReference fireSfxDeprecated;
 
         public ProjectileDefinition Projectile => projectile;
 
