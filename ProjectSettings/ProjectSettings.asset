@@ -22,7 +22,7 @@ PlayerSettings:
   m_SplashScreenOverlayOpacity: 1
   m_SplashScreenAnimation: 1
   m_SplashScreenLogoStyle: 1
-  m_SplashScreenDrawMode: 0
+  m_SplashScreenDrawMode: 1
   m_SplashScreenBackgroundAnimationZoom: 1
   m_SplashScreenLogoAnimationZoom: 1
   m_SplashScreenBackgroundLandscapeAspect: 1
@@ -39,7 +39,11 @@ PlayerSettings:
     y: 0
     width: 1
     height: 1
-  m_SplashScreenLogos: []
+  m_SplashScreenLogos:
+  - logo: {fileID: 10404, guid: 0000000000000000f000000000000000, type: 0}
+    duration: 2
+  - logo: {fileID: 21300000, guid: 9e32d99d4bac3a343aa000103875a809, type: 3}
+    duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1440
@@ -137,7 +141,6 @@ PlayerSettings:
   preloadedAssets:
   - {fileID: 11400000, guid: 24567d516383ca54683a9f0d86631552, type: 2}
   - {fileID: 11400000, guid: c9446e318bb43da47a7f0e9a2674cb19, type: 2}
-  - {fileID: 11400000, guid: cd3af9f5fb7b8b04199e75df413a09f7, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -277,7 +280,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 9cf8309659141ed4daae262274f405da, type: 3}
+      m_Icon: {fileID: 2800000, guid: 06d63e78efe210341b7184b5fcf8f11e, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
