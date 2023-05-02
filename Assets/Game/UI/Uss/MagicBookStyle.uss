@@ -33,6 +33,10 @@
     height: var(--slot-size);
 }
 
+.magic-book-slot--hidden {
+    visibility: hidden;
+}
+
 .magic-book-slot__icon {
     width: var(--slot-size);
     height: var(--slot-size);

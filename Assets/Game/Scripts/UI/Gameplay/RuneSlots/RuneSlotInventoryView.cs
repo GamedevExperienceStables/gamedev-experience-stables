@@ -33,12 +33,12 @@ namespace Game.UI
 
         public void Activate()
         {
-            _element.SetVisibility(true);
+            _element.RemoveFromClassList(LayoutNames.Inventory.SLOT_HIDDEN_CLASS_NAME);
         }
 
         public void Deactivate()
         {
-            _element.SetVisibility(false);
+            _element.AddToClassList(LayoutNames.Inventory.SLOT_HIDDEN_CLASS_NAME);
         }
 
         public void UseSlot()
