@@ -31,7 +31,7 @@
     -unity-text-align: middle-center;
     white-space: normal;
     -unity-font-definition: var(--font-text);
-    font-size: 32px;
+    font-size: 30px;
     color: rgb(255, 255, 255);
 }
 
