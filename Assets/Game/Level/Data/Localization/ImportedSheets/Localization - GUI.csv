@@ -6,27 +6,27 @@ Menu_About_Button,About Creators,О нас,Пра нас,Про творців
 Menu_Artbook_Button,Artbook,Артбук,Артбук,Художня книга
 Menu_Quit_Button,Quit,Выйти,Выйсцi,Кинути
 Menu_NewGame_Caption,Let's start our journey!,Давайте начнем наше путешествие!,Пачнiце сваю прыгоду са Снудзi прама зараз!,Почнемо нашу подорож!
-Menu_Continue_Caption,It is time to continue!,Настало время продолжить!,Час выратаваць планету Айрыc!,Настав час продовжувати!
-Menu_Settings_Caption,Let's deal with the settings.,Давайте разберемся с настройками.,Зрабіце гульню больш камфортнай для сябе!,Давайте розберемося з налаштуваннями.
-Menu_About_Caption,Look at the our outstanding team!,Посмотрите на нашу замечательную команду.,Паглядзіце на нашу цудоўную працу. Мы намагалісь зрабіць усё магчымае!,Подивіться на нашу видатну команду!
-Menu_Artbook_Caption,Look at the  wonderful work of our artists!,Посмотрте на крутые работы наших художников!,Пазнаёмцеся з экіпажам гэтага надзвычайнага карабля!,Подивіться на чудовий твір наших художників!
-Menu_Quit_Caption,Is it really time to say goodbye?,Неужели настала пора прощаться?,Надышоў час развітвацца? :(,Чи справді час попрощатися?
+Menu_Continue_Caption,It's time to continue!,Самое время продолжить!,Час выратаваць планету Айрыc!,Пора продовжувати!
+Menu_Settings_Caption,Let's deal with the settings.,Давайте разберемся с настройками.,Зрабiце гульню больш камфортнай для сябе!,Давайте розберемося з налаштуваннями.
+Menu_About_Caption,Look at the our outstanding team!,Посмотрите на нашу замечательную команду.,Паглядзiце на нашу цудоўную працу. Мы намагалiсь зрабiць усё магчымае!,Подивіться на нашу видатну команду!
+Menu_Artbook_Caption,Look at the  wonderful work of our artists!,Посмотрте на крутые работы наших художников!,Пазнаёмцеся з экiпажам гэтага надзвычайнага карабля!,Подивіться на чудовий твір наших художників!
+Menu_Quit_Caption,Is it really time to say goodbye?,Неужели настала пора прощаться?,Надышоў час развiтвацца? :(,Чи справді час попрощатися?
 Menu_Preview_Caption, , , , 
 PauseMenu_Heading,Pause,Пауза,Перапынак,Пауза
-PauseMenu_Resume_Button,Resume,Возобновить,Аднавіць,Відновивши
+PauseMenu_Resume_Button,Resume,Возобновить,Аднавiць,Відновивши
 PauseMenu_MainMenu_Button,Main menu,Главное меню,Галоўнае меню,Головне меню
 Menu_LastSave_Button,Last save,Последнее сохранение,Апошняе захаванне,Останнє збереження
-Menu_Modal_Quit_Title,Want to leave the game?,Хотите выйти из игры?,"Вы ўпэўнены, што хочаце выйсці з гульні?",Хочете залишити гру?
+Menu_Modal_Quit_Title,Want to leave the game?,Хотите выйти из игры?,"Вы ўпэўнены, што хочаце выйсцi з гульнi?",Хочете залишити гру?
 Menu_Modal_NewGame_Title,Want to start a new game?,Хотите начать новую игру?,"Вы ўпэўнены, што хочаце пачаць новую гульню?",Хочете розпочати нову гру?
-PauseMenu_Modal_Quit_Title,Want to leave the game?,Хотите выйти из игры?,"Вы ўпэўнены, што хочаце выйсці з гульні?",Хочете залишити гру?
+PauseMenu_Modal_Quit_Title,Want to leave the game?,Хотите выйти из игры?,"Вы ўпэўнены, што хочаце выйсцi з гульнi?",Хочете залишити гру?
 PauseMenu_Modal_Quit_Message,Unsaved progress will be lost.,"Внимание, несохраненный прогресс будет потерян!",Незахаваны прагрэс будзе страчаны.,Незбережений прогрес буде втрачено.
-Cutscene_Skip_Label,Hold to skip,"Удеживайте, чтобы пропустить",Утрымлівай <b>{0}</b> каб прапусціць.,Тримайся пропустити
+Cutscene_Skip_Label,Hold to skip,"Удеживайте, чтобы пропустить",Утрымлiвай <b>{0}</b> каб прапусцiць.,Тримайся пропустити
 SettingsMenu_Language_Label,Language,Язык,Мова,Мова
-SettingsMenu_Graphic_Label,Graphics,Графика,Графіка,Графічне мистецтво
+SettingsMenu_Graphic_Label,Graphics,Графика,Графiка,Графічне мистецтво
 SettingsMenu_Quality_Label,Quality,Качество,Якасць,Якість
 SettingsMenu_Resolution_Label,Resolution,Разрешение,Раздзяляльнасць,Дозвіл
 SettingsMenu_Fullscreen_Label,Fullscreen,Полный экран,Поўны экран,Повний екран
-SettingsMenu_Audio_Label,Audio,Звуки,Гукі,Звуки
+SettingsMenu_Audio_Label,Audio,Звуки,Гукi,Звуки
 SettingsMenu_Volume_Label,Volume,Громкость,Гучнасць,Обсяг
 SettingsMenu_Effects_Label,Effects,Эффекты,Эфекты,Ефект
 SettingsMenu_Music_Label,Music,Музыка,Музыка,Музика
