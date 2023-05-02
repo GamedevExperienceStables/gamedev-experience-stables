@@ -2,6 +2,7 @@
 using Game.Player;
 using Game.Stats;
 using Game.TimeManagement;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Game.UI
@@ -38,7 +39,7 @@ namespace Game.UI
 
         private void OnHealthChanged(StatValueChange change)
         {
-            if (change.newValue < change.oldValue)
+            if (Mathf.Floor(change.newValue) < Mathf.Floor(change.oldValue))
                 DamageFeedback();
         }
 
