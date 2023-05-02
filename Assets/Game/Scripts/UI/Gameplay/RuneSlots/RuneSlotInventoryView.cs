@@ -9,26 +9,32 @@ namespace Game.UI
     public class RuneSlotInventoryView
     {
         private readonly Image _icon;
-        private readonly RuneDefinition _runeDefinition;
         private readonly VisualElement _element;
         
+        private RuneDefinition _runeDefinition;
+
         private event Action<RuneSlotDragEvent> PointerDownCallback;
         private event Action<RuneSlotHoverEvent> PointerHoverCallback;
 
-        public RuneSlotInventoryView(VisualElement element, RuneDefinition runeDefinition)
+        public RuneSlotInventoryView(VisualElement element)
         {
             _element = element;
-            _runeDefinition = runeDefinition;
-
-            _icon = element.Q<Image>(LayoutNames.Inventory.RUNE_SLOT_ICON);
-            if (runeDefinition.Icon)
-                _icon.sprite = runeDefinition.Icon;
             
+            _icon = element.Q<Image>(LayoutNames.Inventory.RUNE_SLOT_ICON);
+
             Deactivate();
             
             element.RegisterCallback<PointerDownEvent>(OnPointerDown);
             element.RegisterCallback<PointerEnterEvent>(OnPointerEnter);
             element.RegisterCallback<PointerOutEvent>(OnPointerOut);
+        }
+
+        public void SetRune(RuneDefinition runeDefinition)
+        {
+            _runeDefinition = runeDefinition;
+
+            if (runeDefinition.Icon)
+                _icon.sprite = runeDefinition.Icon;
         }
 
         public void Activate()
@@ -99,10 +105,7 @@ namespace Game.UI
 
         private void OnHover(IPointerEvent evt, bool state)
         {
-            if (_runeDefinition == null)
-                return;
-
-            var hoverEvent = new RuneSlotHoverEvent()
+            var hoverEvent = new RuneSlotHoverEvent
             {
                 pointerId = evt.pointerId,
                 definition = _runeDefinition,

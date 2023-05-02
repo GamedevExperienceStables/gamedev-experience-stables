@@ -38,7 +38,7 @@
 }
 
 .magic-book-slot--hidden {
-    visibility: hidden;
+    opacity: 0;
 }
 
 .magic-book-slot__icon {
