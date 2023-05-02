@@ -151,6 +151,8 @@
         public static class Inventory
         {
             public const string SCREEN = "book-screen";
+            public const string SCREEN_HIDDEN_CLASS_NAME = "book-screen--hidden";
+            
             public const string BOOK = "book";
             public const string BUTTON_CLOSE = "button-close";
             

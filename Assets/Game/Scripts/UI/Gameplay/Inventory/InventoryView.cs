@@ -265,7 +265,7 @@ namespace Game.UI
 
         public void HideImmediate()
         {
-            _container.SetVisibility(false);
+            _container.AddToClassList(LayoutNames.Inventory.SCREEN_HIDDEN_CLASS_NAME);
             _book.AddToClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
 
             HideDetails();
@@ -299,14 +299,14 @@ namespace Game.UI
             OnHide();
             Hide();
             await UniTask.Delay(_hideDuration);
-            _container.SetVisibility(false);
+            _container.AddToClassList(LayoutNames.Inventory.SCREEN_HIDDEN_CLASS_NAME);
         }
 
         private void Show()
         {
             _fx.ShowFeedback();
 
-            _container.SetVisibility(true);
+            _container.RemoveFromClassList(LayoutNames.Inventory.SCREEN_HIDDEN_CLASS_NAME);
             _book.RemoveFromClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
         }
 
