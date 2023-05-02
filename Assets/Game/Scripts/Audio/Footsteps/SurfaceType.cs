@@ -8,5 +8,6 @@
         Mud = 3,
         Water = 4,
         Concrete = 5,
+        Wood = 6
     }
 }
