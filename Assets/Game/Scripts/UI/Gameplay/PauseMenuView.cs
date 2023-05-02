@@ -12,11 +12,12 @@ namespace Game.UI
         private Button _buttonResume;
         private Button _buttonMainMenu;
         private Button _buttonSettings;
+        private Label _heading;
 
         private PauseViewRouter _router;
 
         private Settings _settings;
-        
+
         private CommonFx _commonFx;
 
         [Inject]
@@ -36,10 +37,12 @@ namespace Game.UI
             _buttonSettings = Content.Q<VisualElement>(LayoutNames.PauseMenu.BUTTON_SETTINGS).Q<Button>();
             _buttonMainMenu = Content.Q<VisualElement>(LayoutNames.PauseMenu.BUTTON_MAIN_MENU).Q<Button>();
 
+            _heading = Content.Q<Label>(LayoutNames.PauseMenu.PAGE_HEADING);
+
             _buttonResume.clicked += OnResumeButton;
             _buttonMainMenu.clicked += OnMainMenuButton;
             _buttonSettings.clicked += OnSettingsButton;
-            
+
             _commonFx.RegisterButton(_buttonResume, ButtonStyle.Menu);
             _commonFx.RegisterButton(_buttonSettings, ButtonStyle.Menu);
             _commonFx.RegisterButton(_buttonMainMenu, ButtonStyle.Menu);
@@ -55,7 +58,7 @@ namespace Game.UI
             _buttonResume.clicked -= OnResumeButton;
             _buttonMainMenu.clicked -= OnMainMenuButton;
             _buttonSettings.clicked -= OnSettingsButton;
-            
+
             _commonFx.UnRegisterButton(_buttonResume, ButtonStyle.Menu);
             _commonFx.UnRegisterButton(_buttonSettings, ButtonStyle.Menu);
             _commonFx.UnRegisterButton(_buttonMainMenu, ButtonStyle.Menu);
@@ -76,7 +79,7 @@ namespace Game.UI
         {
             ModalContext context =
                 ModalSettingsExtensions.CreateContext(_settings.mainMenuModal, ViewModel.GoToMainMenu);
-            
+
             ViewModel.ShowModal(context);
         }
 
@@ -88,6 +91,7 @@ namespace Game.UI
             _buttonResume.Q<Label>().text = _settings.resume.button.GetLocalizedString();
             _buttonSettings.Q<Label>().text = _settings.settings.button.GetLocalizedString();
             _buttonMainMenu.Q<Label>().text = _settings.mainMenu.button.GetLocalizedString();
+            _heading.text = _settings.heading.GetLocalizedString();
         }
 
         [Serializable]
@@ -102,6 +106,8 @@ namespace Game.UI
             public Page resume;
             public Page settings;
             public Page mainMenu;
+
+            public LocalizedString heading;
 
             public ModalSettings mainMenuModal;
         }

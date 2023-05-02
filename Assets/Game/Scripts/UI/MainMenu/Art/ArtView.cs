@@ -112,6 +112,7 @@ namespace Game.UI
         private void ShowLinkModal()
         {
             ModalContext context = ModalSettingsExtensions.CreateContext(_downloadModal, OpenLink);
+            context.message = _url;
             
             ViewModel.ShowModal(context);
         }

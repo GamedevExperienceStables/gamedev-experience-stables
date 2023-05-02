@@ -11,6 +11,8 @@
         {
             public const string CONTAINER = "pause-menu";
             
+            public const string PAGE_HEADING = "heading";
+            
             public const string BUTTON_MAIN_MENU = "button-exit";
             public const string BUTTON_RESUME = "button-resume";
             public const string BUTTON_SETTINGS = "button-settings";
@@ -20,6 +22,8 @@
         {
             public const string CONTAINER = "pause-settings";
             public const string BUTTON_BACK = "button-back";
+            
+            public const string PAGE_HEADING = "header";
         }
 
         public static class StartMenu

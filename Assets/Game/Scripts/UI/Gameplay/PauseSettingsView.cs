@@ -1,4 +1,7 @@
-﻿using UnityEngine.UIElements;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine.Localization;
+using UnityEngine.UIElements;
 using VContainer;
 
 namespace Game.UI
@@ -7,49 +10,77 @@ namespace Game.UI
     {
         private PauseViewRouter _router;
         private Button _backButton;
+        private IList<Label> _headerLabels;
 
-        private SettingsView _settings;
-        
+        private SettingsView _settingsView;
+
+        private Settings _settings;
         private CommonFx _commonFx;
 
         [Inject]
-        public void Construct(SettingsView settings, CommonFx commonFx)
+        public void Construct(SettingsView view, Settings settings, CommonFx commonFx)
         {
-            _settings = settings;
+            _settingsView = view;
             _commonFx = commonFx;
+            _settings = settings;
         }
 
         protected override void OnAwake()
         {
             SetContent(LayoutNames.PauseSettings.CONTAINER);
 
-            _settings.Create(Content);
+            _settingsView.Create(Content);
 
             _router = GetComponent<PauseViewRouter>();
 
             _backButton = Content.Q<Button>(LayoutNames.PauseSettings.BUTTON_BACK);
             _backButton.clicked += OnBack;
-            
+
+            _headerLabels = Content.Q<VisualElement>(LayoutNames.PauseSettings.PAGE_HEADING)
+                .Query<Label>().ToList();
+
             _commonFx.RegisterButton(_backButton, ButtonStyle.Primary);
+
+            localization.Changed += OnLocalisationChanged;
         }
+
+        private void Start()
+            => UpdateText();
 
         private void OnDestroy()
         {
-            _settings.Destroy();
+            _settingsView.Destroy();
 
             _backButton.clicked -= OnBack;
-            
+
             _commonFx.UnRegisterButton(_backButton, ButtonStyle.Primary);
+
+            localization.Changed -= OnLocalisationChanged;
         }
 
         public override void Show()
         {
-            _settings.Init();
+            _settingsView.Init();
 
             base.Show();
         }
 
+        private void OnLocalisationChanged()
+            => UpdateText();
+
+        private void UpdateText()
+        {
+            foreach (Label headerLabel in _headerLabels)
+                headerLabel.text = _settings.heading.GetLocalizedString();
+        }
+
         private void OnBack()
             => _router.ToRoot();
+
+        [Serializable]
+        public class Settings
+        {
+            public LocalizedString heading;
+        }
     }
 }

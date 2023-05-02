@@ -5,7 +5,7 @@
             <ui:Image name="slide-current" class="slider__slide" />
         </ui:VisualElement>
         <ui:VisualElement name="block-subtitles" class="subtitles">
-            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); margin-left: 100px; margin-right: 100px; margin-top: 100px; margin-bottom: 80px; max-width: 1200px;">
+            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); margin-left: 100px; margin-right: 100px; margin-top: 100px; margin-bottom: 80px; max-width: 1800px;">
                 <Game.UI.TypewriterLabel text="Далеко-далеко, во тьме необъятного космического пространства, всеми цветами радуги переливается планета Айрис." name="text-subtitles" maxVisibleCharacters="1000" class="subtitles__text" />
             </ui:VisualElement>
         </ui:VisualElement>

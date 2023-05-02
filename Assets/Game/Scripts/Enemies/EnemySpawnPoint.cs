@@ -10,7 +10,7 @@ namespace Game.Enemies
 {
     public class EnemySpawnPoint : MonoBehaviour
     {
-        [SerializeField, Required]
+        [SerializeField, Required, Expandable]
         private EnemyDefinition enemy;
 
         [Space]
