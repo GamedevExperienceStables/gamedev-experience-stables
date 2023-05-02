@@ -83,6 +83,6 @@ namespace Game.Level
         }
 
         private void CloseDialog(bool immediate = false) 
-            => _dialogService.CloseRequest(new DialogData(dialog), immediate);
+            => _dialogService?.CloseRequest(new DialogData(dialog), immediate);
     }
 }
