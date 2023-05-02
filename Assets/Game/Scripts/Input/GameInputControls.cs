@@ -341,7 +341,7 @@ public partial class @GameInputControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f8a1d366-20f2-48be-bfe1-7f165b80b09c"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
