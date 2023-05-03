@@ -5,12 +5,15 @@ namespace Game.Dialog
 {
     public readonly struct DialogData : IEquatable<DialogData>
     {
-        public DialogData(DialogDefinition definition)
-            => Definition = definition;
+        public DialogData(IDialogDefinition definition, bool oneShot = false)
+        {
+            Definition = definition;
+            OneShot = oneShot;
+        }
 
-        public DialogDefinition Definition { get; }
+        public IDialogDefinition Definition { get; }
 
-        public bool IsEmpty => !Definition;
+        public bool OneShot { get; }
 
         public bool Equals(DialogData other)
             => Equals(Definition, other.Definition);

@@ -5,15 +5,15 @@ using UnityEngine.Localization;
 namespace Game.Level
 {
     [CreateAssetMenu(menuName = "Dialog")]
-    public class DialogDefinition : ScriptableObject
+    public class DialogDefinition : ScriptableObject, IDialogDefinition
     {
         [SerializeField]
         private Item item;
 
-        public Item Single => item;
+        public IDialogItem Single => item;
 
         [Serializable]
-        public class Item
+        public class Item : IDialogItem
         {
             [SerializeField]
             private LocalizedString title;
@@ -21,9 +21,9 @@ namespace Game.Level
             [SerializeField]
             private LocalizedString text;
 
-            public LocalizedString Title => title;
+            public string Title => title.IsEmpty ? string.Empty : title.GetLocalizedString();
 
-            public LocalizedString Text => text;
+            public string Text => text.IsEmpty ? string.Empty : text.GetLocalizedString();
         }
     }
     

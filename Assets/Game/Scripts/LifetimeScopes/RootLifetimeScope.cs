@@ -149,6 +149,7 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.UiSettings.Hud);
             builder.RegisterInstance(gameSettings.UiSettings.Loading);
             builder.RegisterInstance(gameSettings.UiSettings.Saving);
+            builder.RegisterInstance(gameSettings.UiSettings.Notification);
 
             builder.RegisterInstance(fxSettings.Inventory);
             builder.RegisterInstance(fxSettings.HudRunes);

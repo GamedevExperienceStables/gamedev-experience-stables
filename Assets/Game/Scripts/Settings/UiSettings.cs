@@ -1,4 +1,5 @@
-﻿using Game.Level;
+﻿using Game.Dialog;
+using Game.Level;
 using Game.UI;
 using UnityEngine;
 
@@ -27,6 +28,9 @@ namespace Game.Settings
 
         [SerializeField]
         private LocalizationInteractionSettings interaction;
+        
+        [SerializeField]
+        private DialogNotification.Settings notification;
 
         [SerializeField]
         private LoadingScreenView.Settings loading;
@@ -63,5 +67,6 @@ namespace Game.Settings
 
         public AboutSettings About => about;
         public ArtSettings ArtMenu => artMenu;
+        public DialogNotification.Settings Notification => notification;
     }
 }
