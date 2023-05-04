@@ -69,6 +69,7 @@
             public const string WIDGET_MP = "widget-mp";
             public const string WIDGET_SP = "widget-sp";
             public const string WIDGET_CRYSTAL = "widget-crystal";
+            public const string WIDGET_CRYSTAL_COUNT = "crystal-count";
             
             public const string SP_LEFT = "sp-left";
             public const string SP_CENTER = "sp-center";
