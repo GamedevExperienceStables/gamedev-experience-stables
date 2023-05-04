@@ -38,7 +38,8 @@ namespace Game.Dialog
             if (change.newValue <= change.oldValue)
                 return;
 
-            string localizedString = _settings.materialObtained.GetLocalizedString(change.definition);
+            string materialName = change.definition.LocalizedName.GetLocalizedString();
+            string localizedString = _settings.materialObtained.GetLocalizedString(materialName);
             
             ShowDialog(localizedString);
         }

@@ -20,6 +20,8 @@ namespace Game.Level
             _inventory = inventory;
         }
 
+        public MaterialDefinition Material => _rocketContainer.TargetMaterial;
+
         public override void OnCreate()
             => _rocketContainer = Source.GetComponent<RocketContainer>();
 

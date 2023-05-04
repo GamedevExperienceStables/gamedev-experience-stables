@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Game.Inventory
 {
@@ -8,6 +9,11 @@ namespace Game.Inventory
         [SerializeField]
         private Color color = Color.black;
 
+        [SerializeField]
+        private LocalizedString localizedName;
+
         public Color Color => color;
+
+        public LocalizedString LocalizedName => localizedName;
     }
 }
