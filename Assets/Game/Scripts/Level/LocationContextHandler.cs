@@ -48,11 +48,11 @@ namespace Game.Level
 
             foreach (LocationPoint point in points)
             {
-                if (point.PointKey == locationPointKey)
+                if (point.PointKey.Id == locationPointKey.Id)
                     return point;
             }
 
-            Debug.LogWarning($"Not found '{locationPointKey}' spawn point, will be used first on location");
+            Debug.LogWarning($"Not found '{locationPointKey} ({locationPointKey.Id})' spawn point, will be used first on location");
             return points.First();
         }
         

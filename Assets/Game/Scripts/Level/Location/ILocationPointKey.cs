@@ -2,5 +2,6 @@
 {
     public interface ILocationPointKey
     {
+        public string Id { get; }
     }
 }

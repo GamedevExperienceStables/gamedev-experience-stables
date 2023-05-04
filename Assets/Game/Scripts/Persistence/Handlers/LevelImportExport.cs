@@ -41,8 +41,29 @@ namespace Game.Persistence
         {
             LevelDefinition currentLevel = GetCurrentLevel(data);
             LevelLocations levelLocations = GetLevelLocations(data);
+            ILocationPoint locationSavePoint = GetLocationSavePoint(data);
 
-            _level.InitLevel(currentLevel, _loadGameStartPoint, levelLocations);
+            _level.InitLevel(currentLevel, locationSavePoint, levelLocations);
+        }
+
+        private ILocationPoint GetLocationSavePoint(GameSaveData.Level data)
+        {
+            string savePointID = data.startPoint.id;
+
+            if (string.IsNullOrEmpty(savePointID))
+            {
+                Debug.LogWarning("Save data not contains save point id. Loading from game start point");
+                return _loadGameStartPoint;
+            }
+
+            if (!_locationDb.TryGetValue(data.startPoint.location, out LocationDefinition definition))
+            {
+                Debug.LogWarning($"Location '{data.startPoint.location}' not found. Loading from game start point");
+                return _loadGameStartPoint;
+            }
+
+            var locationPointKey = new LocationPointKeyData(savePointID);
+            return new LocationPointData(definition, locationPointKey);
         }
 
         private LevelLocations GetLevelLocations(GameSaveData.Level data)
@@ -140,7 +161,18 @@ namespace Game.Persistence
             return new GameSaveData.Level
             {
                 id = _level.GetCurrentLevelId(),
+                startPoint = ExportSavePoint(),
                 locations = ExportLocations()
+            };
+        }
+
+        private GameSaveData.LocationPoint ExportSavePoint()
+        {
+            ILocationPoint currentLocationPoint = _level.GetCurrentLocationPoint();
+            return new GameSaveData.LocationPoint
+            {
+                id = currentLocationPoint.PointKey.Id,
+                location = currentLocationPoint.Location.Id
             };
         }
 
