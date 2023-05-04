@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1; background-color: rgb(255, 255, 255); justify-content: center; align-items: center;">
-        <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/Art/Textures/Brand/ges-logo-sprite.png?fileID=21300000&amp;guid=9cf8309659141ed4daae262274f405da&amp;type=3#ges-logo-sprite&apos;); -unity-background-scale-mode: scale-to-fit; height: 50%; width: 50%;" />
+    <ui:VisualElement style="width: 100%; height: 100%;">
+        <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/SplashScreen/splash_screen_image.jpg?fileID=21300000&amp;guid=66ef9f18dfb1c74409513d396b348894&amp;type=3#splash_screen_image&apos;); flex-grow: 1; flex-shrink: 0; -unity-background-scale-mode: scale-and-crop;" />
+        <ui:VisualElement style="flex-grow: 1; position: absolute; right: 80px; bottom: 50px; height: 264px; width: 473px; background-image: url(&apos;project://database/Assets/Game/UI/Textures/SplashScreen/game_logo.png?fileID=21300000&amp;guid=03e3d28baf312554c89035d8fe6348dc&amp;type=3#game_logo&apos;); -unity-background-scale-mode: scale-to-fit;" />
     </ui:VisualElement>
 </ui:UXML>
