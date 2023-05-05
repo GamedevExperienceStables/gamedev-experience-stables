@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Level
 {
-    public class BedView : MonoBehaviour
+    public class SavingEffect : MonoBehaviour
     {
         [SerializeField, Required]
         private SavePoint savePoint;
