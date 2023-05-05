@@ -193,8 +193,10 @@ GameObject:
   - component: {fileID: 2509567579264617795}
   - component: {fileID: 3505129166368442920}
   - component: {fileID: 4545705813635337607}
+  - component: {fileID: 4510390406744486506}
+  - component: {fileID: 3306686871079278081}
   m_Layer: 0
-  m_Name: SavePoint
+  m_Name: LocationSavePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +220,7 @@ Transform:
   - {fileID: 5300150792408708393}
   - {fileID: 3910451441218502692}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!136 &1475137273586783639
 CapsuleCollider:
@@ -284,6 +286,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   savePoint: {fileID: 3505129166368442920}
   savingFeedback: {fileID: 7851048132933081724}
+--- !u!114 &4510390406744486506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966470829457852452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd7170ab399a489786b3dbaf39beb5bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  definition: {fileID: 11400000, guid: f839796992f36e54792c5f5ff258a91d, type: 2}
+--- !u!208 &3306686871079278081
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966470829457852452}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &207449417220131287
 PrefabInstance:
   m_ObjectHideFlags: 0
