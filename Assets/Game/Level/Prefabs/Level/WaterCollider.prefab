@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3109508306124330226}
   - component: {fileID: 47799559131652709}
   - component: {fileID: 4412193099933419163}
-  - component: {fileID: 2816749731254279198}
+  - component: {fileID: 4101960078802764326}
   m_Layer: 0
   m_Name: WaterCollider
   m_TagString: Untagged
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   behaviours: {fileID: 11400000, guid: 856706b6bb558a648a4c78cbb8961133, type: 2}
---- !u!114 &2816749731254279198
+--- !u!114 &4101960078802764326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,7 +134,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 9207860379889550955}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9be007f6ec2545909fdc22eb2fcad87e, type: 3}
+  m_Script: {fileID: 11500000, guid: d8e2ea6f7acf40c391db423d945a3086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmoColor: {r: 0.4198113, g: 0.80586416, b: 1, a: 0.30588236}
+  gizmoColor: {r: 0.1745283, g: 0.88525987, b: 1, a: 1}
+  show: 0
