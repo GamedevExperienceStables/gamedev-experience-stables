@@ -77,7 +77,7 @@ namespace Game.UI
             
             Show();
             
-            await UniTask.Delay(_showDuration);
+            await UniTask.Delay(_showDuration, DelayType.UnscaledDeltaTime);
             
             _isActive = true;
         }
@@ -88,7 +88,7 @@ namespace Game.UI
                 return;
             
             Hide();
-            await UniTask.Delay(_hideDuration);
+            await UniTask.Delay(_hideDuration, DelayType.UnscaledDeltaTime);
 
             _isActive = false;
         }
