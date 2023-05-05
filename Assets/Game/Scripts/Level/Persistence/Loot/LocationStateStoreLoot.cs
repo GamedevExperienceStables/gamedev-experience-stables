@@ -38,6 +38,8 @@ namespace Game.Level
             {
                 if (_lootDb.Contains(lootItem.Value.definition))
                     locationLoot.SetValue(lootItem.Id, lootItem.Value);
+                else
+                    Debug.LogWarning($"Loot {lootItem.Value.definition.name} not found in database, ignoring.");
             }
         }
     }
