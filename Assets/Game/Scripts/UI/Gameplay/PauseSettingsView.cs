@@ -6,7 +6,7 @@ using VContainer;
 
 namespace Game.UI
 {
-    public class PauseSettingsView : PageView
+    public class PauseSettingsView : PageView<PauseMenuViewModel>
     {
         private PauseViewRouter _router;
         private Button _backButton;
@@ -63,6 +63,15 @@ namespace Game.UI
             _settingsView.Init();
 
             base.Show();
+            
+            ViewModel.SubscribeBack(OnBackRequested);
+        }
+
+        public override void Hide()
+        {
+            ViewModel.UnSubscribeBack(OnBackRequested);
+            
+            base.Hide();
         }
 
         private void OnLocalisationChanged()
@@ -73,6 +82,9 @@ namespace Game.UI
             foreach (Label headerLabel in _headerLabels)
                 headerLabel.text = _settings.heading.GetLocalizedString();
         }
+        
+        private void OnBackRequested() 
+            => OnBack();
 
         private void OnBack()
             => _router.ToRoot();
