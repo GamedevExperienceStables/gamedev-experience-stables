@@ -81,6 +81,8 @@ namespace Game.UI
         {
             foreach (Label headerLabel in _headerLabels)
                 headerLabel.text = _settings.heading.GetLocalizedString();
+            
+            _backButton.text = _settings.back.GetLocalizedString();
         }
         
         private void OnBackRequested() 
@@ -93,6 +95,7 @@ namespace Game.UI
         public class Settings
         {
             public LocalizedString heading;
+            public LocalizedString back;
         }
     }
 }
