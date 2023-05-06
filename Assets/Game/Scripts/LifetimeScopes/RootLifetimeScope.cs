@@ -137,7 +137,6 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.InventorySettings);
             builder.RegisterInstance(gameSettings.AudioSettings);
             builder.RegisterInstance(gameSettings.CursorSettings);
-            builder.RegisterInstance(gameSettings.InputBindings);
             
             builder.RegisterInstance(gameSettings.UiSettings.StartMenu);
             builder.RegisterInstance(gameSettings.UiSettings.SettingsMenu);
@@ -150,6 +149,7 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.UiSettings.Loading);
             builder.RegisterInstance(gameSettings.UiSettings.Saving);
             builder.RegisterInstance(gameSettings.UiSettings.Notification);
+            builder.RegisterInstance(gameSettings.UiSettings.InputBindings);
 
             builder.RegisterInstance(fxSettings.Inventory);
             builder.RegisterInstance(fxSettings.HudRunes);
