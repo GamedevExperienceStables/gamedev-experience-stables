@@ -40,7 +40,7 @@ namespace Game.UI
 
         public void SetData(EmployeeData employeeData, bool isEven)
         {
-            if (isEven)
+            if (!isEven)
             {
                 _info.AddToClassList("employee--reversed");
                 _description.AddToClassList("description--reversed");

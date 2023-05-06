@@ -1,4 +1,4 @@
-﻿.unity-repeat-button {
+.unity-repeat-button {
     visibility: hidden;
 }
 
@@ -21,17 +21,17 @@
 #unity-dragger {
     background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-1882268378&guid=0171bb5685750d24c968dd955bfaa574&type=3#Menu_Atlas_21');
     -unity-background-scale-mode: scale-to-fit;
-    width: 40px;
-    height: 40px;
     background-color: rgba(0, 0, 0, 0);
-    max-height: 40px;
     border-left-color: rgba(0, 0, 0, 0);
     border-right-color: rgba(0, 0, 0, 0);
     border-top-color: rgba(0, 0, 0, 0);
     border-bottom-color: rgba(0, 0, 0, 0);
     cursor: url('center');
-    max-width: 40px;
-    left: 53px;
+    left: 50px;
+    min-width: 45px;
+    min-height: 45px;
+    max-width: 45px;
+    max-height: 45px;
 }
 
 #unity-tracker {
