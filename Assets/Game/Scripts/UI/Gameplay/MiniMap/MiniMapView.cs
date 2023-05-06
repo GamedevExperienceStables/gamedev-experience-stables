@@ -22,6 +22,8 @@ namespace Game.UI
         private Label _miniMapCoordinates;
 
         private float _lastCameraAngle;
+        
+        private bool _isDirty;
 
 
         [Inject]
@@ -61,7 +63,11 @@ namespace Game.UI
         }
 
         private void OnMarkerAdd(ILocationMarker target)
-            => _miniMapMarkers.Create(target);
+        {
+            _miniMapMarkers.Create(target);
+            
+            _isDirty = true;
+        }
 
         private void OnMarkerRemove(ILocationMarker target)
             => _miniMapMarkers.Remove(target);
@@ -98,13 +104,15 @@ namespace Game.UI
             UpdateMarkers(cameraAngle);
 
             _lastCameraAngle = cameraAngle;
+
+            _isDirty = false;
         }
 
         private void UpdateMarkers(float cameraAngle)
         {
             _miniMapMarkers.UpdatePosition();
             
-            if (!_lastCameraAngle.AlmostEquals(cameraAngle))
+            if (_isDirty || !_lastCameraAngle.AlmostEquals(cameraAngle))
                 _miniMapMarkers.UpdateRotation(-cameraAngle);
         }
 
