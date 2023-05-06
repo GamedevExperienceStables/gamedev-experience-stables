@@ -13,7 +13,7 @@ namespace Game.Actors
         public ActorStatus(IActorController owner)
             => _owner = owner;
 
-        public void CreateStatus(StatusDefinition status)
+        public void AddStatus(StatusDefinition status)
         {
             if (_statuses.TryGetValue(status, out Status instance))
             {
@@ -40,7 +40,7 @@ namespace Game.Actors
             _statuses.Add(definition, instance);
         }
 
-        public void Remove(StatusDefinition status)
+        public void RemoveStatus(StatusDefinition status)
         {
             if (!_statuses.TryGetValue(status, out Status instance))
                 return;
