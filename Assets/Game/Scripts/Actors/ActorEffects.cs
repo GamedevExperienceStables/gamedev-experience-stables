@@ -20,15 +20,8 @@ namespace Game.Actors
         public void Apply(Effect effect)
             => effect.Execute(_owner);
 
-        public void Add(Effect effect)
-        {
-            if (effect.Definition.Status)
-                _status.CreateStatus(effect.Definition.Status);
-
-            SuppressEffectIfExisted(effect.Definition);
-
-            _effectsToAdd.Add(effect);
-        }
+        public void Add(Effect effect) 
+            => _effectsToAdd.Add(effect);
 
         public void CancelAll(object instigator, IEnumerable<EffectDefinition> toCancel)
         {
@@ -56,7 +49,6 @@ namespace Game.Actors
         public void Tick()
         {
             AddEffects();
-            RemoveStatus();
             RemoveEffects();
         }
 
@@ -64,9 +56,18 @@ namespace Game.Actors
         {
             for (int i = _effectsToAdd.Count - 1; i >= 0; i--)
             {
-                Effect effect = _effectsToAdd[i];
-                if (effect.IsCanceled)
+                if (_effectsToAdd[i].IsCanceled)
                     continue;
+                
+                Effect effect = _effectsToAdd[i];
+                
+                StatusDefinition status = effect.Definition.Status;
+                if (status)
+                {
+                    _status.AddStatus(status);
+                    
+                    SuppressEffectIfExisted(status);
+                }
 
                 _effects.Add(effect);
                 Apply(effect);
@@ -85,31 +86,31 @@ namespace Game.Actors
                 Effect effect = _effects[i];
                 _effects.RemoveAt(i);
 
-                UnSuppressEffectIfExisted(effect.Definition);
+                StatusDefinition status = effect.Definition.Status;
+                if (status)
+                {
+                    _status.RemoveStatus(status);
+
+                    UnSuppressEffectIfExisted(status);
+                }
             }
         }
 
-        private void RemoveStatus()
+        private void SuppressEffectIfExisted(StatusDefinition status)
         {
-            for (int i = _effects.Count - 1; i >= 0; i--)
+            foreach (Effect existed in _effects)
             {
-                if (!_effects[i].IsCanceled)
-                    continue;
-
-                Effect effect = _effects[i];
-                _status.Remove(effect.Definition.Status);
+                if (ReferenceEquals(existed.Definition.Status, status) && !existed.IsCanceled) 
+                    existed.Suppress();
             }
+
+            // if (TryGetEffect(definition.Status, out Effect existed) && !existed.IsCanceled)
+            //     existed.Suppress();
         }
 
-        private void SuppressEffectIfExisted(EffectDefinition definition)
+        private void UnSuppressEffectIfExisted(StatusDefinition status)
         {
-            if (TryGetEffect(definition.Status, out Effect existed) && !existed.IsCanceled)
-                existed.Suppress();
-        }
-
-        private void UnSuppressEffectIfExisted(EffectDefinition definition)
-        {
-            if (TryGetEffect(definition.Status, out Effect existed) && !existed.IsCanceled)
+            if (TryGetEffect(status, out Effect existed) && !existed.IsCanceled)
                 existed.UnSuppress();
         }
 

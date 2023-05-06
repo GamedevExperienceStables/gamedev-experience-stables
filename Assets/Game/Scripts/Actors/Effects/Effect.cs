@@ -57,6 +57,9 @@ namespace Game.Actors
 
         public void Suppress()
         {
+            if (IsSuppressed)
+                return;
+            
 #if UNITY_EDITOR
             Debug.Log($"[Effect] Suppress: {Definition.name}");
 #endif
@@ -67,6 +70,9 @@ namespace Game.Actors
 
         public void UnSuppress()
         {
+            if (!IsSuppressed)
+                return;
+            
 #if UNITY_EDITOR
             Debug.Log($"[Effect] Unsuppress: {Definition.name}");
 #endif

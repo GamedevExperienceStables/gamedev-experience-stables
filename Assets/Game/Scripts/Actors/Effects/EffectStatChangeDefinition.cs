@@ -94,8 +94,7 @@ namespace Game.Actors
             }
             else
             {
-                if (!IsSuppressed)
-                    AddModifier();
+                AddModifier();
             }
         }
 
@@ -113,14 +112,17 @@ namespace Game.Actors
 
         protected override void OnSuppress()
         {
-            if (Definition.Interval <= 0)
+            if (LimitedAndHasNotInterval())
                 RemoveModifier();
         }
 
         protected override void OnUnSuppress()
         {
-            if (Definition.Interval <= 0)
+            if (LimitedAndHasNotInterval())
                 AddModifier();  
         }
+
+        private bool LimitedAndHasNotInterval() 
+            => Definition.EffectType == EffectDuration.Limited && Definition.Interval <= 0;
     }
 }
