@@ -38,11 +38,15 @@
             public const string BUTTON_BACK = "button-back";
             public const string BUTTON_ICON = "icon";
             
+            public const string BOOKMARK = "book-element";
+            
             public const string SCROLL_CONTAINER = "scroll-container";
             
             public const string MENU = "menu";
             public const string PAGES = "pages";
             public const string MODAL = "menu-modal";
+            
+            public const string DESCRIPTION = "description";
             
             public const string PREVIEW = "preview";
             public const string PREVIEW_IMAGE = "image";

@@ -10,6 +10,7 @@ namespace Game.UI
         private List<TeamView> _teamViews;
 
         private IList<Label> _headerLabels;
+        private Label _descriptionLabel;
         private VisualElement _listContent;
         private Button _buttonBack;
 
@@ -35,6 +36,7 @@ namespace Game.UI
 
             _headerLabels = Content.Q<VisualElement>(LayoutNames.StartMenu.PAGE_HEADING)
                 .Query<Label>().ToList();
+            _descriptionLabel = Content.Q<Label>(LayoutNames.StartMenu.DESCRIPTION);
             
             _scrollContainer = Content.Q<ScrollView>(LayoutNames.StartMenu.SCROLL_CONTAINER);
             
@@ -93,6 +95,7 @@ namespace Game.UI
             foreach (Label headerLabel in _headerLabels)
                 headerLabel.text = _settings.header.GetLocalizedString();
 
+            _descriptionLabel.text = _settings.description.GetLocalizedString();
             _buttonBack.text = _settings.back.GetLocalizedString();
         }
 

@@ -17,12 +17,16 @@ namespace Game.UI
         private Button _buttonAbout;
         private Button _buttonQuit;
 
+        private VisualElement _bookmark;
+
         private PreviewView _preview;
         private VisualElement _menu;
 
         private Settings _settings;
         
         private CommonFx _commonFx;
+
+        private string _url;
 
         [Inject]
         public void Construct(Settings settings, CommonFx commonFx)
@@ -43,6 +47,9 @@ namespace Game.UI
             _buttonArt = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_ART).Q<Button>();
             _buttonQuit = Content.Q<VisualElement>(LayoutNames.StartMenu.BUTTON_QUIT).Q<Button>();
 
+            _bookmark = Content.Q<VisualElement>(LayoutNames.StartMenu.BOOKMARK);
+            _url = _settings.notionLink;
+
             _menu = Content.Q<VisualElement>(LayoutNames.StartMenu.MENU);
 
             var previewElement = Content.Q<VisualElement>(LayoutNames.StartMenu.PREVIEW);
@@ -54,6 +61,8 @@ namespace Game.UI
             RegisterButtonEvent(_buttonArt, OpenArt, OnHoverArt, OnExit);
             RegisterButtonEvent(_buttonAbout, OpenAbout, OnHoverAbout, OnExit);
             RegisterButtonEvent(_buttonQuit, QuitGame, OnHoverQuit, OnExit);
+            
+            _bookmark.RegisterCallback<ClickEvent>(OnClickBookmark);
 
             localization.Changed += OnLocalisationChanged;
         }
@@ -69,6 +78,8 @@ namespace Game.UI
             UnregisterButtonEvent(_buttonArt, OpenArt, OnHoverArt, OnExit);
             UnregisterButtonEvent(_buttonAbout, OpenAbout, OnHoverAbout, OnExit);
             UnregisterButtonEvent(_buttonQuit, QuitGame, OnHoverQuit, OnExit);
+            
+            _bookmark.UnregisterCallback<ClickEvent>(OnClickBookmark);
 
             localization.Changed -= OnLocalisationChanged;
         }
@@ -130,6 +141,9 @@ namespace Game.UI
 
         private void QuitGame()
             => ShowQuitGameModal();
+        
+        private void OnClickBookmark(EventBase _)
+            => ShowNotionModal();
 
         private void ShowQuitGameModal()
         {
@@ -142,6 +156,16 @@ namespace Game.UI
             ModalContext context = ModalSettingsExtensions.CreateContext(_settings.newGameModal, ViewModel.NewGame);
             ViewModel.ShowModal(context);
         }
+        
+        private void ShowNotionModal()
+        {
+            ModalContext context = ModalSettingsExtensions.CreateContext(_settings.notionModal, OpenLink);
+            context.message = _url;
+            ViewModel.ShowModal(context);
+        }
+        
+        private void OpenLink()
+            => ViewModel.OpenURL(_url);
 
         private void OpenArt()
         {
@@ -245,8 +269,11 @@ namespace Game.UI
             public Page settings;
             public Page quit;
 
+            public string notionLink;
+
             public ModalSettings newGameModal;
             public ModalSettings quitModal;
+            public ModalSettings notionModal;
         }
     }
 }

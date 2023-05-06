@@ -15,10 +15,10 @@
                     <ui:Instance template="Artbook" name="Artbook" style="align-self: center; width: 100%;" />
                 </ui:ScrollView>
             </ui:VisualElement>
-            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-direction: row; flex-grow: 1; flex-shrink: 0; margin-top: 10px;">
+            <ui:VisualElement style="flex-direction: row; flex-grow: 1; flex-shrink: 0; margin-top: 10px;">
                 <ui:Button text="Back" display-tooltip-when-elided="true" name="button-back" class="primary-button" />
-                <ui:Button text="Download Artbook" display-tooltip-when-elided="true" name="button-download" class="primary-button" />
             </ui:VisualElement>
+            <ui:Button text="Download" display-tooltip-when-elided="true" name="button-download" class="primary-button" style="position: absolute; bottom: 50px; right: 120px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

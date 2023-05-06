@@ -16,6 +16,8 @@ namespace Game.UI
         [SerializeField]
         public LocalizedString header;
         [SerializeField]
+        public LocalizedString description;
+        [SerializeField]
         public LocalizedString back;
 
         public ModalSettings LinkModal => linkModal;

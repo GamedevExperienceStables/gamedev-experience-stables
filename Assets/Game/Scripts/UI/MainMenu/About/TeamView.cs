@@ -24,7 +24,7 @@ namespace Game.UI
             _listContent.Clear();
         }
 
-        public void SetData(TeamData teamData)
+        public void SetData(TeamData teamData, List<EmployeeData> allEmployees)
         {
             _name.text = teamData.name;
             
@@ -33,7 +33,7 @@ namespace Game.UI
                 TemplateContainer element = _template.Instantiate();
                 _listContent.Add(element);
                 
-                EmployeeView employeeView = _employeeFactory.Create(element, teamData.list[i - 1], i % 2 == 0);
+                EmployeeView employeeView = _employeeFactory.Create(element, teamData.list[i - 1], allEmployees);
                 _employeeViews.Add(employeeView);
             }
         }
