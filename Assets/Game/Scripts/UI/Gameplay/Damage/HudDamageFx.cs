@@ -14,17 +14,20 @@ namespace Game.UI
             _settings = settings;
         }
 
-        public void DamageFeedback()
-            => _uiFx.Play(_settings.damageFeedback);
-
         public void Destroy()
             => _uiFx.Destroy(_settings.damageFeedback);
 
+        public void DamageFeedback()
+            => _uiFx.Play(_settings.damageFeedback);
+
+        public void HighDamageFeedback()
+            => _uiFx.Play(_settings.highDamageFeedback);
 
         [Serializable]
         public class Settings
         {
             public GameObject damageFeedback;
+            public GameObject highDamageFeedback;
         }
     }
 }

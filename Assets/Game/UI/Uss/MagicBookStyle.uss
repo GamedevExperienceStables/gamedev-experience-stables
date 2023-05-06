@@ -3,6 +3,10 @@
     --passive-slot-size: 88px;
 }
 
+.book-screen--hidden {
+    visibility: hidden;
+}
+
 .magic-book {
     translate: 0;
     opacity: 1;
@@ -31,6 +35,10 @@
 .magic-book-slot {
     width: var(--slot-size);
     height: var(--slot-size);
+}
+
+.magic-book-slot--hidden {
+    opacity: 0;
 }
 
 .magic-book-slot__icon {

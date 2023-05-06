@@ -15,6 +15,7 @@
         public struct Level
         {
             public string id;
+            public LocationPoint startPoint;
             public Location[] locations;
         }
 
@@ -36,6 +37,12 @@
         {
             public string type;
             public float[] position;
+        }
+
+        public struct LocationPoint
+        {
+            public string id;
+            public string location;
         }
 
         public struct Player

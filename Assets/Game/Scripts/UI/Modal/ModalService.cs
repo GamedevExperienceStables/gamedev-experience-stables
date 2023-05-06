@@ -6,11 +6,19 @@ namespace Game.UI
     {
         public event Action<ModalContext> Requested;
         public event Action Closing;
+        
+        public bool IsOpen { get; private set; }
 
         public void Request(ModalContext context)
-            => Requested?.Invoke(context);
+        {
+            Requested?.Invoke(context);
+            IsOpen = true;
+        }
 
         public void ForceClose()
-            => Closing?.Invoke();
+        {
+            Closing?.Invoke();
+            IsOpen = false;
+        }
     }
 }

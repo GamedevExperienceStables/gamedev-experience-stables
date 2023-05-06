@@ -201,9 +201,8 @@
 }
 
 .dialog-window {
-    max-width: 750px;
+    max-width: 800px;
     padding: 16px 22px;
-    background-color: rgba(0, 0, 0, 0.6);
     opacity: 1;
     scale: 1;
     translate: 0;
@@ -211,6 +210,11 @@
     transition-duration: 350ms, 150ms, 150ms;
     transition-timing-function: ease-out-sine;
     -unity-font-definition: var(--font-text);
+    background-image: url('project://database/Assets/Game/UI/Textures/Common/dialog_window.png?fileID=21300000&guid=5ad8a4149a97e5f40bace06b1cb5aee9&type=3#dialog_window');
+    padding-left: 48px;
+    padding-right: 48px;
+    padding-top: 32px;
+    padding-bottom: 32px;
 }
 
 .dialog-window--hidden {
@@ -220,17 +224,15 @@
 }
 
 .dialog-window__title {
-    color: rgba(255, 255, 255, 0.55);
     white-space: normal;
     font-size: 24px;
+    color: rgba(27, 27, 27, 0.62);
 }
 
 .dialog-window__text {
-    color: rgb(255, 255, 255);
     white-space: normal;
     font-size: 28px;
 }
-
 
 .widget-damage {
     position: absolute;
@@ -241,11 +243,11 @@
 
     opacity: 0;
 
-    transition: opacity 1000ms linear 150ms;
+    transition: opacity 2000ms linear 200ms;
 }
 
 .widget-damage.widget-damage--enabled {
     opacity: 1;
 
-    transition: opacity 100ms ease;
+    transition: opacity 150ms ease-out;
 }

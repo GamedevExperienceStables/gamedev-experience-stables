@@ -47,4 +47,6 @@ MonoBehaviour:
   enemy: {fileID: 11400000, guid: 2a649a952fd83194586bbbc4e42d2e8a, type: 2}
   spawnCount: 3
   spawnInterval: 4
-  spawnFeedback: {fileID: 0}
+  spawnFeedbackPrefab: {fileID: 2273418849788802875, guid: 9a757ecc85cc8c84db7610e0bfcfdc7c,
+    type: 3}
+  spawnFeedbackDeprecated: {fileID: 0}

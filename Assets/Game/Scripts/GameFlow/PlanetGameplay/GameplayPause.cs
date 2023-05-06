@@ -15,13 +15,11 @@ namespace Game.GameFlow
             _menuInput = menuInput;
 
             _menuInput.SubscribeMenu(OnMenuRequested);
-            _menuInput.SubscribeBack(OnBackRequested);
         }
 
         public void Dispose()
         {
             _menuInput.UnSubscribeMenu(OnMenuRequested);
-            _menuInput.UnSubscribeBack(OnBackRequested);
         }
 
         public void Enable()
@@ -32,11 +30,5 @@ namespace Game.GameFlow
 
         private void OnMenuRequested()
             => Enable();
-
-        private void OnBackRequested()
-        {
-            if (_planetStateMachine.IsState<PlanetPauseState>())
-                Disable();
-        }
     }
 }

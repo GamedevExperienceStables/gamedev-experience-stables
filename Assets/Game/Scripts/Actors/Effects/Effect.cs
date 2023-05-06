@@ -61,6 +61,8 @@ namespace Game.Actors
             Debug.Log($"[Effect] Suppress: {Definition.name}");
 #endif
             IsSuppressed = true;
+            
+            OnSuppress();
         }
 
         public void UnSuppress()
@@ -69,6 +71,16 @@ namespace Game.Actors
             Debug.Log($"[Effect] Unsuppress: {Definition.name}");
 #endif
             IsSuppressed = false;
+            
+            OnUnSuppress();
+        }
+
+        protected virtual void OnSuppress()
+        {
+        }
+        
+        protected virtual void OnUnSuppress()
+        {
         }
     }
 

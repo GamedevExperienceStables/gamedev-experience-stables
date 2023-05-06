@@ -25,7 +25,7 @@ namespace Game.Actors.Health
 
         private void OnHealthChanged(StatValueChange change)
         {
-            if (change.newValue >= change.oldValue)
+            if (Mathf.Floor(change.newValue) >= Mathf.Floor(change.oldValue))
                 return;
 
             DamageFeedback?.Invoke();

@@ -2,12 +2,15 @@
 using Game.Player;
 using Game.Stats;
 using Game.TimeManagement;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Game.UI
 {
     public class HudDamageView
     {
+        private const float HIGH_DAMAGE_THRESHOLD = 0.35f;
+        
         private readonly PlayerController _player;
         private readonly HudDamageFx _fx;
         private readonly TimerPool _timers;
@@ -38,16 +41,30 @@ namespace Game.UI
 
         private void OnHealthChanged(StatValueChange change)
         {
-            if (change.newValue < change.oldValue)
-                DamageFeedback();
+            if (Mathf.Floor(change.newValue) < Mathf.Floor(change.oldValue))
+            {
+                bool highDamage = IsHighDamage(change);
+                DamageFeedback(highDamage);
+            }
         }
 
-        private void DamageFeedback()
+        private void DamageFeedback(bool highDamage)
         {
             _timer.Start();
             _container.AddToClassList(LayoutNames.Hud.WIDGET_DAMAGE_ENABLED_CLASS_NAME);
 
-            _fx.DamageFeedback();
+            if (highDamage)
+                _fx.HighDamageFeedback();
+            else 
+                _fx.DamageFeedback();
+        }
+
+        private bool IsHighDamage(StatValueChange change)
+        {
+            float maxHealth = _player.Hero.GetCurrentValue(CharacterStats.HealthMax);
+            
+            float percent = change.newValue  / maxHealth;
+            return percent < HIGH_DAMAGE_THRESHOLD;
         }
 
         private void RemoveDamage()

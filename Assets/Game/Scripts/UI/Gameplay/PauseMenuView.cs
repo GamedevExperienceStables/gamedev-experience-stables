@@ -50,9 +50,6 @@ namespace Game.UI
             localization.Changed += OnLocalisationChanged;
         }
 
-        private void Start()
-            => UpdateText();
-
         public void OnDestroy()
         {
             _buttonResume.clicked -= OnResumeButton;
@@ -64,6 +61,23 @@ namespace Game.UI
             _commonFx.UnRegisterButton(_buttonMainMenu, ButtonStyle.Menu);
 
             localization.Changed -= OnLocalisationChanged;
+        }
+
+        private void Start()
+            => UpdateText();
+
+        public override void Show()
+        {
+            base.Show();
+            
+            ViewModel.SubscribeBack(OnBackRequested);
+        }
+
+        public override void Hide()
+        {
+            ViewModel.UnSubscribeBack(OnBackRequested);
+            
+            base.Hide();
         }
 
         private void OnLocalisationChanged()
@@ -85,6 +99,14 @@ namespace Game.UI
 
         private void OnSettingsButton()
             => _router.OpenSettings();
+
+        private void OnBackRequested()
+        {
+            if (ViewModel.IsModalOpen)
+                ViewModel.CloseModal();
+            else
+                ViewModel.ResumeGame();
+        }
 
         private void UpdateText()
         {

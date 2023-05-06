@@ -4,6 +4,7 @@ using Game.TimeManagement;
 using MoreMountains.Feedbacks;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 
 namespace Game.Enemies
@@ -22,7 +23,11 @@ namespace Game.Enemies
 
         [Header("FX")]
         [SerializeField]
-        private MMF_Player spawnFeedback;
+        private GameObject spawnFeedbackPrefab;
+        
+        [FormerlySerializedAs("spawnFeedback")]
+        [SerializeField]
+        private MMF_Player spawnFeedbackDeprecated;
 
         [ShowNonSerializedField]
         private int _spawnsLeft;
@@ -37,6 +42,8 @@ namespace Game.Enemies
         private EnemyFactory _factory;
         private TimerUpdatable _spawnTimer;
         private TimerPool _timers;
+        
+        private GameObject _spawnFeedback;
 
         private bool CanRespawn => spawnCount > 1;
 
@@ -103,8 +110,14 @@ namespace Game.Enemies
 
         private void PlaySpawnFeedback()
         {
-            if (spawnFeedback)
-                spawnFeedback.PlayFeedbacks();
+            if (!spawnFeedbackPrefab)
+                return;
+            
+            if (!_spawnFeedback)
+                _spawnFeedback = Instantiate(spawnFeedbackPrefab, transform.position, Quaternion.identity);
+
+            _spawnFeedback.SetActive(false);
+            _spawnFeedback.SetActive(true);
         }
 
         private void OnDied()

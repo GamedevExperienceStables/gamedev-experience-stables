@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9133309009172221845}
   - component: {fileID: 9133309009172221843}
-  - component: {fileID: 9133309009172221842}
+  - component: {fileID: 8815204743579300190}
   - component: {fileID: 9133309009172221844}
   - component: {fileID: 2619705342654143541}
   m_Layer: 0
@@ -56,7 +56,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9133309009172221842
+--- !u!114 &8815204743579300190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,10 +65,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9133309009172221846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9be007f6ec2545909fdc22eb2fcad87e, type: 3}
+  m_Script: {fileID: 11500000, guid: d8e2ea6f7acf40c391db423d945a3086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gizmoColor: {r: 0, g: 0, b: 0, a: 0.6784314}
+  show: 1
 --- !u!114 &9133309009172221844
 MonoBehaviour:
   m_ObjectHideFlags: 0

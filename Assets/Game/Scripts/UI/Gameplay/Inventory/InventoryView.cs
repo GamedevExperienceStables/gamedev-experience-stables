@@ -4,7 +4,6 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using Game.Inventory;
 using Game.UI.Elements;
-using Game.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
@@ -17,7 +16,9 @@ namespace Game.UI
     {
         private const float SHOW_DURATION = 0.1f;
         private const float HIDE_DURATION = 0.2f;
-        
+        private const string UNKNOWN_TEXT = "??????";
+        private readonly Color _unknownColor = Color.grey;
+
         [SerializeField]
         private HudView hud;
 
@@ -132,31 +133,37 @@ namespace Game.UI
                 }
             }
 
-            for (int i = 0; i < activeRunes.Count; i++)
+            for (int i = 0; i < slots.Count; i++)
             {
-                if (i >= slots.Count)
-                    break;
-
-                var runeView = new RuneSlotInventoryView(slots[i], activeRunes[i]);
+                var runeView = new RuneSlotInventoryView(slots[i]);
                 runeView.SubscribeStartDrag(OnRuneStartDrag);
                 runeView.SubscribeHover(OnRuneHover);
 
-                if (runes.Contains(activeRunes[i]))
-                    runeView.Activate();
+                if (i < activeRunes.Count)
+                {
+                    RuneDefinition rune = activeRunes[i];
+                    runeView.SetRune(rune);
+                    if (runes.Contains(rune))
+                        runeView.Activate();
+                }
 
                 _runeSlots.Add(runeView);
             }
 
-            for (int i = 0; i < passiveRunes.Count; i++)
+            for (int i = 0; i < passiveSlots.Count; i++)
             {
-                if (i >= passiveSlots.Count)
-                    break;
-
-                var runeView = new RuneSlotInventoryView(passiveSlots[i], passiveRunes[i]);
+                var runeView = new RuneSlotInventoryView(passiveSlots[i]);
                 runeView.SubscribeHover(OnRuneHover);
 
-                if (runes.Contains(passiveRunes[i]))
-                    runeView.Activate();
+                if (i < passiveRunes.Count)
+                {
+                    RuneDefinition rune = passiveRunes[i];
+                    runeView.SetRune(rune);
+                    if (runes.Contains(rune))
+                    {
+                        runeView.Activate();
+                    }
+                }
 
                 _runeSlots.Add(runeView);
             }
@@ -166,7 +173,7 @@ namespace Game.UI
         {
             _runeDragger = root.Q<RuneSlotDraggerElement>();
             _runeManipulator = new RuneDragAndDropManipulator(_runeDragger, hudSlots);
-            
+
             _runeManipulator.DragStopped += OnRuneDragStopped;
             _runeManipulator.DragCompleted += OnRuneDragCompleted;
         }
@@ -186,6 +193,9 @@ namespace Game.UI
 
         private void OnRuneStartDrag(RuneSlotDragEvent evt)
         {
+            if (!evt.definition || !IsActive(evt.definition)) 
+                return;
+            
             _runeManipulator.StartDrag(evt);
             _runeDragger.StartDrag(evt.definition.Icon);
         }
@@ -198,17 +208,32 @@ namespace Game.UI
                 return;
             }
 
-            RuneDefinition definition = evt.definition;
+            if (evt.definition && IsActive(evt.definition))
+            {
+                RuneDefinition definition = evt.definition;
 
-            _runeTitleIcon.style.backgroundImage = new StyleBackground(definition.IconEmpty);
-            _runeTitleText.text = definition.Name.GetLocalizedString();
-            _runeDescription.text = definition.Description.GetLocalizedString();
-            _runeLevelText.text = definition.Level.Text.GetLocalizedString();
-            _runeLevelText.style.color = definition.Level.Color;
+                _runeTitleIcon.style.backgroundImage = new StyleBackground(definition.IconEmpty);
+                _runeTitleText.text = definition.Name.GetLocalizedString();
+                _runeDescription.text = definition.Description.GetLocalizedString();
+                _runeLevelText.text = definition.Level.Text.GetLocalizedString();
+                _runeLevelText.style.color = definition.Level.Color;
+
+                _fx.RuneHoverFeedback();
+            }
+            else
+            {
+                _runeTitleIcon.style.backgroundImage = null;
+                _runeTitleText.text = UNKNOWN_TEXT;
+                _runeDescription.text = UNKNOWN_TEXT;
+                _runeLevelText.text = UNKNOWN_TEXT;
+                _runeLevelText.style.color = _unknownColor;
+            }
 
             _runeDetails.RemoveFromClassList(LayoutNames.Inventory.BOOK_DETAILS_HIDDEN_CLASS_NAME);
-            _fx.RuneHoverFeedback();
         }
+
+        private bool IsActive(RuneDefinition runeDefinition) 
+            => _viewModel.ObtainedRunes.Contains(runeDefinition);
 
         private void HideDetails()
             => _runeDetails.AddToClassList(LayoutNames.Inventory.BOOK_DETAILS_HIDDEN_CLASS_NAME);
@@ -265,7 +290,7 @@ namespace Game.UI
 
         public void HideImmediate()
         {
-            _container.SetVisibility(false);
+            _container.AddToClassList(LayoutNames.Inventory.SCREEN_HIDDEN_CLASS_NAME);
             _book.AddToClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
 
             HideDetails();
@@ -299,14 +324,14 @@ namespace Game.UI
             OnHide();
             Hide();
             await UniTask.Delay(_hideDuration);
-            _container.SetVisibility(false);
+            _container.AddToClassList(LayoutNames.Inventory.SCREEN_HIDDEN_CLASS_NAME);
         }
 
         private void Show()
         {
             _fx.ShowFeedback();
 
-            _container.SetVisibility(true);
+            _container.RemoveFromClassList(LayoutNames.Inventory.SCREEN_HIDDEN_CLASS_NAME);
             _book.RemoveFromClassList(LayoutNames.Inventory.BOOK_HIDDEN_CLASS_NAME);
         }
 

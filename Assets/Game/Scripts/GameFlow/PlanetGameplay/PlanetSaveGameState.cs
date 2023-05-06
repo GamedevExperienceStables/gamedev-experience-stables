@@ -1,7 +1,9 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Game.Input;
+using Game.Level;
 using Game.Persistence;
+using Game.TimeManagement;
 using Game.UI;
 using VContainer;
 
@@ -12,15 +14,20 @@ namespace Game.GameFlow
         private const float WAIT_TIME = 1f;
 
         private readonly PersistenceService _persistence;
+        private readonly LocationStateStore _locationState;
         private readonly ILoadingScreen _faderScreen;
         private readonly IInputService _input;
+        private readonly ITimeService _timeService;
 
         [Inject]
-        public PlanetSaveGameState(PersistenceService persistence, IFaderScreen faderScreen, IInputService input)
+        public PlanetSaveGameState(PersistenceService persistence, LocationStateStore locationState,
+            IFaderScreen faderScreen, IInputService input, ITimeService timeService)
         {
             _persistence = persistence;
+            _locationState = locationState;
             _faderScreen = faderScreen;
             _input = input;
+            _timeService = timeService;
         }
 
         protected override async UniTask OnEnter()
@@ -29,7 +36,11 @@ namespace Game.GameFlow
 
             await _faderScreen.ShowAsync();
 
-            await UniTask.Delay(TimeSpan.FromSeconds(WAIT_TIME));
+            _timeService.Pause();
+            
+            _locationState.Store();
+
+            await UniTask.Delay(TimeSpan.FromSeconds(WAIT_TIME), DelayType.UnscaledDeltaTime);
             await SaveGame();
 
             await Parent.PopState();
@@ -38,6 +49,7 @@ namespace Game.GameFlow
         protected override UniTask OnExit()
         {
             _input.Back();
+            _timeService.Play();
 
             _faderScreen.Hide();
 

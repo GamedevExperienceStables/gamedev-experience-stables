@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine.Localization;
+﻿using UnityEngine.Localization;
 using VContainer;
 
 namespace Game.Level
@@ -7,16 +6,20 @@ namespace Game.Level
     public class LocalizationInteraction
     {
         private readonly LocalizationInteractionSettings _settings;
+        private readonly RocketContainerLocalization _container;
 
         [Inject]
-        public LocalizationInteraction(LocalizationInteractionSettings settings)
-            => _settings = settings;
+        public LocalizationInteraction(LocalizationInteractionSettings settings, RocketContainerLocalization container)
+        {
+            _settings = settings;
+            _container = container;
+        }
 
         public InteractionPrompt GetInteractionPrompt(Interaction interaction) =>
             interaction switch
             {
                 LevelExitInteraction => HandleLevelExit(interaction),
-                RocketContainerInteraction container => HandleContainer(container),
+                RocketContainerInteraction container => _container.GetPrompt(container),
                 TransitionToLocationInteraction transition => HandleTransition(transition),
                 SaveGameInteraction => GetCommonPrompt(_settings.SaveGame.Text),
                 _ => GetCommonPrompt(_settings.DefaultText)
@@ -48,21 +51,6 @@ namespace Game.Level
             string localizedText = canExecute
                 ? GetLocalizedText(_settings.LevelExit.TextTrue)
                 : GetText(_settings.LevelExit.TextFalse);
-
-            return new InteractionPrompt(localizedText, canExecute);
-        }
-
-        private InteractionPrompt HandleContainer(RocketContainerInteraction container)
-        {
-            bool canExecute = container.CanExecuteWithResult(out InteractionRocketResult result);
-
-            string localizedText = result switch
-            {
-                InteractionRocketResult.Ok => GetLocalizedText(_settings.RocketContainer.TextOk),
-                InteractionRocketResult.Empty => GetText(_settings.RocketContainer.TextEmpty),
-                InteractionRocketResult.Full => GetText(_settings.RocketContainer.TextFull),
-                _ => throw new ArgumentOutOfRangeException(nameof(result), result, null)
-            };
 
             return new InteractionPrompt(localizedText, canExecute);
         }

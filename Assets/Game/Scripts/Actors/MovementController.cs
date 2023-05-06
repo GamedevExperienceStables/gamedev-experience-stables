@@ -1,4 +1,5 @@
 ﻿using Game.Stats;
+using Game.Utils;
 using KinematicCharacterController;
 using UnityEngine;
 
@@ -140,6 +141,8 @@ namespace Game.Actors
                     Vector3.ProjectOnPlane(targetMovementVelocity - currentVelocity, gravity.direction);
                 currentVelocity += velocityDiff * (airMovement.acceleration * deltaTime);
             }
+            
+            currentVelocity = currentVelocity.ClampMagnitude(airMovement.maxSpeed);
 
             ApplyGravity(ref currentVelocity, deltaTime);
             ApplyDrag(ref currentVelocity, deltaTime);

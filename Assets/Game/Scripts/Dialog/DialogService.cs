@@ -10,13 +10,13 @@ namespace Game.Dialog
         public event Action<DialogData> Showing;
         public event Action<bool> Closing;
 
-        public void ShowRequest(DialogData dialogToShow)
+        public void Show(DialogData dialogToShow)
         {
             _stack.Add(dialogToShow);
             Showing?.Invoke(dialogToShow);
         }
 
-        public void CloseRequest(DialogData dialogToClose, bool immediate = false)
+        public void Close(DialogData dialogToClose, bool immediate = false)
         {
             bool activeClosed = _stack.IndexOf(dialogToClose) == _stack.Count - 1;
 
@@ -26,11 +26,12 @@ namespace Game.Dialog
             bool hasOther = _stack.Count > 0;
             if (hasOther)
             {
-                if (!activeClosed)
-                    return;
-
-                DialogData next = _stack[^1];
-                Showing?.Invoke(next);
+                // ReSharper disable once InvertIf
+                if (activeClosed)
+                {
+                    DialogData next = _stack[^1];
+                    Showing?.Invoke(next);
+                }
             }
             else
             {

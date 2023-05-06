@@ -68,11 +68,8 @@ namespace Game.GameFlow
         {
             LocationContext context = GetContext(location);
             _locationContextHandler.Init(context, locationDefinition);
-
             _locationController.Init(_locationContextHandler, locationPoint);
-
-            LocationData locationData = _level.GetOrCreateLocationData(locationDefinition);
-            _locationState.Init(locationData, _locationContextHandler);
+            _locationState.Init();
         }
 
         private async UniTask UnloadLastLocationIfExists()
@@ -88,9 +85,7 @@ namespace Game.GameFlow
             if (!_locationContextHandler.Initialized)
                 return;
             
-            ILocationDefinition locationDefinition = _locationContextHandler.Location;
-            LocationData locationData = _level.GetOrCreateLocationData(locationDefinition);
-            _locationState.Store(locationData, _locationContextHandler);
+            _locationState.Store();
             
             _locationController.Clear();
             _locationContextHandler.Clear();

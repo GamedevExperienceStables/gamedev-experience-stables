@@ -48,6 +48,7 @@ namespace Game.UI
         private DialogView _dialogView;
         private HudPromptView _hudPromptView;
         private HudDamageView _damageView;
+        private Label _crystalCount;
 
         public IReadOnlyDictionary<RuneSlotId, RuneSlotHudView> RuneSlots => _runeSlotsView.Slots;
 
@@ -100,6 +101,7 @@ namespace Game.UI
 
             var crystalWidget = _root.Q<VisualElement>(LayoutNames.Hud.WIDGET_CRYSTAL);
             _crystalMask = crystalWidget.Q<VisualElement>(LayoutNames.Hud.WIDGET_BAR_MASK);
+            _crystalCount = crystalWidget.Q<Label>(LayoutNames.Hud.WIDGET_CRYSTAL_COUNT);
 
             _hudPromptView.Create(_root);
             _interactionView.Create(_root);
@@ -186,7 +188,7 @@ namespace Game.UI
             _viewModel.HeroStatSubscribe(CharacterStats.Stamina, UpdateStamina);
             _viewModel.HeroStatSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax);
 
-            _viewModel.LevelBagMaterialSubscribe(UpdateCrystal);
+            _viewModel.LevelBagMaterialSubscribe(OnCrystalCountChanged);
         }
 
         private void UnSubscribeStats()
@@ -200,7 +202,7 @@ namespace Game.UI
             _viewModel.HeroStatUnSubscribe(CharacterStats.Stamina, UpdateStamina);
             _viewModel.HeroStatUnSubscribe(CharacterStats.StaminaMax, UpdateStaminaMax);
 
-            _viewModel.LevelBagMaterialUnSubscribe(UpdateCrystal);
+            _viewModel.LevelBagMaterialUnSubscribe(OnCrystalCountChanged);
         }
 
         private void UpdateHealth(StatValueChange change)
@@ -242,14 +244,17 @@ namespace Game.UI
         private void InitCrystalView(IReadOnlyMaterialData materialData)
         {
             _crystalMax = materialData.Total;
-            Length stylePercent = GetStylePercent(materialData.Current, _crystalMax);
-            _crystalMask.style.height = stylePercent;
+            UpdateCrystal(materialData.Current);
         }
 
-        private void UpdateCrystal(MaterialChangedData change)
+        private void OnCrystalCountChanged(MaterialChangedData change) 
+            => UpdateCrystal(change.newValue);
+
+        private void UpdateCrystal(int newValue)
         {
-            Length stylePercent = GetStylePercent(change.newValue, _crystalMax);
+            Length stylePercent = GetStylePercent(newValue, _crystalMax);
             _crystalMask.style.height = stylePercent;
+            _crystalCount.text = newValue.ToString();
         }
 
         private static Length GetStylePercent(float current, float max)

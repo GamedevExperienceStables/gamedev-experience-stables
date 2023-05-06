@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Dialog;
+using Game.Level;
 using Game.TimeManagement;
 using Game.Utils;
 using UnityEngine;
@@ -23,7 +24,7 @@ namespace Game.UI
         private Label _title;
         private Label _text;
         private TimerUpdatable _delayTimer;
-        private DialogData _data;
+        private DialogData? _data;
 
         [Inject]
         public DialogView(DialogViewModel viewModel, TimerPool timers)
@@ -65,8 +66,9 @@ namespace Game.UI
             }
 
             bool inTransition = !_hideTimer.IsDone || !_delayTimer.IsDone;
-            if (_data.IsEmpty && !inTransition)
+            if (!_data.HasValue && !inTransition)
             {
+                _hideTimer.Stop();
                 ShowDialog(nextDialog);
                 return;
             }
@@ -79,17 +81,25 @@ namespace Game.UI
 
         private void ShowDialog()
         {
-            if (_data.Definition.Single.Text.IsEmpty)
+            if (!_data.HasValue)
             {
-                Debug.LogWarning($"Dialog {_data.Definition.name} has no text");
+                Debug.LogWarning("Trying to show dialog without data");
                 return;
             }
 
-            _hideTimer.Stop();
+            DialogData data = _data.Value;
+            if (string.IsNullOrEmpty(data.Definition.Single.Text))
+            {
+                Debug.LogWarning($"Dialog {data.Definition} has no text");
+                return;
+            }
 
-            SetupDialog();
+            SetupDialog(data.Definition);
 
             _dialog.RemoveFromClassList(LayoutNames.Hud.DIALOG_HIDDEN_CLASS_NAME);
+
+            if (data.OneShot)
+                _hideTimer.Start();
         }
 
         private void ShowDialog(DialogData newData)
@@ -119,22 +129,22 @@ namespace Game.UI
 
         private void CloseDialog()
         {
-            _data = default;
+            _data = null;
             _viewModel.DialogClosed();
 
             HideDialog();
         }
 
-        private void SetupDialog()
+        private void SetupDialog(IDialogDefinition dialog)
         {
-            _text.text = _data.Definition.Single.Text.GetLocalizedString();
+            _text.text = dialog.Single.Text;
 
-            if (_data.Definition.Single.Title.IsEmpty)
+            if (string.IsNullOrEmpty(dialog.Single.Title))
                 _title.SetDisplay(false);
             else
             {
                 _title.SetDisplay(true);
-                _title.text = _data.Definition.Single.Title.GetLocalizedString();
+                _title.text = dialog.Single.Title;
             }
         }
 

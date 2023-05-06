@@ -9,8 +9,8 @@
                 <ui:VisualElement name="left-side" style="flex-shrink: 0; flex-grow: 1; width: 50%;">
                     <ui:VisualElement name="logo" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); -unity-font-style: bold; font-size: 35px; position: absolute; top: 116px; left: 87px; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1437813421&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_0&apos;); -unity-background-scale-mode: scale-and-crop; width: 537px; height: 277px;" />
                     <ui:VisualElement name="menu" class="menu" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 350px; position: absolute; top: 441px; left: 131px;">
-                        <ui:Instance template="MenuButton" name="button-start" />
                         <ui:Instance template="MenuButton" name="button-continue" />
+                        <ui:Instance template="MenuButton" name="button-start" />
                         <ui:Instance template="MenuButton" name="button-settings" />
                         <ui:Instance template="MenuButton" name="button-art" />
                         <ui:Instance template="MenuButton" name="button-about" />

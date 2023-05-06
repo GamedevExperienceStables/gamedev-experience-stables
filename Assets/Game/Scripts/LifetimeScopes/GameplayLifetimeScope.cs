@@ -98,6 +98,7 @@ namespace Game.LifetimeScopes
             
             builder.Register<LocationMarkers>(Lifetime.Singleton);
             builder.Register<DialogService>(Lifetime.Singleton);
+            builder.Register<DialogNotification>(Lifetime.Singleton).AsImplementedInterfaces();
 
             builder.Register<GameplayPrefabFactory>(Lifetime.Scoped);
         }
@@ -105,6 +106,7 @@ namespace Game.LifetimeScopes
         private static void RegisterInteractions(IContainerBuilder builder)
         {
             builder.Register<LocalizationInteraction>(Lifetime.Singleton);
+            builder.Register<RocketContainerLocalization>(Lifetime.Singleton);
             
             builder.Register<InteractionService>(Lifetime.Scoped);
             builder.Register<InteractionFactory>(Lifetime.Scoped);
@@ -132,6 +134,7 @@ namespace Game.LifetimeScopes
         private void RegisterUi(IContainerBuilder builder)
         {
             builder.Register<HudPromptView>(Lifetime.Scoped);
+            builder.Register<HudDamageView>(Lifetime.Scoped);
             builder.Register<HudDamageView>(Lifetime.Scoped);
 
             builder.Register<GameplayViewModel>(Lifetime.Scoped);

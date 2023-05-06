@@ -42,9 +42,6 @@ namespace Game.Settings
 
         [SerializeField]
         private CursorService.Settings cursorSettings;
-        
-        [SerializeField]
-        private InputBindingsSettings inputBindings;
 
 
         public CameraSettings CameraSettings => cameraSettings;
@@ -57,6 +54,5 @@ namespace Game.Settings
         public AudioSettings AudioSettings => audioSettings;
         public CursorService.Settings CursorSettings => cursorSettings;
         public UiSettings UiSettings => uiSettings;
-        public InputBindingsSettings InputBindings => inputBindings;
     }
 }

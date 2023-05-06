@@ -73,6 +73,7 @@
             public const string WIDGET_MP = "widget-mp";
             public const string WIDGET_SP = "widget-sp";
             public const string WIDGET_CRYSTAL = "widget-crystal";
+            public const string WIDGET_CRYSTAL_COUNT = "crystal-count";
             
             public const string SP_LEFT = "sp-left";
             public const string SP_CENTER = "sp-center";
@@ -155,6 +156,8 @@
         public static class Inventory
         {
             public const string SCREEN = "book-screen";
+            public const string SCREEN_HIDDEN_CLASS_NAME = "book-screen--hidden";
+            
             public const string BOOK = "book";
             public const string BUTTON_CLOSE = "button-close";
             
@@ -171,6 +174,7 @@
             public const string RUNE_SLOT_CLASS_NAME = "magic-book-slot";
             public const string RUNE_PASSIVE_SLOT_CLASS_NAME = "magic-book-slot-passive";
             public const string SLOT_DISABLED_CLASS_NAME = "magic-book-slot--disabled";
+            public const string SLOT_HIDDEN_CLASS_NAME = "magic-book-slot--hidden";
             public const string RUNE_SLOT_ICON = "icon";
 
             public const string BOOK_CLASS_NAME = "magic-book";

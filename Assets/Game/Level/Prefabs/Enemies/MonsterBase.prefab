@@ -201,9 +201,9 @@ MonoBehaviour:
     maxSpeed: 4
     sharpness: 15
   airMovement:
-    maxSpeed: 4
-    acceleration: 5
-    drag: 0.1
+    maxSpeed: 20
+    acceleration: 0.5
+    drag: 2
   rotation:
     sharpness: 15
     rotateOnlyXZ: 1

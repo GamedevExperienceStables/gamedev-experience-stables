@@ -6,17 +6,12 @@
     <ui:Template name="SavingWidget" src="project://database/Assets/Game/UI/Uxml/Partial/SavingWidget.uxml?fileID=9197481963319205126&amp;guid=15c24c93f7d8ee548ad2ab11d547307b&amp;type=3#SavingWidget" />
     <ui:Template name="InteractionWidget" src="project://database/Assets/Game/UI/Uxml/Partial/InteractionWidget.uxml?fileID=9197481963319205126&amp;guid=41441a377c5387649a739155e8c3b5eb&amp;type=3#InteractionWidget" />
     <ui:Template name="HudRuneSlots" src="project://database/Assets/Game/UI/Uxml/Partial/HudRuneSlots.uxml?fileID=9197481963319205126&amp;guid=d4197e0f5979cde4c914112e473815a4&amp;type=3#HudRuneSlots" />
+    <ui:Template name="CrystalWidget" src="project://database/Assets/Game/UI/Uxml/Partial/CrystalWidget.uxml?fileID=9197481963319205126&amp;guid=4eee649186bea2548813f6fe8c8e1455&amp;type=3#CrystalWidget" />
     <Style src="project://database/Assets/Game/UI/Uss/HudStyle.uss?fileID=7433441132597879392&amp;guid=43fb365d5654783488ae02a43eaf455d&amp;type=3#HudStyle" />
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-        <ui:Instance template="DamageWidget" name="widget-damage" class="widget-damage"/>
+        <ui:Instance template="DamageWidget" name="widget-damage" class="widget-damage" />
         <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: space-between; align-items: flex-start; margin-left: 40px; margin-right: 40px; margin-top: 30px;">
-            <ui:VisualElement name="widget-crystal" class="crystal-bar crystal-bar-size" style="align-items: center;">
-                <ui:VisualElement name="bg" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=-1964890988&amp;guid=04fa941512f200843b6c60489583d9fb&amp;type=3#HUD_Atlas_13&apos;); -unity-background-image-tint-color: rgb(255, 255, 255); flex-grow: 1; display: flex; -unity-background-scale-mode: stretch-to-fill; align-self: auto; height: 100%; width: 100%;" />
-                <ui:VisualElement name="mask" style="transition-property: height; transition-duration: 0.1s; overflow: hidden; position: absolute; left: 0; right: 0; bottom: 0; display: flex; height: 50%;">
-                    <ui:VisualElement name="fill" class="crystal-bar-size crystal-bar-fill" style="transition-property: height; transition-duration: 0.1s; background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=1897437579&amp;guid=04fa941512f200843b6c60489583d9fb&amp;type=3#HUD_Atlas_9&apos;); position: absolute; bottom: 0; -unity-background-image-tint-color: rgb(243, 243, 243); -unity-background-scale-mode: stretch-to-fill; flex-grow: 0; align-self: auto; width: 90px; height: 140px;" />
-                </ui:VisualElement>
-                <ui:VisualElement name="front-crystal" class="crystal-bar-size" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/HUD_atlas.psd?fileID=-276402772&amp;guid=04fa941512f200843b6c60489583d9fb&amp;type=3#HUD_Atlas_5&apos;); bottom: -3px; display: flex; -unity-background-image-tint-color: rgb(255, 255, 255); position: absolute; left: -3px; width: 96px; height: 143px;" />
-            </ui:VisualElement>
+            <ui:Instance template="CrystalWidget" name="widget-crystal" />
             <ui:Button text="Menu" display-tooltip-when-elided="true" focusable="false" name="button-menu" style="-unity-font-style: normal; display: none;" />
             <ui:VisualElement style="position: absolute; top: 0; right: 0;">
                 <ui:Instance template="MiniMap" name="widget-map" />

@@ -76,7 +76,7 @@ namespace Game.Actors
             if (Definition.Duration > 0)
                 _timers.ReleaseTimer(_timerTotal);
 
-            _target.RemoveModifier(Definition.Stat, Definition.Modifier);
+            RemoveModifier();
         }
 
         private void AddEffect()
@@ -93,16 +93,34 @@ namespace Game.Actors
                 ApplyModifier();
             }
             else
-                AddModifier();
+            {
+                if (!IsSuppressed)
+                    AddModifier();
+            }
         }
 
         private void AddModifier()
             => _target.AddModifier(Definition.Stat, Definition.Modifier);
 
+        private void RemoveModifier()
+            => _target.RemoveModifier(Definition.Stat, Definition.Modifier);
+
         private void ApplyModifier()
         {
             if (!IsSuppressed)
                 _target.ApplyModifier(Definition.Stat, Definition.Modifier);
+        }
+
+        protected override void OnSuppress()
+        {
+            if (Definition.Interval <= 0)
+                RemoveModifier();
+        }
+
+        protected override void OnUnSuppress()
+        {
+            if (Definition.Interval <= 0)
+                AddModifier();  
         }
     }
 }

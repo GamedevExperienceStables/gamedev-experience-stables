@@ -62,7 +62,7 @@ namespace Game.Level
             if (!IsActive)
                 return;
 
-            _dialogService.ShowRequest(new DialogData(dialog));
+            _dialogService.Show(new DialogData(dialog));
         }
 
         private void OnTriggerExited(GameObject obj)
@@ -83,6 +83,6 @@ namespace Game.Level
         }
 
         private void CloseDialog(bool immediate = false) 
-            => _dialogService.CloseRequest(new DialogData(dialog), immediate);
+            => _dialogService?.Close(new DialogData(dialog), immediate);
     }
 }
