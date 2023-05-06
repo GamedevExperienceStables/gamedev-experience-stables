@@ -1,5 +1,6 @@
 ﻿using Game.GameFlow;
 using Game.Persistence;
+using UnityEngine;
 using VContainer;
 
 namespace Game.UI
@@ -48,5 +49,8 @@ namespace Game.UI
 
         public void ShowModal(ModalContext context) 
             => _modal.Request(context);
+
+        public void OpenURL(string url) 
+            => Application.OpenURL(url);
     }
 }

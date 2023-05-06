@@ -3,6 +3,8 @@
     align-items: center;
     margin: 40px 0;
     padding: 80px 120px 100px;
+    height: 1000px;
+    padding-bottom: 110px;
 }
 
 .header-label {
@@ -11,6 +13,17 @@
     -unity-font-definition: var(--font-heading);
     text-shadow: -1px -1px 0 rgb(86, 38, 118);
     align-self: auto;
+}
+
+.description-label {
+    font-size: 30px;
+    color: rgb(90, 55, 55);
+    -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&guid=9f296ab3b5e417845bc8de63c7b23c43&type=2#koliko-Regular SDF');
+    align-self: auto;
+    flex-wrap: wrap;
+    visibility: visible;
+    white-space: normal;
+    -unity-text-align: upper-center;
 }
 
 .list__content {
