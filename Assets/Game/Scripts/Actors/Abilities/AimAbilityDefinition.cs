@@ -1,8 +1,8 @@
 ﻿using Game.Animations.Hero;
 using Game.Cameras;
 using Game.CursorManagement;
+using Game.Level;
 using Game.Stats;
-using Game.Utils;
 using Game.Weapons;
 using UnityEngine;
 using VContainer;
@@ -27,7 +27,7 @@ namespace Game.Actors
     {
         private readonly FollowSceneCamera _followCamera;
         private readonly CursorService _cursor;
-        private readonly GameplayPrefabFactory _prefabFactory;
+        private readonly PrefabFactory _prefabFactory;
 
         private ActorAnimator _animator;
         private ActiveSkillAbility _activeSkillAbility;
@@ -36,7 +36,7 @@ namespace Game.Actors
         private IActorInputController _input;
 
         [Inject]
-        public AimAbility(FollowSceneCamera followCamera, CursorService cursor, GameplayPrefabFactory prefabFactory)
+        public AimAbility(FollowSceneCamera followCamera, CursorService cursor, PrefabFactory prefabFactory)
         {
             _followCamera = followCamera;
             _cursor = cursor;

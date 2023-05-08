@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 145150, guid: 16d4b504584fb1d4784bc23462900274, type: 3}
       propertyPath: m_Name
-      value: M1_MeleeHit
+      value: M1_MeleeHitEffect
       objectReference: {fileID: 0}
     - target: {fileID: 407622, guid: 16d4b504584fb1d4784bc23462900274, type: 3}
       propertyPath: m_RootOrder
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9205bc1bbacc90040a998067b5643d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearBehavior: 2
+  clearBehavior: 1
   cameraShake:
     enabled: 0
     useMainCamera: 1

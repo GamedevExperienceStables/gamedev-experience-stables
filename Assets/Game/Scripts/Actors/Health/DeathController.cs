@@ -1,6 +1,8 @@
 ﻿using System;
+using Game.Level;
 using Game.Stats;
 using UnityEngine;
+using VContainer;
 
 namespace Game.Actors.Health
 {
@@ -22,6 +24,11 @@ namespace Game.Actors.Health
         private bool _isDead;
 
         private IActorController _owner;
+        private SpawnPool _spawnPool;
+
+        [Inject]
+        public void Construct(SpawnPool spawnPool) 
+            => _spawnPool = spawnPool;
 
         private void Start()
         {
@@ -80,8 +87,11 @@ namespace Game.Actors.Health
 
         private void PlayDeathFeedback()
         {
-            if (deathFeedback)
-                Instantiate(deathFeedback, transform.position, transform.rotation);
+            if (!deathFeedback) 
+                return;
+            
+            Transform self = transform;
+            _spawnPool.Spawn(deathFeedback, self.position, self.rotation);
         }
     }
 }

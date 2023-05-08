@@ -211,7 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb57b94c7089482398b501bc6f6db0fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathFeedback: {fileID: 119968, guid: e73000b12fb76244cbffd6abbf8bb6e4, type: 3}
+  deathFeedback: {fileID: 5464456317419179984, guid: ecb937064369017449f292d8e7c2be25,
+    type: 3}
   destroyOnDeath: 1
 --- !u!114 &-3157847202471997382
 MonoBehaviour:

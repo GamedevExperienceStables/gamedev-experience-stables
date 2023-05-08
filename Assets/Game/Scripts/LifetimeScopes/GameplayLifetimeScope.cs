@@ -101,7 +101,8 @@ namespace Game.LifetimeScopes
             builder.Register<DialogService>(Lifetime.Singleton);
             builder.Register<DialogNotification>(Lifetime.Singleton).AsImplementedInterfaces();
 
-            builder.Register<GameplayPrefabFactory>(Lifetime.Scoped);
+            builder.Register<PrefabFactory>(Lifetime.Singleton);
+            builder.Register<SpawnPool>(Lifetime.Singleton);
         }
 
         private static void RegisterInteractions(IContainerBuilder builder)

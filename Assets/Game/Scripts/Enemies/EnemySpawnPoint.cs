@@ -1,10 +1,9 @@
 ﻿using System;
 using Game.Actors.Health;
+using Game.Level;
 using Game.TimeManagement;
-using MoreMountains.Feedbacks;
 using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VContainer;
 
 namespace Game.Enemies
@@ -24,10 +23,6 @@ namespace Game.Enemies
         [Header("FX")]
         [SerializeField]
         private GameObject spawnFeedbackPrefab;
-        
-        [FormerlySerializedAs("spawnFeedback")]
-        [SerializeField]
-        private MMF_Player spawnFeedbackDeprecated;
 
         [ShowNonSerializedField]
         private int _spawnsLeft;
@@ -44,6 +39,7 @@ namespace Game.Enemies
         private TimerPool _timers;
         
         private GameObject _spawnFeedback;
+        private SpawnPool _spawnPool;
 
         private bool CanRespawn => spawnCount > 1;
 
@@ -51,9 +47,10 @@ namespace Game.Enemies
         public event Action Cleared;
 
         [Inject]
-        public void Construct(EnemyFactory enemyFactory, TimerPool timers)
+        public void Construct(EnemyFactory enemyFactory, TimerPool timers, SpawnPool spawnPool)
         {
             _factory = enemyFactory;
+            _spawnPool = spawnPool;
 
             _timers = timers;
             _spawnTimer = _timers.GetTimer(TimeSpan.FromSeconds(spawnInterval), Spawn, isLooped: true);
@@ -110,14 +107,8 @@ namespace Game.Enemies
 
         private void PlaySpawnFeedback()
         {
-            if (!spawnFeedbackPrefab)
-                return;
-            
-            if (!_spawnFeedback)
-                _spawnFeedback = Instantiate(spawnFeedbackPrefab, transform.position, Quaternion.identity);
-
-            _spawnFeedback.SetActive(false);
-            _spawnFeedback.SetActive(true);
+            if (spawnFeedbackPrefab)
+                _spawnPool.Spawn(spawnFeedbackPrefab, transform.position, Quaternion.identity);
         }
 
         private void OnDied()
