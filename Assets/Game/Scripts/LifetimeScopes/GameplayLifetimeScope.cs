@@ -76,8 +76,9 @@ namespace Game.LifetimeScopes
 
         private static void RegisterProjectile(IContainerBuilder builder)
         {
-            builder.Register<ProjectileFactory>(Lifetime.Scoped);
-            builder.Register<ProjectileHandler>(Lifetime.Scoped);
+            builder.Register<ProjectilePool>(Lifetime.Singleton);
+            builder.Register<ProjectileFactory>(Lifetime.Singleton);
+            builder.Register<ProjectileHandler>(Lifetime.Singleton);
         }
 
         private static void RegisterServices(IContainerBuilder builder)

@@ -45,6 +45,8 @@ namespace Game.Weapons
             _timers = timers;
             _timer = _timers.GetTimer();
         }
+        
+        public int OriginId { get; private set; }
 
         private void FixedUpdate()
         {
@@ -63,8 +65,10 @@ namespace Game.Weapons
         private void OnDestroy() 
             => _timers?.ReleaseTimer(_timer);
 
-        public void Init(IProjectileSettings settings)
+        public void Init(IProjectileSettings settings, int originId)
         {
+            OriginId = originId;
+            
             _settings = settings;
             _timer.Init(TimeSpan.FromSeconds(_settings.LifeTime.Duration), OnLifetimeEnd);
         }
