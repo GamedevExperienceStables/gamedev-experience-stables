@@ -42,10 +42,13 @@ namespace Game.Inventory
         public RuneType Type => type;
 
         public bool CanExecute(ItemExecutionContext context)
-            => IsAbilityExistsAndDisabled(grantAbility, context.target);
+            => true;
 
-        public void Execute(ItemExecutionContext context) 
-            => context.target.GiveAbility(grantAbility);
+        public void Execute(ItemExecutionContext context)
+        {
+            if (IsAbilityExistsAndDisabled(grantAbility, context.target))
+                context.target.GiveAbility(grantAbility);
+        }
 
         private static bool IsAbilityExistsAndDisabled(AbilityDefinition definition, IActorController target)
         {
