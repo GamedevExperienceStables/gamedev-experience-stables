@@ -5,8 +5,8 @@ namespace Game.Inventory
 {
     public interface IReadOnlyRunes
     {
-        void Subscribe(Action<RuneDefinition> callback);
-        void UnSubscribe(Action<RuneDefinition> callback);
+        void SubscribeOnAdded(Action<RuneDefinition> callback);
+        void UnSubscribeOnAdded(Action<RuneDefinition> callback);
         bool Contains(RuneDefinition rune);
         
         IReadOnlyList<RuneDefinition> Items { get; }
