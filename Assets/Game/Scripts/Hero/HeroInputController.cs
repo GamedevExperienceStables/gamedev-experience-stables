@@ -1,6 +1,8 @@
-﻿using Game.Actors;
+﻿using System;
+using Game.Actors;
 using Game.Cameras;
 using Game.Input;
+using Game.TimeManagement;
 using UnityEngine;
 using VContainer;
 
@@ -29,13 +31,21 @@ namespace Game.Hero
         private Vector3 _mouseFirePosition;
         private Vector3 _mouseGroundPosition;
 
+        private const float CHECK_FIRE_INTERVAL = 0.3f;
+        
+        private TimerPool _timers;
+        private TimerUpdatable _fireTimer;
+
         public override Vector3 DesiredDirection => _movementDirection;
 
         [Inject]
-        public void Construct(IInputControlGameplay input, SceneCamera sceneCamera)
+        public void Construct(IInputControlGameplay input, SceneCamera sceneCamera, TimerPool timers)
         {
             _input = input;
             _sceneCamera = sceneCamera;
+            _timers = timers;
+            
+            _fireTimer = _timers.GetTimer(TimeSpan.FromSeconds(CHECK_FIRE_INTERVAL), OnCheckFire, isLooped: true);
         }
 
         private void Awake()
@@ -56,6 +66,8 @@ namespace Game.Hero
             _input.AimButton.Canceled += OnAimCanceled;
 
             _input.FireButton.Performed += OnFire;
+            _input.FireButton.Canceled += OnFireCanceled;
+            
             _input.MeleeButton.Performed += OnMelee;
             _input.InteractionButton.Performed += OnInteract;
             _input.DashButton.Performed += OnDash;
@@ -67,9 +79,13 @@ namespace Game.Hero
             _input.AimButton.Canceled -= OnAimCanceled;
 
             _input.FireButton.Performed -= OnFire;
+            _input.FireButton.Canceled -= OnFireCanceled;
+            
             _input.MeleeButton.Performed -= OnMelee;
             _input.InteractionButton.Performed -= OnInteract;
             _input.DashButton.Performed -= OnDash;
+            
+            _timers?.ReleaseTimer(_fireTimer);
         }
 
         private void Update()
@@ -98,8 +114,20 @@ namespace Game.Hero
             return _mouseRay.GetPoint(distance);
         }
 
-        private void OnFire() 
-            => _activeSkill.TryActivateAbility();
+        private void OnCheckFire()
+        {
+            if (_input.FireButton.IsDown)
+                OnFire();
+        }
+
+        private void OnFire()
+        {
+            _activeSkill.TryActivateAbility();
+            _fireTimer.Start();
+        }
+
+        private void OnFireCanceled() 
+            => _fireTimer.Stop();
 
         private void OnMelee() 
             => _melee.TryActivateAbility();
