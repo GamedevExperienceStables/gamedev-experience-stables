@@ -160,6 +160,7 @@ MonoBehaviour:
     rotateOnlyXZ: 1
   gravity:
     direction: {x: 0, y: -30, z: 0}
+  isPushable: 0
 --- !u!114 &3513096597601233911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopDistance: 1
+  additiveAvoidance: 0.25
 --- !u!114 &3513096597601233910
 MonoBehaviour:
   m_ObjectHideFlags: 0
