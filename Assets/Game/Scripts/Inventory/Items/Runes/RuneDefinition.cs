@@ -1,4 +1,5 @@
 ﻿using Game.Actors;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -13,6 +14,7 @@ namespace Game.Inventory
         [SerializeField]
         private LocalizedString description;
         
+        [Header("Icons")]
         [SerializeField]
         private Sprite icon;
         
@@ -21,15 +23,21 @@ namespace Game.Inventory
         
         [SerializeField]
         private Sprite iconEmpty;
-        
-        [SerializeField]
-        private RuneLevelDefinition level;
-        
-        [SerializeField]
-        private AbilityDefinition grantAbility;
-        
+
+        [Header("Additional")]
         [SerializeField]
         private RuneType type = RuneType.Active;
+
+        [SerializeField, ShowIf(nameof(type), RuneType.Active)]
+        [ColorUsage(true, true)]
+        private Color color = Color.white;
+
+        [SerializeField]
+        private RuneLevelDefinition level;
+
+        [Header("Ability")]
+        [SerializeField]
+        private AbilityDefinition grantAbility;
 
         public Sprite Icon => icon;
         public Sprite IconActive => iconActive;
@@ -40,6 +48,7 @@ namespace Game.Inventory
         
         public AbilityDefinition GrantAbility => grantAbility;
         public RuneType Type => type;
+        public Color Color => color;
 
         public bool CanExecute(ItemExecutionContext context)
             => true;

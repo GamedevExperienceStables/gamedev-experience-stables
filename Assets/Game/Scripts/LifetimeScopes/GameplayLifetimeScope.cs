@@ -37,6 +37,7 @@ namespace Game.LifetimeScopes
             RegisterUi(builder);
             RegisterUiFx(builder);
             RegisterCameras(builder);
+            RegisterHero(builder);
             RegisterAudio(builder);
             RegisterPlanetStateMachine(builder);
             RegisterLootSystem(builder);
@@ -63,6 +64,9 @@ namespace Game.LifetimeScopes
             builder.Register<ActiveSkillAbility>(Lifetime.Transient);
             builder.Register<StatsModifiersAbility>(Lifetime.Transient);
         }
+
+        private static void RegisterHero(IContainerBuilder builder) 
+            => builder.Register<HeroStaffColorChanger>(Lifetime.Singleton).AsImplementedInterfaces();
 
         private static void RegisterEffects(IContainerBuilder builder)
         {
