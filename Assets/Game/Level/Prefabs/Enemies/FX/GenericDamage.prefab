@@ -56,7 +56,7 @@ MonoBehaviour:
     Path: event:/Enemies/M1/M1Damge
   Event: 
   PlayEvent: 11
-  StopEvent: 12
+  StopEvent: 2
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
