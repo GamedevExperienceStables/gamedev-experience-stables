@@ -12,22 +12,11 @@ namespace Game.Level
         private readonly List<TrapZoneCollector> _collectors = new();
         private GameObject _destroyVfx;
 
-        public void SetDurability(int durability, GameObject destroyVfx)
-        {
-            _durability = durability;
-            _destroyVfx = destroyVfx;
-        }
+        private void OnDisable() 
+            => Clear();
 
-        public void Add(TrapZone trap)
-            => _collectors.Add(new TrapZoneCollector(trap));
-
-        private void OnDestroy()
-        {
-            foreach (TrapZoneCollector collector in _collectors)
-                collector.Clear();
-
-            _collectors.Clear();
-        }
+        private void OnDestroy() 
+            => Clear();
 
         private void OnTriggerEnter(Collider other)
         {
@@ -46,6 +35,23 @@ namespace Game.Level
         {
             foreach (TrapZoneCollector collector in _collectors)
                 collector.OnExit(other);
+        }
+
+        public void SetDurability(int durability, GameObject destroyVfx)
+        {
+            _durability = durability;
+            _destroyVfx = destroyVfx;
+        }
+
+        public void Add(TrapZone trap)
+            => _collectors.Add(new TrapZoneCollector(trap));
+
+        private void Clear()
+        {
+            foreach (TrapZoneCollector collector in _collectors)
+                collector.Clear();
+
+            _collectors.Clear();
         }
 
         private bool HasDurability()

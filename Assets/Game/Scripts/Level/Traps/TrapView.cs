@@ -10,11 +10,26 @@ namespace Game.Level
         private TimerPool _timers;
         private TimerUpdatable _timer;
 
+        [SerializeField]
+        private bool destroyOnTimeout = true;
+
+        [Header("Feedback")]
+        [SerializeField]
+        private bool isLocalFeedback;
+
+        [SerializeField]
+        private GameObject destroyFeedback;
+
+        private SpawnPool _spawnPool;
+
         public event Action Destroyed;
 
         [Inject]
-        public void Construct(TimerPool timers)
-            => _timers = timers;
+        public void Construct(TimerPool timers, SpawnPool spawnPool)
+        {
+            _timers = timers;
+            _spawnPool = spawnPool;
+        }
 
         public void Init(float lifetime)
         {
@@ -31,6 +46,22 @@ namespace Game.Level
         }
 
         private void DestroySelf()
-            => Destroy(gameObject);
+        {
+            DestroyFeedback();
+
+            if (destroyOnTimeout)
+                Destroy(gameObject);
+        }
+
+        private void DestroyFeedback()
+        {
+            if (!destroyFeedback) 
+                return;
+            
+            if (isLocalFeedback)
+                destroyFeedback.SetActive(true);
+            else
+                _spawnPool.Spawn(destroyFeedback, transform.position, Quaternion.identity);
+        }
     }
 }
