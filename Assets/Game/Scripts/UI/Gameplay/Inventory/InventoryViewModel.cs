@@ -33,10 +33,10 @@ namespace Game.UI
             => _inventorySwitcher.Disable();
 
         public void SubscribeRuneAdded(Action<RuneDefinition> callback)
-            => _runes.Subscribe(callback);
+            => _runes.SubscribeOnAdded(callback);
 
         public void UnSubscribeRuneAdded(Action<RuneDefinition> callback)
-            => _runes.UnSubscribe(callback);
+            => _runes.UnSubscribeOnAdded(callback);
 
         public void SetRuneToHudSlot(RuneSlotId slotId, RuneDefinition targetRune)
             => _slots.SetRuneToSlot(slotId, targetRune);
