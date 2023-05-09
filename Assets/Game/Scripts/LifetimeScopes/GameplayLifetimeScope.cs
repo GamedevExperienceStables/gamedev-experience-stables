@@ -7,7 +7,6 @@ using Game.GameFlow;
 using Game.Hero;
 using Game.Level;
 using Game.UI;
-using Game.Utils;
 using Game.Weapons;
 using UnityEngine;
 using VContainer;
@@ -79,6 +78,7 @@ namespace Game.LifetimeScopes
             builder.Register<ProjectilePool>(Lifetime.Singleton);
             builder.Register<ProjectileFactory>(Lifetime.Singleton);
             builder.Register<ProjectileHandler>(Lifetime.Singleton);
+            builder.Register<TargetingHandler>(Lifetime.Singleton);
         }
 
         private static void RegisterServices(IContainerBuilder builder)

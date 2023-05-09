@@ -47,6 +47,7 @@ namespace Game.Actors
     {
         private const float BACKWARD_THRESHOLD = 0.2f;
 
+        private readonly TargetingHandler _targeting;
         private readonly TimerPool _timers;
 
         private readonly ProjectilePool _projectilePool;
@@ -61,8 +62,9 @@ namespace Game.Actors
         private TimerUpdatable _castTimer;
         private Vector3 _targetPosition;
 
-        public ProjectileAbility(ProjectilePool projectilePool, TimerPool timers)
+        public ProjectileAbility(TargetingHandler targeting, ProjectilePool projectilePool, TimerPool timers)
         {
+            _targeting = targeting;
             _timers = timers;
             _projectilePool = projectilePool;
         }
@@ -165,43 +167,6 @@ namespace Game.Actors
         }
 
         private Vector3 GetTargetPosition()
-        {
-            TargetingDefinition targeting = Definition.Targeting;
-
-            Vector3 position = Owner.Transform.position;
-            bool groundedPosition = targeting.RelativeToGround;
-            Vector3 targetPosition = _input.GetTargetPosition(groundedPosition);
-
-            Vector3 origin = _spawnPoint.position;
-            if (groundedPosition) 
-                origin.y = position.y;
-
-            if (!targeting.AllowTargetAbove)
-                targetPosition.y = Mathf.Min(targetPosition.y, origin.y);
-
-            float sqrDistance = (targetPosition - position).sqrMagnitude;
-            bool allowTargetBelow = targeting.AllowTargetBelow;
-            float minDistanceBelow = targeting.MinDistanceToTargetBelow;
-            if (allowTargetBelow && minDistanceBelow > 0)
-            {
-                float sqrMinDistance = minDistanceBelow * minDistanceBelow;
-                allowTargetBelow = sqrDistance >= sqrMinDistance;
-            }
-
-            if (!allowTargetBelow)
-                targetPosition.y = Mathf.Max(targetPosition.y, origin.y);
-            
-            float minDistanceToTarget = targeting.MinDistanceToTarget;
-            if (minDistanceToTarget > 0)
-            {
-                float sqrMinDistance = minDistanceToTarget * minDistanceToTarget;
-                if (sqrMinDistance >= sqrDistance)
-                    targetPosition = origin + _spawnPoint.forward * minDistanceToTarget;
-            }
-
-            targetPosition += targeting.TargetPositionOffset;
-
-            return targetPosition;
-        }
+            => _targeting.GetTargetPosition(Definition.Targeting, Owner.Transform, _input, _spawnPoint);
     }
 }
