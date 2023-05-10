@@ -11,10 +11,10 @@ namespace Game.Inventory
 
         private event Action<RuneDefinition> RuneAdded;
 
-        public void Subscribe(Action<RuneDefinition> callback)
+        public void SubscribeOnAdded(Action<RuneDefinition> callback)
             => RuneAdded += callback;
 
-        public void UnSubscribe(Action<RuneDefinition> callback)
+        public void UnSubscribeOnAdded(Action<RuneDefinition> callback)
             => RuneAdded -= callback;
 
         public void Reset()

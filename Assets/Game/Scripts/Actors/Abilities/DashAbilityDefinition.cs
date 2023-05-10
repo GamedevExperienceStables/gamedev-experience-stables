@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Animations.Hero;
+using Game.Level;
 using Game.Stats;
 using Game.TimeManagement;
 using Game.Utils;
@@ -33,7 +34,7 @@ namespace Game.Actors
     public class DashAbility : ActorAbility<DashAbilityDefinition>
     {
         private readonly TimerPool _timers;
-        private readonly GameplayPrefabFactory _prefabFactory;
+        private readonly PrefabFactory _prefabFactory;
 
         private MovementController _movementController;
         private IActorInputController _inputController;
@@ -45,7 +46,7 @@ namespace Game.Actors
         private TimerUpdatable _animationTimer;
         private GameObject _dashFeedback;
 
-        public DashAbility(TimerPool timers, GameplayPrefabFactory prefabFactory)
+        public DashAbility(TimerPool timers, PrefabFactory prefabFactory)
         {
             _timers = timers;
             _prefabFactory = prefabFactory;

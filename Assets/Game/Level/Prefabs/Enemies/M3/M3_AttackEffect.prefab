@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1640140308411512571}
   - component: {fileID: 6870066577600484612}
-  - component: {fileID: 7711015105014116759}
+  - component: {fileID: -4420796839243365289}
   m_Layer: 0
   m_Name: M3_AttackEffect
   m_TagString: Untagged
@@ -63,7 +63,7 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
---- !u!114 &7711015105014116759
+--- !u!114 &-4420796839243365289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,8 +72,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1640140308411775043}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e71ad30bf1524741b90c1bd0354e1e0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f8620980aed4704a96b15e02103ae5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeDestructionMode: 0
-  TimeBeforeDestruction: 4
+  timeBeforeDisable: 2

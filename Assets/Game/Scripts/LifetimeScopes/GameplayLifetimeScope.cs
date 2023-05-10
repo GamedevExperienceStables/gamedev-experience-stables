@@ -7,7 +7,6 @@ using Game.GameFlow;
 using Game.Hero;
 using Game.Level;
 using Game.UI;
-using Game.Utils;
 using Game.Weapons;
 using UnityEngine;
 using VContainer;
@@ -38,6 +37,7 @@ namespace Game.LifetimeScopes
             RegisterUi(builder);
             RegisterUiFx(builder);
             RegisterCameras(builder);
+            RegisterHero(builder);
             RegisterAudio(builder);
             RegisterPlanetStateMachine(builder);
             RegisterLootSystem(builder);
@@ -65,6 +65,9 @@ namespace Game.LifetimeScopes
             builder.Register<StatsModifiersAbility>(Lifetime.Transient);
         }
 
+        private static void RegisterHero(IContainerBuilder builder) 
+            => builder.Register<HeroStaffColorChanger>(Lifetime.Singleton).AsImplementedInterfaces();
+
         private static void RegisterEffects(IContainerBuilder builder)
         {
             builder.Register<EffectFactory>(Lifetime.Scoped);
@@ -76,8 +79,10 @@ namespace Game.LifetimeScopes
 
         private static void RegisterProjectile(IContainerBuilder builder)
         {
-            builder.Register<ProjectileFactory>(Lifetime.Scoped);
-            builder.Register<ProjectileHandler>(Lifetime.Scoped);
+            builder.Register<ProjectilePool>(Lifetime.Singleton);
+            builder.Register<ProjectileFactory>(Lifetime.Singleton);
+            builder.Register<ProjectileHandler>(Lifetime.Singleton);
+            builder.Register<TargetingHandler>(Lifetime.Singleton);
         }
 
         private static void RegisterServices(IContainerBuilder builder)
@@ -100,7 +105,8 @@ namespace Game.LifetimeScopes
             builder.Register<DialogService>(Lifetime.Singleton);
             builder.Register<DialogNotification>(Lifetime.Singleton).AsImplementedInterfaces();
 
-            builder.Register<GameplayPrefabFactory>(Lifetime.Scoped);
+            builder.Register<PrefabFactory>(Lifetime.Singleton);
+            builder.Register<SpawnPool>(Lifetime.Singleton);
         }
 
         private static void RegisterInteractions(IContainerBuilder builder)

@@ -203,10 +203,10 @@ namespace Game.Inventory
 
         public IReadOnlyList<RuneDefinition> Items => _runes.Items;
 
-        public void Subscribe(Action<RuneDefinition> callback)
-            => _runes.Subscribe(callback);
+        public void SubscribeOnAdded(Action<RuneDefinition> callback)
+            => _runes.SubscribeOnAdded(callback);
 
-        public void UnSubscribe(Action<RuneDefinition> callback)
-            => _runes.UnSubscribe(callback);
+        public void UnSubscribeOnAdded(Action<RuneDefinition> callback)
+            => _runes.UnSubscribeOnAdded(callback);
     }
 }

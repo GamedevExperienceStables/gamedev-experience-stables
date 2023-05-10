@@ -1,6 +1,5 @@
 ﻿using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Weapons
 {
@@ -10,7 +9,10 @@ namespace Game.Weapons
         [Header("Target")]
         [SerializeField]
         private TargetCollecting collectTargetPosition;
-        
+
+        [SerializeField]
+        private TargetingHelper helper;
+
         [Header("Grounding")]
         [SerializeField]
         private Vector3 targetPositionOffset;
@@ -45,5 +47,7 @@ namespace Game.Weapons
         public float MinDistanceToTarget => minDistanceToTarget;
 
         public TargetCollecting CollectTargetPosition => collectTargetPosition;
+
+        public TargetingHelper Helper => helper;
     }
 }

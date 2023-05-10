@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Actors;
+using Game.Level;
 using Game.TimeManagement;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -34,17 +35,22 @@ namespace Game.Weapons
         private IProjectileSettings _settings;
         private ProjectileHandler _behaviour;
         private TimerPool _timers;
+        
+        private SpawnPool _spawnPool;
 
         public event Action<Projectile> Completed;
 
         [Inject]
-        public void Construct(ProjectileHandler behaviour, TimerPool timers)
+        public void Construct(ProjectileHandler behaviour, TimerPool timers, SpawnPool spawnPool)
         {
             _behaviour = behaviour;
+            _spawnPool = spawnPool;
 
             _timers = timers;
             _timer = _timers.GetTimer();
         }
+        
+        public int OriginId { get; private set; }
 
         private void FixedUpdate()
         {
@@ -63,8 +69,10 @@ namespace Game.Weapons
         private void OnDestroy() 
             => _timers?.ReleaseTimer(_timer);
 
-        public void Init(IProjectileSettings settings)
+        public void Init(IProjectileSettings settings, int originId)
         {
+            OriginId = originId;
+            
             _settings = settings;
             _timer.Init(TimeSpan.FromSeconds(_settings.LifeTime.Duration), OnLifetimeEnd);
         }
@@ -131,7 +139,7 @@ namespace Game.Weapons
             if (hitRelativeToNormal)
                 rotation = Quaternion.LookRotation(normal);
             
-            Instantiate(deathFeedbackPrefab, position, rotation);
+            _spawnPool.Spawn(deathFeedbackPrefab, position, rotation);
         }
 
 
@@ -182,7 +190,7 @@ namespace Game.Weapons
             if (muzzleFeedbackPrefab)
             {
                 Transform self = transform;
-                Instantiate(muzzleFeedbackPrefab, self.position, self.rotation);
+                _spawnPool.Spawn(muzzleFeedbackPrefab, self.position, self.rotation);
             }
         }
 

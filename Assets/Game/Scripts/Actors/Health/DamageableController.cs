@@ -1,6 +1,8 @@
 ﻿using System;
+using Game.Level;
 using Game.Stats;
 using UnityEngine;
+using VContainer;
 
 namespace Game.Actors.Health
 {
@@ -12,7 +14,13 @@ namespace Game.Actors.Health
         public bool IsInvulnerable { get; private set; }
 
         private IActorController _owner;
+        
+        private SpawnPool _spawnPool;
         public event Action DamageFeedback;
+
+        [Inject]
+        public void Construct(SpawnPool spawnPool) 
+            => _spawnPool = spawnPool;
 
         private void Awake()
             => _owner = GetComponent<IActorController>();
@@ -42,10 +50,11 @@ namespace Game.Actors.Health
 
         private void PlayDamageFeedback()
         {
-            if (damageFeedback)
-            {
-                Instantiate(damageFeedback, transform.position, transform.rotation);
-            }
+            if (!damageFeedback) 
+                return;
+            
+            Transform self = transform;
+            _spawnPool.Spawn(damageFeedback, self.position, self.rotation);
         }
 
         private void ApplyDamage(float damage)

@@ -2,17 +2,20 @@
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Utils
+namespace Game.Level
 {
-    public class GameplayPrefabFactory
+    public class PrefabFactory
     {
         private readonly IObjectResolver _resolver;
 
         [Inject]
-        public GameplayPrefabFactory(IObjectResolver resolver)
+        public PrefabFactory(IObjectResolver resolver)
             => _resolver = resolver;
 
         public T Create<T>(T prefab) where T : MonoBehaviour
+            => _resolver.Instantiate(prefab);
+        
+        public GameObject Create(GameObject prefab) 
             => _resolver.Instantiate(prefab);
         
         public GameObject Create(GameObject prefab, Transform parent)

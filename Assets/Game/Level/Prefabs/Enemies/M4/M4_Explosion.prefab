@@ -175,6 +175,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7407110167235851954, guid: 0c2509361b13505428ce788b7f846686,
         type: 3}
+      propertyPath: clearBehavior
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407110167235851954, guid: 0c2509361b13505428ce788b7f846686,
+        type: 3}
       propertyPath: animatedLights.Array.size
       value: 0
       objectReference: {fileID: 0}

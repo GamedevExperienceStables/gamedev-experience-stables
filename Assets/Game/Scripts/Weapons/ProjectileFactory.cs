@@ -11,11 +11,13 @@ namespace Game.Weapons
         public ProjectileFactory(IObjectResolver resolver)
             => _resolver = resolver;
 
-        public Projectile Create(ProjectileDefinition definition)
+        public Projectile Create(Projectile prefab, IProjectileSettings settings)
         {
-            Projectile projectile = _resolver.Instantiate(definition.Prefab);
-            projectile.Init(definition);
+            Projectile projectile = _resolver.Instantiate(prefab);
             projectile.gameObject.SetActive(false);
+
+            int originId = prefab.GetInstanceID();
+            projectile.Init(settings, originId);
 
             return projectile;
         }

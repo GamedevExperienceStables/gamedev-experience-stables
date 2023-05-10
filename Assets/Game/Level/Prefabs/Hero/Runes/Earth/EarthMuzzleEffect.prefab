@@ -4728,8 +4728,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8580965896098570202}
-  - component: {fileID: 5387673529089301129}
   - component: {fileID: 635456263571209101}
+  - component: {fileID: 3256730930588673428}
   m_Layer: 0
   m_Name: EarthMuzzleEffect
   m_TagString: Untagged
@@ -4754,20 +4754,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5387673529089301129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3696429573555417670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e71ad30bf1524741b90c1bd0354e1e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TimeDestructionMode: 0
-  TimeBeforeDestruction: 2
 --- !u!114 &635456263571209101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4798,6 +4784,19 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 70
+--- !u!114 &3256730930588673428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3696429573555417670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8620980aed4704a96b15e02103ae5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBeforeDisable: 2
 --- !u!1 &8214064227077998659
 GameObject:
   m_ObjectHideFlags: 0

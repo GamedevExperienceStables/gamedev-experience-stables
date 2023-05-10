@@ -23,13 +23,13 @@ namespace Game.Dialog
 
         public void Start()
         {
-            _inventory.Runes.Subscribe(OnRuneAdded);
+            _inventory.Runes.SubscribeOnAdded(OnRuneAdded);
             _inventory.Materials.Bag.Subscribe(OnMaterialAdded);
         }
 
         public void Dispose()
         {
-            _inventory.Runes.UnSubscribe(OnRuneAdded);
+            _inventory.Runes.UnSubscribeOnAdded(OnRuneAdded);
             _inventory.Materials.Bag.UnSubscribe(OnMaterialAdded);
         }
 

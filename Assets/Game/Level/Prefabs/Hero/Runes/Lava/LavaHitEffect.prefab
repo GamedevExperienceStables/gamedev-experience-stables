@@ -15,6 +15,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1347780276449787774, guid: 99bc28c0d45f51c4fbac01080b73edc7,
         type: 3}
+      propertyPath: clearBehavior
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1347780276449787774, guid: 99bc28c0d45f51c4fbac01080b73edc7,
+        type: 3}
       propertyPath: cameraShake.enabled
       value: 0
       objectReference: {fileID: 0}
@@ -116,7 +121,7 @@ PrefabInstance:
     - target: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7,
         type: 3}
       propertyPath: m_Name
-      value: CFXR3 Fire Explosion B Variant
+      value: LavaHitEffect
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

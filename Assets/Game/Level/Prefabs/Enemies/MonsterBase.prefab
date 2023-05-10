@@ -165,19 +165,19 @@ MonoBehaviour:
   StableGroundLayers:
     serializedVersion: 2
     m_Bits: 769
-  DiscreteCollisionEvents: 0
+  DiscreteCollisionEvents: 1
   StepHandling: 1
   MaxStepHeight: 0.5
   AllowSteppingWithoutStableGrounding: 0
   MinRequiredStepDepth: 0.1
-  LedgeAndDenivelationHandling: 1
+  LedgeAndDenivelationHandling: 0
   MaxStableDistanceFromLedge: 0.3
   MaxVelocityForLedgeSnap: 0
   MaxStableDenivelationAngle: 180
-  InteractiveRigidbodyHandling: 1
+  InteractiveRigidbodyHandling: 0
   RigidbodyInteractionType: 0
   SimulatedCharacterMass: 1
-  PreserveAttachedRigidbodyMomentum: 1
+  PreserveAttachedRigidbodyMomentum: 0
   HasPlanarConstraint: 0
   PlanarConstraintAxis: {x: 0, y: 0, z: 1}
   MaxMovementIterations: 5
@@ -209,6 +209,7 @@ MonoBehaviour:
     rotateOnlyXZ: 1
   gravity:
     direction: {x: 0, y: -30, z: 0}
+  isPushable: 1
 --- !u!114 &1646171557498439836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopDistance: 0.3
+  additiveAvoidance: 0.3
 --- !u!114 &1815510984333573865
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1640791984947342054}
   - component: {fileID: 8972731323728571871}
-  - component: {fileID: 8080724051095361161}
+  - component: {fileID: -578225529388704406}
   m_Layer: 0
   m_Name: WindMuzzleEffect
   m_TagString: Untagged
@@ -64,7 +64,7 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 70
---- !u!114 &8080724051095361161
+--- !u!114 &-578225529388704406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,11 +73,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 155999892178582022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e71ad30bf1524741b90c1bd0354e1e0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f8620980aed4704a96b15e02103ae5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeDestructionMode: 0
-  TimeBeforeDestruction: 3
+  timeBeforeDisable: 2
 --- !u!1001 &8974077578508195306
 PrefabInstance:
   m_ObjectHideFlags: 0
