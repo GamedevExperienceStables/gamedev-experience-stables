@@ -58,10 +58,10 @@ namespace Game.Actors
         public void RemoveModifier(CharacterStats key, StatModifier modifier)
             => Stats.RemoveModifier(key, modifier);
 
-        public void Subscribe(CharacterStats key, IStats.StatChangedEvent callback)
+        public void SubscribeStatChanged(CharacterStats key, IStats.StatChangedEvent callback)
             => Stats.Subscribe(key, callback);
 
-        public void UnSubscribe(CharacterStats key, IStats.StatChangedEvent callback)
+        public void UnSubscribeStatChanged(CharacterStats key, IStats.StatChangedEvent callback)
             => Stats.UnSubscribe(key, callback);
         
         #endregion
