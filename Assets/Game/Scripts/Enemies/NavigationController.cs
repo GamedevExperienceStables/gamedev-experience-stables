@@ -12,6 +12,9 @@ namespace Game.Enemies
         [SerializeField]
         private float stopDistance = 1f;
 
+        [SerializeField]
+        private float additiveAvoidance = 0.25f;
+
         [UsedImplicitly]
         public float StopDistance => stopDistance;
 
@@ -37,7 +40,7 @@ namespace Game.Enemies
             _agent.updateUpAxis = false;
             
             _agent.stoppingDistance = stopDistance;
-            _agent.radius = _movement.CapsuleRadius;
+            _agent.radius = _movement.CapsuleRadius + additiveAvoidance;
             _agent.height = _movement.CapsuleHeight;
         }
 
