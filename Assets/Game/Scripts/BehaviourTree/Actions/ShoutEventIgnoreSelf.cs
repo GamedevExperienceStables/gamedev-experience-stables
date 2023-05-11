@@ -31,7 +31,7 @@ namespace Game.BehaviourTree.Actions
             traveledDistance = Mathf.Lerp(0, shoutRange.value, elapsedTime / completionTime.value);
             for ( int i = 0; i < owners.Length; i++ ) {
                 GraphOwner owner = owners[i];
-                if (owner.transform == agent)
+                if (owner && owner.transform == agent)
                     continue;
                 
                 float distance = ( agent.position - owner.transform.position ).magnitude;

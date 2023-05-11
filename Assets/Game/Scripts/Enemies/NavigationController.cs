@@ -23,7 +23,16 @@ namespace Game.Enemies
 
         private Vector3 _movementDirection;
 
-        public bool IsCompleted => !_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance;
+        public bool IsCompleted
+        {
+            get
+            {
+                if (!_agent.isOnNavMesh) 
+                    return true;
+                
+                return !_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance;
+            }
+        }
 
         private void Awake()
         {
