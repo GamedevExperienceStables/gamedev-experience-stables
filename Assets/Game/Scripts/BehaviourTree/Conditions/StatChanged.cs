@@ -14,22 +14,29 @@ namespace Game.BehaviourTree.Conditions
         public CompareMethod checkType = CompareMethod.GreaterOrEqualTo;
 
         public BBParameter<float> difference = 0f;
+        
+        [SliderField(0, 0.1f)]
+        public float floatingPoint = 0.1f;
 
-        private float _oldValue;
+        protected override string info =>
+            $"<b>{stat.value.ToStringAdvanced()}</b> changes {OperationTools.GetCompareString(checkType)} {difference}";
 
-
-        protected override string info
-            =>
-                $"<b>{stat.value.ToStringAdvanced()}</b> changed {OperationTools.GetCompareString(checkType)} {difference}";
-
+        protected override void OnEnable()
+            => agent.SubscribeStatChanged(stat.value, OnStatChanged);
+        
+        protected override void OnDisable()
+            => agent.UnSubscribeStatChanged(stat.value, OnStatChanged);
 
         protected override bool OnCheck()
-        {
-            float currentValue = agent.GetCurrentValue(stat.value);
-            float diff = currentValue - _oldValue;
-            _oldValue = currentValue;
+            => false;
 
-            return OperationTools.Compare(diff, difference.value, checkType, 0.1f);
+        private void OnStatChanged(StatValueChange change)
+        {
+            float diff = change.newValue - change.oldValue;
+            bool result = OperationTools.Compare(diff, difference.value, checkType, floatingPoint);
+            
+            if (result)
+                YieldReturn(true);
         }
     }
 }
