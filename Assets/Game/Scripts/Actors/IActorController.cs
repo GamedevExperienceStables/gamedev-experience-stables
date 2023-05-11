@@ -18,8 +18,8 @@ namespace Game.Actors
         void AddModifier(CharacterStats key, StatModifier modifier);
         void RemoveModifier(CharacterStats key, StatModifier modifier);
 
-        void Subscribe(CharacterStats key, IStats.StatChangedEvent callback);
-        void UnSubscribe(CharacterStats key, IStats.StatChangedEvent callback);
+        void SubscribeStatChanged(CharacterStats key, IStats.StatChangedEvent callback);
+        void UnSubscribeStatChanged(CharacterStats key, IStats.StatChangedEvent callback);
 
         void GiveAbility(AbilityDefinition definition);
         T GetAbility<T>() where T : ActorAbility;

@@ -26,10 +26,10 @@ namespace Game.Actors.Health
             => _owner = GetComponent<IActorController>();
 
         private void Start()
-            => _owner.Subscribe(CharacterStats.Health, OnHealthChanged);
+            => _owner.SubscribeStatChanged(CharacterStats.Health, OnHealthChanged);
 
         private void OnDestroy()
-            => _owner.UnSubscribe(CharacterStats.Health, OnHealthChanged);
+            => _owner.UnSubscribeStatChanged(CharacterStats.Health, OnHealthChanged);
 
         private void OnHealthChanged(StatValueChange change)
         {

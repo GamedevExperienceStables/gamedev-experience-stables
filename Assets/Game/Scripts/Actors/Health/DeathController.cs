@@ -35,12 +35,12 @@ namespace Game.Actors.Health
             _damageableController = GetComponent<DamageableController>();
 
             _owner = GetComponent<IActorController>();
-            _owner.Subscribe(CharacterStats.Health, OnHealthChanged);
+            _owner.SubscribeStatChanged(CharacterStats.Health, OnHealthChanged);
         }
 
         private void OnDestroy()
         {
-            _owner.UnSubscribe(CharacterStats.Health, OnHealthChanged);
+            _owner.UnSubscribeStatChanged(CharacterStats.Health, OnHealthChanged);
         }
 
         public void Revive()
