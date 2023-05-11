@@ -20,6 +20,11 @@ namespace Game.Actors
         [SerializeField]
         private Gravity gravity;
 
+        [SerializeField]
+        private bool isPushable = true;
+        
+        private float pushPower = 1f;
+
         private Vector3 _movementDirection;
         private Vector3 _lookDirection;
         private Vector3 _internalVelocityAdd;
@@ -193,6 +198,12 @@ namespace Game.Actors
 
         public void OnDiscreteCollisionDetected(Collider hitCollider)
         {
+            if (!hitCollider.TryGetComponent(out MovementController controller) || !controller.isPushable) 
+                return;
+            
+            Vector3 diff = (transform.position - controller.transform.position).WithY(0).normalized;
+            Vector3 pushDirection = (_movementDirection + diff).WithY(0);
+            controller.AddVelocity(-pushDirection * pushPower);
         }
     }
 }

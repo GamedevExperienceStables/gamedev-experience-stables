@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game.Utils
 {
@@ -70,5 +71,27 @@ namespace Game.Utils
 
         public static Vector3 TransformWithOffset(this Transform target, Vector3 offset) 
             => target.position + target.TransformDirection(offset);
+
+        public static Vector3 WithY(this Vector3 vector, float y)
+            => new(vector.x, y, vector.z);
+
+        public static Vector3 FindClosestCollider(this Vector3 position, IList<Collider> colliders, int count)
+        {
+            Vector3 closest = Vector3.zero;
+            float distance = Mathf.Infinity;
+
+            for (int i = 0; i < count; i++)
+            {
+                Vector3 point = colliders[i].transform.position;
+                float sqrDistance = (point - position).sqrMagnitude;
+                if (sqrDistance >= distance)
+                    continue;
+
+                closest = point;
+                distance = sqrDistance;
+            }
+
+            return closest;
+        }
     }
 }

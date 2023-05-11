@@ -21,6 +21,9 @@ namespace Game.Player
             => _heroStats = data.HeroStats;
 
         public HeroController Hero { get; private set; }
+        
+        public event Action<HeroController> HeroBound;
+        public event Action HeroUnBound;
 
         public void Init(HeroStats.InitialStats initial)
             => _heroStats.Init(initial);
@@ -45,6 +48,8 @@ namespace Game.Player
             _isBound = true;
 
             SubscribeHeroDeath(Hero);
+            
+            HeroBound?.Invoke(Hero);
         }
 
         public void UnbindHero()
@@ -54,6 +59,8 @@ namespace Game.Player
             _isBound = false;
 
             Hero = null;
+            
+            HeroUnBound?.Invoke();
         }
 
         private void SubscribeHeroDeath(Component hero)

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2017714598821510266}
-  - component: {fileID: 2457577422123590673}
+  - component: {fileID: 2550238780498917041}
   m_Layer: 0
   m_Name: LifeTreeHitEffect
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2457577422123590673
+--- !u!114 &2550238780498917041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,11 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5750144968905439506}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e71ad30bf1524741b90c1bd0354e1e0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f8620980aed4704a96b15e02103ae5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeDestructionMode: 0
-  TimeBeforeDestruction: 3
+  timeBeforeDisable: 2
 --- !u!1001 &44500976338426318
 PrefabInstance:
   m_ObjectHideFlags: 0

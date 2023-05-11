@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 633518282137178879}
   - component: {fileID: 1830281790058389920}
-  - component: {fileID: 4773412964690234805}
+  - component: {fileID: 7457778944143167856}
   m_Layer: 0
   m_Name: EarthHitEffect
   m_TagString: Untagged
@@ -64,7 +64,7 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 70
---- !u!114 &4773412964690234805
+--- !u!114 &7457778944143167856
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,11 +73,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2105710721977991881}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e71ad30bf1524741b90c1bd0354e1e0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f8620980aed4704a96b15e02103ae5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeDestructionMode: 0
-  TimeBeforeDestruction: 3
+  timeBeforeDisable: 2
 --- !u!1 &2611740714984185022
 GameObject:
   m_ObjectHideFlags: 0

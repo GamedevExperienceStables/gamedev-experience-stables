@@ -3,6 +3,7 @@ using Game.Audio;
 using Game.Cameras;
 using Game.Enemies;
 using Game.Hero;
+using Game.Weapons;
 using UnityEngine;
 using VContainer;
 
@@ -14,6 +15,8 @@ namespace Game.Level
 
         private readonly FollowSceneCamera _followCamera;
         private readonly LocationAudioListener _audioListener;
+        private readonly ProjectilePool _projectilePool;
+        private readonly SpawnPool _spawnPool;
 
         private HeroController _hero;
 
@@ -23,12 +26,16 @@ namespace Game.Level
         public LocationController(
             HeroFactory heroFactory,
             FollowSceneCamera followCamera,
-            LocationAudioListener audioListener
+            LocationAudioListener audioListener,
+            ProjectilePool projectilePool,
+            SpawnPool spawnPool
         )
         {
             _heroFactory = heroFactory;
             _followCamera = followCamera;
             _audioListener = audioListener;
+            _projectilePool = projectilePool;
+            _spawnPool = spawnPool;
         }
         
         public Transform Hero => _hero.transform;
@@ -50,6 +57,9 @@ namespace Game.Level
                 _hero.Reset();
                 _hero.SetActive(false);
             }
+
+            _projectilePool.Clear();
+            _spawnPool.Clear();
         }
 
         private void SpawnHero(Transform spawnPoint)

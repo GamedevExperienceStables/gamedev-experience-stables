@@ -1,14 +1,10 @@
 ﻿using System;
-using FMODUnity;
 using Game.Animations.Hero;
-using Game.Audio;
 using Game.Stats;
 using Game.TimeManagement;
 using Game.Weapons;
 using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Pool;
-using UnityEngine.Serialization;
 
 namespace Game.Actors
 {
@@ -49,13 +45,12 @@ namespace Game.Actors
 
     public class ProjectileAbility : ActorAbility<ProjectileAbilityDefinition>
     {
-        private const int POOL_MAX_SIZE = 20;
         private const float BACKWARD_THRESHOLD = 0.2f;
 
-        private readonly FmodService _audio;
+        private readonly TargetingHandler _targeting;
         private readonly TimerPool _timers;
 
-        private readonly ObjectPool<Projectile> _projectilePool;
+        private readonly ProjectilePool _projectilePool;
 
         private Transform _spawnPoint;
         private bool _hasMana;
@@ -67,24 +62,12 @@ namespace Game.Actors
         private TimerUpdatable _castTimer;
         private Vector3 _targetPosition;
 
-        public ProjectileAbility(ProjectileFactory projectileFactory, FmodService audio, TimerPool timers)
+        public ProjectileAbility(TargetingHandler targeting, ProjectilePool projectilePool, TimerPool timers)
         {
-            _audio = audio;
+            _targeting = targeting;
             _timers = timers;
-
-            _projectilePool = new ObjectPool<Projectile>(
-                createFunc: () =>
-                {
-                    Projectile projectile = projectileFactory.Create(Definition.Projectile);
-                    projectile.Completed += OnCompleteProjectile;
-                    return projectile;
-                },
-                actionOnDestroy: projectile => projectile.Completed -= OnCompleteProjectile,
-                maxSize: POOL_MAX_SIZE);
+            _projectilePool = projectilePool;
         }
-
-        private void OnCompleteProjectile(Projectile projectile)
-            => _projectilePool.Release(projectile);
 
         protected override void OnInitAbility()
         {
@@ -100,9 +83,6 @@ namespace Game.Actors
 
         protected override void OnDestroyAbility()
         {
-            _projectilePool.Clear();
-            _projectilePool.Dispose();
-
             _timers.ReleaseTimer(_fireTimer);
             _timers.ReleaseTimer(_castTimer);
         }
@@ -182,49 +162,11 @@ namespace Game.Actors
 
         private void FireProjectile()
         {
-            _projectilePool.Get(out Projectile projectile);
-
+            Projectile projectile = _projectilePool.Get(Definition.Projectile);
             projectile.Fire(_spawnPoint, _targetPosition);
         }
 
         private Vector3 GetTargetPosition()
-        {
-            TargetingDefinition targeting = Definition.Targeting;
-
-            Vector3 position = Owner.Transform.position;
-            bool groundedPosition = targeting.RelativeToGround;
-            Vector3 targetPosition = _input.GetTargetPosition(groundedPosition);
-
-            Vector3 origin = _spawnPoint.position;
-            if (groundedPosition) 
-                origin.y = position.y;
-
-            if (!targeting.AllowTargetAbove)
-                targetPosition.y = Mathf.Min(targetPosition.y, origin.y);
-
-            float sqrDistance = (targetPosition - position).sqrMagnitude;
-            bool allowTargetBelow = targeting.AllowTargetBelow;
-            float minDistanceBelow = targeting.MinDistanceToTargetBelow;
-            if (allowTargetBelow && minDistanceBelow > 0)
-            {
-                float sqrMinDistance = minDistanceBelow * minDistanceBelow;
-                allowTargetBelow = sqrDistance >= sqrMinDistance;
-            }
-
-            if (!allowTargetBelow)
-                targetPosition.y = Mathf.Max(targetPosition.y, origin.y);
-            
-            float minDistanceToTarget = targeting.MinDistanceToTarget;
-            if (minDistanceToTarget > 0)
-            {
-                float sqrMinDistance = minDistanceToTarget * minDistanceToTarget;
-                if (sqrMinDistance >= sqrDistance)
-                    targetPosition = origin + _spawnPoint.forward * minDistanceToTarget;
-            }
-
-            targetPosition += targeting.TargetPositionOffset;
-
-            return targetPosition;
-        }
+            => _targeting.GetTargetPosition(Definition.Targeting, Owner.Transform, _input, _spawnPoint);
     }
 }

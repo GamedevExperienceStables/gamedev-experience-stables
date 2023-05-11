@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Actors.Health;
 using Game.Animations.Hero;
+using Game.Level;
 using Game.Stats;
 using Game.TimeManagement;
 using Game.Utils;
@@ -8,7 +9,6 @@ using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
-using Object = UnityEngine.Object;
 
 namespace Game.Actors
 {
@@ -68,6 +68,7 @@ namespace Game.Actors
     public class MeleeAbility : ActorAbility<MeleeAbilityDefinition>
     {
         private readonly TimerPool _timers;
+        private readonly SpawnPool _spawnPool;
 
         private Collider[] _hitColliders;
         private ActorAnimator _animator;
@@ -83,8 +84,11 @@ namespace Game.Actors
         private bool _hasHitEffect;
 
         [Inject]
-        public MeleeAbility(TimerPool timers)
-            => _timers = timers;
+        public MeleeAbility(TimerPool timers, SpawnPool spawnPool)
+        {
+            _timers = timers;
+            _spawnPool = spawnPool;
+        }
 
         public override bool CanActivateAbility()
         {
@@ -225,7 +229,7 @@ namespace Game.Actors
             SpawnEffect(effectPrefab, spawnPoint, spawnRotation);
         }
 
-        private static void SpawnEffect(GameObject effectPrefab, Vector3 spawnPoint, Quaternion spawnRotation) 
-            => Object.Instantiate(effectPrefab, spawnPoint, spawnRotation);
+        private void SpawnEffect(GameObject effectPrefab, Vector3 spawnPoint, Quaternion spawnRotation) 
+            => _spawnPool.Spawn(effectPrefab, spawnPoint, spawnRotation);
     }
 }

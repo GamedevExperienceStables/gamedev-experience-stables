@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7434773884508858446}
   - component: {fileID: 3529963644464559305}
-  - component: {fileID: 4000501041159060207}
+  - component: {fileID: -4160743144529625359}
   m_Layer: 0
   m_Name: HeroDefaultHitEffect
   m_TagString: Untagged
@@ -56,7 +56,7 @@ MonoBehaviour:
     Path: event:/Abilities/HeroDefault/DestroyHeroDefaultProjectile
   Event: 
   PlayEvent: 11
-  StopEvent: 2
+  StopEvent: 12
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 70
---- !u!114 &4000501041159060207
+--- !u!114 &-4160743144529625359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,11 +73,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7434773884508858481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e71ad30bf1524741b90c1bd0354e1e0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f8620980aed4704a96b15e02103ae5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeDestructionMode: 0
-  TimeBeforeDestruction: 4
+  timeBeforeDisable: 2
 --- !u!1001 &7023716549570760381
 PrefabInstance:
   m_ObjectHideFlags: 0

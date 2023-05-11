@@ -201,12 +201,6 @@ PrefabInstance:
       propertyPath: CapsuleYOffset
       value: 0.65
       objectReference: {fileID: 0}
-    - target: {fileID: 1815510984333573865, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
-        type: 3}
-      propertyPath: damageFeedback
-      value: 
-      objectReference: {fileID: 5722597808306690243, guid: c610a1c9baf842c478e292f8843e484e,
-        type: 3}
     - target: {fileID: 2243510481174325238, guid: 1f72e3e50fc25e84f9cbf33b4e3d248a,
         type: 3}
       propertyPath: m_Radius
