@@ -7,7 +7,7 @@ namespace Game.Enemies
     public class EnemySpawnZone : MonoBehaviour
     {
         [SerializeField, HideInInspector]
-        private List<EnemySpawnGroup> enemySpawnZones;
+        private List<EnemySpawnGroup> enemySpawnZones = new();
 
         private void OnValidate()
         {

@@ -11,7 +11,7 @@ namespace Game.Enemies
     public class EnemySpawnGroup : MonoBehaviour, ISwitchObject
     {
         [SerializeField, HideInInspector]
-        private List<EnemySpawnPoint> enemySpawnPoints;
+        private List<EnemySpawnPoint> enemySpawnPoints = new();
 
         [SerializeField]
         private bool canRespawn;
@@ -33,6 +33,8 @@ namespace Game.Enemies
 
         private TimerPool _timers;
         private TimerUpdatable _spawnTimer;
+        
+        public event Action Cleared;
 
 
         private bool CanRespawn => canRespawn && respawnTimer > 0f && spawnCounts > 1 && _spawnsLeft == 0;
@@ -105,6 +107,8 @@ namespace Game.Enemies
             }
 
             _isCleared = true;
+            
+            Cleared?.Invoke();
         }
 
         public void Activate()
