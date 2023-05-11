@@ -62,6 +62,9 @@ namespace Game.Enemies
             int lastIndex = linkedGroups.Count - 1;
             for (int i = 0; i < lastIndex; i++)
             {
+                if (!linkedGroups[i])
+                    continue;
+                
                 int nextIndex = i + 1;
 
                 Vector3 position = linkedGroups[i].transform.position;
