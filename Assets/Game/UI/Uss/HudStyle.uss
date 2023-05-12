@@ -246,6 +246,8 @@
 .dialog-window__image-container {
     margin-top: -20px;
     margin-right: 35px;
+    
+    flex-shrink: 0;
 }
 
 .dialog-window__text {
@@ -260,12 +262,12 @@
 
 .dialog-window__arrow {
     position: absolute;
-    top: 40px;
+    top: 38px;
     width: 29px;
     height: 33px;
     border-right-color: rgb(0, 0, 0);
     background-image: url('project://database/Assets/Game/UI/Textures/Common/dialog_window.png?fileID=-1904629740&guid=5ad8a4149a97e5f40bace06b1cb5aee9&type=3#dialog_window_arrow');
-    left: -27px;
+    left: -26px;
 }
 
 .dialog-window--title-hidden .dialog-window__title {
