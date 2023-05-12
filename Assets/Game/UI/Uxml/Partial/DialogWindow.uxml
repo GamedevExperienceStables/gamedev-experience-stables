@@ -1,7 +1,15 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Game/UI/Uss/HudStyle.uss?fileID=7433441132597879392&amp;guid=43fb365d5654783488ae02a43eaf455d&amp;type=3#HudStyle" />
-    <ui:VisualElement name="dialog-window" class="dialog-window">
-        <ui:Label tabindex="-1" text="Narrator" display-tooltip-when-elided="true" name="title" class="dialog-window__title" />
-        <ui:Label tabindex="-1" text="Snoody lost this battle, but this is not the end of his story.&lt;b&gt;You can start the New Game or continue from last save." display-tooltip-when-elided="true" name="text" class="dialog-window__text" />
+    <ui:VisualElement name="dialog-window" class="dialog-window" style="flex-direction: row;">
+        <ui:VisualElement class="dialog-window__image-container">
+            <ui:Image name="image" class="dialog-window__image" style="background-image: url(&apos;project://database/Assets/Game/Art/Common/Textures/Brand/pike-game-icon.png?fileID=21300000&amp;guid=6daaec60d1127c44689713d832351da2&amp;type=3#pike-game-icon&apos;);" />
+        </ui:VisualElement>
+        <ui:VisualElement class="dialog-window-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+            <ui:VisualElement class="dialog-window__arrow" />
+            <ui:VisualElement class="dialog-window__text-container">
+                <ui:Label tabindex="-1" text="Narrator" display-tooltip-when-elided="true" name="title" class="dialog-window__title" />
+                <ui:Label tabindex="-1" text="Snoody lost this battle, but this is not the end of his story.&lt;b&gt;You can start the New Game or continue from last save." display-tooltip-when-elided="true" name="text" class="dialog-window__text" />
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
