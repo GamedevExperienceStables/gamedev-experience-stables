@@ -226,18 +226,26 @@
     white-space: normal;
     font-size: 24px;
     color: rgb(255, 255, 255);
+    
     position: absolute;
-    left: -20px;
+    left: -15px;
     top: -50px;
     background-color: rgb(155, 89, 199);
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 5px;
+
+    -unity-font-definition: var(--font-heading);
+    
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
     padding-bottom: 5px;
 }
 
+.dialog-window__text-container {
+}
+
 .dialog-window__image-container {
-    margin-right: 30px;
+    margin-top: -20px;
+    margin-right: 35px;
 }
 
 .dialog-window__text {
@@ -245,19 +253,19 @@
     font-size: 28px;
 }
 
-.dialog-window__image {
-    width: 110px;
-    height: 110px;
+.dialog-window__image {    
+    width: 125px;
+    height: 125px;
 }
 
 .dialog-window__arrow {
     position: absolute;
-    top: 35px;
-    width: 20px;
-    height: 40px;
+    top: 40px;
+    width: 29px;
+    height: 33px;
     border-right-color: rgb(0, 0, 0);
     background-image: url('project://database/Assets/Game/UI/Textures/Common/dialog_window.png?fileID=-1904629740&guid=5ad8a4149a97e5f40bace06b1cb5aee9&type=3#dialog_window_arrow');
-    left: -18px;
+    left: -27px;
 }
 
 .dialog-window--title-hidden .dialog-window__title {
