@@ -254,8 +254,8 @@
 }
 
 .dialog-window__image {    
-    width: 125px;
-    height: 125px;
+    width: 120px;
+    height: 120px;
 }
 
 .dialog-window__arrow {
