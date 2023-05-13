@@ -198,7 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b950b9bbe5f41259fbd446539fbd7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageFeedback: {fileID: 0}
+  damageFeedback: {fileID: 8742856534220869631, guid: a238399dff7dd244396129280a040aa2,
+    type: 3}
 --- !u!114 &6721898128750939348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,8 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb57b94c7089482398b501bc6f6db0fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathFeedback: {fileID: 8742856534220869631, guid: a238399dff7dd244396129280a040aa2,
-    type: 3}
+  deathFeedback: {fileID: 0}
   destroyOnDeath: 1
 --- !u!114 &-3157847202471997382
 MonoBehaviour:
