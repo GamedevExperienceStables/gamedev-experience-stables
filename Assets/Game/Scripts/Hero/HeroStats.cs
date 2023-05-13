@@ -13,6 +13,7 @@ namespace Game.Hero
             this.CreateStatsMana();
             this.CreateStatsStamina();
             this.CreateStatsMovement();
+            this.CreateStatsWeight();
 
             CreateStat(CharacterStats.DashMultiplier);
             CreateStat(CharacterStats.DashStaminaMultiplier);
@@ -26,6 +27,7 @@ namespace Game.Hero
             this.InitStatsMana(initial.ManaPoints);
             this.InitStatsStamina(initial.StaminaPoints);
             this.InitStatsMovement(initial.MovementSpeed);
+            this.InitStatsWeight(initial.Weight);
 
             InitStat(CharacterStats.DashMultiplier, 0);
             InitStat(CharacterStats.DashStaminaMultiplier, 0);
@@ -37,23 +39,28 @@ namespace Game.Hero
         [Serializable]
         public class InitialStats
         {
-            [SerializeField]
+            [SerializeField, Min(1)]
             private float healthPoints = 100f;
 
-            [SerializeField]
+            [SerializeField, Min(0)]
             private float staminaPoints = 100f;
 
-            [SerializeField]
+            [SerializeField, Min(0)]
             private float manaPoints = 100f;
 
             [Header("Movement")]
-            [SerializeField]
+            [SerializeField, Min(0)]
             private float movementSpeed = 6f;
+
+            [SerializeField, Min(0)]
+            private float weight = 1f;
 
             public float MovementSpeed => movementSpeed;
             public float HealthPoints => healthPoints;
             public float StaminaPoints => staminaPoints;
             public float ManaPoints => manaPoints;
+
+            public float Weight => weight;
         }
     }
 }
