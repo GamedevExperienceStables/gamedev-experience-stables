@@ -27,7 +27,12 @@ namespace Game.Actors
 
         public static void InitStatsMovement(this ActorStats stats, float baseValue)
             => stats.InitStat(CharacterStats.MovementSpeed, baseValue);
-
+        
+        public static void CreateStatsWeight(this ActorStats stats)
+            => stats.CreateStat(CharacterStats.Weight);
+        
+        public static void InitStatsWeight(this ActorStats stats, float baseValue)
+            => stats.InitStat(CharacterStats.Weight, baseValue);
 
         private static void CreateStatsMinMax(this ActorStats stats, CharacterStats current, CharacterStats max)
         {

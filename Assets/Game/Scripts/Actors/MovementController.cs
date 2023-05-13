@@ -8,6 +8,8 @@ namespace Game.Actors
     [RequireComponent(typeof(KinematicCharacterMotor))]
     public class MovementController : MonoBehaviour, ICharacterController
     {
+        private const float PUSH_POWER = 1f;
+        
         [SerializeField]
         private GroundMovement groundMovement;
 
@@ -22,8 +24,6 @@ namespace Game.Actors
 
         [SerializeField]
         private bool isPushable = true;
-        
-        private float pushPower = 1f;
 
         private Vector3 _movementDirection;
         private Vector3 _lookDirection;
@@ -81,7 +81,7 @@ namespace Game.Actors
         
         public void AddVelocity(Vector3 velocity)
         {
-            _internalVelocityAdd += velocity;
+            _internalVelocityAdd += velocity / _owner.GetCurrentValue(CharacterStats.Weight);
         }
         
         public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
@@ -203,7 +203,8 @@ namespace Game.Actors
             
             Vector3 diff = (transform.position - controller.transform.position).WithY(0).normalized;
             Vector3 pushDirection = (_movementDirection + diff).WithY(0);
-            controller.AddVelocity(-pushDirection * pushPower);
+            Vector3 pushForce = -pushDirection * PUSH_POWER / _owner.GetCurrentValue(CharacterStats.Weight);
+            controller.AddVelocity(pushForce);
         }
     }
 }

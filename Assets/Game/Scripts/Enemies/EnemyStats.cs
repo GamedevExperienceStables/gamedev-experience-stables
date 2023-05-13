@@ -10,6 +10,7 @@ namespace Game.Enemies
         {
             this.CreateStatsHealth();
             this.CreateStatsMovement();
+            this.CreateStatsWeight();
             this.CreateStatsStamina();
         }
 
@@ -17,6 +18,7 @@ namespace Game.Enemies
         {
             this.InitStatsHealth(stats.HealthPoints);
             this.InitStatsMovement(stats.MovementSpeed);
+            this.InitStatsWeight(stats.Weight);
             this.InitStatsStamina(stats.StaminaPoints);
         }
         
@@ -32,6 +34,9 @@ namespace Game.Enemies
             [Header("Movement")]
             [SerializeField]
             private float movementSpeed = 3f;
+            
+            [SerializeField, Min(0)]
+            private float weight = 1f;
             
             [Header("Sensor")]
             [SerializeField]
@@ -49,6 +54,8 @@ namespace Game.Enemies
             public float SensorDistance => sensorDistance;
 
             public AttackSettings AttackSettings => attackSettings;
+
+            public float Weight => weight;
         }
     }
 }
