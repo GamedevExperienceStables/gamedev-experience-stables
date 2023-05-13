@@ -39,17 +39,17 @@ namespace Game.Hero
         [Serializable]
         public class InitialStats
         {
-            [SerializeField]
+            [SerializeField, Min(1)]
             private float healthPoints = 100f;
 
-            [SerializeField]
+            [SerializeField, Min(0)]
             private float staminaPoints = 100f;
 
-            [SerializeField]
+            [SerializeField, Min(0)]
             private float manaPoints = 100f;
 
             [Header("Movement")]
-            [SerializeField]
+            [SerializeField, Min(0)]
             private float movementSpeed = 6f;
 
             [SerializeField, Min(0)]

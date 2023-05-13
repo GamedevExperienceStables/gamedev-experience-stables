@@ -25,21 +25,21 @@ namespace Game.Enemies
         [Serializable]
         public class InitialStats
         {
-            [SerializeField]
+            [SerializeField, Min(1)]
             private float healthPoints = 1f;
             
-            [SerializeField]
+            [SerializeField, Min(0)]
             private float staminaPoints = 1f;
             
             [Header("Movement")]
-            [SerializeField]
+            [SerializeField, Min(0)]
             private float movementSpeed = 3f;
             
             [SerializeField, Min(0)]
             private float weight = 1f;
             
             [Header("Sensor")]
-            [SerializeField]
+            [SerializeField, Min(0)]
             private float sensorDistance = 10f;
             
             [Space]
