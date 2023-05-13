@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Game.Level;
-using UnityEditor;
 using UnityEngine;
 
 namespace Game.Enemies
@@ -56,6 +55,7 @@ namespace Game.Enemies
             }
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             Vector3 offset = Vector3.up * 0.5f;
@@ -68,14 +68,15 @@ namespace Game.Enemies
                 int nextIndex = i + 1;
 
                 Vector3 position = linkedGroups[i].transform.position;
-                Handles.Label(position + offset, (i + 1).ToString());
+                UnityEditor.Handles.Label(position + offset, (i + 1).ToString());
 
                 Vector3 nextPosition = linkedGroups[nextIndex].transform.position;
                 if (i == lastIndex - 1)
-                    Handles.Label(nextPosition + offset, (nextIndex + 1).ToString());
+                    UnityEditor.Handles.Label(nextPosition + offset, (nextIndex + 1).ToString());
 
                 Debug.DrawLine(position, nextPosition, Color.yellow);
             }
         }
+#endif
     }
 }
