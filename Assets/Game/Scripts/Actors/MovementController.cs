@@ -81,7 +81,7 @@ namespace Game.Actors
         
         public void AddVelocity(Vector3 velocity)
         {
-            _internalVelocityAdd += velocity / _owner.GetCurrentValue(CharacterStats.Weight);
+            _internalVelocityAdd += velocity * (1 / _owner.GetCurrentValue(CharacterStats.Weight));
         }
         
         public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
@@ -203,7 +203,7 @@ namespace Game.Actors
             
             Vector3 diff = (transform.position - controller.transform.position).WithY(0).normalized;
             Vector3 pushDirection = (_movementDirection + diff).WithY(0);
-            Vector3 pushForce = -pushDirection * PUSH_POWER / _owner.GetCurrentValue(CharacterStats.Weight);
+            Vector3 pushForce = -pushDirection * (PUSH_POWER / _owner.GetCurrentValue(CharacterStats.Weight));
             controller.AddVelocity(pushForce);
         }
     }
