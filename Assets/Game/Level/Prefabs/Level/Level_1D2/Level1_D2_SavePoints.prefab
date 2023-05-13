@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1133580147477397706}
   m_Layer: 0
-  m_Name: Level_1_D2_SavePoints
+  m_Name: Level1_D2_SavePoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
