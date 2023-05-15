@@ -21,27 +21,37 @@ PrefabInstance:
     - target: {fileID: 1979956111426262956, guid: 59048e7cba98dc447834ea5c790f3381,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.02
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1979956111426262956, guid: 59048e7cba98dc447834ea5c790f3381,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.02
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1979956111426262956, guid: 59048e7cba98dc447834ea5c790f3381,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.02
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1979956111426262956, guid: 59048e7cba98dc447834ea5c790f3381,
         type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3380177231270123176, guid: 59048e7cba98dc447834ea5c790f3381,
+        type: 3}
+      propertyPath: CapsuleHeight
+      value: 1.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380177231270123176, guid: 59048e7cba98dc447834ea5c790f3381,
+        type: 3}
+      propertyPath: CapsuleRadius
+      value: 0.61
+      objectReference: {fileID: 0}
     - target: {fileID: 3380177231270123177, guid: 59048e7cba98dc447834ea5c790f3381,
         type: 3}
       propertyPath: m_Name
-      value: M2_SN_r_Scroll_Soul
+      value: M2_SN_r_Scroll_LifeTree
       objectReference: {fileID: 0}
     - target: {fileID: 3380177231270123178, guid: 59048e7cba98dc447834ea5c790f3381,
         type: 3}
@@ -98,6 +108,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3380177231270123179, guid: 59048e7cba98dc447834ea5c790f3381,
+        type: 3}
+      propertyPath: m_Height
+      value: 1.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380177231270123179, guid: 59048e7cba98dc447834ea5c790f3381,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.61
+      objectReference: {fileID: 0}
     - target: {fileID: 4665282962577927619, guid: 59048e7cba98dc447834ea5c790f3381,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -106,12 +126,12 @@ PrefabInstance:
     - target: {fileID: 5595258497723786628, guid: 59048e7cba98dc447834ea5c790f3381,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.786
+      value: 0.994
       objectReference: {fileID: 0}
     - target: {fileID: 5595258497723786628, guid: 59048e7cba98dc447834ea5c790f3381,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.659
+      value: 0.868
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
