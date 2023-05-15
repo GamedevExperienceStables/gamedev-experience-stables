@@ -22,14 +22,14 @@ namespace Game.Level
             _context = context;
         }
 
-        public void SpawnScattered(LootBagDefinition lootBagDefinition, Vector3 position)
+        public void SpawnScattered(LootBagDefinition lootBagDefinition, Vector3 position, Vector3 direction)
         {
             FetchLoot(lootBagDefinition, _bufferItems);
 
             foreach (LootDefinitionItem definition in _bufferItems)
             {
                 Vector3 spawnPosition = GetSpawnPosition(definition, position);
-                SpawnItem(definition, spawnPosition);
+                SpawnItem(definition, spawnPosition, direction);
             }
 
             _bufferItems.Clear();
@@ -55,17 +55,13 @@ namespace Game.Level
             return item;
         }
 
-        private void SpawnItem(LootDefinitionItem item, Vector3 position)
+        private void SpawnItem(LootDefinitionItem item, Vector3 position, Vector3 direction)
         {
             LootItemDefinition definition = item.Definition;
             LootItem instance = Spawn(definition, position);
-            
-            // ReSharper disable once InvertIf
+
             if (definition.Overrides.enabled)
-            {
-                Transform itemTransform = instance.transform;
-                itemTransform.position = itemTransform.TransformDirection(definition.Overrides.offset);
-            }
+                instance.transform.position += Quaternion.LookRotation(direction) * definition.Overrides.offset;
         }
 
         private static void FetchLoot(LootBagDefinition lootBagDefinition, ICollection<LootDefinitionItem> lootOut)

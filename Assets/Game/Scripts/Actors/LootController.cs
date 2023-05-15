@@ -33,8 +33,11 @@ namespace Game.Actors
 
         private void SpawnLoot()
         {
-            if (_lootBag)
-                _lootSpawner.SpawnScattered(_lootBag, transform.position);
+            if (!_lootBag)
+                return;
+
+            Transform self = transform;
+            _lootSpawner.SpawnScattered(_lootBag, self.position, self.forward);
         }
     }
 }
