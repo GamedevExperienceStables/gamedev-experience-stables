@@ -406,7 +406,7 @@ PrefabInstance:
     - target: {fileID: 887511104983678051, guid: 225f616a91570d7498eab718c97c9428,
         type: 3}
       propertyPath: _id
-      value: 
+      value: ea55d98d-99b2-46f9-8111-35186079f346
       objectReference: {fileID: 0}
     - target: {fileID: 4074550701592204921, guid: 225f616a91570d7498eab718c97c9428,
         type: 3}
@@ -6339,6 +6339,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 472859650906451071}
     m_Modifications:
+    - target: {fileID: 144310750723413946, guid: 077aa0a12051a3641891986d2abd3f8c,
+        type: 3}
+      propertyPath: _id
+      value: 3733de70-a5bb-475f-a990-4e641dc77907
+      objectReference: {fileID: 0}
     - target: {fileID: 187255120951379644, guid: 077aa0a12051a3641891986d2abd3f8c,
         type: 3}
       propertyPath: m_Name
@@ -6494,6 +6499,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 35.613
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589599740155997710, guid: 077aa0a12051a3641891986d2abd3f8c,
+        type: 3}
+      propertyPath: _id
+      value: 4b496313-d876-4f4c-b58a-2446f1b24ff3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9573,7 +9583,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemy
       value: 
-      objectReference: {fileID: 11400000, guid: 93d60815b2ac5a64ab5a48438f438b2a,
+      objectReference: {fileID: 11400000, guid: 9f21713c8c3452d4698b2693f31cb384,
         type: 2}
     - target: {fileID: 2350107545435338788, guid: be35d5748bb8ad74b9e5d3bb8f572618,
         type: 3}
