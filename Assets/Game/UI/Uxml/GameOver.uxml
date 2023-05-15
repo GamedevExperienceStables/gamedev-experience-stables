@@ -7,12 +7,12 @@
             <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center; background-image: url(&apos;project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=-100320597&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_27&apos;); padding-left: 150px; padding-right: 150px; padding-top: 100px; padding-bottom: 125px;">
                 <ui:VisualElement style="background-color: rgba(0, 0, 0, 0);">
                     <ui:Instance template="Dividers" />
-                    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 0; margin-right: 0; margin-top: 45px; margin-bottom: 35px; width: 900px;">
-                        <ui:Label tabindex="-1" text="Snoody lost this battle, but this is not the end of his story. " display-tooltip-when-elided="true" name="caption" style="color: rgb(90, 55, 55); font-size: 60px; white-space: normal; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&amp;guid=1823e5ab5312e0e40972472a78991947&amp;type=2#borsok SDF&apos;); -unity-text-align: upper-center;" />
+                    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 0; margin-right: 0; margin-top: 45px; margin-bottom: 35px; width: 1000px;">
+                        <ui:Label tabindex="-1" text="Snoody lost this battle, but this is not the end of his story. " display-tooltip-when-elided="true" name="caption" style="color: rgb(90, 55, 55); font-size: 50px; white-space: normal; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&amp;guid=1823e5ab5312e0e40972472a78991947&amp;type=2#borsok SDF&apos;); -unity-text-align: upper-center;" />
                     </ui:VisualElement>
                     <ui:Instance template="Dividers" />
                 </ui:VisualElement>
-                <ui:VisualElement style="margin-left: 0; margin-right: 0; margin-top: 60px; margin-bottom: 60px; width: 650px;">
+                <ui:VisualElement style="margin-left: 0; margin-right: 0; margin-top: 60px; margin-bottom: 60px; width: 800px;">
                     <ui:Label tabindex="-1" text="You can start the New Game or continue from last save." name="description" display-tooltip-when-elided="true" style="color: rgb(155, 89, 199); font-size: 35px; -unity-font-style: bold; white-space: normal; -unity-text-align: upper-center; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&amp;guid=9f296ab3b5e417845bc8de63c7b23c43&amp;type=2#koliko-Regular SDF&apos;);" />
                 </ui:VisualElement>
                 <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-direction: row;">
