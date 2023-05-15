@@ -317,7 +317,7 @@ TextureImporter:
         height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 99, y: 23, z: 98, w: 25}
+      border: {x: 29, y: 23, z: 28, w: 25}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -773,13 +773,13 @@ TextureImporter:
       name: Menu_Atlas_41
       rect:
         serializedVersion: 2
-        x: 50
+        x: 48
         y: 46
         width: 279
         height: 77
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 97, y: 26, z: 106, w: 28}
+      border: {x: 30, y: 26, z: 29, w: 28}
       outline: []
       physicsShape: []
       tessellationDetail: 0
