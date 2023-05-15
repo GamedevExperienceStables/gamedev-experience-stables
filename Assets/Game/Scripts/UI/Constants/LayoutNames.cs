@@ -111,6 +111,10 @@
             public const string DIALOG_WINDOW = "dialog-window";
             public const string DIALOG_TITLE = "title";
             public const string DIALOG_TEXT = "text";
+            public const string DIALOG_IMAGE = "image";
+            
+            public const string DIALOG_TITLE_HIDDEN_CLASS_NAME = "dialog-window--title-hidden";
+            public const string DIALOG_IMAGE_HIDDEN_CLASS_NAME = "dialog-window--image-hidden";
 
             public const string DIALOG_HIDDEN_CLASS_NAME = "dialog-window--hidden";
             

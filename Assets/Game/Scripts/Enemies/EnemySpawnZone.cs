@@ -7,7 +7,7 @@ namespace Game.Enemies
     public class EnemySpawnZone : MonoBehaviour
     {
         [SerializeField, HideInInspector]
-        private List<EnemySpawnGroup> enemySpawnZones;
+        private List<EnemySpawnGroup> enemySpawnZones = new();
 
         private void OnValidate()
         {
@@ -36,7 +36,10 @@ namespace Game.Enemies
 
             Vector3 position = transform.position;
             foreach (EnemySpawnGroup spawnZone in enemySpawnZones)
-                Gizmos.DrawLine(position, spawnZone.transform.position);
+            {
+                if (spawnZone)
+                    Gizmos.DrawLine(position, spawnZone.transform.position);
+            }
         }
     }
 }

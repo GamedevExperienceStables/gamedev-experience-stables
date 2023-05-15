@@ -4,7 +4,7 @@ using UnityEngine.Localization;
 
 namespace Game.Level
 {
-    [CreateAssetMenu(menuName = "Dialog")]
+    [CreateAssetMenu(menuName = "Dialog/Dialog")]
     public class DialogDefinition : ScriptableObject, IDialogDefinition
     {
         [SerializeField]
@@ -16,12 +16,29 @@ namespace Game.Level
         public class Item : IDialogItem
         {
             [SerializeField]
+            private DialogActorDefinition actor;
+            
+            [SerializeField]
             private LocalizedString title;
 
             [SerializeField]
             private LocalizedString text;
 
-            public string Title => title.IsEmpty ? string.Empty : title.GetLocalizedString();
+            private bool IsActor => actor;
+
+            public string Title
+            {
+                get
+                {
+                    if (IsActor) 
+                        return actor.DisplayName.GetLocalizedString();
+                    
+                    return title.IsEmpty ? string.Empty : title.GetLocalizedString();
+                }
+            }
+            
+            public Sprite Image 
+                => IsActor ? actor.Image : null;
 
             public string Text => text.IsEmpty ? string.Empty : text.GetLocalizedString();
         }

@@ -202,19 +202,18 @@
 
 .dialog-window {
     max-width: 800px;
-    padding: 16px 22px;
     opacity: 1;
     scale: 1;
     translate: 0;
     transition-property: scale, opacity, translate;
     transition-duration: 350ms, 150ms, 150ms;
     transition-timing-function: ease-out-sine;
+}
+
+.dialog-window-container {
     -unity-font-definition: var(--font-text);
-    background-image: url('project://database/Assets/Game/UI/Textures/Common/dialog_window.png?fileID=21300000&guid=5ad8a4149a97e5f40bace06b1cb5aee9&type=3#dialog_window');
-    padding-left: 48px;
-    padding-right: 48px;
-    padding-top: 32px;
-    padding-bottom: 32px;
+    background-image: url('project://database/Assets/Game/UI/Textures/Common/dialog_window.png?fileID=-1877027965&guid=5ad8a4149a97e5f40bace06b1cb5aee9&type=3#dialog_window_bg');
+    padding: 32px 48px;
 }
 
 .dialog-window--hidden {
@@ -226,12 +225,61 @@
 .dialog-window__title {
     white-space: normal;
     font-size: 24px;
-    color: rgba(27, 27, 27, 0.62);
+    color: rgb(255, 255, 255);
+    
+    position: absolute;
+    left: -15px;
+    top: -50px;
+    background-color: rgb(155, 89, 199);
+
+    -unity-font-definition: var(--font-heading);
+    
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+
+.dialog-window__text-container {
+}
+
+.dialog-window__image-container {
+    margin-top: -20px;
+    margin-right: 35px;
+    
+    flex-shrink: 0;
 }
 
 .dialog-window__text {
     white-space: normal;
     font-size: 28px;
+}
+
+.dialog-window__image {    
+    width: 120px;
+    height: 120px;
+}
+
+.dialog-window__arrow {
+    position: absolute;
+    top: 38px;
+    width: 29px;
+    height: 33px;
+    border-right-color: rgb(0, 0, 0);
+    background-image: url('project://database/Assets/Game/UI/Textures/Common/dialog_window.png?fileID=-1904629740&guid=5ad8a4149a97e5f40bace06b1cb5aee9&type=3#dialog_window_arrow');
+    left: -26px;
+}
+
+.dialog-window--title-hidden .dialog-window__title {
+    visibility: hidden;
+}
+
+.dialog-window--image-hidden .dialog-window__image-container {
+    display: none;
+}
+
+.dialog-window--image-hidden .dialog-window__arrow  {
+    visibility: hidden;
 }
 
 .widget-damage {

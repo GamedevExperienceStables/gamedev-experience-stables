@@ -1,13 +1,10 @@
-﻿using Game.Utils;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Game.UI
 {
     public class MiniMap
     {
-        private const float WIDTH = 1600f;
-
         private readonly VisualElement _map;
 
         private Bounds _worldBounds;
@@ -21,30 +18,14 @@ namespace Game.UI
         public void Init(Sprite image, Bounds worldBounds)
         {
             _worldBounds = worldBounds;
-
-            float ratio = image.rect.width / WIDTH;
-            var mapRect = new Rect(image.rect.x, image.rect.y, WIDTH, image.rect.height / ratio);
-            _mapBounds = new Bounds(mapRect.center, mapRect.size);
+            
+            MiniMapExtensions.GetMapData(image,out _mapBounds, out Rect mapRect);
 
             SetImage(image, mapRect);
         }
 
-        public Vector2 WorldToMapPosition(Vector3 position)
-        {
-            Vector3 worldMin = _worldBounds.min;
-            Vector3 worldMax = _worldBounds.max;
-
-            Vector3 min = _mapBounds.min;
-            Vector3 max = _mapBounds.max;
-
-            float x = MathExtensions.Remap(position.x, worldMin.x, worldMax.x, min.x, max.x);
-
-            // should be used 'max' value as 'min', because origin of the map coordinates
-            // goes from top to bottom, and the world coordinates from bottom to top 
-            float y = MathExtensions.Remap(position.z, worldMin.z, worldMax.z, max.y, min.y);
-
-            return new Vector2(x, y);
-        }
+        public Vector2 WorldToMapPosition(Vector3 position) 
+            => MiniMapExtensions.WorldToMapPosition(position, _worldBounds, _mapBounds);
 
         public void SetCenterPosition(Vector2 position)
             => _map.style.translate = new Translate(-position.x, -position.y);

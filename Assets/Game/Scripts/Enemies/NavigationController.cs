@@ -12,6 +12,9 @@ namespace Game.Enemies
         [SerializeField]
         private float stopDistance = 1f;
 
+        [SerializeField]
+        private float additiveAvoidance = 0.25f;
+
         [UsedImplicitly]
         public float StopDistance => stopDistance;
 
@@ -20,7 +23,16 @@ namespace Game.Enemies
 
         private Vector3 _movementDirection;
 
-        public bool IsCompleted => !_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance;
+        public bool IsCompleted
+        {
+            get
+            {
+                if (!_agent.isOnNavMesh) 
+                    return true;
+                
+                return !_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance;
+            }
+        }
 
         private void Awake()
         {
@@ -37,7 +49,7 @@ namespace Game.Enemies
             _agent.updateUpAxis = false;
             
             _agent.stoppingDistance = stopDistance;
-            _agent.radius = _movement.CapsuleRadius;
+            _agent.radius = _movement.CapsuleRadius + additiveAvoidance;
             _agent.height = _movement.CapsuleHeight;
         }
 

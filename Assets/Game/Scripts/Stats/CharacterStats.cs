@@ -18,5 +18,7 @@
         
         DashMultiplier,
         DashStaminaMultiplier,
+        
+        Weight
     }
 }

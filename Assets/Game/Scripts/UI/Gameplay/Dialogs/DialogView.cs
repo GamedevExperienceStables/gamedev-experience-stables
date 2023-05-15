@@ -23,6 +23,8 @@ namespace Game.UI
 
         private Label _title;
         private Label _text;
+        private Image _image;
+        
         private TimerUpdatable _delayTimer;
         private DialogData? _data;
 
@@ -38,6 +40,7 @@ namespace Game.UI
             _dialog = root.Q<VisualElement>(LayoutNames.Hud.DIALOG_WINDOW);
             _title = _dialog.Q<Label>(LayoutNames.Hud.DIALOG_TITLE);
             _text = _dialog.Q<Label>(LayoutNames.Hud.DIALOG_TEXT);
+            _image = _dialog.Q<Image>(LayoutNames.Hud.DIALOG_IMAGE);
 
             _viewModel.SubscribeDialogRequested(OnDialogRequested);
             _viewModel.SubscribeDialogClosing(OnDialogClosing);
@@ -139,12 +142,29 @@ namespace Game.UI
         {
             _text.text = dialog.Single.Text;
 
-            if (string.IsNullOrEmpty(dialog.Single.Title))
-                _title.SetDisplay(false);
+            if (!string.IsNullOrEmpty(dialog.Single.Title))
+            {
+                _title.text = dialog.Single.Title;
+                
+                _dialog.RemoveFromClassList(LayoutNames.Hud.DIALOG_TITLE_HIDDEN_CLASS_NAME);
+            }
             else
             {
-                _title.SetDisplay(true);
-                _title.text = dialog.Single.Title;
+                _title.text = string.Empty;
+                _dialog.AddToClassList(LayoutNames.Hud.DIALOG_TITLE_HIDDEN_CLASS_NAME);
+            }
+
+            if (dialog.Single.Image)
+            {
+                _image.sprite = dialog.Single.Image;
+                
+                _dialog.RemoveFromClassList(LayoutNames.Hud.DIALOG_IMAGE_HIDDEN_CLASS_NAME);
+            }
+            else
+            {
+                _dialog.AddToClassList(LayoutNames.Hud.DIALOG_IMAGE_HIDDEN_CLASS_NAME);
+
+                _image.sprite = null;
             }
         }
 

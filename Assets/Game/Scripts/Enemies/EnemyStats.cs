@@ -10,6 +10,7 @@ namespace Game.Enemies
         {
             this.CreateStatsHealth();
             this.CreateStatsMovement();
+            this.CreateStatsWeight();
             this.CreateStatsStamina();
         }
 
@@ -17,24 +18,28 @@ namespace Game.Enemies
         {
             this.InitStatsHealth(stats.HealthPoints);
             this.InitStatsMovement(stats.MovementSpeed);
+            this.InitStatsWeight(stats.Weight);
             this.InitStatsStamina(stats.StaminaPoints);
         }
         
         [Serializable]
         public class InitialStats
         {
-            [SerializeField]
+            [SerializeField, Min(1)]
             private float healthPoints = 1f;
             
-            [SerializeField]
+            [SerializeField, Min(0)]
             private float staminaPoints = 1f;
             
             [Header("Movement")]
-            [SerializeField]
+            [SerializeField, Min(0)]
             private float movementSpeed = 3f;
             
+            [SerializeField, Min(0)]
+            private float weight = 1f;
+            
             [Header("Sensor")]
-            [SerializeField]
+            [SerializeField, Min(0)]
             private float sensorDistance = 10f;
             
             [Space]
@@ -49,6 +54,8 @@ namespace Game.Enemies
             public float SensorDistance => sensorDistance;
 
             public AttackSettings AttackSettings => attackSettings;
+
+            public float Weight => weight;
         }
     }
 }
