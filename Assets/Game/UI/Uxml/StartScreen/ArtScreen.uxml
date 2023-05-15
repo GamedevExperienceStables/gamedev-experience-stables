@@ -15,12 +15,12 @@
                     <ui:Instance template="Artbook" name="Artbook" style="align-self: center; width: 100%;" />
                 </ui:ScrollView>
             </ui:VisualElement>
-            <ui:VisualElement style="flex-direction: row; flex-grow: 1; flex-shrink: 0; margin-top: 10px;">
+            <ui:VisualElement style="flex-direction: row; flex-grow: 1; flex-shrink: 0; margin-top: 10px; width: 100%; justify-content: center;">
+                <ui:Button display-tooltip-when-elided="true" name="button-download" class="primary-button" style="justify-content: center; position: absolute; left: 0; min-width: auto; padding-left: 22px; padding-right: 20px; padding-top: 18px; padding-bottom: 18px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                    <ui:VisualElement name="icon" style="background-image: url(&apos;project://database/Assets/Game/UI/Textures/Common/icon-download.png?fileID=2800000&amp;guid=8023c5a38d6d50c429a16dade31435d5&amp;type=3#icon-download&apos;); -unity-background-image-tint-color: rgb(255, 255, 255); position: relative; -unity-background-scale-mode: scale-to-fit; min-height: 35px; min-width: 35px;" />
+                </ui:Button>
                 <ui:Button text="Back" display-tooltip-when-elided="true" name="button-back" class="primary-button" />
             </ui:VisualElement>
-            <ui:Button display-tooltip-when-elided="true" name="button-download" class="primary-button" style="position: absolute; min-height: 75px; min-width: 75px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; bottom: 50px; left: 120px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
-                <ui:VisualElement name="icon" style="flex-grow: 1; background-image: url(&apos;project://database/Packages/com.unity.inputsystem/InputSystem/Editor/Icons/Button@2x.png?fileID=2800000&amp;guid=1c37f00575bd6494ea726be5afee89b9&amp;type=3#Button@2x&apos;); -unity-background-image-tint-color: rgb(0, 0, 0); position: relative;" />
-            </ui:Button>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
