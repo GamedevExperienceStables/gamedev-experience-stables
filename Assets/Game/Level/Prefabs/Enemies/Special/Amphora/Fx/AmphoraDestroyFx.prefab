@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6705197464795103181}
   - component: {fileID: 65867322428798294}
+  - component: {fileID: -3170215147735633671}
   m_Layer: 0
   m_Name: AmphoraDestroyFx
   m_TagString: Untagged
@@ -46,6 +47,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBeforeDisable: 2
+--- !u!114 &-3170215147735633671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8728415871633307980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 2104697484
+      Data2: 1189502183
+      Data3: -1265586015
+      Data4: 158813319
+    Path: event:/Loot/AmphoraDestroy
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &4900841671187861334
 PrefabInstance:
   m_ObjectHideFlags: 0
