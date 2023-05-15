@@ -99,7 +99,7 @@ namespace Game.UI
             foreach (Label headerLabel in _headerLabels)
                 headerLabel.text = _settings.header.GetLocalizedString();
 
-            _buttonDownload.text = _settings.download.GetLocalizedString();
+            //_buttonDownload.text = _settings.download.GetLocalizedString();
             _buttonBack.text = _settings.back.GetLocalizedString();
         }
 
