@@ -73,6 +73,7 @@ namespace Game.UI
             CreateRuneSlots(_root, _viewModel.ObtainedRunes);
 
             _viewModel.SubscribeRuneAdded(OnRuneAdded);
+            _viewModel.SubscribeRuneRemoved(OnRuneRemoved);
             _buttonClose.clicked += OnCloseClicked;
         }
 
@@ -85,6 +86,7 @@ namespace Game.UI
         private void OnDestroy()
         {
             _viewModel.UnSubscribeRuneAdded(OnRuneAdded);
+            _viewModel.UnSubscribeRuneRemoved(OnRuneRemoved);
             _buttonClose.clicked -= OnCloseClicked;
             
             UnSubscribeHudRunes(hud.RuneSlots.Values);
@@ -272,6 +274,18 @@ namespace Game.UI
                     continue;
 
                 runeView.Activate();
+                return;
+            }
+        }
+
+        private void OnRuneRemoved(RuneDefinition rune)
+        {
+            foreach (RuneSlotInventoryView runeView in _runeSlots)
+            {
+                if (!runeView.Contains(rune))
+                    continue;
+
+                runeView.Deactivate();
                 return;
             }
         }

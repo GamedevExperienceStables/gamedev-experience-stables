@@ -2,20 +2,25 @@
 using Game.Actors;
 using Game.Actors.Health;
 using Game.Hero;
+using Game.Inventory;
 using Game.Player;
 using VContainer;
+using VContainer.Unity;
 
 namespace Game.GameFlow
 {
-    public sealed class GameplayGameOver : IDisposable
+    public sealed class GameplayGameOver : IStartable, IDisposable
     {
         private readonly PlayerController _player;
+        private readonly InventoryController _inventory;
         private readonly PlanetStateMachine _planetStateMachine;
 
         [Inject]
-        public GameplayGameOver(PlayerController player, PlanetStateMachine planetStateMachine)
+        public GameplayGameOver(PlayerController player, InventoryController inventory,
+            PlanetStateMachine planetStateMachine)
         {
             _player = player;
+            _inventory = inventory;
             _planetStateMachine = planetStateMachine;
         }
 
@@ -42,10 +47,24 @@ namespace Game.GameFlow
             _planetStateMachine.EnterState<PlanetGameOverState>();
         }
 
-        private static bool CanRevive(IActorController hero)
+        private bool CanRevive(IActorController hero)
         {
             var reviveAbility = hero.GetAbility<ReviveAbility>();
-            return reviveAbility.TryActivateAbility();
+            bool isRevived = reviveAbility.TryActivateAbility();
+            if (isRevived)
+                RemoveRune(reviveAbility);
+
+            return isRevived;
+        }
+
+        private void RemoveRune(ActorAbility ability)
+        {
+            var runes = _inventory.Runes.Items;
+            for (int i = runes.Count - 1; i >= 0; i--)
+            {
+                if (runes[i].GrantAbility == ability.Definition)
+                    _inventory.RemoveRune(runes[i]);
+            }
         }
     }
 }
