@@ -1,5 +1,5 @@
 .about-container {
-    width: 1250px;
+    width: 1300px;
     align-items: center;
     margin: 40px 0;
     padding: 80px 120px 100px;

@@ -17,8 +17,13 @@ namespace Game.Level
         [SerializeField]
         private GameObject pickupFeedback;
 
+        [Space]
+        [SerializeField]
+        private LootItemOverrides overrides;
+
         public LootItem Prefab => prefab;
         public ItemDefinition ItemDefinition => item;
         public GameObject PickupFeedback => pickupFeedback;
+        public LootItemOverrides Overrides => overrides;
     }
 }

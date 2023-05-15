@@ -22,17 +22,29 @@ namespace Game.Level
             _context = context;
         }
 
-        public void SpawnScattered(LootBagDefinition lootBagDefinition, Vector3 position)
+        public void SpawnScattered(LootBagDefinition lootBagDefinition, Vector3 position, Vector3 direction)
         {
             FetchLoot(lootBagDefinition, _bufferItems);
 
             foreach (LootDefinitionItem definition in _bufferItems)
             {
-                Vector3 spawnPosition = RandomUtils.NextRandomInCircle(position, _settings.SpawnScatterRadius);
-                SpawnItem(definition, spawnPosition);
+                Vector3 spawnPosition = GetSpawnPosition(definition, position);
+                SpawnItem(definition, spawnPosition, direction);
             }
 
             _bufferItems.Clear();
+        }
+
+        private Vector3 GetSpawnPosition(LootDefinitionItem item, Vector3 position)
+        {
+            float settingsSpawnScatterRadius = _settings.SpawnScatterRadius;
+            
+            LootItemDefinition definition = item.Definition;
+            if (definition.Overrides.enabled) 
+                settingsSpawnScatterRadius = definition.Overrides.spawnScatterRadius;
+
+            Vector3 spawnPosition = RandomUtils.NextRandomInCircle(position, settingsSpawnScatterRadius);
+            return spawnPosition;
         }
 
         public LootItem Spawn(LootItemDefinition definition, Vector3 position)
@@ -43,10 +55,13 @@ namespace Game.Level
             return item;
         }
 
-        private void SpawnItem(LootDefinitionItem item, Vector3 position)
+        private void SpawnItem(LootDefinitionItem item, Vector3 position, Vector3 direction)
         {
-            Spawn(item.Definition, position);
-            // toss up item? 
+            LootItemDefinition definition = item.Definition;
+            LootItem instance = Spawn(definition, position);
+
+            if (definition.Overrides.enabled)
+                instance.transform.position += Quaternion.LookRotation(direction) * definition.Overrides.offset;
         }
 
         private static void FetchLoot(LootBagDefinition lootBagDefinition, ICollection<LootDefinitionItem> lootOut)
