@@ -225,6 +225,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3513096597601233913, guid: 922aff3917fd14b4fbd1172a4a3ea2fd,
+        type: 3}
+      propertyPath: CapsuleRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3513096597601233914, guid: 922aff3917fd14b4fbd1172a4a3ea2fd,
+        type: 3}
+      propertyPath: m_Height
+      value: 2.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3513096597601233914, guid: 922aff3917fd14b4fbd1172a4a3ea2fd,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3513096597601233914, guid: 922aff3917fd14b4fbd1172a4a3ea2fd,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3513096597601233915, guid: 922aff3917fd14b4fbd1172a4a3ea2fd,
         type: 3}
       propertyPath: damageFeedback
