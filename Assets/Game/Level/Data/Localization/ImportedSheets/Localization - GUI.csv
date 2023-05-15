@@ -5,36 +5,42 @@ Menu_Settings_Button,Settings,Настройки,Налады,Налаштува
 Menu_About_Button,About Creators,О нас,Пра нас,Про творців
 Menu_Artbook_Button,Artbook,Артбук,Артбук,Художня книга
 Menu_Quit_Button,Quit,Выйти,Выйсцi,Кинути
-Menu_NewGame_Caption,Let's start our journey!,Давайте начнем наше путешествие!,Пачнiце сваю прыгоду са Снудзi прама зараз!,Почнемо нашу подорож!
-Menu_Continue_Caption,It's time to continue!,Самое время продолжить!,Час выратаваць планету Айрыc!,Пора продовжувати!
-Menu_Settings_Caption,Let's deal with the settings.,Давайте разберемся с настройками.,Зрабiце гульню больш камфортнай для сябе!,Давайте розберемося з налаштуваннями.
-Menu_About_Caption,Look at the our outstanding team!,Посмотрите на нашу замечательную команду.,Паглядзiце на нашу цудоўную працу. Мы намагалiсь зрабiць усё магчымае!,Подивіться на нашу видатну команду!
-Menu_Artbook_Caption,Look at the  wonderful work of our artists!,Посмотрте на крутые работы наших художников!,Пазнаёмцеся з экiпажам гэтага надзвычайнага карабля!,Подивіться на чудовий твір наших художників!
-Menu_Quit_Caption,Is it really time to say goodbye?,Неужели настала пора прощаться?,Надышоў час развiтвацца? :(,Чи справді час попрощатися?
+Menu_NewGame_Caption,Let's start a new journey!,Начнем новое путешествие!,Пачнм новае падарожжа!,Почнемо нову подорож!
+Menu_Continue_Caption,It's time to continue!,Самое время продолжить!,Пара працягнуць!,Пора продовжувати!
+Menu_Settings_Caption,Let's deal with the settings.,Давайте разберемся с настройками.,Давайце разбярэмся з наладамі.,Давайте розберемося з налаштуваннями.
+Menu_About_Caption,Look at the our outstanding team!,Наша замечательная команда.,Наша цудоўная каманда.,Подивіться на нашу видатну команду!
+Menu_Artbook_Caption,Look at the  wonderful work of our artists!,Кое что интересное!,Нешта цікавае!,Подивіться на чудовий твір наших художників!
+Menu_Quit_Caption,Is it time to say goodbye?,Настала пора прощаться?,Надышоў час развiтвацца?,Чи пора попрощатися?
 Menu_Preview_Caption, , , , 
-PauseMenu_Heading,Pause,Пауза,Перапынак,Пауза
-PauseMenu_Resume_Button,Resume,Возобновить,Аднавiць,Відновивши
+PauseMenu_Heading,Pause,Пауза,Паўза,Пауза
+PauseMenu_Resume_Button,Resume,Возобновить игру,Аднавiць гульню,Відновивши
 PauseMenu_MainMenu_Button,Main menu,Главное меню,Галоўнае меню,Головне меню
 Menu_LastSave_Button,Last save,Последнее сохранение,Апошняе захаванне,Останнє збереження
-Menu_Modal_Quit_Title,Want to leave the game?,Хотите выйти из игры?,"Вы ўпэўнены, што хочаце выйсцi з гульнi?",Хочете залишити гру?
-Menu_Modal_NewGame_Title,Want to start a new game?,Хотите начать новую игру?,"Вы ўпэўнены, што хочаце пачаць новую гульню?",Хочете розпочати нову гру?
-PauseMenu_Modal_Quit_Title,Want to leave the game?,Хотите выйти из игры?,"Вы ўпэўнены, што хочаце выйсцi з гульнi?",Хочете залишити гру?
-PauseMenu_Modal_Quit_Message,Unsaved progress will be lost.,"Внимание, несохраненный прогресс будет потерян!",Незахаваны прагрэс будзе страчаны.,Незбережений прогрес буде втрачено.
-Cutscene_Skip_Label,Hold to skip,"Удеживайте, чтобы пропустить",Утрымлiвай <b>{0}</b> каб прапусцiць.,Тримайся пропустити
+Menu_Modal_Quit_Title,Want to leave the game?,Хотите выйти из игры?,Хочаце выйсцi з гульнi?,Хочете залишити гру?
+Menu_Modal_NewGame_Title,Want to start a new game?,Хотите начать новую игру?,Хочаце пачаць новую гульню?,Хочете розпочати нову гру?
+Menu_Modal_Notion_Title,Want to open our site?,Хотите открыть наш сайт?,Хочаце адкрыць наш сайт?,Хочете відкрити наш сайт?
+PauseMenu_Modal_Quit_Title,Want to leave the game?,Хотите выйти из игры?,Хочаце выйсцi з гульнi?,Хочете залишити гру?
+PauseMenu_Modal_Quit_Message,Unsaved progress will be lost.,"Внимание, весь несохраненный прогресс будет потерян!","Увага, незахаваны прагрэс будзе страчаны!",Незбережений прогрес буде втрачено.
+Cutscene_Skip_Label,Hold to skip,"Удеживайте, чтобы пропустить",Утрымлiвай каб прапусцiць.,Тримайся пропустити
 SettingsMenu_Language_Label,Language,Язык,Мова,Мова
-SettingsMenu_Graphic_Label,Graphics,Графика,Графiка,Графічне мистецтво
-SettingsMenu_Quality_Label,Quality,Качество,Якасць,Якість
-SettingsMenu_Resolution_Label,Resolution,Разрешение,Раздзяляльнасць,Дозвіл
-SettingsMenu_Fullscreen_Label,Fullscreen,Полный экран,Поўны экран,Повний екран
+SettingsMenu_Graphic_Label,Graphics,  Графика,Графiка,  Графічне мистецтво
+SettingsMenu_Quality_Label,Quality,  Качество,Якасць,  Якість
+SettingsMenu_Resolution_Label,Resolution,  Разрешение,Раздзяляльнасць,  Дозвіл
+SettingsMenu_Fullscreen_Label,Fullscreen,  Полный экран,Поўны экран,  Повний екран
 SettingsMenu_Audio_Label,Audio,Звуки,Гукi,Звуки
-SettingsMenu_Volume_Label,Volume,Громкость,Гучнасць,Обсяг
-SettingsMenu_Effects_Label,Effects,Эффекты,Эфекты,Ефект
-SettingsMenu_Music_Label,Music,Музыка,Музыка,Музика
+SettingsMenu_Volume_Label,Volume,  Громкость,Гучнасць,  Обсяг
+SettingsMenu_Effects_Label,Effects,  Эффекты,Эфекты,  Ефект
+SettingsMenu_Music_Label,Music,  Музыка,Музыка,  Музика
 SettingsMenu_Back_Label,Back,Назад,Назад,назад
-Hud_Magic_Book,Magic Book,Магическая книга,Чароўная кніга,Чарівна книга
+Hud_Magic_Book,Magic Book,Магическая книга,Магiчная кнiга,Чарівна книга
 Hud_Save_Saving,Saving...,Сохранение...,Захаванне ...,Збереження ...
-Hud_Save_Saved,Game saved!,Игра сохранена!,Гульня выратавана!,Гра врятована!
+Hud_Save_Saved,Game saved!,Игра сохранена!,Гульня захавана!,Гра врятована!
 LoadingScreen_Loading,Loading...,Загрузка...,Загрузка ...,Завантаження ...
 Link_Modal,Want to open a link?,Хотите открыть ссылку?,Хочаце адкрыць спасылку?,Хочете відкрити посилання?
-ArtMenu_Download_Label,Download artbook,Скачать артбук,Спампаваць ArtBook,Завантажити книжку Art
-Download_Artbook_Modal,Want to download artbook?,Хотите скачать артбук?,Хочаце загрузіць ArtBook?,Хочете завантажити книгу Art?
+ArtMenu_Download_Label,Download,Скачать,Спампаваць,завантажити
+Download_Artbook_Modal,Want to download artbook?,Хотите скачать артбук?,Хочаце спампаваць артбук?,Хочете завантажити книгу Art?
+AboutMenu_Description_Label,"The game was created as part of a non -profit project <b> Gamedev Experience Stables </b>.
+Many experts are still in search of work! Follow the links to Linkedin and write if you are interested in cooperation.","Игра создана в рамках некоммерческого проекта <b>GameDev Experience Stables</b>.
+Многие специалисты все еще в поисках работы! Переходите по ссылкам в линкедин и пишите если заинтересовались в сотрудничестве.","Гульня была створана ў рамках некамерцыйнага праекта <b> Gamedev Experience Stables </b>.
+Многія ўдзельнікі шукаюць працу! Перайдзіце па спасылцы на LinkedIn і напішыце калі вы зацікаўлены ў супрацоўніцтве.","Гра була створена в рамках некомерційного проекту <b> Gamedev Scess Stables </b>.
+Багато експертів все ще шукають роботу! Перегляньте посилання на LinkedIn та напишіть, якщо ви зацікавлені у співпраці."
