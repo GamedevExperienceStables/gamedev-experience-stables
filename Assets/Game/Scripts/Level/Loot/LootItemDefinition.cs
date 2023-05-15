@@ -17,6 +17,7 @@ namespace Game.Level
         [SerializeField]
         private GameObject pickupFeedback;
 
+        [Space]
         [SerializeField]
         private LootItemOverrides overrides;
 

@@ -8,11 +8,12 @@ namespace Game.Level
     public struct LootItemOverrides
     {
         public bool enabled;
-        
-        [Range(0, 10), ShowIf(nameof(enabled)), AllowNesting]
+
+        [EnableIf(nameof(enabled)), AllowNesting]
+        [Range(0, 10)]
         public float spawnScatterRadius;
         
-        [ShowIf(nameof(enabled)), AllowNesting]
+        [EnableIf(nameof(enabled)), AllowNesting]
         public Vector3 offset;
     }
 }
