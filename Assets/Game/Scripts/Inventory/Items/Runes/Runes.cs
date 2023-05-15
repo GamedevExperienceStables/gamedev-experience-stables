@@ -10,12 +10,19 @@ namespace Game.Inventory
         public IReadOnlyList<RuneDefinition> Items => _items.AsReadOnly();
 
         private event Action<RuneDefinition> RuneAdded;
+        private event Action<RuneDefinition> RuneRemoved;
 
         public void SubscribeOnAdded(Action<RuneDefinition> callback)
             => RuneAdded += callback;
 
         public void UnSubscribeOnAdded(Action<RuneDefinition> callback)
             => RuneAdded -= callback;
+        
+        public void SubscribeOnRemoved(Action<RuneDefinition> callback)
+            => RuneRemoved += callback;
+
+        public void UnSubscribeOnRemoved(Action<RuneDefinition> callback)
+            => RuneRemoved -= callback;
 
         public void Reset()
             => _items.Clear();
@@ -35,6 +42,13 @@ namespace Game.Inventory
             _items.Add(rune);
 
             RuneAdded?.Invoke(rune);
+        }
+
+        public void Remove(RuneDefinition rune)
+        {
+            _items.Remove(rune);
+
+            RuneRemoved?.Invoke(rune);
         }
     }
 }

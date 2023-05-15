@@ -208,5 +208,14 @@ namespace Game.Inventory
 
         public void UnSubscribeOnAdded(Action<RuneDefinition> callback)
             => _runes.UnSubscribeOnAdded(callback);
+        
+        public void SubscribeOnRemoved(Action<RuneDefinition> callback)
+            => _runes.SubscribeOnRemoved(callback);
+
+        public void UnSubscribeOnRemoved(Action<RuneDefinition> callback)
+            => _runes.UnSubscribeOnRemoved(callback);
+        
+        public void RemoveRune(RuneDefinition runeDefinition) 
+            => _runes.Remove(runeDefinition);
     }
 }

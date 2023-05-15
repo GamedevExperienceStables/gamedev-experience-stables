@@ -1,29 +1,17 @@
-﻿using System;
-using VContainer;
+﻿using VContainer;
 using VContainer.Unity;
 
 namespace Game.GameFlow
 {
-    public sealed class GameplayEntryPoint : IStartable, IDisposable
+    public sealed class GameplayEntryPoint : IStartable
     {
         private readonly PlanetStateMachine _planetStateMachine;
-        private readonly GameplayGameOver _gameOver;
 
         [Inject]
-        public GameplayEntryPoint(PlanetStateMachine planetStateMachine, GameplayGameOver gameOver)
-        {
-            _planetStateMachine = planetStateMachine;
-            _gameOver = gameOver;
-        }
+        public GameplayEntryPoint(PlanetStateMachine planetStateMachine)
+            => _planetStateMachine = planetStateMachine;
 
         public void Start()
-        {
-            _gameOver.Start();
-
-            _planetStateMachine.EnterState<PlanetLocationLoadingState>();
-        }
-
-        public void Dispose()
-            => _gameOver.Dispose();
+            => _planetStateMachine.EnterState<PlanetLocationLoadingState>();
     }
 }

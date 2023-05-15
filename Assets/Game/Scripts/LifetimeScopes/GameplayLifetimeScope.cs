@@ -87,10 +87,9 @@ namespace Game.LifetimeScopes
 
         private static void RegisterServices(IContainerBuilder builder)
         {
-            builder.Register<GameplayPause>(Lifetime.Scoped);
-            builder.Register<GameplayMenuInput>(Lifetime.Scoped);
-            builder.Register<GameplayGameOver>(Lifetime.Scoped);
-            builder.Register<GameplayInventory>(Lifetime.Scoped);
+            builder.Register<GameplayPause>(Lifetime.Singleton);
+            builder.Register<GameplayMenuInput>(Lifetime.Singleton);
+            builder.Register<GameplayInventory>(Lifetime.Singleton);
             
             builder.Register<LocationController>(Lifetime.Singleton);
             builder.Register<LocationContextHandler>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
@@ -99,7 +98,8 @@ namespace Game.LifetimeScopes
             builder.Register<LocationStateStoreCounter>(Lifetime.Singleton);
             builder.Register<LocationStateStoreFact>(Lifetime.Singleton);
             
-            builder.Register<MagnetSystem>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<MagnetSystem>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<GameplayGameOver>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<LocationMarkers>(Lifetime.Singleton);
             builder.Register<DialogService>(Lifetime.Singleton);

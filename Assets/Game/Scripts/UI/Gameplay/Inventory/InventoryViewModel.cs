@@ -37,6 +37,12 @@ namespace Game.UI
 
         public void UnSubscribeRuneAdded(Action<RuneDefinition> callback)
             => _runes.UnSubscribeOnAdded(callback);
+        
+        public void SubscribeRuneRemoved(Action<RuneDefinition> callback)
+            => _runes.SubscribeOnRemoved(callback);
+
+        public void UnSubscribeRuneRemoved(Action<RuneDefinition> callback)
+            => _runes.UnSubscribeOnRemoved(callback);
 
         public void SetRuneToHudSlot(RuneSlotId slotId, RuneDefinition targetRune)
             => _slots.SetRuneToSlot(slotId, targetRune);
