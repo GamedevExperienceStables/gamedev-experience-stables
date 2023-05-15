@@ -28,11 +28,23 @@ namespace Game.Level
 
             foreach (LootDefinitionItem definition in _bufferItems)
             {
-                Vector3 spawnPosition = RandomUtils.NextRandomInCircle(position, _settings.SpawnScatterRadius);
+                Vector3 spawnPosition = GetSpawnPosition(definition, position);
                 SpawnItem(definition, spawnPosition);
             }
 
             _bufferItems.Clear();
+        }
+
+        private Vector3 GetSpawnPosition(LootDefinitionItem item, Vector3 position)
+        {
+            float settingsSpawnScatterRadius = _settings.SpawnScatterRadius;
+            
+            LootItemDefinition definition = item.Definition;
+            if (definition.Overrides.enabled) 
+                settingsSpawnScatterRadius = definition.Overrides.spawnScatterRadius;
+
+            Vector3 spawnPosition = RandomUtils.NextRandomInCircle(position, settingsSpawnScatterRadius);
+            return spawnPosition;
         }
 
         public LootItem Spawn(LootItemDefinition definition, Vector3 position)
@@ -45,8 +57,15 @@ namespace Game.Level
 
         private void SpawnItem(LootDefinitionItem item, Vector3 position)
         {
-            Spawn(item.Definition, position);
-            // toss up item? 
+            LootItemDefinition definition = item.Definition;
+            LootItem instance = Spawn(definition, position);
+            
+            // ReSharper disable once InvertIf
+            if (definition.Overrides.enabled)
+            {
+                Transform itemTransform = instance.transform;
+                itemTransform.position = itemTransform.TransformDirection(definition.Overrides.offset);
+            }
         }
 
         private static void FetchLoot(LootBagDefinition lootBagDefinition, ICollection<LootDefinitionItem> lootOut)

@@ -6,6 +6,9 @@ namespace Game.Utils
     {
         public static Vector3 NextRandomInCircle(Vector3 position, float radius)
         {
+            if (radius <= 0)
+                return position;
+
             Vector2 value = GetRandomInsideUnitCircle() * radius;
             return position + new Vector3(value.x, 0, value.y);
         }
