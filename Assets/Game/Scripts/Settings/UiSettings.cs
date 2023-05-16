@@ -1,4 +1,5 @@
 ﻿using Game.Dialog;
+using Game.GameFlow;
 using Game.Input;
 using Game.Level;
 using Game.UI;
@@ -50,6 +51,9 @@ namespace Game.Settings
 
         [SerializeField]
         private ArtSettings artMenu;
+
+        [SerializeField]
+        private CreditsView.Settings credits;
         
         [SerializeField]
         private InputBindingsSettings inputBindings;
@@ -73,5 +77,7 @@ namespace Game.Settings
         public ArtSettings ArtMenu => artMenu;
         public DialogNotification.Settings Notification => notification;
         public InputBindingsSettings InputBindings => inputBindings;
+
+        public CreditsView.Settings Credits => credits;
     }
 }

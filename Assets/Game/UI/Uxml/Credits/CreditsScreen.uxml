@@ -1,0 +1,43 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="CreditsTeam" src="project://database/Assets/Game/UI/Uxml/Credits/CreditsTeam.uxml?fileID=9197481963319205126&amp;guid=b56c3fa56787a5f48a6503a1455c1e27&amp;type=3#CreditsTeam" />
+    <ui:Template name="CreditsMember" src="project://database/Assets/Game/UI/Uxml/Credits/CreditsMember.uxml?fileID=9197481963319205126&amp;guid=7887b9cf09372d54bb8ccc785dbbb1ef&amp;type=3#CreditsMember" />
+    <Style src="project://database/Assets/Game/UI/Uss/CutsceneStyle.uss?fileID=7433441132597879392&amp;guid=5d6d5cd37af278140bc8c01b921e9462&amp;type=3#CutsceneStyle" />
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement usage-hints="DynamicTransform, GroupTransform" name="wrapper" style="background-color: rgba(0, 0, 0, 0); overflow: hidden; flex-shrink: 0; height: 100%;">
+            <ui:VisualElement name="credits" usage-hints="DynamicTransform, GroupTransform" style="flex-shrink: 0; transform-origin: top;">
+                <ui:VisualElement name="spacer" style="flex-shrink: 0;" />
+                <ui:VisualElement name="game-logo" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-shrink: 0; justify-content: center; margin-top: 40px;">
+                    <ui:VisualElement name="logo" style="background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/UI/Textures/SplashScreen/game_logo.png?fileID=21300000&amp;guid=03e3d28baf312554c89035d8fe6348dc&amp;type=3#game_logo&apos;); height: 288px; -unity-background-scale-mode: scale-to-fit;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="ges-logo" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-shrink: 0; justify-content: center; height: 324px; margin-top: 20px;">
+                    <ui:VisualElement name="logo" style="background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/Art/Common/Textures/Brand/ges-logo-inverse-transparent.png?fileID=21300000&amp;guid=9e32d99d4bac3a343aa000103875a809&amp;type=3#ges-logo-inverse-transparent&apos;); height: 216px; -unity-background-scale-mode: scale-to-fit;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="list" style="background-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255); flex-shrink: 0;">
+                    <ui:Instance template="CreditsTeam" name="team">
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                        <ui:Instance template="CreditsMember" name="member" />
+                    </ui:Instance>
+                </ui:VisualElement>
+                <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); margin-left: 0; margin-right: 0; margin-top: 15px; margin-bottom: 15px;">
+                    <ui:Label tabindex="-1" text="Audio Engine: FMOD Studio by Firelight Technologies Pty Ltd." display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&amp;guid=9f296ab3b5e417845bc8de63c7b23c43&amp;type=2#koliko-Regular SDF&apos;);" />
+                    <ui:VisualElement name="logo" style="background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Game/Art/Common/Textures/Other/FMOD%20Logo%20White%20-%20Black%20Background.png?fileID=21300000&amp;guid=eadd081fc76bce64f838f2f084307958&amp;type=3#FMOD Logo White - Black Background&apos;); height: 25px; -unity-background-scale-mode: scale-to-fit; margin-top: 10px; flex-shrink: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

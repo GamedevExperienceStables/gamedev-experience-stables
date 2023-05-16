@@ -227,5 +227,22 @@
             public const string SUBTITLES_HIDDEN_CLASS_NAME = "subtitles--hidden";
             public const string ACTION_HIDDEN_CLASS_NAME = "action--hidden";
         }
+        
+        public static class Credits 
+        {
+            public const string CONTAINER = "credits";
+            public const string SPACER = "spacer";
+            public const string WRAPPER = "wrapper";
+            
+            public const string LIST = "list";
+            
+            public const string TEAM_TEMPLATE = "team";
+            public const string TEAM_NAME = "team-name";
+            public const string TEAM_LIST = "team-list";
+            
+            public const string MEMBER_TEMPLATE = "member";
+            public const string MEMBER_NAME = "name";
+            public const string MEMBER_POSITION = "position";
+        }
     }
 }
