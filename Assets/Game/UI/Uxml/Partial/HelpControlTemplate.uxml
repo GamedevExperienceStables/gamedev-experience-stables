@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/UI/Uss/HelpScreenStyle.uss?fileID=7433441132597879392&amp;guid=85a8c948b34691a45a55c74d35865a16&amp;type=3#HelpScreenStyle" />
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: space-around;">
+        <ui:Label tabindex="-1" text="Forward" display-tooltip-when-elided="true" name="action" class="control-action-label" />
+        <ui:Label tabindex="-1" text="W" display-tooltip-when-elided="true" name="key" class="control-key-label" />
+    </ui:VisualElement>
+</ui:UXML>
