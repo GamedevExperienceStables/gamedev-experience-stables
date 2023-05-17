@@ -114,30 +114,6 @@ namespace Game.UI
 
         private void PlayAnimation(Action onComplete, float height, TimeSpan duration)
         {
-            // _container.experimental.animation
-            //     .Start(
-            //         new StyleValues { top = -height },
-            //         (int)duration.TotalMilliseconds
-            //     )
-            //     .Ease(Easing.Linear)
-            //     .OnCompleted(onComplete);
-
-            // DOTween.To(
-            //         value =>
-            //         {
-            //             Length currentValue = _container.style.translate.value.x;
-            //             
-            //             var styleTranslate = new Translate(currentValue, value);
-            //             _container.style.translate = styleTranslate;
-            //         },
-            //         _container.style.translate.value.y.value,
-            //         -height,
-            //         duration
-            //     )
-            //     .SetEase(Ease.Linear)
-            //     .OnComplete(() => onComplete?.Invoke());
-
-
             _container.experimental.animation
                 .Start(
                     element => element.style.translate.value.y.value,
