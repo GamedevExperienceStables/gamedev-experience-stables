@@ -2,12 +2,15 @@
     align-items: center;
     padding: 60px 120px 100px;
     margin: 40px;
-    width: 1250px;
+    width: 1350px;
     padding-bottom: 50px;
+    padding-top: 45px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .header-label {
-    font-size: 80px;
+    font-size: 60px;
     color: rgb(155, 89, 199);
     -unity-font-definition: var(--font-heading);
     text-shadow: -1px -1px 0 rgb(86, 38, 118);
@@ -20,7 +23,7 @@
 
 .art__page {
     flex-shrink: 0;
-    height: 685px;
+    height: 760px;
 }
 
 .art__image {

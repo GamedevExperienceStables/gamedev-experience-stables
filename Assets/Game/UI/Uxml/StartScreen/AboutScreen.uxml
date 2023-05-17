@@ -9,7 +9,7 @@
                 <ui:Label tabindex="-1" text="About Creators" display-tooltip-when-elided="true" name="label-settings-1" class="header-label" style="color: rgb(253, 253, 253); position: absolute; top: 1px; left: 1px;" />
                 <ui:Label tabindex="-1" text="About Creators" display-tooltip-when-elided="true" name="label-settings-2" class="header-label" style="display: flex;" />
             </ui:VisualElement>
-            <ui:Instance template="Dividers" name="Dividers" style="flex-shrink: 0; width: 1010px; margin-top: 25px; margin-bottom: 25px;" />
+            <ui:Instance template="Dividers" name="Dividers" style="flex-shrink: 0; width: 1010px; margin-top: 10px; margin-bottom: 10px;" />
             <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); align-self: center; flex-shrink: 0;">
                 <ui:Label text="Description some some some some some long texts texts test text text more more more" name="description" class="description-label" />
             </ui:VisualElement>

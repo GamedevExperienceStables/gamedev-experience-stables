@@ -11,6 +11,7 @@ namespace Game.UI
 
         private Button _buttonResume;
         private Button _buttonMainMenu;
+        private Button _buttonHelp;
         private Button _buttonSettings;
         private Label _heading;
 
@@ -34,34 +35,17 @@ namespace Game.UI
             _router = GetComponent<PauseViewRouter>();
 
             _buttonResume = Content.Q<VisualElement>(LayoutNames.PauseMenu.BUTTON_RESUME).Q<Button>();
+            _buttonHelp = Content.Q<VisualElement>(LayoutNames.PauseMenu.BUTTON_HELP).Q<Button>();
             _buttonSettings = Content.Q<VisualElement>(LayoutNames.PauseMenu.BUTTON_SETTINGS).Q<Button>();
             _buttonMainMenu = Content.Q<VisualElement>(LayoutNames.PauseMenu.BUTTON_MAIN_MENU).Q<Button>();
 
             _heading = Content.Q<Label>(LayoutNames.PauseMenu.PAGE_HEADING);
-
-            _buttonResume.clicked += OnResumeButton;
-            _buttonMainMenu.clicked += OnMainMenuButton;
-            _buttonSettings.clicked += OnSettingsButton;
-
-            _commonFx.RegisterButton(_buttonResume, ButtonStyle.Menu);
-            _commonFx.RegisterButton(_buttonSettings, ButtonStyle.Menu);
-            _commonFx.RegisterButton(_buttonMainMenu, ButtonStyle.Menu);
-
-            localization.Changed += OnLocalisationChanged;
+            
+            RegisterCallbacks();
         }
 
         public void OnDestroy()
-        {
-            _buttonResume.clicked -= OnResumeButton;
-            _buttonMainMenu.clicked -= OnMainMenuButton;
-            _buttonSettings.clicked -= OnSettingsButton;
-
-            _commonFx.UnRegisterButton(_buttonResume, ButtonStyle.Menu);
-            _commonFx.UnRegisterButton(_buttonSettings, ButtonStyle.Menu);
-            _commonFx.UnRegisterButton(_buttonMainMenu, ButtonStyle.Menu);
-
-            localization.Changed -= OnLocalisationChanged;
-        }
+            => UnregisterCallbacks();
 
         private void Start()
             => UpdateText();
@@ -78,6 +62,36 @@ namespace Game.UI
             ViewModel.UnSubscribeBack(OnBackRequested);
             
             base.Hide();
+        }
+
+        private void RegisterCallbacks()
+        {
+            _buttonResume.clicked += OnResumeButton;
+            _buttonHelp.clicked += OnHelpButton;
+            _buttonMainMenu.clicked += OnMainMenuButton;
+            _buttonSettings.clicked += OnSettingsButton;
+
+            _commonFx.RegisterButton(_buttonResume, ButtonStyle.Menu);
+            _commonFx.RegisterButton(_buttonHelp, ButtonStyle.Menu);
+            _commonFx.RegisterButton(_buttonSettings, ButtonStyle.Menu);
+            _commonFx.RegisterButton(_buttonMainMenu, ButtonStyle.Menu);
+
+            localization.Changed += OnLocalisationChanged;
+        }
+
+        private void UnregisterCallbacks()
+        {
+            _buttonResume.clicked -= OnResumeButton;
+            _buttonHelp.clicked -= OnHelpButton;
+            _buttonMainMenu.clicked -= OnMainMenuButton;
+            _buttonSettings.clicked -= OnSettingsButton;
+
+            _commonFx.UnRegisterButton(_buttonResume, ButtonStyle.Menu);
+            _commonFx.UnRegisterButton(_buttonHelp, ButtonStyle.Menu);
+            _commonFx.UnRegisterButton(_buttonSettings, ButtonStyle.Menu);
+            _commonFx.UnRegisterButton(_buttonMainMenu, ButtonStyle.Menu);
+
+            localization.Changed -= OnLocalisationChanged;
         }
 
         private void OnLocalisationChanged()
@@ -97,6 +111,9 @@ namespace Game.UI
             ViewModel.ShowModal(context);
         }
 
+        private void OnHelpButton()
+            => _router.OpenHelp();
+        
         private void OnSettingsButton()
             => _router.OpenSettings();
 
@@ -111,6 +128,7 @@ namespace Game.UI
         private void UpdateText()
         {
             _buttonResume.Q<Label>().text = _settings.resume.button.GetLocalizedString();
+            _buttonHelp.Q<Label>().text = _settings.help.button.GetLocalizedString();
             _buttonSettings.Q<Label>().text = _settings.settings.button.GetLocalizedString();
             _buttonMainMenu.Q<Label>().text = _settings.mainMenu.button.GetLocalizedString();
             _heading.text = _settings.heading.GetLocalizedString();
@@ -126,6 +144,7 @@ namespace Game.UI
             }
 
             public Page resume;
+            public Page help;
             public Page settings;
             public Page mainMenu;
 

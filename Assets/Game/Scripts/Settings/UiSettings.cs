@@ -20,6 +20,9 @@ namespace Game.Settings
 
         [SerializeField]
         private PauseMenuView.Settings pauseMenu;
+        
+        [SerializeField]
+        private HelpSettings pauseHelp;
 
         [SerializeField]
         private PauseSettingsView.Settings pauseSettings;
@@ -58,6 +61,7 @@ namespace Game.Settings
         public MainMenuSettingsView.Settings SettingsMenu => settingsMenu;
         public SettingsView.Settings SettingsControlsMenuMenu => settingsControlsMenu;
         public PauseMenuView.Settings PauseMenu => pauseMenu;
+        public HelpSettings PauseHelp => pauseHelp;
         public PauseSettingsView.Settings PauseSettings => pauseSettings;
         public GameOverView.Settings GameOver => gameOver;
 

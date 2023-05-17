@@ -1,0 +1,45 @@
+.header-label {
+    font-size: 80px;
+    color: rgb(155, 89, 199);
+    -unity-font-definition: var(--font-heading);
+    text-shadow: -1px -1px 0 rgb(86, 38, 118);
+}
+
+.description-label {
+    font-size: 30px;
+    color: rgb(90, 55, 55);
+    -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&guid=9f296ab3b5e417845bc8de63c7b23c43&type=2#koliko-Regular SDF');
+    flex-wrap: wrap;
+    visibility: visible;
+    white-space: normal;
+    -unity-text-align: upper-center;
+}
+
+.control-header-label {
+    -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&guid=1823e5ab5312e0e40972472a78991947&type=2#borsok SDF');
+    -unity-text-align: upper-center;
+    align-self: center;
+    color: rgb(155, 89, 199);
+    font-size: 40px;
+    margin-top: 25px;
+}
+
+.control-action-label {
+    font-size: 30px;
+    color: rgb(90, 55, 55);
+    -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/koliko-Bold%20SDF.asset?fileID=11400000&guid=1560b98ea3b2269498a28500187bf3cc&type=2#koliko-Bold SDF');
+    flex-wrap: wrap;
+    visibility: visible;
+    white-space: normal;
+    -unity-text-align: upper-center;
+}
+
+.control-key-label {
+    font-size: 30px;
+    color: rgb(90, 55, 55);
+    -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&guid=9f296ab3b5e417845bc8de63c7b23c43&type=2#koliko-Regular SDF');
+    flex-wrap: wrap;
+    visibility: visible;
+    white-space: normal;
+    -unity-text-align: upper-center;
+}

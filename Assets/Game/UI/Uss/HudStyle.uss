@@ -175,7 +175,6 @@
     opacity: 1;
     flex-direction: row;
     align-items: center;
-
     transition: opacity 150ms ease-out-sine;
 }
 
@@ -201,7 +200,7 @@
 }
 
 .dialog-window {
-    max-width: 800px;
+    max-width: 1250px;
     opacity: 1;
     scale: 1;
     translate: 0;
@@ -214,6 +213,10 @@
     -unity-font-definition: var(--font-text);
     background-image: url('project://database/Assets/Game/UI/Textures/Common/dialog_window.png?fileID=-1877027965&guid=5ad8a4149a97e5f40bace06b1cb5aee9&type=3#dialog_window_bg');
     padding: 32px 48px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .dialog-window--hidden {
@@ -226,14 +229,11 @@
     white-space: normal;
     font-size: 24px;
     color: rgb(255, 255, 255);
-    
     position: absolute;
     left: -15px;
     top: -50px;
     background-color: rgb(155, 89, 199);
-
     -unity-font-definition: var(--font-heading);
-    
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 15px;
@@ -246,7 +246,6 @@
 .dialog-window__image-container {
     margin-top: -20px;
     margin-right: 35px;
-    
     flex-shrink: 0;
 }
 
@@ -255,7 +254,7 @@
     font-size: 28px;
 }
 
-.dialog-window__image {    
+.dialog-window__image {
     width: 120px;
     height: 120px;
 }
@@ -278,7 +277,7 @@
     display: none;
 }
 
-.dialog-window--image-hidden .dialog-window__arrow  {
+.dialog-window--image-hidden .dialog-window__arrow {
     visibility: hidden;
 }
 
@@ -288,14 +287,11 @@
     top: 0;
     right: 0;
     bottom: 0;
-
     opacity: 0;
-
     transition: opacity 2000ms linear 200ms;
 }
 
 .widget-damage.widget-damage--enabled {
     opacity: 1;
-
     transition: opacity 150ms ease-out;
 }

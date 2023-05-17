@@ -15,6 +15,7 @@
             
             public const string BUTTON_MAIN_MENU = "button-exit";
             public const string BUTTON_RESUME = "button-resume";
+            public const string BUTTON_HELP = "button-help";
             public const string BUTTON_SETTINGS = "button-settings";
         }
         
