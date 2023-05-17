@@ -144,6 +144,10 @@
         {
             public const string CONTAINER = "loading-screen";
             public const string LOADING_LABEL = "loading-label";
+            public const string LOADING_ICON = "loading-icon";
+            
+            public const string LOADING_HIDDEN_CLASS_NAME = "loading-screen--hidden";
+            public const string LOADING_ICON_VISIBLE_CLASS_NAME = "loading-icon--visible";
         }
 
         public static class GameOver
