@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Localization;
+﻿using System.Collections.Generic;
 using UnityEngine.UIElements;
 using VContainer;
 
 namespace Game.UI
 {
-    public class HelpView : PageView<PauseMenuViewModel>
+    public class PauseHelpView : PageView<PauseMenuViewModel>
     {
         private PauseViewRouter _router;
         private Button _backButton;
@@ -28,14 +25,14 @@ namespace Game.UI
 
         protected override void OnAwake()
         {
-            SetContent(LayoutNames.PauseSettings.CONTAINER);
+            SetContent(LayoutNames.PauseHelp.CONTAINER);
 
             _router = GetComponent<PauseViewRouter>();
 
-            _backButton = Content.Q<Button>(LayoutNames.PauseSettings.BUTTON_BACK);
+            _backButton = Content.Q<Button>(LayoutNames.Common.BUTTON_BACK);
             _backButton.clicked += OnBack;
 
-            _headerLabels = Content.Q<VisualElement>(LayoutNames.PauseSettings.PAGE_HEADING)
+            _headerLabels = Content.Q<VisualElement>(LayoutNames.Common.PAGE_HEADING)
                 .Query<Label>().ToList();
             
             _helpContent.Create(Content);

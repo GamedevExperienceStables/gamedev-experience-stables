@@ -139,29 +139,33 @@ namespace Game.LifetimeScopes
 
         private void RegisterUi(IContainerBuilder builder)
         {
-            builder.Register<HudPromptView>(Lifetime.Scoped);
-            builder.Register<HudDamageView>(Lifetime.Scoped);
-            builder.Register<HudDamageView>(Lifetime.Scoped);
+            builder.Register<HudPromptView>(Lifetime.Singleton);
+            builder.Register<HudDamageView>(Lifetime.Singleton);
 
-            builder.Register<GameplayViewModel>(Lifetime.Scoped);
-            builder.Register<InventoryViewModel>(Lifetime.Scoped);
+            builder.Register<GameplayViewModel>(Lifetime.Singleton);
+            builder.Register<InventoryViewModel>(Lifetime.Singleton);
             
-            builder.Register<HudRuneSlotsView>(Lifetime.Scoped);
-            builder.Register<HudRuneSlotsViewModel>(Lifetime.Scoped);
+            builder.Register<HudRuneSlotsView>(Lifetime.Singleton);
+            builder.Register<HudRuneSlotsViewModel>(Lifetime.Singleton);
             
-            builder.Register<InteractionView>(Lifetime.Scoped);
-            builder.Register<InteractionViewModel>(Lifetime.Scoped);
+            builder.Register<InteractionView>(Lifetime.Singleton);
+            builder.Register<InteractionViewModel>(Lifetime.Singleton);
 
-            builder.Register<DialogView>(Lifetime.Scoped);
-            builder.Register<DialogViewModel>(Lifetime.Scoped);
+            builder.Register<DialogView>(Lifetime.Singleton);
+            builder.Register<DialogViewModel>(Lifetime.Singleton);
             
-            builder.Register<SavingView>(Lifetime.Scoped);
-            builder.Register<SavingViewModel>(Lifetime.Scoped);
+            builder.Register<SavingView>(Lifetime.Singleton);
+            builder.Register<SavingViewModel>(Lifetime.Singleton);
             
-            builder.Register<MiniMapView>(Lifetime.Scoped);
-            builder.Register<MiniMapViewModel>(Lifetime.Scoped);
+            builder.Register<MiniMapView>(Lifetime.Singleton);
+            builder.Register<MiniMapViewModel>(Lifetime.Singleton);
 
-            builder.Register<PauseMenuViewModel>(Lifetime.Scoped);
+            builder.Register<PauseMenuViewModel>(Lifetime.Singleton);
+            
+            builder.Register<HelpContentView>(Lifetime.Singleton);
+            builder.Register<ControlTemplateViewFactory>(Lifetime.Singleton);
+            builder.Register<ControlTemplateView>(Lifetime.Transient);
+            
 
             builder.RegisterInstance(gameplayView);
             builder.UseComponents(gameplayView.transform, componentsBuilder =>
@@ -175,6 +179,7 @@ namespace Game.LifetimeScopes
                 
                 componentsBuilder.AddInHierarchy<PauseMenuView>();
                 componentsBuilder.AddInHierarchy<PauseSettingsView>();
+                componentsBuilder.AddInHierarchy<PauseHelpView>();
                 
                 componentsBuilder.AddInHierarchy<ModalView>();
             });

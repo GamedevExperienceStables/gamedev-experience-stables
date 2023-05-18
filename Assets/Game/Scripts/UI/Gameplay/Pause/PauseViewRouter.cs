@@ -7,13 +7,13 @@ namespace Game.UI
     public class PauseViewRouter : PageRouter
     {
         private PauseMenuView _menu;
-        private HelpView _help;
+        private PauseHelpView _help;
         private PauseSettingsView _settings;
 
         private void Awake()
         {
             _menu = GetComponentInChildren<PauseMenuView>();
-            _help = GetComponentInChildren<HelpView>();
+            _help = GetComponentInChildren<PauseHelpView>();
             _settings = GetComponentInChildren<PauseSettingsView>();
         }
 

@@ -47,7 +47,6 @@ namespace Game.LifetimeScopes
             RegisterAudio(builder);
             RegisterTime(builder);
             RegisterUi(builder);
-            RegisterPauseMenu(builder);
 
             builder.RegisterEntryPoint<GameEntryPoint>();
         }
@@ -142,6 +141,9 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.UiSettings.StartMenu);
             builder.RegisterInstance(gameSettings.UiSettings.SettingsMenu);
             builder.RegisterInstance(gameSettings.UiSettings.SettingsControlsMenuMenu);
+            builder.RegisterInstance(gameSettings.UiSettings.PauseMenu);
+            builder.RegisterInstance(gameSettings.UiSettings.PauseSettings);
+            builder.RegisterInstance(gameSettings.UiSettings.PauseHelp);
             builder.RegisterInstance(gameSettings.UiSettings.GameOver);
             builder.RegisterInstance(gameSettings.UiSettings.Interaction);
             builder.RegisterInstance(gameSettings.UiSettings.Hud);
@@ -165,18 +167,6 @@ namespace Game.LifetimeScopes
             builder.Register<ModalViewModel>(Lifetime.Singleton);
 
             builder.Register<Typewriter>(Lifetime.Transient);
-        }
-        
-        private void RegisterPauseMenu(IContainerBuilder builder)
-        {
-            builder.RegisterInstance(gameSettings.UiSettings.PauseMenu);
-            builder.RegisterInstance(gameSettings.UiSettings.PauseHelp);
-            builder.RegisterInstance(gameSettings.UiSettings.PauseSettings);
-                
-            builder.Register<HelpContentView>(Lifetime.Scoped);
-            
-            builder.Register<ControlTemplateViewFactory>(Lifetime.Scoped);
-            builder.Register<ControlTemplateView>(Lifetime.Transient);
         }
 
         private void RegisterDataTables(IContainerBuilder builder)

@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using Game.Localization;
-using UnityEngine;
+﻿using Game.Localization;
 using UnityEngine.UIElements;
 
 namespace Game.UI
 {
     public class HelpContentView
     {
-        private readonly List<ControlTemplateView> _controls = new();
         private readonly HelpContentData _settings;
 
         private Label _description;
@@ -17,7 +14,7 @@ namespace Game.UI
         private VisualTreeAsset _template;
         
         private readonly ControlTemplateViewFactory _controlFactory;
-        private ILocalizationService _localization;
+        private readonly ILocalizationService _localization;
         
         public HelpContentView(HelpSettings settings, ControlTemplateViewFactory controlFactory, ILocalizationService localisation)
         {
@@ -51,8 +48,7 @@ namespace Game.UI
                 TemplateContainer element = _template.Instantiate();
                 _listContent.Add(element);
 
-                ControlTemplateView controlView = _controlFactory.Create(element, control);
-                _controls.Add(controlView);
+                _controlFactory.Create(element, control);
             }
         }
         

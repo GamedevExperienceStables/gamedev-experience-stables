@@ -14,8 +14,8 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="menu" style="background-color: rgba(0, 0, 0, 0);">
                     <ui:Instance template="MenuButton" name="button-resume" />
-                    <ui:Instance template="MenuButton" name="button-help" />
                     <ui:Instance template="MenuButton" name="button-settings" />
+                    <ui:Instance template="MenuButton" name="button-help" />
                     <ui:Instance template="MenuButton" name="button-exit" />
                 </ui:VisualElement>
             </ui:VisualElement>
