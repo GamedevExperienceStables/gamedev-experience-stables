@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Game/Level/Scenes/Other/Ending.unity
     guid: 5f5a6fa0c7442844f8eb78751396d4a0
   - enabled: 1
+    path: Assets/Game/Level/Scenes/Other/Credits.unity
+    guid: 68be1941d8dc9a543a9e3aade7057bfa
+  - enabled: 1
     path: Assets/Game/Level/Scenes/Levels/GameLevel/L1/Level_1V3.unity
     guid: 82a3b2d558971fe4f8d13e178f8b462f
   - enabled: 1

@@ -24,6 +24,6 @@ namespace Game.GameFlow
             => _cutscene.Play();
 
         private void OnCompleted()
-            => _rootStateMachine.EnterState<MainMenuState>();
+            => _rootStateMachine.EnterState<CreditsGameState>();
     }
 }

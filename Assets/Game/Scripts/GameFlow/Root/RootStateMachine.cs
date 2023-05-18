@@ -14,7 +14,8 @@ namespace Game.GameFlow
             QuitGameState quitGameState,
             PlanetState planetGameplayState,
             CompleteLevelState completeLevelState,
-            CompleteGameState completeGameState
+            CompleteGameState completeGameState,
+            CreditsGameState creditsGameState
         )
         {
             stateMachine.AddState(initState);
@@ -24,6 +25,7 @@ namespace Game.GameFlow
             stateMachine.AddState(newGameState);
             stateMachine.AddState(loadGameState);
             stateMachine.AddState(completeGameState);
+            stateMachine.AddState(creditsGameState);
             stateMachine.AddState(quitGameState);
 
             stateMachine.AddState(planetGameplayState);

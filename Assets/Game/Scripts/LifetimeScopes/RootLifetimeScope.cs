@@ -120,6 +120,7 @@ namespace Game.LifetimeScopes
             builder.Register<LoadGameState>(Lifetime.Singleton);
             builder.Register<CompleteLevelState>(Lifetime.Singleton);
             builder.Register<CompleteGameState>(Lifetime.Singleton);
+            builder.Register<CreditsGameState>(Lifetime.Singleton);
             builder.Register<QuitGameState>(Lifetime.Singleton);
             builder.Register<PlanetState>(Lifetime.Singleton);
         }

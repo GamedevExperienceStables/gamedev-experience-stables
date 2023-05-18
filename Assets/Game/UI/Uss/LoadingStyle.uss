@@ -1,0 +1,44 @@
+.loading-screen {
+    flex-grow: 1;
+    background-color: rgb(24, 24, 24);
+    display: flex;
+}
+
+.loading-screen--hidden {
+    display: none;
+}
+
+.loading-text {
+    color: rgb(255, 255, 255);
+    font-size: 33px;
+
+    position: absolute;
+    right: 24px;
+    bottom: 19px;
+
+    -unity-font-definition: var(--font-heading);
+}
+
+.loading-icon {
+    -unity-background-scale-mode: scale-to-fit;
+
+    flex-shrink: 0;
+
+    height: 140px;
+    width: 140px;
+
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    opacity: 0;
+
+    transition: opacity 200ms ease;
+}
+
+.loading-icon.loading-icon--visible {
+    opacity: 1;
+
+    transition-delay: 500ms;
+}

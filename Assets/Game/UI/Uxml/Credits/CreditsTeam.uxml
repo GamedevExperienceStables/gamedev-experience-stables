@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="team" style="margin-top: 40px; margin-bottom: 40px;">
+        <ui:Label tabindex="-1" text="Development" display-tooltip-when-elided="true" name="team-name" style="-unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&amp;guid=1823e5ab5312e0e40972472a78991947&amp;type=2#borsok SDF&apos;); font-size: 35px; -unity-text-align: upper-center; color: rgb(255, 255, 255);" />
+        <ui:VisualElement name="team-list" content-container="true" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center;" />
+    </ui:VisualElement>
+</ui:UXML>
