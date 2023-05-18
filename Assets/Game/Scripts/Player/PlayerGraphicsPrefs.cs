@@ -5,6 +5,9 @@ namespace Game.Player
 {
     public class PlayerGraphicsPrefs
     {
+        public void Init() 
+            => Application.backgroundLoadingPriority = ThreadPriority.Low;
+
         public bool GetFullScreen()
             => Screen.fullScreen;
 
