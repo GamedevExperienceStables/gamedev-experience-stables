@@ -24,6 +24,9 @@ namespace Game.LifetimeScopes
         private GameSettings gameSettings;
 
         [SerializeField]
+        private UiSettings uiSettings;
+
+        [SerializeField]
         private FxSettings fxSettings;
 
         [SerializeField]
@@ -139,19 +142,19 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.AudioSettings);
             builder.RegisterInstance(gameSettings.CursorSettings);
             
-            builder.RegisterInstance(gameSettings.UiSettings.StartMenu);
-            builder.RegisterInstance(gameSettings.UiSettings.SettingsMenu);
-            builder.RegisterInstance(gameSettings.UiSettings.SettingsControlsMenuMenu);
-            builder.RegisterInstance(gameSettings.UiSettings.PauseMenu);
-            builder.RegisterInstance(gameSettings.UiSettings.PauseSettings);
-            builder.RegisterInstance(gameSettings.UiSettings.PauseHelp);
-            builder.RegisterInstance(gameSettings.UiSettings.GameOver);
-            builder.RegisterInstance(gameSettings.UiSettings.Interaction);
-            builder.RegisterInstance(gameSettings.UiSettings.Hud);
-            builder.RegisterInstance(gameSettings.UiSettings.Loading);
-            builder.RegisterInstance(gameSettings.UiSettings.Saving);
-            builder.RegisterInstance(gameSettings.UiSettings.Notification);
-            builder.RegisterInstance(gameSettings.UiSettings.InputBindings);
+            builder.RegisterInstance(uiSettings.StartMenu);
+            builder.RegisterInstance(uiSettings.SettingsMenu);
+            builder.RegisterInstance(uiSettings.SettingsControlsMenuMenu);
+            builder.RegisterInstance(uiSettings.PauseMenu);
+            builder.RegisterInstance(uiSettings.PauseSettings);
+            builder.RegisterInstance(uiSettings.PauseHelp);
+            builder.RegisterInstance(uiSettings.GameOver);
+            builder.RegisterInstance(uiSettings.Interaction);
+            builder.RegisterInstance(uiSettings.Hud);
+            builder.RegisterInstance(uiSettings.Loading);
+            builder.RegisterInstance(uiSettings.Saving);
+            builder.RegisterInstance(uiSettings.Notification);
+            builder.RegisterInstance(uiSettings.InputBindings);
 
             builder.RegisterInstance(fxSettings.Inventory);
             builder.RegisterInstance(fxSettings.HudRunes);

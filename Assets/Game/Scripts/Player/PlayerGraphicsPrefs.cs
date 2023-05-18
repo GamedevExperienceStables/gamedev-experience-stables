@@ -5,10 +5,8 @@ namespace Game.Player
 {
     public class PlayerGraphicsPrefs
     {
-        private const int TARGET_FRAME_RATE = 120;
-
-        public void Init()
-            => Application.targetFrameRate = TARGET_FRAME_RATE;
+        public void Init() 
+            => Application.backgroundLoadingPriority = ThreadPriority.Low;
 
         public bool GetFullScreen()
             => Screen.fullScreen;
