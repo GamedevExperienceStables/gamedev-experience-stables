@@ -2,6 +2,13 @@
 {
     public static class LayoutNames
     {
+        public static class Common
+        {
+            public const string PAGE_HEADING = "header";
+            
+            public const string BUTTON_BACK = "button-back";
+        }
+        
         public static class Pause
         {
             public const string CONTAINER = "pause-screen";
@@ -15,6 +22,7 @@
             
             public const string BUTTON_MAIN_MENU = "button-exit";
             public const string BUTTON_RESUME = "button-resume";
+            public const string BUTTON_HELP = "button-help";
             public const string BUTTON_SETTINGS = "button-settings";
         }
         
@@ -24,6 +32,11 @@
             public const string BUTTON_BACK = "button-back";
             
             public const string PAGE_HEADING = "header";
+        }
+        
+        public static class PauseHelp
+        {
+            public const string CONTAINER = "pause-help";
         }
 
         public static class StartMenu

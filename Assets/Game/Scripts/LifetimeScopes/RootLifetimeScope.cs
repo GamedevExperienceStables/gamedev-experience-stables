@@ -143,6 +143,7 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(gameSettings.UiSettings.SettingsControlsMenuMenu);
             builder.RegisterInstance(gameSettings.UiSettings.PauseMenu);
             builder.RegisterInstance(gameSettings.UiSettings.PauseSettings);
+            builder.RegisterInstance(gameSettings.UiSettings.PauseHelp);
             builder.RegisterInstance(gameSettings.UiSettings.GameOver);
             builder.RegisterInstance(gameSettings.UiSettings.Interaction);
             builder.RegisterInstance(gameSettings.UiSettings.Hud);

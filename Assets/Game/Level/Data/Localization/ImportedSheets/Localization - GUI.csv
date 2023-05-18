@@ -5,42 +5,71 @@ Menu_Settings_Button,Settings,Настройки,Налады,Налаштува
 Menu_About_Button,About Creators,О нас,Пра нас,Про творців
 Menu_Artbook_Button,Artbook,Артбук,Артбук,Художня книга
 Menu_Quit_Button,Quit,Выйти,Выйсцi,Кинути
-Menu_NewGame_Caption,Let's start a new journey!,Начнем новое путешествие!,Пачнм новае падарожжа!,Почнемо нову подорож!
-Menu_Continue_Caption,It's time to continue!,Самое время продолжить!,Пара працягнуць!,Пора продовжувати!
-Menu_Settings_Caption,Let's deal with the settings.,Давайте разберемся с настройками.,Давайце разбярэмся з наладамі.,Давайте розберемося з налаштуваннями.
-Menu_About_Caption,Look at the our outstanding team!,Наша замечательная команда.,Наша цудоўная каманда.,Подивіться на нашу видатну команду!
-Menu_Artbook_Caption,Look at the  wonderful work of our artists!,Кое что интересное!,Нешта цікавае!,Подивіться на чудовий твір наших художників!
+Menu_NewGame_Caption,Let's start a new journey!,Начнем новое путешествие!,Пачнем новае падарожжа!,Почнемо нову подорож!
+Menu_Continue_Caption,It's time to continue,Самое время продолжить,Пара працягнуць!,Пора продовжувати
+Menu_Settings_Caption,Let's deal with the settings,Давайте разберемся с настройками,Давайце разбярэмся з наладамі.,Давайте розберемося з налаштуваннями
+Menu_About_Caption,Our outstanding team,Наша замечательная команда,Наша цудоўная каманда.,Наша видатна команда
+Menu_Artbook_Caption,Something really interesting,Кое что интересное!,Нешта цікавае!,Щось справді цікаве
 Menu_Quit_Caption,Is it time to say goodbye?,Настала пора прощаться?,Надышоў час развiтвацца?,Чи пора попрощатися?
 Menu_Preview_Caption, , , , 
 PauseMenu_Heading,Pause,Пауза,Паўза,Пауза
 PauseMenu_Resume_Button,Resume,Возобновить игру,Аднавiць гульню,Відновивши
+PauseMenu_Help_Button,Help,Помощь,Дапамога,Допомога
 PauseMenu_MainMenu_Button,Main menu,Главное меню,Галоўнае меню,Головне меню
 Menu_LastSave_Button,Last save,Последнее сохранение,Апошняе захаванне,Останнє збереження
-Menu_Modal_Quit_Title,Want to leave the game?,Хотите выйти из игры?,Хочаце выйсцi з гульнi?,Хочете залишити гру?
-Menu_Modal_NewGame_Title,Want to start a new game?,Хотите начать новую игру?,Хочаце пачаць новую гульню?,Хочете розпочати нову гру?
-Menu_Modal_Notion_Title,Want to open our site?,Хотите открыть наш сайт?,Хочаце адкрыць наш сайт?,Хочете відкрити наш сайт?
-PauseMenu_Modal_Quit_Title,Want to leave the game?,Хотите выйти из игры?,Хочаце выйсцi з гульнi?,Хочете залишити гру?
-PauseMenu_Modal_Quit_Message,Unsaved progress will be lost.,"Внимание, весь несохраненный прогресс будет потерян!","Увага, незахаваны прагрэс будзе страчаны!",Незбережений прогрес буде втрачено.
-Cutscene_Skip_Label,Hold to skip,"Удеживайте, чтобы пропустить",Утрымлiвай каб прапусцiць.,Тримайся пропустити
+Menu_Modal_Quit_Title,Do you want to leave the game?,Хотите выйти из игры?,Хочаце выйсцi з гульнi?,Ви хочете залишити гру?
+Menu_Modal_NewGame_Title,Do you want to start a new game?,Хотите начать новую игру?,Хочаце пачаць новую гульню?,Ви хочете розпочати нову гру?
+Menu_Modal_Notion_Title,Do you want to visit our website?,Хотите открыть наш сайт?,Хочаце наведаць наш сайт?,Ви хочете відвідати наш веб -сайт?
+PauseMenu_Modal_Quit_Title,Do you want to leave the game?,Хотите выйти из игры?,Хочаце выйсцi з гульнi?,Ви хочете залишити гру?
+PauseMenu_Modal_Quit_Message,"Attention, all unsaved progress will be lost!","Внимание, весь несохраненный прогресс будет потерян!","Увага, незахаваны прагрэс будзе страчаны!","Увага, весь незбережений прогрес буде втрачено!"
+Cutscene_Skip_Label,Hold to skip,"Удерживайте, чтобы пропустить.","Утрымлiвай, каб прапусцiць.",Тримайся пропустити
 SettingsMenu_Language_Label,Language,Язык,Мова,Мова
-SettingsMenu_Graphic_Label,Graphics,  Графика,Графiка,  Графічне мистецтво
-SettingsMenu_Quality_Label,Quality,  Качество,Якасць,  Якість
-SettingsMenu_Resolution_Label,Resolution,  Разрешение,Раздзяляльнасць,  Дозвіл
-SettingsMenu_Fullscreen_Label,Fullscreen,  Полный экран,Поўны экран,  Повний екран
+SettingsMenu_Graphic_Label,Graphics,Графика,Графiка,Графічне мистецтво
+SettingsMenu_Quality_Label,Quality,Качество,Якасць,Якість
+SettingsMenu_Resolution_Label,Resolution,Разрешение,Раздзяляльнасць,Дозвіл
+SettingsMenu_Fullscreen_Label,Fullscreen,Полный экран,Поўны экран,Повний екран
 SettingsMenu_Audio_Label,Audio,Звуки,Гукi,Звуки
-SettingsMenu_Volume_Label,Volume,  Громкость,Гучнасць,  Обсяг
-SettingsMenu_Effects_Label,Effects,  Эффекты,Эфекты,  Ефект
-SettingsMenu_Music_Label,Music,  Музыка,Музыка,  Музика
+SettingsMenu_Volume_Label,Volume,Громкость,Гучнасць,Обсяг
+SettingsMenu_Effects_Label,Effects,Эффекты,Эфекты,Ефект
+SettingsMenu_Music_Label,Music,Музыка,Музыка,Музика
 SettingsMenu_Back_Label,Back,Назад,Назад,назад
 Hud_Magic_Book,Magic Book,Магическая книга,Магiчная кнiга,Чарівна книга
 Hud_Save_Saving,Saving...,Сохранение...,Захаванне ...,Збереження ...
 Hud_Save_Saved,Game saved!,Игра сохранена!,Гульня захавана!,Гра врятована!
 LoadingScreen_Loading,Loading...,Загрузка...,Загрузка ...,Завантаження ...
-Link_Modal,Want to open a link?,Хотите открыть ссылку?,Хочаце адкрыць спасылку?,Хочете відкрити посилання?
+Link_Modal,Do you want to open a link?,Хотите открыть ссылку?,Хочаце адкрыць спасылку?,Хочете відкрити посилання?
 ArtMenu_Download_Label,Download,Скачать,Спампаваць,завантажити
-Download_Artbook_Modal,Want to download artbook?,Хотите скачать артбук?,Хочаце спампаваць артбук?,Хочете завантажити книгу Art?
-AboutMenu_Description_Label,"The game was created as part of a non -profit project <b> Gamedev Experience Stables </b>.
-Many experts are still in search of work! Follow the links to Linkedin and write if you are interested in cooperation.","Игра создана в рамках некоммерческого проекта <b>GameDev Experience Stables</b>.
-Многие специалисты все еще в поисках работы! Переходите по ссылкам в линкедин и пишите если заинтересовались в сотрудничестве.","Гульня была створана ў рамках некамерцыйнага праекта <b> Gamedev Experience Stables </b>.
-Многія ўдзельнікі шукаюць працу! Перайдзіце па спасылцы на LinkedIn і напішыце калі вы зацікаўлены ў супрацоўніцтве.","Гра була створена в рамках некомерційного проекту <b> Gamedev Scess Stables </b>.
+Download_Artbook_Modal,Do you want to download the artbook?,Хотите скачать артбук?,Хочаце спампаваць артбук?,Хочете завантажити книгу Art?
+AboutMenu_Description_Label,"The game is created as part of the non-commercial project <b>GameDev Experience Stables</b>.
+Many specialists are still in search of work! Follow the links to LinkedIn and reach out if you are interested in collaboration.","Игра создана в рамках некоммерческого проекта <b>GameDev Experience Stables</b>.
+Многие специалисты все еще в поисках работы! Переходите по ссылкам в LinkedIn и пишите, если заинтересованы в сотрудничестве.","Гульня была створана ў рамках некамерцыйнага праекта <b>Gamedev Experience Stables</b>.
+Многія ўдзельнікі яшчэ шукаюць працу! Перайдзіце па спасылцы на LinkedIn і напішыце калі вы зацікаўлены ў супрацоўніцтве.","Гра була створена в рамках некомерційного проекту <b> Gamedev Scess Stables </b>.
 Багато експертів все ще шукають роботу! Перегляньте посилання на LinkedIn та напишіть, якщо ви зацікавлені у співпраці."
+Hud_Log_Text,Find 17 green crystals and fill them with a prism.,Найди 17 зеленых кристаллов и наполни ими призму.,Знайдзіце 17 зялёных крышталяў і запоўніце іх прызмай.,Знайдіть 17 зелених кристалів і наповніть їх призмою.
+HelpMenu_Description_Label,"• When controlling the dreams, you need to collect all the crystals on the planet and place them in the prism that is located on the ship.
+<br> • Crystals can be found
+","• Управляя Снуди, вам нужно собрать все кристаллы на планете и поместить их в призму, которая находится на корабле. 
+<br>•  Кристаллы можно найти
+","• Кантроль мары, вам трэба сабраць усе крышталі на планеце і змясціць іх у прызму, якая знаходзіцца на караблі.
+<br> • Можна знайсці крышталі
+","• Під час контролю мрій вам потрібно зібрати всі кристали на планеті і помістити їх у призму, яка розташована на кораблі.
+<br> • можна знайти кристали
+"
+HelpMenu_Control,Management in the game,Управление в игре,Кіраванне ў гульні,Управління в грі
+HelpMenu_Control_Forvard,Forward,Вперед,Наперад,Вперед
+HelpMenu_Control_Back,Back,Назад,Назад,назад
+HelpMenu_Control_Left,To the left,Влево,Злева,Зліва
+HelpMenu_Control_Right,To the right,Вправо,Направа,Направо
+HelpMenu_Control_Dash,Dash,Рывок,Рыкаць,Ривок
+HelpMenu_Control_Interaction,Interaction,Взаимодействие,Узаемадзеянне,Взаємодія
+HelpMenu_Control_Aiming,Aiming,Прицеливание,Прысіў,Націлювання
+HelpMenu_Control_Shoot,Fire,Огонь,Пажар,Вогонь
+HelpMenu_Control_Melee,Middle attack,Ближняя атака,Сярэдняя атака,Середня атака
+HelpMenu_Control_Ability1,Ability: 1,Способность: 1,Здольнасць: 1,Здатність: 1
+HelpMenu_Control_Ability2,Ability: 2,Способность: 2,Здольнасць: 2,Здатність: 2
+HelpMenu_Control_Ability3,Ability: 3,Способность: 3,Здольнасць: 3,Здатність: 3
+HelpMenu_Control_Ability4,Ability: 4,Способность: 4,Здольнасць: 4,Здатність: 4
+HelpMenu_Control_PreviousRune,Previous rune,Предыдущая руна,Папярэдні Рун,Попередня руна
+HelpMenu_Control_NextRune,The next rune,Следующая руна,Наступная руна,Наступна руна
+HelpMenu_Control_Menu,Menu,Меню,Меню,Меню
+HelpMenu_Control_Book,Book of runes,Книга рун,Кніга рун,Книга рун
