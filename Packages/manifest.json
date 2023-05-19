@@ -9,6 +9,7 @@
     "com.moremountains.feel": "https://github.com/GamedevExperienceStables/com.moremountains.feel.git",
     "com.nuclearband.projectfoldericons": "https://github.com/NuclearBand/NuclearProjectFolderIcons.git",
     "com.paradoxnotion.nodecanvas": "https://github.com/GamedevExperienceStables/com.paradoxnotion.nodecanvas.git",
+    "com.rlabrecque.steamworks.net": "https://github.com/rlabrecque/Steamworks.NET.git?path=/com.rlabrecque.steamworks.net",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.addressables": "1.21.10",
     "com.unity.ai.navigation": "1.1.3",
