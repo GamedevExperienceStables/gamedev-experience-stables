@@ -69,6 +69,9 @@ namespace Game.Steam
 
         public void SetAchievement(string achievement)
         {
+#if UNITY_EDITOR
+            Debug.Log($"[Steamworks.NET] SetAchievement: {achievement}");
+#endif
             SteamUserStats.SetAchievement(achievement);
             SteamUserStats.StoreStats();
         }
