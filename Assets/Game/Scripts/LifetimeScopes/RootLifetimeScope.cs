@@ -1,4 +1,5 @@
-﻿using Game.Audio;
+﻿using Game.Achievements;
+using Game.Audio;
 using Game.CursorManagement;
 using Game.GameFlow;
 using Game.Hero;
@@ -28,6 +29,9 @@ namespace Game.LifetimeScopes
 
         [SerializeField]
         private FxSettings fxSettings;
+        
+        [SerializeField]
+        private AchievementsSettings achievementsSettings;
 
         [SerializeField]
         private HeroDefinition heroData;
@@ -50,6 +54,7 @@ namespace Game.LifetimeScopes
             RegisterAudio(builder);
             RegisterTime(builder);
             RegisterUi(builder);
+            RegisterAchievements(builder);
 
             builder.RegisterEntryPoint<GameEntryPoint>();
         }
@@ -161,6 +166,9 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(fxSettings.HudDamage);
             builder.RegisterInstance(fxSettings.GameOver);
             builder.RegisterInstance(fxSettings.Common);
+
+            builder.RegisterInstance(achievementsSettings.Game);
+            builder.RegisterInstance(achievementsSettings.Runes);
         }
 
         private static void RegisterUi(IContainerBuilder builder)
@@ -206,5 +214,8 @@ namespace Game.LifetimeScopes
             builder.Register<TimerPool>(Lifetime.Singleton);
             builder.Register<TimerUpdater>(Lifetime.Singleton).AsImplementedInterfaces();
         }
+        
+        private static void RegisterAchievements(IContainerBuilder builder) 
+            => builder.Register<GameAchievements>(Lifetime.Singleton);
     }
 }

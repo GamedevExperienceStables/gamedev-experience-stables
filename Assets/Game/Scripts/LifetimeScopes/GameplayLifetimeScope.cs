@@ -1,4 +1,5 @@
-﻿using Game.Actors;
+﻿using Game.Achievements;
+using Game.Actors;
 using Game.Audio;
 using Game.Cameras;
 using Game.Dialog;
@@ -45,9 +46,13 @@ namespace Game.LifetimeScopes
             RegisterProjectile(builder);
             RegisterEffects(builder);
             RegisterInteractions(builder);
+            RegisterAchievements(builder);
 
             builder.RegisterEntryPoint<GameplayEntryPoint>();
         }
+
+        private static void RegisterAchievements(IContainerBuilder builder) 
+            => builder.Register<InventoryAchievementsHandler>(Lifetime.Singleton).AsImplementedInterfaces();
 
         private static void RegisterAbilities(IContainerBuilder builder)
         {
