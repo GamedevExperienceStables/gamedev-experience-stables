@@ -56,7 +56,10 @@ namespace Game.LifetimeScopes
             RegisterTime(builder);
             RegisterUi(builder);
             RegisterAchievements(builder);
+            
+#if ENABLE_STEAMWORKS
             RegisterSteam(builder);
+#endif
 
             builder.RegisterEntryPoint<GameEntryPoint>();
         }
