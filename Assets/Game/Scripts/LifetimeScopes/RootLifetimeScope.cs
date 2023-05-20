@@ -216,9 +216,13 @@ namespace Game.LifetimeScopes
             builder.Register<TimerPool>(Lifetime.Singleton);
             builder.Register<TimerUpdater>(Lifetime.Singleton).AsImplementedInterfaces();
         }
-        
-        private static void RegisterAchievements(IContainerBuilder builder) 
-            => builder.Register<GameAchievements>(Lifetime.Singleton);
+
+        private static void RegisterAchievements(IContainerBuilder builder)
+        {
+            builder.Register<GameAchievements>(Lifetime.Singleton);
+
+            builder.Register<PlaceholderAchievements>(Lifetime.Singleton).As<IAchievementsService>();
+        }
 
         private static void RegisterSteam(IContainerBuilder builder)
         {
