@@ -11,6 +11,7 @@ using Game.Persistence;
 using Game.Player;
 using Game.SceneManagement;
 using Game.Settings;
+using Game.Steam;
 using Game.TimeManagement;
 using Game.UI;
 using UnityEngine;
@@ -55,6 +56,7 @@ namespace Game.LifetimeScopes
             RegisterTime(builder);
             RegisterUi(builder);
             RegisterAchievements(builder);
+            RegisterSteam(builder);
 
             builder.RegisterEntryPoint<GameEntryPoint>();
         }
@@ -217,5 +219,13 @@ namespace Game.LifetimeScopes
         
         private static void RegisterAchievements(IContainerBuilder builder) 
             => builder.Register<GameAchievements>(Lifetime.Singleton);
+
+        private static void RegisterSteam(IContainerBuilder builder)
+        {
+            builder.Register<SteamService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<SteamOverlay>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+            builder.Register<SteamAchievements>(Lifetime.Singleton).As<IAchievementsService>();
+        }
     }
 }

@@ -800,7 +800,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;UNITASK_DOTWEEN_SUPPORT
+    Standalone: MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;UNITASK_DOTWEEN_SUPPORT;STEAMWORKS_NET
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
