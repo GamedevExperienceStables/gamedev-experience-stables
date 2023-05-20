@@ -9,10 +9,7 @@ namespace Game.Steam
 {
     public sealed class SteamService : ITickable, IDisposable
     {
-        // Once you get a Steam AppID assigned by Valve, you need to replace AppId_t.Invalid with it and
-        // remove steam_appid.txt from the game depot. eg: "(AppId_t)480" or "new AppId_t(480)".
-        // See the Valve documentation for more information: https://partner.steamgames.com/doc/sdk/api#initialization_and_shutdown
-        private readonly AppId_t _appId = AppId_t.Invalid;
+        private readonly AppId_t _appId = (AppId_t)2440730;
 
         [Inject]
         public SteamService()
