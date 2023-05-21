@@ -169,6 +169,7 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(fxSettings.GameOver);
             builder.RegisterInstance(fxSettings.Common);
 
+            builder.RegisterInstance(achievementsSettings.Stats);
             builder.RegisterInstance(achievementsSettings.Game);
             builder.RegisterInstance(achievementsSettings.Runes);
         }

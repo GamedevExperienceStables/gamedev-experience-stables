@@ -6,6 +6,9 @@ namespace Game.Achievements
     public class AchievementsSettings : ScriptableObject
     {
         [SerializeField]
+        private GameStats.Settings stats;
+
+        [SerializeField]
         private GameAchievements.Settings game;
 
         [SerializeField]
@@ -13,5 +16,6 @@ namespace Game.Achievements
 
         public RuneAchievementsSettings Runes => runeAchievements;
         public GameAchievements.Settings Game => game;
+        public GameStats.Settings Stats => stats;
     }
 }
