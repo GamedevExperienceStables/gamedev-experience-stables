@@ -90,5 +90,8 @@ namespace Game.Steam
 
         public bool ClearStatsAndAchievements() 
             => SteamUserStats.ResetAllStats(true);
+
+        public string GetSteamID() 
+            => SteamUser.GetSteamID().ToString();
     }
 }
