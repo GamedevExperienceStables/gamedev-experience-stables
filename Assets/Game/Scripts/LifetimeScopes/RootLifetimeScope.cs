@@ -221,6 +221,7 @@ namespace Game.LifetimeScopes
         {
             builder.Register<GameAchievements>(Lifetime.Singleton);
 
+            builder.Register<PlaceholderStats>(Lifetime.Singleton).As<IGameStatsService>();
             builder.Register<PlaceholderAchievements>(Lifetime.Singleton).As<IAchievementsService>();
         }
 
