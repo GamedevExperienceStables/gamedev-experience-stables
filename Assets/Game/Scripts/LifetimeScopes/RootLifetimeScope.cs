@@ -220,6 +220,7 @@ namespace Game.LifetimeScopes
         private static void RegisterAchievements(IContainerBuilder builder)
         {
             builder.Register<GameAchievements>(Lifetime.Singleton);
+            builder.Register<GameStats>(Lifetime.Singleton);
 
             builder.Register<PlaceholderStats>(Lifetime.Singleton).As<IGameStatsService>();
             builder.Register<PlaceholderAchievements>(Lifetime.Singleton).As<IAchievementsService>();
