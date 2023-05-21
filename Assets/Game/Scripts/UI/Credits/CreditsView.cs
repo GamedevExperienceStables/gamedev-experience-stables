@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Game.Utils;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.UIElements;
-using UnityEngine.UIElements.Experimental;
 using VContainer;
 
 namespace Game.UI
@@ -15,7 +15,7 @@ namespace Game.UI
         private VisualElement _container;
         private VisualElement _list;
         private VisualElement _wrapper;
-        private VisualElement _spacer;
+        private VisualElement _intro;
 
         private VisualTreeAsset _teamTemplate;
         private VisualTreeAsset _memberTemplate;
@@ -25,7 +25,7 @@ namespace Game.UI
         private StyleTranslate _position;
 
         [Inject]
-        public void Construct(Settings settings) 
+        public void Construct(Settings settings)
             => _settings = settings;
 
 
@@ -37,7 +37,10 @@ namespace Game.UI
             _wrapper = root.Q<VisualElement>(LayoutNames.Credits.WRAPPER);
             _container = root.Q<VisualElement>(LayoutNames.Credits.CONTAINER);
 
-            _spacer = _container.Q<VisualElement>(LayoutNames.Credits.SPACER);
+            var introText = _container.Q<Label>(LayoutNames.Credits.INTRO_TEXT);
+            introText.text = _settings.introText.GetLocalizedString();
+
+            _intro = _container.Q<VisualElement>(LayoutNames.Credits.INTRO);
 
             _list = root.Q<VisualElement>(LayoutNames.Credits.LIST);
 
@@ -47,8 +50,8 @@ namespace Game.UI
             _list.Clear();
 
             CreateTeams(_settings.teams.Teams);
-            
-            _container.SetVisibility(false);
+
+            _container.AddToClassList(LayoutNames.Credits.CONTAINER_HIDDEN_CLASS_NAME);
         }
 
 
@@ -98,43 +101,67 @@ namespace Game.UI
 
         private async UniTask PlayDelay(Action onComplete)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            bool canceled = await UniTask
+                .DelayFrame(1, cancellationToken: destroyCancellationToken)
+                .SuppressCancellationThrow();
 
-            // set spacer height as screen height
-            float screenHeight = _wrapper.resolvedStyle.height;
-            _spacer.style.height = screenHeight;
+            if (canceled)
+                return;
 
-            float height = _container.resolvedStyle.height + screenHeight;
+            float height = UpdateIntroHeight();
+
+            _container.RemoveFromClassList(LayoutNames.Credits.CONTAINER_HIDDEN_CLASS_NAME);
+
+            canceled = await UniTask
+                .Delay(TimeSpan.FromSeconds(_settings.startDelay), cancellationToken: destroyCancellationToken)
+                .SuppressCancellationThrow();
+
+            if (canceled)
+                return;
+
             TimeSpan duration = TimeSpan.FromSeconds(height / _settings.scrollSpeed / 100);
-
             PlayAnimation(onComplete, height, duration);
-            
-            _container.SetVisibility(true);
+        }
+
+        private float UpdateIntroHeight()
+        {
+            // set height as screen height
+            float screenHeight = _wrapper.resolvedStyle.height;
+            _intro.style.height = screenHeight;
+
+            return _container.resolvedStyle.height + screenHeight;
         }
 
         private void PlayAnimation(Action onComplete, float height, TimeSpan duration)
         {
-            _container.experimental.animation
-                .Start(
-                    element => element.style.translate.value.y.value,
-                    -height,
-                    (int)duration.TotalMilliseconds,
-                    (element, y) =>
+            DOTween
+                .To(
+                    getter: () => _container.style.translate.value.y.value,
+                    setter: y =>
                     {
-                        var styleTranslate = new Translate(element.style.translate.value.x, y);
-                        element.style.translate = styleTranslate;
-                    }
+                        var styleTranslate = new Translate(_container.style.translate.value.x, y);
+                        _container.style.translate = styleTranslate;
+                    },
+                    endValue: -height,
+                    duration: (float)duration.TotalSeconds
                 )
-                .Ease(Easing.Linear)
-                .OnCompleted(onComplete);
+                .SetEase(Ease.Linear)
+                .OnComplete(() => onComplete?.Invoke())
+                .ToUniTask(cancellationToken: destroyCancellationToken)
+                .SuppressCancellationThrow();
         }
 
 
         [Serializable]
         public class Settings
         {
-            [SerializeField, Min(0.01f)]
+            [Range(0f, 10f)]
+            public float startDelay = 2f;
+
+            [Min(0.01f)]
             public float scrollSpeed = 1f;
+
+            public LocalizedString introText;
 
             public TeamsSettings teams;
         }
