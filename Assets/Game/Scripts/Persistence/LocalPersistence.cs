@@ -50,12 +50,13 @@ namespace Game.Persistence
 
         private static string GetOrCreateFilePath(string filename)
         {
-            string dirPath = Path.Combine(Application.persistentDataPath, DIRECTORY);
-            var dir = new DirectoryInfo(Path.GetFullPath(dirPath));
-            if (!dir.Exists)
-                dir.Create();
+            string filePath = Path.Combine(Application.persistentDataPath, DIRECTORY, filename);
 
-            return Path.Combine(dirPath, filename);
+            string dirPath = Path.GetDirectoryName(filePath);
+            if (!string.IsNullOrEmpty(dirPath))
+                Directory.CreateDirectory(dirPath);
+
+            return filePath;
         }
     }
 }
