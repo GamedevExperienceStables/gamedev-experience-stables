@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="member" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; margin-top: 20px; margin-bottom: 20px;">
-        <ui:Label tabindex="-1" text="Hero" display-tooltip-when-elided="true" name="position" style="-unity-font-style: normal; font-size: 25px; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&amp;guid=9f296ab3b5e417845bc8de63c7b23c43&amp;type=2#koliko-Regular SDF&apos;); color: rgba(255, 255, 255, 0.3); -unity-text-align: upper-center;" />
-        <ui:Label tabindex="-1" text="Snoody" display-tooltip-when-elided="true" name="name" style="font-size: 25px; -unity-font-definition: url(&apos;project://database/Assets/Game/UI/Fonts/koliko-Regular%20SDF.asset?fileID=11400000&amp;guid=9f296ab3b5e417845bc8de63c7b23c43&amp;type=2#koliko-Regular SDF&apos;); -unity-font-style: normal; color: rgb(255, 255, 255); -unity-text-align: upper-center;" />
+    <Style src="project://database/Assets/Game/UI/Uss/CreditsStyle.uss?fileID=7433441132597879392&amp;guid=1107f1da0ee3e3f4888c0733df70b1d2&amp;type=3#CreditsStyle" />
+    <ui:VisualElement name="member" class="credits-member">
+        <ui:Label tabindex="-1" text="Hero" display-tooltip-when-elided="true" name="position" class="credits-member__position" />
+        <ui:Label tabindex="-1" text="Snoody" display-tooltip-when-elided="true" name="name" class="credits-member__name" />
     </ui:VisualElement>
 </ui:UXML>

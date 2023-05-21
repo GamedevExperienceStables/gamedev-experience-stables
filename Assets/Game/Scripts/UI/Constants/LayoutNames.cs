@@ -248,8 +248,10 @@
         public static class Credits 
         {
             public const string CONTAINER = "credits";
-            public const string SPACER = "spacer";
             public const string WRAPPER = "wrapper";
+
+            public const string INTRO = "intro";
+            public const string INTRO_TEXT = "intro-text";
             
             public const string LIST = "list";
             
@@ -260,6 +262,8 @@
             public const string MEMBER_TEMPLATE = "member";
             public const string MEMBER_NAME = "name";
             public const string MEMBER_POSITION = "position";
+            
+            public const string CONTAINER_HIDDEN_CLASS_NAME = "credits--hidden";
         }
     }
 }

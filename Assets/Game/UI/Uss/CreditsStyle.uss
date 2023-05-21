@@ -1,0 +1,53 @@
+.credits {
+    flex-shrink: 0;
+    transform-origin: top;
+}
+
+.credits--hidden {
+    visibility: hidden;
+}
+
+.credits-intro {
+    font-size: 50px;
+    -unity-font-definition: var(--font-text);
+    color: rgb(255, 255, 255);
+    -unity-text-align: upper-center;
+
+    flex-shrink: 0;
+    justify-content: center;
+    min-height: 350px;
+}
+
+.credits-team {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.credits-team__name {
+    -unity-font-definition: var(--font-text);
+    font-size: 35px;
+    -unity-text-align: upper-center;
+    color: rgb(255, 255, 255);
+}
+
+.credits-member {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0);
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.credits-member__position {
+    font-size: 25px;
+    -unity-font-definition: var(--font-text);
+    color: rgba(255, 255, 255, 0.3);
+    -unity-text-align: upper-center;
+}
+
+.credits-member__name {
+    font-size: 25px;
+    -unity-font-definition: var(--font-text);
+    color: rgb(255, 255, 255);
+    -unity-text-align: upper-center;
+}
