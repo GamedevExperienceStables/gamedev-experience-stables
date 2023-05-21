@@ -56,10 +56,7 @@ namespace Game.LifetimeScopes
             RegisterTime(builder);
             RegisterUi(builder);
             RegisterAchievements(builder);
-            
-#if ENABLE_STEAMWORKS
             RegisterSteam(builder);
-#endif
 
             builder.RegisterEntryPoint<GameEntryPoint>();
         }
@@ -229,11 +226,13 @@ namespace Game.LifetimeScopes
 
         private static void RegisterSteam(IContainerBuilder builder)
         {
+#if ENABLE_STEAMWORKS
             builder.Register<SteamService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<SteamOverlay>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<SteamAchievements>(Lifetime.Singleton).As<IAchievementsService>();
             builder.Register<SteamPersistence>(Lifetime.Singleton).As<IPersistence>();
+#endif
         }
     }
 }
