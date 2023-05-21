@@ -232,6 +232,7 @@ namespace Game.LifetimeScopes
             builder.Register<SteamService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<SteamOverlay>(Lifetime.Singleton).AsImplementedInterfaces();
             
+            builder.Register<SteamStats>(Lifetime.Singleton).As<IGameStatsService>();
             builder.Register<SteamAchievements>(Lifetime.Singleton).As<IAchievementsService>();
             builder.Register<SteamPersistence>(Lifetime.Singleton).As<IPersistence>();
 #endif

@@ -93,5 +93,22 @@ namespace Game.Steam
 
         public string GetSteamID() 
             => SteamUser.GetSteamID().ToString();
+
+        public int GetStat(string key)
+        {
+            if (!SteamUserStats.GetStat(key, out int value))
+                value = 0;
+            
+            return value;
+        }
+
+        public void SetStat(string key, int value)
+        {
+#if UNITY_EDITOR
+            Debug.Log($"[Steamworks.NET] SetStat: {key} = {value.ToString()}");
+#endif
+            SteamUserStats.SetStat(key, value);
+            SteamUserStats.StoreStats();
+        }
     }
 }
