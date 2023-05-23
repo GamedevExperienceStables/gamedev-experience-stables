@@ -30,7 +30,7 @@ namespace Game.UI
         private IList<Resolution> _resolutions;
         private List<string> _resolutionsOptions;
 
-        private List<string> _qualityOptions;
+        private readonly List<string> _qualityOptions = new();
 
         private DropdownField _fieldLocale;
         private List<Locale> _locales;
@@ -105,7 +105,10 @@ namespace Game.UI
         }
 
         private void OnLocalisationChanged()
-            => UpdateText();
+        {
+            InitQuality();
+            UpdateText();
+        }
 
         private void UpdateText()
         {
@@ -158,7 +161,23 @@ namespace Game.UI
 
         private void InitQuality()
         {
-            _qualityOptions = _viewModel.GetQualityNames().ToList();
+            _qualityOptions.Clear();
+
+            foreach (string qualityName in _viewModel.GetQualityNames())
+            {
+                string name = qualityName;
+
+                foreach (Settings.QualitySettings.Quality quality in _settings.quality.qualities)
+                {
+                    if (quality.name != name) 
+                        continue;
+                    
+                    name = quality.label.GetLocalizedString();
+                }
+                
+                _qualityOptions.Add(name);
+            }
+            
             _fieldQuality.choices = _qualityOptions;
 
             int current = _viewModel.CurrentQuality;
@@ -265,10 +284,24 @@ namespace Game.UI
             {
                 public LocalizedString label;
             }
+            
+            [Serializable]
+            public struct QualitySettings
+            {
+                public LocalizedString label;
+                public List<Quality> qualities;
+                
+                [Serializable]
+                public struct Quality
+                {
+                    public string name;
+                    public LocalizedString label;
+                }
+            }
 
             public Page language;
             public Page graphic;
-            public Page quality;
+            public QualitySettings quality;
             public Page resolution;
             public Page fullscreen;
             public Page audio;
