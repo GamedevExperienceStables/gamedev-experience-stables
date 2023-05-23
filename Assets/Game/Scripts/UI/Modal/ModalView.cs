@@ -1,4 +1,5 @@
-﻿using Game.Utils;
+﻿using System.Collections.Generic;
+using Game.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
@@ -23,6 +24,8 @@ namespace Game.UI
 
         private CommonFx _commonFx;
 
+        private readonly List<VisualElement> _siblings = new();
+
         [Inject]
         public void Construct(ModalViewModel viewModel, CommonFx commonFx)
         {
@@ -33,6 +36,8 @@ namespace Game.UI
         private void Awake()
         {
             _root = GetComponent<UIDocument>().rootVisualElement;
+
+            GetSiblings(_root, _siblings);
 
             _container = _root.Q<VisualElement>(LayoutNames.Modal.CONTAINER);
             _buttonConfirm = _container.Q<Button>(LayoutNames.Modal.BUTTON_CONFIRM);
@@ -126,10 +131,18 @@ namespace Game.UI
             => _container.RemoveFromClassList(LayoutNames.Modal.WIDE_CLASS_NAME);
 
         private void Show()
-            => _root.SetDisplay(true);
+        {
+            foreach (VisualElement sibling in _siblings) 
+                sibling.SetEnabled(false);
+            
+            _root.SetDisplay(true);
+        }
 
         private void Hide()
         {
+            foreach (VisualElement sibling in _siblings) 
+                sibling.SetEnabled(true);
+
             _root.SetDisplay(false);
 
             CleanUp();
@@ -137,5 +150,14 @@ namespace Game.UI
 
         private void CleanUp()
             => _currentContext = default;
+
+        private static void GetSiblings(VisualElement root, ICollection<VisualElement> listOut)
+        {
+            foreach (VisualElement child in root.parent.Children())
+            {
+                if (child != root) 
+                    listOut.Add(child);
+            }
+        }
     }
 }

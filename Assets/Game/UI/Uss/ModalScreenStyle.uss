@@ -20,6 +20,7 @@
     background-image: url('project://database/Assets/Game/UI/Textures/Menu_Atlas.psd?fileID=1286348549&amp;guid=0171bb5685750d24c968dd955bfaa574&amp;type=3#Menu_Atlas_36');
 }
 
+.modal-button:focus,
 .modal-button:hover {
     scale: 1 1;
 }

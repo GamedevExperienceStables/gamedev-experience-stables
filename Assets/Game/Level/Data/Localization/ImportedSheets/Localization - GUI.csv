@@ -1,75 +1,122 @@
 Key,English(en),Russian(ru),Belarusian(be),Ukrainian(uk)
 Menu_NewGame_Button,New Game,Новая игра,Новая гульня,Нова гра
-Menu_Continue_Button,Continue,Продолжить,Працягнуць,Продовжувати
+Menu_Continue_Button,Continue,Продолжить,Працягнуць,Продовжити
 Menu_Settings_Button,Settings,Настройки,Налады,Налаштування
-Menu_About_Button,About Creators,О нас,Пра нас,Про творців
-Menu_Artbook_Button,Artbook,Артбук,Артбук,Художня книга
-Menu_Quit_Button,Quit,Выйти,Выйсцi,Кинути
-Menu_NewGame_Caption,Let's start a new journey!,Начнем новое путешествие!,Пачнем новае падарожжа!,Почнемо нову подорож!
-Menu_Continue_Caption,It's time to continue,Самое время продолжить,Пара працягнуць!,Пора продовжувати
-Menu_Settings_Caption,Let's deal with the settings,Давайте разберемся с настройками,Давайце разбярэмся з наладамі.,Давайте розберемося з налаштуваннями
-Menu_About_Caption,Our outstanding team,Наша замечательная команда,Наша цудоўная каманда.,Наша видатна команда
-Menu_Artbook_Caption,Something really interesting,Кое что интересное!,Нешта цікавае!,Щось справді цікаве
-Menu_Quit_Caption,Is it time to say goodbye?,Настала пора прощаться?,Надышоў час развiтвацца?,Чи пора попрощатися?
+Menu_About_Button,About Creators,О нас,Пра нас,Про нас
+Menu_Artbook_Button,Artbook,Артбук,Артбук,Артбук
+Menu_Quit_Button,Quit,Выйти,Выйсцi,Вийти
+Menu_NewGame_Caption,Let's start a new journey!,Начнем новое путешествие!,Пачнем новае падарожжа!,Почнемо нову пригоду!
+Menu_Continue_Caption,It's time to continue,Самое время продолжить,Пара працягнуць!,Саме час продовжити!
+Menu_Settings_Caption,Let's deal with the settings,Давайте разберемся с настройками,Давайце разбярэмся з наладамі.,Давайте розберемося з налаштуванням
+Menu_About_Caption,Our outstanding team,Наша замечательная команда,Наша цудоўная каманда.,Наша чудова команда
+Menu_Artbook_Caption,Something really interesting,Кое что интересное!,Нешта цікавае!,Дещо цікаве
+Menu_Quit_Caption,Is it time to say goodbye?,Настала пора прощаться?,Надышоў час развiтвацца?,Настав час прощатися?
 Menu_Preview_Caption, , , , 
 PauseMenu_Heading,Pause,Пауза,Паўза,Пауза
-PauseMenu_Resume_Button,Resume,Возобновить игру,Аднавiць гульню,Відновивши
+PauseMenu_Resume_Button,Resume,Возобновить игру,Аднавiць гульню,Відновити гру
 PauseMenu_Help_Button,Help,Помощь,Дапамога,Допомога
 PauseMenu_MainMenu_Button,Main menu,Главное меню,Галоўнае меню,Головне меню
-Menu_LastSave_Button,Last save,Последнее сохранение,Апошняе захаванне,Останнє збереження
-Menu_Modal_Quit_Title,Do you want to leave the game?,Хотите выйти из игры?,Хочаце выйсцi з гульнi?,Ви хочете залишити гру?
-Menu_Modal_NewGame_Title,Do you want to start a new game?,Хотите начать новую игру?,Хочаце пачаць новую гульню?,Ви хочете розпочати нову гру?
-Menu_Modal_Notion_Title,Do you want to visit our website?,Хотите открыть наш сайт?,Хочаце наведаць наш сайт?,Ви хочете відвідати наш веб -сайт?
-PauseMenu_Modal_Quit_Title,Do you want to leave the game?,Хотите выйти из игры?,Хочаце выйсцi з гульнi?,Ви хочете залишити гру?
-PauseMenu_Modal_Quit_Message,"Attention, all unsaved progress will be lost!","Внимание, весь несохраненный прогресс будет потерян!","Увага, незахаваны прагрэс будзе страчаны!","Увага, весь незбережений прогрес буде втрачено!"
-Cutscene_Skip_Label,Hold to skip,"Удерживайте, чтобы пропустить.","Утрымлiвай, каб прапусцiць.",Тримайся пропустити
+Menu_LastSave_Button,Last save,Последнее сохранение,Апошняе захаванне,Останні збереження
+Menu_Modal_Quit_Title,Do you want to leave the game?,Хотите выйти из игры?,Хочаце выйсцi з гульнi?,Бажаєте вийти з гри?
+Menu_Modal_NewGame_Title,Do you want to start a new game?,Хотите начать новую игру?,Хочаце пачаць новую гульню?,Бажаєте розпочати нову гру?
+Menu_Modal_Notion_Title,Do you want to visit our website?,Хотите посетить наш сайт?,Хочаце наведаць наш сайт?,Бажаєте відкрити наш сайт?
+PauseMenu_Modal_Quit_Title,Do you want to leave the game?,Хотите выйти из игры?,Хочаце выйсцi з гульнi?,Бажаєте вийти з гри?
+PauseMenu_Modal_Quit_Message,"Attention, all unsaved progress will be lost!","Внимание, весь несохраненный прогресс будет потерян!","Увага, незахаваны прагрэс будзе страчаны!","Увага, весь не збережений прогрес буде втрачено!"
+Cutscene_Skip_Label,Hold to skip,"Удерживайте, чтобы пропустить.","Утрымлiвай, каб прапусцiць.","Утримуйте, щоб пропустити"
 SettingsMenu_Language_Label,Language,Язык,Мова,Мова
-SettingsMenu_Graphic_Label,Graphics,Графика,Графiка,Графічне мистецтво
+SettingsMenu_Graphic_Label,Graphics,Графика,Графiка,Графіка
 SettingsMenu_Quality_Label,Quality,Качество,Якасць,Якість
-SettingsMenu_Resolution_Label,Resolution,Разрешение,Раздзяляльнасць,Дозвіл
-SettingsMenu_Fullscreen_Label,Fullscreen,Полный экран,Поўны экран,Повний екран
+SettingsMenu_Quality_High,High,Высокое,Высокае,Високий
+SettingsMenu_Quality_Medium,Medium,Среднее,Сярэдняе,Середній
+SettingsMenu_Resolution_Label,Resolution,Разрешение,Раздзяляльнасць,Розширення
+SettingsMenu_Fullscreen_Label,Fullscreen,Полный экран,Поўны экран,Повний екран 
 SettingsMenu_Audio_Label,Audio,Звуки,Гукi,Звуки
-SettingsMenu_Volume_Label,Volume,Громкость,Гучнасць,Обсяг
-SettingsMenu_Effects_Label,Effects,Эффекты,Эфекты,Ефект
+SettingsMenu_Volume_Label,Volume,Громкость,Гучнасць,Гучність
+SettingsMenu_Effects_Label,Effects,Эффекты,Эфекты,Ефекти
 SettingsMenu_Music_Label,Music,Музыка,Музыка,Музика
-SettingsMenu_Back_Label,Back,Назад,Назад,назад
-Hud_Magic_Book,Magic Book,Магическая книга,Магiчная кнiга,Чарівна книга
-Hud_Save_Saving,Saving...,Сохранение...,Захаванне ...,Збереження ...
-Hud_Save_Saved,Game saved!,Игра сохранена!,Гульня захавана!,Гра врятована!
-LoadingScreen_Loading,Loading...,Загрузка...,Загрузка ...,Завантаження ...
-Link_Modal,Do you want to open a link?,Хотите открыть ссылку?,Хочаце адкрыць спасылку?,Хочете відкрити посилання?
-ArtMenu_Download_Label,Download,Скачать,Спампаваць,завантажити
-Download_Artbook_Modal,Do you want to download the artbook?,Хотите скачать артбук?,Хочаце спампаваць артбук?,Хочете завантажити книгу Art?
-AboutMenu_Description_Label,"The game is created as part of the non-commercial project <b>GameDev Experience Stables</b>.
+SettingsMenu_Back_Label,Back,Назад,Назад,Назад
+Hud_Magic_Book,Magic Book,Магическая книга,Магiчная кнiга,Магічна книга
+Hud_Save_Saving,Saving...,Сохранение...,Захаванне ...,Збереження…
+Hud_Save_Saved,Game saved!,Игра сохранена!,Гульня захавана!,Гра збережена!
+LoadingScreen_Loading,Loading...,Загрузка...,Загрузка ...,Завантаження….
+Link_Modal,Do you want to open a link?,Хотите открыть ссылку?,Хочаце адкрыць спасылку?,Бажаєте відкрити посилання?
+ArtMenu_Download_Label,Download,Скачать,Спампаваць,Завантажити
+Download_Artbook_Modal,Do you want to download the artbook?,Хотите скачать артбук?,Хочаце спампаваць артбук?,Бажаєте завантажити артбук?
+AboutMenu_Description_Label,"  The game is created as part of the non-commercial project <b>GameDev Experience Stables</b>.
 Many specialists are still in search of work! Follow the links to LinkedIn and reach out if you are interested in collaboration.","Игра создана в рамках некоммерческого проекта <b>GameDev Experience Stables</b>.
 Многие специалисты все еще в поисках работы! Переходите по ссылкам в LinkedIn и пишите, если заинтересованы в сотрудничестве.","Гульня была створана ў рамках некамерцыйнага праекта <b>Gamedev Experience Stables</b>.
-Многія ўдзельнікі яшчэ шукаюць працу! Перайдзіце па спасылцы на LinkedIn і напішыце калі вы зацікаўлены ў супрацоўніцтве.","Гра була створена в рамках некомерційного проекту <b> Gamedev Scess Stables </b>.
-Багато експертів все ще шукають роботу! Перегляньте посилання на LinkedIn та напишіть, якщо ви зацікавлені у співпраці."
-Hud_Log_Text,Find 17 green crystals and fill them with a prism.,Найди 17 зеленых кристаллов и наполни ими призму.,Знайдзіце 17 зялёных крышталяў і запоўніце іх прызмай.,Знайдіть 17 зелених кристалів і наповніть їх призмою.
-HelpMenu_Description_Label,"• When controlling the dreams, you need to collect all the crystals on the planet and place them in the prism that is located on the ship.
-<br> • Crystals can be found
-","• Управляя Снуди, вам нужно собрать все кристаллы на планете и поместить их в призму, которая находится на корабле. 
-<br>•  Кристаллы можно найти
-","• Кантроль мары, вам трэба сабраць усе крышталі на планеце і змясціць іх у прызму, якая знаходзіцца на караблі.
-<br> • Можна знайсці крышталі
-","• Під час контролю мрій вам потрібно зібрати всі кристали на планеті і помістити їх у призму, яка розташована на кораблі.
-<br> • можна знайти кристали
-"
-HelpMenu_Control,Management in the game,Управление в игре,Кіраванне ў гульні,Управління в грі
+Многія ўдзельнікі яшчэ шукаюць працу! Перайдзіце па спасылцы на LinkedIn і напішыце калі вы зацікаўлены ў супрацоўніцтве.","Гра створена в рамках некомерційного проекту<b>GameDev Experience Stables</b>. 
+Багато спеціалістів все ще у пошуку роботи! Переходьте за посиланням у LinkedIn та пишіть, якщо зацікавлені у співпраці."
+Hud_Log_Text,Find 17 green crystals and fill the Prism with them.,Найдите 17 зеленых кристаллов и наполните ими Призму.,Знайдзіце 17 зялёных крышталяў і напоўніце імі Прызму.,Знайдіть 17 зелених кристалів та наповніть ними Призму.
+HelpMenu_Description_Label,"Together with Snoody you need to collect <b>17 crystals</b> and put them into the Prism on the spaceship. Green stalagmites can be found on the planet. Break them to collect such crystals.
+
+To attack with the staff, hold down the <b>right mouse button</b>, aim, and then click the <b>left mouse button</b>.
+To attack nearby enemies, press the <b>middle mouse button</b> or <b>Ctrl</b>.
+To use the ""Dash"" ability, press <b>Space</b>.
+
+Ancient statues can be found on the planet. Break them to obtain scrolls with magic runes.
+All obtained scrolls are automatically added to the Magic Book <b>TAB</b>.
+
+To activate or deactivate a rune, press the corresponding slot button: <b>1</b>, <b>2</b>, <b>3</b>, <b>4</b>.
+To switch between runes in the slots, use the <b>Q</b> button (previous rune) and the <b>E</b> button (next rune).
+
+Defeated enemies may drop colorless crystals that restore the three main character's attributes.
+
+Caution! In case of character’s death, all crystals and runes will be lost! The game progress can be saved on the spaceship in <b>Snoody's bed</b> or near the <b>campfires</b> on the planet.","Управляя Снуди, вам нужно собрать <b>17 кристаллов</b> и поместить их в Призму, которая находится на корабле. На планете встречаются <b>зеленые сталагмиты</b>, разбив которые можно получить такие кристаллы.
+
+Чтобы атаковать посохом, зажмите <b>правую кнопку мыши</b>, прицельтесь, а затем нажмите на <b>левую кнопку</b>.
+Для атаки врагов вблизи нажмите <b>среднюю клавишу мыши</b> или <b>Ctrl</b>.
+Для использования способности «Рывок», нажмите <b>Space</b>.
+
+На планете встречаются древние статуи, разбивая которые можно получать свитки с магическими рунами. Полученные свитки автоматически добавляются в магическую книгу <b>TAB</b>.
+
+Чтобы активировать или деактивировать руну, нажмите кнопку соответствующего слота: <b>1</b>, <b>2</b>, <b>3</b>, <b>4</b>. Для переключения между рунами в слотах используйте кнопки <b>Q</b> (предыдущая руна) и <b>E</b> (следующая руна).
+
+Из побежденных врагов могут выпасть бесцветные кристаллы, которые восстанавливают три основные характеристики персонажа.
+
+Осторожно! В случае смерти персонажа все кристаллы и руны теряются! Сохранить игровой прогресс можно на корабле в <b>кровати Снуди</b> или около <b>костров</b> на планете.","Разам са Снудзі вам трэба сабраць <b> 17 крышталяў </b> і размясціць іх у Прызму, якая знаходзіцца на караблі. На планеце ёсць <b> зялёныя сталагміты</b>, разбіўшы якія, можна атрымаць такія крышталі.
+
+Каб атакаваць посахам, націсніце <b> правую кнопку мышы </b>, нацэльцесь, а пасля націсніце на <b> левую кнопку </b>.
+Каб атакаваць ворагаў паблізу націсніце<b> сярэднюю  кнопку мышы </b> або <b> Сtrl </b>.
+Для выкарыстання здольнасці ""Рывок"", націсніце <b> Space</b>.
+
+На планеце сустракаюцца старажытныя статуі, разбурыў якія, можна атрымаць скруткі з магічнымі рунамі. Атрыманыя скруткі аўтаматычна дадаюцца ў магічную кнігу<b>TAB</b>.
+
+Каб актываваць або адключыць руну, націсніце кнопку адпаведнага слота: <b>1</b>, <b>2</b>, <b>3</b>, <b>4</b>. Каб пераключыцца паміж рунамі ў слотах, выкарыстоўвайце кнопкі <b>Q</b> (папярэдняя руна) і <b>E</b> (наступная руна).
+
+З пераможаных ворагаў могуць выпасць бяскаляровыя крышталі , якія аднаўляюць тры асноўныя характарыстыкі персанажа.
+
+Асцярожна! У выпадку смерці персанажа ўсе крышталі і руны губляюцца! Захаваць прагрэс гульні можна на караблі ў <b>ложку</b> або каля <b>вогнішча</b> на планеце.","Керуючи Снуді, вам потрібно зібрати 17 кристалів і помістити їх у Призму, яка знаходиться на кораблі.
+На планеті зустрічаються зелені сталагміти, розбивши які можна отримати такі кристали.
+
+Щоб атакувати посохом, затисніть праву кнопку миші, прицільтеся, а потім натисніть на ліву кнопку.
+Для атаки ворогів поблизу, натисніть <b>середня клавіша миші</b> або <b>Ctrl</b>.
+Для використання здібності «Ривок» натисніть <b>Space</b>.
+
+На планеті зустрічаються стародавні статуї, розбивши їх – можна отримати сувій з магічною руною. Отримані сувої автоматично додається до магічної книжки <b>TAB</b>.
+
+Щоб активувати або деактивувати руну, натисніть кнопку відповідного слота <b>1</b>, <b>2</b>, <b>3</b>, <b>4</b>.
+
+Для перемикання між рунами у слотах використовуйте кнопки <b>Q</b> (попередня) и <b>E</b> (наступна).
+
+З переможених ворогів можуть випасти безбарвні кристали, які відновлюють три основні характеристики персонажа.
+
+Обережно, у випадку смерті персонажа весь необережний прогресс буде втрачено! Зберегти ігровий процес можно на кораблі у <b>ліжку Снуді</b> або біля <b>багаття</b> на планеті."
+HelpMenu_Control,Game controls,Управление в игре,Кіраванне ў гульні,Управління у грі
 HelpMenu_Control_Forvard,Forward,Вперед,Наперад,Вперед
-HelpMenu_Control_Back,Back,Назад,Назад,назад
-HelpMenu_Control_Left,To the left,Влево,Злева,Зліва
-HelpMenu_Control_Right,To the right,Вправо,Направа,Направо
-HelpMenu_Control_Dash,Dash,Рывок,Рыкаць,Ривок
+HelpMenu_Control_Back,Back,Назад,Назад,Назад
+HelpMenu_Control_Left,To the left,Влево,Налева,Вліво
+HelpMenu_Control_Right,To the right,Вправо,Направа,Вправо
+HelpMenu_Control_Dash,Dash,Рывок,Рывок,Ривок
 HelpMenu_Control_Interaction,Interaction,Взаимодействие,Узаемадзеянне,Взаємодія
-HelpMenu_Control_Aiming,Aiming,Прицеливание,Прысіў,Націлювання
-HelpMenu_Control_Shoot,Fire,Огонь,Пажар,Вогонь
-HelpMenu_Control_Melee,Middle attack,Ближняя атака,Сярэдняя атака,Середня атака
-HelpMenu_Control_Ability1,Ability: 1,Способность: 1,Здольнасць: 1,Здатність: 1
-HelpMenu_Control_Ability2,Ability: 2,Способность: 2,Здольнасць: 2,Здатність: 2
-HelpMenu_Control_Ability3,Ability: 3,Способность: 3,Здольнасць: 3,Здатність: 3
-HelpMenu_Control_Ability4,Ability: 4,Способность: 4,Здольнасць: 4,Здатність: 4
-HelpMenu_Control_PreviousRune,Previous rune,Предыдущая руна,Папярэдні Рун,Попередня руна
-HelpMenu_Control_NextRune,The next rune,Следующая руна,Наступная руна,Наступна руна
+HelpMenu_Control_Aiming,Aiming,Прицеливание,Прыцэльванне,Прицілювання
+HelpMenu_Control_Shoot,Attack,Атака,Атака,Атака
+HelpMenu_Control_Melee,Melee attack,Ближняя атака,Бліжняя атака,Ближня атака
+HelpMenu_Control_Ability1,Rune: 1,Руна: 1,Руна: 1,Руна: 1
+HelpMenu_Control_Ability2,Rune: 2,Руна: 2,Руна: 2,Руна: 2
+HelpMenu_Control_Ability3,Rune: 3,Руна: 3,Руна: 3,Руна: 3
+HelpMenu_Control_Ability4,Rune: 4,Руна: 4,Руна: 4,Руна: 4
+HelpMenu_Control_PreviousRune,Previous rune,Предыдущая руна,Папярэдняя руна,Попередня руна
+HelpMenu_Control_NextRune,Next rune,Следующая руна,Наступная руна,Наступна руна
 HelpMenu_Control_Menu,Menu,Меню,Меню,Меню
-HelpMenu_Control_Book,Book of runes,Книга рун,Кніга рун,Книга рун
+HelpMenu_Control_Book,Book of runes,Книга рун,Магiчная кнiга,Магічна книга
