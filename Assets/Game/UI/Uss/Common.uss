@@ -102,3 +102,7 @@
 .input-key--icon .input-key__text {
     display: none;
 }
+
+.unity-ui-document__root.unity-disabled {
+    opacity: 1;
+}
