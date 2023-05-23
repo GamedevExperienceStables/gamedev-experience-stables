@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine.Localization;
 
 namespace Game.Localization
 {
     public interface ILocalizationService
     {
         event Action Changed;
-        string CurrentLocale { get; }
-        void SetLocale(string localeName);
-        List<string> GetLocales();
+        Locale CurrentLocale { get; }
+        void SetLocale(Locale locale);
+        void SetLocale(string localeCode);
+        List<Locale> GetLocales();
     }
 }

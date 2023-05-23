@@ -60,10 +60,14 @@ namespace Game.UI
             _blurHandler.HideImmediate();
         }
 
-        public UniTask ShowAsync()
+        public async UniTask ShowAsync()
         {
+            _container.SetEnabled(false);
+            
             FadeIn(_showDuration);
-            return UniTask.Delay(_showDuration, true);
+            await UniTask.Delay(_showDuration, true);
+            
+            _container.SetEnabled(true);
         }
 
         public async UniTask HideAsync()

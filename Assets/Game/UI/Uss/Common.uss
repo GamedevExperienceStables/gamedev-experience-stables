@@ -28,6 +28,12 @@
     background-color: rgba(0, 0, 0, 0);
 }
 
+.primary-button:enabled:focus {
+    -unity-background-image-tint-color: #975fb7;
+
+    background-color: rgba(0, 0, 0, 0);
+}
+
 .primary-button:disabled {
     background-color: rgba(0, 0, 0, 0);
     -unity-background-image-tint-color: rgba(255, 255, 255, 0.8);
@@ -95,4 +101,8 @@
 
 .input-key--icon .input-key__text {
     display: none;
+}
+
+.unity-ui-document__root.unity-disabled {
+    opacity: 1;
 }
