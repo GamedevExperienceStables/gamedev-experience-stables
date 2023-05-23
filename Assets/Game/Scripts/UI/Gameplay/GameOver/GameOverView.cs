@@ -15,7 +15,7 @@ namespace Game.UI
     {
         private const float DELAY = 0.4f;
         
-        private const float SHOW_DURATION = 1.2f;
+        private const float SHOW_DURATION = 0.4f;
         private const float HIDE_DURATION = 0.2f;
 
         private VisualElement _container;
@@ -110,11 +110,15 @@ namespace Game.UI
         
         public async UniTask ShowAsync()
         {
+            _container.SetEnabled(false);
+            
             _fx.ShowFeedback();
             await UniTask.Delay(TimeSpan.FromSeconds(DELAY), true);
             FadeIn(_showDuration);
             
             await UniTask.Delay(_showDuration, true);
+            
+            _container.SetEnabled(true);
         }
 
         public UniTask HideAsync()
