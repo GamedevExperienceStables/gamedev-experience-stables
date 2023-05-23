@@ -2,6 +2,7 @@
 using Game.Audio;
 using Game.Player;
 using UnityEngine;
+using UnityEngine.Localization;
 
 // ReSharper disable MemberCanBeMadeStatic.Global
 namespace Game.UI
@@ -25,7 +26,7 @@ namespace Game.UI
         
         public int CurrentScreenHeight => Screen.height;
         public int CurrentScreenWidth => Screen.width;
-        public string CurrentLocale => _localization.CurrentLocale;
+        public string CurrentLocaleCode => _localization.CurrentLocaleCode;
 
         public void SetFullscreen(bool value)
             => _graphics.SetFullscreen(value);
@@ -54,10 +55,13 @@ namespace Game.UI
         public float GetVolume(AudioChannel channel)
             => _audio.GetVolume(channel);
 
-        public List<string> GetLocales() 
+        public List<Locale> GetLocales() 
             => _localization.GetLocales();
 
         public void SetLocale(string locale) 
+            => _localization.SetLocale(locale);
+
+        public void SetLocale(Locale locale) 
             => _localization.SetLocale(locale);
     }
 }

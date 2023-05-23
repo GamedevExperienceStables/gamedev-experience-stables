@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Audio;
 using Game.Localization;
+using Game.Utils;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.UIElements;
@@ -32,6 +33,7 @@ namespace Game.UI
         private List<string> _qualityOptions;
 
         private DropdownField _fieldLocale;
+        private List<Locale> _locales;
 
         public SettingsView(SettingsViewModel viewModel, ILocalizationService localization, Settings settings)
         {
@@ -114,7 +116,7 @@ namespace Game.UI
 
             _fieldQuality.label = _settings.quality.label.GetLocalizedString();
             _fieldResolution.label = _settings.resolution.label.GetLocalizedString();
-            _fieldFullscreen.label= _settings.fullscreen.label.GetLocalizedString();
+            _fieldFullscreen.label = _settings.fullscreen.label.GetLocalizedString();
 
             _fieldMasterVolume.label = _settings.master.label.GetLocalizedString();
             _fieldMusicVolume.label = _settings.music.label.GetLocalizedString();
@@ -225,22 +227,32 @@ namespace Game.UI
 
         private void InitLocalization()
         {
-            _fieldLocale.choices = _viewModel.GetLocales();
+            _locales = _viewModel.GetLocales();
+            _fieldLocale.choices = _locales.Select(locale =>
+            {
+                string nativeName = locale.Identifier.CultureInfo.NativeName;
+                nativeName = nativeName.UppercaseFirst();
+                return nativeName;
+            }).ToList();
 
-            string current = _viewModel.CurrentLocale;
+            string current = _viewModel.CurrentLocaleCode;
+            Locale found = _locales.Find(locale => locale.Identifier.Code == current);
+            if (!found) 
+                return;
 
-            if (!_fieldLocale.choices.Contains(current))
-                current = _fieldLocale.choices[0];
-
+            int index = _locales.IndexOf(found);
+            current = _fieldLocale.choices[index];
             _fieldLocale.SetValueWithoutNotify(current);
         }
 
         private void OnChangeLocale(ChangeEvent<string> evt)
         {
-            if (!_fieldLocale.choices.Contains(evt.newValue))
+            int index = _fieldLocale.choices.IndexOf(evt.newValue);
+            if (index < 0)
                 return;
-
-            _viewModel.SetLocale(evt.newValue);
+            
+            Locale locale = _locales[index];
+            _viewModel.SetLocale(locale);
         }
 
         #endregion
