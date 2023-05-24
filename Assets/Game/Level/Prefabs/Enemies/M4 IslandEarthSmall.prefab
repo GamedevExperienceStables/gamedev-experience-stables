@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 642830290696357688, guid: 3be0727eec826e240981582d3a371c75,
         type: 3}
       propertyPath: m_Height
-      value: 2.3899994
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 642830290696357688, guid: 3be0727eec826e240981582d3a371c75,
         type: 3}
@@ -21,7 +21,7 @@ PrefabInstance:
     - target: {fileID: 642830290696357688, guid: 3be0727eec826e240981582d3a371c75,
         type: 3}
       propertyPath: m_Center.y
-      value: 0.9
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 642830290696357689, guid: 3be0727eec826e240981582d3a371c75,
         type: 3}
@@ -86,12 +86,17 @@ PrefabInstance:
     - target: {fileID: 642830290696357691, guid: 3be0727eec826e240981582d3a371c75,
         type: 3}
       propertyPath: CapsuleHeight
-      value: 2.3899994
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 642830290696357691, guid: 3be0727eec826e240981582d3a371c75,
         type: 3}
       propertyPath: CapsuleRadius
       value: 0.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 642830290696357691, guid: 3be0727eec826e240981582d3a371c75,
+        type: 3}
+      propertyPath: CapsuleYOffset
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 642830290696357691, guid: 3be0727eec826e240981582d3a371c75,
         type: 3}
