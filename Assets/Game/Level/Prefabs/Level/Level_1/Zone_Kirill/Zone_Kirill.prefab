@@ -4779,6 +4779,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 2.38
       objectReference: {fileID: 0}
+    - target: {fileID: 654553994302978516, guid: 225f616a91570d7498eab718c97c9428,
+        type: 3}
+      propertyPath: m_Name
+      value: CrystalSpawnPoint
+      objectReference: {fileID: 0}
     - target: {fileID: 654553994302978538, guid: 225f616a91570d7498eab718c97c9428,
         type: 3}
       propertyPath: enemy
