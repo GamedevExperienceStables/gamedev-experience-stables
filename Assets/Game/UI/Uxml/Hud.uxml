@@ -1,21 +1,27 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:Template name="DamageWidget" src="project://database/Assets/Game/UI/Uxml/Partial/DamageWidget.uxml?fileID=9197481963319205126&amp;guid=f6386d02889ac0a4e8fcb028338a10d6&amp;type=3#DamageWidget" />
-    <ui:Template name="MiniMap" src="project://database/Assets/Game/UI/Uxml/Partial/MiniMap.uxml?fileID=9197481963319205126&amp;guid=112172bd361597c42b1fbca0b63a6cda&amp;type=3#MiniMap" />
+    <ui:Template name="CrystalWidget" src="project://database/Assets/Game/UI/Uxml/Partial/CrystalWidget.uxml?fileID=9197481963319205126&amp;guid=4eee649186bea2548813f6fe8c8e1455&amp;type=3#CrystalWidget" />
     <ui:Template name="MagicBookPrompt" src="project://database/Assets/Game/UI/Uxml/Partial/MagicBookPrompt.uxml?fileID=9197481963319205126&amp;guid=bde5ecf54c9c6cc4c9c9a76e660d5e4f&amp;type=3#MagicBookPrompt" />
+    <ui:Template name="MiniMap" src="project://database/Assets/Game/UI/Uxml/Partial/MiniMap.uxml?fileID=9197481963319205126&amp;guid=112172bd361597c42b1fbca0b63a6cda&amp;type=3#MiniMap" />
     <ui:Template name="DialogWindow" src="project://database/Assets/Game/UI/Uxml/Partial/DialogWindow.uxml?fileID=9197481963319205126&amp;guid=ee493ed27981d2f4f83f4ac0a7748c14&amp;type=3#DialogWindow" />
     <ui:Template name="SavingWidget" src="project://database/Assets/Game/UI/Uxml/Partial/SavingWidget.uxml?fileID=9197481963319205126&amp;guid=15c24c93f7d8ee548ad2ab11d547307b&amp;type=3#SavingWidget" />
     <ui:Template name="InteractionWidget" src="project://database/Assets/Game/UI/Uxml/Partial/InteractionWidget.uxml?fileID=9197481963319205126&amp;guid=41441a377c5387649a739155e8c3b5eb&amp;type=3#InteractionWidget" />
     <ui:Template name="HudRuneSlots" src="project://database/Assets/Game/UI/Uxml/Partial/HudRuneSlots.uxml?fileID=9197481963319205126&amp;guid=d4197e0f5979cde4c914112e473815a4&amp;type=3#HudRuneSlots" />
-    <ui:Template name="CrystalWidget" src="project://database/Assets/Game/UI/Uxml/Partial/CrystalWidget.uxml?fileID=9197481963319205126&amp;guid=4eee649186bea2548813f6fe8c8e1455&amp;type=3#CrystalWidget" />
+    <ui:Template name="ActiveQuestWidget" src="project://database/Assets/Game/UI/Uxml/Partial/ActiveQuestWidget.uxml?fileID=9197481963319205126&amp;guid=43c0e4440ee259c42b86c12fbd74b615&amp;type=3#ActiveQuestWidget" />
     <Style src="project://database/Assets/Game/UI/Uss/HudStyle.uss?fileID=7433441132597879392&amp;guid=43fb365d5654783488ae02a43eaf455d&amp;type=3#HudStyle" />
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
         <ui:Instance template="DamageWidget" name="widget-damage" class="widget-damage" />
         <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: space-between; align-items: flex-start; margin-left: 40px; margin-right: 40px; margin-top: 30px;">
-            <ui:Instance template="CrystalWidget" name="widget-crystal" />
+            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0); flex-direction: row;">
+                <ui:Instance template="CrystalWidget" name="widget-crystal" style="width: 90px;" />
+            </ui:VisualElement>
             <ui:Button text="Menu" display-tooltip-when-elided="true" focusable="false" name="button-menu" style="-unity-font-style: normal; display: none;" />
-            <ui:VisualElement style="position: absolute; top: 0; right: 0;">
-                <ui:Instance template="MiniMap" name="widget-map" />
-                <ui:Instance template="MagicBookPrompt" name="widget-prompt-inventory" style="align-items: center;" />
+            <ui:VisualElement style="position: absolute; top: 0; right: 0; flex-grow: 1; flex-shrink: 0; align-items: flex-end;">
+                <ui:VisualElement style="background-color: rgba(0, 0, 0, 0);">
+                    <ui:Instance template="MagicBookPrompt" name="widget-prompt-inventory" style="align-items: center;" />
+                    <ui:Instance template="MiniMap" name="widget-map" />
+                </ui:VisualElement>
+                <ui:Instance template="ActiveQuestWidget" name="widget-active-quest" />
             </ui:VisualElement>
             <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; left: 0; right: 0; top: 30px;">
                 <ui:Instance template="DialogWindow" name="widget-dialog" style="align-items: center;" />
