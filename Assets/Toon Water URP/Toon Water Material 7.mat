@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Toon Water Material 4
+  m_Name: Toon Water Material 7
   m_Shader: {fileID: -6465566751694194690, guid: b4a6b41e114133b4d8eb40ab1d879de6,
     type: 3}
   m_Parent: {fileID: 0}
@@ -107,8 +107,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_1139F668: {r: 0, g: 0.9003706, b: 1, a: 0.62352943}
-    - Color_198818EE: {r: 0.01183696, g: 0.19717659, b: 0.3584906, a: 0.8509804}
+    - Color_1139F668: {r: 0.082352936, g: 0.77254903, b: 0.34928298, a: 0.62352943}
+    - Color_198818EE: {r: 0.015686274, g: 0.4117647, b: 0.22095278, a: 0.8509804}
     - Color_626750DD: {r: 0.4022784, g: 0.754717, b: 0.54903096, a: 1}
     - Color_77A2EDE9: {r: 12.73353, g: 8.44272, b: 5.105425, a: 1}
     - Vector2_1E1B6943: {r: 1, g: 1, b: 0, a: 0}
