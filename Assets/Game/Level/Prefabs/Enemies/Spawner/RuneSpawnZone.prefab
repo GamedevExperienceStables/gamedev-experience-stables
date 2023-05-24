@@ -266,7 +266,7 @@ PrefabInstance:
     - target: {fileID: 2350107545435338778, guid: 30330fece65ca154da95867f5528b8ce,
         type: 3}
       propertyPath: m_Name
-      value: EnemySpawnGroup (1)
+      value: FrogScroll
       objectReference: {fileID: 0}
     - target: {fileID: 2350107545435338789, guid: 30330fece65ca154da95867f5528b8ce,
         type: 3}
@@ -437,7 +437,7 @@ PrefabInstance:
     - target: {fileID: 2350107545435338778, guid: 30330fece65ca154da95867f5528b8ce,
         type: 3}
       propertyPath: m_Name
-      value: EnemySpawnGroup (2)
+      value: FrogEmpty
       objectReference: {fileID: 0}
     - target: {fileID: 2350107545435338789, guid: 30330fece65ca154da95867f5528b8ce,
         type: 3}
