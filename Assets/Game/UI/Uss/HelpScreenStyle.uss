@@ -12,8 +12,6 @@
     flex-wrap: wrap;
     visibility: visible;
     white-space: normal;
-
-    -unity-text-align: middle-center;
 }
 
 .control-header-label {
