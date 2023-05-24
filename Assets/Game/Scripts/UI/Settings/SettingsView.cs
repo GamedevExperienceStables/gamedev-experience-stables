@@ -256,10 +256,8 @@ namespace Game.UI
 
             string current = _viewModel.CurrentLocaleCode;
             Locale found = _locales.Find(locale => locale.Identifier.Code == current);
-            if (!found) 
-                return;
-
-            int index = _locales.IndexOf(found);
+            int index = found ? _locales.IndexOf(found) : 0;
+            
             current = _fieldLocale.choices[index];
             _fieldLocale.SetValueWithoutNotify(current);
         }
