@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Game.Localization;
 using Game.Persistence;
+using UnityEngine.Localization;
 
 namespace Game.Player
 {
@@ -11,7 +12,7 @@ namespace Game.Player
         private readonly ILocalizationService _localization;
         private readonly IPlayerPrefs _playerPrefs;
 
-        public string CurrentLocale => _playerPrefs.GetString(LOCALE_KEY, _localization.CurrentLocale);
+        public string CurrentLocaleCode => _playerPrefs.GetString(LOCALE_KEY, _localization.CurrentLocale.Identifier.Code);
 
         public PlayerLocalizationPrefs(ILocalizationService localization, IPlayerPrefs playerPrefs)
         {
@@ -20,15 +21,23 @@ namespace Game.Player
         }
 
         public void Init() 
-            => _localization.SetLocale(CurrentLocale);
+            => _localization.SetLocale(CurrentLocaleCode);
 
-        public void SetLocale(string localeName)
+        public void SetLocale(string localeCode)
         {
-            _playerPrefs.SetString(LOCALE_KEY, localeName);
-            _localization.SetLocale(localeName);
+            _playerPrefs.SetString(LOCALE_KEY, localeCode);
+            _localization.SetLocale(localeCode);
         }
 
-        public List<string> GetLocales() 
+        public void SetLocale(Locale locale)
+        {
+            string localeCode = locale.Identifier.Code;
+            _playerPrefs.SetString(LOCALE_KEY, localeCode);
+            
+            _localization.SetLocale(locale);
+        }
+
+        public List<Locale> GetLocales() 
             => _localization.GetLocales();
     }
 }
