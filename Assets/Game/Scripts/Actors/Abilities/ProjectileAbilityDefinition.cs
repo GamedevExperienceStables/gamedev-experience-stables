@@ -79,6 +79,8 @@ namespace Game.Actors
 
             _fireTimer = _timers.GetTimer(TimeSpan.FromSeconds(Definition.FireTime), OnFire);
             _castTimer = _timers.GetTimer(TimeSpan.FromSeconds(Definition.CastTime), OnComplete);
+            
+            _projectilePool.Prewarm(Definition.Projectile);
         }
 
         protected override void OnDestroyAbility()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Level;
 using UnityEngine.Pool;
 using Object = UnityEngine.Object;
 
@@ -7,15 +8,44 @@ namespace Game.Weapons
 {
     public sealed class ProjectilePool : IDisposable
     {
-        private const int POOL_MAX_SIZE = 20;
-
         private readonly Dictionary<int, ObjectPool<Projectile>> _pools = new();
         private readonly ProjectileFactory _factory;
+        private readonly PoolSettings _settings;
 
-        public ProjectilePool(ProjectileFactory factory)
-            => _factory = factory;
+        private readonly List<Projectile> _buffer;
+
+        public ProjectilePool(ProjectileFactory factory, PoolSettings settings)
+        {
+            _factory = factory;
+            _settings = settings;
+            
+            _buffer = new List<Projectile>(_settings.prewarmCount);
+        }
+
+
+        public void Prewarm(ProjectileDefinition definition)
+        {
+            if (_settings.prewarmCount == 0)
+                return;
+            
+            var pool = GetPool(definition); 
+
+            while (pool.CountAll < _settings.prewarmCount) 
+                _buffer.Add(pool.Get());
+
+            foreach (Projectile projectile in _buffer) 
+                pool.Release(projectile);
+            
+            _buffer.Clear();
+        }
 
         public Projectile Get(ProjectileDefinition definition)
+        {
+            var pool = GetPool(definition);
+            return pool.Get();
+        }
+
+        private ObjectPool<Projectile> GetPool(ProjectileDefinition definition)
         {
             int originId = definition.Prefab.GetHashCode();
             if (!_pools.TryGetValue(originId, out var pool))
@@ -24,7 +54,7 @@ namespace Game.Weapons
                 _pools[originId] = pool;
             }
 
-            return pool.Get();
+            return pool;
         }
 
         private ObjectPool<Projectile> CreatePool(ProjectileDefinition definition)
@@ -38,7 +68,7 @@ namespace Game.Weapons
                 },
                 actionOnRelease: target => target.gameObject.SetActive(false),
                 actionOnDestroy: target => Object.Destroy(target.gameObject),
-                maxSize: POOL_MAX_SIZE);
+                maxSize: _settings.maxPoolSize);
 
             return projectilePool;
         }

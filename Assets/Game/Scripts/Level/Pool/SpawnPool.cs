@@ -8,13 +8,35 @@ namespace Game.Level
 {
     public sealed class SpawnPool : IDisposable
     {
-        private const int POOL_MAX_SIZE = 20;
-
         private readonly Dictionary<int, ObjectPool<SpawnPoolTarget>> _pools = new();
         private readonly PrefabFactory _factory;
+        private readonly PoolSettings _settings;
 
-        public SpawnPool(PrefabFactory factory) 
-            => _factory = factory;
+        private readonly List<SpawnPoolTarget> _buffer;
+
+        public SpawnPool(PrefabFactory factory, PoolSettings settings)
+        {
+            _factory = factory;
+            _settings = settings;
+
+            _buffer = new List<SpawnPoolTarget>(_settings.prewarmCount);
+        }
+
+        public void Prewarm(GameObject definition)
+        {
+            if (_settings.prewarmCount == 0)
+                return;
+            
+            var pool = GetPool(definition); 
+
+            while (pool.CountAll < _settings.prewarmCount) 
+                _buffer.Add(pool.Get());
+
+            foreach (SpawnPoolTarget instance in _buffer) 
+                pool.Release(instance);
+            
+            _buffer.Clear();
+        }
 
         public void Spawn(GameObject prefab, Vector3 position, Quaternion rotation)
         {
@@ -24,6 +46,13 @@ namespace Game.Level
 
         private SpawnPoolTarget GetInstance(GameObject prefab)
         {
+            var pool = GetPool(prefab);
+            SpawnPoolTarget instance = pool.Get();
+            return instance;
+        }
+
+        private ObjectPool<SpawnPoolTarget> GetPool(GameObject prefab)
+        {
             int originId = prefab.GetHashCode();
             if (!_pools.TryGetValue(originId, out var pool))
             {
@@ -31,8 +60,7 @@ namespace Game.Level
                 _pools[originId] = pool;
             }
 
-            SpawnPoolTarget instance = pool.Get();
-            return instance;
+            return pool;
         }
 
 
@@ -41,8 +69,12 @@ namespace Game.Level
             var projectilePool = new ObjectPool<SpawnPoolTarget>(
                 createFunc: () =>
                 {
+                    bool originState = prefab.activeSelf;
+                    prefab.SetActive(false);
+
                     GameObject instance = _factory.Create(prefab);
-                    instance.SetActive(false);
+
+                    prefab.SetActive(originState);
 
                     var target = instance.AddComponent<SpawnPoolTarget>();
                     target.Init(originId, OnInstanceDisable);
@@ -51,7 +83,7 @@ namespace Game.Level
                 },
                 actionOnRelease: target => target.gameObject.SetActive(false),
                 actionOnDestroy: target => Object.Destroy(target.gameObject),
-                maxSize: POOL_MAX_SIZE);
+                maxSize: _settings.maxPoolSize);
 
             return projectilePool;
         }
@@ -69,13 +101,13 @@ namespace Game.Level
 
         public void Clear()
         {
-            foreach (var pool in _pools.Values) 
+            foreach (var pool in _pools.Values)
                 pool.Clear();
-            
+
             _pools.Clear();
         }
 
-        public void Dispose() 
+        public void Dispose()
             => _pools.Clear();
     }
 }
