@@ -48,6 +48,8 @@ namespace Game.UI
         private DialogView _dialogView;
         private HudPromptView _hudPromptView;
         private HudDamageView _damageView;
+        private HudActiveQuestView _activeQuestView;
+        
         private Label _crystalCount;
 
         public IReadOnlyDictionary<RuneSlotId, RuneSlotHudView> RuneSlots => _runeSlotsView.Slots;
@@ -61,7 +63,8 @@ namespace Game.UI
             MiniMapView miniMapView,
             DialogView dialogView,
             HudPromptView hudPromptView,
-            HudDamageView damageView
+            HudDamageView damageView,
+            HudActiveQuestView activeQuestView
             )
         {
             _viewModel = viewModel;
@@ -73,6 +76,7 @@ namespace Game.UI
             _dialogView = dialogView;
             _hudPromptView = hudPromptView;
             _damageView = damageView;
+            _activeQuestView = activeQuestView;
         }
 
         private void Awake()
@@ -104,6 +108,7 @@ namespace Game.UI
             _crystalCount = crystalWidget.Q<Label>(LayoutNames.Hud.WIDGET_CRYSTAL_COUNT);
 
             _hudPromptView.Create(_root);
+            _activeQuestView.Create(_root);
             _interactionView.Create(_root);
             _runeSlotsView.Create(_root);
             _savingView.Create(_root);
@@ -127,6 +132,7 @@ namespace Game.UI
             _buttonMenu.clicked -= PauseGame;
 
             _hudPromptView.Destroy();
+            _activeQuestView.Destroy();
             _savingView.Destroy();
             _interactionView.Destroy();
             _runeSlotsView.Destroy();

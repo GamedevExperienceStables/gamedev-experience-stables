@@ -36,6 +36,9 @@ namespace Game.Settings
 
         [SerializeField]
         private CursorService.Settings cursorSettings;
+        
+        [SerializeField]
+        private PoolSettings poolSettings;
 
 
         public CameraSettings CameraSettings => cameraSettings;
@@ -47,5 +50,7 @@ namespace Game.Settings
         public InventorySettings InventorySettings => inventorySettings;
         public AudioSettings AudioSettings => audioSettings;
         public CursorService.Settings CursorSettings => cursorSettings;
+
+        public PoolSettings PoolSettings => poolSettings;
     }
 }

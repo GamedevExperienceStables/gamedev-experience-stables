@@ -12,17 +12,15 @@
     flex-wrap: wrap;
     visibility: visible;
     white-space: normal;
-
-    -unity-text-align: middle-center;
 }
 
 .control-header-label {
-    -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&guid=1823e5ab5312e0e40972472a78991947&type=2#borsok SDF');    
+    -unity-font-definition: url('project://database/Assets/Game/UI/Fonts/borsok%20SDF.asset?fileID=11400000&guid=1823e5ab5312e0e40972472a78991947&type=2#borsok SDF');
     color: rgb(155, 89, 199);
     font-size: 40px;
-    margin-top: 25px;
-    
+    margin-top: 80px;
     -unity-text-align: middle-center;
+    margin-bottom: 10px;
 }
 
 .control-action-label {
@@ -32,7 +30,6 @@
     flex-wrap: wrap;
     visibility: visible;
     white-space: normal;
-
     flex: 1 1;
 }
 
@@ -43,7 +40,6 @@
     flex-wrap: wrap;
     visibility: visible;
     white-space: normal;
-        
     flex: 1 1;
     -unity-text-align: middle-right;
 }

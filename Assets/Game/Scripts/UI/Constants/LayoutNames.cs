@@ -134,6 +134,9 @@
             public const string WIDGET_PROMPT_INVENTORY = "widget-prompt-inventory";
             public const string WIDGET_PROMPT_LABEL = "label";
 
+            public const string WIDGET_ACTIVE_QUEST = "widget-active-quest";
+            public const string WIDGET_ACTIVE_QUEST_LABEL = "label";
+
             public const string WIDGET_DAMAGE = "widget-damage";
             public const string WIDGET_DAMAGE_ENABLED_CLASS_NAME = "widget-damage--enabled";
         }

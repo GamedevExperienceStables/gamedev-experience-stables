@@ -140,6 +140,7 @@ namespace Game.LifetimeScopes
         private void RegisterUi(IContainerBuilder builder)
         {
             builder.Register<HudPromptView>(Lifetime.Singleton);
+            builder.Register<HudActiveQuestView>(Lifetime.Singleton);
             builder.Register<HudDamageView>(Lifetime.Singleton);
 
             builder.Register<GameplayViewModel>(Lifetime.Singleton);

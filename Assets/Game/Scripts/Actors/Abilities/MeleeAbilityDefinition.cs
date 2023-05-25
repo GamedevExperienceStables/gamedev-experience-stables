@@ -116,6 +116,15 @@ namespace Game.Actors
             _hasStartEffect = Definition.VisualEffects && Definition.VisualEffects.OnStart;
             _hasCompleteEffect = Definition.VisualEffects && Definition.VisualEffects.OnEnd;
             _hasHitEffect = Definition.VisualEffects && Definition.VisualEffects.OnHit;
+
+            if (_hasStartEffect)
+                _spawnPool.Prewarm(Definition.VisualEffects.OnStart);
+            
+            if (_hasCompleteEffect)
+                _spawnPool.Prewarm(Definition.VisualEffects.OnEnd);
+            
+            if (_hasHitEffect)
+                _spawnPool.Prewarm(Definition.VisualEffects.OnHit);
         }
 
         protected override void OnDestroyAbility()

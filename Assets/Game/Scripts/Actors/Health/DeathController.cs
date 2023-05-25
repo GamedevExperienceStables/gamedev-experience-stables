@@ -36,6 +36,9 @@ namespace Game.Actors.Health
 
             _owner = GetComponent<IActorController>();
             _owner.SubscribeStatChanged(CharacterStats.Health, OnHealthChanged);
+            
+            if (deathFeedback)
+                _spawnPool.Prewarm(deathFeedback);
         }
 
         private void OnDestroy()
