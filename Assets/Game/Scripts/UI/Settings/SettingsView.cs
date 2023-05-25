@@ -247,21 +247,24 @@ namespace Game.UI
         private void InitLocalization()
         {
             _locales = _viewModel.GetLocales();
-            _fieldLocale.choices = _locales.Select(locale =>
-            {
-                string nativeName = locale.Identifier.CultureInfo.NativeName;
-                nativeName = nativeName.UppercaseFirst();
-                return nativeName;
-            }).ToList();
+            _fieldLocale.choices = _locales.Select(GetLanguageName).ToList();
 
             string current = _viewModel.CurrentLocaleCode;
             Locale found = _locales.Find(locale => locale.Identifier.Code == current);
-            if (!found) 
-                return;
-
-            int index = _locales.IndexOf(found);
+            int index = found ? _locales.IndexOf(found) : 0;
+            
             current = _fieldLocale.choices[index];
             _fieldLocale.SetValueWithoutNotify(current);
+        }
+
+        private static string GetLanguageName(Locale locale)
+        {
+            if (locale.Identifier.Code == "uk")
+                return "Украïнська";
+
+            string nativeName = locale.Identifier.CultureInfo.NativeName;
+            nativeName = nativeName.UppercaseFirst();
+            return nativeName;
         }
 
         private void OnChangeLocale(ChangeEvent<string> evt)

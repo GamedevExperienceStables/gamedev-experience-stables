@@ -8,7 +8,7 @@
         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
             <ui:Label tabindex="-1" text="Label" display-tooltip-when-elided="true" name="header" class="control-header-label" />
         </ui:VisualElement>
-        <ui:VisualElement name="control-content" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="control-content" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-self: center; width: 800px;">
             <ui:Instance template="HelpControlTemplate" name="control-template" />
         </ui:VisualElement>
     </ui:VisualElement>

@@ -17,6 +17,7 @@ namespace Game.Level
         private readonly LocationAudioListener _audioListener;
         private readonly ProjectilePool _projectilePool;
         private readonly SpawnPool _spawnPool;
+        private readonly PoolSettings _settings;
 
         private HeroController _hero;
 
@@ -28,7 +29,8 @@ namespace Game.Level
             FollowSceneCamera followCamera,
             LocationAudioListener audioListener,
             ProjectilePool projectilePool,
-            SpawnPool spawnPool
+            SpawnPool spawnPool,
+            PoolSettings settings
         )
         {
             _heroFactory = heroFactory;
@@ -36,6 +38,7 @@ namespace Game.Level
             _audioListener = audioListener;
             _projectilePool = projectilePool;
             _spawnPool = spawnPool;
+            _settings = settings;
         }
         
         public Transform Hero => _hero.transform;
@@ -58,8 +61,12 @@ namespace Game.Level
                 _hero.SetActive(false);
             }
 
-            _projectilePool.Clear();
-            _spawnPool.Clear();
+            // ReSharper disable once InvertIf
+            if (_settings.clearOnEnterLocation)
+            {
+                _projectilePool.Clear();
+                _spawnPool.Clear();
+            }
         }
 
         private void SpawnHero(Transform spawnPoint)

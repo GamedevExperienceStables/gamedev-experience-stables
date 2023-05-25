@@ -169,7 +169,10 @@ namespace Game.Enemies
 
             Vector3 position = transform.position;
             foreach (EnemySpawnPoint spawnZone in enemySpawnPoints)
-                Gizmos.DrawLine(position, spawnZone.transform.position);
+            {
+                if (spawnZone)
+                    Gizmos.DrawLine(position, spawnZone.transform.position);
+            }
         }
 
         private void OnDrawGizmos()

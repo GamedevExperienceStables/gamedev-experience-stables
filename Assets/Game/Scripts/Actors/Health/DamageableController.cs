@@ -22,11 +22,16 @@ namespace Game.Actors.Health
         public void Construct(SpawnPool spawnPool) 
             => _spawnPool = spawnPool;
 
-        private void Awake()
+        private void Awake() 
             => _owner = GetComponent<IActorController>();
 
         private void Start()
-            => _owner.SubscribeStatChanged(CharacterStats.Health, OnHealthChanged);
+        {
+            _owner.SubscribeStatChanged(CharacterStats.Health, OnHealthChanged);
+            
+            if (damageFeedback)
+                _spawnPool.Prewarm(damageFeedback);
+        }
 
         private void OnDestroy()
             => _owner.UnSubscribeStatChanged(CharacterStats.Health, OnHealthChanged);

@@ -75,6 +75,12 @@ namespace Game.Weapons
             
             _settings = settings;
             _timer.Init(TimeSpan.FromSeconds(_settings.LifeTime.Duration), OnLifetimeEnd);
+            
+            if (muzzleFeedbackPrefab)
+                _spawnPool.Prewarm(muzzleFeedbackPrefab);
+
+            if (deathFeedbackPrefab)
+                _spawnPool.Prewarm(deathFeedbackPrefab);
         }
 
         public void Fire(Transform spawnPoint, Vector3 targetPosition)

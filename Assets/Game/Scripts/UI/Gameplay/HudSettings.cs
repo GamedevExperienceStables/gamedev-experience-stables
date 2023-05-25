@@ -10,6 +10,11 @@ namespace Game.UI
         [SerializeField]
         private LocalizedString inventoryPrompt;
 
+        [SerializeField]
+        private LocalizedString activeQuest;
+
         public LocalizedString InventoryPrompt => inventoryPrompt;
+
+        public LocalizedString ActiveQuest => activeQuest;
     }
 }

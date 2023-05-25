@@ -10,8 +10,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1114068764005624468, guid: d21e88db93c4fa44cad2c882b1f5e81d,
         type: 3}
+      propertyPath: CapsuleHeight
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114068764005624468, guid: d21e88db93c4fa44cad2c882b1f5e81d,
+        type: 3}
       propertyPath: CapsuleRadius
       value: 0.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114068764005624468, guid: d21e88db93c4fa44cad2c882b1f5e81d,
+        type: 3}
+      propertyPath: CapsuleYOffset
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 1114068764005624469, guid: d21e88db93c4fa44cad2c882b1f5e81d,
         type: 3}
@@ -75,8 +85,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1114068764005624471, guid: d21e88db93c4fa44cad2c882b1f5e81d,
         type: 3}
+      propertyPath: m_Height
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114068764005624471, guid: d21e88db93c4fa44cad2c882b1f5e81d,
+        type: 3}
       propertyPath: m_Radius
       value: 0.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114068764005624471, guid: d21e88db93c4fa44cad2c882b1f5e81d,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 4656188894137393543, guid: d21e88db93c4fa44cad2c882b1f5e81d,
         type: 3}
