@@ -1,4 +1,5 @@
-﻿using Game.Audio;
+﻿using Game.Achievements;
+using Game.Audio;
 using Game.CursorManagement;
 using Game.GameFlow;
 using Game.Hero;
@@ -10,6 +11,7 @@ using Game.Persistence;
 using Game.Player;
 using Game.SceneManagement;
 using Game.Settings;
+using Game.Steam;
 using Game.TimeManagement;
 using Game.UI;
 using UnityEngine;
@@ -28,6 +30,9 @@ namespace Game.LifetimeScopes
 
         [SerializeField]
         private FxSettings fxSettings;
+        
+        [SerializeField]
+        private AchievementsSettings achievementsSettings;
 
         [SerializeField]
         private HeroDefinition heroData;
@@ -50,6 +55,8 @@ namespace Game.LifetimeScopes
             RegisterAudio(builder);
             RegisterTime(builder);
             RegisterUi(builder);
+            RegisterAchievements(builder);
+            RegisterSteam(builder);
 
             builder.RegisterEntryPoint<GameEntryPoint>();
         }
@@ -162,6 +169,10 @@ namespace Game.LifetimeScopes
             builder.RegisterInstance(fxSettings.HudDamage);
             builder.RegisterInstance(fxSettings.GameOver);
             builder.RegisterInstance(fxSettings.Common);
+
+            builder.RegisterInstance(achievementsSettings.Stats);
+            builder.RegisterInstance(achievementsSettings.Game);
+            builder.RegisterInstance(achievementsSettings.Runes);
         }
 
         private static void RegisterUi(IContainerBuilder builder)
@@ -206,6 +217,27 @@ namespace Game.LifetimeScopes
             builder.Register<TimerFactory>(Lifetime.Singleton);
             builder.Register<TimerPool>(Lifetime.Singleton);
             builder.Register<TimerUpdater>(Lifetime.Singleton).AsImplementedInterfaces();
+        }
+
+        private static void RegisterAchievements(IContainerBuilder builder)
+        {
+            builder.Register<GameAchievements>(Lifetime.Singleton);
+            builder.Register<GameStats>(Lifetime.Singleton);
+
+            builder.Register<PlaceholderStats>(Lifetime.Singleton).As<IGameStatsService>();
+            builder.Register<PlaceholderAchievements>(Lifetime.Singleton).As<IAchievementsService>();
+        }
+
+        private static void RegisterSteam(IContainerBuilder builder)
+        {
+#if ENABLE_STEAMWORKS
+            builder.Register<SteamService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<SteamOverlay>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+            builder.Register<SteamStats>(Lifetime.Singleton).As<IGameStatsService>();
+            builder.Register<SteamAchievements>(Lifetime.Singleton).As<IAchievementsService>();
+            builder.Register<SteamPersistence>(Lifetime.Singleton).As<IPersistence>();
+#endif
         }
     }
 }

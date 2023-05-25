@@ -1,4 +1,5 @@
-﻿using Game.Actors;
+﻿using System;
+using Game.Actors;
 
 namespace Game.Inventory
 {
@@ -16,5 +17,6 @@ namespace Game.Inventory
         
         bool IsContainerFull(MaterialDefinition levelMaterial);
         bool IsBagEmpty(MaterialDefinition levelMaterial);
+        event Action<ItemDefinition> AddedToBag;
     }
 }

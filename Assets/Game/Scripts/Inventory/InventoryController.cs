@@ -25,6 +25,7 @@ namespace Game.Inventory
 
         IReadOnlyDictionary<RuneSlotId, RuneSlot> IInventorySlots.Items => _slots.Items;
 
+        public event Action<ItemDefinition> AddedToBag;
         public event Action<RuneActiveSlotChangedEvent> ActiveSlotChanged;
         public event Action<RuneSlotChangedEvent> SlotChanged;
 
@@ -93,6 +94,8 @@ namespace Game.Inventory
                     _runes.Add(rune);
                     break;
             }
+
+            AddedToBag?.Invoke(item);
         }
 
         public void SetActiveSlot(RuneSlotId slotId)
