@@ -26,8 +26,8 @@ Cutscene_Skip_Label,Hold to skip,"Удерживайте, чтобы пропу�
 SettingsMenu_Language_Label,Language,Язык,Мова,Мова
 SettingsMenu_Graphic_Label,Graphics,Графика,Графiка,Графiка
 SettingsMenu_Quality_Label,Quality,Качество,Якасць,Якiсть
-SettingsMenu_Quality_High,High,Высокое,Высокае,Високий
-SettingsMenu_Quality_Medium,Medium,Среднее,Сярэдняе,Середній
+SettingsMenu_Quality_High,High,Высокое,Высокае,Висока 
+SettingsMenu_Quality_Medium,Medium,Среднее,Сярэдняе,Середня
 SettingsMenu_Resolution_Label,Resolution,Разрешение,Раздзяляльнасць,Розширення
 SettingsMenu_Fullscreen_Label,Fullscreen,Полный экран,Поўны экран,Повний екран 
 SettingsMenu_Audio_Label,Audio,Звуки,Гукi,Звуки
