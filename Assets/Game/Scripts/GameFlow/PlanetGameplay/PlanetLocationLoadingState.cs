@@ -4,6 +4,7 @@ using Game.Input;
 using Game.Level;
 using Game.SceneManagement;
 using Game.UI;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer;
 using VContainer.Unity;
@@ -78,6 +79,7 @@ namespace Game.GameFlow
                 return;
 
             await _sceneLoader.UnloadSceneIfLoadedAsync(lastLocation.Location.SceneName);
+            await Resources.UnloadUnusedAssets();
         }
 
         private void ExitLocation()
