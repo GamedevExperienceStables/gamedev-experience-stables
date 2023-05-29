@@ -109,11 +109,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 199860, guid: 8b158db9a52d92c41bd357624c42ac6f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6431811998008746129}
+      addedObject: {fileID: 6569}
     - targetCorrespondingSourceObject: {fileID: 199860, guid: 8b158db9a52d92c41bd357624c42ac6f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5352827673354336500}
+      addedObject: {fileID: 6568}
   m_SourcePrefab: {fileID: 100100000, guid: 8b158db9a52d92c41bd357624c42ac6f, type: 3}
 --- !u!1 &5563119492122862905 stripped
 GameObject:
@@ -121,7 +121,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5563119492123060621}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6431811998008746129
+--- !u!114 &6569
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 70
---- !u!114 &5352827673354336500
+--- !u!114 &6568
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

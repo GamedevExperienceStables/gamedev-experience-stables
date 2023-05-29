@@ -26,9 +26,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Level/Scenes/Levels/GameLevel/L1/Level_1V3.unity
     guid: 82a3b2d558971fe4f8d13e178f8b462f
-  - enabled: 1
-    path: Assets/Game/Level/Scenes/Levels/Rocket v3.unity
+  - enabled: 0
+    path: Assets/Game/Level/Scenes/Levels/Rocket v3_static.unity
     guid: 81c392d6e4801c942afc826fcc48da7d
+  - enabled: 1
+    path: Assets/Game/Level/Scenes/Levels/Rocket v3_non_static.unity
+    guid: 624ddf418d2307f4d97dd29847bcfd06
   - enabled: 1
     path: Assets/Game/Level/Scenes/Levels/GameLevel/L1D1/Level_1_Dung_1.unity
     guid: 6d1dcc69f898c5b4d81695a028086131

@@ -77,11 +77,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 176998, guid: f1179f7c8280ed9418120582fab4e86b,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8176665745434195035}
+      addedObject: {fileID: 6572}
     - targetCorrespondingSourceObject: {fileID: 176998, guid: f1179f7c8280ed9418120582fab4e86b,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4929785759251338509}
+      addedObject: {fileID: 6567}
   m_SourcePrefab: {fileID: 100100000, guid: f1179f7c8280ed9418120582fab4e86b, type: 3}
 --- !u!1 &293793438527136069 stripped
 GameObject:
@@ -89,7 +89,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 293793438527296035}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8176665745434195035
+--- !u!114 &6572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,7 +137,7 @@ MonoBehaviour:
     shakesDelay: 0
   animatedLights: []
   fadeOutReference: {fileID: 0}
---- !u!114 &4929785759251338509
+--- !u!114 &6567
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
