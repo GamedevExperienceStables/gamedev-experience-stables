@@ -31,6 +31,7 @@
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.7.4",
     "com.unity.ugui": "1.0.0",
+    "com.whinarn.unitymeshsimplifier": "https://github.com/Whinarn/UnityMeshSimplifier.git",
     "jp.hadashikick.vcontainer": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.13.1",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",

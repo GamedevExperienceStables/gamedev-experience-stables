@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4492440512746077073
+--- !u!1 &449
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4176820247910833627}
-  - component: {fileID: 4868495056052708517}
+  - component: {fileID: 2731}
+  - component: {fileID: 5574}
   m_Layer: 0
   m_Name: Feedbacks
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4176820247910833627
+--- !u!4 &2731
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4492440512746077073}
+  m_GameObject: {fileID: 449}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.99999976, z: 0.99999976}
@@ -32,13 +32,13 @@ Transform:
   m_Father: {fileID: 5464456317419623080}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4868495056052708517
+--- !u!114 &5574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4492440512746077073}
+  m_GameObject: {fileID: 449}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
@@ -189,7 +189,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
-        Owner: {fileID: 4868495056052708517}
+        Owner: {fileID: 5574}
         DebugActive: 0
         m_ImpulseDefinition:
           m_ImpulseChannel: 1
@@ -299,7 +299,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapRangeFalloff: {x: 0, y: 1}
-        Owner: {fileID: 4868495056052708517}
+        Owner: {fileID: 5574}
         DebugActive: 0
         eventReference:
           Guid:
@@ -387,12 +387,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 428504, guid: e73000b12fb76244cbffd6abbf8bb6e4,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4176820247910833627}
+      addedObject: {fileID: 2731}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 119968, guid: e73000b12fb76244cbffd6abbf8bb6e4,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4956611500411417815}
+      addedObject: {fileID: 5575}
   m_SourcePrefab: {fileID: 100100000, guid: e73000b12fb76244cbffd6abbf8bb6e4, type: 3}
 --- !u!1 &5464456317419179984 stripped
 GameObject:
@@ -400,7 +400,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5464456317419199344}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4956611500411417815
+--- !u!114 &5575
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5342548815337115749}
   - component: {fileID: 6494607592945974976}
   - component: {fileID: 3906995355901491630}
+  - component: {fileID: 5049172412250379243}
   m_Layer: 0
   m_Name: rock.001
   m_TagString: Untagged
@@ -83,6 +84,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5049172412250379243
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907471838281930364}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6938710573835471721, guid: 3556b0ac39c364f1ebecc1302f58efbf, type: 3}
 --- !u!1 &1780845675311674938
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 2
+  m_Version: 3
   m_UsePipelineSettings: 1
   m_AdditionalLightsShadowResolutionTier: 2
   m_LightLayerMask: 1
@@ -200,7 +223,7 @@ MonoBehaviour:
   m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 1
+  m_SoftShadowQuality: 2
 --- !u!1 &4330334475156051288
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,6 +401,7 @@ GameObject:
   - component: {fileID: 7173611867622769080}
   - component: {fileID: 6057404205896119420}
   - component: {fileID: 8776839524333832123}
+  - component: {fileID: 296846629949973919}
   m_Layer: 0
   m_Name: Mball.003
   m_TagString: Untagged
@@ -450,6 +474,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &296846629949973919
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4773958619532004772}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1050480386633182426, guid: 3556b0ac39c364f1ebecc1302f58efbf, type: 3}
 --- !u!1 &7269909836174666719
 GameObject:
   m_ObjectHideFlags: 0
