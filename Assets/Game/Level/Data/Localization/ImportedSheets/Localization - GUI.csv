@@ -36,17 +36,17 @@ SettingsMenu_Effects_Label,Effects,Эффекты,Эфекты,Ефекти
 SettingsMenu_Music_Label,Music,Музыка,Музыка,Музика
 SettingsMenu_Back_Label,Back,Назад,Назад,Назад
 Hud_Magic_Book,Magic Book,Магическая книга,Магiчная кнiга,Магiчна книга
-Hud_Save_Saving,Saving...,Сохранение...,Захаванне ...,Збереження…
+Hud_Save_Saving,Saving...,Сохранение...,Захаванне...,Збереження…
 Hud_Save_Saved,Game saved!,Игра сохранена!,Гульня захавана!,Гра збережена!
 Hud_Log_Text,Find 17 green crystals and fill the Prism with them,Найдите 17 зеленых кристаллов и наполните ими Призму,Знайдзiце 17 зялёных крышталяў i напоўнiце iмi Прызму,Знайдiть 17 зелених кристалiв та наповнiть ними Призму
-LoadingScreen_Loading,Loading...,Загрузка...,Загрузка ...,Завантаження….
+LoadingScreen_Loading,Loading...,Загрузка...,Загрузка...,Завантаження…
 Link_Modal,Do you want to open a link?,Хотите открыть ссылку?,Хочаце адкрыць спасылку?,Бажаєте вiдкрити посилання?
 ArtMenu_Download_Label,Download,Скачать,Спампаваць,Завантажити
 Download_Artbook_Modal,Do you want to download the artbook?,Хотите скачать артбук?,Хочаце спампаваць артбук?,Бажаєте завантажити артбук?
 AboutMenu_Description_Label,"  The game is created as part of the non-commercial project <b>GameDev Experience Stables</b>.
 Many specialists are still in search of work! Follow the links to LinkedIn and reach out if you are interested in collaboration.","Игра создана в рамках некоммерческого проекта <b>GameDev Experience Stables</b>.
 Многие специалисты все еще в поисках работы! Переходите по ссылкам в LinkedIn и пишите, если заинтересованы в сотрудничестве.","Гульня была створана ў рамках некамерцыйнага праекта <b>Gamedev Experience Stables</b>.
-Многiя ўдзельнiкi яшчэ шукаюць працу! Перайдзiце па спасылцы на LinkedIn i напiшыце калi вы зацiкаўлены ў супрацоўнiцтве.","Гра створена в рамках некомерцiйного проекту<b>GameDev Experience Stables</b>. 
+Многiя ўдзельнiкi яшчэ шукаюць працу! Перайдзiце па спасылцы на LinkedIn i напiшыце калi вы зацiкаўлены ў супрацоўнiцтве.","Гра створена в рамках некомерцiйного проекту <b>GameDev Experience Stables</b>. 
 Багато спецiалiстiв все ще у пошуку роботи! Переходьте за посиланням у LinkedIn та пишiть, якщо зацiкавленi у спiвпрацi."
 HelpMenu_Description_Label,"Together with Snoody you need to collect <b>17 crystals</b> and put them into the Prism on the spaceship. Green stalagmites can be found on the planet. Break them to collect such crystals.
 
